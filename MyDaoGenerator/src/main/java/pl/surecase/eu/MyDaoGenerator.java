@@ -14,7 +14,11 @@ public class MyDaoGenerator {
     public static final String CREDIT_CARD_TYPE_ENTITY = "CreditCardType";
     public static final String SHOP_CATEGORY_ENTITY = "ShopCategory";
     public static final String SHOP_DATA_ENTITY = "ShopData";
+    public static final String STAFF_ENTITY_ENTITY = "Staffs";
+    public static final String STAFF_ROLE_ENTITY = "StaffRole";
 
+    public static final String SESSION_ENTITY = "Session";
+    public static final String SESSION_ENDDAY_DETAIL_ENTITY = "SessionEnddayDetail";
     public static final String ORDER_TRANSACTION_ENTITY = "OrderTransaction";
     public static final String ORDER_DETAIL_ENTITY = "OrderDetail";
     public static final String ORDER_PAY_DETAIL_ENTITY = "OrderPayDetail";
@@ -56,7 +60,57 @@ public class MyDaoGenerator {
         createOrderTransactionEntity(schema);
         createOrderDetailEntity(schema);
         createOrderPayDetailEntity(schema);
+        createStaffEntity(schema);
+        createStaffRoleEntity(schema);
+        createSessionEntity(schema);
+        createSessionEnddayDetailEntity(schema);
         new DaoGenerator().generateAll(schema, args[0]);
+    }
+
+    public static void createStaffRoleEntity(Schema schema){
+        Entity staffRole = schema.addEntity(STAFF_ROLE_ENTITY);
+        staffRole.addIntProperty("StaffRoleID").notNull().primaryKey();
+        staffRole.addIntProperty("StaffRoleLevel");
+        staffRole.addStringProperty("StaffRoleName");
+        staffRole.addIntProperty("Deleted");
+        staffRole.addIntProperty("AddingFromBranch");
+    }
+
+    public static void createStaffEntity(Schema schema){
+        Entity staff = schema.addEntity(STAFF_ENTITY_ENTITY);
+        staff.addIntProperty("StaffID").notNull().primaryKey();
+        staff.addIntProperty("StaffRoleID").notNull();
+        staff.addStringProperty("StaffPassword").notNull();
+        staff.addStringProperty("StaffCode").notNull();
+        staff.addIntProperty("StaffGender");
+        staff.addStringProperty("StaffFirstName").notNull();
+        staff.addStringProperty("StaffLastName").notNull();
+        staff.addStringProperty("StaffAddress1");
+        staff.addStringProperty("StaffAddress2");
+        staff.addStringProperty("StaffCity");
+        staff.addIntProperty("StaffProvince");
+        staff.addStringProperty("StaffZipCode");
+        staff.addStringProperty("StaffTelephone");
+        staff.addStringProperty("StaffMobile");
+        staff.addStringProperty("StaffEmail");
+        staff.addDateProperty("StaffBirthDay");
+        staff.addStringProperty("StaffAdditional");
+        staff.addStringProperty("StaffIDNumber");
+        staff.addDateProperty("StaffIDIssueDate");
+        staff.addDateProperty("StaffIDExpiration");
+        staff.addStringProperty("StaffBlood");
+        staff.addStringProperty("StaffPictureFileServer");
+        staff.addStringProperty("StaffPictureFileClient");
+        staff.addDoubleProperty("BasedSalary");
+        staff.addIntProperty("LangID");
+        staff.addDateProperty("InputDate");
+        staff.addIntProperty("InputBy");
+        staff.addDateProperty("UpdateDate");
+        staff.addIntProperty("UpdateBy");
+        staff.addDateProperty("LastUseDate");
+        staff.addIntProperty("Activated");
+        staff.addIntProperty("Deleted");
+        staff.addIntProperty("AddingFromBranch");
     }
 
     public static void createOrderPayDetailEntity(Schema schema){
@@ -202,6 +256,40 @@ public class MyDaoGenerator {
         orderTransaction.addIntProperty("FromDepositTransactionID");
         orderTransaction.addIntProperty("FromDepositComputerID");
         orderTransaction.addIntProperty("Deleted");
+    }
+
+    public static void createSessionEnddayDetailEntity(Schema schema){
+        Entity sessionEndday = schema.addEntity(SESSION_ENDDAY_DETAIL_ENTITY);
+        sessionEndday.addDateProperty("SessionDate").notNull().primaryKey();
+        sessionEndday.addIntProperty("ShopID").notNull();
+        sessionEndday.addIntProperty("IsEndDay");
+        sessionEndday.addIntProperty("EndDayStaffID");
+        sessionEndday.addDateProperty("EndDayDateTime");
+        sessionEndday.addIntProperty("TotalReceipt");
+        sessionEndday.addDoubleProperty("TotalPayPrice");
+        sessionEndday.addIntProperty("EndDayComputerID");
+        sessionEndday.addIntProperty("NoOfSync");
+        sessionEndday.addStringProperty("Remark");
+    }
+
+    public static void createSessionEntity(Schema schema){
+        Entity session = schema.addEntity(SESSION_ENTITY);
+        session.addIntProperty("SessionID").notNull().primaryKey();
+        session.addIntProperty("ComputerID").notNull();
+        session.addIntProperty("OpenStaffID").notNull();
+        session.addIntProperty("CloseStaffID");
+        session.addDateProperty("OpenSessionDateTime");
+        session.addDateProperty("CloseSessionDateTime");
+        session.addDateProperty("SessionDate");
+        session.addDoubleProperty("OpenSessionAmount").notNull();
+        session.addDoubleProperty("CashAmount");
+        session.addDoubleProperty("CashInAmount");
+        session.addDoubleProperty("CashOutAmount");
+        session.addDoubleProperty("CloseSessionAmount");
+        session.addDoubleProperty("CashShortOver");
+        session.addDateProperty("SessionUpdateDate");
+        session.addIntProperty("ShopID");
+        session.addIntProperty("IsEndDaySession");
     }
 
     public static void createShopDataEntity(Schema schema){
