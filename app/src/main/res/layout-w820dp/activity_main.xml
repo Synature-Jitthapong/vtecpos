@@ -10,7 +10,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/leftcontent"
-        android:layout_above="@+id/btnPay"></FrameLayout>
+        android:paddingLeft="@dimen/default_horizontal_margin"
+        android:paddingRight="@dimen/minimum_margin"
+        android:layout_alignBottom="@+id/btnDiscount"></FrameLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -18,7 +20,7 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/leftcontent"
         android:id="@+id/rightcontent"
-        android:layout_above="@+id/btnPay"></FrameLayout>
+        android:layout_above="@+id/btnFastPay"></FrameLayout>
 
     <Button
         android:layout_width="wrap_content"
@@ -26,26 +28,26 @@
         android:text="@string/fast_pay"
         android:id="@+id/btnFastPay"
         android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/btnPay"
-        android:layout_toStartOf="@+id/btnPay" />
+        android:layout_toRightOf="@+id/btnDiscount"
+        android:layout_toEndOf="@+id/btnDiscount" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/pay"
         android:id="@+id/btnPay"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignTop="@+id/btnFastPay"
+        android:layout_toRightOf="@+id/btnFastPay"
+        android:layout_toEndOf="@+id/btnFastPay" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/discount_short"
         android:id="@+id/btnDiscount"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/btnFastPay"
-        android:layout_toStartOf="@+id/btnFastPay" />
+        android:layout_alignTop="@+id/btnFastPay"
+        android:layout_toRightOf="@+id/leftcontent"
+        android:layout_toEndOf="@+id/leftcontent" />
 
     <Button
         android:layout_width="wrap_content"
@@ -53,6 +55,16 @@
         android:text="@string/clear"
         android:id="@+id/btnClearOrder"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hold_order"
+        android:id="@+id/btnHoldOrder"
+        android:layout_alignTop="@+id/btnClearOrder"
+        android:layout_toLeftOf="@+id/btnClearOrder"
+        android:layout_toStartOf="@+id/btnClearOrder" />
+
 </RelativeLayout>

@@ -12,8 +12,16 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
 
+        if(savedInstanceState == null){
+            android.support.v4.app.FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+            FoodMenuFragment foodMenuFragment = new FoodMenuFragment();
+            trans.replace(R.id.rightcontent, foodMenuFragment);
+            OrderListFragment orderListFragment = new OrderListFragment();
+            trans.replace(R.id.leftcontent, orderListFragment);
+            trans.commit();
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

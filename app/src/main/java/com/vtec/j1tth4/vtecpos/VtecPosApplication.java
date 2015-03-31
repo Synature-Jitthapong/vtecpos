@@ -18,7 +18,7 @@ public class VtecPosApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        setupDatabase();
+        //setupDatabase();
     }
 
     private void setupDatabase(){

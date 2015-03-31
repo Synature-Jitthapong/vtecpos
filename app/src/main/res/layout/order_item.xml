@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/default_horizontal_margin"
+    android:background="@drawable/abc_list_selector_holo_light">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="1,000"
+        android:id="@+id/tvOrderQty"
+        android:layout_marginRight="@dimen/default_horizontal_margin" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginRight="@dimen/default_horizontal_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Order Title"
+            android:id="@+id/tvOrderTitle" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order Sub"
+            android:id="@+id/tvOrderSub" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                android:id="@+id/btnOrderMinus"
+                android:textSize="@dimen/abc_text_size_large_material" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:id="@+id/btnOrderPlus"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/btnOrderMinus"
+                android:layout_toEndOf="@+id/btnOrderMinus"
+                android:textSize="@dimen/abc_text_size_large_material" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Modify"
+                android:id="@+id/btnOrderModify"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/btnOrderDel"
+                android:layout_toStartOf="@+id/btnOrderDel" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete"
+                android:id="@+id/btnOrderDel"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="299,999.00"
+        android:id="@+id/tvOrderPrice" />
+
+</LinearLayout>

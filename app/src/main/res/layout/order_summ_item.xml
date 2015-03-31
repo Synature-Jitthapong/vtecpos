@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/default_horizontal_margin">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Label"
+        android:id="@+id/tvLabel"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:layout_marginRight="@dimen/default_horizontal_margin" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1,000,000.00"
+        android:id="@+id/tvValue"
+        android:gravity="right"
+        android:minWidth="96dp" />
+</LinearLayout>
