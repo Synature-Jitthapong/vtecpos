@@ -37,21 +37,6 @@ public class CreditCardTypeDao extends AbstractDao<CreditCardType, Integer> {
         super(config, daoSession);
     }
 
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'CREDIT_CARD_TYPE' (" + //
-                "'CCTYPE_ID' INTEGER PRIMARY KEY NOT NULL ," + // 0: CCTypeID
-                "'CREDIT_CARD_TYPE' INTEGER NOT NULL ," + // 1: CreditCardType
-                "'DELETED' INTEGER NOT NULL );"); // 2: Deleted
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'CREDIT_CARD_TYPE'";
-        db.execSQL(sql);
-    }
-
     /** @inheritdoc */
     @Override
     protected void bindValues(SQLiteStatement stmt, CreditCardType entity) {

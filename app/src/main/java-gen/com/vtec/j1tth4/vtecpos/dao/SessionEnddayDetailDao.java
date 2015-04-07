@@ -44,28 +44,6 @@ public class SessionEnddayDetailDao extends AbstractDao<SessionEnddayDetail, jav
         super(config, daoSession);
     }
 
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'SESSION_ENDDAY_DETAIL' (" + //
-                "'SESSION_DATE' INTEGER PRIMARY KEY NOT NULL ," + // 0: SessionDate
-                "'SHOP_ID' INTEGER NOT NULL ," + // 1: ShopID
-                "'IS_END_DAY' INTEGER," + // 2: IsEndDay
-                "'END_DAY_STAFF_ID' INTEGER," + // 3: EndDayStaffID
-                "'END_DAY_DATE_TIME' INTEGER," + // 4: EndDayDateTime
-                "'TOTAL_RECEIPT' INTEGER," + // 5: TotalReceipt
-                "'TOTAL_PAY_PRICE' REAL," + // 6: TotalPayPrice
-                "'END_DAY_COMPUTER_ID' INTEGER," + // 7: EndDayComputerID
-                "'NO_OF_SYNC' INTEGER," + // 8: NoOfSync
-                "'REMARK' TEXT);"); // 9: Remark
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'SESSION_ENDDAY_DETAIL'";
-        db.execSQL(sql);
-    }
-
     /** @inheritdoc */
     @Override
     protected void bindValues(SQLiteStatement stmt, SessionEnddayDetail entity) {

@@ -81,65 +81,6 @@ public class ShopDataDao extends AbstractDao<ShopData, Integer> {
         super(config, daoSession);
     }
 
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'SHOP_DATA' (" + //
-                "'SHOP_ID' INTEGER PRIMARY KEY NOT NULL ," + // 0: ShopID
-                "'SHOP_CODE' TEXT," + // 1: ShopCode
-                "'SHOP_NAME' TEXT," + // 2: ShopName
-                "'IS_SHOP' INTEGER NOT NULL ," + // 3: IsShop
-                "'IS_INV' INTEGER NOT NULL ," + // 4: IsInv
-                "'MASTER_SHOP' INTEGER NOT NULL ," + // 5: MasterShop
-                "'MASTER_SHOP_LINK' INTEGER NOT NULL ," + // 6: MasterShopLink
-                "'SHOW_IN_REPORT' INTEGER NOT NULL ," + // 7: ShowInReport
-                "'SHOP_TYPE_ID' INTEGER NOT NULL ," + // 8: ShopTypeID
-                "'SHOP_CAT_ID1' INTEGER NOT NULL ," + // 9: ShopCatID1
-                "'SHOP_CAT_ID2' INTEGER NOT NULL ," + // 10: ShopCatID2
-                "'SHOP_CAT_ID3' INTEGER NOT NULL ," + // 11: ShopCatID3
-                "'SHOP_CAT_ID4' INTEGER NOT NULL ," + // 12: ShopCatID4
-                "'SHOP_CAT_ID5' INTEGER NOT NULL ," + // 13: ShopCatID5
-                "'SHOP_CAT_ID6' INTEGER NOT NULL ," + // 14: ShopCatID6
-                "'SHOP_CAT_ID7' INTEGER NOT NULL ," + // 15: ShopCatID7
-                "'SHOP_CAT_ID8' INTEGER NOT NULL ," + // 16: ShopCatID8
-                "'SHOP_CAT_ID9' INTEGER NOT NULL ," + // 17: ShopCatID9
-                "'SHOP_CAT_ID10' INTEGER NOT NULL ," + // 18: ShopCatID10
-                "'OPEN_HOUR' INTEGER," + // 19: OpenHour
-                "'CLOSE_HOUR' INTEGER," + // 20: CloseHour
-                "'COMPANY_NAME' TEXT," + // 21: CompanyName
-                "'COMPANY_ADDRESS1' TEXT," + // 22: CompanyAddress1
-                "'COMPANY_ADDRESS2' TEXT," + // 23: CompanyAddress2
-                "'COMPANY_CITY' TEXT," + // 24: CompanyCity
-                "'COMPANY_PROVINCE' INTEGER," + // 25: CompanyProvince
-                "'DISPLAY_COMPANY_PROVINCE_LANG_ID' INTEGER," + // 26: DisplayCompanyProvinceLangID
-                "'COMPANY_ZIP_CODE' TEXT," + // 27: CompanyZipCode
-                "'COMPANY_TELEPHONE' TEXT," + // 28: CompanyTelephone
-                "'COMPANY_FAX' TEXT," + // 29: CompanyFax
-                "'COMPANY_COUNTRY' TEXT," + // 30: CompanyCountry
-                "'COMPANY_TAX_ID' TEXT," + // 31: CompanyTaxID
-                "'COMPANY_REGISTER_ID' TEXT," + // 32: CompanyRegisterID
-                "'ACCOUNTING_CODE' TEXT," + // 33: AccountingCode
-                "'COMPANY_VAT' REAL," + // 34: CompanyVAT
-                "'DELIVERY_NAME' TEXT," + // 35: DeliveryName
-                "'DELIVERY_ADDRESS1' TEXT," + // 36: DeliveryAddress1
-                "'DELIVERY_ADDRESS2' TEXT," + // 37: DeliveryAddress2
-                "'DELIVERY_CITY' TEXT," + // 38: DeliveryCity
-                "'DELIVERY_PROVINCE' INTEGER," + // 39: DeliveryProvince
-                "'DELIVERY_ZIP_CODE' TEXT," + // 40: DeliveryZipCode
-                "'DELIVERY_TELEPHONE' TEXT," + // 41: DeliveryTelephone
-                "'DELIVERY_FAX' TEXT," + // 42: DeliveryFax
-                "'IPADDRESS' TEXT," + // 43: IPAddress
-                "'ADDTIONAL' TEXT," + // 44: Addtional
-                "'PRODUCT_LEVEL_ORDER' INTEGER," + // 45: ProductLevelOrder
-                "'DELETED' INTEGER);"); // 46: Deleted
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'SHOP_DATA'";
-        db.execSQL(sql);
-    }
-
     /** @inheritdoc */
     @Override
     protected void bindValues(SQLiteStatement stmt, ShopData entity) {

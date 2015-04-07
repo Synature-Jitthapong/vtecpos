@@ -20,10 +20,8 @@ public class ProductPriceGroupData {
     public ProductPriceGroupData() {
     }
 
-    public ProductPriceGroupData(int PriceGroupDateID, int PriceGroupID, int ProductPriceID) {
+    public ProductPriceGroupData(int PriceGroupDateID) {
         this.PriceGroupDateID = PriceGroupDateID;
-        this.PriceGroupID = PriceGroupID;
-        this.ProductPriceID = ProductPriceID;
     }
 
     public ProductPriceGroupData(int PriceGroupDateID, int PriceGroupID, int ProductPriceID, Integer ProductID, Double ProductPrice, double PrepaidPrice, int MainPrice, int SaleMode, String PriceRemark, int AddingFromBranch) {

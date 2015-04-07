@@ -38,22 +38,6 @@ public class ProductVatDao extends AbstractDao<ProductVat, Integer> {
         super(config, daoSession);
     }
 
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'PRODUCT_VAT' (" + //
-                "'PRODUCT_VATID' INTEGER PRIMARY KEY NOT NULL ," + // 0: ProductVATID
-                "'PRODUCT_VATCODE' TEXT NOT NULL ," + // 1: ProductVATCode
-                "'PRODUCT_VATPERCENT' REAL NOT NULL ," + // 2: ProductVATPercent
-                "'DELETED' INTEGER NOT NULL );"); // 3: Deleted
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'PRODUCT_VAT'";
-        db.execSQL(sql);
-    }
-
     /** @inheritdoc */
     @Override
     protected void bindValues(SQLiteStatement stmt, ProductVat entity) {

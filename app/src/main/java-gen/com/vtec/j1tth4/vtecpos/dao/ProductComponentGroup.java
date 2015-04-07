@@ -19,10 +19,8 @@ public class ProductComponentGroup {
     public ProductComponentGroup() {
     }
 
-    public ProductComponentGroup(int PGroupID, int ProductID, int SaleMode) {
+    public ProductComponentGroup(int PGroupID) {
         this.PGroupID = PGroupID;
-        this.ProductID = ProductID;
-        this.SaleMode = SaleMode;
     }
 
     public ProductComponentGroup(int PGroupID, int ProductID, int SaleMode, java.util.Date StartDate, java.util.Date EndDate, int SetGroupNo, String SetGroupName, int RequireAddAmountForProduct, int AddingFromBranch) {

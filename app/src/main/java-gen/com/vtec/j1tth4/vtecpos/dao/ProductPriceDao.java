@@ -44,28 +44,6 @@ public class ProductPriceDao extends AbstractDao<ProductPrice, Integer> {
         super(config, daoSession);
     }
 
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'PRODUCT_PRICE' (" + //
-                "'PRODUCT_PRICE_ID' INTEGER PRIMARY KEY NOT NULL ," + // 0: ProductPriceID
-                "'PRODUCT_ID' INTEGER NOT NULL ," + // 1: ProductID
-                "'PRODUCT_PRICE' REAL," + // 2: ProductPrice
-                "'PREPAID_PRICE' REAL NOT NULL ," + // 3: PrepaidPrice
-                "'MAIN_PRICE' REAL NOT NULL ," + // 4: MainPrice
-                "'SALE_MODE' INTEGER NOT NULL ," + // 5: SaleMode
-                "'PRICE_REMARK' TEXT," + // 6: PriceRemark
-                "'FROM_DATE' INTEGER NOT NULL ," + // 7: FromDate
-                "'TO_DATE' INTEGER NOT NULL ," + // 8: ToDate
-                "'ADDING_FROM_BRANCH' INTEGER NOT NULL );"); // 9: AddingFromBranch
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'PRODUCT_PRICE'";
-        db.execSQL(sql);
-    }
-
     /** @inheritdoc */
     @Override
     protected void bindValues(SQLiteStatement stmt, ProductPrice entity) {

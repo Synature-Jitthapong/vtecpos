@@ -14,7 +14,7 @@ import com.vtec.j1tth4.vtecpos.dao.ProductPriceGroupData;
 /** 
  * DAO for table PRODUCT_PRICE_GROUP_DATA.
 */
-public class ProductPriceGroupDataDao extends AbstractDao<ProductPriceGroupData, Void> {
+public class ProductPriceGroupDataDao extends AbstractDao<ProductPriceGroupData, Integer> {
 
     public static final String TABLENAME = "PRODUCT_PRICE_GROUP_DATA";
 
@@ -24,8 +24,8 @@ public class ProductPriceGroupDataDao extends AbstractDao<ProductPriceGroupData,
     */
     public static class Properties {
         public final static Property PriceGroupDateID = new Property(0, int.class, "PriceGroupDateID", true, "PRICE_GROUP_DATE_ID");
-        public final static Property PriceGroupID = new Property(1, int.class, "PriceGroupID", true, "PRICE_GROUP_ID");
-        public final static Property ProductPriceID = new Property(2, int.class, "ProductPriceID", true, "PRODUCT_PRICE_ID");
+        public final static Property PriceGroupID = new Property(1, int.class, "PriceGroupID", false, "PRICE_GROUP_ID");
+        public final static Property ProductPriceID = new Property(2, int.class, "ProductPriceID", false, "PRODUCT_PRICE_ID");
         public final static Property ProductID = new Property(3, Integer.class, "ProductID", false, "PRODUCT_ID");
         public final static Property ProductPrice = new Property(4, Double.class, "ProductPrice", false, "PRODUCT_PRICE");
         public final static Property PrepaidPrice = new Property(5, double.class, "PrepaidPrice", false, "PREPAID_PRICE");
@@ -42,28 +42,6 @@ public class ProductPriceGroupDataDao extends AbstractDao<ProductPriceGroupData,
     
     public ProductPriceGroupDataDao(DaoConfig config, DaoSession daoSession) {
         super(config, daoSession);
-    }
-
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'PRODUCT_PRICE_GROUP_DATA' (" + //
-                "'PRICE_GROUP_DATE_ID' INTEGER PRIMARY KEY NOT NULL ," + // 0: PriceGroupDateID
-                "'PRICE_GROUP_ID' INTEGER PRIMARY KEY NOT NULL ," + // 1: PriceGroupID
-                "'PRODUCT_PRICE_ID' INTEGER PRIMARY KEY NOT NULL ," + // 2: ProductPriceID
-                "'PRODUCT_ID' INTEGER," + // 3: ProductID
-                "'PRODUCT_PRICE' REAL," + // 4: ProductPrice
-                "'PREPAID_PRICE' REAL NOT NULL ," + // 5: PrepaidPrice
-                "'MAIN_PRICE' INTEGER NOT NULL ," + // 6: MainPrice
-                "'SALE_MODE' INTEGER NOT NULL ," + // 7: SaleMode
-                "'PRICE_REMARK' TEXT," + // 8: PriceRemark
-                "'ADDING_FROM_BRANCH' INTEGER NOT NULL );"); // 9: AddingFromBranch
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'PRODUCT_PRICE_GROUP_DATA'";
-        db.execSQL(sql);
     }
 
     /** @inheritdoc */
@@ -96,8 +74,8 @@ public class ProductPriceGroupDataDao extends AbstractDao<ProductPriceGroupData,
 
     /** @inheritdoc */
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public Integer readKey(Cursor cursor, int offset) {
+        return cursor.getInt(offset + 0);
     }    
 
     /** @inheritdoc */
@@ -135,15 +113,18 @@ public class ProductPriceGroupDataDao extends AbstractDao<ProductPriceGroupData,
     
     /** @inheritdoc */
     @Override
-    protected Void updateKeyAfterInsert(ProductPriceGroupData entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected Integer updateKeyAfterInsert(ProductPriceGroupData entity, long rowId) {
+        return entity.getPriceGroupDateID();
     }
     
     /** @inheritdoc */
     @Override
-    public Void getKey(ProductPriceGroupData entity) {
-        return null;
+    public Integer getKey(ProductPriceGroupData entity) {
+        if(entity != null) {
+            return entity.getPriceGroupDateID();
+        } else {
+            return null;
+        }
     }
 
     /** @inheritdoc */

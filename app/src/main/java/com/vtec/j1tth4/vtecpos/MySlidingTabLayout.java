@@ -17,8 +17,9 @@ import android.widget.TextView;
 public class MySlidingTabLayout extends HorizontalScrollView {
 
     private static final String[] GROUPS = {
-        "Food",
-        "Beverage"
+            "Food",
+            "Beverage",
+            "Promotion"
     };
 
     private static final int TAB_VIEW_PADDING_DIPS = 16;

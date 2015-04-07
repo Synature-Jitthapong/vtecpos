@@ -43,60 +43,10 @@ public class DaoMaster extends AbstractDaoMaster {
 
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(SQLiteDatabase db, boolean ifNotExists) {
-        ProductsDao.createTable(db, ifNotExists);
-        ProductDeptDao.createTable(db, ifNotExists);
-        ProductGroupDao.createTable(db, ifNotExists);
-        ProductCategoryDao.createTable(db, ifNotExists);
-        ProductComponentDao.createTable(db, ifNotExists);
-        ProductComponentGroupDao.createTable(db, ifNotExists);
-        ProductPriceDao.createTable(db, ifNotExists);
-        ProductPriceGroupDao.createTable(db, ifNotExists);
-        ProductPriceGroupDataDao.createTable(db, ifNotExists);
-        ProductPriceGroupDateDao.createTable(db, ifNotExists);
-        ProductPriceGroupShopDao.createTable(db, ifNotExists);
-        ProductTypeDao.createTable(db, ifNotExists);
-        ProductVatDao.createTable(db, ifNotExists);
-        BankNameDao.createTable(db, ifNotExists);
-        ComputerNameDao.createTable(db, ifNotExists);
-        CreditCardTypeDao.createTable(db, ifNotExists);
-        ShopCategoryDao.createTable(db, ifNotExists);
-        ShopDataDao.createTable(db, ifNotExists);
-        OrderTransactionDao.createTable(db, ifNotExists);
-        OrderDetailDao.createTable(db, ifNotExists);
-        OrderPayDetailDao.createTable(db, ifNotExists);
-        StaffsDao.createTable(db, ifNotExists);
-        StaffRoleDao.createTable(db, ifNotExists);
-        SessionDao.createTable(db, ifNotExists);
-        SessionEnddayDetailDao.createTable(db, ifNotExists);
     }
     
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(SQLiteDatabase db, boolean ifExists) {
-        ProductsDao.dropTable(db, ifExists);
-        ProductDeptDao.dropTable(db, ifExists);
-        ProductGroupDao.dropTable(db, ifExists);
-        ProductCategoryDao.dropTable(db, ifExists);
-        ProductComponentDao.dropTable(db, ifExists);
-        ProductComponentGroupDao.dropTable(db, ifExists);
-        ProductPriceDao.dropTable(db, ifExists);
-        ProductPriceGroupDao.dropTable(db, ifExists);
-        ProductPriceGroupDataDao.dropTable(db, ifExists);
-        ProductPriceGroupDateDao.dropTable(db, ifExists);
-        ProductPriceGroupShopDao.dropTable(db, ifExists);
-        ProductTypeDao.dropTable(db, ifExists);
-        ProductVatDao.dropTable(db, ifExists);
-        BankNameDao.dropTable(db, ifExists);
-        ComputerNameDao.dropTable(db, ifExists);
-        CreditCardTypeDao.dropTable(db, ifExists);
-        ShopCategoryDao.dropTable(db, ifExists);
-        ShopDataDao.dropTable(db, ifExists);
-        OrderTransactionDao.dropTable(db, ifExists);
-        OrderDetailDao.dropTable(db, ifExists);
-        OrderPayDetailDao.dropTable(db, ifExists);
-        StaffsDao.dropTable(db, ifExists);
-        StaffRoleDao.dropTable(db, ifExists);
-        SessionDao.dropTable(db, ifExists);
-        SessionEnddayDetailDao.dropTable(db, ifExists);
     }
     
     public static abstract class OpenHelper extends SQLiteOpenHelper {

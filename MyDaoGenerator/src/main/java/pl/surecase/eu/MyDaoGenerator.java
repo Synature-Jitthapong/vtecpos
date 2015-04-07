@@ -74,6 +74,7 @@ public class MyDaoGenerator {
         staffRole.addStringProperty("StaffRoleName");
         staffRole.addIntProperty("Deleted");
         staffRole.addIntProperty("AddingFromBranch");
+        staffRole.setSkipTableCreation(true);
     }
 
     public static void createStaffEntity(Schema schema){
@@ -111,6 +112,7 @@ public class MyDaoGenerator {
         staff.addIntProperty("Activated");
         staff.addIntProperty("Deleted");
         staff.addIntProperty("AddingFromBranch");
+        staff.setSkipTableCreation(true);
     }
 
     public static void createOrderPayDetailEntity(Schema schema){
@@ -134,6 +136,7 @@ public class MyDaoGenerator {
         orderPayDetail.addStringProperty("CardNo");
         orderPayDetail.addDoubleProperty("PrepaidDiscountPercent");
         orderPayDetail.addIntProperty("IsFromEDC");
+        orderPayDetail.setSkipTableCreation(true);
     }
 
     public static void createOrderDetailEntity(Schema schema){
@@ -185,6 +188,7 @@ public class MyDaoGenerator {
         orderDetail.addDateProperty("SubmitOrderDateTime");
         orderDetail.addStringProperty("Comment");
         orderDetail.addIntProperty("Deleted");
+        orderDetail.setSkipTableCreation(true);
     }
 
     public static void createOrderTransactionEntity(Schema schema){
@@ -256,6 +260,7 @@ public class MyDaoGenerator {
         orderTransaction.addIntProperty("FromDepositTransactionID");
         orderTransaction.addIntProperty("FromDepositComputerID");
         orderTransaction.addIntProperty("Deleted");
+        orderTransaction.setSkipTableCreation(true);
     }
 
     public static void createSessionEnddayDetailEntity(Schema schema){
@@ -270,6 +275,7 @@ public class MyDaoGenerator {
         sessionEndday.addIntProperty("EndDayComputerID");
         sessionEndday.addIntProperty("NoOfSync");
         sessionEndday.addStringProperty("Remark");
+        sessionEndday.setSkipTableCreation(true);
     }
 
     public static void createSessionEntity(Schema schema){
@@ -290,6 +296,7 @@ public class MyDaoGenerator {
         session.addDateProperty("SessionUpdateDate");
         session.addIntProperty("ShopID");
         session.addIntProperty("IsEndDaySession");
+        session.setSkipTableCreation(true);
     }
 
     public static void createShopDataEntity(Schema schema){
@@ -341,6 +348,7 @@ public class MyDaoGenerator {
         shopData.addStringProperty("Addtional");
         shopData.addIntProperty("ProductLevelOrder");
         shopData.addIntProperty("Deleted");
+        shopData.setSkipTableCreation(true);
     }
 
     public static void createShopCategoryEntity(Schema schema){
@@ -350,6 +358,7 @@ public class MyDaoGenerator {
         shopCategory.addStringProperty("ShopCatName").notNull();
         shopCategory.addIntProperty("LangID").notNull();
         shopCategory.addIntProperty("Deleted");
+        shopCategory.setSkipTableCreation(true);
     }
 
     public static void createCreditCardTypeEntity(Schema schema){
@@ -357,6 +366,7 @@ public class MyDaoGenerator {
         creditCardType.addIntProperty("CCTypeID").notNull().primaryKey();
         creditCardType.addIntProperty("CreditCardType").notNull();
         creditCardType.addIntProperty("Deleted").notNull();
+        creditCardType.setSkipTableCreation(true);
     }
 
     public static void createComputerNameEntity(Schema schema){
@@ -371,6 +381,7 @@ public class MyDaoGenerator {
         computerName.addIntProperty("KDSID");
         computerName.addStringProperty("Description");
         computerName.addIntProperty("Deleted");
+        computerName.setSkipTableCreation(true);
     }
 
     public static void createBankNameEntity(Schema schema){
@@ -378,6 +389,7 @@ public class MyDaoGenerator {
         bankName.addIntProperty("BankNameID").notNull().primaryKey();
         bankName.addStringProperty("BankName").notNull();
         bankName.addIntProperty("Deleted").notNull();
+        bankName.setSkipTableCreation(true);
     }
 
     public static void createProductVatEntity(Schema schema){
@@ -386,6 +398,7 @@ public class MyDaoGenerator {
         productVat.addStringProperty("ProductVATCode").notNull();
         productVat.addDoubleProperty("ProductVATPercent").notNull();
         productVat.addIntProperty("Deleted").notNull();
+        productVat.setSkipTableCreation(true);
     }
 
     public static void createProductTypeEntity(Schema schema){
@@ -399,28 +412,31 @@ public class MyDaoGenerator {
         productType.addIntProperty("WeightPriceForRevenue").notNull();
         productType.addIntProperty("DisplayOrdering").notNull();
         productType.addIntProperty("Deleted").notNull();
+        productType.setSkipTableCreation(true);
     }
 
     public static void createProductPriceGroupShopEntity(Schema schema){
         Entity productPriceGroupShop = schema.addEntity(PRODUCT_PRICE_GROUP_SHOP_ENTITY);
         productPriceGroupShop.addIntProperty("PriceGroupID").notNull().primaryKey();
         productPriceGroupShop.addIntProperty("ShopID").notNull();
+        productPriceGroupShop.setSkipTableCreation(true);
     }
 
     public static void createProductPriceGroupDateEntity(Schema schema){
         Entity productPriceGroupDate = schema.addEntity(PRODUCT_PRICE_GROUP_DATE_ENTITY);
         productPriceGroupDate.addIntProperty("PriceGroupDateID").notNull().primaryKey();
-        productPriceGroupDate.addIntProperty("PriceGroupID").notNull().primaryKey();
+        productPriceGroupDate.addIntProperty("PriceGroupID").notNull();
         productPriceGroupDate.addDateProperty("FromDate").notNull();
         productPriceGroupDate.addDateProperty("ToDate").notNull();
         productPriceGroupDate.addIntProperty("Deleted").notNull();
+        productPriceGroupDate.setSkipTableCreation(true);
     }
 
     public static void createProductPriceGroupDataEntity(Schema schema){
         Entity productPriceGroupData = schema.addEntity(PRODUCT_PRICE_GROUP_DATA_ENTITY);
         productPriceGroupData.addIntProperty("PriceGroupDateID").notNull().primaryKey();
-        productPriceGroupData.addIntProperty("PriceGroupID").notNull().primaryKey();
-        productPriceGroupData.addIntProperty("ProductPriceID").notNull().primaryKey();
+        productPriceGroupData.addIntProperty("PriceGroupID").notNull();
+        productPriceGroupData.addIntProperty("ProductPriceID").notNull();
         productPriceGroupData.addIntProperty("ProductID");
         productPriceGroupData.addDoubleProperty("ProductPrice");
         productPriceGroupData.addDoubleProperty("PrepaidPrice").notNull();
@@ -428,6 +444,7 @@ public class MyDaoGenerator {
         productPriceGroupData.addIntProperty("SaleMode").notNull();
         productPriceGroupData.addStringProperty("PriceRemark");
         productPriceGroupData.addIntProperty("AddingFromBranch").notNull();
+        productPriceGroupData.setSkipTableCreation(true);
     }
 
     public static void createProductPriceGroupEntity(Schema schema){
@@ -435,6 +452,7 @@ public class MyDaoGenerator {
         productPriceGroup.addIntProperty("PriceGroupID").notNull().primaryKey();
         productPriceGroup.addStringProperty("PriceGroupName");
         productPriceGroup.addIntProperty("Deleted").notNull();
+        productPriceGroup.setSkipTableCreation(true);
     }
 
     public static void createProductPriceEntity(Schema schema){
@@ -449,27 +467,29 @@ public class MyDaoGenerator {
         productPrice.addDateProperty("FromDate").notNull();
         productPrice.addDateProperty("ToDate").notNull();
         productPrice.addIntProperty("AddingFromBranch").notNull();
+        productPrice.setSkipTableCreation(true);
     }
 
     public static void createProductComponentGroupEntity(Schema schema){
         Entity productCompGroup = schema.addEntity(PRODUCT_COMPONENT_GROUP_ENTITY);
         productCompGroup.addIntProperty("PGroupID").notNull().primaryKey();
-        productCompGroup.addIntProperty("ProductID").notNull().primaryKey();
-        productCompGroup.addIntProperty("SaleMode").notNull().primaryKey();
+        productCompGroup.addIntProperty("ProductID").notNull();
+        productCompGroup.addIntProperty("SaleMode").notNull();
         productCompGroup.addDateProperty("StartDate");
         productCompGroup.addDateProperty("EndDate");
         productCompGroup.addIntProperty("SetGroupNo").notNull();
         productCompGroup.addStringProperty("SetGroupName");
         productCompGroup.addIntProperty("RequireAddAmountForProduct").notNull();
         productCompGroup.addIntProperty("AddingFromBranch").notNull();
+        productCompGroup.setSkipTableCreation(true);
     }
 
     public static void createProductComponentEntity(Schema schema){
         Entity productComponent = schema.addEntity(PRODUCT_COMPONENT_ENTITY);
-        productComponent.addIntProperty("PGroupID").notNull().primaryKey();
-        productComponent.addIntProperty("ProductID").notNull().primaryKey();
-        productComponent.addIntProperty("SaleMode").notNull().primaryKey();
-        productComponent.addIntProperty("MaterialID").notNull().primaryKey();
+        productComponent.addIntProperty("PGroupID").notNull();
+        productComponent.addIntProperty("ProductID").notNull();
+        productComponent.addIntProperty("SaleMode").notNull();
+        productComponent.addIntProperty("MaterialID").notNull();
         productComponent.addDoubleProperty("MaterialAmount").notNull();
         productComponent.addIntProperty("UnitSmallID").notNull();
         productComponent.addIntProperty("ShowOnOrder").notNull();
@@ -478,6 +498,7 @@ public class MyDaoGenerator {
         productComponent.addIntProperty("FlexibleProductIncludePrice").notNull();
         productComponent.addIntProperty("Ordering").notNull();
         productComponent.addIntProperty("AddingFromBranch").notNull();
+        productComponent.setSkipTableCreation(true);
     }
 
     public static void createProductCategoryEntity(Schema schema){
@@ -493,6 +514,7 @@ public class MyDaoGenerator {
         productCat.addIntProperty("Deleted").notNull();
         productCat.addIntProperty("IsComment").notNull();
         productCat.addIntProperty("AddingFromBranch").notNull();
+        productCat.setSkipTableCreation(true);
     }
 
     public static void createProductDeptEntity(Schema schema){
@@ -515,6 +537,7 @@ public class MyDaoGenerator {
         productDept.addIntProperty("DisplayMobile").notNull();
         productDept.addIntProperty("AddingFromBranch").notNull();
         productDept.addIntProperty("Deleted").notNull();
+        productDept.setSkipTableCreation(true);
     }
 
     public static void createProductGroupEntity(Schema schema){
@@ -537,6 +560,7 @@ public class MyDaoGenerator {
         productGroup.addIntProperty("IsComment").notNull();
         productGroup.addIntProperty("AddingFromBranch").notNull();
         productGroup.addIntProperty("Deleted").notNull();
+        productGroup.setSkipTableCreation(true);
     }
 
     public static void createProductEntity(Schema schema){
@@ -607,5 +631,6 @@ public class MyDaoGenerator {
         products.addIntProperty("Deleted").notNull();
         products.addDateProperty("InsertDate");
         products.addDateProperty("UpdateDate");
+        products.setSkipTableCreation(true);
     }
 }

@@ -52,36 +52,6 @@ public class ProductDeptDao extends AbstractDao<ProductDept, Integer> {
         super(config, daoSession);
     }
 
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'PRODUCT_DEPT' (" + //
-                "'PRODUCT_DEPT_ID' INTEGER PRIMARY KEY NOT NULL ," + // 0: ProductDeptID
-                "'PRODUCT_GROUP_ID' INTEGER NOT NULL ," + // 1: ProductGroupID
-                "'SHOP_ID' INTEGER NOT NULL ," + // 2: ShopID
-                "'PRODUCT_DEPT_CODE' TEXT," + // 3: ProductDeptCode
-                "'PRODUCT_DEPT_NAME' TEXT," + // 4: ProductDeptName
-                "'PRODUCT_DEPT_NAME_LANG1' TEXT," + // 5: ProductDeptNameLang1
-                "'PRODUCT_DEPT_NAME_LANG2' TEXT," + // 6: ProductDeptNameLang2
-                "'PRODUCT_DEPT_NAME_LANG3' TEXT," + // 7: ProductDeptNameLang3
-                "'PRODUCT_DEPT_NAME_LANG4' TEXT," + // 8: ProductDeptNameLang4
-                "'PRODUCT_DEPT_NAME_LANG5' TEXT," + // 9: ProductDeptNameLang5
-                "'PRODUCT_DEPT_ACTIVATE' INTEGER NOT NULL ," + // 10: ProductDeptActivate
-                "'PRODUCT_DEPT_SALE_MODE' INTEGER NOT NULL ," + // 11: ProductDeptSaleMode
-                "'PRODUCT_DEPT_ORDERING' INTEGER NOT NULL ," + // 12: ProductDeptOrdering
-                "'PRINT_PRODUCT_FOR_SESSION' INTEGER NOT NULL ," + // 13: PrintProductForSession
-                "'PRINT_RECEIPT_GROUPING_DEPT' INTEGER," + // 14: PrintReceiptGroupingDept
-                "'DISPLAY_MOBILE' INTEGER NOT NULL ," + // 15: DisplayMobile
-                "'ADDING_FROM_BRANCH' INTEGER NOT NULL ," + // 16: AddingFromBranch
-                "'DELETED' INTEGER NOT NULL );"); // 17: Deleted
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'PRODUCT_DEPT'";
-        db.execSQL(sql);
-    }
-
     /** @inheritdoc */
     @Override
     protected void bindValues(SQLiteStatement stmt, ProductDept entity) {

@@ -23,10 +23,10 @@ public class ProductComponentDao extends AbstractDao<ProductComponent, Void> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property PGroupID = new Property(0, int.class, "PGroupID", true, "PGROUP_ID");
-        public final static Property ProductID = new Property(1, int.class, "ProductID", true, "PRODUCT_ID");
-        public final static Property SaleMode = new Property(2, int.class, "SaleMode", true, "SALE_MODE");
-        public final static Property MaterialID = new Property(3, int.class, "MaterialID", true, "MATERIAL_ID");
+        public final static Property PGroupID = new Property(0, int.class, "PGroupID", false, "PGROUP_ID");
+        public final static Property ProductID = new Property(1, int.class, "ProductID", false, "PRODUCT_ID");
+        public final static Property SaleMode = new Property(2, int.class, "SaleMode", false, "SALE_MODE");
+        public final static Property MaterialID = new Property(3, int.class, "MaterialID", false, "MATERIAL_ID");
         public final static Property MaterialAmount = new Property(4, double.class, "MaterialAmount", false, "MATERIAL_AMOUNT");
         public final static Property UnitSmallID = new Property(5, int.class, "UnitSmallID", false, "UNIT_SMALL_ID");
         public final static Property ShowOnOrder = new Property(6, int.class, "ShowOnOrder", false, "SHOW_ON_ORDER");
@@ -44,30 +44,6 @@ public class ProductComponentDao extends AbstractDao<ProductComponent, Void> {
     
     public ProductComponentDao(DaoConfig config, DaoSession daoSession) {
         super(config, daoSession);
-    }
-
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'PRODUCT_COMPONENT' (" + //
-                "'PGROUP_ID' INTEGER PRIMARY KEY NOT NULL ," + // 0: PGroupID
-                "'PRODUCT_ID' INTEGER PRIMARY KEY NOT NULL ," + // 1: ProductID
-                "'SALE_MODE' INTEGER PRIMARY KEY NOT NULL ," + // 2: SaleMode
-                "'MATERIAL_ID' INTEGER PRIMARY KEY NOT NULL ," + // 3: MaterialID
-                "'MATERIAL_AMOUNT' REAL NOT NULL ," + // 4: MaterialAmount
-                "'UNIT_SMALL_ID' INTEGER NOT NULL ," + // 5: UnitSmallID
-                "'SHOW_ON_ORDER' INTEGER NOT NULL ," + // 6: ShowOnOrder
-                "'DATA_TYPE' INTEGER NOT NULL ," + // 7: DataType
-                "'FLEXIBLE_PRODUCT_PRICE' REAL NOT NULL ," + // 8: FlexibleProductPrice
-                "'FLEXIBLE_PRODUCT_INCLUDE_PRICE' INTEGER NOT NULL ," + // 9: FlexibleProductIncludePrice
-                "'ORDERING' INTEGER NOT NULL ," + // 10: Ordering
-                "'ADDING_FROM_BRANCH' INTEGER NOT NULL );"); // 11: AddingFromBranch
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'PRODUCT_COMPONENT'";
-        db.execSQL(sql);
     }
 
     /** @inheritdoc */

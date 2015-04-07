@@ -52,36 +52,6 @@ public class ProductGroupDao extends AbstractDao<ProductGroup, Integer> {
         super(config, daoSession);
     }
 
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'PRODUCT_GROUP' (" + //
-                "'PRODUCT_GROUP_ID' INTEGER PRIMARY KEY NOT NULL ," + // 0: ProductGroupID
-                "'SHOP_ID' INTEGER," + // 1: ShopID
-                "'PRODUCT_GROUP_CODE' TEXT," + // 2: ProductGroupCode
-                "'PRODUCT_GROUP_NAME' TEXT," + // 3: ProductGroupName
-                "'PRODUCT_GROUP_NAME_LANG1' TEXT," + // 4: ProductGroupNameLang1
-                "'PRODUCT_GROUP_NAME_LANG2' TEXT," + // 5: ProductGroupNameLang2
-                "'PRODUCT_GROUP_NAME_LANG3' TEXT," + // 6: ProductGroupNameLang3
-                "'PRODUCT_GROUP_NAME_LANG4' TEXT," + // 7: ProductGroupNameLang4
-                "'PRODUCT_GROUP_NAME_LANG5' TEXT," + // 8: ProductGroupNameLang5
-                "'PRODUCT_GROUP_ACTIVATE' INTEGER NOT NULL ," + // 9: ProductGroupActivate
-                "'PRODUCT_GROUP_SALE_MODE' INTEGER NOT NULL ," + // 10: ProductGroupSaleMode
-                "'PRODUCT_GROUP_TYPE' INTEGER NOT NULL ," + // 11: ProductGroupType
-                "'PRODUCT_GROUP_ORDERING' INTEGER NOT NULL ," + // 12: ProductGroupOrdering
-                "'PRINT_DEPT_FOR_SESSION' INTEGER NOT NULL ," + // 13: PrintDeptForSession
-                "'DISPLAY_MOBILE' INTEGER NOT NULL ," + // 14: DisplayMobile
-                "'IS_COMMENT' INTEGER NOT NULL ," + // 15: IsComment
-                "'ADDING_FROM_BRANCH' INTEGER NOT NULL ," + // 16: AddingFromBranch
-                "'DELETED' INTEGER NOT NULL );"); // 17: Deleted
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'PRODUCT_GROUP'";
-        db.execSQL(sql);
-    }
-
     /** @inheritdoc */
     @Override
     protected void bindValues(SQLiteStatement stmt, ProductGroup entity) {

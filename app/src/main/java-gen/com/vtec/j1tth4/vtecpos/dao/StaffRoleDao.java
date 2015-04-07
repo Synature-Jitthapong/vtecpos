@@ -39,23 +39,6 @@ public class StaffRoleDao extends AbstractDao<StaffRole, Integer> {
         super(config, daoSession);
     }
 
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'STAFF_ROLE' (" + //
-                "'STAFF_ROLE_ID' INTEGER PRIMARY KEY NOT NULL ," + // 0: StaffRoleID
-                "'STAFF_ROLE_LEVEL' INTEGER," + // 1: StaffRoleLevel
-                "'STAFF_ROLE_NAME' TEXT," + // 2: StaffRoleName
-                "'DELETED' INTEGER," + // 3: Deleted
-                "'ADDING_FROM_BRANCH' INTEGER);"); // 4: AddingFromBranch
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'STAFF_ROLE'";
-        db.execSQL(sql);
-    }
-
     /** @inheritdoc */
     @Override
     protected void bindValues(SQLiteStatement stmt, StaffRole entity) {

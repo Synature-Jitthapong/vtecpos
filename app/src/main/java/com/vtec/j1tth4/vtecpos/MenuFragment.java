@@ -1,5 +1,6 @@
 package com.vtec.j1tth4.vtecpos;
 
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +14,13 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPut;
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by j1tth4 on 3/27/15.
@@ -23,15 +30,25 @@ public class MenuFragment extends Fragment {
 
     public static final String SLIDING_TAB_TITLE = "sliding_tab_title";
 
-    public static final String[] MENUS = {
-        "Sushi",
-            "Ramen",
-            "ต้มยำกุ้ง",
-            "ข้าวผัด",
-            "Capucino",
-            "Espresso",
-            "Late"
-    };
+    public static class MenuItem{
+        private String menuName;
+        private Drawable imgDrawable;
+
+        public MenuItem(String name, Drawable drawable){
+            menuName = name;
+            imgDrawable = drawable;
+        }
+
+        public String getMenuName() {
+            return menuName;
+        }
+
+        public Drawable getImgDrawable() {
+            return imgDrawable;
+        }
+    }
+
+    List<MenuItem> mMenuItem = new ArrayList<MenuItem>();
 
     private GridView mGvMenu;
 
@@ -46,6 +63,11 @@ public class MenuFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mMenuItem.add(new MenuItem("Shusi", getResources().getDrawable(R.drawable.sushi)));
+        mMenuItem.add(new MenuItem("Ramen", getResources().getDrawable(R.drawable.ramen)));
+        mMenuItem.add(new MenuItem("Capuchino", getResources().getDrawable(R.drawable.capuchino)));
+        mMenuItem.add(new MenuItem("Espress", getResources().getDrawable(R.drawable.esspresso)));
     }
 
     @Nullable
@@ -65,12 +87,12 @@ public class MenuFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return MENUS.length;
+            return mMenuItem.size();
         }
 
         @Override
         public Object getItem(int i) {
-            return MENUS[i];
+            return mMenuItem.get(i);
         }
 
         @Override
@@ -83,7 +105,7 @@ public class MenuFragment extends Fragment {
             ViewHolder holder;
             if(view == null){
                 holder = new ViewHolder();
-                view = getActivity().getLayoutInflater().inflate(R.layout.menu_item, viewGroup, false);
+                view = getActivity().getLayoutInflater().inflate(R.layout.menu_item_card, viewGroup, false);
                 holder.img = (ImageView) view.findViewById(R.id.imgMenu);
                 holder.tvTitle = (TextView) view.findViewById(R.id.tvMenuTitle);
                 holder.tvSub = (TextView) view.findViewById(R.id.tvMenuSub);
@@ -91,7 +113,8 @@ public class MenuFragment extends Fragment {
             }else{
                 holder = (ViewHolder) view.getTag();
             }
-            holder.tvTitle.setText(MENUS[i]);
+            holder.tvTitle.setText(mMenuItem.get(i).menuName);
+            holder.img.setImageDrawable(mMenuItem.get(i).imgDrawable);
             return view;
         }
 

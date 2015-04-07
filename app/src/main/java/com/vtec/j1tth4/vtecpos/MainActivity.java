@@ -1,17 +1,66 @@
 package com.vtec.j1tth4.vtecpos;
 
+import android.content.Intent;
+import android.content.res.Configuration;
+import android.media.Image;
+import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.ListView;
 
 
 public class MainActivity extends ActionBarActivity {
+
+    static String[] sDrawerItems = {
+        "","","",""
+    };
+
+    private android.support.v4.app.ActionBarDrawerToggle mDrawerToggle;
+
+    private DrawerLayout mDrawerLayout;
+    private ListView mLvDrawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mLvDrawer = (ListView) findViewById(R.id.left_drawer);
+
+        final ActionBar actionBar = getSupportActionBar();
+        mLvDrawer.setAdapter(new DrawerListAdapter());
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
+                android.support.v7.appcompat.R.drawable.abc_ic_menu_moreoverflow_mtrl_alpha,
+                R.string.app_name, R.string.app_name) {
+
+            /** Called when a drawer has settled in a completely closed state. */
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                actionBar.setTitle("vtecpos");
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+
+            /** Called when a drawer has settled in a completely open state. */
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+                actionBar.setTitle("vtecpos");
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+            }
+        };
+
+        // Set the drawer toggle as the DrawerListener
+        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeButtonEnabled(true);
 
         if(savedInstanceState == null){
             android.support.v4.app.FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
@@ -21,6 +70,27 @@ public class MainActivity extends ActionBarActivity {
             trans.replace(R.id.leftcontent, orderListFragment);
             trans.commit();
         }
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // If the nav drawer is open, hide action items related to the content view
+        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mLvDrawer);
+        //menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -41,7 +111,53 @@ public class MainActivity extends ActionBarActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClick(final View v){
+        int id = v.getId();
+        if(id == R.id.btnPay){
+            Intent intent = new Intent(this, PaymentActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    private class DrawerListAdapter extends BaseAdapter{
+
+        @Override
+        public int getCount() {
+            return sDrawerItems.length;
+        }
+
+        @Override
+        public Object getItem(int i) {
+            return sDrawerItems[i];
+        }
+
+        @Override
+        public long getItemId(int i) {
+            return 0;
+        }
+
+        @Override
+        public View getView(int i, View view, ViewGroup viewGroup) {
+            ViewHolder holder;
+            if(view == null){
+                holder = new ViewHolder();
+                view = getLayoutInflater().inflate(R.layout.drawer_list_item, viewGroup, false);
+                holder.img = (ImageView) view.findViewById(R.id.imageView);
+                view.setTag(holder);
+            }else{
+                holder = (ViewHolder) view.getTag();
+            }
+            return view;
+        }
+
+        class ViewHolder{
+            ImageView img;
+        }
     }
 }

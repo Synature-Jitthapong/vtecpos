@@ -12,4 +12,19 @@
     <string name="clear_short">C</string>
     <string name="items">items</string>
     <string name="total">Total</string>
+    <string name="enter">Enter</string>
+    <string name="title_activity_payment">PaymentActivity</string>
+    <string name="balance">Balance</string>
+    <string name="total_due">Total Due</string>
+    <string name="total_paid">Total Paid</string>
+    <string name="card_no">Card No</string>
+    <string name="card_holder">Card Holder</string>
+    <string name="expire">Expire</string>
+    <string name="done">Done</string>
+    <string name="card_type">Card Type</string>
+    <string name="bank">Bank</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="staff_code">Staff Code</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
 </resources>

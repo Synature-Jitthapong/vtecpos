@@ -22,13 +22,6 @@ public class ProductComponent {
     public ProductComponent() {
     }
 
-    public ProductComponent(int PGroupID, int ProductID, int SaleMode, int MaterialID) {
-        this.PGroupID = PGroupID;
-        this.ProductID = ProductID;
-        this.SaleMode = SaleMode;
-        this.MaterialID = MaterialID;
-    }
-
     public ProductComponent(int PGroupID, int ProductID, int SaleMode, int MaterialID, double MaterialAmount, int UnitSmallID, int ShowOnOrder, int DataType, double FlexibleProductPrice, int FlexibleProductIncludePrice, int Ordering, int AddingFromBranch) {
         this.PGroupID = PGroupID;
         this.ProductID = ProductID;

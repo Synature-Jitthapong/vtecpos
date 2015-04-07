@@ -17,9 +17,8 @@ public class ProductPriceGroupDate {
     public ProductPriceGroupDate() {
     }
 
-    public ProductPriceGroupDate(int PriceGroupDateID, int PriceGroupID) {
+    public ProductPriceGroupDate(int PriceGroupDateID) {
         this.PriceGroupDateID = PriceGroupDateID;
-        this.PriceGroupID = PriceGroupID;
     }
 
     public ProductPriceGroupDate(int PriceGroupDateID, int PriceGroupID, java.util.Date FromDate, java.util.Date ToDate, int Deleted) {

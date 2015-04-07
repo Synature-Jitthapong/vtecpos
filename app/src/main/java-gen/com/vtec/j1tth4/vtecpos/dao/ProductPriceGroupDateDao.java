@@ -14,7 +14,7 @@ import com.vtec.j1tth4.vtecpos.dao.ProductPriceGroupDate;
 /** 
  * DAO for table PRODUCT_PRICE_GROUP_DATE.
 */
-public class ProductPriceGroupDateDao extends AbstractDao<ProductPriceGroupDate, Void> {
+public class ProductPriceGroupDateDao extends AbstractDao<ProductPriceGroupDate, Integer> {
 
     public static final String TABLENAME = "PRODUCT_PRICE_GROUP_DATE";
 
@@ -24,7 +24,7 @@ public class ProductPriceGroupDateDao extends AbstractDao<ProductPriceGroupDate,
     */
     public static class Properties {
         public final static Property PriceGroupDateID = new Property(0, int.class, "PriceGroupDateID", true, "PRICE_GROUP_DATE_ID");
-        public final static Property PriceGroupID = new Property(1, int.class, "PriceGroupID", true, "PRICE_GROUP_ID");
+        public final static Property PriceGroupID = new Property(1, int.class, "PriceGroupID", false, "PRICE_GROUP_ID");
         public final static Property FromDate = new Property(2, java.util.Date.class, "FromDate", false, "FROM_DATE");
         public final static Property ToDate = new Property(3, java.util.Date.class, "ToDate", false, "TO_DATE");
         public final static Property Deleted = new Property(4, int.class, "Deleted", false, "DELETED");
@@ -37,23 +37,6 @@ public class ProductPriceGroupDateDao extends AbstractDao<ProductPriceGroupDate,
     
     public ProductPriceGroupDateDao(DaoConfig config, DaoSession daoSession) {
         super(config, daoSession);
-    }
-
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'PRODUCT_PRICE_GROUP_DATE' (" + //
-                "'PRICE_GROUP_DATE_ID' INTEGER PRIMARY KEY NOT NULL ," + // 0: PriceGroupDateID
-                "'PRICE_GROUP_ID' INTEGER PRIMARY KEY NOT NULL ," + // 1: PriceGroupID
-                "'FROM_DATE' INTEGER NOT NULL ," + // 2: FromDate
-                "'TO_DATE' INTEGER NOT NULL ," + // 3: ToDate
-                "'DELETED' INTEGER NOT NULL );"); // 4: Deleted
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'PRODUCT_PRICE_GROUP_DATE'";
-        db.execSQL(sql);
     }
 
     /** @inheritdoc */
@@ -69,8 +52,8 @@ public class ProductPriceGroupDateDao extends AbstractDao<ProductPriceGroupDate,
 
     /** @inheritdoc */
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public Integer readKey(Cursor cursor, int offset) {
+        return cursor.getInt(offset + 0);
     }    
 
     /** @inheritdoc */
@@ -98,15 +81,18 @@ public class ProductPriceGroupDateDao extends AbstractDao<ProductPriceGroupDate,
     
     /** @inheritdoc */
     @Override
-    protected Void updateKeyAfterInsert(ProductPriceGroupDate entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected Integer updateKeyAfterInsert(ProductPriceGroupDate entity, long rowId) {
+        return entity.getPriceGroupDateID();
     }
     
     /** @inheritdoc */
     @Override
-    public Void getKey(ProductPriceGroupDate entity) {
-        return null;
+    public Integer getKey(ProductPriceGroupDate entity) {
+        if(entity != null) {
+            return entity.getPriceGroupDateID();
+        } else {
+            return null;
+        }
     }
 
     /** @inheritdoc */

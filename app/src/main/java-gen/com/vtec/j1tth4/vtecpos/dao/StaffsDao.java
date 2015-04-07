@@ -67,51 +67,6 @@ public class StaffsDao extends AbstractDao<Staffs, Integer> {
         super(config, daoSession);
     }
 
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'STAFFS' (" + //
-                "'STAFF_ID' INTEGER PRIMARY KEY NOT NULL ," + // 0: StaffID
-                "'STAFF_ROLE_ID' INTEGER NOT NULL ," + // 1: StaffRoleID
-                "'STAFF_PASSWORD' TEXT NOT NULL ," + // 2: StaffPassword
-                "'STAFF_CODE' TEXT NOT NULL ," + // 3: StaffCode
-                "'STAFF_GENDER' INTEGER," + // 4: StaffGender
-                "'STAFF_FIRST_NAME' TEXT NOT NULL ," + // 5: StaffFirstName
-                "'STAFF_LAST_NAME' TEXT NOT NULL ," + // 6: StaffLastName
-                "'STAFF_ADDRESS1' TEXT," + // 7: StaffAddress1
-                "'STAFF_ADDRESS2' TEXT," + // 8: StaffAddress2
-                "'STAFF_CITY' TEXT," + // 9: StaffCity
-                "'STAFF_PROVINCE' INTEGER," + // 10: StaffProvince
-                "'STAFF_ZIP_CODE' TEXT," + // 11: StaffZipCode
-                "'STAFF_TELEPHONE' TEXT," + // 12: StaffTelephone
-                "'STAFF_MOBILE' TEXT," + // 13: StaffMobile
-                "'STAFF_EMAIL' TEXT," + // 14: StaffEmail
-                "'STAFF_BIRTH_DAY' INTEGER," + // 15: StaffBirthDay
-                "'STAFF_ADDITIONAL' TEXT," + // 16: StaffAdditional
-                "'STAFF_IDNUMBER' TEXT," + // 17: StaffIDNumber
-                "'STAFF_IDISSUE_DATE' INTEGER," + // 18: StaffIDIssueDate
-                "'STAFF_IDEXPIRATION' INTEGER," + // 19: StaffIDExpiration
-                "'STAFF_BLOOD' TEXT," + // 20: StaffBlood
-                "'STAFF_PICTURE_FILE_SERVER' TEXT," + // 21: StaffPictureFileServer
-                "'STAFF_PICTURE_FILE_CLIENT' TEXT," + // 22: StaffPictureFileClient
-                "'BASED_SALARY' REAL," + // 23: BasedSalary
-                "'LANG_ID' INTEGER," + // 24: LangID
-                "'INPUT_DATE' INTEGER," + // 25: InputDate
-                "'INPUT_BY' INTEGER," + // 26: InputBy
-                "'UPDATE_DATE' INTEGER," + // 27: UpdateDate
-                "'UPDATE_BY' INTEGER," + // 28: UpdateBy
-                "'LAST_USE_DATE' INTEGER," + // 29: LastUseDate
-                "'ACTIVATED' INTEGER," + // 30: Activated
-                "'DELETED' INTEGER," + // 31: Deleted
-                "'ADDING_FROM_BRANCH' INTEGER);"); // 32: AddingFromBranch
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'STAFFS'";
-        db.execSQL(sql);
-    }
-
     /** @inheritdoc */
     @Override
     protected void bindValues(SQLiteStatement stmt, Staffs entity) {

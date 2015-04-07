@@ -44,28 +44,6 @@ public class ComputerNameDao extends AbstractDao<ComputerName, Integer> {
         super(config, daoSession);
     }
 
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'COMPUTER_NAME' (" + //
-                "'COMPUTER_ID' INTEGER PRIMARY KEY NOT NULL ," + // 0: ComputerID
-                "'COMPUTER_NAME' TEXT," + // 1: ComputerName
-                "'SHOP_ID' INTEGER NOT NULL ," + // 2: ShopID
-                "'COMPUTER_TYPE' INTEGER NOT NULL ," + // 3: ComputerType
-                "'IPADDRESS' TEXT," + // 4: IPAddress
-                "'REGISTRATION_NUMBER' TEXT," + // 5: RegistrationNumber
-                "'DEVICE_CODE' TEXT," + // 6: DeviceCode
-                "'KDSID' INTEGER," + // 7: KDSID
-                "'DESCRIPTION' TEXT," + // 8: Description
-                "'DELETED' INTEGER);"); // 9: Deleted
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'COMPUTER_NAME'";
-        db.execSQL(sql);
-    }
-
     /** @inheritdoc */
     @Override
     protected void bindValues(SQLiteStatement stmt, ComputerName entity) {

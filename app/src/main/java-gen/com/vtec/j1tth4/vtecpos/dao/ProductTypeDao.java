@@ -43,27 +43,6 @@ public class ProductTypeDao extends AbstractDao<ProductType, Integer> {
         super(config, daoSession);
     }
 
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'PRODUCT_TYPE' (" + //
-                "'PRODUCT_TYPE_ID' INTEGER PRIMARY KEY NOT NULL ," + // 0: ProductTypeID
-                "'PRODUCT_TYPE_NAME' TEXT," + // 1: ProductTypeName
-                "'COMPONENT_LEVEL' INTEGER NOT NULL ," + // 2: ComponentLevel
-                "'SHOW_IN_FRONT' INTEGER NOT NULL ," + // 3: ShowInFront
-                "'AUTO_ADD_MATERIAL' INTEGER NOT NULL ," + // 4: AutoAddMaterial
-                "'NOT_IN_REVENUE' INTEGER NOT NULL ," + // 5: NotInRevenue
-                "'WEIGHT_PRICE_FOR_REVENUE' INTEGER NOT NULL ," + // 6: WeightPriceForRevenue
-                "'DISPLAY_ORDERING' INTEGER NOT NULL ," + // 7: DisplayOrdering
-                "'DELETED' INTEGER NOT NULL );"); // 8: Deleted
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'PRODUCT_TYPE'";
-        db.execSQL(sql);
-    }
-
     /** @inheritdoc */
     @Override
     protected void bindValues(SQLiteStatement stmt, ProductType entity) {

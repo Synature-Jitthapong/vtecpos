@@ -39,23 +39,6 @@ public class ShopCategoryDao extends AbstractDao<ShopCategory, Integer> {
         super(config, daoSession);
     }
 
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'SHOP_CATEGORY' (" + //
-                "'SHOP_CAT_ID' INTEGER PRIMARY KEY NOT NULL ," + // 0: ShopCatID
-                "'SHOP_CAT_GROUP_ID' INTEGER NOT NULL ," + // 1: ShopCatGroupID
-                "'SHOP_CAT_NAME' TEXT NOT NULL ," + // 2: ShopCatName
-                "'LANG_ID' INTEGER NOT NULL ," + // 3: LangID
-                "'DELETED' INTEGER);"); // 4: Deleted
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'SHOP_CATEGORY'";
-        db.execSQL(sql);
-    }
-
     /** @inheritdoc */
     @Override
     protected void bindValues(SQLiteStatement stmt, ShopCategory entity) {

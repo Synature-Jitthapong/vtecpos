@@ -81,68 +81,6 @@ public class OrderDetailDao extends AbstractDao<OrderDetail, Integer> {
         super(config, daoSession);
     }
 
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'ORDER_DETAIL' (" + //
-                "'ORDER_DETAIL_ID' INTEGER PRIMARY KEY NOT NULL ," + // 0: OrderDetailID
-                "'TRANSACTION_ID' INTEGER NOT NULL ," + // 1: TransactionID
-                "'COMPUTER_ID' INTEGER NOT NULL ," + // 2: ComputerID
-                "'ORDER_DETAIL_LEVEL' INTEGER," + // 3: OrderDetailLevel
-                "'ORDER_DETAIL_LINK_ID' INTEGER," + // 4: OrderDetailLinkID
-                "'SALE_DATE' INTEGER NOT NULL ," + // 5: SaleDate
-                "'SHOP_ID' INTEGER NOT NULL ," + // 6: ShopID
-                "'PRODUCT_ID' INTEGER NOT NULL ," + // 7: ProductID
-                "'PRODUCT_SET_TYPE' INTEGER NOT NULL ," + // 8: ProductSetType
-                "'ORDER_STATUS_ID' INTEGER NOT NULL ," + // 9: OrderStatusID
-                "'SALE_MODE' INTEGER NOT NULL ," + // 10: SaleMode
-                "'TOTAL_QTY' REAL NOT NULL ," + // 11: TotalQty
-                "'RETAIL_PRICE' REAL NOT NULL ," + // 12: RetailPrice
-                "'TOTAL_RETAIL_PRICE' REAL NOT NULL ," + // 13: TotalRetailPrice
-                "'TOTAL_DISCOUNT' REAL NOT NULL ," + // 14: TotalDiscount
-                "'SALE_PRICE' REAL NOT NULL ," + // 15: SalePrice
-                "'PRODUCT_VATCODE' TEXT NOT NULL ," + // 16: ProductVATCode
-                "'PRODUCT_VATPERCENT' REAL NOT NULL ," + // 17: ProductVATPercent
-                "'PRODUCT_VAT' REAL NOT NULL ," + // 18: ProductVAT
-                "'HAS_SERVICE_CHARGE' INTEGER," + // 19: HasServiceCharge
-                "'SERVICE_CHARGE' REAL," + // 20: ServiceCharge
-                "'SERVICE_CHARGE_VAT' REAL," + // 21: ServiceChargeVAT
-                "'WEIGHT_PRICE' REAL," + // 22: WeightPrice
-                "'WEIGHT_PRICE_VAT' REAL," + // 23: WeightPriceVAT
-                "'OTHER_FOOD_NAME' TEXT," + // 24: OtherFoodName
-                "'OTHER_PRODUCT_GROUP_ID' INTEGER," + // 25: OtherProductGroupID
-                "'DISCOUNT_ALLOW' INTEGER," + // 26: DiscountAllow
-                "'LAST_TRANSACTION_ID' INTEGER," + // 27: LastTransactionID
-                "'LAST_COMPUTER_ID' INTEGER," + // 28: LastComputerID
-                "'PRINTER_ID' INTEGER," + // 29: PrinterID
-                "'INVENTORY_ID' INTEGER," + // 30: InventoryID
-                "'ORDER_STAFF_ID' INTEGER," + // 31: OrderStaffID
-                "'ORDER_COMPUTER_ID' INTEGER," + // 32: OrderComputerID
-                "'ORDER_TABLE_ID' INTEGER," + // 33: OrderTableID
-                "'VOID_TYPE_ID' INTEGER," + // 34: VoidTypeID
-                "'VOID_STAFF_ID' INTEGER," + // 35: VoidStaffID
-                "'VATTYPE' INTEGER," + // 36: VATType
-                "'PRINT_GROUP' INTEGER," + // 37: PrintGroup
-                "'NO_PRINT_BILL' INTEGER," + // 38: NoPrintBill
-                "'NO_RE_PRINT_ORDER' INTEGER," + // 39: NoRePrintOrder
-                "'START_TIME' INTEGER," + // 40: StartTime
-                "'FINISH_TIME' INTEGER," + // 41: FinishTime
-                "'PRINT_STATUS' INTEGER," + // 42: PrintStatus
-                "'PROCESS_ID' INTEGER," + // 43: ProcessID
-                "'SUBMIT_ORDER_DATE_TIME' INTEGER," + // 44: SubmitOrderDateTime
-                "'COMMENT' TEXT," + // 45: Comment
-                "'DELETED' INTEGER);"); // 46: Deleted
-        // Add Indexes
-        db.execSQL("CREATE UNIQUE INDEX " + constraint + "trans_order_idx ON ORDER_DETAIL" +
-                " (TRANSACTION_ID);");
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'ORDER_DETAIL'";
-        db.execSQL(sql);
-    }
-
     /** @inheritdoc */
     @Override
     protected void bindValues(SQLiteStatement stmt, OrderDetail entity) {

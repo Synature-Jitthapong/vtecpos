@@ -2,10 +2,35 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.vtec.j1tth4.vtecpos.MySlidingTabLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/group_slide_tabs"/>
+        android:layout_height="wrap_content">
+
+        <com.vtec.j1tth4.vtecpos.MySlidingTabLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/group_slide_tabs"/>
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnListMode"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/btnListMode"
+            android:layout_toStartOf="@+id/btnListMode" />
+    </RelativeLayout>
+
     <com.vtec.j1tth4.vtecpos.SlidingTabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,9 +38,8 @@
     <android.support.v4.view.ViewPager
         android:id="@+id/item_pager"
         android:layout_width="match_parent"
-        android:layout_height="0px"
-        android:layout_weight="1"
-        android:background="@android:color/white" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -108,4 +132,5 @@
             android:text="@string/clear_short"
             android:id="@+id/btnClear" />
     </LinearLayout>
+
 </LinearLayout>

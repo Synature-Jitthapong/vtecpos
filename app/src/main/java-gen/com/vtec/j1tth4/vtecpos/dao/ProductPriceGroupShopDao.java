@@ -36,20 +36,6 @@ public class ProductPriceGroupShopDao extends AbstractDao<ProductPriceGroupShop,
         super(config, daoSession);
     }
 
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'PRODUCT_PRICE_GROUP_SHOP' (" + //
-                "'PRICE_GROUP_ID' INTEGER PRIMARY KEY NOT NULL ," + // 0: PriceGroupID
-                "'SHOP_ID' INTEGER NOT NULL );"); // 1: ShopID
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'PRODUCT_PRICE_GROUP_SHOP'";
-        db.execSQL(sql);
-    }
-
     /** @inheritdoc */
     @Override
     protected void bindValues(SQLiteStatement stmt, ProductPriceGroupShop entity) {

@@ -45,29 +45,6 @@ public class ProductCategoryDao extends AbstractDao<ProductCategory, Integer> {
         super(config, daoSession);
     }
 
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'PRODUCT_CATEGORY' (" + //
-                "'PRODUCT_CAT_ID' INTEGER PRIMARY KEY NOT NULL ," + // 0: ProductCatID
-                "'SHOP_ID' INTEGER NOT NULL ," + // 1: ShopID
-                "'PRODUCT_CAT_TYPE_ID' INTEGER NOT NULL ," + // 2: ProductCatTypeID
-                "'PRODUCT_CAT_CODE' TEXT," + // 3: ProductCatCode
-                "'PRODUCT_CAT_NAME' TEXT," + // 4: ProductCatName
-                "'PRODUCT_CAT_DISPLAY' INTEGER NOT NULL ," + // 5: ProductCatDisplay
-                "'PRODUCT_CAT_ACTIVATE' INTEGER NOT NULL ," + // 6: ProductCatActivate
-                "'PRODUCT_CAT_ORDERING' INTEGER NOT NULL ," + // 7: ProductCatOrdering
-                "'DELETED' INTEGER NOT NULL ," + // 8: Deleted
-                "'IS_COMMENT' INTEGER NOT NULL ," + // 9: IsComment
-                "'ADDING_FROM_BRANCH' INTEGER NOT NULL );"); // 10: AddingFromBranch
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'PRODUCT_CATEGORY'";
-        db.execSQL(sql);
-    }
-
     /** @inheritdoc */
     @Override
     protected void bindValues(SQLiteStatement stmt, ProductCategory entity) {

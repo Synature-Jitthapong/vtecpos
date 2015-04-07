@@ -50,34 +50,6 @@ public class SessionDao extends AbstractDao<Session, Integer> {
         super(config, daoSession);
     }
 
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'SESSION' (" + //
-                "'SESSION_ID' INTEGER PRIMARY KEY NOT NULL ," + // 0: SessionID
-                "'COMPUTER_ID' INTEGER NOT NULL ," + // 1: ComputerID
-                "'OPEN_STAFF_ID' INTEGER NOT NULL ," + // 2: OpenStaffID
-                "'CLOSE_STAFF_ID' INTEGER," + // 3: CloseStaffID
-                "'OPEN_SESSION_DATE_TIME' INTEGER," + // 4: OpenSessionDateTime
-                "'CLOSE_SESSION_DATE_TIME' INTEGER," + // 5: CloseSessionDateTime
-                "'SESSION_DATE' INTEGER," + // 6: SessionDate
-                "'OPEN_SESSION_AMOUNT' REAL NOT NULL ," + // 7: OpenSessionAmount
-                "'CASH_AMOUNT' REAL," + // 8: CashAmount
-                "'CASH_IN_AMOUNT' REAL," + // 9: CashInAmount
-                "'CASH_OUT_AMOUNT' REAL," + // 10: CashOutAmount
-                "'CLOSE_SESSION_AMOUNT' REAL," + // 11: CloseSessionAmount
-                "'CASH_SHORT_OVER' REAL," + // 12: CashShortOver
-                "'SESSION_UPDATE_DATE' INTEGER," + // 13: SessionUpdateDate
-                "'SHOP_ID' INTEGER," + // 14: ShopID
-                "'IS_END_DAY_SESSION' INTEGER);"); // 15: IsEndDaySession
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'SESSION'";
-        db.execSQL(sql);
-    }
-
     /** @inheritdoc */
     @Override
     protected void bindValues(SQLiteStatement stmt, Session entity) {

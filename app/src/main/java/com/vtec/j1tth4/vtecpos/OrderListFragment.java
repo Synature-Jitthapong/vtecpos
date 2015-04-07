@@ -14,6 +14,9 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URLConnection;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,8 @@ public class OrderListFragment extends Fragment {
     private ListView mLvOrder;
     private ListView mLvOrderSummary;
 
+    List<MenuFragment.MenuItem> mMenuItem = new ArrayList<MenuFragment.MenuItem>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.order_list_fragment, container, false);
@@ -34,6 +39,10 @@ public class OrderListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mMenuItem.add(new MenuFragment.MenuItem("Shusi", getResources().getDrawable(R.drawable.sushi)));
+        mMenuItem.add(new MenuFragment.MenuItem("Ramen", getResources().getDrawable(R.drawable.ramen)));
+        mMenuItem.add(new MenuFragment.MenuItem("Capuchino", getResources().getDrawable(R.drawable.capuchino)));
+        mMenuItem.add(new MenuFragment.MenuItem("Espress", getResources().getDrawable(R.drawable.esspresso)));
     }
 
     @Override
@@ -50,12 +59,12 @@ public class OrderListFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return MenuFragment.MENUS.length;
+            return mMenuItem.size();
         }
 
         @Override
         public Object getItem(int i) {
-            return MenuFragment.MENUS[i];
+            return mMenuItem.get(i);
         }
 
         @Override
@@ -79,7 +88,7 @@ public class OrderListFragment extends Fragment {
                 holder = (ViewHolder) view.getTag();
             }
             holder.tvOrderQty.setText(NumberFormat.getInstance().format(Math.ceil(Math.random() * 2)) + "x");
-            holder.tvOrderTitle.setText(MenuFragment.MENUS[i]);
+            holder.tvOrderTitle.setText(mMenuItem.get(i).getMenuName());
             holder.tvOrderPrice.setText("200");
             return view;
         }
@@ -100,7 +109,7 @@ public class OrderListFragment extends Fragment {
         public OrderSummaryListAdapter(){
             summaryItemList.add(
                     new SummaryItem(
-                            getActivity().getString(R.string.items),
+                            getActivity().getString(R.string.items) + " 6",
                             "10.00",
                             SummaryItem.SUMM_NORMAL));
             summaryItemList.add(

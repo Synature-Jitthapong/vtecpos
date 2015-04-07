@@ -53,37 +53,6 @@ public class OrderPayDetailDao extends AbstractDao<OrderPayDetail, Integer> {
         super(config, daoSession);
     }
 
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'ORDER_PAY_DETAIL' (" + //
-                "'PAY_DETAIL_ID' INTEGER PRIMARY KEY NOT NULL ," + // 0: PayDetailID
-                "'TRANSACTION_ID' INTEGER NOT NULL ," + // 1: TransactionID
-                "'COMPUTER_ID' INTEGER NOT NULL ," + // 2: ComputerID
-                "'PAY_TYPE_ID' INTEGER NOT NULL ," + // 3: PayTypeID
-                "'AMOUNT' REAL NOT NULL ," + // 4: Amount
-                "'CREDIT_CARD_NO' TEXT," + // 5: CreditCardNo
-                "'EXPIRE_MONTH' INTEGER," + // 6: ExpireMonth
-                "'EXPIRE_YEAR' INTEGER," + // 7: ExpireYear
-                "'CHEQUE_NUMBER' TEXT," + // 8: ChequeNumber
-                "'CHEQUE_DATE' INTEGER," + // 9: ChequeDate
-                "'BANK_NAME' TEXT," + // 10: BankName
-                "'CREDIT_CARD_TYPE' INTEGER," + // 11: CreditCardType
-                "'PAID_BY_NAME' TEXT," + // 12: PaidByName
-                "'PAID' REAL NOT NULL ," + // 13: Paid
-                "'PAYMENT_VAT' REAL NOT NULL ," + // 14: PaymentVAT
-                "'CARD_ID' INTEGER," + // 15: CardID
-                "'CARD_NO' TEXT," + // 16: CardNo
-                "'PREPAID_DISCOUNT_PERCENT' REAL," + // 17: PrepaidDiscountPercent
-                "'IS_FROM_EDC' INTEGER);"); // 18: IsFromEDC
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'ORDER_PAY_DETAIL'";
-        db.execSQL(sql);
-    }
-
     /** @inheritdoc */
     @Override
     protected void bindValues(SQLiteStatement stmt, OrderPayDetail entity) {

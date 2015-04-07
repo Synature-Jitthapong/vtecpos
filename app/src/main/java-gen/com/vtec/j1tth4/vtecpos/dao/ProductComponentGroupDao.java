@@ -14,7 +14,7 @@ import com.vtec.j1tth4.vtecpos.dao.ProductComponentGroup;
 /** 
  * DAO for table PRODUCT_COMPONENT_GROUP.
 */
-public class ProductComponentGroupDao extends AbstractDao<ProductComponentGroup, Void> {
+public class ProductComponentGroupDao extends AbstractDao<ProductComponentGroup, Integer> {
 
     public static final String TABLENAME = "PRODUCT_COMPONENT_GROUP";
 
@@ -24,8 +24,8 @@ public class ProductComponentGroupDao extends AbstractDao<ProductComponentGroup,
     */
     public static class Properties {
         public final static Property PGroupID = new Property(0, int.class, "PGroupID", true, "PGROUP_ID");
-        public final static Property ProductID = new Property(1, int.class, "ProductID", true, "PRODUCT_ID");
-        public final static Property SaleMode = new Property(2, int.class, "SaleMode", true, "SALE_MODE");
+        public final static Property ProductID = new Property(1, int.class, "ProductID", false, "PRODUCT_ID");
+        public final static Property SaleMode = new Property(2, int.class, "SaleMode", false, "SALE_MODE");
         public final static Property StartDate = new Property(3, java.util.Date.class, "StartDate", false, "START_DATE");
         public final static Property EndDate = new Property(4, java.util.Date.class, "EndDate", false, "END_DATE");
         public final static Property SetGroupNo = new Property(5, int.class, "SetGroupNo", false, "SET_GROUP_NO");
@@ -41,27 +41,6 @@ public class ProductComponentGroupDao extends AbstractDao<ProductComponentGroup,
     
     public ProductComponentGroupDao(DaoConfig config, DaoSession daoSession) {
         super(config, daoSession);
-    }
-
-    /** Creates the underlying database table. */
-    public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
-        String constraint = ifNotExists? "IF NOT EXISTS ": "";
-        db.execSQL("CREATE TABLE " + constraint + "'PRODUCT_COMPONENT_GROUP' (" + //
-                "'PGROUP_ID' INTEGER PRIMARY KEY NOT NULL ," + // 0: PGroupID
-                "'PRODUCT_ID' INTEGER PRIMARY KEY NOT NULL ," + // 1: ProductID
-                "'SALE_MODE' INTEGER PRIMARY KEY NOT NULL ," + // 2: SaleMode
-                "'START_DATE' INTEGER," + // 3: StartDate
-                "'END_DATE' INTEGER," + // 4: EndDate
-                "'SET_GROUP_NO' INTEGER NOT NULL ," + // 5: SetGroupNo
-                "'SET_GROUP_NAME' TEXT," + // 6: SetGroupName
-                "'REQUIRE_ADD_AMOUNT_FOR_PRODUCT' INTEGER NOT NULL ," + // 7: RequireAddAmountForProduct
-                "'ADDING_FROM_BRANCH' INTEGER NOT NULL );"); // 8: AddingFromBranch
-    }
-
-    /** Drops the underlying database table. */
-    public static void dropTable(SQLiteDatabase db, boolean ifExists) {
-        String sql = "DROP TABLE " + (ifExists ? "IF EXISTS " : "") + "'PRODUCT_COMPONENT_GROUP'";
-        db.execSQL(sql);
     }
 
     /** @inheritdoc */
@@ -93,8 +72,8 @@ public class ProductComponentGroupDao extends AbstractDao<ProductComponentGroup,
 
     /** @inheritdoc */
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public Integer readKey(Cursor cursor, int offset) {
+        return cursor.getInt(offset + 0);
     }    
 
     /** @inheritdoc */
@@ -130,15 +109,18 @@ public class ProductComponentGroupDao extends AbstractDao<ProductComponentGroup,
     
     /** @inheritdoc */
     @Override
-    protected Void updateKeyAfterInsert(ProductComponentGroup entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected Integer updateKeyAfterInsert(ProductComponentGroup entity, long rowId) {
+        return entity.getPGroupID();
     }
     
     /** @inheritdoc */
     @Override
-    public Void getKey(ProductComponentGroup entity) {
-        return null;
+    public Integer getKey(ProductComponentGroup entity) {
+        if(entity != null) {
+            return entity.getPGroupID();
+        } else {
+            return null;
+        }
     }
 
     /** @inheritdoc */
