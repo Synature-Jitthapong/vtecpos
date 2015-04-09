@@ -12,6 +12,12 @@ public class MyDaoGenerator {
     public static final String BANK_NAME_ENTITY = "BankName";
     public static final String COMPUTER_NAME_ENTITY = "ComputerName";
     public static final String CREDIT_CARD_TYPE_ENTITY = "CreditCardType";
+    public static final String DOCUMENT_ENTITY = "Document";
+    public static final String DOCUMENT_TYPE_ENTITY = "DocumentType";
+    public static final String FC_CARD_HISTORY_ENTITY = "fc_cardhistory";
+    public static final String FC_CARD_INFO_ENTITY = "fc_cardinfo";
+    public static final String FC_TRAN_DETAIL_ENTITY = "fc_trandetail";
+    public static final String FC_TRAN_PAYMENT_ENTITY = "fc_tranpament";
     public static final String SHOP_CATEGORY_ENTITY = "ShopCategory";
     public static final String SHOP_DATA_ENTITY = "ShopData";
     public static final String STAFF_ENTITY_ENTITY = "Staffs";
@@ -39,6 +45,115 @@ public class MyDaoGenerator {
 
     public static final String COLUMN_BANK_NAME_ID = "BankNameID";
     public static final String COLUMN_BANK_NAME = "BankName";
+
+    public static final String COLUMN_COMPUTER_ID = "ComputerID";
+    public static final String COLUMN_COMPUTER_NAME = "ComputerName";
+    public static final String COLUMN_COMPUTER_TYPE = "ComputerType";
+    public static final String COLUMN_IP_ADDRESS = "IPAddress";
+    public static final String COLUMN_REGISTRATION_NUMBER = "RegistrationNumber";
+    public static final String COLUMN_DEVICE_CODE = "DeviceCode";
+    public static final String COLUMN_KDS_ID = "KDSID";
+    public static final String COLUMN_DESCRIPTION = "Description";
+
+    public static final String COLUMN_CREDIT_CARD_TYPE_ID = "CCTypeID";
+    public static final String COLUMN_CREDIT_CARD_TYPE = "CreditCardType";
+
+    public static final String COLUMN_DOCUMENT_ID = "DocumentID";
+    public static final String COLUMN_VENDOR_ID = "VendorID";
+    public static final String COLUMN_VENDOR_GROUP_ID = "VendorGroupID";
+    public static final String COLUMN_VENDOR_SHOP_ID = "VendorShopID";
+    public static final String COLUMN_DOCUMENT_TYPE_ID = "DocumentTypeID";
+    public static final String COLUMN_DOCUMENT_YEAR = "DocumentYear";
+    public static final String COLUMN_DOCUMENT_MONTH = "DocumentMonth";
+    public static final String COLUMN_DOCUMENT_NUMBER = "DocumentNumber";
+    public static final String COLUMN_DOCUMENT_DATE = "DocumentDate";
+    public static final String COLUMN_INPUT_BY = "InputBy";
+    public static final String COLUMN_UPDATE_BY = "UpdateBy";
+    public static final String COLUMN_APPROVE_BY = "ApproveBy";
+    public static final String COLUMN_VOID_BY = "VoidBy";
+    public static final String COLUMN_RECEIPT_BY = "ReceiveBy";
+    public static final String COLUMN_DOCUMENT_STATUS = "DocumentStatus";
+    public static final String COLUMN_INVOICE_REF = "InvoiceRef";
+    public static final String COLUMN_DOCUMENT_UUID = "DocumentUDDID";
+    public static final String COLUMN_DOCUMENT_ID_REF = "DocumentIDRef";
+    public static final String COLUMN_DOCUMENT_ID_REF_SHOP_ID = "DocIDRefShopID";
+    public static final String COLUMN_TO_INV_ID = "ToInvID";
+    public static final String COLUMN_FROM_INV_ID = "FromInvID";
+    public static final String COLUMN_FROM_TEMPLATE_ID = "FromTemplateID";
+    public static final String COLUMN_FROM_TEMPLATE_SHOP_ID = "FromTemplateShopID";
+    public static final String COLUMN_IS_SMALL_UNIT= "IsSmallUnit";
+    public static final String COLUMN_REMARK = "Remark";
+    public static final String COLUMN_TERM_OF_PAYMENT = "TermOfPayment";
+    public static final String COLUMN_DUE_DATE = "DueDate";
+    public static final String COLUMN_DOCUMENT_HEADER = "DocumentHeader";
+    public static final String COLUMN_CREDIT_DAY = "CreditDay";
+    public static final String COLUMN_APPROVE_DATE = "ApproveDate";
+    public static final String COLUMN_CANCEL_DATE = "CancelDate";
+    public static final String COLUMN_NEW_SEND = "NewSend";
+    public static final String COLUMN_CURRENT_STAFF_ACCESS = "CurrentAccessStaff";
+    public static final String COLUMN_OTHER_PERCENT_DISCOUNT = "OtherPercentDiscount";
+    public static final String COLUMN_OTHER_AMOUNT_DISCOUNT = "OtherAmountDiscount";
+    public static final String COLUMN_DOCUMENT_VAT_TYPE = "DocumentVATType";
+    public static final String COLUMN_VAT_PERCENT = "VATPercent";
+    public static final String COLUMN_LOCK_EDIT_DETAIL = "LockEditDetail";
+    public static final String COLUMN_DOCUMENT_BATCH_ID = "DocumentBatchID";
+    public static final String COLUMN_DOCUMENT_BATCH_SHOP_ID = "DocumentBatchShopID";
+    public static final String COLUMN_ALREADY_SEND_TO_HQ = "AlreadyExportToHQ";
+    public static final String COLUMN_ALREADY_EXPORT_TO_BRANCH = "AlreadyExportToBranch";
+    public static final String COLUMN_IS_UPDATE_DOC_DETAIL = "IsUpdateDocDetail";
+
+    public static final String COLUMN_DOCUMENT_STORE_CODE = "DocumentStoreCode";
+    public static final String COLUMN_DOCUMENT_TYPE_HEADER = "DocumentTypeHeader";
+    public static final String COLUMN_DOCUMENT_TYPE_NAME = "DocumentTypeName";
+    public static final String COLUMN_DOCUMENT_TYPE_NAME_LANG1 = "DocumentTypeNameLang1";
+    public static final String COLUMN_DOCUMENT_TYPE_NAME_LANG2 = "DocumentTypeNameLang2";
+    public static final String COLUMN_DOCUMENT_TYPE_NAME_LANG3 = "DocumentTypeNameLang3";
+    public static final String COLUMN_DOCUMENT_TYPE_NAME_LANG4 = "DocumentTypeNameLang4";
+    public static final String COLUMN_DOCUMENT_TYPE_NAME_LANG5 = "DocumentTypeNameLang5";
+    public static final String COLUMN_SHOW_ON_SEARCH = "ShowOnSearch";
+    public static final String COLUMN_MOVEMENT_IN_STOCK = "MovementInStock";
+    public static final String COLUMN_IS_ADD_REDUCE_DOC = "IsAddReduceDoc";
+    public static final String COLUMN_CALCULATE_IN_PROFITLOSS = "CalculateInProfitLoss";
+    public static final String COLUMN_CALCULATE_NET_USE = "CalculateNetUse";
+    public static final String COLUMN_CALCULATE_STANDARD_PROFITLOSS = "CalculateStandardProfitLoss";
+
+    public static final String COLUMN_HISTORY_ID = "HistoryID";
+    public static final String COLUMN_TRANS_UUID = "TranUUID";
+    public static final String COLUMN_CARD_ID = "CardID";
+    public static final String COLUMN_CARD_NO = "CardNo";
+    public static final String COLUMN_TRANSACTION_ID = "TransactionID";
+    public static final String COLUMN_SALE_DATE = "SaleDate";
+    public static final String COLUMN_RECEIPT_NO = "ReceiptNo";
+    public static final String COLUMN_PREVIOUS_BALANCE = "PreviousBalance";
+    public static final String COLUMN_TRANS_AMOUNT = "TranAmount";
+    public static final String COLUMN_DOC_TYPE = "DocType";
+    public static final String COLUMN_STAFF_ID = "StaffID";
+
+    public static final String COLUMN_CARD_STATUS = "CardStatus";
+    public static final String COLUMN_LOG_ID = "LogID";
+    public static final String COLUMN_CARD_DEPOSIT_AMOUNT = "CardDepositAmount";
+    public static final String COLUMN_CARD_CURRENT_AMOUNT = "CardCurrentAmount";
+    public static final String COLUMN_CARD_LIMIT_AMOUNT = "CardLimitAmount";
+    public static final String COLUMN_CREATE_STAFF_ID = "CreateStaffID";
+    public static final String COLUMN_UPDATE_STAFF_ID = "UpdateStaffID";
+    public static final String COLUMN_MEMBER_ID = "MemberID";
+    public static final String COLUMN_CREATE_DATE = "CreateDate";
+    public static final String COLUMN_EXPIRE_DATE = "ExpireDate";
+
+    public static final String COLUMN_ORDER_DETAIL_ID = "OrderDetailID";
+    public static final String COLUMN_RECORD_STATUS = "RecordStatus";
+
+    public static final String COLUMN_PAY_DETAIL_ID = "PayDetailID";
+    public static final String COLUMN_PAY_TYPE_ID = "PayTypeID";
+    public static final String COLUMN_PAY_AMOUNT = "PayAmount";
+    public static final String COLUMN_CC_NUMBER = "CCNumber";
+    public static final String COLUMN_CC_EXP_MONTH = "CCExpMonth";
+    public static final String COLUMN_CC_EXP_YEAR = "CCExpYear";
+    public static final String COLUMN_CC_TYPE = "CCType";
+    public static final String COLUMN_CC_BANK = "CCBank";
+    public static final String COLUMN_CC_NAME = "CCName";
+    public static final String COLUMN_CC_APPROVE_CODE = "CCApproveCode";
+    public static final String COLUMN_CC_RESPONSE = "CCResponse";
 
     public static final String COLUMN_PRODUCT_ID = "ProductID";
     public static final String COLUMN_SHOP_ID = "ShopID";
@@ -114,6 +229,15 @@ public class MyDaoGenerator {
 
     public static void main(String args[]) throws Exception {
         Schema schema = new Schema(SCHEMA_VERSION, SCHEMA);
+        createBankNameEntity(schema);
+        createComputerNameEntity(schema);
+        createCreditCardTypeEntity(schema);
+        createDocumentEntity(schema);
+        createDocumentTypeEntity(schema);
+        createFcCardHistoryEntity(schema);
+        createFcCardInfoEntity(schema);
+        createFcTransDetailEntity(schema);
+        createFcTransPaymentEntity(schema);
         createProductEntity(schema);
         createProductDeptEntity(schema);
         createProductGroupEntity(schema);
@@ -127,9 +251,6 @@ public class MyDaoGenerator {
         createProductPriceGroupShopEntity(schema);
         createProductTypeEntity(schema);
         createProductVatEntity(schema);
-        createBankNameEntity(schema);
-        createComputerNameEntity(schema);
-        createCreditCardTypeEntity(schema);
         createShopCategoryEntity(schema);
         createShopDataEntity(schema);
         createOrderTransactionEntity(schema);
@@ -145,10 +266,191 @@ public class MyDaoGenerator {
     public static void createBankNameEntity(Schema schema){
         Entity bankName = schema.addEntity(BANK_NAME_ENTITY);
         bankName.setTableName(BANK_NAME_ENTITY);
-        bankName.addIntProperty("BankNameID").notNull().primaryKey();
-        bankName.addStringProperty("BankName").notNull();
-        bankName.addIntProperty("Deleted").notNull();
+        bankName.addIntProperty(COLUMN_BANK_NAME_ID).columnName(COLUMN_BANK_NAME_ID).primaryKey();
+        bankName.addStringProperty(COLUMN_BANK_NAME).columnName(COLUMN_BANK_NAME);
+        bankName.addIntProperty(COLUMN_DELETED).columnName(COLUMN_DELETED);
         bankName.setSkipTableCreation(true);
+    }
+
+    public static void createComputerNameEntity(Schema schema){
+        Entity computerName = schema.addEntity(COMPUTER_NAME_ENTITY);
+        computerName.setTableName(COMPUTER_NAME_ENTITY);
+        computerName.addIntProperty(COLUMN_COMPUTER_ID).columnName(COLUMN_COMPUTER_ID).primaryKey();
+        computerName.addStringProperty(COLUMN_COMPUTER_NAME).columnName(COLUMN_COMPUTER_NAME);
+        computerName.addIntProperty(COLUMN_SHOP_ID).columnName(COLUMN_SHOP_ID);
+        computerName.addIntProperty(COLUMN_COMPUTER_TYPE).columnName(COLUMN_COMPUTER_TYPE);
+        computerName.addStringProperty(COLUMN_IP_ADDRESS).columnName(COLUMN_IP_ADDRESS);
+        computerName.addStringProperty(COLUMN_REGISTRATION_NUMBER).columnName(COLUMN_REGISTRATION_NUMBER);
+        computerName.addStringProperty(COLUMN_DEVICE_CODE).columnName(COLUMN_DEVICE_CODE);
+        computerName.addIntProperty(COLUMN_KDS_ID).columnName(COLUMN_KDS_ID);
+        computerName.addStringProperty(COLUMN_DESCRIPTION).columnName(COLUMN_DESCRIPTION);
+        computerName.addIntProperty(COLUMN_DELETED).columnName(COLUMN_DELETED);
+        computerName.setSkipTableCreation(true);
+    }
+
+    public static void createCreditCardTypeEntity(Schema schema){
+        Entity creditCardType = schema.addEntity(CREDIT_CARD_TYPE_ENTITY);
+        creditCardType.setTableName(CREDIT_CARD_TYPE_ENTITY);
+        creditCardType.addIntProperty(COLUMN_CREDIT_CARD_TYPE_ID).columnName(COLUMN_CREDIT_CARD_TYPE_ID).primaryKey();
+        creditCardType.addIntProperty(COLUMN_CREDIT_CARD_TYPE).columnName(COLUMN_CREDIT_CARD_TYPE);
+        creditCardType.addIntProperty(COLUMN_DELETED).columnName(COLUMN_DELETED);
+        creditCardType.setSkipTableCreation(true);
+    }
+
+    public static void createDocumentEntity(Schema schema){
+        Entity document = schema.addEntity(DOCUMENT_ENTITY);
+        document.setTableName(DOCUMENT_ENTITY);
+        document.addIntProperty(COLUMN_DOCUMENT_ID).columnName(COLUMN_DOCUMENT_ID).primaryKey();
+        document.addIntProperty(COLUMN_SHOP_ID).columnName(COLUMN_SHOP_ID);
+        document.addIntProperty(COLUMN_VENDOR_ID).columnName(COLUMN_VENDOR_ID);
+        document.addIntProperty(COLUMN_VENDOR_GROUP_ID).columnName(COLUMN_VENDOR_GROUP_ID);
+        document.addIntProperty(COLUMN_VENDOR_SHOP_ID).columnName(COLUMN_VENDOR_SHOP_ID);
+        document.addIntProperty(COLUMN_DOCUMENT_TYPE_ID).columnName(COLUMN_DOCUMENT_TYPE_ID);
+        document.addIntProperty(COLUMN_DOCUMENT_YEAR).columnName(COLUMN_DOCUMENT_YEAR);
+        document.addIntProperty(COLUMN_DOCUMENT_MONTH).columnName(COLUMN_DOCUMENT_MONTH);
+        document.addIntProperty(COLUMN_DOCUMENT_NUMBER).columnName(COLUMN_DOCUMENT_NUMBER);
+        document.addDateProperty(COLUMN_DOCUMENT_DATE).columnName(COLUMN_DOCUMENT_DATE);
+        document.addIntProperty(COLUMN_INPUT_BY).columnName(COLUMN_INPUT_BY);
+        document.addIntProperty(COLUMN_UPDATE_BY).columnName(COLUMN_UPDATE_BY);
+        document.addIntProperty(COLUMN_APPROVE_BY).columnName(COLUMN_APPROVE_BY);
+        document.addIntProperty(COLUMN_VOID_BY).columnName(COLUMN_VOID_BY);
+        document.addIntProperty(COLUMN_RECEIPT_BY).columnName(COLUMN_RECEIPT_BY);
+        document.addIntProperty(COLUMN_DOCUMENT_STATUS).columnName(COLUMN_DOCUMENT_STATUS);
+        document.addIntProperty(COLUMN_INVOICE_REF).columnName(COLUMN_INVOICE_REF);
+        document.addStringProperty(COLUMN_DOCUMENT_UUID).columnName(COLUMN_DOCUMENT_UUID);
+        document.addIntProperty(COLUMN_DOCUMENT_ID_REF).columnName(COLUMN_DOCUMENT_ID_REF);
+        document.addIntProperty(COLUMN_DOCUMENT_ID_REF_SHOP_ID).columnName(COLUMN_DOCUMENT_ID_REF_SHOP_ID);
+        document.addIntProperty(COLUMN_INVENTORY_ID).columnName(COLUMN_INVENTORY_ID);
+        document.addIntProperty(COLUMN_TO_INV_ID).columnName(COLUMN_TO_INV_ID);
+        document.addIntProperty(COLUMN_FROM_INV_ID).columnName(COLUMN_FROM_INV_ID);
+        document.addIntProperty(COLUMN_FROM_TEMPLATE_ID).columnName(COLUMN_FROM_TEMPLATE_ID);
+        document.addIntProperty(COLUMN_FROM_TEMPLATE_SHOP_ID).columnName(COLUMN_FROM_TEMPLATE_SHOP_ID);
+        document.addIntProperty(COLUMN_IS_SMALL_UNIT).columnName(COLUMN_IS_SMALL_UNIT);
+        document.addStringProperty(COLUMN_REMARK).columnName(COLUMN_REMARK);
+        document.addIntProperty(COLUMN_TERM_OF_PAYMENT).columnName(COLUMN_TERM_OF_PAYMENT);
+        document.addDateProperty(COLUMN_DUE_DATE).columnName(COLUMN_DUE_DATE);
+        document.addStringProperty(COLUMN_DOCUMENT_HEADER).columnName(COLUMN_DOCUMENT_HEADER);
+        document.addIntProperty(COLUMN_CREDIT_DAY).columnName(COLUMN_CREDIT_DAY);
+        document.addDateProperty(COLUMN_INSERT_DATE).columnName(COLUMN_INSERT_DATE);
+        document.addDateProperty(COLUMN_UPDATE_DATE).columnName(COLUMN_UPDATE_DATE);
+        document.addDateProperty(COLUMN_APPROVE_DATE).columnName(COLUMN_APPROVE_DATE);
+        document.addDateProperty(COLUMN_CANCEL_DATE).columnName(COLUMN_CANCEL_DATE);
+        document.addIntProperty(COLUMN_NEW_SEND).columnName(COLUMN_NEW_SEND);
+        document.addIntProperty(COLUMN_CURRENT_STAFF_ACCESS).columnName(COLUMN_CURRENT_STAFF_ACCESS);
+        document.addDoubleProperty(COLUMN_OTHER_PERCENT_DISCOUNT).columnName(COLUMN_OTHER_PERCENT_DISCOUNT);
+        document.addDoubleProperty(COLUMN_OTHER_AMOUNT_DISCOUNT).columnName(COLUMN_OTHER_AMOUNT_DISCOUNT);
+        document.addIntProperty(COLUMN_DOCUMENT_VAT_TYPE).columnName(COLUMN_DOCUMENT_VAT_TYPE);
+        document.addDoubleProperty(COLUMN_VAT_PERCENT).columnName(COLUMN_VAT_PERCENT);
+        document.addIntProperty(COLUMN_LOCK_EDIT_DETAIL).columnName(COLUMN_LOCK_EDIT_DETAIL);
+        document.addIntProperty(COLUMN_DOCUMENT_BATCH_ID).columnName(COLUMN_DOCUMENT_BATCH_ID);
+        document.addIntProperty(COLUMN_DOCUMENT_BATCH_SHOP_ID).columnName(COLUMN_DOCUMENT_BATCH_SHOP_ID);
+        document.addIntProperty(COLUMN_ALREADY_SEND_TO_HQ).columnName(COLUMN_ALREADY_SEND_TO_HQ);
+        document.addIntProperty(COLUMN_ALREADY_EXPORT_TO_BRANCH).columnName(COLUMN_ALREADY_EXPORT_TO_BRANCH);
+        document.addIntProperty(COLUMN_IS_UPDATE_DOC_DETAIL).columnName(COLUMN_IS_UPDATE_DOC_DETAIL);
+        document.setSkipTableCreation(true);
+    }
+
+    public static void createDocumentTypeEntity(Schema schema){
+        Entity documentType = schema.addEntity(DOCUMENT_TYPE_ENTITY);
+        documentType.setTableName(DOCUMENT_TYPE_ENTITY);
+        documentType.addIntProperty(COLUMN_DOCUMENT_TYPE_ID).columnName(COLUMN_DOCUMENT_TYPE_ID).primaryKey();
+        documentType.addIntProperty(COLUMN_SHOP_ID).columnName(COLUMN_SHOP_ID);
+        documentType.addIntProperty(COLUMN_COMPUTER_ID).columnName(COLUMN_COMPUTER_ID);
+        documentType.addIntProperty(COLUMN_DOCUMENT_STORE_CODE).columnName(COLUMN_DOCUMENT_STORE_CODE);
+        documentType.addStringProperty(COLUMN_DOCUMENT_TYPE_HEADER).columnName(COLUMN_DOCUMENT_TYPE_HEADER);
+        documentType.addStringProperty(COLUMN_DOCUMENT_TYPE_NAME).columnName(COLUMN_DOCUMENT_TYPE_NAME);
+        documentType.addStringProperty(COLUMN_DOCUMENT_TYPE_NAME_LANG1).columnName(COLUMN_DOCUMENT_TYPE_NAME_LANG1);
+        documentType.addStringProperty(COLUMN_DOCUMENT_TYPE_NAME_LANG2).columnName(COLUMN_DOCUMENT_TYPE_NAME_LANG2);
+        documentType.addStringProperty(COLUMN_DOCUMENT_TYPE_NAME_LANG3).columnName(COLUMN_DOCUMENT_TYPE_NAME_LANG3);
+        documentType.addStringProperty(COLUMN_DOCUMENT_TYPE_NAME_LANG4).columnName(COLUMN_DOCUMENT_TYPE_NAME_LANG4);
+        documentType.addStringProperty(COLUMN_DOCUMENT_TYPE_NAME_LANG5).columnName(COLUMN_DOCUMENT_TYPE_NAME_LANG5);
+        documentType.addIntProperty(COLUMN_SHOW_ON_SEARCH).columnName(COLUMN_SHOW_ON_SEARCH);
+        documentType.addIntProperty(COLUMN_MOVEMENT_IN_STOCK).columnName(COLUMN_MOVEMENT_IN_STOCK);
+        documentType.addIntProperty(COLUMN_IS_ADD_REDUCE_DOC).columnName(COLUMN_IS_ADD_REDUCE_DOC);
+        documentType.addIntProperty(COLUMN_CALCULATE_IN_PROFITLOSS).columnName(COLUMN_CALCULATE_IN_PROFITLOSS);
+        documentType.addIntProperty(COLUMN_CALCULATE_NET_USE).columnName(COLUMN_CALCULATE_NET_USE);
+        documentType.addIntProperty(COLUMN_CALCULATE_STANDARD_PROFITLOSS).columnName(COLUMN_CALCULATE_STANDARD_PROFITLOSS);
+        documentType.addIntProperty(COLUMN_DELETED);
+        documentType.setSkipTableCreation(true);
+    }
+
+    public static void createFcCardHistoryEntity(Schema schema){
+        Entity fcCardHistory = schema.addEntity(FC_CARD_HISTORY_ENTITY);
+        fcCardHistory.setTableName(FC_CARD_HISTORY_ENTITY);
+        fcCardHistory.addIntProperty(COLUMN_HISTORY_ID).columnName(COLUMN_HISTORY_ID).primaryKey();
+        fcCardHistory.addIntProperty(COLUMN_TRANS_UUID).columnName(COLUMN_TRANS_UUID);
+        fcCardHistory.addIntProperty(COLUMN_CARD_ID).columnName(COLUMN_CARD_ID);
+        fcCardHistory.addStringProperty(COLUMN_CARD_NO).columnName(COLUMN_CARD_NO);
+        fcCardHistory.addIntProperty(COLUMN_TRANSACTION_ID).columnName(COLUMN_TRANSACTION_ID);
+        fcCardHistory.addIntProperty(COLUMN_COMPUTER_ID).columnName(COLUMN_COMPUTER_ID);
+        fcCardHistory.addIntProperty(COLUMN_SHOP_ID).columnName(COLUMN_SHOP_ID);
+        fcCardHistory.addDateProperty(COLUMN_SALE_DATE).columnName(COLUMN_SALE_DATE);
+        fcCardHistory.addStringProperty(COLUMN_RECEIPT_NO).columnName(COLUMN_RECEIPT_NO);
+        fcCardHistory.addDoubleProperty(COLUMN_PREVIOUS_BALANCE).columnName(COLUMN_PREVIOUS_BALANCE);
+        fcCardHistory.addDoubleProperty(COLUMN_TRANS_AMOUNT).columnName(COLUMN_TRANS_AMOUNT);
+        fcCardHistory.addIntProperty(COLUMN_DOC_TYPE).columnName(COLUMN_DOC_TYPE);
+        fcCardHistory.addIntProperty(COLUMN_STAFF_ID).columnName(COLUMN_STAFF_ID);
+        fcCardHistory.addDateProperty(COLUMN_INSERT_DATE).columnName(COLUMN_INSERT_DATE);
+        fcCardHistory.setSkipTableCreation(true);
+    }
+
+    public static void createFcCardInfoEntity(Schema schema){
+        Entity fcCardInfo = schema.addEntity(FC_CARD_INFO_ENTITY);
+        fcCardInfo.setTableName(FC_CARD_INFO_ENTITY);
+        fcCardInfo.addIntProperty(COLUMN_CARD_ID).columnName(COLUMN_CARD_ID).primaryKey();
+        fcCardInfo.addStringProperty(COLUMN_CARD_NO).columnName(COLUMN_CARD_NO);
+        fcCardInfo.addIntProperty(COLUMN_CARD_STATUS).columnName(COLUMN_CARD_STATUS);
+        fcCardInfo.addIntProperty(COLUMN_LOG_ID).columnName(COLUMN_LOG_ID);
+        fcCardInfo.addDoubleProperty(COLUMN_CARD_DEPOSIT_AMOUNT).columnName(COLUMN_CARD_DEPOSIT_AMOUNT);
+        fcCardInfo.addDoubleProperty(COLUMN_CARD_CURRENT_AMOUNT).columnName(COLUMN_CARD_CURRENT_AMOUNT);
+        fcCardInfo.addDoubleProperty(COLUMN_CARD_LIMIT_AMOUNT).columnName(COLUMN_CARD_LIMIT_AMOUNT);
+        fcCardInfo.addIntProperty(COLUMN_CREATE_STAFF_ID).columnName(COLUMN_STAFF_ID);
+        fcCardInfo.addIntProperty(COLUMN_UPDATE_STAFF_ID).columnName(COLUMN_UPDATE_STAFF_ID);
+        fcCardInfo.addIntProperty(COLUMN_MEMBER_ID).columnName(COLUMN_MEMBER_ID);
+        fcCardInfo.addDateProperty(COLUMN_CREATE_DATE).columnName(COLUMN_CREATE_DATE);
+        fcCardInfo.addDateProperty(COLUMN_UPDATE_DATE).columnName(COLUMN_UPDATE_DATE);
+        fcCardInfo.addDateProperty(COLUMN_EXPIRE_DATE).columnName(COLUMN_EXPIRE_DATE);
+        fcCardInfo.addIntProperty(COLUMN_DELETED).columnName(COLUMN_DELETED);
+        fcCardInfo.setSkipTableCreation(true);
+    }
+
+    public static void createFcTransDetailEntity(Schema schema){
+        Entity fcTranDetail = schema.addEntity(FC_TRAN_DETAIL_ENTITY);
+        fcTranDetail.setTableName(FC_TRAN_DETAIL_ENTITY);
+        fcTranDetail.addIntProperty(COLUMN_ORDER_DETAIL_ID).columnName(COLUMN_ORDER_DETAIL_ID).primaryKey();
+        fcTranDetail.addIntProperty(COLUMN_TRANSACTION_ID).columnName(COLUMN_TRANSACTION_ID).primaryKey();
+        fcTranDetail.addIntProperty(COLUMN_COMPUTER_ID).columnName(COLUMN_COMPUTER_ID).primaryKey();
+        fcTranDetail.addIntProperty(COLUMN_CARD_ID).columnName(COLUMN_CARD_ID);
+        fcTranDetail.addStringProperty(COLUMN_CARD_NO).columnName(COLUMN_CARD_NO);
+        fcTranDetail.addIntProperty(COLUMN_SHOP_ID).columnName(COLUMN_SHOP_ID);
+        fcTranDetail.addDateProperty(COLUMN_SALE_DATE).columnName(COLUMN_SALE_DATE);
+        fcTranDetail.addDoubleProperty(COLUMN_TRANS_AMOUNT).columnName(COLUMN_TRANS_AMOUNT);
+        fcTranDetail.addIntProperty(COLUMN_RECORD_STATUS).columnName(COLUMN_RECORD_STATUS);
+        fcTranDetail.addDateProperty(COLUMN_INSERT_DATE).columnName(COLUMN_INSERT_DATE);
+        fcTranDetail.setSkipTableCreation(true);
+    }
+
+    public static void createFcTransPaymentEntity(Schema schema){
+        Entity fcTransPayment = schema.addEntity(FC_TRAN_PAYMENT_ENTITY);
+        fcTransPayment.setTableName(FC_TRAN_PAYMENT_ENTITY);
+        fcTransPayment.addIntProperty(COLUMN_PAY_DETAIL_ID).columnName(COLUMN_PAY_DETAIL_ID).primaryKey();
+        fcTransPayment.addIntProperty(COLUMN_TRANSACTION_ID).columnName(COLUMN_TRANSACTION_ID).primaryKey();
+        fcTransPayment.addIntProperty(COLUMN_COMPUTER_ID).columnName(COLUMN_COMPUTER_ID).primaryKey();
+        fcTransPayment.addIntProperty(COLUMN_PAY_TYPE_ID).columnName(COLUMN_PAY_TYPE_ID);
+        fcTransPayment.addIntProperty(COLUMN_SHOP_ID).columnName(COLUMN_SHOP_ID);
+        fcTransPayment.addDateProperty(COLUMN_SALE_DATE).columnName(COLUMN_SALE_DATE);
+        fcTransPayment.addDoubleProperty(COLUMN_PAY_AMOUNT).columnName(COLUMN_PAY_AMOUNT);
+        fcTransPayment.addStringProperty(COLUMN_CC_NUMBER).columnName(COLUMN_CC_NUMBER);
+        fcTransPayment.addIntProperty(COLUMN_CC_EXP_MONTH).columnName(COLUMN_CC_EXP_MONTH);
+        fcTransPayment.addIntProperty(COLUMN_CC_EXP_YEAR).columnName(COLUMN_CC_EXP_YEAR);
+        fcTransPayment.addIntProperty(COLUMN_CC_TYPE).columnName(COLUMN_CC_TYPE);
+        fcTransPayment.addIntProperty(COLUMN_CC_BANK).columnName(COLUMN_CC_BANK);
+        fcTransPayment.addStringProperty(COLUMN_CC_NAME).columnName(COLUMN_CC_NAME);
+        fcTransPayment.addStringProperty(COLUMN_CC_APPROVE_CODE).columnName(COLUMN_CC_APPROVE_CODE);
+        fcTransPayment.addStringProperty(COLUMN_CC_RESPONSE).columnName(COLUMN_CC_RESPONSE);
+        fcTransPayment.addStringProperty(COLUMN_REMARK).columnName(COLUMN_REMARK);
+        fcTransPayment.addDateProperty(COLUMN_INSERT_DATE).columnName(COLUMN_INSERT_DATE);
+        fcTransPayment.setSkipTableCreation(true);
     }
 
     public static void createStaffRoleEntity(Schema schema){
@@ -445,28 +747,6 @@ public class MyDaoGenerator {
         shopCategory.setSkipTableCreation(true);
     }
 
-    public static void createCreditCardTypeEntity(Schema schema){
-        Entity creditCardType = schema.addEntity(CREDIT_CARD_TYPE_ENTITY);
-        creditCardType.addIntProperty("CCTypeID").notNull().primaryKey();
-        creditCardType.addIntProperty("CreditCardType").notNull();
-        creditCardType.addIntProperty("Deleted").notNull();
-        creditCardType.setSkipTableCreation(true);
-    }
-
-    public static void createComputerNameEntity(Schema schema){
-        Entity computerName = schema.addEntity(COMPUTER_NAME_ENTITY);
-        computerName.addIntProperty("ComputerID").notNull().primaryKey();
-        computerName.addStringProperty("ComputerName");
-        computerName.addIntProperty("ShopID").notNull();
-        computerName.addIntProperty("ComputerType").notNull();
-        computerName.addStringProperty("IPAddress");
-        computerName.addStringProperty("RegistrationNumber");
-        computerName.addStringProperty("DeviceCode");
-        computerName.addIntProperty("KDSID");
-        computerName.addStringProperty("Description");
-        computerName.addIntProperty("Deleted");
-        computerName.setSkipTableCreation(true);
-    }
 
     public static void createProductVatEntity(Schema schema){
         Entity productVat = schema.addEntity(PRODUCT_VAT_ENTITY);

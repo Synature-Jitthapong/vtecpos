@@ -8,6 +8,13 @@ import android.util.Log;
 import de.greenrobot.dao.AbstractDaoMaster;
 import de.greenrobot.dao.identityscope.IdentityScopeType;
 
+import com.vtec.j1tth4.vtecpos.dao.BankNameDao;
+import com.vtec.j1tth4.vtecpos.dao.ComputerNameDao;
+import com.vtec.j1tth4.vtecpos.dao.CreditCardTypeDao;
+import com.vtec.j1tth4.vtecpos.dao.DocumentDao;
+import com.vtec.j1tth4.vtecpos.dao.DocumentTypeDao;
+import com.vtec.j1tth4.vtecpos.dao.fc_cardhistoryDao;
+import com.vtec.j1tth4.vtecpos.dao.fc_cardinfoDao;
 import com.vtec.j1tth4.vtecpos.dao.ProductsDao;
 import com.vtec.j1tth4.vtecpos.dao.ProductDeptDao;
 import com.vtec.j1tth4.vtecpos.dao.ProductGroupDao;
@@ -21,9 +28,6 @@ import com.vtec.j1tth4.vtecpos.dao.ProductPriceGroupDateDao;
 import com.vtec.j1tth4.vtecpos.dao.ProductPriceGroupShopDao;
 import com.vtec.j1tth4.vtecpos.dao.ProductTypeDao;
 import com.vtec.j1tth4.vtecpos.dao.ProductVatDao;
-import com.vtec.j1tth4.vtecpos.dao.BankNameDao;
-import com.vtec.j1tth4.vtecpos.dao.ComputerNameDao;
-import com.vtec.j1tth4.vtecpos.dao.CreditCardTypeDao;
 import com.vtec.j1tth4.vtecpos.dao.ShopCategoryDao;
 import com.vtec.j1tth4.vtecpos.dao.ShopDataDao;
 import com.vtec.j1tth4.vtecpos.dao.OrderTransactionDao;
@@ -78,6 +82,13 @@ public class DaoMaster extends AbstractDaoMaster {
 
     public DaoMaster(SQLiteDatabase db) {
         super(db, SCHEMA_VERSION);
+        registerDaoClass(BankNameDao.class);
+        registerDaoClass(ComputerNameDao.class);
+        registerDaoClass(CreditCardTypeDao.class);
+        registerDaoClass(DocumentDao.class);
+        registerDaoClass(DocumentTypeDao.class);
+        registerDaoClass(fc_cardhistoryDao.class);
+        registerDaoClass(fc_cardinfoDao.class);
         registerDaoClass(ProductsDao.class);
         registerDaoClass(ProductDeptDao.class);
         registerDaoClass(ProductGroupDao.class);
@@ -91,9 +102,6 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(ProductPriceGroupShopDao.class);
         registerDaoClass(ProductTypeDao.class);
         registerDaoClass(ProductVatDao.class);
-        registerDaoClass(BankNameDao.class);
-        registerDaoClass(ComputerNameDao.class);
-        registerDaoClass(CreditCardTypeDao.class);
         registerDaoClass(ShopCategoryDao.class);
         registerDaoClass(ShopDataDao.class);
         registerDaoClass(OrderTransactionDao.class);

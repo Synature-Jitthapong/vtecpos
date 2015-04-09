@@ -9,6 +9,13 @@ import de.greenrobot.dao.AbstractDaoSession;
 import de.greenrobot.dao.identityscope.IdentityScopeType;
 import de.greenrobot.dao.internal.DaoConfig;
 
+import com.vtec.j1tth4.vtecpos.dao.BankName;
+import com.vtec.j1tth4.vtecpos.dao.ComputerName;
+import com.vtec.j1tth4.vtecpos.dao.CreditCardType;
+import com.vtec.j1tth4.vtecpos.dao.Document;
+import com.vtec.j1tth4.vtecpos.dao.DocumentType;
+import com.vtec.j1tth4.vtecpos.dao.fc_cardhistory;
+import com.vtec.j1tth4.vtecpos.dao.fc_cardinfo;
 import com.vtec.j1tth4.vtecpos.dao.Products;
 import com.vtec.j1tth4.vtecpos.dao.ProductDept;
 import com.vtec.j1tth4.vtecpos.dao.ProductGroup;
@@ -22,9 +29,6 @@ import com.vtec.j1tth4.vtecpos.dao.ProductPriceGroupDate;
 import com.vtec.j1tth4.vtecpos.dao.ProductPriceGroupShop;
 import com.vtec.j1tth4.vtecpos.dao.ProductType;
 import com.vtec.j1tth4.vtecpos.dao.ProductVat;
-import com.vtec.j1tth4.vtecpos.dao.BankName;
-import com.vtec.j1tth4.vtecpos.dao.ComputerName;
-import com.vtec.j1tth4.vtecpos.dao.CreditCardType;
 import com.vtec.j1tth4.vtecpos.dao.ShopCategory;
 import com.vtec.j1tth4.vtecpos.dao.ShopData;
 import com.vtec.j1tth4.vtecpos.dao.OrderTransaction;
@@ -35,6 +39,13 @@ import com.vtec.j1tth4.vtecpos.dao.StaffRole;
 import com.vtec.j1tth4.vtecpos.dao.Session;
 import com.vtec.j1tth4.vtecpos.dao.SessionEnddayDetail;
 
+import com.vtec.j1tth4.vtecpos.dao.BankNameDao;
+import com.vtec.j1tth4.vtecpos.dao.ComputerNameDao;
+import com.vtec.j1tth4.vtecpos.dao.CreditCardTypeDao;
+import com.vtec.j1tth4.vtecpos.dao.DocumentDao;
+import com.vtec.j1tth4.vtecpos.dao.DocumentTypeDao;
+import com.vtec.j1tth4.vtecpos.dao.fc_cardhistoryDao;
+import com.vtec.j1tth4.vtecpos.dao.fc_cardinfoDao;
 import com.vtec.j1tth4.vtecpos.dao.ProductsDao;
 import com.vtec.j1tth4.vtecpos.dao.ProductDeptDao;
 import com.vtec.j1tth4.vtecpos.dao.ProductGroupDao;
@@ -48,9 +59,6 @@ import com.vtec.j1tth4.vtecpos.dao.ProductPriceGroupDateDao;
 import com.vtec.j1tth4.vtecpos.dao.ProductPriceGroupShopDao;
 import com.vtec.j1tth4.vtecpos.dao.ProductTypeDao;
 import com.vtec.j1tth4.vtecpos.dao.ProductVatDao;
-import com.vtec.j1tth4.vtecpos.dao.BankNameDao;
-import com.vtec.j1tth4.vtecpos.dao.ComputerNameDao;
-import com.vtec.j1tth4.vtecpos.dao.CreditCardTypeDao;
 import com.vtec.j1tth4.vtecpos.dao.ShopCategoryDao;
 import com.vtec.j1tth4.vtecpos.dao.ShopDataDao;
 import com.vtec.j1tth4.vtecpos.dao.OrderTransactionDao;
@@ -70,6 +78,13 @@ import com.vtec.j1tth4.vtecpos.dao.SessionEnddayDetailDao;
  */
 public class DaoSession extends AbstractDaoSession {
 
+    private final DaoConfig bankNameDaoConfig;
+    private final DaoConfig computerNameDaoConfig;
+    private final DaoConfig creditCardTypeDaoConfig;
+    private final DaoConfig documentDaoConfig;
+    private final DaoConfig documentTypeDaoConfig;
+    private final DaoConfig fc_cardhistoryDaoConfig;
+    private final DaoConfig fc_cardinfoDaoConfig;
     private final DaoConfig productsDaoConfig;
     private final DaoConfig productDeptDaoConfig;
     private final DaoConfig productGroupDaoConfig;
@@ -83,9 +98,6 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig productPriceGroupShopDaoConfig;
     private final DaoConfig productTypeDaoConfig;
     private final DaoConfig productVatDaoConfig;
-    private final DaoConfig bankNameDaoConfig;
-    private final DaoConfig computerNameDaoConfig;
-    private final DaoConfig creditCardTypeDaoConfig;
     private final DaoConfig shopCategoryDaoConfig;
     private final DaoConfig shopDataDaoConfig;
     private final DaoConfig orderTransactionDaoConfig;
@@ -96,6 +108,13 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig sessionDaoConfig;
     private final DaoConfig sessionEnddayDetailDaoConfig;
 
+    private final BankNameDao bankNameDao;
+    private final ComputerNameDao computerNameDao;
+    private final CreditCardTypeDao creditCardTypeDao;
+    private final DocumentDao documentDao;
+    private final DocumentTypeDao documentTypeDao;
+    private final fc_cardhistoryDao fc_cardhistoryDao;
+    private final fc_cardinfoDao fc_cardinfoDao;
     private final ProductsDao productsDao;
     private final ProductDeptDao productDeptDao;
     private final ProductGroupDao productGroupDao;
@@ -109,9 +128,6 @@ public class DaoSession extends AbstractDaoSession {
     private final ProductPriceGroupShopDao productPriceGroupShopDao;
     private final ProductTypeDao productTypeDao;
     private final ProductVatDao productVatDao;
-    private final BankNameDao bankNameDao;
-    private final ComputerNameDao computerNameDao;
-    private final CreditCardTypeDao creditCardTypeDao;
     private final ShopCategoryDao shopCategoryDao;
     private final ShopDataDao shopDataDao;
     private final OrderTransactionDao orderTransactionDao;
@@ -125,6 +141,27 @@ public class DaoSession extends AbstractDaoSession {
     public DaoSession(SQLiteDatabase db, IdentityScopeType type, Map<Class<? extends AbstractDao<?, ?>>, DaoConfig>
             daoConfigMap) {
         super(db);
+
+        bankNameDaoConfig = daoConfigMap.get(BankNameDao.class).clone();
+        bankNameDaoConfig.initIdentityScope(type);
+
+        computerNameDaoConfig = daoConfigMap.get(ComputerNameDao.class).clone();
+        computerNameDaoConfig.initIdentityScope(type);
+
+        creditCardTypeDaoConfig = daoConfigMap.get(CreditCardTypeDao.class).clone();
+        creditCardTypeDaoConfig.initIdentityScope(type);
+
+        documentDaoConfig = daoConfigMap.get(DocumentDao.class).clone();
+        documentDaoConfig.initIdentityScope(type);
+
+        documentTypeDaoConfig = daoConfigMap.get(DocumentTypeDao.class).clone();
+        documentTypeDaoConfig.initIdentityScope(type);
+
+        fc_cardhistoryDaoConfig = daoConfigMap.get(fc_cardhistoryDao.class).clone();
+        fc_cardhistoryDaoConfig.initIdentityScope(type);
+
+        fc_cardinfoDaoConfig = daoConfigMap.get(fc_cardinfoDao.class).clone();
+        fc_cardinfoDaoConfig.initIdentityScope(type);
 
         productsDaoConfig = daoConfigMap.get(ProductsDao.class).clone();
         productsDaoConfig.initIdentityScope(type);
@@ -165,15 +202,6 @@ public class DaoSession extends AbstractDaoSession {
         productVatDaoConfig = daoConfigMap.get(ProductVatDao.class).clone();
         productVatDaoConfig.initIdentityScope(type);
 
-        bankNameDaoConfig = daoConfigMap.get(BankNameDao.class).clone();
-        bankNameDaoConfig.initIdentityScope(type);
-
-        computerNameDaoConfig = daoConfigMap.get(ComputerNameDao.class).clone();
-        computerNameDaoConfig.initIdentityScope(type);
-
-        creditCardTypeDaoConfig = daoConfigMap.get(CreditCardTypeDao.class).clone();
-        creditCardTypeDaoConfig.initIdentityScope(type);
-
         shopCategoryDaoConfig = daoConfigMap.get(ShopCategoryDao.class).clone();
         shopCategoryDaoConfig.initIdentityScope(type);
 
@@ -201,6 +229,13 @@ public class DaoSession extends AbstractDaoSession {
         sessionEnddayDetailDaoConfig = daoConfigMap.get(SessionEnddayDetailDao.class).clone();
         sessionEnddayDetailDaoConfig.initIdentityScope(type);
 
+        bankNameDao = new BankNameDao(bankNameDaoConfig, this);
+        computerNameDao = new ComputerNameDao(computerNameDaoConfig, this);
+        creditCardTypeDao = new CreditCardTypeDao(creditCardTypeDaoConfig, this);
+        documentDao = new DocumentDao(documentDaoConfig, this);
+        documentTypeDao = new DocumentTypeDao(documentTypeDaoConfig, this);
+        fc_cardhistoryDao = new fc_cardhistoryDao(fc_cardhistoryDaoConfig, this);
+        fc_cardinfoDao = new fc_cardinfoDao(fc_cardinfoDaoConfig, this);
         productsDao = new ProductsDao(productsDaoConfig, this);
         productDeptDao = new ProductDeptDao(productDeptDaoConfig, this);
         productGroupDao = new ProductGroupDao(productGroupDaoConfig, this);
@@ -214,9 +249,6 @@ public class DaoSession extends AbstractDaoSession {
         productPriceGroupShopDao = new ProductPriceGroupShopDao(productPriceGroupShopDaoConfig, this);
         productTypeDao = new ProductTypeDao(productTypeDaoConfig, this);
         productVatDao = new ProductVatDao(productVatDaoConfig, this);
-        bankNameDao = new BankNameDao(bankNameDaoConfig, this);
-        computerNameDao = new ComputerNameDao(computerNameDaoConfig, this);
-        creditCardTypeDao = new CreditCardTypeDao(creditCardTypeDaoConfig, this);
         shopCategoryDao = new ShopCategoryDao(shopCategoryDaoConfig, this);
         shopDataDao = new ShopDataDao(shopDataDaoConfig, this);
         orderTransactionDao = new OrderTransactionDao(orderTransactionDaoConfig, this);
@@ -227,6 +259,13 @@ public class DaoSession extends AbstractDaoSession {
         sessionDao = new SessionDao(sessionDaoConfig, this);
         sessionEnddayDetailDao = new SessionEnddayDetailDao(sessionEnddayDetailDaoConfig, this);
 
+        registerDao(BankName.class, bankNameDao);
+        registerDao(ComputerName.class, computerNameDao);
+        registerDao(CreditCardType.class, creditCardTypeDao);
+        registerDao(Document.class, documentDao);
+        registerDao(DocumentType.class, documentTypeDao);
+        registerDao(fc_cardhistory.class, fc_cardhistoryDao);
+        registerDao(fc_cardinfo.class, fc_cardinfoDao);
         registerDao(Products.class, productsDao);
         registerDao(ProductDept.class, productDeptDao);
         registerDao(ProductGroup.class, productGroupDao);
@@ -240,9 +279,6 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(ProductPriceGroupShop.class, productPriceGroupShopDao);
         registerDao(ProductType.class, productTypeDao);
         registerDao(ProductVat.class, productVatDao);
-        registerDao(BankName.class, bankNameDao);
-        registerDao(ComputerName.class, computerNameDao);
-        registerDao(CreditCardType.class, creditCardTypeDao);
         registerDao(ShopCategory.class, shopCategoryDao);
         registerDao(ShopData.class, shopDataDao);
         registerDao(OrderTransaction.class, orderTransactionDao);
@@ -255,6 +291,13 @@ public class DaoSession extends AbstractDaoSession {
     }
     
     public void clear() {
+        bankNameDaoConfig.getIdentityScope().clear();
+        computerNameDaoConfig.getIdentityScope().clear();
+        creditCardTypeDaoConfig.getIdentityScope().clear();
+        documentDaoConfig.getIdentityScope().clear();
+        documentTypeDaoConfig.getIdentityScope().clear();
+        fc_cardhistoryDaoConfig.getIdentityScope().clear();
+        fc_cardinfoDaoConfig.getIdentityScope().clear();
         productsDaoConfig.getIdentityScope().clear();
         productDeptDaoConfig.getIdentityScope().clear();
         productGroupDaoConfig.getIdentityScope().clear();
@@ -268,9 +311,6 @@ public class DaoSession extends AbstractDaoSession {
         productPriceGroupShopDaoConfig.getIdentityScope().clear();
         productTypeDaoConfig.getIdentityScope().clear();
         productVatDaoConfig.getIdentityScope().clear();
-        bankNameDaoConfig.getIdentityScope().clear();
-        computerNameDaoConfig.getIdentityScope().clear();
-        creditCardTypeDaoConfig.getIdentityScope().clear();
         shopCategoryDaoConfig.getIdentityScope().clear();
         shopDataDaoConfig.getIdentityScope().clear();
         orderTransactionDaoConfig.getIdentityScope().clear();
@@ -280,6 +320,34 @@ public class DaoSession extends AbstractDaoSession {
         staffRoleDaoConfig.getIdentityScope().clear();
         sessionDaoConfig.getIdentityScope().clear();
         sessionEnddayDetailDaoConfig.getIdentityScope().clear();
+    }
+
+    public BankNameDao getBankNameDao() {
+        return bankNameDao;
+    }
+
+    public ComputerNameDao getComputerNameDao() {
+        return computerNameDao;
+    }
+
+    public CreditCardTypeDao getCreditCardTypeDao() {
+        return creditCardTypeDao;
+    }
+
+    public DocumentDao getDocumentDao() {
+        return documentDao;
+    }
+
+    public DocumentTypeDao getDocumentTypeDao() {
+        return documentTypeDao;
+    }
+
+    public fc_cardhistoryDao getFc_cardhistoryDao() {
+        return fc_cardhistoryDao;
+    }
+
+    public fc_cardinfoDao getFc_cardinfoDao() {
+        return fc_cardinfoDao;
     }
 
     public ProductsDao getProductsDao() {
@@ -332,18 +400,6 @@ public class DaoSession extends AbstractDaoSession {
 
     public ProductVatDao getProductVatDao() {
         return productVatDao;
-    }
-
-    public BankNameDao getBankNameDao() {
-        return bankNameDao;
-    }
-
-    public ComputerNameDao getComputerNameDao() {
-        return computerNameDao;
-    }
-
-    public CreditCardTypeDao getCreditCardTypeDao() {
-        return creditCardTypeDao;
     }
 
     public ShopCategoryDao getShopCategoryDao() {

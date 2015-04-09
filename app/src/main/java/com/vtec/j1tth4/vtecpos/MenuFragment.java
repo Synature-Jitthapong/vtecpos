@@ -3,7 +3,6 @@ package com.vtec.j1tth4.vtecpos;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -14,10 +13,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPut;
-import org.w3c.dom.Text;
+import com.vtec.j1tth4.vtecpos.dao.Products;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,13 +60,19 @@ public class MenuFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ProductRepository productRepo = new ProductRepository();
+        List<Products> productLst = productRepo.getAllProducts(getActivity());
+
         mMenuItem.add(new MenuItem("Shusi", getResources().getDrawable(R.drawable.sushi)));
         mMenuItem.add(new MenuItem("Ramen", getResources().getDrawable(R.drawable.ramen)));
         mMenuItem.add(new MenuItem("Capuchino", getResources().getDrawable(R.drawable.capuchino)));
         mMenuItem.add(new MenuItem("Espress", getResources().getDrawable(R.drawable.esspresso)));
+
+        for(Products p : productLst){
+            mMenuItem.add(new MenuItem(p.getProductName(), getResources().getDrawable(R.drawable.sushi)));
+        }
     }
 
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.menu_gridview, container, false);
