@@ -8,17 +8,17 @@ public class Products {
 
     private int ProductID;
     private int ShopID;
-    private int ProductGroupID;
-    private int ProductDeptID;
-    private int ProductCat1ID;
-    private int ProductCat2ID;
-    private int ProductCat3ID;
-    private int ProductCat4ID;
-    private int ProductCat5ID;
-    private int ProductTypeID;
+    private Integer InventoryID;
+    private Integer ProductGroupID;
+    private Integer ProductDeptID;
+    private Integer ProductCat1ID;
+    private Integer ProductCat2ID;
+    private Integer ProductCat3ID;
+    private Integer ProductCat4ID;
+    private Integer ProductCat5ID;
+    private Integer ProductTypeID;
     private String ProductCode;
     private String ProductBarCode;
-    /** Not-null value. */
     private String ProductName;
     private String ProductNameLang1;
     private String ProductNameLang2;
@@ -33,45 +33,48 @@ public class Products {
     private String ProductMNameLang5;
     private String ProductPictureServer;
     private String ProductPictureClient;
-    private int PrinterID;
-    private int PrintGroup;
-    private int DurationTime;
-    private int HasServiceCharge;
-    private int IsOutOfStock;
-    private int AutoComment;
-    private int CanReturnProduct;
-    private int DisplayAtCheckerSystem;
+    private Integer PrinterID;
+    private Integer PrintGroup;
+    private String PrintProductName;
+    private java.util.Date DurationTime;
+    private Integer HasServiceCharge;
+    private Integer IsOutOfStock;
+    private Integer AutoComment;
+    private Integer IsDisplayBill;
+    private Integer IsPrintCheck;
+    private Integer IsPrintReceipt;
+    private Integer CanReturnProduct;
+    private Integer DisplayAtCheckerSystem;
     private java.util.Date ProductEnableDateTime;
     private java.util.Date ProductExpireDateTime;
-    private String ProductEnableDayString;
-    private int WarningTime;
-    private int CriticalTime;
-    private int SaleMode1;
-    private int SaleMode2;
-    private int SaleMode3;
-    private int SaleMode4;
-    private int SaleMode5;
-    private int SaleMode6;
-    private int SaleMode7;
-    private int SaleMode8;
-    private int SaleMode9;
-    private int SaleMode10;
-    private int VATType;
-    /** Not-null value. */
+    private java.util.Date ProductEnableDayString;
+    private java.util.Date WarningTime;
+    private java.util.Date CriticalTime;
+    private Integer SaleMode1;
+    private Integer SaleMode2;
+    private Integer SaleMode3;
+    private Integer SaleMode4;
+    private Integer SaleMode5;
+    private Integer SaleMode6;
+    private Integer SaleMode7;
+    private Integer SaleMode8;
+    private Integer SaleMode9;
+    private Integer SaleMode10;
+    private Integer VATType;
     private String VATCode;
     private String ProductUnitName;
-    private int DiscountAllow;
-    private int ZeroPriceAllow;
-    private double LimitDiscountAmount;
-    private double LimitDiscountPercent;
-    private int CommRate;
+    private Integer DiscountAllow;
+    private Integer ZeroPriceAllow;
+    private Integer LimitDiscountAmount;
+    private Integer LimitDiscountPercent;
+    private Integer CommRate;
     private String ProductDesp;
-    private int ProductDisplay;
-    private int ProductActivate;
-    private int ProductOrdering;
-    private int PrintOrdering;
-    private int AddingFromBranch;
-    private int Deleted;
+    private Integer ProductDisplay;
+    private Integer ProductActivate;
+    private Integer ProductOrdering;
+    private Integer PrintOrdering;
+    private Integer AddingFromBranch;
+    private Integer Deleted;
     private java.util.Date InsertDate;
     private java.util.Date UpdateDate;
 
@@ -82,9 +85,10 @@ public class Products {
         this.ProductID = ProductID;
     }
 
-    public Products(int ProductID, int ShopID, int ProductGroupID, int ProductDeptID, int ProductCat1ID, int ProductCat2ID, int ProductCat3ID, int ProductCat4ID, int ProductCat5ID, int ProductTypeID, String ProductCode, String ProductBarCode, String ProductName, String ProductNameLang1, String ProductNameLang2, String ProductNameLang3, String ProductNameLang4, String ProductNameLang5, String ProductMName, String ProductMNameLang1, String ProductMNameLang2, String ProductMNameLang3, String ProductMNameLang4, String ProductMNameLang5, String ProductPictureServer, String ProductPictureClient, int PrinterID, int PrintGroup, int DurationTime, int HasServiceCharge, int IsOutOfStock, int AutoComment, int CanReturnProduct, int DisplayAtCheckerSystem, java.util.Date ProductEnableDateTime, java.util.Date ProductExpireDateTime, String ProductEnableDayString, int WarningTime, int CriticalTime, int SaleMode1, int SaleMode2, int SaleMode3, int SaleMode4, int SaleMode5, int SaleMode6, int SaleMode7, int SaleMode8, int SaleMode9, int SaleMode10, int VATType, String VATCode, String ProductUnitName, int DiscountAllow, int ZeroPriceAllow, double LimitDiscountAmount, double LimitDiscountPercent, int CommRate, String ProductDesp, int ProductDisplay, int ProductActivate, int ProductOrdering, int PrintOrdering, int AddingFromBranch, int Deleted, java.util.Date InsertDate, java.util.Date UpdateDate) {
+    public Products(int ProductID, int ShopID, Integer InventoryID, Integer ProductGroupID, Integer ProductDeptID, Integer ProductCat1ID, Integer ProductCat2ID, Integer ProductCat3ID, Integer ProductCat4ID, Integer ProductCat5ID, Integer ProductTypeID, String ProductCode, String ProductBarCode, String ProductName, String ProductNameLang1, String ProductNameLang2, String ProductNameLang3, String ProductNameLang4, String ProductNameLang5, String ProductMName, String ProductMNameLang1, String ProductMNameLang2, String ProductMNameLang3, String ProductMNameLang4, String ProductMNameLang5, String ProductPictureServer, String ProductPictureClient, Integer PrinterID, Integer PrintGroup, String PrintProductName, java.util.Date DurationTime, Integer HasServiceCharge, Integer IsOutOfStock, Integer AutoComment, Integer IsDisplayBill, Integer IsPrintCheck, Integer IsPrintReceipt, Integer CanReturnProduct, Integer DisplayAtCheckerSystem, java.util.Date ProductEnableDateTime, java.util.Date ProductExpireDateTime, java.util.Date ProductEnableDayString, java.util.Date WarningTime, java.util.Date CriticalTime, Integer SaleMode1, Integer SaleMode2, Integer SaleMode3, Integer SaleMode4, Integer SaleMode5, Integer SaleMode6, Integer SaleMode7, Integer SaleMode8, Integer SaleMode9, Integer SaleMode10, Integer VATType, String VATCode, String ProductUnitName, Integer DiscountAllow, Integer ZeroPriceAllow, Integer LimitDiscountAmount, Integer LimitDiscountPercent, Integer CommRate, String ProductDesp, Integer ProductDisplay, Integer ProductActivate, Integer ProductOrdering, Integer PrintOrdering, Integer AddingFromBranch, Integer Deleted, java.util.Date InsertDate, java.util.Date UpdateDate) {
         this.ProductID = ProductID;
         this.ShopID = ShopID;
+        this.InventoryID = InventoryID;
         this.ProductGroupID = ProductGroupID;
         this.ProductDeptID = ProductDeptID;
         this.ProductCat1ID = ProductCat1ID;
@@ -111,10 +115,14 @@ public class Products {
         this.ProductPictureClient = ProductPictureClient;
         this.PrinterID = PrinterID;
         this.PrintGroup = PrintGroup;
+        this.PrintProductName = PrintProductName;
         this.DurationTime = DurationTime;
         this.HasServiceCharge = HasServiceCharge;
         this.IsOutOfStock = IsOutOfStock;
         this.AutoComment = AutoComment;
+        this.IsDisplayBill = IsDisplayBill;
+        this.IsPrintCheck = IsPrintCheck;
+        this.IsPrintReceipt = IsPrintReceipt;
         this.CanReturnProduct = CanReturnProduct;
         this.DisplayAtCheckerSystem = DisplayAtCheckerSystem;
         this.ProductEnableDateTime = ProductEnableDateTime;
@@ -167,67 +175,75 @@ public class Products {
         this.ShopID = ShopID;
     }
 
-    public int getProductGroupID() {
+    public Integer getInventoryID() {
+        return InventoryID;
+    }
+
+    public void setInventoryID(Integer InventoryID) {
+        this.InventoryID = InventoryID;
+    }
+
+    public Integer getProductGroupID() {
         return ProductGroupID;
     }
 
-    public void setProductGroupID(int ProductGroupID) {
+    public void setProductGroupID(Integer ProductGroupID) {
         this.ProductGroupID = ProductGroupID;
     }
 
-    public int getProductDeptID() {
+    public Integer getProductDeptID() {
         return ProductDeptID;
     }
 
-    public void setProductDeptID(int ProductDeptID) {
+    public void setProductDeptID(Integer ProductDeptID) {
         this.ProductDeptID = ProductDeptID;
     }
 
-    public int getProductCat1ID() {
+    public Integer getProductCat1ID() {
         return ProductCat1ID;
     }
 
-    public void setProductCat1ID(int ProductCat1ID) {
+    public void setProductCat1ID(Integer ProductCat1ID) {
         this.ProductCat1ID = ProductCat1ID;
     }
 
-    public int getProductCat2ID() {
+    public Integer getProductCat2ID() {
         return ProductCat2ID;
     }
 
-    public void setProductCat2ID(int ProductCat2ID) {
+    public void setProductCat2ID(Integer ProductCat2ID) {
         this.ProductCat2ID = ProductCat2ID;
     }
 
-    public int getProductCat3ID() {
+    public Integer getProductCat3ID() {
         return ProductCat3ID;
     }
 
-    public void setProductCat3ID(int ProductCat3ID) {
+    public void setProductCat3ID(Integer ProductCat3ID) {
         this.ProductCat3ID = ProductCat3ID;
     }
 
-    public int getProductCat4ID() {
+    public Integer getProductCat4ID() {
         return ProductCat4ID;
     }
 
-    public void setProductCat4ID(int ProductCat4ID) {
+    public void setProductCat4ID(Integer ProductCat4ID) {
         this.ProductCat4ID = ProductCat4ID;
     }
 
-    public int getProductCat5ID() {
+    public Integer getProductCat5ID() {
         return ProductCat5ID;
     }
 
-    public void setProductCat5ID(int ProductCat5ID) {
+    public void setProductCat5ID(Integer ProductCat5ID) {
         this.ProductCat5ID = ProductCat5ID;
     }
 
-    public int getProductTypeID() {
+    public Integer getProductTypeID() {
         return ProductTypeID;
     }
 
-    public void setProductTypeID(int ProductTypeID) {
+    public void setProductTypeID(Integer ProductTypeID) {
         this.ProductTypeID = ProductTypeID;
     }
 
@@ -247,12 +263,10 @@ public class Products {
         this.ProductBarCode = ProductBarCode;
     }
 
-    /** Not-null value. */
     public String getProductName() {
         return ProductName;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setProductName(String ProductName) {
         this.ProductName = ProductName;
     }
@@ -361,67 +375,99 @@ public class Products {
         this.ProductPictureClient = ProductPictureClient;
     }
 
-    public int getPrinterID() {
+    public Integer getPrinterID() {
         return PrinterID;
     }
 
-    public void setPrinterID(int PrinterID) {
+    public void setPrinterID(Integer PrinterID) {
         this.PrinterID = PrinterID;
     }
 
-    public int getPrintGroup() {
+    public Integer getPrintGroup() {
         return PrintGroup;
     }
 
-    public void setPrintGroup(int PrintGroup) {
+    public void setPrintGroup(Integer PrintGroup) {
         this.PrintGroup = PrintGroup;
     }
 
-    public int getDurationTime() {
+    public String getPrintProductName() {
+        return PrintProductName;
+    }
+
+    public void setPrintProductName(String PrintProductName) {
+        this.PrintProductName = PrintProductName;
+    }
+
+    public java.util.Date getDurationTime() {
         return DurationTime;
     }
 
-    public void setDurationTime(int DurationTime) {
+    public void setDurationTime(java.util.Date DurationTime) {
         this.DurationTime = DurationTime;
     }
 
-    public int getHasServiceCharge() {
+    public Integer getHasServiceCharge() {
         return HasServiceCharge;
     }
 
-    public void setHasServiceCharge(int HasServiceCharge) {
+    public void setHasServiceCharge(Integer HasServiceCharge) {
         this.HasServiceCharge = HasServiceCharge;
     }
 
-    public int getIsOutOfStock() {
+    public Integer getIsOutOfStock() {
         return IsOutOfStock;
     }
 
-    public void setIsOutOfStock(int IsOutOfStock) {
+    public void setIsOutOfStock(Integer IsOutOfStock) {
         this.IsOutOfStock = IsOutOfStock;
     }
 
-    public int getAutoComment() {
+    public Integer getAutoComment() {
         return AutoComment;
     }
 
-    public void setAutoComment(int AutoComment) {
+    public void setAutoComment(Integer AutoComment) {
         this.AutoComment = AutoComment;
     }
 
-    public int getCanReturnProduct() {
+    public Integer getIsDisplayBill() {
+        return IsDisplayBill;
+    }
+
+    public void setIsDisplayBill(Integer IsDisplayBill) {
+        this.IsDisplayBill = IsDisplayBill;
+    }
+
+    public Integer getIsPrintCheck() {
+        return IsPrintCheck;
+    }
+
+    public void setIsPrintCheck(Integer IsPrintCheck) {
+        this.IsPrintCheck = IsPrintCheck;
+    }
+
+    public Integer getIsPrintReceipt() {
+        return IsPrintReceipt;
+    }
+
+    public void setIsPrintReceipt(Integer IsPrintReceipt) {
+        this.IsPrintReceipt = IsPrintReceipt;
+    }
+
+    public Integer getCanReturnProduct() {
         return CanReturnProduct;
     }
 
-    public void setCanReturnProduct(int CanReturnProduct) {
+    public void setCanReturnProduct(Integer CanReturnProduct) {
         this.CanReturnProduct = CanReturnProduct;
     }
 
-    public int getDisplayAtCheckerSystem() {
+    public Integer getDisplayAtCheckerSystem() {
         return DisplayAtCheckerSystem;
     }
 
-    public void setDisplayAtCheckerSystem(int DisplayAtCheckerSystem) {
+    public void setDisplayAtCheckerSystem(Integer DisplayAtCheckerSystem) {
         this.DisplayAtCheckerSystem = DisplayAtCheckerSystem;
     }
 
@@ -441,124 +487,122 @@ public class Products {
         this.ProductExpireDateTime = ProductExpireDateTime;
     }
 
-    public String getProductEnableDayString() {
+    public java.util.Date getProductEnableDayString() {
         return ProductEnableDayString;
     }
 
-    public void setProductEnableDayString(String ProductEnableDayString) {
+    public void setProductEnableDayString(java.util.Date ProductEnableDayString) {
         this.ProductEnableDayString = ProductEnableDayString;
     }
 
-    public int getWarningTime() {
+    public java.util.Date getWarningTime() {
         return WarningTime;
     }
 
-    public void setWarningTime(int WarningTime) {
+    public void setWarningTime(java.util.Date WarningTime) {
         this.WarningTime = WarningTime;
     }
 
-    public int getCriticalTime() {
+    public java.util.Date getCriticalTime() {
         return CriticalTime;
     }
 
-    public void setCriticalTime(int CriticalTime) {
+    public void setCriticalTime(java.util.Date CriticalTime) {
         this.CriticalTime = CriticalTime;
     }
 
-    public int getSaleMode1() {
+    public Integer getSaleMode1() {
         return SaleMode1;
     }
 
-    public void setSaleMode1(int SaleMode1) {
+    public void setSaleMode1(Integer SaleMode1) {
         this.SaleMode1 = SaleMode1;
     }
 
-    public int getSaleMode2() {
+    public Integer getSaleMode2() {
         return SaleMode2;
     }
 
-    public void setSaleMode2(int SaleMode2) {
+    public void setSaleMode2(Integer SaleMode2) {
         this.SaleMode2 = SaleMode2;
     }
 
-    public int getSaleMode3() {
+    public Integer getSaleMode3() {
         return SaleMode3;
     }
 
-    public void setSaleMode3(int SaleMode3) {
+    public void setSaleMode3(Integer SaleMode3) {
         this.SaleMode3 = SaleMode3;
     }
 
-    public int getSaleMode4() {
+    public Integer getSaleMode4() {
         return SaleMode4;
     }
 
-    public void setSaleMode4(int SaleMode4) {
+    public void setSaleMode4(Integer SaleMode4) {
         this.SaleMode4 = SaleMode4;
     }
 
-    public int getSaleMode5() {
+    public Integer getSaleMode5() {
         return SaleMode5;
     }
 
-    public void setSaleMode5(int SaleMode5) {
+    public void setSaleMode5(Integer SaleMode5) {
         this.SaleMode5 = SaleMode5;
     }
 
-    public int getSaleMode6() {
+    public Integer getSaleMode6() {
         return SaleMode6;
     }
 
-    public void setSaleMode6(int SaleMode6) {
+    public void setSaleMode6(Integer SaleMode6) {
         this.SaleMode6 = SaleMode6;
     }
 
-    public int getSaleMode7() {
+    public Integer getSaleMode7() {
         return SaleMode7;
     }
 
-    public void setSaleMode7(int SaleMode7) {
+    public void setSaleMode7(Integer SaleMode7) {
         this.SaleMode7 = SaleMode7;
     }
 
-    public int getSaleMode8() {
+    public Integer getSaleMode8() {
         return SaleMode8;
     }
 
-    public void setSaleMode8(int SaleMode8) {
+    public void setSaleMode8(Integer SaleMode8) {
         this.SaleMode8 = SaleMode8;
     }
 
-    public int getSaleMode9() {
+    public Integer getSaleMode9() {
         return SaleMode9;
     }
 
-    public void setSaleMode9(int SaleMode9) {
+    public void setSaleMode9(Integer SaleMode9) {
         this.SaleMode9 = SaleMode9;
     }
 
-    public int getSaleMode10() {
+    public Integer getSaleMode10() {
         return SaleMode10;
     }
 
-    public void setSaleMode10(int SaleMode10) {
+    public void setSaleMode10(Integer SaleMode10) {
         this.SaleMode10 = SaleMode10;
     }
 
-    public int getVATType() {
+    public Integer getVATType() {
         return VATType;
     }
 
-    public void setVATType(int VATType) {
+    public void setVATType(Integer VATType) {
         this.VATType = VATType;
     }
 
-    /** Not-null value. */
     public String getVATCode() {
         return VATCode;
     }
 
-    /** Not-null value; ensure this value is available before it is saved to the database. */
     public void setVATCode(String VATCode) {
         this.VATCode = VATCode;
     }
@@ -571,43 +615,43 @@ public class Products {
         this.ProductUnitName = ProductUnitName;
     }
 
-    public int getDiscountAllow() {
+    public Integer getDiscountAllow() {
         return DiscountAllow;
     }
 
-    public void setDiscountAllow(int DiscountAllow) {
+    public void setDiscountAllow(Integer DiscountAllow) {
         this.DiscountAllow = DiscountAllow;
     }
 
-    public int getZeroPriceAllow() {
+    public Integer getZeroPriceAllow() {
         return ZeroPriceAllow;
     }
 
-    public void setZeroPriceAllow(int ZeroPriceAllow) {
+    public void setZeroPriceAllow(Integer ZeroPriceAllow) {
         this.ZeroPriceAllow = ZeroPriceAllow;
     }
 
-    public double getLimitDiscountAmount() {
+    public Integer getLimitDiscountAmount() {
         return LimitDiscountAmount;
     }
 
-    public void setLimitDiscountAmount(double LimitDiscountAmount) {
+    public void setLimitDiscountAmount(Integer LimitDiscountAmount) {
         this.LimitDiscountAmount = LimitDiscountAmount;
     }
 
-    public double getLimitDiscountPercent() {
+    public Integer getLimitDiscountPercent() {
         return LimitDiscountPercent;
     }
 
-    public void setLimitDiscountPercent(double LimitDiscountPercent) {
+    public void setLimitDiscountPercent(Integer LimitDiscountPercent) {
         this.LimitDiscountPercent = LimitDiscountPercent;
     }
 
-    public int getCommRate() {
+    public Integer getCommRate() {
         return CommRate;
     }
 
-    public void setCommRate(int CommRate) {
+    public void setCommRate(Integer CommRate) {
         this.CommRate = CommRate;
     }
 
@@ -619,51 +663,51 @@ public class Products {
         this.ProductDesp = ProductDesp;
     }
 
-    public int getProductDisplay() {
+    public Integer getProductDisplay() {
         return ProductDisplay;
     }
 
-    public void setProductDisplay(int ProductDisplay) {
+    public void setProductDisplay(Integer ProductDisplay) {
         this.ProductDisplay = ProductDisplay;
     }
 
-    public int getProductActivate() {
+    public Integer getProductActivate() {
         return ProductActivate;
     }
 
-    public void setProductActivate(int ProductActivate) {
+    public void setProductActivate(Integer ProductActivate) {
         this.ProductActivate = ProductActivate;
     }
 
-    public int getProductOrdering() {
+    public Integer getProductOrdering() {
         return ProductOrdering;
     }
 
-    public void setProductOrdering(int ProductOrdering) {
+    public void setProductOrdering(Integer ProductOrdering) {
         this.ProductOrdering = ProductOrdering;
     }
 
-    public int getPrintOrdering() {
+    public Integer getPrintOrdering() {
         return PrintOrdering;
     }
 
-    public void setPrintOrdering(int PrintOrdering) {
+    public void setPrintOrdering(Integer PrintOrdering) {
         this.PrintOrdering = PrintOrdering;
     }
 
-    public int getAddingFromBranch() {
+    public Integer getAddingFromBranch() {
         return AddingFromBranch;
     }
 
-    public void setAddingFromBranch(int AddingFromBranch) {
+    public void setAddingFromBranch(Integer AddingFromBranch) {
         this.AddingFromBranch = AddingFromBranch;
     }
 
-    public int getDeleted() {
+    public Integer getDeleted() {
         return Deleted;
     }
 
-    public void setDeleted(int Deleted) {
+    public void setDeleted(Integer Deleted) {
         this.Deleted = Deleted;
     }
 
