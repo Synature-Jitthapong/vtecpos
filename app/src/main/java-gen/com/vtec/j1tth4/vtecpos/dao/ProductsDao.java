@@ -23,72 +23,77 @@ public class ProductsDao extends AbstractDao<Products, Integer> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property ProductID = new Property(0, int.class, "ProductID", true, "PRODUCT_ID");
-        public final static Property ShopID = new Property(1, int.class, "ShopID", false, "SHOP_ID");
-        public final static Property ProductGroupID = new Property(2, int.class, "ProductGroupID", false, "PRODUCT_GROUP_ID");
-        public final static Property ProductDeptID = new Property(3, int.class, "ProductDeptID", false, "PRODUCT_DEPT_ID");
-        public final static Property ProductCat1ID = new Property(4, int.class, "ProductCat1ID", false, "PRODUCT_CAT1_ID");
-        public final static Property ProductCat2ID = new Property(5, int.class, "ProductCat2ID", false, "PRODUCT_CAT2_ID");
-        public final static Property ProductCat3ID = new Property(6, int.class, "ProductCat3ID", false, "PRODUCT_CAT3_ID");
-        public final static Property ProductCat4ID = new Property(7, int.class, "ProductCat4ID", false, "PRODUCT_CAT4_ID");
-        public final static Property ProductCat5ID = new Property(8, int.class, "ProductCat5ID", false, "PRODUCT_CAT5_ID");
-        public final static Property ProductTypeID = new Property(9, int.class, "ProductTypeID", false, "PRODUCT_TYPE_ID");
-        public final static Property ProductCode = new Property(10, String.class, "ProductCode", false, "PRODUCT_CODE");
-        public final static Property ProductBarCode = new Property(11, String.class, "ProductBarCode", false, "PRODUCT_BAR_CODE");
-        public final static Property ProductName = new Property(12, String.class, "ProductName", false, "PRODUCT_NAME");
-        public final static Property ProductNameLang1 = new Property(13, String.class, "ProductNameLang1", false, "PRODUCT_NAME_LANG1");
-        public final static Property ProductNameLang2 = new Property(14, String.class, "ProductNameLang2", false, "PRODUCT_NAME_LANG2");
-        public final static Property ProductNameLang3 = new Property(15, String.class, "ProductNameLang3", false, "PRODUCT_NAME_LANG3");
-        public final static Property ProductNameLang4 = new Property(16, String.class, "ProductNameLang4", false, "PRODUCT_NAME_LANG4");
-        public final static Property ProductNameLang5 = new Property(17, String.class, "ProductNameLang5", false, "PRODUCT_NAME_LANG5");
-        public final static Property ProductMName = new Property(18, String.class, "ProductMName", false, "PRODUCT_MNAME");
-        public final static Property ProductMNameLang1 = new Property(19, String.class, "ProductMNameLang1", false, "PRODUCT_MNAME_LANG1");
-        public final static Property ProductMNameLang2 = new Property(20, String.class, "ProductMNameLang2", false, "PRODUCT_MNAME_LANG2");
-        public final static Property ProductMNameLang3 = new Property(21, String.class, "ProductMNameLang3", false, "PRODUCT_MNAME_LANG3");
-        public final static Property ProductMNameLang4 = new Property(22, String.class, "ProductMNameLang4", false, "PRODUCT_MNAME_LANG4");
-        public final static Property ProductMNameLang5 = new Property(23, String.class, "ProductMNameLang5", false, "PRODUCT_MNAME_LANG5");
-        public final static Property ProductPictureServer = new Property(24, String.class, "ProductPictureServer", false, "PRODUCT_PICTURE_SERVER");
-        public final static Property ProductPictureClient = new Property(25, String.class, "ProductPictureClient", false, "PRODUCT_PICTURE_CLIENT");
-        public final static Property PrinterID = new Property(26, int.class, "PrinterID", false, "PRINTER_ID");
-        public final static Property PrintGroup = new Property(27, int.class, "PrintGroup", false, "PRINT_GROUP");
-        public final static Property DurationTime = new Property(28, int.class, "DurationTime", false, "DURATION_TIME");
-        public final static Property HasServiceCharge = new Property(29, int.class, "HasServiceCharge", false, "HAS_SERVICE_CHARGE");
-        public final static Property IsOutOfStock = new Property(30, int.class, "IsOutOfStock", false, "IS_OUT_OF_STOCK");
-        public final static Property AutoComment = new Property(31, int.class, "AutoComment", false, "AUTO_COMMENT");
-        public final static Property CanReturnProduct = new Property(32, int.class, "CanReturnProduct", false, "CAN_RETURN_PRODUCT");
-        public final static Property DisplayAtCheckerSystem = new Property(33, int.class, "DisplayAtCheckerSystem", false, "DISPLAY_AT_CHECKER_SYSTEM");
-        public final static Property ProductEnableDateTime = new Property(34, java.util.Date.class, "ProductEnableDateTime", false, "PRODUCT_ENABLE_DATE_TIME");
-        public final static Property ProductExpireDateTime = new Property(35, java.util.Date.class, "ProductExpireDateTime", false, "PRODUCT_EXPIRE_DATE_TIME");
-        public final static Property ProductEnableDayString = new Property(36, String.class, "ProductEnableDayString", false, "PRODUCT_ENABLE_DAY_STRING");
-        public final static Property WarningTime = new Property(37, int.class, "WarningTime", false, "WARNING_TIME");
-        public final static Property CriticalTime = new Property(38, int.class, "CriticalTime", false, "CRITICAL_TIME");
-        public final static Property SaleMode1 = new Property(39, int.class, "SaleMode1", false, "SALE_MODE1");
-        public final static Property SaleMode2 = new Property(40, int.class, "SaleMode2", false, "SALE_MODE2");
-        public final static Property SaleMode3 = new Property(41, int.class, "SaleMode3", false, "SALE_MODE3");
-        public final static Property SaleMode4 = new Property(42, int.class, "SaleMode4", false, "SALE_MODE4");
-        public final static Property SaleMode5 = new Property(43, int.class, "SaleMode5", false, "SALE_MODE5");
-        public final static Property SaleMode6 = new Property(44, int.class, "SaleMode6", false, "SALE_MODE6");
-        public final static Property SaleMode7 = new Property(45, int.class, "SaleMode7", false, "SALE_MODE7");
-        public final static Property SaleMode8 = new Property(46, int.class, "SaleMode8", false, "SALE_MODE8");
-        public final static Property SaleMode9 = new Property(47, int.class, "SaleMode9", false, "SALE_MODE9");
-        public final static Property SaleMode10 = new Property(48, int.class, "SaleMode10", false, "SALE_MODE10");
-        public final static Property VATType = new Property(49, int.class, "VATType", false, "VATTYPE");
-        public final static Property VATCode = new Property(50, String.class, "VATCode", false, "VATCODE");
-        public final static Property ProductUnitName = new Property(51, String.class, "ProductUnitName", false, "PRODUCT_UNIT_NAME");
-        public final static Property DiscountAllow = new Property(52, int.class, "DiscountAllow", false, "DISCOUNT_ALLOW");
-        public final static Property ZeroPriceAllow = new Property(53, int.class, "ZeroPriceAllow", false, "ZERO_PRICE_ALLOW");
-        public final static Property LimitDiscountAmount = new Property(54, double.class, "LimitDiscountAmount", false, "LIMIT_DISCOUNT_AMOUNT");
-        public final static Property LimitDiscountPercent = new Property(55, double.class, "LimitDiscountPercent", false, "LIMIT_DISCOUNT_PERCENT");
-        public final static Property CommRate = new Property(56, int.class, "CommRate", false, "COMM_RATE");
-        public final static Property ProductDesp = new Property(57, String.class, "ProductDesp", false, "PRODUCT_DESP");
-        public final static Property ProductDisplay = new Property(58, int.class, "ProductDisplay", false, "PRODUCT_DISPLAY");
-        public final static Property ProductActivate = new Property(59, int.class, "ProductActivate", false, "PRODUCT_ACTIVATE");
-        public final static Property ProductOrdering = new Property(60, int.class, "ProductOrdering", false, "PRODUCT_ORDERING");
-        public final static Property PrintOrdering = new Property(61, int.class, "PrintOrdering", false, "PRINT_ORDERING");
-        public final static Property AddingFromBranch = new Property(62, int.class, "AddingFromBranch", false, "ADDING_FROM_BRANCH");
-        public final static Property Deleted = new Property(63, int.class, "Deleted", false, "DELETED");
-        public final static Property InsertDate = new Property(64, java.util.Date.class, "InsertDate", false, "INSERT_DATE");
-        public final static Property UpdateDate = new Property(65, java.util.Date.class, "UpdateDate", false, "UPDATE_DATE");
+        public final static Property ProductID = new Property(0, int.class, "ProductID", true, "ProductID");
+        public final static Property ShopID = new Property(1, int.class, "ShopID", false, "ShopID");
+        public final static Property InventoryID = new Property(2, Integer.class, "InventoryID", false, "InventoryID");
+        public final static Property ProductGroupID = new Property(3, Integer.class, "ProductGroupID", false, "ProductGroupID");
+        public final static Property ProductDeptID = new Property(4, Integer.class, "ProductDeptID", false, "ProductDeptID");
+        public final static Property ProductCat1ID = new Property(5, Integer.class, "ProductCat1ID", false, "ProductCat1ID");
+        public final static Property ProductCat2ID = new Property(6, Integer.class, "ProductCat2ID", false, "ProductCat2ID");
+        public final static Property ProductCat3ID = new Property(7, Integer.class, "ProductCat3ID", false, "ProductCat3ID");
+        public final static Property ProductCat4ID = new Property(8, Integer.class, "ProductCat4ID", false, "ProductCat4ID");
+        public final static Property ProductCat5ID = new Property(9, Integer.class, "ProductCat5ID", false, "ProductCat5ID");
+        public final static Property ProductTypeID = new Property(10, Integer.class, "ProductTypeID", false, "ProductTypeID");
+        public final static Property ProductCode = new Property(11, String.class, "ProductCode", false, "ProductCode");
+        public final static Property ProductBarCode = new Property(12, String.class, "ProductBarCode", false, "ProductBarCode");
+        public final static Property ProductName = new Property(13, String.class, "ProductName", false, "ProductName");
+        public final static Property ProductNameLang1 = new Property(14, String.class, "ProductNameLang1", false, "ProductNameLang1");
+        public final static Property ProductNameLang2 = new Property(15, String.class, "ProductNameLang2", false, "ProductNameLang2");
+        public final static Property ProductNameLang3 = new Property(16, String.class, "ProductNameLang3", false, "ProductNameLang3");
+        public final static Property ProductNameLang4 = new Property(17, String.class, "ProductNameLang4", false, "ProductNameLang4");
+        public final static Property ProductNameLang5 = new Property(18, String.class, "ProductNameLang5", false, "ProductNameLang5");
+        public final static Property ProductMName = new Property(19, String.class, "ProductMName", false, "ProductMName");
+        public final static Property ProductMNameLang1 = new Property(20, String.class, "ProductMNameLang1", false, "ProductMNameLang1");
+        public final static Property ProductMNameLang2 = new Property(21, String.class, "ProductMNameLang2", false, "ProductMNameLang2");
+        public final static Property ProductMNameLang3 = new Property(22, String.class, "ProductMNameLang3", false, "ProductMNameLang3");
+        public final static Property ProductMNameLang4 = new Property(23, String.class, "ProductMNameLang4", false, "ProductMNameLang4");
+        public final static Property ProductMNameLang5 = new Property(24, String.class, "ProductMNameLang5", false, "ProductMNameLang5");
+        public final static Property ProductPictureServer = new Property(25, String.class, "ProductPictureServer", false, "ProductPictureServer");
+        public final static Property ProductPictureClient = new Property(26, String.class, "ProductPictureClient", false, "ProductPictureClient");
+        public final static Property PrinterID = new Property(27, Integer.class, "PrinterID", false, "PrinterID");
+        public final static Property PrintGroup = new Property(28, Integer.class, "PrintGroup", false, "PrintGroup");
+        public final static Property PrintProductName = new Property(29, String.class, "PrintProductName", false, "PrintProductName");
+        public final static Property DurationTime = new Property(30, java.util.Date.class, "DurationTime", false, "DurationTime");
+        public final static Property HasServiceCharge = new Property(31, Integer.class, "HasServiceCharge", false, "HasServiceCharge");
+        public final static Property IsOutOfStock = new Property(32, Integer.class, "IsOutOfStock", false, "IsOutOfStock");
+        public final static Property AutoComment = new Property(33, Integer.class, "AutoComment", false, "AutoComment");
+        public final static Property IsDisplayBill = new Property(34, Integer.class, "IsDisplayBill", false, "IsDisplayBill");
+        public final static Property IsPrintCheck = new Property(35, Integer.class, "IsPrintCheck", false, "IsPrintCheck");
+        public final static Property IsPrintReceipt = new Property(36, Integer.class, "IsPrintReceipt", false, "IsPrintReceipt");
+        public final static Property CanReturnProduct = new Property(37, Integer.class, "CanReturnProduct", false, "CanReturnProduct");
+        public final static Property DisplayAtCheckerSystem = new Property(38, Integer.class, "DisplayAtCheckerSystem", false, "DisplayAtCheckerSystem");
+        public final static Property ProductEnableDateTime = new Property(39, java.util.Date.class, "ProductEnableDateTime", false, "ProductEnableDateTime");
+        public final static Property ProductExpireDateTime = new Property(40, java.util.Date.class, "ProductExpireDateTime", false, "ProductExpireDateTime");
+        public final static Property ProductEnableDayString = new Property(41, java.util.Date.class, "ProductEnableDayString", false, "ProductEnableDayString");
+        public final static Property WarningTime = new Property(42, java.util.Date.class, "WarningTime", false, "WarningTime");
+        public final static Property CriticalTime = new Property(43, java.util.Date.class, "CriticalTime", false, "CriticalTime");
+        public final static Property SaleMode1 = new Property(44, Integer.class, "SaleMode1", false, "SaleMode1");
+        public final static Property SaleMode2 = new Property(45, Integer.class, "SaleMode2", false, "SaleMode2");
+        public final static Property SaleMode3 = new Property(46, Integer.class, "SaleMode3", false, "SaleMode3");
+        public final static Property SaleMode4 = new Property(47, Integer.class, "SaleMode4", false, "SaleMode4");
+        public final static Property SaleMode5 = new Property(48, Integer.class, "SaleMode5", false, "SaleMode5");
+        public final static Property SaleMode6 = new Property(49, Integer.class, "SaleMode6", false, "SaleMode6");
+        public final static Property SaleMode7 = new Property(50, Integer.class, "SaleMode7", false, "SaleMode7");
+        public final static Property SaleMode8 = new Property(51, Integer.class, "SaleMode8", false, "SaleMode8");
+        public final static Property SaleMode9 = new Property(52, Integer.class, "SaleMode9", false, "SaleMode9");
+        public final static Property SaleMode10 = new Property(53, Integer.class, "SaleMode10", false, "SaleMode10");
+        public final static Property VATType = new Property(54, Integer.class, "VATType", false, "VATType");
+        public final static Property VATCode = new Property(55, String.class, "VATCode", false, "VATCode");
+        public final static Property ProductUnitName = new Property(56, String.class, "ProductUnitName", false, "ProductUnitName");
+        public final static Property DiscountAllow = new Property(57, Integer.class, "DiscountAllow", false, "DiscountAllow");
+        public final static Property ZeroPriceAllow = new Property(58, Integer.class, "ZeroPriceAllow", false, "ZeroPriceAllow");
+        public final static Property LimitDiscountAmount = new Property(59, Integer.class, "LimitDiscountAmount", false, "LimitDiscountAmount");
+        public final static Property LimitDiscountPercent = new Property(60, Integer.class, "LimitDiscountPercent", false, "LimitDiscountPercent");
+        public final static Property CommRate = new Property(61, Integer.class, "CommRate", false, "CommRate");
+        public final static Property ProductDesp = new Property(62, String.class, "ProductDesp", false, "ProductDesp");
+        public final static Property ProductDisplay = new Property(63, Integer.class, "ProductDisplay", false, "ProductDisplay");
+        public final static Property ProductActivate = new Property(64, Integer.class, "ProductActivate", false, "ProductActivate");
+        public final static Property ProductOrdering = new Property(65, Integer.class, "ProductOrdering", false, "ProductOrdering");
+        public final static Property PrintOrdering = new Property(66, Integer.class, "PrintOrdering", false, "PrintOrdering");
+        public final static Property AddingFromBranch = new Property(67, Integer.class, "AddingFromBranch", false, "AddingFromBranch");
+        public final static Property Deleted = new Property(68, Integer.class, "Deleted", false, "Deleted");
+        public final static Property InsertDate = new Property(69, java.util.Date.class, "InsertDate", false, "InsertDate");
+        public final static Property UpdateDate = new Property(70, java.util.Date.class, "UpdateDate", false, "UpdateDate");
     };
 
 
@@ -106,157 +111,350 @@ public class ProductsDao extends AbstractDao<Products, Integer> {
         stmt.clearBindings();
         stmt.bindLong(1, entity.getProductID());
         stmt.bindLong(2, entity.getShopID());
-        stmt.bindLong(3, entity.getProductGroupID());
-        stmt.bindLong(4, entity.getProductDeptID());
-        stmt.bindLong(5, entity.getProductCat1ID());
-        stmt.bindLong(6, entity.getProductCat2ID());
-        stmt.bindLong(7, entity.getProductCat3ID());
-        stmt.bindLong(8, entity.getProductCat4ID());
-        stmt.bindLong(9, entity.getProductCat5ID());
-        stmt.bindLong(10, entity.getProductTypeID());
+ 
+        Integer InventoryID = entity.getInventoryID();
+        if (InventoryID != null) {
+            stmt.bindLong(3, InventoryID);
+        }
+ 
+        Integer ProductGroupID = entity.getProductGroupID();
+        if (ProductGroupID != null) {
+            stmt.bindLong(4, ProductGroupID);
+        }
+ 
+        Integer ProductDeptID = entity.getProductDeptID();
+        if (ProductDeptID != null) {
+            stmt.bindLong(5, ProductDeptID);
+        }
+ 
+        Integer ProductCat1ID = entity.getProductCat1ID();
+        if (ProductCat1ID != null) {
+            stmt.bindLong(6, ProductCat1ID);
+        }
+ 
+        Integer ProductCat2ID = entity.getProductCat2ID();
+        if (ProductCat2ID != null) {
+            stmt.bindLong(7, ProductCat2ID);
+        }
+ 
+        Integer ProductCat3ID = entity.getProductCat3ID();
+        if (ProductCat3ID != null) {
+            stmt.bindLong(8, ProductCat3ID);
+        }
+ 
+        Integer ProductCat4ID = entity.getProductCat4ID();
+        if (ProductCat4ID != null) {
+            stmt.bindLong(9, ProductCat4ID);
+        }
+ 
+        Integer ProductCat5ID = entity.getProductCat5ID();
+        if (ProductCat5ID != null) {
+            stmt.bindLong(10, ProductCat5ID);
+        }
+ 
+        Integer ProductTypeID = entity.getProductTypeID();
+        if (ProductTypeID != null) {
+            stmt.bindLong(11, ProductTypeID);
+        }
  
         String ProductCode = entity.getProductCode();
         if (ProductCode != null) {
-            stmt.bindString(11, ProductCode);
+            stmt.bindString(12, ProductCode);
         }
  
         String ProductBarCode = entity.getProductBarCode();
         if (ProductBarCode != null) {
-            stmt.bindString(12, ProductBarCode);
+            stmt.bindString(13, ProductBarCode);
         }
-        stmt.bindString(13, entity.getProductName());
+ 
+        String ProductName = entity.getProductName();
+        if (ProductName != null) {
+            stmt.bindString(14, ProductName);
+        }
  
         String ProductNameLang1 = entity.getProductNameLang1();
         if (ProductNameLang1 != null) {
-            stmt.bindString(14, ProductNameLang1);
+            stmt.bindString(15, ProductNameLang1);
         }
  
         String ProductNameLang2 = entity.getProductNameLang2();
         if (ProductNameLang2 != null) {
-            stmt.bindString(15, ProductNameLang2);
+            stmt.bindString(16, ProductNameLang2);
         }
  
         String ProductNameLang3 = entity.getProductNameLang3();
         if (ProductNameLang3 != null) {
-            stmt.bindString(16, ProductNameLang3);
+            stmt.bindString(17, ProductNameLang3);
         }
  
         String ProductNameLang4 = entity.getProductNameLang4();
         if (ProductNameLang4 != null) {
-            stmt.bindString(17, ProductNameLang4);
+            stmt.bindString(18, ProductNameLang4);
         }
  
         String ProductNameLang5 = entity.getProductNameLang5();
         if (ProductNameLang5 != null) {
-            stmt.bindString(18, ProductNameLang5);
+            stmt.bindString(19, ProductNameLang5);
         }
  
         String ProductMName = entity.getProductMName();
         if (ProductMName != null) {
-            stmt.bindString(19, ProductMName);
+            stmt.bindString(20, ProductMName);
         }
  
         String ProductMNameLang1 = entity.getProductMNameLang1();
         if (ProductMNameLang1 != null) {
-            stmt.bindString(20, ProductMNameLang1);
+            stmt.bindString(21, ProductMNameLang1);
         }
  
         String ProductMNameLang2 = entity.getProductMNameLang2();
         if (ProductMNameLang2 != null) {
-            stmt.bindString(21, ProductMNameLang2);
+            stmt.bindString(22, ProductMNameLang2);
         }
  
         String ProductMNameLang3 = entity.getProductMNameLang3();
         if (ProductMNameLang3 != null) {
-            stmt.bindString(22, ProductMNameLang3);
+            stmt.bindString(23, ProductMNameLang3);
         }
  
         String ProductMNameLang4 = entity.getProductMNameLang4();
         if (ProductMNameLang4 != null) {
-            stmt.bindString(23, ProductMNameLang4);
+            stmt.bindString(24, ProductMNameLang4);
         }
  
         String ProductMNameLang5 = entity.getProductMNameLang5();
         if (ProductMNameLang5 != null) {
-            stmt.bindString(24, ProductMNameLang5);
+            stmt.bindString(25, ProductMNameLang5);
         }
  
         String ProductPictureServer = entity.getProductPictureServer();
         if (ProductPictureServer != null) {
-            stmt.bindString(25, ProductPictureServer);
+            stmt.bindString(26, ProductPictureServer);
         }
  
         String ProductPictureClient = entity.getProductPictureClient();
         if (ProductPictureClient != null) {
-            stmt.bindString(26, ProductPictureClient);
+            stmt.bindString(27, ProductPictureClient);
         }
-        stmt.bindLong(27, entity.getPrinterID());
-        stmt.bindLong(28, entity.getPrintGroup());
-        stmt.bindLong(29, entity.getDurationTime());
-        stmt.bindLong(30, entity.getHasServiceCharge());
-        stmt.bindLong(31, entity.getIsOutOfStock());
-        stmt.bindLong(32, entity.getAutoComment());
-        stmt.bindLong(33, entity.getCanReturnProduct());
-        stmt.bindLong(34, entity.getDisplayAtCheckerSystem());
+ 
+        Integer PrinterID = entity.getPrinterID();
+        if (PrinterID != null) {
+            stmt.bindLong(28, PrinterID);
+        }
+ 
+        Integer PrintGroup = entity.getPrintGroup();
+        if (PrintGroup != null) {
+            stmt.bindLong(29, PrintGroup);
+        }
+ 
+        String PrintProductName = entity.getPrintProductName();
+        if (PrintProductName != null) {
+            stmt.bindString(30, PrintProductName);
+        }
+ 
+        java.util.Date DurationTime = entity.getDurationTime();
+        if (DurationTime != null) {
+            stmt.bindLong(31, DurationTime.getTime());
+        }
+ 
+        Integer HasServiceCharge = entity.getHasServiceCharge();
+        if (HasServiceCharge != null) {
+            stmt.bindLong(32, HasServiceCharge);
+        }
+ 
+        Integer IsOutOfStock = entity.getIsOutOfStock();
+        if (IsOutOfStock != null) {
+            stmt.bindLong(33, IsOutOfStock);
+        }
+ 
+        Integer AutoComment = entity.getAutoComment();
+        if (AutoComment != null) {
+            stmt.bindLong(34, AutoComment);
+        }
+ 
+        Integer IsDisplayBill = entity.getIsDisplayBill();
+        if (IsDisplayBill != null) {
+            stmt.bindLong(35, IsDisplayBill);
+        }
+ 
+        Integer IsPrintCheck = entity.getIsPrintCheck();
+        if (IsPrintCheck != null) {
+            stmt.bindLong(36, IsPrintCheck);
+        }
+ 
+        Integer IsPrintReceipt = entity.getIsPrintReceipt();
+        if (IsPrintReceipt != null) {
+            stmt.bindLong(37, IsPrintReceipt);
+        }
+ 
+        Integer CanReturnProduct = entity.getCanReturnProduct();
+        if (CanReturnProduct != null) {
+            stmt.bindLong(38, CanReturnProduct);
+        }
+ 
+        Integer DisplayAtCheckerSystem = entity.getDisplayAtCheckerSystem();
+        if (DisplayAtCheckerSystem != null) {
+            stmt.bindLong(39, DisplayAtCheckerSystem);
+        }
  
         java.util.Date ProductEnableDateTime = entity.getProductEnableDateTime();
         if (ProductEnableDateTime != null) {
-            stmt.bindLong(35, ProductEnableDateTime.getTime());
+            stmt.bindLong(40, ProductEnableDateTime.getTime());
         }
  
         java.util.Date ProductExpireDateTime = entity.getProductExpireDateTime();
         if (ProductExpireDateTime != null) {
-            stmt.bindLong(36, ProductExpireDateTime.getTime());
+            stmt.bindLong(41, ProductExpireDateTime.getTime());
         }
  
-        String ProductEnableDayString = entity.getProductEnableDayString();
+        java.util.Date ProductEnableDayString = entity.getProductEnableDayString();
         if (ProductEnableDayString != null) {
-            stmt.bindString(37, ProductEnableDayString);
+            stmt.bindLong(42, ProductEnableDayString.getTime());
         }
-        stmt.bindLong(38, entity.getWarningTime());
-        stmt.bindLong(39, entity.getCriticalTime());
-        stmt.bindLong(40, entity.getSaleMode1());
-        stmt.bindLong(41, entity.getSaleMode2());
-        stmt.bindLong(42, entity.getSaleMode3());
-        stmt.bindLong(43, entity.getSaleMode4());
-        stmt.bindLong(44, entity.getSaleMode5());
-        stmt.bindLong(45, entity.getSaleMode6());
-        stmt.bindLong(46, entity.getSaleMode7());
-        stmt.bindLong(47, entity.getSaleMode8());
-        stmt.bindLong(48, entity.getSaleMode9());
-        stmt.bindLong(49, entity.getSaleMode10());
-        stmt.bindLong(50, entity.getVATType());
-        stmt.bindString(51, entity.getVATCode());
+ 
+        java.util.Date WarningTime = entity.getWarningTime();
+        if (WarningTime != null) {
+            stmt.bindLong(43, WarningTime.getTime());
+        }
+ 
+        java.util.Date CriticalTime = entity.getCriticalTime();
+        if (CriticalTime != null) {
+            stmt.bindLong(44, CriticalTime.getTime());
+        }
+ 
+        Integer SaleMode1 = entity.getSaleMode1();
+        if (SaleMode1 != null) {
+            stmt.bindLong(45, SaleMode1);
+        }
+ 
+        Integer SaleMode2 = entity.getSaleMode2();
+        if (SaleMode2 != null) {
+            stmt.bindLong(46, SaleMode2);
+        }
+ 
+        Integer SaleMode3 = entity.getSaleMode3();
+        if (SaleMode3 != null) {
+            stmt.bindLong(47, SaleMode3);
+        }
+ 
+        Integer SaleMode4 = entity.getSaleMode4();
+        if (SaleMode4 != null) {
+            stmt.bindLong(48, SaleMode4);
+        }
+ 
+        Integer SaleMode5 = entity.getSaleMode5();
+        if (SaleMode5 != null) {
+            stmt.bindLong(49, SaleMode5);
+        }
+ 
+        Integer SaleMode6 = entity.getSaleMode6();
+        if (SaleMode6 != null) {
+            stmt.bindLong(50, SaleMode6);
+        }
+ 
+        Integer SaleMode7 = entity.getSaleMode7();
+        if (SaleMode7 != null) {
+            stmt.bindLong(51, SaleMode7);
+        }
+ 
+        Integer SaleMode8 = entity.getSaleMode8();
+        if (SaleMode8 != null) {
+            stmt.bindLong(52, SaleMode8);
+        }
+ 
+        Integer SaleMode9 = entity.getSaleMode9();
+        if (SaleMode9 != null) {
+            stmt.bindLong(53, SaleMode9);
+        }
+ 
+        Integer SaleMode10 = entity.getSaleMode10();
+        if (SaleMode10 != null) {
+            stmt.bindLong(54, SaleMode10);
+        }
+ 
+        Integer VATType = entity.getVATType();
+        if (VATType != null) {
+            stmt.bindLong(55, VATType);
+        }
+ 
+        String VATCode = entity.getVATCode();
+        if (VATCode != null) {
+            stmt.bindString(56, VATCode);
+        }
  
         String ProductUnitName = entity.getProductUnitName();
         if (ProductUnitName != null) {
-            stmt.bindString(52, ProductUnitName);
+            stmt.bindString(57, ProductUnitName);
         }
-        stmt.bindLong(53, entity.getDiscountAllow());
-        stmt.bindLong(54, entity.getZeroPriceAllow());
-        stmt.bindDouble(55, entity.getLimitDiscountAmount());
-        stmt.bindDouble(56, entity.getLimitDiscountPercent());
-        stmt.bindLong(57, entity.getCommRate());
+ 
+        Integer DiscountAllow = entity.getDiscountAllow();
+        if (DiscountAllow != null) {
+            stmt.bindLong(58, DiscountAllow);
+        }
+ 
+        Integer ZeroPriceAllow = entity.getZeroPriceAllow();
+        if (ZeroPriceAllow != null) {
+            stmt.bindLong(59, ZeroPriceAllow);
+        }
+ 
+        Integer LimitDiscountAmount = entity.getLimitDiscountAmount();
+        if (LimitDiscountAmount != null) {
+            stmt.bindLong(60, LimitDiscountAmount);
+        }
+ 
+        Integer LimitDiscountPercent = entity.getLimitDiscountPercent();
+        if (LimitDiscountPercent != null) {
+            stmt.bindLong(61, LimitDiscountPercent);
+        }
+ 
+        Integer CommRate = entity.getCommRate();
+        if (CommRate != null) {
+            stmt.bindLong(62, CommRate);
+        }
  
         String ProductDesp = entity.getProductDesp();
         if (ProductDesp != null) {
-            stmt.bindString(58, ProductDesp);
+            stmt.bindString(63, ProductDesp);
         }
-        stmt.bindLong(59, entity.getProductDisplay());
-        stmt.bindLong(60, entity.getProductActivate());
-        stmt.bindLong(61, entity.getProductOrdering());
-        stmt.bindLong(62, entity.getPrintOrdering());
-        stmt.bindLong(63, entity.getAddingFromBranch());
-        stmt.bindLong(64, entity.getDeleted());
+ 
+        Integer ProductDisplay = entity.getProductDisplay();
+        if (ProductDisplay != null) {
+            stmt.bindLong(64, ProductDisplay);
+        }
+ 
+        Integer ProductActivate = entity.getProductActivate();
+        if (ProductActivate != null) {
+            stmt.bindLong(65, ProductActivate);
+        }
+ 
+        Integer ProductOrdering = entity.getProductOrdering();
+        if (ProductOrdering != null) {
+            stmt.bindLong(66, ProductOrdering);
+        }
+ 
+        Integer PrintOrdering = entity.getPrintOrdering();
+        if (PrintOrdering != null) {
+            stmt.bindLong(67, PrintOrdering);
+        }
+ 
+        Integer AddingFromBranch = entity.getAddingFromBranch();
+        if (AddingFromBranch != null) {
+            stmt.bindLong(68, AddingFromBranch);
+        }
+ 
+        Integer Deleted = entity.getDeleted();
+        if (Deleted != null) {
+            stmt.bindLong(69, Deleted);
+        }
  
         java.util.Date InsertDate = entity.getInsertDate();
         if (InsertDate != null) {
-            stmt.bindLong(65, InsertDate.getTime());
+            stmt.bindLong(70, InsertDate.getTime());
         }
  
         java.util.Date UpdateDate = entity.getUpdateDate();
         if (UpdateDate != null) {
-            stmt.bindLong(66, UpdateDate.getTime());
+            stmt.bindLong(71, UpdateDate.getTime());
         }
     }
 
@@ -272,70 +470,75 @@ public class ProductsDao extends AbstractDao<Products, Integer> {
         Products entity = new Products( //
             cursor.getInt(offset + 0), // ProductID
             cursor.getInt(offset + 1), // ShopID
-            cursor.getInt(offset + 2), // ProductGroupID
-            cursor.getInt(offset + 3), // ProductDeptID
-            cursor.getInt(offset + 4), // ProductCat1ID
-            cursor.getInt(offset + 5), // ProductCat2ID
-            cursor.getInt(offset + 6), // ProductCat3ID
-            cursor.getInt(offset + 7), // ProductCat4ID
-            cursor.getInt(offset + 8), // ProductCat5ID
-            cursor.getInt(offset + 9), // ProductTypeID
-            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // ProductCode
-            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // ProductBarCode
-            cursor.getString(offset + 12), // ProductName
-            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // ProductNameLang1
-            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // ProductNameLang2
-            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // ProductNameLang3
-            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // ProductNameLang4
-            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // ProductNameLang5
-            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // ProductMName
-            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19), // ProductMNameLang1
-            cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // ProductMNameLang2
-            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // ProductMNameLang3
-            cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // ProductMNameLang4
-            cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // ProductMNameLang5
-            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // ProductPictureServer
-            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25), // ProductPictureClient
-            cursor.getInt(offset + 26), // PrinterID
-            cursor.getInt(offset + 27), // PrintGroup
-            cursor.getInt(offset + 28), // DurationTime
-            cursor.getInt(offset + 29), // HasServiceCharge
-            cursor.getInt(offset + 30), // IsOutOfStock
-            cursor.getInt(offset + 31), // AutoComment
-            cursor.getInt(offset + 32), // CanReturnProduct
-            cursor.getInt(offset + 33), // DisplayAtCheckerSystem
-            cursor.isNull(offset + 34) ? null : new java.util.Date(cursor.getLong(offset + 34)), // ProductEnableDateTime
-            cursor.isNull(offset + 35) ? null : new java.util.Date(cursor.getLong(offset + 35)), // ProductExpireDateTime
-            cursor.isNull(offset + 36) ? null : cursor.getString(offset + 36), // ProductEnableDayString
-            cursor.getInt(offset + 37), // WarningTime
-            cursor.getInt(offset + 38), // CriticalTime
-            cursor.getInt(offset + 39), // SaleMode1
-            cursor.getInt(offset + 40), // SaleMode2
-            cursor.getInt(offset + 41), // SaleMode3
-            cursor.getInt(offset + 42), // SaleMode4
-            cursor.getInt(offset + 43), // SaleMode5
-            cursor.getInt(offset + 44), // SaleMode6
-            cursor.getInt(offset + 45), // SaleMode7
-            cursor.getInt(offset + 46), // SaleMode8
-            cursor.getInt(offset + 47), // SaleMode9
-            cursor.getInt(offset + 48), // SaleMode10
-            cursor.getInt(offset + 49), // VATType
-            cursor.getString(offset + 50), // VATCode
-            cursor.isNull(offset + 51) ? null : cursor.getString(offset + 51), // ProductUnitName
-            cursor.getInt(offset + 52), // DiscountAllow
-            cursor.getInt(offset + 53), // ZeroPriceAllow
-            cursor.getDouble(offset + 54), // LimitDiscountAmount
-            cursor.getDouble(offset + 55), // LimitDiscountPercent
-            cursor.getInt(offset + 56), // CommRate
-            cursor.isNull(offset + 57) ? null : cursor.getString(offset + 57), // ProductDesp
-            cursor.getInt(offset + 58), // ProductDisplay
-            cursor.getInt(offset + 59), // ProductActivate
-            cursor.getInt(offset + 60), // ProductOrdering
-            cursor.getInt(offset + 61), // PrintOrdering
-            cursor.getInt(offset + 62), // AddingFromBranch
-            cursor.getInt(offset + 63), // Deleted
-            cursor.isNull(offset + 64) ? null : new java.util.Date(cursor.getLong(offset + 64)), // InsertDate
-            cursor.isNull(offset + 65) ? null : new java.util.Date(cursor.getLong(offset + 65)) // UpdateDate
+            cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2), // InventoryID
+            cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // ProductGroupID
+            cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // ProductDeptID
+            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // ProductCat1ID
+            cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6), // ProductCat2ID
+            cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7), // ProductCat3ID
+            cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8), // ProductCat4ID
+            cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9), // ProductCat5ID
+            cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10), // ProductTypeID
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // ProductCode
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // ProductBarCode
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // ProductName
+            cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // ProductNameLang1
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // ProductNameLang2
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // ProductNameLang3
+            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // ProductNameLang4
+            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // ProductNameLang5
+            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19), // ProductMName
+            cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // ProductMNameLang1
+            cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // ProductMNameLang2
+            cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // ProductMNameLang3
+            cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23), // ProductMNameLang4
+            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // ProductMNameLang5
+            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25), // ProductPictureServer
+            cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26), // ProductPictureClient
+            cursor.isNull(offset + 27) ? null : cursor.getInt(offset + 27), // PrinterID
+            cursor.isNull(offset + 28) ? null : cursor.getInt(offset + 28), // PrintGroup
+            cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29), // PrintProductName
+            cursor.isNull(offset + 30) ? null : new java.util.Date(cursor.getLong(offset + 30)), // DurationTime
+            cursor.isNull(offset + 31) ? null : cursor.getInt(offset + 31), // HasServiceCharge
+            cursor.isNull(offset + 32) ? null : cursor.getInt(offset + 32), // IsOutOfStock
+            cursor.isNull(offset + 33) ? null : cursor.getInt(offset + 33), // AutoComment
+            cursor.isNull(offset + 34) ? null : cursor.getInt(offset + 34), // IsDisplayBill
+            cursor.isNull(offset + 35) ? null : cursor.getInt(offset + 35), // IsPrintCheck
+            cursor.isNull(offset + 36) ? null : cursor.getInt(offset + 36), // IsPrintReceipt
+            cursor.isNull(offset + 37) ? null : cursor.getInt(offset + 37), // CanReturnProduct
+            cursor.isNull(offset + 38) ? null : cursor.getInt(offset + 38), // DisplayAtCheckerSystem
+            cursor.isNull(offset + 39) ? null : new java.util.Date(cursor.getLong(offset + 39)), // ProductEnableDateTime
+            cursor.isNull(offset + 40) ? null : new java.util.Date(cursor.getLong(offset + 40)), // ProductExpireDateTime
+            cursor.isNull(offset + 41) ? null : new java.util.Date(cursor.getLong(offset + 41)), // ProductEnableDayString
+            cursor.isNull(offset + 42) ? null : new java.util.Date(cursor.getLong(offset + 42)), // WarningTime
+            cursor.isNull(offset + 43) ? null : new java.util.Date(cursor.getLong(offset + 43)), // CriticalTime
+            cursor.isNull(offset + 44) ? null : cursor.getInt(offset + 44), // SaleMode1
+            cursor.isNull(offset + 45) ? null : cursor.getInt(offset + 45), // SaleMode2
+            cursor.isNull(offset + 46) ? null : cursor.getInt(offset + 46), // SaleMode3
+            cursor.isNull(offset + 47) ? null : cursor.getInt(offset + 47), // SaleMode4
+            cursor.isNull(offset + 48) ? null : cursor.getInt(offset + 48), // SaleMode5
+            cursor.isNull(offset + 49) ? null : cursor.getInt(offset + 49), // SaleMode6
+            cursor.isNull(offset + 50) ? null : cursor.getInt(offset + 50), // SaleMode7
+            cursor.isNull(offset + 51) ? null : cursor.getInt(offset + 51), // SaleMode8
+            cursor.isNull(offset + 52) ? null : cursor.getInt(offset + 52), // SaleMode9
+            cursor.isNull(offset + 53) ? null : cursor.getInt(offset + 53), // SaleMode10
+            cursor.isNull(offset + 54) ? null : cursor.getInt(offset + 54), // VATType
+            cursor.isNull(offset + 55) ? null : cursor.getString(offset + 55), // VATCode
+            cursor.isNull(offset + 56) ? null : cursor.getString(offset + 56), // ProductUnitName
+            cursor.isNull(offset + 57) ? null : cursor.getInt(offset + 57), // DiscountAllow
+            cursor.isNull(offset + 58) ? null : cursor.getInt(offset + 58), // ZeroPriceAllow
+            cursor.isNull(offset + 59) ? null : cursor.getInt(offset + 59), // LimitDiscountAmount
+            cursor.isNull(offset + 60) ? null : cursor.getInt(offset + 60), // LimitDiscountPercent
+            cursor.isNull(offset + 61) ? null : cursor.getInt(offset + 61), // CommRate
+            cursor.isNull(offset + 62) ? null : cursor.getString(offset + 62), // ProductDesp
+            cursor.isNull(offset + 63) ? null : cursor.getInt(offset + 63), // ProductDisplay
+            cursor.isNull(offset + 64) ? null : cursor.getInt(offset + 64), // ProductActivate
+            cursor.isNull(offset + 65) ? null : cursor.getInt(offset + 65), // ProductOrdering
+            cursor.isNull(offset + 66) ? null : cursor.getInt(offset + 66), // PrintOrdering
+            cursor.isNull(offset + 67) ? null : cursor.getInt(offset + 67), // AddingFromBranch
+            cursor.isNull(offset + 68) ? null : cursor.getInt(offset + 68), // Deleted
+            cursor.isNull(offset + 69) ? null : new java.util.Date(cursor.getLong(offset + 69)), // InsertDate
+            cursor.isNull(offset + 70) ? null : new java.util.Date(cursor.getLong(offset + 70)) // UpdateDate
         );
         return entity;
     }
@@ -345,70 +548,75 @@ public class ProductsDao extends AbstractDao<Products, Integer> {
     public void readEntity(Cursor cursor, Products entity, int offset) {
         entity.setProductID(cursor.getInt(offset + 0));
         entity.setShopID(cursor.getInt(offset + 1));
-        entity.setProductGroupID(cursor.getInt(offset + 2));
-        entity.setProductDeptID(cursor.getInt(offset + 3));
-        entity.setProductCat1ID(cursor.getInt(offset + 4));
-        entity.setProductCat2ID(cursor.getInt(offset + 5));
-        entity.setProductCat3ID(cursor.getInt(offset + 6));
-        entity.setProductCat4ID(cursor.getInt(offset + 7));
-        entity.setProductCat5ID(cursor.getInt(offset + 8));
-        entity.setProductTypeID(cursor.getInt(offset + 9));
-        entity.setProductCode(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
-        entity.setProductBarCode(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
-        entity.setProductName(cursor.getString(offset + 12));
-        entity.setProductNameLang1(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
-        entity.setProductNameLang2(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
-        entity.setProductNameLang3(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
-        entity.setProductNameLang4(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
-        entity.setProductNameLang5(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
-        entity.setProductMName(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
-        entity.setProductMNameLang1(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
-        entity.setProductMNameLang2(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
-        entity.setProductMNameLang3(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
-        entity.setProductMNameLang4(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
-        entity.setProductMNameLang5(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
-        entity.setProductPictureServer(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
-        entity.setProductPictureClient(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
-        entity.setPrinterID(cursor.getInt(offset + 26));
-        entity.setPrintGroup(cursor.getInt(offset + 27));
-        entity.setDurationTime(cursor.getInt(offset + 28));
-        entity.setHasServiceCharge(cursor.getInt(offset + 29));
-        entity.setIsOutOfStock(cursor.getInt(offset + 30));
-        entity.setAutoComment(cursor.getInt(offset + 31));
-        entity.setCanReturnProduct(cursor.getInt(offset + 32));
-        entity.setDisplayAtCheckerSystem(cursor.getInt(offset + 33));
-        entity.setProductEnableDateTime(cursor.isNull(offset + 34) ? null : new java.util.Date(cursor.getLong(offset + 34)));
-        entity.setProductExpireDateTime(cursor.isNull(offset + 35) ? null : new java.util.Date(cursor.getLong(offset + 35)));
-        entity.setProductEnableDayString(cursor.isNull(offset + 36) ? null : cursor.getString(offset + 36));
-        entity.setWarningTime(cursor.getInt(offset + 37));
-        entity.setCriticalTime(cursor.getInt(offset + 38));
-        entity.setSaleMode1(cursor.getInt(offset + 39));
-        entity.setSaleMode2(cursor.getInt(offset + 40));
-        entity.setSaleMode3(cursor.getInt(offset + 41));
-        entity.setSaleMode4(cursor.getInt(offset + 42));
-        entity.setSaleMode5(cursor.getInt(offset + 43));
-        entity.setSaleMode6(cursor.getInt(offset + 44));
-        entity.setSaleMode7(cursor.getInt(offset + 45));
-        entity.setSaleMode8(cursor.getInt(offset + 46));
-        entity.setSaleMode9(cursor.getInt(offset + 47));
-        entity.setSaleMode10(cursor.getInt(offset + 48));
-        entity.setVATType(cursor.getInt(offset + 49));
-        entity.setVATCode(cursor.getString(offset + 50));
-        entity.setProductUnitName(cursor.isNull(offset + 51) ? null : cursor.getString(offset + 51));
-        entity.setDiscountAllow(cursor.getInt(offset + 52));
-        entity.setZeroPriceAllow(cursor.getInt(offset + 53));
-        entity.setLimitDiscountAmount(cursor.getDouble(offset + 54));
-        entity.setLimitDiscountPercent(cursor.getDouble(offset + 55));
-        entity.setCommRate(cursor.getInt(offset + 56));
-        entity.setProductDesp(cursor.isNull(offset + 57) ? null : cursor.getString(offset + 57));
-        entity.setProductDisplay(cursor.getInt(offset + 58));
-        entity.setProductActivate(cursor.getInt(offset + 59));
-        entity.setProductOrdering(cursor.getInt(offset + 60));
-        entity.setPrintOrdering(cursor.getInt(offset + 61));
-        entity.setAddingFromBranch(cursor.getInt(offset + 62));
-        entity.setDeleted(cursor.getInt(offset + 63));
-        entity.setInsertDate(cursor.isNull(offset + 64) ? null : new java.util.Date(cursor.getLong(offset + 64)));
-        entity.setUpdateDate(cursor.isNull(offset + 65) ? null : new java.util.Date(cursor.getLong(offset + 65)));
+        entity.setInventoryID(cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2));
+        entity.setProductGroupID(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
+        entity.setProductDeptID(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
+        entity.setProductCat1ID(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
+        entity.setProductCat2ID(cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6));
+        entity.setProductCat3ID(cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7));
+        entity.setProductCat4ID(cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8));
+        entity.setProductCat5ID(cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9));
+        entity.setProductTypeID(cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10));
+        entity.setProductCode(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setProductBarCode(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
+        entity.setProductName(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
+        entity.setProductNameLang1(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
+        entity.setProductNameLang2(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
+        entity.setProductNameLang3(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
+        entity.setProductNameLang4(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
+        entity.setProductNameLang5(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
+        entity.setProductMName(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
+        entity.setProductMNameLang1(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
+        entity.setProductMNameLang2(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
+        entity.setProductMNameLang3(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
+        entity.setProductMNameLang4(cursor.isNull(offset + 23) ? null : cursor.getString(offset + 23));
+        entity.setProductMNameLang5(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
+        entity.setProductPictureServer(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
+        entity.setProductPictureClient(cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26));
+        entity.setPrinterID(cursor.isNull(offset + 27) ? null : cursor.getInt(offset + 27));
+        entity.setPrintGroup(cursor.isNull(offset + 28) ? null : cursor.getInt(offset + 28));
+        entity.setPrintProductName(cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29));
+        entity.setDurationTime(cursor.isNull(offset + 30) ? null : new java.util.Date(cursor.getLong(offset + 30)));
+        entity.setHasServiceCharge(cursor.isNull(offset + 31) ? null : cursor.getInt(offset + 31));
+        entity.setIsOutOfStock(cursor.isNull(offset + 32) ? null : cursor.getInt(offset + 32));
+        entity.setAutoComment(cursor.isNull(offset + 33) ? null : cursor.getInt(offset + 33));
+        entity.setIsDisplayBill(cursor.isNull(offset + 34) ? null : cursor.getInt(offset + 34));
+        entity.setIsPrintCheck(cursor.isNull(offset + 35) ? null : cursor.getInt(offset + 35));
+        entity.setIsPrintReceipt(cursor.isNull(offset + 36) ? null : cursor.getInt(offset + 36));
+        entity.setCanReturnProduct(cursor.isNull(offset + 37) ? null : cursor.getInt(offset + 37));
+        entity.setDisplayAtCheckerSystem(cursor.isNull(offset + 38) ? null : cursor.getInt(offset + 38));
+        entity.setProductEnableDateTime(cursor.isNull(offset + 39) ? null : new java.util.Date(cursor.getLong(offset + 39)));
+        entity.setProductExpireDateTime(cursor.isNull(offset + 40) ? null : new java.util.Date(cursor.getLong(offset + 40)));
+        entity.setProductEnableDayString(cursor.isNull(offset + 41) ? null : new java.util.Date(cursor.getLong(offset + 41)));
+        entity.setWarningTime(cursor.isNull(offset + 42) ? null : new java.util.Date(cursor.getLong(offset + 42)));
+        entity.setCriticalTime(cursor.isNull(offset + 43) ? null : new java.util.Date(cursor.getLong(offset + 43)));
+        entity.setSaleMode1(cursor.isNull(offset + 44) ? null : cursor.getInt(offset + 44));
+        entity.setSaleMode2(cursor.isNull(offset + 45) ? null : cursor.getInt(offset + 45));
+        entity.setSaleMode3(cursor.isNull(offset + 46) ? null : cursor.getInt(offset + 46));
+        entity.setSaleMode4(cursor.isNull(offset + 47) ? null : cursor.getInt(offset + 47));
+        entity.setSaleMode5(cursor.isNull(offset + 48) ? null : cursor.getInt(offset + 48));
+        entity.setSaleMode6(cursor.isNull(offset + 49) ? null : cursor.getInt(offset + 49));
+        entity.setSaleMode7(cursor.isNull(offset + 50) ? null : cursor.getInt(offset + 50));
+        entity.setSaleMode8(cursor.isNull(offset + 51) ? null : cursor.getInt(offset + 51));
+        entity.setSaleMode9(cursor.isNull(offset + 52) ? null : cursor.getInt(offset + 52));
+        entity.setSaleMode10(cursor.isNull(offset + 53) ? null : cursor.getInt(offset + 53));
+        entity.setVATType(cursor.isNull(offset + 54) ? null : cursor.getInt(offset + 54));
+        entity.setVATCode(cursor.isNull(offset + 55) ? null : cursor.getString(offset + 55));
+        entity.setProductUnitName(cursor.isNull(offset + 56) ? null : cursor.getString(offset + 56));
+        entity.setDiscountAllow(cursor.isNull(offset + 57) ? null : cursor.getInt(offset + 57));
+        entity.setZeroPriceAllow(cursor.isNull(offset + 58) ? null : cursor.getInt(offset + 58));
+        entity.setLimitDiscountAmount(cursor.isNull(offset + 59) ? null : cursor.getInt(offset + 59));
+        entity.setLimitDiscountPercent(cursor.isNull(offset + 60) ? null : cursor.getInt(offset + 60));
+        entity.setCommRate(cursor.isNull(offset + 61) ? null : cursor.getInt(offset + 61));
+        entity.setProductDesp(cursor.isNull(offset + 62) ? null : cursor.getString(offset + 62));
+        entity.setProductDisplay(cursor.isNull(offset + 63) ? null : cursor.getInt(offset + 63));
+        entity.setProductActivate(cursor.isNull(offset + 64) ? null : cursor.getInt(offset + 64));
+        entity.setProductOrdering(cursor.isNull(offset + 65) ? null : cursor.getInt(offset + 65));
+        entity.setPrintOrdering(cursor.isNull(offset + 66) ? null : cursor.getInt(offset + 66));
+        entity.setAddingFromBranch(cursor.isNull(offset + 67) ? null : cursor.getInt(offset + 67));
+        entity.setDeleted(cursor.isNull(offset + 68) ? null : cursor.getInt(offset + 68));
+        entity.setInsertDate(cursor.isNull(offset + 69) ? null : new java.util.Date(cursor.getLong(offset + 69)));
+        entity.setUpdateDate(cursor.isNull(offset + 70) ? null : new java.util.Date(cursor.getLong(offset + 70)));
      }
     
     /** @inheritdoc */
