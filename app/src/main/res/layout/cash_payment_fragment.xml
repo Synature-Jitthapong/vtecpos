@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="348dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editText"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7"
+            android:id="@+id/btnCash7"
+            android:layout_below="@+id/editText"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:minHeight="72dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8"
+            android:id="@+id/btnCash8"
+            android:layout_alignTop="@+id/btnCash7"
+            android:layout_toRightOf="@+id/btnCash7"
+            android:layout_toEndOf="@+id/btnCash7"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:minHeight="72dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9"
+            android:id="@+id/btnCash9"
+            android:layout_alignTop="@+id/btnCash8"
+            android:layout_toRightOf="@+id/btnCash8"
+            android:layout_toEndOf="@+id/btnCash8"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:minHeight="72dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="&lt;"
+            android:id="@+id/btnCashDel"
+            android:layout_alignTop="@+id/btnCash9"
+            android:layout_toRightOf="@+id/btnCash9"
+            android:layout_toEndOf="@+id/btnCash9"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:minHeight="72dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4"
+            android:id="@+id/btnCash4"
+            android:layout_below="@+id/btnCash7"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:minHeight="72dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:id="@+id/btnCash5"
+            android:layout_below="@+id/btnCash8"
+            android:layout_toRightOf="@+id/btnCash4"
+            android:layout_toEndOf="@+id/btnCash4"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:minHeight="72dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6"
+            android:id="@+id/btnCash6"
+            android:layout_below="@+id/btnCash9"
+            android:layout_toRightOf="@+id/btnCash5"
+            android:layout_toEndOf="@+id/btnCash5"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:minHeight="72dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:id="@+id/btnCash1"
+            android:layout_below="@+id/btnCash4"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:minHeight="72dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:id="@+id/btnCash2"
+            android:layout_below="@+id/btnCash5"
+            android:layout_toRightOf="@+id/btnCash1"
+            android:layout_toEndOf="@+id/btnCash1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:minHeight="72dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:id="@+id/btnCash3"
+            android:layout_below="@+id/btnCash6"
+            android:layout_toRightOf="@+id/btnCash2"
+            android:layout_toEndOf="@+id/btnCash2"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:minHeight="72dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/btnCash0"
+            android:layout_below="@+id/btnCash1"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_toLeftOf="@+id/btnCash3"
+            android:layout_toStartOf="@+id/btnCash3"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:minHeight="72dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_short"
+            android:id="@+id/btnCashClear"
+            android:layout_below="@+id/btnCashDel"
+            android:layout_alignLeft="@+id/btnCashDel"
+            android:layout_alignStart="@+id/btnCashDel"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:minHeight="72dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="."
+            android:id="@+id/btnCashDot"
+            android:layout_below="@+id/btnCash6"
+            android:layout_toRightOf="@+id/btnCash3"
+            android:layout_toEndOf="@+id/btnCash3"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:minHeight="72dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/enter"
+            android:id="@+id/btnCashEnter"
+            android:layout_below="@+id/btnCash1"
+            android:layout_toRightOf="@+id/btnCash0"
+            android:layout_alignRight="@+id/btnCashDot"
+            android:layout_alignEnd="@+id/btnCashDot"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:minHeight="72dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <GridView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/gvPaymentButton"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:numColumns="1" />
+    </RelativeLayout>
+</LinearLayout>
