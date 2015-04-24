@@ -1,9 +1,5 @@
 package pl.surecase.eu;
 
-import com.sun.deploy.panel.DeleteFilesDialog;
-
-import javax.print.attribute.HashPrintServiceAttributeSet;
-
 import de.greenrobot.daogenerator.DaoGenerator;
 import de.greenrobot.daogenerator.Entity;
 import de.greenrobot.daogenerator.Schema;
@@ -13,34 +9,37 @@ public class MyDaoGenerator {
     public static final int SCHEMA_VERSION = 1;
     public static final String SCHEMA = "com.vtec.j1tth4.vtecpos.dao";
 
-    public static final String BANK_NAME_ENTITY = "bankname";
-    public static final String COMPUTER_NAME_ENTITY = "computername";
-    public static final String CREDIT_CARD_TYPE_ENTITY = "creditcardtype";
-    public static final String DOCUMENT_ENTITY = "document";
-    public static final String DOCUMENT_TYPE_ENTITY = "documenttype";
-    public static final String FC_CARD_HISTORY_ENTITY = "fc_cardhistory";
-    public static final String FC_CARD_INFO_ENTITY = "fc_cardinfo";
-    public static final String FC_TRAN_DETAIL_ENTITY = "fc_trandetail";
-    public static final String FC_TRAN_PAYMENT_ENTITY = "fc_tranpament";
-    public static final String FC_TRANSACTION_ENTITY = "fc_transaction";
-    public static final String LANGUAGE_ENTITY = "language";
-    public static final String LOG_ACCESS_INFO_ENTITY = "log_accessinfo";
+    public static final String BANK_NAME_ENTITY = "BankName";
+    public static final String COMPUTER_NAME_ENTITY = "ComputerName";
+    public static final String CREDIT_CARD_TYPE_ENTITY = "CreditCardType";
+    public static final String DOCUMENT_ENTITY = "Document";
+    public static final String DOCUMENT_TYPE_ENTITY = "Documenttype";
+    public static final String FC_CARD_HISTORY_ENTITY = "FcCardHistory";
+    public static final String FC_CARD_INFO_ENTITY = "FcCardInfo";
+    public static final String FC_TRAN_DETAIL_ENTITY = "FcTranDetail";
+    public static final String FC_TRAN_PAYMENT_ENTITY = "FcTranPayment";
+    public static final String FC_TRANSACTION_ENTITY = "FcTransaction";
+    public static final String LANGUAGE_ENTITY = "Language";
+    public static final String LOG_ACCESS_INFO_ENTITY = "LogAccessInfo";
 
-    public static final String ORDER_DETAIL_ENTITY = "orderdetail";
-    public static final String ORDER_PAY_DETAIL_ENTITY = "orderpaydetail";
-    public static final String ORDER_PRINT_JOB_ENTITY = "orderprintjob";
-    public static final String ORDER_TRANSACTION_ENTITY = "ordertransaction";
+    public static final String ORDER_DETAIL_ENTITY = "OrderDetail";
+    public static final String ORDER_PAY_DETAIL_ENTITY = "OrderpayDetail";
+    public static final String ORDER_PRINT_JOB_ENTITY = "OrderPrintJob";
+    public static final String ORDER_TRANSACTION_ENTITY = "OrderTransaction";
 
     public static final String SHOP_CATEGORY_ENTITY = "ShopCategory";
     public static final String SHOP_DATA_ENTITY = "ShopData";
-    public static final String STAFF_ENTITY_ENTITY = "Staffs";
+    public static final String STAFF_ENTITY = "Staffs";
     public static final String STAFF_ROLE_ENTITY = "StaffRole";
 
     public static final String SESSION_ENTITY = "Session";
     public static final String SESSION_ENDDAY_DETAIL_ENTITY = "SessionEnddayDetail";
+    public static final String SALE_MODE_ENTITY = "SaleMode";
 
     public static final String PRODUCT_VAT_ENTITY = "ProductVat";
     public static final String PRODUCT_TYPE_ENTITY = "ProductType";
+    public static final String PROGRAM_PROPERTY_ENTITY = "ProgramProperty";
+    public static final String PROGRAM_PROPERTY_VALUE_ENTITY = "ProgramPropertyValue";
     public static final String PRODUCT_PRICE_GROUP_SHOP_ENTITY = "ProductPriceGroupShop";
     public static final String PRODUCT_PRICE_GROUP_DATE_ENTITY = "ProductPriceGroupDate";
     public static final String PRODUCT_PRICE_GROUP_DATA_ENTITY = "ProductPriceGroupData";
@@ -59,7 +58,6 @@ public class MyDaoGenerator {
     public static final String COLUMN_COMPUTER_ID = "ComputerID";
     public static final String COLUMN_COMPUTER_NAME = "ComputerName";
     public static final String COLUMN_COMPUTER_TYPE = "ComputerType";
-    public static final String COLUMN_IP_ADDRESS = "IPAddress";
     public static final String COLUMN_REGISTRATION_NUMBER = "RegistrationNumber";
     public static final String COLUMN_DEVICE_CODE = "DeviceCode";
     public static final String COLUMN_KDS_ID = "KDSID";
@@ -181,7 +179,6 @@ public class MyDaoGenerator {
     public static final String COLUMN_ACCESS_ID = "AccessID";
     public static final String COLUMN_ACCESS_NAME = "AccessName";
 
-    public static final String COLUMN_COMPONENT_LEVEL = "ComponentLevel";
     public static final String COLUMN_ORDER_DETAIL_LINK_ID = "OrderDetailLinkID";
     public static final String COLUMN_INSERT_ORDER_NO = "InsertOrderNo";
     public static final String COLUMN_PRODUCT_SET_TYPE = "ProductSetType";
@@ -191,20 +188,27 @@ public class MyDaoGenerator {
     public static final String COLUMN_TOTAL_RETAIL_PRICE = "TotalRetailPrice";
     public static final String COLUMN_ORG_PRICE_PER_UNIT = "OrgPricePerUnit";
     public static final String COLUMN_ORG_TOTAL_RETAIL_PRICE = "OrgTotalRetailPrice";
+    public static final String COLUMN_INDENT_LEVEL = "IndentLevel";
+    public static final String COLUMN_DISC_PRICE = "DiscPrice";
+    public static final String COLUMN_DISC_OTHER_PERCENT = "DiscOtherPercent";
+    public static final String COLUMN_DISC_OTHER = "DiscOther";
+    public static final String COLUMN_TOTAL_ITEM_DISC = "TotalItemDisc";
+    public static final String COLUMN_DISC_BILL = "DiscBill";
+    public static final String COLUMN_NET_SALE = "NetSale";
+    public static final String COLUMN_W_VATABLE = "WVatable";
+    public static final String COLUMN_SCW_AMOUNT = "SCWAmount";
+    public static final String COLUMN_SCW_VAT = "SCWVAT";
+    public static final String COLUMN_SCW_BEFORE_VAT = "SCWBeforeVAT";
+    public static final String COLUMN_ITEM_DISC_ALLOW = "ItemDiscAllow";
     public static final String COLUMN_DISC_PERCENT = "DiscPercent";
     public static final String COLUMN_DISC_AMOUNT = "DiscAmount";
-    public static final String COLUMN_DISC_WEIGHT = "DiscWeight";
     public static final String COLUMN_TOTAL_DISCOUNT = "TotalDiscount";
     public static final String COLUMN_SALE_PRICE = "SalePrice";
-    public static final String COLUMN_PRODUCT_VAT_CODE = "ProductVATCode";
-    public static final String COLUMN_VAT_DISPLAY = "VATDisplay";
-    public static final String COLUMN_PRODUCT_VAT_PERCENT = "ProductVATPercent";
     public static final String COLUMN_PRODUCT_VAT = "ProductVAT";
     public static final String COLUMN_PRODUCT_BEFORE_VAT = "ProductBeforeVAT";
     public static final String COLUMN_TOTAL_RETAIL_VAT = "TotalRetailVAT";
     public static final String COLUMN_DISC_VAT = "DiscVAT";
     public static final String COLUMN_VATABLE = "Vatable";
-    public static final String COLUMN_SC_PERCENT = "SCPercent";
     public static final String COLUMN_SC_AMOUNT = "SCAmount";
     public static final String COLUMN_SC_VAT = "SCVAT";
     public static final String COLUMN_SC_BEFORE_VAT = "SCBeforeVAT";
@@ -229,7 +233,6 @@ public class MyDaoGenerator {
     public static final String COLUMN_PROCESS_ID = "ProcessID";
     public static final String COLUMN_SUBMIT_ORDER_DATE_TIME = "SubmitOrderDateTime";
     public static final String COLUMN_COMMENT = "Comment";
-    public static final String COLUMN_IS_COMMENT = "IsComment";
 
     public static final String COLUMN_CASH_CHANGE = "CashChange";
     public static final String COLUMN_CREDIT_CARD_NO = "CreditCardNo";
@@ -282,18 +285,14 @@ public class MyDaoGenerator {
     public static final String COLUMN_OTHER_INCOME = "OtherIncome";
     public static final String COLUMN_OTHER_INCOME_VAT = "OtherIncomeVAT";
     public static final String COLUMN_OTHER_INCOME_BEFORE_VAT = "OhterIncomeBeforeVAT";
-    public static final String COLUMN_RECEIPT_PRODUCT_RETAIL_PRICE = "ReceiptProductRetailPrice";
     public static final String COLUMN_RECEIPT_SALE_PRICE = "ReceiptSalePrice";
     public static final String COLUMN_RECEIPT_PAY_PRICE = "ReceiptPayPrice";
     public static final String COLUMN_RECEIPT_DISCOUNT = "ReceiptDiscount";
     public static final String COLUMN_RECEIPT_TOTAL_QTY = "ReceiptTotalQty";
-    public static final String COLUMN_RECEIPT_SALE_BEFORE_VAT = "ReceiptSaleBeforeVAT";
-    public static final String COLUMN_RECEIPT_SALE_VAT = "ReceiptSaleVAT";
-    public static final String COLUMN_RECEIPT_RETAIL_VAT = "ReceiptRetailVAT";
-    public static final String COLUMN_RECEIPT_DISC_VAT = "ReceiptDiscVAT";
-    public static final String COLUMN_RECEIPT_WEIGHT_PRICE = "ReceiptWeightPrice";
-    public static final String COLUMN_RECEIPT_WEIGHT_BEFORE_VAT = "ReceiptWeightBeforeVAT";
-    public static final String COLUMN_RECEIPT_WEIGHT_VAT = "ReceiptWeightVAT";
+    public static final String COLUMN_DISCOUNT_OTHER = "DiscountOther";
+    public static final String COLUMN_TRAN_BEFORE_VAT = "TranBeforeVAT";
+    public static final String COLUMN_RECEIPT_RETAIL_PRICE = "ReceiptRetailPrice";
+    public static final String COLUMN_RECEIPT_NET_SALE = "ReceiptNetSale";
     public static final String COLUMN_RECEIPT_ROUNDING_BILL = "ReceiptRoundingBill";
     public static final String COLUMN_SESSION_ID = "SessionID";
     public static final String COLUMN_CLOSE_COMPUTER_ID = "CloseComputerID";
@@ -323,8 +322,58 @@ public class MyDaoGenerator {
     public static final String COLUMN_FROM_DEPOSIT_TRANSACTION_ID = "FromDepositTransactionID";
     public static final String COLUMN_FROM_DEPOSIT_COMPUTER_ID = "FromDepositComputerID";
 
+    public static final String COLUMN_PRODUCT_TYPE_ID = "ProductTypeID";
+    public static final String COLUMN_PRODUCT_TYPE_NAME = "ProductTypeName";
+    public static final String COLUMN_COMPONENT_LEVEL = "ComponentLevel";
+    public static final String COLUMN_SHOW_IN_FRONT = "ShowInFront";
+    public static final String COLUMN_SHOW_IN_RECEIPT = "ShowInReceipt";
+    public static final String COLUMN_AUTO_ADD_MATERIAL = "AutoAddMaterial";
+    public static final String COLUMN_NOT_IN_REVENUE = "NotInRevenue";
+    public static final String COLUMN_WEIGHT_PRICE_FOR_REVENUE = "WeightPriceForRevenue";
+    public static final String COLUMN_IS_COMMENT = "IsComment";
+    public static final String COLUMN_DISPLAY_ORDERING = "DisplayOrdering";
+
+    public static final String COLUMN_PRODUCT_VAT_ID = "ProductVATID";
+    public static final String COLUMN_PRODUCT_VAT_CODE = "ProductVATCode";
+    public static final String COLUMN_PRODUCT_VAT_PERCENT = "ProductVATPercent";
+    public static final String COLUMN_VAT_DISPLAY = "VATDisplay";
+    public static final String COLUMN_VAT_DESP = "VATDesp";
+
+    public static final String COLUMN_PRICE_GROUP_ID = "PriceGroupID";
+    public static final String COLUMN_PRICE_GROUP_DATE_ID = "PriceGroupDateID";
+    public static final String COLUMN_FROM_DATE = "FromDate";
+    public static final String COLUMN_TO_DATE = "ToDate";
+    public static final String COLUMN_PRODUCT_PRICE_ID = "ProductPriceID";
+    public static final String COLUMN_PRODUCT_PRICE = "ProductPrice";
+    public static final String COLUMN_PREPAID_PRICE = "PrepaidPrice";
+    public static final String COLUMN_MAIN_PRICE = "MainPrice";
+    public static final String COLUMN_PRICE_REMARK = "PriceRemark";
+    public static final String COLUMN_PRICE_GROUP_NAME = "PriceGroupName";
+
+    public static final String COLUMN_PGROUP_ID = "PGroupID";
+    public static final String COLUMN_START_DATE = "StartDate";
+    public static final String COLUMN_END_DATE = "EndDate";
+    public static final String COLUMN_SET_GROUP_NO = "SetGroupNo";
+    public static final String COLUMN_SET_GROUP_NAME = "SetGroupName";
+    public static final String COLUMN_REQUIRE_ADD_AMOUNT_FOR_PRODUCT = "RequireAddAmountForProduct";
+
+    public static final String COLUMN_MATERIAL_ID = "MaterialID";
+    public static final String COLUMN_MATERIAL_AMOUNT = "MaterialAmount";
+    public static final String COLUMN_UNIT_SMALL_ID = "UnitSmallID";
+    public static final String COLUMN_SHOW_ON_ORDER = "ShowOnOrder";
+    public static final String COLUMN_DATA_TYPE = "DataType";
+    public static final String COLUMN_FLEXIBLE_PRODUCT_PRICE = "FlexibleProductPrice";
+    public static final String COLUMN_FLEXIBLE_PRODUCT_INCLUDE_PRICE = "FlexibleProductIncludePrice";
+
+    public static final String COLUMN_PRODUCT_CAT_ID = "ProductCatID";
+    public static final String COLUMN_PRODUCT_CAT_TYPE_ID = "ProductCatTypeID";
+    public static final String COLUMN_PRODUCT_CAT_CODE = "ProductCatCode";
+    public static final String COLUMN_PRODUCT_CAT_NAME = "ProductCatName";
+    public static final String COLUMN_PRODUCT_CAT_DISPLAY = "ProductCatDisplay";
+    public static final String COLUMN_PRODUCT_CAT_ACTIVATE = "ProductCatActivate";
+    public static final String COLUMN_PRODUCT_CAT_ORDERING = "ProductCatOrdering";
+
     public static final String COLUMN_PRODUCT_ID = "ProductID";
-    public static final String COLUMN_SHOP_ID = "ShopID";
     public static final String COLUMN_INVENTORY_ID = "InventoryID";
     public static final String COLUMN_PRODUCT_GROUP_ID = "ProductGroupID";
     public static final String COLUMN_PRODUCT_DEPT_ID = "ProductDeptID";
@@ -333,7 +382,6 @@ public class MyDaoGenerator {
     public static final String COLUMN_PRODUCT_CAT_3ID = "ProductCat3ID";
     public static final String COLUMN_PRODUCT_CAT_4ID = "ProductCat4ID";
     public static final String COLUMN_PRODUCT_CAT_5ID = "ProductCat5ID";
-    public static final String COLUMN_PRODUCT_TYPE_ID = "ProductTypeID";
     public static final String COLUMN_PRODUCT_CODE = "ProductCode";
     public static final String COLUMN_PRODUCT_BARCODE = "ProductBarCode";
     public static final String COLUMN_PRODUCT_NAME = "ProductName";
@@ -378,8 +426,6 @@ public class MyDaoGenerator {
     public static final String COLUMN_SALE_MODE8 = "SaleMode8";
     public static final String COLUMN_SALE_MODE9 = "SaleMode9";
     public static final String COLUMN_SALE_MODE10 = "SaleMode10";
-    public static final String COLUMN_VAT_TYPE = "VATType";
-    public static final String COLUMN_VAT_CODE = "VATCode";
     public static final String COLUMN_PRODUCT_UNIT_NAME = "ProductUnitName";
     public static final String COLUMN_DISCOUNT_ALLOW = "DiscountAllow";
     public static final String COLUMN_ZERO_PRICE_ALLOW = "ZeroPriceAllow";
@@ -395,6 +441,88 @@ public class MyDaoGenerator {
     public static final String COLUMN_DELETED = "Deleted";
     public static final String COLUMN_INSERT_DATE = "InsertDate";
     public static final String COLUMN_UPDATE_DATE = "UpdateDate";
+
+    public static final String COLUMN_PROPERTY_ID = "PropertyID";
+    public static final String COLUMN_PROPERTY_LEVEL_ID = "PropertyLevelID";
+    public static final String COLUMN_PROPERTY_GROUP_ID = "PropertyGroupID";
+    public static final String COLUMN_PROPERTY_DEPT_ID = "PropertyDeptID";
+    public static final String COLUMN_PROPERTY_FUNCTION_ID = "PropertyFunctionID";
+    public static final String COLUMN_PROPERTY_NAME = "PropertyName";
+    public static final String COLUMN_PROPERTY_PARAM = "PropertyParam";
+    public static final String COLUMN_PROPERTY_DETAIL_URL = "PropertyDetailUrl";
+    public static final String COLUMN_PROPERTY_DESP = "PropertyDesp";
+    public static final String COLUMN_IS_FIX_PROPERTY = "IsFixProperty";
+    public static final String COLUMN_CAN_CHANGE_AT_BRANCH = "CanChangeAtBranch";
+    public static final String COLUMN_ORDERING = "Ordering";
+
+    public static final String COLUMN_KEY_ID = "KeyID";
+    public static final String COLUMN_PROPERTY_VALUE = "PropertyValue";
+    public static final String COLUMN_PROPERTY_TEXT_VALUE = "PropertyTextValue";
+    public static final String COLUMN_PROPERTY_DATE_VALUE = "PropertyDateValue";
+    public static final String COLUMN_PROPERTY_DECIMAL_VALUE = "PropertyDecimalValue";
+
+    public static final String COLUMN_SALE_MODE_ID = "SaleModeID";
+    public static final String COLUMN_SALE_MODE_NAME = "SaleModeName";
+    public static final String COLUMN_POSITION_PREFIX = "PositionPrefix";
+    public static final String COLUMN_PREFIX_TEXT = "PrefixText";
+    public static final String COLUMN_PREFIX_TEXT_PRINTTING = "PrefixTextPrinting";
+    public static final String COLUMN_PREFIX_QUEUE = "PrefixQueue";
+    public static final String COLUMN_PREFIX_RECEIPT_HEADER_TEXT = "ReceiptHeaderText";
+
+    public static final String COLUMN_SHOP_CAT_ID = "ShopCatID";
+    public static final String COLUMN_SHOP_CAT_GROUP_ID = "ShopCatGroupID";
+    public static final String COLUMN_SHOP_CAT_NAME = "ShopCatName";
+
+    public static final String COLUMN_SHOP_ID = "ShopID";
+    public static final String COLUMN_SHOP_CODE = "ShopCode";
+    public static final String COLUMN_SHOP_NAME = "ShopName";
+    public static final String COLUMN_IS_SHOP = "IsShop";
+    public static final String COLUMN_IS_INV = "IsInv";
+    public static final String COLUMN_HAS_SC = "HasSC";
+    public static final String COLUMN_IS_SC_BEFORE_DISC = "IsSCBeforeDisc";
+    public static final String COLUMN_SC_PERCENT = "SCPercent";
+    public static final String COLUMN_VAT_CODE = "VATCode";
+    public static final String COLUMN_VAT_TYPE = "VATType";
+    public static final String COLUMN_MASTER_SHOP = "MasterShop";
+    public static final String COLUMN_MASTER_SHOP_LINK = "MasterShopLink";
+    public static final String COLUMN_SHOW_IN_REPORT = "ShowInReport";
+    public static final String COLUMN_SHOP_TYPE_ID = "ShopTypeID";
+    public static final String COLUMN_SHOP_CAT_ID1 = "ShopCatID1";
+    public static final String COLUMN_SHOP_CAT_ID2 = "ShopCatID2";
+    public static final String COLUMN_SHOP_CAT_ID3 = "ShopCatID3";
+    public static final String COLUMN_SHOP_CAT_ID4 = "ShopCatID4";
+    public static final String COLUMN_SHOP_CAT_ID5 = "ShopCatID5";
+    public static final String COLUMN_SHOP_CAT_ID6 = "ShopCatID6";
+    public static final String COLUMN_SHOP_CAT_ID7 = "ShopCatID7";
+    public static final String COLUMN_SHOP_CAT_ID8 = "ShopCatID8";
+    public static final String COLUMN_SHOP_CAT_ID9 = "ShopCatID9";
+    public static final String COLUMN_SHOP_CAT_ID10 = "ShopCatID10";
+    public static final String COLUMN_OPEN_HOUR = "OpenHour";
+    public static final String COLUMN_CLOSE_HOUR = "CloseHour";
+    public static final String COLUMN_COMPANY_NAME = "CompanyName";
+    public static final String COLUMN_COMPANY_ADDRESS1 = "CompanyAddress1";
+    public static final String COLUMN_COMPANY_ADDRESS2 = "CompanyAddress2";
+    public static final String COLUMN_COMPANY_CITY = "CompanyCity";
+    public static final String COLUMN_COMPANY_PROVINCE = "CompanyProvince";
+    public static final String COLUMN_DISPLAY_COMPANY_PROVINCE_LANG_ID = "DisplayCompanyProvinceLangID";
+    public static final String COLUMN_COMPANY_ZIPCODE = "CompanyZipCode";
+    public static final String COLUMN_COMPANY_TELEPHONE = "CompanyTelephone";
+    public static final String COLUMN_COMPANY_FAX = "CompanyFax";
+    public static final String COLUMN_COMPANY_COUNTRY = "CompanyCountry";
+    public static final String COLUMN_COMPANY_TAX_ID = "CompanyTaxID";
+    public static final String COLUMN_COMPANY_REGISTER_ID = "CompanyRegisterID";
+    public static final String COLUMN_ACCOUNTING_CODE = "AccountingCode";
+    public static final String COLUMN_DELIVERY_NAME = "DeliveryName";
+    public static final String COLUMN_DELIVERY_ADDRESS1 = "DeliveryAddress1";
+    public static final String COLUMN_DELIVERY_ADDRESS2 = "DeliveryAddress2";
+    public static final String COLUMN_DELIVERY_CITY = "DeliveryCity";
+    public static final String COLUMN_DELIVERY_PROVINCE = "DeliveryProvince";
+    public static final String COLUMN_DELIVERY_ZIPCODE = "DeliveryZipCode";
+    public static final String COLUMN_DELIVERY_TELLEPHONE = "DeliveryTelephone";
+    public static final String COLUMN_DELIVERY_FAX = "DeliveryFax";
+    public static final String COLUMN_IP_ADDRESS = "IPAddress";
+    public static final String COLUMN_ADDITIONAL = "Addtional";
+    public static final String COLUMN_PRODUCTLEVEL_ORDER = "ProductLevelOrder";
 
     public static void main(String args[]) throws Exception {
         Schema schema = new Schema(SCHEMA_VERSION, SCHEMA);
@@ -429,13 +557,15 @@ public class MyDaoGenerator {
         createProductPriceGroupShopEntity(schema);
         createProductTypeEntity(schema);
         createProductVatEntity(schema);
+        createProgramPropertyEntity(schema);
+        createProgramPropertyValueEntity(schema);
         createShopCategoryEntity(schema);
         createShopDataEntity(schema);
-        createOrderPayDetailEntity(schema);
         createStaffEntity(schema);
         createStaffRoleEntity(schema);
         createSessionEntity(schema);
         createSessionEnddayDetailEntity(schema);
+        createSaleModeEntiry(schema);
         new DaoGenerator().generateAll(schema, args[0]);
     }
 
@@ -552,7 +682,7 @@ public class MyDaoGenerator {
 
     public static void createFcCardHistoryEntity(Schema schema){
         Entity fcCardHistory = schema.addEntity(FC_CARD_HISTORY_ENTITY);
-        fcCardHistory.setTableName(FC_CARD_HISTORY_ENTITY);
+        fcCardHistory.setTableName("fc_cardhistory");
         fcCardHistory.addIntProperty(COLUMN_HISTORY_ID).columnName(COLUMN_HISTORY_ID).primaryKey();
         fcCardHistory.addIntProperty(COLUMN_TRANS_UUID).columnName(COLUMN_TRANS_UUID);
         fcCardHistory.addIntProperty(COLUMN_CARD_ID).columnName(COLUMN_CARD_ID);
@@ -572,7 +702,7 @@ public class MyDaoGenerator {
 
     public static void createFcCardInfoEntity(Schema schema){
         Entity fcCardInfo = schema.addEntity(FC_CARD_INFO_ENTITY);
-        fcCardInfo.setTableName(FC_CARD_INFO_ENTITY);
+        fcCardInfo.setTableName("fc_cardinfo");
         fcCardInfo.addIntProperty(COLUMN_CARD_ID).columnName(COLUMN_CARD_ID).primaryKey();
         fcCardInfo.addStringProperty(COLUMN_CARD_NO).columnName(COLUMN_CARD_NO);
         fcCardInfo.addIntProperty(COLUMN_CARD_STATUS).columnName(COLUMN_CARD_STATUS);
@@ -592,7 +722,7 @@ public class MyDaoGenerator {
 
     public static void createFcTransDetailEntity(Schema schema){
         Entity fcTranDetail = schema.addEntity(FC_TRAN_DETAIL_ENTITY);
-        fcTranDetail.setTableName(FC_TRAN_DETAIL_ENTITY);
+        fcTranDetail.setTableName("fc_trandetail");
         fcTranDetail.addIntProperty(COLUMN_ORDER_DETAIL_ID).columnName(COLUMN_ORDER_DETAIL_ID).primaryKey();
         fcTranDetail.addIntProperty(COLUMN_TRANSACTION_ID).columnName(COLUMN_TRANSACTION_ID).primaryKey();
         fcTranDetail.addIntProperty(COLUMN_COMPUTER_ID).columnName(COLUMN_COMPUTER_ID).primaryKey();
@@ -608,7 +738,7 @@ public class MyDaoGenerator {
 
     public static void createFcTransPaymentEntity(Schema schema){
         Entity fcTransPayment = schema.addEntity(FC_TRAN_PAYMENT_ENTITY);
-        fcTransPayment.setTableName(FC_TRAN_PAYMENT_ENTITY);
+        fcTransPayment.setTableName("fc_tranpayment");
         fcTransPayment.addIntProperty(COLUMN_PAY_DETAIL_ID).columnName(COLUMN_PAY_DETAIL_ID).primaryKey();
         fcTransPayment.addIntProperty(COLUMN_TRANSACTION_ID).columnName(COLUMN_TRANSACTION_ID).primaryKey();
         fcTransPayment.addIntProperty(COLUMN_COMPUTER_ID).columnName(COLUMN_COMPUTER_ID).primaryKey();
@@ -631,7 +761,7 @@ public class MyDaoGenerator {
 
     public static void createFcTransactionEntity(Schema schema){
         Entity fcTrans = schema.addEntity(FC_TRANSACTION_ENTITY);
-        fcTrans.setTableName(FC_TRANSACTION_ENTITY);
+        fcTrans.setTableName("fc_transaction");
         fcTrans.addIntProperty(COLUMN_TRANSACTION_ID).columnName(COLUMN_TRANSACTION_ID).primaryKey();
         fcTrans.addIntProperty(COLUMN_COMPUTER_ID).columnName(COLUMN_COMPUTER_ID).primaryKey();
         fcTrans.addStringProperty(COLUMN_TRANS_UUID).columnName(COLUMN_TRANS_UUID);
@@ -667,10 +797,12 @@ public class MyDaoGenerator {
         logAccessInfo.addIntProperty(COLUMN_ACCESS_ID).columnName(COLUMN_ACCESS_ID).primaryKey();
         logAccessInfo.addStringProperty(COLUMN_ACCESS_NAME).columnName(COLUMN_ACCESS_NAME);
         logAccessInfo.addIntProperty(COLUMN_DELETED).columnName(COLUMN_DELETED);
+        logAccessInfo.setSkipTableCreation(true);
     }
 
     public static void createStaffRoleEntity(Schema schema){
         Entity staffRole = schema.addEntity(STAFF_ROLE_ENTITY);
+        staffRole.setTableName(STAFF_ROLE_ENTITY);
         staffRole.addIntProperty("StaffRoleID").notNull().primaryKey();
         staffRole.addIntProperty("StaffRoleLevel");
         staffRole.addStringProperty("StaffRoleName");
@@ -680,7 +812,8 @@ public class MyDaoGenerator {
     }
 
     public static void createStaffEntity(Schema schema){
-        Entity staff = schema.addEntity(STAFF_ENTITY_ENTITY);
+        Entity staff = schema.addEntity(STAFF_ENTITY);
+        staff.setTableName(STAFF_ENTITY);
         staff.addIntProperty("StaffID").notNull().primaryKey();
         staff.addIntProperty("StaffRoleID").notNull();
         staff.addStringProperty("StaffPassword").notNull();
@@ -726,6 +859,8 @@ public class MyDaoGenerator {
         orderDetail.addIntProperty(COLUMN_COMPONENT_LEVEL).columnName(COLUMN_COMPONENT_LEVEL);
         orderDetail.addIntProperty(COLUMN_ORDER_DETAIL_LINK_ID).columnName(COLUMN_ORDER_DETAIL_LINK_ID);
         orderDetail.addIntProperty(COLUMN_INSERT_ORDER_NO).columnName(COLUMN_INSERT_ORDER_NO);
+        orderDetail.addIntProperty(COLUMN_INDENT_LEVEL).columnName(COLUMN_INDENT_LEVEL);
+        orderDetail.addIntProperty(COLUMN_DISPLAY_ORDERING).columnName(COLUMN_DISPLAY_ORDERING);
         orderDetail.addDateProperty(COLUMN_SALE_DATE).columnName(COLUMN_SALE_DATE);
         orderDetail.addIntProperty(COLUMN_SHOP_ID).columnName(COLUMN_SHOP_ID);
         orderDetail.addIntProperty(COLUMN_PRODUCT_ID).columnName(COLUMN_PRODUCT_ID);
@@ -737,11 +872,17 @@ public class MyDaoGenerator {
         orderDetail.addDoubleProperty(COLUMN_TOTAL_RETAIL_PRICE).columnName(COLUMN_TOTAL_RETAIL_PRICE);
         orderDetail.addDoubleProperty(COLUMN_ORG_PRICE_PER_UNIT).columnName(COLUMN_ORG_PRICE_PER_UNIT);
         orderDetail.addDoubleProperty(COLUMN_ORG_TOTAL_RETAIL_PRICE).columnName(COLUMN_ORG_TOTAL_RETAIL_PRICE);
+        orderDetail.addDoubleProperty(COLUMN_DISC_PRICE).columnName(COLUMN_DISC_PRICE);
         orderDetail.addDoubleProperty(COLUMN_DISC_PERCENT).columnName(COLUMN_DISC_PERCENT);
         orderDetail.addDoubleProperty(COLUMN_DISC_AMOUNT).columnName(COLUMN_DISC_AMOUNT);
-        orderDetail.addDoubleProperty(COLUMN_DISC_WEIGHT).columnName(COLUMN_DISC_WEIGHT);
-        orderDetail.addDoubleProperty(COLUMN_TOTAL_DISCOUNT).columnName(COLUMN_TOTAL_DISCOUNT);
+        orderDetail.addDoubleProperty(COLUMN_DISC_OTHER_PERCENT).columnName(COLUMN_DISC_OTHER_PERCENT);
+        orderDetail.addDoubleProperty(COLUMN_DISC_OTHER).columnName(COLUMN_DISC_OTHER);
+        orderDetail.addDoubleProperty(COLUMN_TOTAL_ITEM_DISC).columnName(COLUMN_TOTAL_ITEM_DISC);
         orderDetail.addDoubleProperty(COLUMN_SALE_PRICE).columnName(COLUMN_SALE_PRICE);
+        orderDetail.addDoubleProperty(COLUMN_DISC_BILL).columnName(COLUMN_DISC_BILL);
+        orderDetail.addDoubleProperty(COLUMN_TOTAL_DISCOUNT).columnName(COLUMN_TOTAL_DISCOUNT);
+        orderDetail.addDoubleProperty(COLUMN_NET_SALE).columnName(COLUMN_NET_SALE);
+        orderDetail.addDoubleProperty(COLUMN_VATABLE).columnName(COLUMN_VATABLE);
         orderDetail.addStringProperty(COLUMN_PRODUCT_VAT_CODE).columnName(COLUMN_PRODUCT_VAT_CODE);
         orderDetail.addStringProperty(COLUMN_VAT_DISPLAY).columnName(COLUMN_VAT_DISPLAY);
         orderDetail.addDoubleProperty(COLUMN_PRODUCT_VAT_PERCENT).columnName(COLUMN_PRODUCT_VAT_PERCENT);
@@ -749,18 +890,23 @@ public class MyDaoGenerator {
         orderDetail.addDoubleProperty(COLUMN_PRODUCT_BEFORE_VAT).columnName(COLUMN_PRODUCT_BEFORE_VAT);
         orderDetail.addDoubleProperty(COLUMN_TOTAL_RETAIL_VAT).columnName(COLUMN_TOTAL_RETAIL_VAT);
         orderDetail.addDoubleProperty(COLUMN_DISC_VAT).columnName(COLUMN_DISC_VAT);
-        orderDetail.addDoubleProperty(COLUMN_VATABLE).columnName(COLUMN_VATABLE);
+        orderDetail.addIntProperty(COLUMN_IS_SC_BEFORE_DISC).columnName(COLUMN_IS_SC_BEFORE_DISC);
         orderDetail.addIntProperty(COLUMN_HAS_SERVICE_CHARGE).columnName(COLUMN_HAS_SERVICE_CHARGE);
         orderDetail.addDoubleProperty(COLUMN_SC_PERCENT).columnName(COLUMN_SC_PERCENT);
         orderDetail.addDoubleProperty(COLUMN_SC_AMOUNT).columnName(COLUMN_SC_AMOUNT);
         orderDetail.addDoubleProperty(COLUMN_SC_VAT).columnName(COLUMN_SC_VAT);
         orderDetail.addDoubleProperty(COLUMN_SC_BEFORE_VAT).columnName(COLUMN_SC_BEFORE_VAT);
+        orderDetail.addDoubleProperty(COLUMN_W_VATABLE).columnName(COLUMN_W_VATABLE);
+        orderDetail.addDoubleProperty(COLUMN_SCW_AMOUNT).columnName(COLUMN_SCW_AMOUNT);
+        orderDetail.addDoubleProperty(COLUMN_SCW_VAT).columnName(COLUMN_SCW_VAT);
+        orderDetail.addDoubleProperty(COLUMN_SCW_BEFORE_VAT).columnName(COLUMN_SCW_BEFORE_VAT);
         orderDetail.addDoubleProperty(COLUMN_WEIGHT_PRICE).columnName(COLUMN_WEIGHT_PRICE);
         orderDetail.addDoubleProperty(COLUMN_WEIGHT_PRICE_VAT).columnName(COLUMN_WEIGHT_PRICE_VAT);
         orderDetail.addDoubleProperty(COLUMN_WEIGHT_PRICE_BEFORE_VAT).columnName(COLUMN_WEIGHT_PRICE_BEFORE_VAT);
         orderDetail.addStringProperty(COLUMN_OTHER_FOOD_NAME).columnName(COLUMN_OTHER_FOOD_NAME);
         orderDetail.addIntProperty(COLUMN_OTHER_PRODUCT_GROUP_ID).columnName(COLUMN_OTHER_PRODUCT_GROUP_ID);
         orderDetail.addIntProperty(COLUMN_DISCOUNT_ALLOW).columnName(COLUMN_DISCOUNT_ALLOW);
+        orderDetail.addIntProperty(COLUMN_ITEM_DISC_ALLOW).columnName(COLUMN_ITEM_DISC_ALLOW);
         orderDetail.addIntProperty(COLUMN_LAST_TRANSACTION_ID).columnName(COLUMN_LAST_TRANSACTION_ID);
         orderDetail.addIntProperty(COLUMN_LAST_COMPUTER_ID).columnName(COLUMN_LAST_COMPUTER_ID);
         orderDetail.addIntProperty(COLUMN_PRINTER_ID).columnName(COLUMN_PRINTER_ID);
@@ -852,6 +998,7 @@ public class MyDaoGenerator {
         orderTransaction.addIntProperty(COLUMN_COMM_STAFF_ID).columnName(COLUMN_COMM_STAFF_ID);
         orderTransaction.addDoubleProperty(COLUMN_DISCOUNT_ITEM).columnName(COLUMN_DISCOUNT_ITEM);
         orderTransaction.addDoubleProperty(COLUMN_DISCOUNT_BILL).columnName(COLUMN_DISCOUNT_BILL);
+        orderTransaction.addDoubleProperty(COLUMN_DISCOUNT_OTHER).columnName(COLUMN_DISCOUNT_OTHER);
         orderTransaction.addDoubleProperty(COLUMN_TOTAL_DISCOUNT).columnName(COLUMN_TOTAL_DISCOUNT);
         orderTransaction.addIntProperty(COLUMN_TRANSACTION_STATUS_ID).columnName(COLUMN_TRANSACTION_STATUS_ID);
         orderTransaction.addIntProperty(COLUMN_SALE_MODE).columnName(COLUMN_SALE_MODE);
@@ -868,7 +1015,9 @@ public class MyDaoGenerator {
         orderTransaction.addIntProperty(COLUMN_SHOP_ID).columnName(COLUMN_SHOP_ID);
         orderTransaction.addDoubleProperty(COLUMN_TRANSACTION_VAT).columnName(COLUMN_TRANSACTION_VAT);
         orderTransaction.addDoubleProperty(COLUMN_TRANSACTION_VATABLE).columnName(COLUMN_TRANSACTION_VATABLE);
-        orderTransaction.addIntProperty(COLUMN_IS_CAL_SC).columnName(COLUMN_IS_CAL_SC);
+        orderTransaction.addDoubleProperty(COLUMN_TRAN_BEFORE_VAT).columnName(COLUMN_TRAN_BEFORE_VAT);
+        orderTransaction.addStringProperty(COLUMN_VAT_CODE).columnName(COLUMN_VAT_CODE);
+        orderTransaction.addDoubleProperty(COLUMN_VAT_PERCENT).columnName(COLUMN_VAT_PERCENT);
         orderTransaction.addDoubleProperty(COLUMN_SERVICE_CHARGE_PERCENT).columnName(COLUMN_SERVICE_CHARGE_PERCENT);
         orderTransaction.addDoubleProperty(COLUMN_SERVICE_CHARGE).columnName(COLUMN_SERVICE_CHARGE);
         orderTransaction.addDoubleProperty(COLUMN_SERVICE_CHARGE_VAT).columnName(COLUMN_SERVICE_CHARGE_VAT);
@@ -876,18 +1025,12 @@ public class MyDaoGenerator {
         orderTransaction.addDoubleProperty(COLUMN_OTHER_INCOME).columnName(COLUMN_OTHER_INCOME);
         orderTransaction.addDoubleProperty(COLUMN_OTHER_INCOME_VAT).columnName(COLUMN_OTHER_INCOME_VAT);
         orderTransaction.addDoubleProperty(COLUMN_OTHER_INCOME_BEFORE_VAT).columnName(COLUMN_OTHER_INCOME_BEFORE_VAT);
-        orderTransaction.addDoubleProperty(COLUMN_RECEIPT_PRODUCT_RETAIL_PRICE).columnName(COLUMN_RECEIPT_PRODUCT_RETAIL_PRICE);
-        orderTransaction.addDoubleProperty(COLUMN_RECEIPT_SALE_PRICE).columnName(COLUMN_RECEIPT_SALE_PRICE);
-        orderTransaction.addDoubleProperty(COLUMN_RECEIPT_PAY_PRICE).columnName(COLUMN_RECEIPT_PAY_PRICE);
-        orderTransaction.addDoubleProperty(COLUMN_RECEIPT_DISCOUNT).columnName(COLUMN_RECEIPT_DISCOUNT);
         orderTransaction.addDoubleProperty(COLUMN_RECEIPT_TOTAL_QTY).columnName(COLUMN_RECEIPT_TOTAL_QTY);
-        orderTransaction.addDoubleProperty(COLUMN_RECEIPT_SALE_BEFORE_VAT).columnName(COLUMN_RECEIPT_SALE_BEFORE_VAT);
-        orderTransaction.addDoubleProperty(COLUMN_RECEIPT_SALE_VAT).columnName(COLUMN_RECEIPT_SALE_VAT);
-        orderTransaction.addDoubleProperty(COLUMN_RECEIPT_RETAIL_VAT).columnName(COLUMN_RECEIPT_RETAIL_VAT);
-        orderTransaction.addDoubleProperty(COLUMN_RECEIPT_DISC_VAT).columnName(COLUMN_RECEIPT_DISC_VAT);
-        orderTransaction.addDoubleProperty(COLUMN_RECEIPT_WEIGHT_PRICE).columnName(COLUMN_RECEIPT_WEIGHT_PRICE);
-        orderTransaction.addDoubleProperty(COLUMN_RECEIPT_WEIGHT_BEFORE_VAT).columnName(COLUMN_WEIGHT_PRICE_BEFORE_VAT);
-        orderTransaction.addDoubleProperty(COLUMN_RECEIPT_WEIGHT_VAT).columnName(COLUMN_RECEIPT_WEIGHT_VAT);
+        orderTransaction.addDoubleProperty(COLUMN_RECEIPT_RETAIL_PRICE).columnName(COLUMN_RECEIPT_RETAIL_PRICE);
+        orderTransaction.addDoubleProperty(COLUMN_RECEIPT_DISCOUNT).columnName(COLUMN_RECEIPT_DISCOUNT);
+        orderTransaction.addDoubleProperty(COLUMN_RECEIPT_SALE_PRICE).columnName(COLUMN_RECEIPT_SALE_PRICE);
+        orderTransaction.addDoubleProperty(COLUMN_RECEIPT_NET_SALE).columnName(COLUMN_RECEIPT_NET_SALE);
+        orderTransaction.addDoubleProperty(COLUMN_RECEIPT_PAY_PRICE).columnName(COLUMN_RECEIPT_PAY_PRICE);
         orderTransaction.addDoubleProperty(COLUMN_RECEIPT_ROUNDING_BILL).columnName(COLUMN_RECEIPT_ROUNDING_BILL);
         orderTransaction.addIntProperty(COLUMN_SESSION_ID).columnName(COLUMN_SESSION_ID);
         orderTransaction.addIntProperty(COLUMN_CLOSE_COMPUTER_ID).columnName(COLUMN_CLOSE_COMPUTER_ID);
@@ -923,8 +1066,24 @@ public class MyDaoGenerator {
         orderTransaction.setSkipTableCreation(true);
     }
 
+    public static void createSaleModeEntiry(Schema schema){
+        Entity saleMode = schema.addEntity(SALE_MODE_ENTITY);
+        saleMode.setTableName(SALE_MODE_ENTITY);
+        saleMode.addIntProperty(COLUMN_SALE_MODE_ID).columnName(COLUMN_SALE_MODE_ID).primaryKey();
+        saleMode.addStringProperty(COLUMN_SALE_MODE_NAME).columnName(COLUMN_SALE_MODE_NAME);
+        saleMode.addIntProperty(COLUMN_DELETED).columnName(COLUMN_DELETED);
+        saleMode.addIntProperty(COLUMN_POSITION_PREFIX).columnName(COLUMN_POSITION_PREFIX);
+        saleMode.addStringProperty(COLUMN_PREFIX_TEXT).columnName(COLUMN_PREFIX_TEXT);
+        saleMode.addStringProperty(COLUMN_PREFIX_TEXT_PRINTTING).columnName(COLUMN_PREFIX_TEXT_PRINTTING);
+        saleMode.addStringProperty(COLUMN_PREFIX_QUEUE).columnName(COLUMN_PREFIX_QUEUE);
+        saleMode.addStringProperty(COLUMN_PREFIX_RECEIPT_HEADER_TEXT).columnName(COLUMN_PREFIX_RECEIPT_HEADER_TEXT);
+        saleMode.addIntProperty(COLUMN_HAS_SERVICE_CHARGE).columnName(COLUMN_HAS_SERVICE_CHARGE);
+        saleMode.setSkipTableCreation(true);
+    }
+
     public static void createSessionEnddayDetailEntity(Schema schema){
         Entity sessionEndday = schema.addEntity(SESSION_ENDDAY_DETAIL_ENTITY);
+        sessionEndday.setTableName(SESSION_ENDDAY_DETAIL_ENTITY);
         sessionEndday.addDateProperty("SessionDate").notNull().primaryKey();
         sessionEndday.addIntProperty("ShopID").notNull();
         sessionEndday.addIntProperty("IsEndDay");
@@ -940,6 +1099,7 @@ public class MyDaoGenerator {
 
     public static void createSessionEntity(Schema schema){
         Entity session = schema.addEntity(SESSION_ENTITY);
+        session.setTableName(SESSION_ENTITY);
         session.addIntProperty("SessionID").notNull().primaryKey();
         session.addIntProperty("ComputerID").notNull();
         session.addIntProperty("OpenStaffID").notNull();
@@ -961,194 +1121,246 @@ public class MyDaoGenerator {
 
     public static void createShopDataEntity(Schema schema){
         Entity shopData = schema.addEntity(SHOP_DATA_ENTITY);
-        shopData.addIntProperty("ShopID").notNull().primaryKey();
-        shopData.addStringProperty("ShopCode");
-        shopData.addStringProperty("ShopName");
-        shopData.addIntProperty("IsShop").notNull();
-        shopData.addIntProperty("IsInv").notNull();
-        shopData.addIntProperty("MasterShop").notNull();
-        shopData.addIntProperty("MasterShopLink").notNull();
-        shopData.addIntProperty("ShowInReport").notNull();
-        shopData.addIntProperty("ShopTypeID").notNull();
-        shopData.addIntProperty("ShopCatID1").notNull();
-        shopData.addIntProperty("ShopCatID2").notNull();
-        shopData.addIntProperty("ShopCatID3").notNull();
-        shopData.addIntProperty("ShopCatID4").notNull();
-        shopData.addIntProperty("ShopCatID5").notNull();
-        shopData.addIntProperty("ShopCatID6").notNull();
-        shopData.addIntProperty("ShopCatID7").notNull();
-        shopData.addIntProperty("ShopCatID8").notNull();
-        shopData.addIntProperty("ShopCatID9").notNull();
-        shopData.addIntProperty("ShopCatID10").notNull();
-        shopData.addDateProperty("OpenHour");
-        shopData.addDateProperty("CloseHour");
-        shopData.addStringProperty("CompanyName");
-        shopData.addStringProperty("CompanyAddress1");
-        shopData.addStringProperty("CompanyAddress2");
-        shopData.addStringProperty("CompanyCity");
-        shopData.addIntProperty("CompanyProvince");
-        shopData.addIntProperty("DisplayCompanyProvinceLangID");
-        shopData.addStringProperty("CompanyZipCode");
-        shopData.addStringProperty("CompanyTelephone");
-        shopData.addStringProperty("CompanyFax");
-        shopData.addStringProperty("CompanyCountry");
-        shopData.addStringProperty("CompanyTaxID");
-        shopData.addStringProperty("CompanyRegisterID");
-        shopData.addStringProperty("AccountingCode");
-        shopData.addDoubleProperty("CompanyVAT");
-        shopData.addStringProperty("DeliveryName");
-        shopData.addStringProperty("DeliveryAddress1");
-        shopData.addStringProperty("DeliveryAddress2");
-        shopData.addStringProperty("DeliveryCity");
-        shopData.addIntProperty("DeliveryProvince");
-        shopData.addStringProperty("DeliveryZipCode");
-        shopData.addStringProperty("DeliveryTelephone");
-        shopData.addStringProperty("DeliveryFax");
-        shopData.addStringProperty("IPAddress");
-        shopData.addStringProperty("Addtional");
-        shopData.addIntProperty("ProductLevelOrder");
-        shopData.addIntProperty("Deleted");
+        shopData.setTableName(SHOP_DATA_ENTITY);
+        shopData.addIntProperty(COLUMN_SHOP_ID).columnName(COLUMN_SHOP_ID).primaryKey();
+        shopData.addStringProperty(COLUMN_SHOP_CODE).columnName(COLUMN_SHOP_CODE);
+        shopData.addStringProperty(COLUMN_SHOP_NAME).columnName(COLUMN_SHOP_NAME);
+        shopData.addIntProperty(COLUMN_IS_SHOP).columnName(COLUMN_IS_SHOP);
+        shopData.addIntProperty(COLUMN_IS_INV).columnName(COLUMN_IS_INV);
+        shopData.addIntProperty(COLUMN_HAS_SC).columnName(COLUMN_HAS_SC);
+        shopData.addIntProperty(COLUMN_IS_SC_BEFORE_DISC).columnName(COLUMN_IS_SC_BEFORE_DISC);
+        shopData.addDoubleProperty(COLUMN_SC_PERCENT).columnName(COLUMN_SC_PERCENT);
+        shopData.addStringProperty(COLUMN_VAT_CODE).columnName(COLUMN_VAT_CODE);
+        shopData.addIntProperty(COLUMN_VAT_TYPE).columnName(COLUMN_VAT_TYPE);
+        shopData.addIntProperty(COLUMN_MASTER_SHOP).columnName(COLUMN_MASTER_SHOP);
+        shopData.addIntProperty(COLUMN_MASTER_SHOP_LINK).columnName(COLUMN_MASTER_SHOP_LINK);
+        shopData.addIntProperty(COLUMN_SHOW_IN_REPORT).columnName(COLUMN_SHOW_IN_REPORT);
+        shopData.addIntProperty(COLUMN_SHOP_TYPE_ID).columnName(COLUMN_SHOP_TYPE_ID);
+        shopData.addIntProperty(COLUMN_SHOP_CAT_ID1).columnName(COLUMN_SHOP_CAT_ID1);
+        shopData.addIntProperty(COLUMN_SHOP_CAT_ID2).columnName(COLUMN_SHOP_CAT_ID2);
+        shopData.addIntProperty(COLUMN_SHOP_CAT_ID3).columnName(COLUMN_SHOP_CAT_ID3);
+        shopData.addIntProperty(COLUMN_SHOP_CAT_ID4).columnName(COLUMN_SHOP_CAT_ID4);
+        shopData.addIntProperty(COLUMN_SHOP_CAT_ID5).columnName(COLUMN_SHOP_CAT_ID5);
+        shopData.addIntProperty(COLUMN_SHOP_CAT_ID6).columnName(COLUMN_SHOP_CAT_ID6);
+        shopData.addIntProperty(COLUMN_SHOP_CAT_ID7).columnName(COLUMN_SHOP_CAT_ID7);
+        shopData.addIntProperty(COLUMN_SHOP_CAT_ID8).columnName(COLUMN_SHOP_CAT_ID8);
+        shopData.addIntProperty(COLUMN_SHOP_CAT_ID9).columnName(COLUMN_SHOP_CAT_ID9);
+        shopData.addIntProperty(COLUMN_SHOP_CAT_ID10).columnName(COLUMN_SHOP_CAT_ID10);
+        shopData.addDateProperty(COLUMN_OPEN_HOUR).columnName(COLUMN_OPEN_HOUR);
+        shopData.addDateProperty(COLUMN_CLOSE_HOUR).columnName(COLUMN_CLOSE_HOUR);
+        shopData.addStringProperty(COLUMN_COMPANY_NAME).columnName(COLUMN_COMPANY_NAME);
+        shopData.addStringProperty(COLUMN_COMPANY_ADDRESS1).columnName(COLUMN_COMPANY_ADDRESS1);
+        shopData.addStringProperty(COLUMN_COMPANY_ADDRESS2).columnName(COLUMN_COMPANY_ADDRESS2);
+        shopData.addStringProperty(COLUMN_COMPANY_CITY).columnName(COLUMN_COMPANY_CITY);
+        shopData.addIntProperty(COLUMN_COMPANY_PROVINCE).columnName(COLUMN_COMPANY_PROVINCE);
+        shopData.addIntProperty(COLUMN_DISPLAY_COMPANY_PROVINCE_LANG_ID).columnName(COLUMN_DISPLAY_COMPANY_PROVINCE_LANG_ID);
+        shopData.addStringProperty(COLUMN_COMPANY_ZIPCODE).columnName(COLUMN_COMPANY_ZIPCODE);
+        shopData.addStringProperty(COLUMN_COMPANY_TELEPHONE).columnName(COLUMN_COMPANY_TELEPHONE);
+        shopData.addStringProperty(COLUMN_COMPANY_FAX).columnName(COLUMN_COMPANY_FAX);
+        shopData.addStringProperty(COLUMN_COMPANY_COUNTRY).columnName(COLUMN_COMPANY_COUNTRY);
+        shopData.addStringProperty(COLUMN_COMPANY_TAX_ID).columnName(COLUMN_COMPANY_TAX_ID);
+        shopData.addStringProperty(COLUMN_COMPANY_REGISTER_ID).columnName(COLUMN_COMPANY_REGISTER_ID);
+        shopData.addStringProperty(COLUMN_ACCOUNTING_CODE).columnName(COLUMN_ACCOUNTING_CODE);
+        shopData.addStringProperty(COLUMN_DELIVERY_NAME).columnName(COLUMN_DELIVERY_NAME);
+        shopData.addStringProperty(COLUMN_DELIVERY_ADDRESS1).columnName(COLUMN_DELIVERY_ADDRESS1);
+        shopData.addStringProperty(COLUMN_DELIVERY_ADDRESS2).columnName(COLUMN_DELIVERY_ADDRESS2);
+        shopData.addStringProperty(COLUMN_DELIVERY_CITY).columnName(COLUMN_DELIVERY_CITY);
+        shopData.addIntProperty(COLUMN_DELIVERY_PROVINCE).columnName(COLUMN_DELIVERY_PROVINCE);
+        shopData.addStringProperty(COLUMN_DELIVERY_ZIPCODE).columnName(COLUMN_DELIVERY_ZIPCODE);
+        shopData.addStringProperty(COLUMN_DELIVERY_TELLEPHONE).columnName(COLUMN_DELIVERY_TELLEPHONE);
+        shopData.addStringProperty(COLUMN_DELIVERY_FAX).columnName(COLUMN_DELIVERY_FAX);
+        shopData.addStringProperty(COLUMN_IP_ADDRESS).columnName(COLUMN_IP_ADDRESS);
+        shopData.addStringProperty(COLUMN_ADDITIONAL).columnName(COLUMN_ADDITIONAL);
+        shopData.addIntProperty(COLUMN_PRODUCTLEVEL_ORDER).columnName(COLUMN_PRODUCTLEVEL_ORDER);
+        shopData.addIntProperty(COLUMN_DELETED).columnName(COLUMN_DELETED);
         shopData.setSkipTableCreation(true);
     }
 
     public static void createShopCategoryEntity(Schema schema){
         Entity shopCategory = schema.addEntity(SHOP_CATEGORY_ENTITY);
-        shopCategory.addIntProperty("ShopCatID").notNull().primaryKey();
-        shopCategory.addIntProperty("ShopCatGroupID").notNull();
-        shopCategory.addStringProperty("ShopCatName").notNull();
-        shopCategory.addIntProperty("LangID").notNull();
-        shopCategory.addIntProperty("Deleted");
+        shopCategory.setTableName(SHOP_CATEGORY_ENTITY);
+        shopCategory.addIntProperty(COLUMN_SHOP_CAT_ID).columnName(COLUMN_SHOP_CAT_ID).primaryKey();
+        shopCategory.addIntProperty(COLUMN_SHOP_CAT_GROUP_ID).columnName(COLUMN_SHOP_CAT_GROUP_ID);
+        shopCategory.addStringProperty(COLUMN_SHOP_CAT_NAME).columnName(COLUMN_SHOP_CAT_NAME);
+        shopCategory.addIntProperty(COLUMN_LANG_ID).columnName(COLUMN_LANG_ID);
+        shopCategory.addIntProperty(COLUMN_DELETED).columnName(COLUMN_DELETED);
         shopCategory.setSkipTableCreation(true);
     }
 
-
     public static void createProductVatEntity(Schema schema){
         Entity productVat = schema.addEntity(PRODUCT_VAT_ENTITY);
-        productVat.addIntProperty("ProductVATID").notNull().primaryKey();
-        productVat.addStringProperty("ProductVATCode").notNull();
-        productVat.addDoubleProperty("ProductVATPercent").notNull();
-        productVat.addIntProperty("Deleted").notNull();
+        productVat.setTableName(PRODUCT_VAT_ENTITY);
+        productVat.addIntProperty(COLUMN_PRODUCT_VAT_ID).columnName(COLUMN_PRODUCT_VAT_ID).primaryKey();
+        productVat.addStringProperty(COLUMN_PRODUCT_VAT_CODE).columnName(COLUMN_PRODUCT_VAT_CODE);
+        productVat.addDoubleProperty(COLUMN_PRODUCT_VAT_PERCENT).columnName(COLUMN_PRODUCT_VAT_PERCENT);
+        productVat.addStringProperty(COLUMN_VAT_DISPLAY).columnName(COLUMN_VAT_DISPLAY);
+        productVat.addStringProperty(COLUMN_VAT_DESP).columnName(COLUMN_VAT_DESP);
+        productVat.addIntProperty(COLUMN_DELETED).columnName(COLUMN_DELETED);
         productVat.setSkipTableCreation(true);
     }
 
     public static void createProductTypeEntity(Schema schema){
         Entity productType = schema.addEntity(PRODUCT_TYPE_ENTITY);
-        productType.addIntProperty("ProductTypeID").notNull().primaryKey();
-        productType.addStringProperty("ProductTypeName");
-        productType.addIntProperty("ComponentLevel").notNull();
-        productType.addIntProperty("ShowInFront").notNull();
-        productType.addIntProperty("AutoAddMaterial").notNull();
-        productType.addIntProperty("NotInRevenue").notNull();
-        productType.addIntProperty("WeightPriceForRevenue").notNull();
-        productType.addIntProperty("DisplayOrdering").notNull();
-        productType.addIntProperty("Deleted").notNull();
+        productType.setTableName(PRODUCT_TYPE_ENTITY);
+        productType.addIntProperty(COLUMN_PRODUCT_TYPE_ID).columnName(COLUMN_PRODUCT_TYPE_ID).primaryKey();
+        productType.addStringProperty(COLUMN_PRODUCT_TYPE_NAME).columnName(COLUMN_PRODUCT_TYPE_NAME);
+        productType.addIntProperty(COLUMN_COMPONENT_LEVEL).columnName(COLUMN_COMPONENT_LEVEL);
+        productType.addIntProperty(COLUMN_SHOW_IN_FRONT).columnName(COLUMN_SHOW_IN_FRONT);
+        productType.addIntProperty(COLUMN_SHOW_IN_RECEIPT).columnName(COLUMN_SHOW_IN_RECEIPT);
+        productType.addIntProperty(COLUMN_AUTO_ADD_MATERIAL).columnName(COLUMN_AUTO_ADD_MATERIAL);
+        productType.addIntProperty(COLUMN_NOT_IN_REVENUE).columnName(COLUMN_NOT_IN_REVENUE);
+        productType.addIntProperty(COLUMN_WEIGHT_PRICE_FOR_REVENUE).columnName(COLUMN_WEIGHT_PRICE_FOR_REVENUE);
+        productType.addIntProperty(COLUMN_IS_COMMENT).columnName(COLUMN_IS_COMMENT);
+        productType.addIntProperty(COLUMN_DISPLAY_ORDERING).columnName(COLUMN_DISPLAY_ORDERING);
+        productType.addIntProperty(COLUMN_DELETED).columnName(COLUMN_DELETED);
         productType.setSkipTableCreation(true);
+    }
+
+    public static void createProgramPropertyEntity(Schema schema){
+        Entity programProperty = schema.addEntity(PROGRAM_PROPERTY_ENTITY);
+        programProperty.setTableName(PROGRAM_PROPERTY_ENTITY);
+        programProperty.addIntProperty(COLUMN_PROPERTY_ID).columnName(COLUMN_PROPERTY_ID).primaryKey();
+        programProperty.addIntProperty(COLUMN_PROPERTY_LEVEL_ID).columnName(COLUMN_PROPERTY_LEVEL_ID);
+        programProperty.addIntProperty(COLUMN_PROPERTY_GROUP_ID).columnName(COLUMN_PROPERTY_GROUP_ID);
+        programProperty.addIntProperty(COLUMN_PROPERTY_DEPT_ID).columnName(COLUMN_PROPERTY_DEPT_ID);
+        programProperty.addIntProperty(COLUMN_PROPERTY_FUNCTION_ID).columnName(COLUMN_PROPERTY_FUNCTION_ID);
+        programProperty.addStringProperty(COLUMN_PROPERTY_NAME).columnName(COLUMN_PROPERTY_NAME);
+        programProperty.addStringProperty(COLUMN_PROPERTY_PARAM).columnName(COLUMN_PROPERTY_PARAM);
+        programProperty.addStringProperty(COLUMN_PROPERTY_DETAIL_URL).columnName(COLUMN_PROPERTY_DETAIL_URL);
+        programProperty.addStringProperty(COLUMN_PROPERTY_DESP).columnName(COLUMN_PROPERTY_DESP);
+        programProperty.addIntProperty(COLUMN_IS_FIX_PROPERTY).columnName(COLUMN_IS_FIX_PROPERTY);
+        programProperty.addIntProperty(COLUMN_CAN_CHANGE_AT_BRANCH).columnName(COLUMN_CAN_CHANGE_AT_BRANCH);
+        programProperty.addIntProperty(COLUMN_ORDERING).columnName(COLUMN_ORDERING);
+        programProperty.addIntProperty(COLUMN_DELETED).columnName(COLUMN_DELETED);
+        programProperty.setSkipTableCreation(true);
+    }
+
+    public static void createProgramPropertyValueEntity(Schema schema){
+        Entity programPropertyValue = schema.addEntity(PROGRAM_PROPERTY_VALUE_ENTITY);
+        programPropertyValue.setTableName(PROGRAM_PROPERTY_VALUE_ENTITY);
+        programPropertyValue.addIntProperty(COLUMN_PROPERTY_ID).columnName(COLUMN_PROPERTY_ID).primaryKey();
+        programPropertyValue.addIntProperty(COLUMN_KEY_ID).columnName(COLUMN_KEY_ID).primaryKey();
+        programPropertyValue.addIntProperty(COLUMN_PROPERTY_VALUE).columnName(COLUMN_PROPERTY_VALUE);
+        programPropertyValue.addStringProperty(COLUMN_PROPERTY_TEXT_VALUE).columnName(COLUMN_PROPERTY_TEXT_VALUE);
+        programPropertyValue.addDateProperty(COLUMN_PROPERTY_DATE_VALUE).columnName(COLUMN_PROPERTY_DATE_VALUE);
+        programPropertyValue.addDoubleProperty(COLUMN_PROPERTY_DECIMAL_VALUE).columnName(COLUMN_PROPERTY_DECIMAL_VALUE);
+        programPropertyValue.addIntProperty(COLUMN_UPDATE_STAFF_ID).columnName(COLUMN_UPDATE_STAFF_ID);
+        programPropertyValue.addDateProperty(COLUMN_UPDATE_DATE).columnName(COLUMN_UPDATE_DATE);
+        programPropertyValue.setSkipTableCreation(true);
     }
 
     public static void createProductPriceGroupShopEntity(Schema schema){
         Entity productPriceGroupShop = schema.addEntity(PRODUCT_PRICE_GROUP_SHOP_ENTITY);
-        productPriceGroupShop.addIntProperty("PriceGroupID").notNull().primaryKey();
-        productPriceGroupShop.addIntProperty("ShopID").notNull();
+        productPriceGroupShop.setTableName(PRODUCT_PRICE_GROUP_SHOP_ENTITY);
+        productPriceGroupShop.addIntProperty(COLUMN_PRICE_GROUP_ID).columnName(COLUMN_PRICE_GROUP_ID).primaryKey();
+        productPriceGroupShop.addIntProperty(COLUMN_SHOP_ID).columnName(COLUMN_SHOP_ID).primaryKey();
         productPriceGroupShop.setSkipTableCreation(true);
     }
 
     public static void createProductPriceGroupDateEntity(Schema schema){
         Entity productPriceGroupDate = schema.addEntity(PRODUCT_PRICE_GROUP_DATE_ENTITY);
-        productPriceGroupDate.addIntProperty("PriceGroupDateID").notNull().primaryKey();
-        productPriceGroupDate.addIntProperty("PriceGroupID").notNull();
-        productPriceGroupDate.addDateProperty("FromDate").notNull();
-        productPriceGroupDate.addDateProperty("ToDate").notNull();
-        productPriceGroupDate.addIntProperty("Deleted").notNull();
+        productPriceGroupDate.setTableName(PRODUCT_PRICE_GROUP_DATE_ENTITY);
+        productPriceGroupDate.addIntProperty(COLUMN_PRICE_GROUP_DATE_ID).columnName(COLUMN_PRICE_GROUP_DATE_ID).primaryKey();
+        productPriceGroupDate.addDateProperty(COLUMN_FROM_DATE).columnName(COLUMN_FROM_DATE);
+        productPriceGroupDate.addDateProperty(COLUMN_TO_DATE).columnName(COLUMN_TO_DATE);
+        productPriceGroupDate.addIntProperty(COLUMN_DELETED).columnName(COLUMN_DELETED);
         productPriceGroupDate.setSkipTableCreation(true);
     }
 
     public static void createProductPriceGroupDataEntity(Schema schema){
         Entity productPriceGroupData = schema.addEntity(PRODUCT_PRICE_GROUP_DATA_ENTITY);
-        productPriceGroupData.addIntProperty("PriceGroupDateID").notNull().primaryKey();
-        productPriceGroupData.addIntProperty("PriceGroupID").notNull();
-        productPriceGroupData.addIntProperty("ProductPriceID").notNull();
-        productPriceGroupData.addIntProperty("ProductID");
-        productPriceGroupData.addDoubleProperty("ProductPrice");
-        productPriceGroupData.addDoubleProperty("PrepaidPrice").notNull();
-        productPriceGroupData.addIntProperty("MainPrice").notNull();
-        productPriceGroupData.addIntProperty("SaleMode").notNull();
-        productPriceGroupData.addStringProperty("PriceRemark");
-        productPriceGroupData.addIntProperty("AddingFromBranch").notNull();
+        productPriceGroupData.setTableName(PRODUCT_PRICE_GROUP_DATA_ENTITY);
+        productPriceGroupData.addIntProperty(COLUMN_PRICE_GROUP_DATE_ID).columnName(COLUMN_PRICE_GROUP_DATE_ID).primaryKey();
+        productPriceGroupData.addIntProperty(COLUMN_PRICE_GROUP_ID).columnName(COLUMN_PRICE_GROUP_ID).primaryKey();
+        productPriceGroupData.addIntProperty(COLUMN_PRODUCT_PRICE_ID).columnName(COLUMN_PRODUCT_PRICE_ID).primaryKey();
+        productPriceGroupData.addIntProperty(COLUMN_PRODUCT_ID).columnName(COLUMN_PRODUCT_ID);
+        productPriceGroupData.addDoubleProperty(COLUMN_PRODUCT_PRICE).columnName(COLUMN_PRODUCT_PRICE);
+        productPriceGroupData.addDoubleProperty(COLUMN_PREPAID_PRICE).columnName(COLUMN_PREPAID_PRICE);
+        productPriceGroupData.addDoubleProperty(COLUMN_MAIN_PRICE).columnName(COLUMN_MAIN_PRICE);
+        productPriceGroupData.addIntProperty(COLUMN_SALE_MODE).columnName(COLUMN_SALE_MODE);
+        productPriceGroupData.addStringProperty(COLUMN_PRICE_REMARK).columnName(COLUMN_PRICE_REMARK);
+        productPriceGroupData.addIntProperty(COLUMN_ADDING_FROM_BRANCH).columnName(COLUMN_ADDING_FROM_BRANCH);
         productPriceGroupData.setSkipTableCreation(true);
     }
 
     public static void createProductPriceGroupEntity(Schema schema){
         Entity productPriceGroup = schema.addEntity(PRODUCT_PRICE_GROUP_ENTITY);
-        productPriceGroup.addIntProperty("PriceGroupID").notNull().primaryKey();
-        productPriceGroup.addStringProperty("PriceGroupName");
-        productPriceGroup.addIntProperty("Deleted").notNull();
+        productPriceGroup.setTableName(PRODUCT_PRICE_GROUP_ENTITY);
+        productPriceGroup.addIntProperty(COLUMN_PRICE_GROUP_ID).columnName(COLUMN_PRICE_GROUP_ID).primaryKey();
+        productPriceGroup.addStringProperty(COLUMN_PRICE_GROUP_NAME).columnName(COLUMN_PRICE_GROUP_NAME);
+        productPriceGroup.addIntProperty(COLUMN_DELETED).columnName(COLUMN_DELETED);
         productPriceGroup.setSkipTableCreation(true);
     }
 
     public static void createProductPriceEntity(Schema schema){
         Entity productPrice = schema.addEntity(PRODUCT_PRICE_ENTITY);
-        productPrice.addIntProperty("ProductPriceID").notNull().primaryKey();
-        productPrice.addIntProperty("ProductID").notNull();
-        productPrice.addDoubleProperty("ProductPrice");
-        productPrice.addDoubleProperty("PrepaidPrice").notNull();
-        productPrice.addDoubleProperty("MainPrice").notNull();
-        productPrice.addIntProperty("SaleMode").notNull();
-        productPrice.addStringProperty("PriceRemark");
-        productPrice.addDateProperty("FromDate").notNull();
-        productPrice.addDateProperty("ToDate").notNull();
-        productPrice.addIntProperty("AddingFromBranch").notNull();
+        productPrice.setTableName(PRODUCT_PRICE_ENTITY);
+        productPrice.addIntProperty(COLUMN_PRODUCT_PRICE_ID).columnName(COLUMN_PRODUCT_PRICE_ID).primaryKey();
+        productPrice.addIntProperty(COLUMN_PRODUCT_ID).columnName(COLUMN_PRODUCT_ID);
+        productPrice.addDoubleProperty(COLUMN_PRODUCT_PRICE).columnName(COLUMN_PRODUCT_PRICE);
+        productPrice.addDoubleProperty(COLUMN_PREPAID_PRICE).columnName(COLUMN_PREPAID_PRICE);
+        productPrice.addDoubleProperty(COLUMN_MAIN_PRICE).columnName(COLUMN_MAIN_PRICE);
+        productPrice.addIntProperty(COLUMN_SALE_MODE).columnName(COLUMN_SALE_MODE);
+        productPrice.addStringProperty(COLUMN_PRICE_REMARK).columnName(COLUMN_PRICE_REMARK);
+        productPrice.addDateProperty(COLUMN_FROM_DATE).columnName(COLUMN_FROM_DATE);
+        productPrice.addDateProperty(COLUMN_TO_DATE).columnName(COLUMN_TO_DATE);
+        productPrice.addIntProperty(COLUMN_ADDING_FROM_BRANCH).columnName(COLUMN_ADDING_FROM_BRANCH);
         productPrice.setSkipTableCreation(true);
     }
 
     public static void createProductComponentGroupEntity(Schema schema){
         Entity productCompGroup = schema.addEntity(PRODUCT_COMPONENT_GROUP_ENTITY);
-        productCompGroup.addIntProperty("PGroupID").notNull().primaryKey();
-        productCompGroup.addIntProperty("ProductID").notNull();
-        productCompGroup.addIntProperty("SaleMode").notNull();
-        productCompGroup.addDateProperty("StartDate");
-        productCompGroup.addDateProperty("EndDate");
-        productCompGroup.addIntProperty("SetGroupNo").notNull();
-        productCompGroup.addStringProperty("SetGroupName");
-        productCompGroup.addIntProperty("RequireAddAmountForProduct").notNull();
-        productCompGroup.addIntProperty("AddingFromBranch").notNull();
+        productCompGroup.setTableName(PRODUCT_COMPONENT_GROUP_ENTITY);
+        productCompGroup.addIntProperty(COLUMN_PGROUP_ID).columnName(COLUMN_PGROUP_ID).primaryKey();
+        productCompGroup.addIntProperty(COLUMN_PRODUCT_ID).columnName(COLUMN_PRODUCT_ID);
+        productCompGroup.addIntProperty(COLUMN_SALE_MODE).columnName(COLUMN_SALE_MODE);
+        productCompGroup.addDateProperty(COLUMN_START_DATE).columnName(COLUMN_START_DATE);
+        productCompGroup.addDateProperty(COLUMN_END_DATE).columnName(COLUMN_END_DATE);
+        productCompGroup.addIntProperty(COLUMN_SET_GROUP_NO).columnName(COLUMN_SET_GROUP_NO);
+        productCompGroup.addStringProperty(COLUMN_SET_GROUP_NAME).columnName(COLUMN_SET_GROUP_NAME);
+        productCompGroup.addIntProperty(COLUMN_REQUIRE_ADD_AMOUNT_FOR_PRODUCT).columnName(COLUMN_REQUIRE_ADD_AMOUNT_FOR_PRODUCT);
+        productCompGroup.addIntProperty(COLUMN_ADDING_FROM_BRANCH).columnName(COLUMN_ADDING_FROM_BRANCH);
         productCompGroup.setSkipTableCreation(true);
     }
 
     public static void createProductComponentEntity(Schema schema){
         Entity productComponent = schema.addEntity(PRODUCT_COMPONENT_ENTITY);
-        productComponent.addIntProperty("PGroupID").notNull();
-        productComponent.addIntProperty("ProductID").notNull();
-        productComponent.addIntProperty("SaleMode").notNull();
-        productComponent.addIntProperty("MaterialID").notNull();
-        productComponent.addDoubleProperty("MaterialAmount").notNull();
-        productComponent.addIntProperty("UnitSmallID").notNull();
-        productComponent.addIntProperty("ShowOnOrder").notNull();
-        productComponent.addIntProperty("DataType").notNull();
-        productComponent.addDoubleProperty("FlexibleProductPrice").notNull();
-        productComponent.addIntProperty("FlexibleProductIncludePrice").notNull();
-        productComponent.addIntProperty("Ordering").notNull();
-        productComponent.addIntProperty("AddingFromBranch").notNull();
+        productComponent.setTableName(PRODUCT_COMPONENT_ENTITY);
+        productComponent.addIntProperty(COLUMN_PGROUP_ID).columnName(COLUMN_PGROUP_ID).primaryKey();
+        productComponent.addIntProperty(COLUMN_PRODUCT_ID).columnName(COLUMN_PRODUCT_ID).primaryKey();
+        productComponent.addIntProperty(COLUMN_SALE_MODE).columnName(COLUMN_SALE_MODE).primaryKey();
+        productComponent.addIntProperty(COLUMN_MATERIAL_ID).columnName(COLUMN_MATERIAL_ID).primaryKey();
+        productComponent.addDoubleProperty(COLUMN_MATERIAL_AMOUNT).columnName(COLUMN_MATERIAL_AMOUNT);
+        productComponent.addIntProperty(COLUMN_UNIT_SMALL_ID).columnName(COLUMN_UNIT_SMALL_ID);
+        productComponent.addIntProperty(COLUMN_SHOW_ON_ORDER).columnName(COLUMN_SHOW_ON_ORDER);
+        productComponent.addIntProperty(COLUMN_DATA_TYPE).columnName(COLUMN_DATA_TYPE);
+        productComponent.addDoubleProperty(COLUMN_FLEXIBLE_PRODUCT_PRICE).columnName(COLUMN_FLEXIBLE_PRODUCT_PRICE);
+        productComponent.addIntProperty(COLUMN_FLEXIBLE_PRODUCT_INCLUDE_PRICE).columnName(COLUMN_FLEXIBLE_PRODUCT_INCLUDE_PRICE);
+        productComponent.addIntProperty(COLUMN_ORDERING).columnName(COLUMN_ORDERING);
+        productComponent.addIntProperty(COLUMN_ADDING_FROM_BRANCH).columnName(COLUMN_ADDING_FROM_BRANCH);
         productComponent.setSkipTableCreation(true);
     }
 
     public static void createProductCategoryEntity(Schema schema){
         Entity productCat = schema.addEntity(PRODUCT_CATEGORY_ENTITY);
-        productCat.addIntProperty("ProductCatID").notNull().primaryKey();
-        productCat.addIntProperty("ShopID").notNull();
-        productCat.addIntProperty("ProductCatTypeID").notNull();
-        productCat.addStringProperty("ProductCatCode");
-        productCat.addStringProperty("ProductCatName");
-        productCat.addIntProperty("ProductCatDisplay").notNull();
-        productCat.addIntProperty("ProductCatActivate").notNull();
-        productCat.addIntProperty("ProductCatOrdering").notNull();
-        productCat.addIntProperty("Deleted").notNull();
-        productCat.addIntProperty("IsComment").notNull();
-        productCat.addIntProperty("AddingFromBranch").notNull();
+        productCat.setTableName(PRODUCT_CATEGORY_ENTITY);
+        productCat.addIntProperty(COLUMN_PRODUCT_CAT_ID).columnName(COLUMN_PRODUCT_CAT_ID).primaryKey();
+        productCat.addIntProperty(COLUMN_SHOP_ID).columnName(COLUMN_SHOP_ID);
+        productCat.addIntProperty(COLUMN_PRODUCT_CAT_TYPE_ID).columnName(COLUMN_PRODUCT_CAT_TYPE_ID);
+        productCat.addStringProperty(COLUMN_PRODUCT_CAT_CODE).columnName(COLUMN_PRODUCT_CAT_CODE);
+        productCat.addStringProperty(COLUMN_PRODUCT_CAT_NAME).columnName(COLUMN_PRODUCT_CAT_NAME);
+        productCat.addIntProperty(COLUMN_PRODUCT_CAT_DISPLAY).columnName(COLUMN_PRODUCT_CAT_DISPLAY);
+        productCat.addIntProperty(COLUMN_PRODUCT_CAT_ACTIVATE).columnName(COLUMN_PRODUCT_CAT_ACTIVATE);
+        productCat.addIntProperty(COLUMN_PRODUCT_CAT_ORDERING).columnName(COLUMN_PRODUCT_CAT_ORDERING);
+        productCat.addIntProperty(COLUMN_DELETED).columnName(COLUMN_DELETED);
+        productCat.addIntProperty(COLUMN_IS_COMMENT).columnName(COLUMN_IS_COMMENT);
+        productCat.addIntProperty(COLUMN_ADDING_FROM_BRANCH).columnName(COLUMN_ADDING_FROM_BRANCH);
         productCat.setSkipTableCreation(true);
     }
 
     public static void createProductDeptEntity(Schema schema){
         Entity productDept = schema.addEntity(PRODUCT_DEPT_ENTITY);
+        productDept.setTableName(PRODUCT_DEPT_ENTITY);
         productDept.addIntProperty("ProductDeptID").notNull().primaryKey();
         productDept.addIntProperty("ProductGroupID").notNull();
         productDept.addIntProperty("ShopID").notNull();
@@ -1172,6 +1384,7 @@ public class MyDaoGenerator {
 
     public static void createProductGroupEntity(Schema schema){
         Entity productGroup = schema.addEntity(PRODUCT_GROUP_ENTITY);
+        productGroup.setTableName(PRODUCT_GROUP_ENTITY);
         productGroup.addIntProperty("ProductGroupID").notNull().primaryKey();
         productGroup.addIntProperty("ShopID");
         productGroup.addStringProperty("ProductGroupCode");
@@ -1195,6 +1408,7 @@ public class MyDaoGenerator {
 
     public static void createProductEntity(Schema schema){
         Entity products = schema.addEntity(PRODUCTS_ENTITY);
+        products.setTableName(PRODUCTS_ENTITY);
         products.addIntProperty(COLUMN_PRODUCT_ID).columnName(COLUMN_PRODUCT_ID).notNull().primaryKey();
         products.addIntProperty(COLUMN_SHOP_ID).columnName(COLUMN_SHOP_ID).notNull();
         products.addIntProperty(COLUMN_INVENTORY_ID).columnName(COLUMN_INVENTORY_ID);

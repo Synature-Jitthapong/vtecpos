@@ -4,7 +4,7 @@ package com.vtec.j1tth4.vtecpos.dao;
 /**
  * Entity mapped to table fc_cardinfo.
  */
-public class fc_cardinfo {
+public class FcCardInfo {
 
     private Integer CardID;
     private String CardNo;
@@ -21,14 +21,14 @@ public class fc_cardinfo {
     private java.util.Date ExpireDate;
     private Integer Deleted;
 
-    public fc_cardinfo() {
+    public FcCardInfo() {
     }
 
-    public fc_cardinfo(Integer CardID) {
+    public FcCardInfo(Integer CardID) {
         this.CardID = CardID;
     }
 
-    public fc_cardinfo(Integer CardID, String CardNo, Integer CardStatus, Integer LogID, Double CardDepositAmount, Double CardCurrentAmount, Double CardLimitAmount, Integer CreateStaffID, Integer UpdateStaffID, Integer MemberID, java.util.Date CreateDate, java.util.Date UpdateDate, java.util.Date ExpireDate, Integer Deleted) {
+    public FcCardInfo(Integer CardID, String CardNo, Integer CardStatus, Integer LogID, Double CardDepositAmount, Double CardCurrentAmount, Double CardLimitAmount, Integer CreateStaffID, Integer UpdateStaffID, Integer MemberID, java.util.Date CreateDate, java.util.Date UpdateDate, java.util.Date ExpireDate, Integer Deleted) {
         this.CardID = CardID;
         this.CardNo = CardNo;
         this.CardStatus = CardStatus;

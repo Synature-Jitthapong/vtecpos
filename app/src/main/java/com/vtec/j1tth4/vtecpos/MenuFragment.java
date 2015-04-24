@@ -1,10 +1,8 @@
 package com.vtec.j1tth4.vtecpos;
 
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.vtec.j1tth4.vtecpos.dao.Products;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,12 +57,12 @@ public class MenuFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         ProductRepository productRepo = new ProductRepository();
-        List<Products> productLst = productRepo.getAllProducts(getActivity());
+        List<Products> productLst = productRepo.getProducts(getActivity(), 200001, 200002);
 
-        mMenuItem.add(new MenuItem("Shusi", getResources().getDrawable(R.drawable.sushi)));
-        mMenuItem.add(new MenuItem("Ramen", getResources().getDrawable(R.drawable.ramen)));
-        mMenuItem.add(new MenuItem("Capuchino", getResources().getDrawable(R.drawable.capuchino)));
-        mMenuItem.add(new MenuItem("Espress", getResources().getDrawable(R.drawable.esspresso)));
+//        mMenuItem.add(new MenuItem("Shusi", getResources().getDrawable(R.drawable.sushi)));
+//        mMenuItem.add(new MenuItem("Ramen", getResources().getDrawable(R.drawable.ramen)));
+//        mMenuItem.add(new MenuItem("Capuchino", getResources().getDrawable(R.drawable.capuchino)));
+//        mMenuItem.add(new MenuItem("Espress", getResources().getDrawable(R.drawable.esspresso)));
 
         for(Products p : productLst){
             mMenuItem.add(new MenuItem(p.getProductName(), getResources().getDrawable(R.drawable.sushi)));

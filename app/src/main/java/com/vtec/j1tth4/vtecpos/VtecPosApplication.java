@@ -5,17 +5,11 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
 
-import com.vtec.j1tth4.vtecpos.dao.DaoMaster;
-import com.vtec.j1tth4.vtecpos.dao.DaoSession;
-
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.nio.channels.FileChannel;
 
 /**
  * Created by j1tth4 on 25/3/2558.

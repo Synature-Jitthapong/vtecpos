@@ -4,7 +4,7 @@ package com.vtec.j1tth4.vtecpos.dao;
 /**
  * Entity mapped to table fc_cardhistory.
  */
-public class fc_cardhistory {
+public class FcCardHistory {
 
     private Integer HistoryID;
     private Integer TranUUID;
@@ -21,14 +21,14 @@ public class fc_cardhistory {
     private Integer StaffID;
     private java.util.Date InsertDate;
 
-    public fc_cardhistory() {
+    public FcCardHistory() {
     }
 
-    public fc_cardhistory(Integer HistoryID) {
+    public FcCardHistory(Integer HistoryID) {
         this.HistoryID = HistoryID;
     }
 
-    public fc_cardhistory(Integer HistoryID, Integer TranUUID, Integer CardID, String CardNo, Integer TransactionID, Integer ComputerID, Integer ShopID, java.util.Date SaleDate, String ReceiptNo, Double PreviousBalance, Double TranAmount, Integer DocType, Integer StaffID, java.util.Date InsertDate) {
+    public FcCardHistory(Integer HistoryID, Integer TranUUID, Integer CardID, String CardNo, Integer TransactionID, Integer ComputerID, Integer ShopID, java.util.Date SaleDate, String ReceiptNo, Double PreviousBalance, Double TranAmount, Integer DocType, Integer StaffID, java.util.Date InsertDate) {
         this.HistoryID = HistoryID;
         this.TranUUID = TranUUID;
         this.CardID = CardID;
