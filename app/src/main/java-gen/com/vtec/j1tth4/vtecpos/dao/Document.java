@@ -15,7 +15,7 @@ public class Document {
     private Integer DocumentYear;
     private Integer DocumentMonth;
     private Integer DocumentNumber;
-    private java.util.Date DocumentDate;
+    private String DocumentDate;
     private Integer InputBy;
     private Integer UpdateBy;
     private Integer ApproveBy;
@@ -34,13 +34,13 @@ public class Document {
     private Integer IsSmallUnit;
     private String Remark;
     private Integer TermOfPayment;
-    private java.util.Date DueDate;
+    private String DueDate;
     private String DocumentHeader;
     private Integer CreditDay;
-    private java.util.Date InsertDate;
-    private java.util.Date UpdateDate;
-    private java.util.Date ApproveDate;
-    private java.util.Date CancelDate;
+    private String InsertDate;
+    private String UpdateDate;
+    private String ApproveDate;
+    private String CancelDate;
     private Integer NewSend;
     private Integer CurrentAccessStaff;
     private Double OtherPercentDiscount;
@@ -61,7 +61,7 @@ public class Document {
         this.DocumentID = DocumentID;
     }
 
-    public Document(Integer DocumentID, Integer ShopID, Integer VendorID, Integer VendorGroupID, Integer VendorShopID, Integer DocumentTypeID, Integer DocumentYear, Integer DocumentMonth, Integer DocumentNumber, java.util.Date DocumentDate, Integer InputBy, Integer UpdateBy, Integer ApproveBy, Integer VoidBy, Integer ReceiveBy, Integer DocumentStatus, Integer InvoiceRef, String DocumentUDDID, Integer DocumentIDRef, Integer DocIDRefShopID, Integer InventoryID, Integer ToInvID, Integer FromInvID, Integer FromTemplateID, Integer FromTemplateShopID, Integer IsSmallUnit, String Remark, Integer TermOfPayment, java.util.Date DueDate, String DocumentHeader, Integer CreditDay, java.util.Date InsertDate, java.util.Date UpdateDate, java.util.Date ApproveDate, java.util.Date CancelDate, Integer NewSend, Integer CurrentAccessStaff, Double OtherPercentDiscount, Double OtherAmountDiscount, Integer DocumentVATType, Double VATPercent, Integer LockEditDetail, Integer DocumentBatchID, Integer DocumentBatchShopID, Integer AlreadyExportToHQ, Integer AlreadyExportToBranch, Integer IsUpdateDocDetail) {
+    public Document(Integer DocumentID, Integer ShopID, Integer VendorID, Integer VendorGroupID, Integer VendorShopID, Integer DocumentTypeID, Integer DocumentYear, Integer DocumentMonth, Integer DocumentNumber, String DocumentDate, Integer InputBy, Integer UpdateBy, Integer ApproveBy, Integer VoidBy, Integer ReceiveBy, Integer DocumentStatus, Integer InvoiceRef, String DocumentUDDID, Integer DocumentIDRef, Integer DocIDRefShopID, Integer InventoryID, Integer ToInvID, Integer FromInvID, Integer FromTemplateID, Integer FromTemplateShopID, Integer IsSmallUnit, String Remark, Integer TermOfPayment, String DueDate, String DocumentHeader, Integer CreditDay, String InsertDate, String UpdateDate, String ApproveDate, String CancelDate, Integer NewSend, Integer CurrentAccessStaff, Double OtherPercentDiscount, Double OtherAmountDiscount, Integer DocumentVATType, Double VATPercent, Integer LockEditDetail, Integer DocumentBatchID, Integer DocumentBatchShopID, Integer AlreadyExportToHQ, Integer AlreadyExportToBranch, Integer IsUpdateDocDetail) {
         this.DocumentID = DocumentID;
         this.ShopID = ShopID;
         this.VendorID = VendorID;
@@ -183,11 +183,11 @@ public class Document {
         this.DocumentNumber = DocumentNumber;
     }
 
-    public java.util.Date getDocumentDate() {
+    public String getDocumentDate() {
         return DocumentDate;
     }
 
-    public void setDocumentDate(java.util.Date DocumentDate) {
+    public void setDocumentDate(String DocumentDate) {
         this.DocumentDate = DocumentDate;
     }
 
@@ -335,11 +335,11 @@ public class Document {
         this.TermOfPayment = TermOfPayment;
     }
 
-    public java.util.Date getDueDate() {
+    public String getDueDate() {
         return DueDate;
     }
 
-    public void setDueDate(java.util.Date DueDate) {
+    public void setDueDate(String DueDate) {
         this.DueDate = DueDate;
     }
 
@@ -359,35 +359,35 @@ public class Document {
         this.CreditDay = CreditDay;
     }
 
-    public java.util.Date getInsertDate() {
+    public String getInsertDate() {
         return InsertDate;
     }
 
-    public void setInsertDate(java.util.Date InsertDate) {
+    public void setInsertDate(String InsertDate) {
         this.InsertDate = InsertDate;
     }
 
-    public java.util.Date getUpdateDate() {
+    public String getUpdateDate() {
         return UpdateDate;
     }
 
-    public void setUpdateDate(java.util.Date UpdateDate) {
+    public void setUpdateDate(String UpdateDate) {
         this.UpdateDate = UpdateDate;
     }
 
-    public java.util.Date getApproveDate() {
+    public String getApproveDate() {
         return ApproveDate;
     }
 
-    public void setApproveDate(java.util.Date ApproveDate) {
+    public void setApproveDate(String ApproveDate) {
         this.ApproveDate = ApproveDate;
     }
 
-    public java.util.Date getCancelDate() {
+    public String getCancelDate() {
         return CancelDate;
     }
 
-    public void setCancelDate(java.util.Date CancelDate) {
+    public void setCancelDate(String CancelDate) {
         this.CancelDate = CancelDate;
     }
 

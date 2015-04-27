@@ -16,9 +16,9 @@ public class FcCardInfo {
     private Integer CreateStaffID;
     private Integer UpdateStaffID;
     private Integer MemberID;
-    private java.util.Date CreateDate;
-    private java.util.Date UpdateDate;
-    private java.util.Date ExpireDate;
+    private String CreateDate;
+    private String UpdateDate;
+    private String ExpireDate;
     private Integer Deleted;
 
     public FcCardInfo() {
@@ -28,7 +28,7 @@ public class FcCardInfo {
         this.CardID = CardID;
     }
 
-    public FcCardInfo(Integer CardID, String CardNo, Integer CardStatus, Integer LogID, Double CardDepositAmount, Double CardCurrentAmount, Double CardLimitAmount, Integer CreateStaffID, Integer UpdateStaffID, Integer MemberID, java.util.Date CreateDate, java.util.Date UpdateDate, java.util.Date ExpireDate, Integer Deleted) {
+    public FcCardInfo(Integer CardID, String CardNo, Integer CardStatus, Integer LogID, Double CardDepositAmount, Double CardCurrentAmount, Double CardLimitAmount, Integer CreateStaffID, Integer UpdateStaffID, Integer MemberID, String CreateDate, String UpdateDate, String ExpireDate, Integer Deleted) {
         this.CardID = CardID;
         this.CardNo = CardNo;
         this.CardStatus = CardStatus;
@@ -125,27 +125,27 @@ public class FcCardInfo {
         this.MemberID = MemberID;
     }
 
-    public java.util.Date getCreateDate() {
+    public String getCreateDate() {
         return CreateDate;
     }
 
-    public void setCreateDate(java.util.Date CreateDate) {
+    public void setCreateDate(String CreateDate) {
         this.CreateDate = CreateDate;
     }
 
-    public java.util.Date getUpdateDate() {
+    public String getUpdateDate() {
         return UpdateDate;
     }
 
-    public void setUpdateDate(java.util.Date UpdateDate) {
+    public void setUpdateDate(String UpdateDate) {
         this.UpdateDate = UpdateDate;
     }
 
-    public java.util.Date getExpireDate() {
+    public String getExpireDate() {
         return ExpireDate;
     }
 
-    public void setExpireDate(java.util.Date ExpireDate) {
+    public void setExpireDate(String ExpireDate) {
         this.ExpireDate = ExpireDate;
     }
 

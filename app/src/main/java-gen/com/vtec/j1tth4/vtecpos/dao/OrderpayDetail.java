@@ -16,7 +16,7 @@ public class OrderpayDetail {
     private Integer ExpireMonth;
     private Integer ExpireYear;
     private String ChequeNumber;
-    private java.util.Date ChequeDate;
+    private String ChequeDate;
     private String BankName;
     private Integer CreditCardType;
     private String PaidByName;
@@ -41,7 +41,7 @@ public class OrderpayDetail {
         this.ComputerID = ComputerID;
     }
 
-    public OrderpayDetail(Integer PayDetailID, Integer TransactionID, Integer ComputerID, Integer PayTypeID, Double PayAmount, Double CashChange, String CreditCardNo, Integer ExpireMonth, Integer ExpireYear, String ChequeNumber, java.util.Date ChequeDate, String BankName, Integer CreditCardType, String PaidByName, Double Paid, Integer CardID, String CardNo, Double PrepaidDiscountPercent, Double RevenueRatio, Integer IsFromEDC, String CurrencyCode, String CurrencyName, Double MainCurrencyRatio, Double CurrencyRatio, Double CurrencyAmount) {
+    public OrderpayDetail(Integer PayDetailID, Integer TransactionID, Integer ComputerID, Integer PayTypeID, Double PayAmount, Double CashChange, String CreditCardNo, Integer ExpireMonth, Integer ExpireYear, String ChequeNumber, String ChequeDate, String BankName, Integer CreditCardType, String PaidByName, Double Paid, Integer CardID, String CardNo, Double PrepaidDiscountPercent, Double RevenueRatio, Integer IsFromEDC, String CurrencyCode, String CurrencyName, Double MainCurrencyRatio, Double CurrencyRatio, Double CurrencyAmount) {
         this.PayDetailID = PayDetailID;
         this.TransactionID = TransactionID;
         this.ComputerID = ComputerID;
@@ -149,11 +149,11 @@ public class OrderpayDetail {
         this.ChequeNumber = ChequeNumber;
     }
 
-    public java.util.Date getChequeDate() {
+    public String getChequeDate() {
         return ChequeDate;
     }
 
-    public void setChequeDate(java.util.Date ChequeDate) {
+    public void setChequeDate(String ChequeDate) {
         this.ChequeDate = ChequeDate;
     }
 

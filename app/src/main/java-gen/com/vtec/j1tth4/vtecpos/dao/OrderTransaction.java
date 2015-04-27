@@ -9,13 +9,13 @@ public class OrderTransaction {
     private Integer TransactionID;
     private Integer ComputerID;
     private String TransactionUUID;
-    private java.util.Date ReserveTime;
+    private String ReserveTime;
     private Integer ReserveStaffID;
-    private java.util.Date OpenTime;
+    private String OpenTime;
     private Integer OpenStaffID;
-    private java.util.Date PaidTime;
+    private String PaidTime;
     private Integer PaidStaffID;
-    private java.util.Date CloseTime;
+    private String CloseTime;
     private Integer CommStaffID;
     private Double DiscountItem;
     private Double DiscountBill;
@@ -32,7 +32,7 @@ public class OrderTransaction {
     private Integer ReceiptMonth;
     private Integer ReceiptID;
     private String ReceiptNumber;
-    private java.util.Date SaleDate;
+    private String SaleDate;
     private Integer ShopID;
     private Double TransactionVAT;
     private Double TransactionVATable;
@@ -57,7 +57,7 @@ public class OrderTransaction {
     private Integer CloseComputerID;
     private Integer VoidStaffID;
     private String VoidReason;
-    private java.util.Date VoidTime;
+    private String VoidTime;
     private Integer IsCloneBill;
     private Integer VoidTranID;
     private Integer VoidComID;
@@ -70,11 +70,11 @@ public class OrderTransaction {
     private Integer CallForCheckBill;
     private String TransactionNote;
     private Integer CurrentAccessComputer;
-    private java.util.Date UpdateDate;
-    private java.util.Date BeginTime;
-    private java.util.Date EndTime;
-    private java.util.Date PrintWarningTime;
-    private java.util.Date PrintBeginTime;
+    private String UpdateDate;
+    private String BeginTime;
+    private String EndTime;
+    private String PrintWarningTime;
+    private String PrintBeginTime;
     private Integer AlreadyCalculateStock;
     private Integer AlreadyExportToHQ;
     private Integer TableID;
@@ -93,7 +93,7 @@ public class OrderTransaction {
         this.ComputerID = ComputerID;
     }
 
-    public OrderTransaction(Integer TransactionID, Integer ComputerID, String TransactionUUID, java.util.Date ReserveTime, Integer ReserveStaffID, java.util.Date OpenTime, Integer OpenStaffID, java.util.Date PaidTime, Integer PaidStaffID, java.util.Date CloseTime, Integer CommStaffID, Double DiscountItem, Double DiscountBill, Double DiscountOther, Double TotalDiscount, Integer TransactionStatusID, Integer SaleMode, String TransactionName, String QueueName, Integer NoCustomer, Integer NoCustomerWhenOpen, Integer DocType, Integer ReceiptYear, Integer ReceiptMonth, Integer ReceiptID, String ReceiptNumber, java.util.Date SaleDate, Integer ShopID, Double TransactionVAT, Double TransactionVATable, Double TranBeforeVAT, String VATCode, Double VATPercent, Double ServiceChargePercent, Double ServiceCharge, Double ServiceChargeVAT, Double SCBeforeVAT, Double OtherIncome, Double OtherIncomeVAT, Double OhterIncomeBeforeVAT, Double ReceiptTotalQty, Double ReceiptRetailPrice, Double ReceiptDiscount, Double ReceiptSalePrice, Double ReceiptNetSale, Double ReceiptPayPrice, Double ReceiptRoundingBill, Integer SessionID, Integer CloseComputerID, Integer VoidStaffID, String VoidReason, java.util.Date VoidTime, Integer IsCloneBill, Integer VoidTranID, Integer VoidComID, Double DiffCloneBill, Integer MemberID, Integer HasOrder, Integer NoPrintBillDetail, Double DiffPayCheckBill, String BillDetailReferenceNo, Integer CallForCheckBill, String TransactionNote, Integer CurrentAccessComputer, java.util.Date UpdateDate, java.util.Date BeginTime, java.util.Date EndTime, java.util.Date PrintWarningTime, java.util.Date PrintBeginTime, Integer AlreadyCalculateStock, Integer AlreadyExportToHQ, Integer TableID, Integer IsSplitTransaction, Integer IsFromOtherTransaction, String ReferenceNo, Integer FromDepositTransactionID, Integer FromDepositComputerID, Integer Deleted) {
+    public OrderTransaction(Integer TransactionID, Integer ComputerID, String TransactionUUID, String ReserveTime, Integer ReserveStaffID, String OpenTime, Integer OpenStaffID, String PaidTime, Integer PaidStaffID, String CloseTime, Integer CommStaffID, Double DiscountItem, Double DiscountBill, Double DiscountOther, Double TotalDiscount, Integer TransactionStatusID, Integer SaleMode, String TransactionName, String QueueName, Integer NoCustomer, Integer NoCustomerWhenOpen, Integer DocType, Integer ReceiptYear, Integer ReceiptMonth, Integer ReceiptID, String ReceiptNumber, String SaleDate, Integer ShopID, Double TransactionVAT, Double TransactionVATable, Double TranBeforeVAT, String VATCode, Double VATPercent, Double ServiceChargePercent, Double ServiceCharge, Double ServiceChargeVAT, Double SCBeforeVAT, Double OtherIncome, Double OtherIncomeVAT, Double OhterIncomeBeforeVAT, Double ReceiptTotalQty, Double ReceiptRetailPrice, Double ReceiptDiscount, Double ReceiptSalePrice, Double ReceiptNetSale, Double ReceiptPayPrice, Double ReceiptRoundingBill, Integer SessionID, Integer CloseComputerID, Integer VoidStaffID, String VoidReason, String VoidTime, Integer IsCloneBill, Integer VoidTranID, Integer VoidComID, Double DiffCloneBill, Integer MemberID, Integer HasOrder, Integer NoPrintBillDetail, Double DiffPayCheckBill, String BillDetailReferenceNo, Integer CallForCheckBill, String TransactionNote, Integer CurrentAccessComputer, String UpdateDate, String BeginTime, String EndTime, String PrintWarningTime, String PrintBeginTime, Integer AlreadyCalculateStock, Integer AlreadyExportToHQ, Integer TableID, Integer IsSplitTransaction, Integer IsFromOtherTransaction, String ReferenceNo, Integer FromDepositTransactionID, Integer FromDepositComputerID, Integer Deleted) {
         this.TransactionID = TransactionID;
         this.ComputerID = ComputerID;
         this.TransactionUUID = TransactionUUID;
@@ -198,11 +198,11 @@ public class OrderTransaction {
         this.TransactionUUID = TransactionUUID;
     }
 
-    public java.util.Date getReserveTime() {
+    public String getReserveTime() {
         return ReserveTime;
     }
 
-    public void setReserveTime(java.util.Date ReserveTime) {
+    public void setReserveTime(String ReserveTime) {
         this.ReserveTime = ReserveTime;
     }
 
@@ -214,11 +214,11 @@ public class OrderTransaction {
         this.ReserveStaffID = ReserveStaffID;
     }
 
-    public java.util.Date getOpenTime() {
+    public String getOpenTime() {
         return OpenTime;
     }
 
-    public void setOpenTime(java.util.Date OpenTime) {
+    public void setOpenTime(String OpenTime) {
         this.OpenTime = OpenTime;
     }
 
@@ -230,11 +230,11 @@ public class OrderTransaction {
         this.OpenStaffID = OpenStaffID;
     }
 
-    public java.util.Date getPaidTime() {
+    public String getPaidTime() {
         return PaidTime;
     }
 
-    public void setPaidTime(java.util.Date PaidTime) {
+    public void setPaidTime(String PaidTime) {
         this.PaidTime = PaidTime;
     }
 
@@ -246,11 +246,11 @@ public class OrderTransaction {
         this.PaidStaffID = PaidStaffID;
     }
 
-    public java.util.Date getCloseTime() {
+    public String getCloseTime() {
         return CloseTime;
     }
 
-    public void setCloseTime(java.util.Date CloseTime) {
+    public void setCloseTime(String CloseTime) {
         this.CloseTime = CloseTime;
     }
 
@@ -382,11 +382,11 @@ public class OrderTransaction {
         this.ReceiptNumber = ReceiptNumber;
     }
 
-    public java.util.Date getSaleDate() {
+    public String getSaleDate() {
         return SaleDate;
     }
 
-    public void setSaleDate(java.util.Date SaleDate) {
+    public void setSaleDate(String SaleDate) {
         this.SaleDate = SaleDate;
     }
 
@@ -582,11 +582,11 @@ public class OrderTransaction {
         this.VoidReason = VoidReason;
     }
 
-    public java.util.Date getVoidTime() {
+    public String getVoidTime() {
         return VoidTime;
     }
 
-    public void setVoidTime(java.util.Date VoidTime) {
+    public void setVoidTime(String VoidTime) {
         this.VoidTime = VoidTime;
     }
 
@@ -686,43 +686,43 @@ public class OrderTransaction {
         this.CurrentAccessComputer = CurrentAccessComputer;
     }
 
-    public java.util.Date getUpdateDate() {
+    public String getUpdateDate() {
         return UpdateDate;
     }
 
-    public void setUpdateDate(java.util.Date UpdateDate) {
+    public void setUpdateDate(String UpdateDate) {
         this.UpdateDate = UpdateDate;
     }
 
-    public java.util.Date getBeginTime() {
+    public String getBeginTime() {
         return BeginTime;
     }
 
-    public void setBeginTime(java.util.Date BeginTime) {
+    public void setBeginTime(String BeginTime) {
         this.BeginTime = BeginTime;
     }
 
-    public java.util.Date getEndTime() {
+    public String getEndTime() {
         return EndTime;
     }
 
-    public void setEndTime(java.util.Date EndTime) {
+    public void setEndTime(String EndTime) {
         this.EndTime = EndTime;
     }
 
-    public java.util.Date getPrintWarningTime() {
+    public String getPrintWarningTime() {
         return PrintWarningTime;
     }
 
-    public void setPrintWarningTime(java.util.Date PrintWarningTime) {
+    public void setPrintWarningTime(String PrintWarningTime) {
         this.PrintWarningTime = PrintWarningTime;
     }
 
-    public java.util.Date getPrintBeginTime() {
+    public String getPrintBeginTime() {
         return PrintBeginTime;
     }
 
-    public void setPrintBeginTime(java.util.Date PrintBeginTime) {
+    public void setPrintBeginTime(String PrintBeginTime) {
         this.PrintBeginTime = PrintBeginTime;
     }
 

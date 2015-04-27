@@ -29,10 +29,10 @@ public class FcTranDetailDao extends AbstractDao<FcTranDetail, Void> {
         public final static Property CardID = new Property(3, Integer.class, "CardID", false, "CardID");
         public final static Property CardNo = new Property(4, String.class, "CardNo", false, "CardNo");
         public final static Property ShopID = new Property(5, Integer.class, "ShopID", false, "ShopID");
-        public final static Property SaleDate = new Property(6, java.util.Date.class, "SaleDate", false, "SaleDate");
+        public final static Property SaleDate = new Property(6, String.class, "SaleDate", false, "SaleDate");
         public final static Property TranAmount = new Property(7, Double.class, "TranAmount", false, "TranAmount");
         public final static Property RecordStatus = new Property(8, Integer.class, "RecordStatus", false, "RecordStatus");
-        public final static Property InsertDate = new Property(9, java.util.Date.class, "InsertDate", false, "InsertDate");
+        public final static Property InsertDate = new Property(9, String.class, "InsertDate", false, "InsertDate");
     };
 
 
@@ -79,9 +79,9 @@ public class FcTranDetailDao extends AbstractDao<FcTranDetail, Void> {
             stmt.bindLong(6, ShopID);
         }
  
-        java.util.Date SaleDate = entity.getSaleDate();
+        String SaleDate = entity.getSaleDate();
         if (SaleDate != null) {
-            stmt.bindLong(7, SaleDate.getTime());
+            stmt.bindString(7, SaleDate);
         }
  
         Double TranAmount = entity.getTranAmount();
@@ -94,9 +94,9 @@ public class FcTranDetailDao extends AbstractDao<FcTranDetail, Void> {
             stmt.bindLong(9, RecordStatus);
         }
  
-        java.util.Date InsertDate = entity.getInsertDate();
+        String InsertDate = entity.getInsertDate();
         if (InsertDate != null) {
-            stmt.bindLong(10, InsertDate.getTime());
+            stmt.bindString(10, InsertDate);
         }
     }
 
@@ -116,10 +116,10 @@ public class FcTranDetailDao extends AbstractDao<FcTranDetail, Void> {
             cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // CardID
             cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // CardNo
             cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // ShopID
-            cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)), // SaleDate
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // SaleDate
             cursor.isNull(offset + 7) ? null : cursor.getDouble(offset + 7), // TranAmount
             cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8), // RecordStatus
-            cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)) // InsertDate
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9) // InsertDate
         );
         return entity;
     }
@@ -133,10 +133,10 @@ public class FcTranDetailDao extends AbstractDao<FcTranDetail, Void> {
         entity.setCardID(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
         entity.setCardNo(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setShopID(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
-        entity.setSaleDate(cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)));
+        entity.setSaleDate(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setTranAmount(cursor.isNull(offset + 7) ? null : cursor.getDouble(offset + 7));
         entity.setRecordStatus(cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8));
-        entity.setInsertDate(cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)));
+        entity.setInsertDate(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
      }
     
     /** @inheritdoc */

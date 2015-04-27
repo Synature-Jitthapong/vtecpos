@@ -30,8 +30,8 @@ public class ProductPriceDao extends AbstractDao<ProductPrice, Integer> {
         public final static Property MainPrice = new Property(4, Double.class, "MainPrice", false, "MainPrice");
         public final static Property SaleMode = new Property(5, Integer.class, "SaleMode", false, "SaleMode");
         public final static Property PriceRemark = new Property(6, String.class, "PriceRemark", false, "PriceRemark");
-        public final static Property FromDate = new Property(7, java.util.Date.class, "FromDate", false, "FromDate");
-        public final static Property ToDate = new Property(8, java.util.Date.class, "ToDate", false, "ToDate");
+        public final static Property FromDate = new Property(7, String.class, "FromDate", false, "FromDate");
+        public final static Property ToDate = new Property(8, String.class, "ToDate", false, "ToDate");
         public final static Property AddingFromBranch = new Property(9, Integer.class, "AddingFromBranch", false, "AddingFromBranch");
     };
 
@@ -84,14 +84,14 @@ public class ProductPriceDao extends AbstractDao<ProductPrice, Integer> {
             stmt.bindString(7, PriceRemark);
         }
  
-        java.util.Date FromDate = entity.getFromDate();
+        String FromDate = entity.getFromDate();
         if (FromDate != null) {
-            stmt.bindLong(8, FromDate.getTime());
+            stmt.bindString(8, FromDate);
         }
  
-        java.util.Date ToDate = entity.getToDate();
+        String ToDate = entity.getToDate();
         if (ToDate != null) {
-            stmt.bindLong(9, ToDate.getTime());
+            stmt.bindString(9, ToDate);
         }
  
         Integer AddingFromBranch = entity.getAddingFromBranch();
@@ -117,8 +117,8 @@ public class ProductPriceDao extends AbstractDao<ProductPrice, Integer> {
             cursor.isNull(offset + 4) ? null : cursor.getDouble(offset + 4), // MainPrice
             cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // SaleMode
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // PriceRemark
-            cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)), // FromDate
-            cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)), // ToDate
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // FromDate
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // ToDate
             cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9) // AddingFromBranch
         );
         return entity;
@@ -134,8 +134,8 @@ public class ProductPriceDao extends AbstractDao<ProductPrice, Integer> {
         entity.setMainPrice(cursor.isNull(offset + 4) ? null : cursor.getDouble(offset + 4));
         entity.setSaleMode(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
         entity.setPriceRemark(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
-        entity.setFromDate(cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)));
-        entity.setToDate(cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)));
+        entity.setFromDate(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
+        entity.setToDate(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
         entity.setAddingFromBranch(cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9));
      }
     

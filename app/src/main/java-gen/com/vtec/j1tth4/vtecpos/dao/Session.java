@@ -10,16 +10,16 @@ public class Session {
     private int ComputerID;
     private int OpenStaffID;
     private Integer CloseStaffID;
-    private java.util.Date OpenSessionDateTime;
-    private java.util.Date CloseSessionDateTime;
-    private java.util.Date SessionDate;
+    private String OpenSessionDateTime;
+    private String CloseSessionDateTime;
+    private String SessionDate;
     private double OpenSessionAmount;
     private Double CashAmount;
     private Double CashInAmount;
     private Double CashOutAmount;
     private Double CloseSessionAmount;
     private Double CashShortOver;
-    private java.util.Date SessionUpdateDate;
+    private String SessionUpdateDate;
     private Integer ShopID;
     private Integer IsEndDaySession;
 
@@ -30,7 +30,7 @@ public class Session {
         this.SessionID = SessionID;
     }
 
-    public Session(int SessionID, int ComputerID, int OpenStaffID, Integer CloseStaffID, java.util.Date OpenSessionDateTime, java.util.Date CloseSessionDateTime, java.util.Date SessionDate, double OpenSessionAmount, Double CashAmount, Double CashInAmount, Double CashOutAmount, Double CloseSessionAmount, Double CashShortOver, java.util.Date SessionUpdateDate, Integer ShopID, Integer IsEndDaySession) {
+    public Session(int SessionID, int ComputerID, int OpenStaffID, Integer CloseStaffID, String OpenSessionDateTime, String CloseSessionDateTime, String SessionDate, double OpenSessionAmount, Double CashAmount, Double CashInAmount, Double CashOutAmount, Double CloseSessionAmount, Double CashShortOver, String SessionUpdateDate, Integer ShopID, Integer IsEndDaySession) {
         this.SessionID = SessionID;
         this.ComputerID = ComputerID;
         this.OpenStaffID = OpenStaffID;
@@ -81,27 +81,27 @@ public class Session {
         this.CloseStaffID = CloseStaffID;
     }
 
-    public java.util.Date getOpenSessionDateTime() {
+    public String getOpenSessionDateTime() {
         return OpenSessionDateTime;
     }
 
-    public void setOpenSessionDateTime(java.util.Date OpenSessionDateTime) {
+    public void setOpenSessionDateTime(String OpenSessionDateTime) {
         this.OpenSessionDateTime = OpenSessionDateTime;
     }
 
-    public java.util.Date getCloseSessionDateTime() {
+    public String getCloseSessionDateTime() {
         return CloseSessionDateTime;
     }
 
-    public void setCloseSessionDateTime(java.util.Date CloseSessionDateTime) {
+    public void setCloseSessionDateTime(String CloseSessionDateTime) {
         this.CloseSessionDateTime = CloseSessionDateTime;
     }
 
-    public java.util.Date getSessionDate() {
+    public String getSessionDate() {
         return SessionDate;
     }
 
-    public void setSessionDate(java.util.Date SessionDate) {
+    public void setSessionDate(String SessionDate) {
         this.SessionDate = SessionDate;
     }
 
@@ -153,11 +153,11 @@ public class Session {
         this.CashShortOver = CashShortOver;
     }
 
-    public java.util.Date getSessionUpdateDate() {
+    public String getSessionUpdateDate() {
         return SessionUpdateDate;
     }
 
-    public void setSessionUpdateDate(java.util.Date SessionUpdateDate) {
+    public void setSessionUpdateDate(String SessionUpdateDate) {
         this.SessionUpdateDate = SessionUpdateDate;
     }
 

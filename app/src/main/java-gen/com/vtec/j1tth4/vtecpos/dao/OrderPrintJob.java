@@ -12,10 +12,10 @@ public class OrderPrintJob {
     private Integer PrintNo;
     private Integer PrinterID;
     private Integer IsPrintSummary;
-    private java.util.Date InsertDateTime;
-    private java.util.Date PrintDateTime;
-    private java.util.Date FinishDateTime;
-    private java.util.Date SaleDate;
+    private String InsertDateTime;
+    private String PrintDateTime;
+    private String FinishDateTime;
+    private String SaleDate;
     private Integer ShopID;
     private Integer PrintFromComputerID;
     private Integer PrintStatus;
@@ -30,7 +30,7 @@ public class OrderPrintJob {
         this.PrintNo = PrintNo;
     }
 
-    public OrderPrintJob(Integer TransactionID, Integer ComputerID, Integer OrderDetailID, Integer PrintNo, Integer PrinterID, Integer IsPrintSummary, java.util.Date InsertDateTime, java.util.Date PrintDateTime, java.util.Date FinishDateTime, java.util.Date SaleDate, Integer ShopID, Integer PrintFromComputerID, Integer PrintStatus) {
+    public OrderPrintJob(Integer TransactionID, Integer ComputerID, Integer OrderDetailID, Integer PrintNo, Integer PrinterID, Integer IsPrintSummary, String InsertDateTime, String PrintDateTime, String FinishDateTime, String SaleDate, Integer ShopID, Integer PrintFromComputerID, Integer PrintStatus) {
         this.TransactionID = TransactionID;
         this.ComputerID = ComputerID;
         this.OrderDetailID = OrderDetailID;
@@ -94,35 +94,35 @@ public class OrderPrintJob {
         this.IsPrintSummary = IsPrintSummary;
     }
 
-    public java.util.Date getInsertDateTime() {
+    public String getInsertDateTime() {
         return InsertDateTime;
     }
 
-    public void setInsertDateTime(java.util.Date InsertDateTime) {
+    public void setInsertDateTime(String InsertDateTime) {
         this.InsertDateTime = InsertDateTime;
     }
 
-    public java.util.Date getPrintDateTime() {
+    public String getPrintDateTime() {
         return PrintDateTime;
     }
 
-    public void setPrintDateTime(java.util.Date PrintDateTime) {
+    public void setPrintDateTime(String PrintDateTime) {
         this.PrintDateTime = PrintDateTime;
     }
 
-    public java.util.Date getFinishDateTime() {
+    public String getFinishDateTime() {
         return FinishDateTime;
     }
 
-    public void setFinishDateTime(java.util.Date FinishDateTime) {
+    public void setFinishDateTime(String FinishDateTime) {
         this.FinishDateTime = FinishDateTime;
     }
 
-    public java.util.Date getSaleDate() {
+    public String getSaleDate() {
         return SaleDate;
     }
 
-    public void setSaleDate(java.util.Date SaleDate) {
+    public void setSaleDate(String SaleDate) {
         this.SaleDate = SaleDate;
     }
 

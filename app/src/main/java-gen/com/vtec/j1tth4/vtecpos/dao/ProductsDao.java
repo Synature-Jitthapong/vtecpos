@@ -53,7 +53,7 @@ public class ProductsDao extends AbstractDao<Products, Integer> {
         public final static Property PrinterID = new Property(27, Integer.class, "PrinterID", false, "PrinterID");
         public final static Property PrintGroup = new Property(28, Integer.class, "PrintGroup", false, "PrintGroup");
         public final static Property PrintProductName = new Property(29, String.class, "PrintProductName", false, "PrintProductName");
-        public final static Property DurationTime = new Property(30, java.util.Date.class, "DurationTime", false, "DurationTime");
+        public final static Property DurationTime = new Property(30, String.class, "DurationTime", false, "DurationTime");
         public final static Property HasServiceCharge = new Property(31, Integer.class, "HasServiceCharge", false, "HasServiceCharge");
         public final static Property IsOutOfStock = new Property(32, Integer.class, "IsOutOfStock", false, "IsOutOfStock");
         public final static Property AutoComment = new Property(33, Integer.class, "AutoComment", false, "AutoComment");
@@ -62,11 +62,11 @@ public class ProductsDao extends AbstractDao<Products, Integer> {
         public final static Property IsPrintReceipt = new Property(36, Integer.class, "IsPrintReceipt", false, "IsPrintReceipt");
         public final static Property CanReturnProduct = new Property(37, Integer.class, "CanReturnProduct", false, "CanReturnProduct");
         public final static Property DisplayAtCheckerSystem = new Property(38, Integer.class, "DisplayAtCheckerSystem", false, "DisplayAtCheckerSystem");
-        public final static Property ProductEnableDateTime = new Property(39, java.util.Date.class, "ProductEnableDateTime", false, "ProductEnableDateTime");
-        public final static Property ProductExpireDateTime = new Property(40, java.util.Date.class, "ProductExpireDateTime", false, "ProductExpireDateTime");
-        public final static Property ProductEnableDayString = new Property(41, java.util.Date.class, "ProductEnableDayString", false, "ProductEnableDayString");
-        public final static Property WarningTime = new Property(42, java.util.Date.class, "WarningTime", false, "WarningTime");
-        public final static Property CriticalTime = new Property(43, java.util.Date.class, "CriticalTime", false, "CriticalTime");
+        public final static Property ProductEnableDateTime = new Property(39, String.class, "ProductEnableDateTime", false, "ProductEnableDateTime");
+        public final static Property ProductExpireDateTime = new Property(40, String.class, "ProductExpireDateTime", false, "ProductExpireDateTime");
+        public final static Property ProductEnableDayString = new Property(41, String.class, "ProductEnableDayString", false, "ProductEnableDayString");
+        public final static Property WarningTime = new Property(42, String.class, "WarningTime", false, "WarningTime");
+        public final static Property CriticalTime = new Property(43, String.class, "CriticalTime", false, "CriticalTime");
         public final static Property SaleMode1 = new Property(44, Integer.class, "SaleMode1", false, "SaleMode1");
         public final static Property SaleMode2 = new Property(45, Integer.class, "SaleMode2", false, "SaleMode2");
         public final static Property SaleMode3 = new Property(46, Integer.class, "SaleMode3", false, "SaleMode3");
@@ -92,8 +92,8 @@ public class ProductsDao extends AbstractDao<Products, Integer> {
         public final static Property PrintOrdering = new Property(66, Integer.class, "PrintOrdering", false, "PrintOrdering");
         public final static Property AddingFromBranch = new Property(67, Integer.class, "AddingFromBranch", false, "AddingFromBranch");
         public final static Property Deleted = new Property(68, Integer.class, "Deleted", false, "Deleted");
-        public final static Property InsertDate = new Property(69, java.util.Date.class, "InsertDate", false, "InsertDate");
-        public final static Property UpdateDate = new Property(70, java.util.Date.class, "UpdateDate", false, "UpdateDate");
+        public final static Property InsertDate = new Property(69, String.class, "InsertDate", false, "InsertDate");
+        public final static Property UpdateDate = new Property(70, String.class, "UpdateDate", false, "UpdateDate");
     };
 
 
@@ -252,9 +252,9 @@ public class ProductsDao extends AbstractDao<Products, Integer> {
             stmt.bindString(30, PrintProductName);
         }
  
-        java.util.Date DurationTime = entity.getDurationTime();
+        String DurationTime = entity.getDurationTime();
         if (DurationTime != null) {
-            stmt.bindLong(31, DurationTime.getTime());
+            stmt.bindString(31, DurationTime);
         }
  
         Integer HasServiceCharge = entity.getHasServiceCharge();
@@ -297,29 +297,29 @@ public class ProductsDao extends AbstractDao<Products, Integer> {
             stmt.bindLong(39, DisplayAtCheckerSystem);
         }
  
-        java.util.Date ProductEnableDateTime = entity.getProductEnableDateTime();
+        String ProductEnableDateTime = entity.getProductEnableDateTime();
         if (ProductEnableDateTime != null) {
-            stmt.bindLong(40, ProductEnableDateTime.getTime());
+            stmt.bindString(40, ProductEnableDateTime);
         }
  
-        java.util.Date ProductExpireDateTime = entity.getProductExpireDateTime();
+        String ProductExpireDateTime = entity.getProductExpireDateTime();
         if (ProductExpireDateTime != null) {
-            stmt.bindLong(41, ProductExpireDateTime.getTime());
+            stmt.bindString(41, ProductExpireDateTime);
         }
  
-        java.util.Date ProductEnableDayString = entity.getProductEnableDayString();
+        String ProductEnableDayString = entity.getProductEnableDayString();
         if (ProductEnableDayString != null) {
-            stmt.bindLong(42, ProductEnableDayString.getTime());
+            stmt.bindString(42, ProductEnableDayString);
         }
  
-        java.util.Date WarningTime = entity.getWarningTime();
+        String WarningTime = entity.getWarningTime();
         if (WarningTime != null) {
-            stmt.bindLong(43, WarningTime.getTime());
+            stmt.bindString(43, WarningTime);
         }
  
-        java.util.Date CriticalTime = entity.getCriticalTime();
+        String CriticalTime = entity.getCriticalTime();
         if (CriticalTime != null) {
-            stmt.bindLong(44, CriticalTime.getTime());
+            stmt.bindString(44, CriticalTime);
         }
  
         Integer SaleMode1 = entity.getSaleMode1();
@@ -447,14 +447,14 @@ public class ProductsDao extends AbstractDao<Products, Integer> {
             stmt.bindLong(69, Deleted);
         }
  
-        java.util.Date InsertDate = entity.getInsertDate();
+        String InsertDate = entity.getInsertDate();
         if (InsertDate != null) {
-            stmt.bindLong(70, InsertDate.getTime());
+            stmt.bindString(70, InsertDate);
         }
  
-        java.util.Date UpdateDate = entity.getUpdateDate();
+        String UpdateDate = entity.getUpdateDate();
         if (UpdateDate != null) {
-            stmt.bindLong(71, UpdateDate.getTime());
+            stmt.bindString(71, UpdateDate);
         }
     }
 
@@ -498,7 +498,7 @@ public class ProductsDao extends AbstractDao<Products, Integer> {
             cursor.isNull(offset + 27) ? null : cursor.getInt(offset + 27), // PrinterID
             cursor.isNull(offset + 28) ? null : cursor.getInt(offset + 28), // PrintGroup
             cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29), // PrintProductName
-            cursor.isNull(offset + 30) ? null : new java.util.Date(cursor.getLong(offset + 30)), // DurationTime
+            cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30), // DurationTime
             cursor.isNull(offset + 31) ? null : cursor.getInt(offset + 31), // HasServiceCharge
             cursor.isNull(offset + 32) ? null : cursor.getInt(offset + 32), // IsOutOfStock
             cursor.isNull(offset + 33) ? null : cursor.getInt(offset + 33), // AutoComment
@@ -507,11 +507,11 @@ public class ProductsDao extends AbstractDao<Products, Integer> {
             cursor.isNull(offset + 36) ? null : cursor.getInt(offset + 36), // IsPrintReceipt
             cursor.isNull(offset + 37) ? null : cursor.getInt(offset + 37), // CanReturnProduct
             cursor.isNull(offset + 38) ? null : cursor.getInt(offset + 38), // DisplayAtCheckerSystem
-            cursor.isNull(offset + 39) ? null : new java.util.Date(cursor.getLong(offset + 39)), // ProductEnableDateTime
-            cursor.isNull(offset + 40) ? null : new java.util.Date(cursor.getLong(offset + 40)), // ProductExpireDateTime
-            cursor.isNull(offset + 41) ? null : new java.util.Date(cursor.getLong(offset + 41)), // ProductEnableDayString
-            cursor.isNull(offset + 42) ? null : new java.util.Date(cursor.getLong(offset + 42)), // WarningTime
-            cursor.isNull(offset + 43) ? null : new java.util.Date(cursor.getLong(offset + 43)), // CriticalTime
+            cursor.isNull(offset + 39) ? null : cursor.getString(offset + 39), // ProductEnableDateTime
+            cursor.isNull(offset + 40) ? null : cursor.getString(offset + 40), // ProductExpireDateTime
+            cursor.isNull(offset + 41) ? null : cursor.getString(offset + 41), // ProductEnableDayString
+            cursor.isNull(offset + 42) ? null : cursor.getString(offset + 42), // WarningTime
+            cursor.isNull(offset + 43) ? null : cursor.getString(offset + 43), // CriticalTime
             cursor.isNull(offset + 44) ? null : cursor.getInt(offset + 44), // SaleMode1
             cursor.isNull(offset + 45) ? null : cursor.getInt(offset + 45), // SaleMode2
             cursor.isNull(offset + 46) ? null : cursor.getInt(offset + 46), // SaleMode3
@@ -537,8 +537,8 @@ public class ProductsDao extends AbstractDao<Products, Integer> {
             cursor.isNull(offset + 66) ? null : cursor.getInt(offset + 66), // PrintOrdering
             cursor.isNull(offset + 67) ? null : cursor.getInt(offset + 67), // AddingFromBranch
             cursor.isNull(offset + 68) ? null : cursor.getInt(offset + 68), // Deleted
-            cursor.isNull(offset + 69) ? null : new java.util.Date(cursor.getLong(offset + 69)), // InsertDate
-            cursor.isNull(offset + 70) ? null : new java.util.Date(cursor.getLong(offset + 70)) // UpdateDate
+            cursor.isNull(offset + 69) ? null : cursor.getString(offset + 69), // InsertDate
+            cursor.isNull(offset + 70) ? null : cursor.getString(offset + 70) // UpdateDate
         );
         return entity;
     }
@@ -576,7 +576,7 @@ public class ProductsDao extends AbstractDao<Products, Integer> {
         entity.setPrinterID(cursor.isNull(offset + 27) ? null : cursor.getInt(offset + 27));
         entity.setPrintGroup(cursor.isNull(offset + 28) ? null : cursor.getInt(offset + 28));
         entity.setPrintProductName(cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29));
-        entity.setDurationTime(cursor.isNull(offset + 30) ? null : new java.util.Date(cursor.getLong(offset + 30)));
+        entity.setDurationTime(cursor.isNull(offset + 30) ? null : cursor.getString(offset + 30));
         entity.setHasServiceCharge(cursor.isNull(offset + 31) ? null : cursor.getInt(offset + 31));
         entity.setIsOutOfStock(cursor.isNull(offset + 32) ? null : cursor.getInt(offset + 32));
         entity.setAutoComment(cursor.isNull(offset + 33) ? null : cursor.getInt(offset + 33));
@@ -585,11 +585,11 @@ public class ProductsDao extends AbstractDao<Products, Integer> {
         entity.setIsPrintReceipt(cursor.isNull(offset + 36) ? null : cursor.getInt(offset + 36));
         entity.setCanReturnProduct(cursor.isNull(offset + 37) ? null : cursor.getInt(offset + 37));
         entity.setDisplayAtCheckerSystem(cursor.isNull(offset + 38) ? null : cursor.getInt(offset + 38));
-        entity.setProductEnableDateTime(cursor.isNull(offset + 39) ? null : new java.util.Date(cursor.getLong(offset + 39)));
-        entity.setProductExpireDateTime(cursor.isNull(offset + 40) ? null : new java.util.Date(cursor.getLong(offset + 40)));
-        entity.setProductEnableDayString(cursor.isNull(offset + 41) ? null : new java.util.Date(cursor.getLong(offset + 41)));
-        entity.setWarningTime(cursor.isNull(offset + 42) ? null : new java.util.Date(cursor.getLong(offset + 42)));
-        entity.setCriticalTime(cursor.isNull(offset + 43) ? null : new java.util.Date(cursor.getLong(offset + 43)));
+        entity.setProductEnableDateTime(cursor.isNull(offset + 39) ? null : cursor.getString(offset + 39));
+        entity.setProductExpireDateTime(cursor.isNull(offset + 40) ? null : cursor.getString(offset + 40));
+        entity.setProductEnableDayString(cursor.isNull(offset + 41) ? null : cursor.getString(offset + 41));
+        entity.setWarningTime(cursor.isNull(offset + 42) ? null : cursor.getString(offset + 42));
+        entity.setCriticalTime(cursor.isNull(offset + 43) ? null : cursor.getString(offset + 43));
         entity.setSaleMode1(cursor.isNull(offset + 44) ? null : cursor.getInt(offset + 44));
         entity.setSaleMode2(cursor.isNull(offset + 45) ? null : cursor.getInt(offset + 45));
         entity.setSaleMode3(cursor.isNull(offset + 46) ? null : cursor.getInt(offset + 46));
@@ -615,8 +615,8 @@ public class ProductsDao extends AbstractDao<Products, Integer> {
         entity.setPrintOrdering(cursor.isNull(offset + 66) ? null : cursor.getInt(offset + 66));
         entity.setAddingFromBranch(cursor.isNull(offset + 67) ? null : cursor.getInt(offset + 67));
         entity.setDeleted(cursor.isNull(offset + 68) ? null : cursor.getInt(offset + 68));
-        entity.setInsertDate(cursor.isNull(offset + 69) ? null : new java.util.Date(cursor.getLong(offset + 69)));
-        entity.setUpdateDate(cursor.isNull(offset + 70) ? null : new java.util.Date(cursor.getLong(offset + 70)));
+        entity.setInsertDate(cursor.isNull(offset + 69) ? null : cursor.getString(offset + 69));
+        entity.setUpdateDate(cursor.isNull(offset + 70) ? null : cursor.getString(offset + 70));
      }
     
     /** @inheritdoc */

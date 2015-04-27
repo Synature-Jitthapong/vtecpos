@@ -33,9 +33,9 @@ public class FcCardInfoDao extends AbstractDao<FcCardInfo, Integer> {
         public final static Property CreateStaffID = new Property(7, Integer.class, "CreateStaffID", false, "StaffID");
         public final static Property UpdateStaffID = new Property(8, Integer.class, "UpdateStaffID", false, "UpdateStaffID");
         public final static Property MemberID = new Property(9, Integer.class, "MemberID", false, "MemberID");
-        public final static Property CreateDate = new Property(10, java.util.Date.class, "CreateDate", false, "CreateDate");
-        public final static Property UpdateDate = new Property(11, java.util.Date.class, "UpdateDate", false, "UpdateDate");
-        public final static Property ExpireDate = new Property(12, java.util.Date.class, "ExpireDate", false, "ExpireDate");
+        public final static Property CreateDate = new Property(10, String.class, "CreateDate", false, "CreateDate");
+        public final static Property UpdateDate = new Property(11, String.class, "UpdateDate", false, "UpdateDate");
+        public final static Property ExpireDate = new Property(12, String.class, "ExpireDate", false, "ExpireDate");
         public final static Property Deleted = new Property(13, Integer.class, "Deleted", false, "Deleted");
     };
 
@@ -103,19 +103,19 @@ public class FcCardInfoDao extends AbstractDao<FcCardInfo, Integer> {
             stmt.bindLong(10, MemberID);
         }
  
-        java.util.Date CreateDate = entity.getCreateDate();
+        String CreateDate = entity.getCreateDate();
         if (CreateDate != null) {
-            stmt.bindLong(11, CreateDate.getTime());
+            stmt.bindString(11, CreateDate);
         }
  
-        java.util.Date UpdateDate = entity.getUpdateDate();
+        String UpdateDate = entity.getUpdateDate();
         if (UpdateDate != null) {
-            stmt.bindLong(12, UpdateDate.getTime());
+            stmt.bindString(12, UpdateDate);
         }
  
-        java.util.Date ExpireDate = entity.getExpireDate();
+        String ExpireDate = entity.getExpireDate();
         if (ExpireDate != null) {
-            stmt.bindLong(13, ExpireDate.getTime());
+            stmt.bindString(13, ExpireDate);
         }
  
         Integer Deleted = entity.getDeleted();
@@ -144,9 +144,9 @@ public class FcCardInfoDao extends AbstractDao<FcCardInfo, Integer> {
             cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7), // CreateStaffID
             cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8), // UpdateStaffID
             cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9), // MemberID
-            cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)), // CreateDate
-            cursor.isNull(offset + 11) ? null : new java.util.Date(cursor.getLong(offset + 11)), // UpdateDate
-            cursor.isNull(offset + 12) ? null : new java.util.Date(cursor.getLong(offset + 12)), // ExpireDate
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // CreateDate
+            cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // UpdateDate
+            cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // ExpireDate
             cursor.isNull(offset + 13) ? null : cursor.getInt(offset + 13) // Deleted
         );
         return entity;
@@ -165,9 +165,9 @@ public class FcCardInfoDao extends AbstractDao<FcCardInfo, Integer> {
         entity.setCreateStaffID(cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7));
         entity.setUpdateStaffID(cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8));
         entity.setMemberID(cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9));
-        entity.setCreateDate(cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)));
-        entity.setUpdateDate(cursor.isNull(offset + 11) ? null : new java.util.Date(cursor.getLong(offset + 11)));
-        entity.setExpireDate(cursor.isNull(offset + 12) ? null : new java.util.Date(cursor.getLong(offset + 12)));
+        entity.setCreateDate(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
+        entity.setUpdateDate(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
+        entity.setExpireDate(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
         entity.setDeleted(cursor.isNull(offset + 13) ? null : cursor.getInt(offset + 13));
      }
     

@@ -47,8 +47,8 @@ public class ShopDataDao extends AbstractDao<ShopData, Integer> {
         public final static Property ShopCatID8 = new Property(21, Integer.class, "ShopCatID8", false, "ShopCatID8");
         public final static Property ShopCatID9 = new Property(22, Integer.class, "ShopCatID9", false, "ShopCatID9");
         public final static Property ShopCatID10 = new Property(23, Integer.class, "ShopCatID10", false, "ShopCatID10");
-        public final static Property OpenHour = new Property(24, java.util.Date.class, "OpenHour", false, "OpenHour");
-        public final static Property CloseHour = new Property(25, java.util.Date.class, "CloseHour", false, "CloseHour");
+        public final static Property OpenHour = new Property(24, String.class, "OpenHour", false, "OpenHour");
+        public final static Property CloseHour = new Property(25, String.class, "CloseHour", false, "CloseHour");
         public final static Property CompanyName = new Property(26, String.class, "CompanyName", false, "CompanyName");
         public final static Property CompanyAddress1 = new Property(27, String.class, "CompanyAddress1", false, "CompanyAddress1");
         public final static Property CompanyAddress2 = new Property(28, String.class, "CompanyAddress2", false, "CompanyAddress2");
@@ -210,14 +210,14 @@ public class ShopDataDao extends AbstractDao<ShopData, Integer> {
             stmt.bindLong(24, ShopCatID10);
         }
  
-        java.util.Date OpenHour = entity.getOpenHour();
+        String OpenHour = entity.getOpenHour();
         if (OpenHour != null) {
-            stmt.bindLong(25, OpenHour.getTime());
+            stmt.bindString(25, OpenHour);
         }
  
-        java.util.Date CloseHour = entity.getCloseHour();
+        String CloseHour = entity.getCloseHour();
         if (CloseHour != null) {
-            stmt.bindLong(26, CloseHour.getTime());
+            stmt.bindString(26, CloseHour);
         }
  
         String CompanyName = entity.getCompanyName();
@@ -380,8 +380,8 @@ public class ShopDataDao extends AbstractDao<ShopData, Integer> {
             cursor.isNull(offset + 21) ? null : cursor.getInt(offset + 21), // ShopCatID8
             cursor.isNull(offset + 22) ? null : cursor.getInt(offset + 22), // ShopCatID9
             cursor.isNull(offset + 23) ? null : cursor.getInt(offset + 23), // ShopCatID10
-            cursor.isNull(offset + 24) ? null : new java.util.Date(cursor.getLong(offset + 24)), // OpenHour
-            cursor.isNull(offset + 25) ? null : new java.util.Date(cursor.getLong(offset + 25)), // CloseHour
+            cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24), // OpenHour
+            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25), // CloseHour
             cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26), // CompanyName
             cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27), // CompanyAddress1
             cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28), // CompanyAddress2
@@ -438,8 +438,8 @@ public class ShopDataDao extends AbstractDao<ShopData, Integer> {
         entity.setShopCatID8(cursor.isNull(offset + 21) ? null : cursor.getInt(offset + 21));
         entity.setShopCatID9(cursor.isNull(offset + 22) ? null : cursor.getInt(offset + 22));
         entity.setShopCatID10(cursor.isNull(offset + 23) ? null : cursor.getInt(offset + 23));
-        entity.setOpenHour(cursor.isNull(offset + 24) ? null : new java.util.Date(cursor.getLong(offset + 24)));
-        entity.setCloseHour(cursor.isNull(offset + 25) ? null : new java.util.Date(cursor.getLong(offset + 25)));
+        entity.setOpenHour(cursor.isNull(offset + 24) ? null : cursor.getString(offset + 24));
+        entity.setCloseHour(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
         entity.setCompanyName(cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26));
         entity.setCompanyAddress1(cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27));
         entity.setCompanyAddress2(cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28));

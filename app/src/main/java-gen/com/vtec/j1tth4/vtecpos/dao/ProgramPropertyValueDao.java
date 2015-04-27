@@ -27,10 +27,10 @@ public class ProgramPropertyValueDao extends AbstractDao<ProgramPropertyValue, V
         public final static Property KeyID = new Property(1, Integer.class, "KeyID", true, "KeyID");
         public final static Property PropertyValue = new Property(2, Integer.class, "PropertyValue", false, "PropertyValue");
         public final static Property PropertyTextValue = new Property(3, String.class, "PropertyTextValue", false, "PropertyTextValue");
-        public final static Property PropertyDateValue = new Property(4, java.util.Date.class, "PropertyDateValue", false, "PropertyDateValue");
+        public final static Property PropertyDateValue = new Property(4, String.class, "PropertyDateValue", false, "PropertyDateValue");
         public final static Property PropertyDecimalValue = new Property(5, Double.class, "PropertyDecimalValue", false, "PropertyDecimalValue");
         public final static Property UpdateStaffID = new Property(6, Integer.class, "UpdateStaffID", false, "UpdateStaffID");
-        public final static Property UpdateDate = new Property(7, java.util.Date.class, "UpdateDate", false, "UpdateDate");
+        public final static Property UpdateDate = new Property(7, String.class, "UpdateDate", false, "UpdateDate");
     };
 
 
@@ -67,9 +67,9 @@ public class ProgramPropertyValueDao extends AbstractDao<ProgramPropertyValue, V
             stmt.bindString(4, PropertyTextValue);
         }
  
-        java.util.Date PropertyDateValue = entity.getPropertyDateValue();
+        String PropertyDateValue = entity.getPropertyDateValue();
         if (PropertyDateValue != null) {
-            stmt.bindLong(5, PropertyDateValue.getTime());
+            stmt.bindString(5, PropertyDateValue);
         }
  
         Double PropertyDecimalValue = entity.getPropertyDecimalValue();
@@ -82,9 +82,9 @@ public class ProgramPropertyValueDao extends AbstractDao<ProgramPropertyValue, V
             stmt.bindLong(7, UpdateStaffID);
         }
  
-        java.util.Date UpdateDate = entity.getUpdateDate();
+        String UpdateDate = entity.getUpdateDate();
         if (UpdateDate != null) {
-            stmt.bindLong(8, UpdateDate.getTime());
+            stmt.bindString(8, UpdateDate);
         }
     }
 
@@ -102,10 +102,10 @@ public class ProgramPropertyValueDao extends AbstractDao<ProgramPropertyValue, V
             cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // KeyID
             cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2), // PropertyValue
             cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // PropertyTextValue
-            cursor.isNull(offset + 4) ? null : new java.util.Date(cursor.getLong(offset + 4)), // PropertyDateValue
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // PropertyDateValue
             cursor.isNull(offset + 5) ? null : cursor.getDouble(offset + 5), // PropertyDecimalValue
             cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6), // UpdateStaffID
-            cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)) // UpdateDate
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7) // UpdateDate
         );
         return entity;
     }
@@ -117,10 +117,10 @@ public class ProgramPropertyValueDao extends AbstractDao<ProgramPropertyValue, V
         entity.setKeyID(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
         entity.setPropertyValue(cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2));
         entity.setPropertyTextValue(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setPropertyDateValue(cursor.isNull(offset + 4) ? null : new java.util.Date(cursor.getLong(offset + 4)));
+        entity.setPropertyDateValue(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setPropertyDecimalValue(cursor.isNull(offset + 5) ? null : cursor.getDouble(offset + 5));
         entity.setUpdateStaffID(cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6));
-        entity.setUpdateDate(cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)));
+        entity.setUpdateDate(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
      }
     
     /** @inheritdoc */

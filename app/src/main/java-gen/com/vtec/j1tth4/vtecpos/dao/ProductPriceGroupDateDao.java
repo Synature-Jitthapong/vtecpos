@@ -24,8 +24,8 @@ public class ProductPriceGroupDateDao extends AbstractDao<ProductPriceGroupDate,
     */
     public static class Properties {
         public final static Property PriceGroupDateID = new Property(0, Integer.class, "PriceGroupDateID", true, "PriceGroupDateID");
-        public final static Property FromDate = new Property(1, java.util.Date.class, "FromDate", false, "FromDate");
-        public final static Property ToDate = new Property(2, java.util.Date.class, "ToDate", false, "ToDate");
+        public final static Property FromDate = new Property(1, String.class, "FromDate", false, "FromDate");
+        public final static Property ToDate = new Property(2, String.class, "ToDate", false, "ToDate");
         public final static Property Deleted = new Property(3, Integer.class, "Deleted", false, "Deleted");
     };
 
@@ -48,14 +48,14 @@ public class ProductPriceGroupDateDao extends AbstractDao<ProductPriceGroupDate,
             stmt.bindLong(1, PriceGroupDateID);
         }
  
-        java.util.Date FromDate = entity.getFromDate();
+        String FromDate = entity.getFromDate();
         if (FromDate != null) {
-            stmt.bindLong(2, FromDate.getTime());
+            stmt.bindString(2, FromDate);
         }
  
-        java.util.Date ToDate = entity.getToDate();
+        String ToDate = entity.getToDate();
         if (ToDate != null) {
-            stmt.bindLong(3, ToDate.getTime());
+            stmt.bindString(3, ToDate);
         }
  
         Integer Deleted = entity.getDeleted();
@@ -75,8 +75,8 @@ public class ProductPriceGroupDateDao extends AbstractDao<ProductPriceGroupDate,
     public ProductPriceGroupDate readEntity(Cursor cursor, int offset) {
         ProductPriceGroupDate entity = new ProductPriceGroupDate( //
             cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0), // PriceGroupDateID
-            cursor.isNull(offset + 1) ? null : new java.util.Date(cursor.getLong(offset + 1)), // FromDate
-            cursor.isNull(offset + 2) ? null : new java.util.Date(cursor.getLong(offset + 2)), // ToDate
+            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // FromDate
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // ToDate
             cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3) // Deleted
         );
         return entity;
@@ -86,8 +86,8 @@ public class ProductPriceGroupDateDao extends AbstractDao<ProductPriceGroupDate,
     @Override
     public void readEntity(Cursor cursor, ProductPriceGroupDate entity, int offset) {
         entity.setPriceGroupDateID(cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0));
-        entity.setFromDate(cursor.isNull(offset + 1) ? null : new java.util.Date(cursor.getLong(offset + 1)));
-        entity.setToDate(cursor.isNull(offset + 2) ? null : new java.util.Date(cursor.getLong(offset + 2)));
+        entity.setFromDate(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
+        entity.setToDate(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setDeleted(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
      }
     

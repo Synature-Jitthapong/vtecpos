@@ -7,11 +7,11 @@ package com.vtec.j1tth4.vtecpos.dao;
 public class SessionEnddayDetail {
 
     /** Not-null value. */
-    private java.util.Date SessionDate;
+    private String SessionDate;
     private int ShopID;
     private Integer IsEndDay;
     private Integer EndDayStaffID;
-    private java.util.Date EndDayDateTime;
+    private String EndDayDateTime;
     private Integer TotalReceipt;
     private Double TotalPayPrice;
     private Integer EndDayComputerID;
@@ -21,11 +21,11 @@ public class SessionEnddayDetail {
     public SessionEnddayDetail() {
     }
 
-    public SessionEnddayDetail(java.util.Date SessionDate) {
+    public SessionEnddayDetail(String SessionDate) {
         this.SessionDate = SessionDate;
     }
 
-    public SessionEnddayDetail(java.util.Date SessionDate, int ShopID, Integer IsEndDay, Integer EndDayStaffID, java.util.Date EndDayDateTime, Integer TotalReceipt, Double TotalPayPrice, Integer EndDayComputerID, Integer NoOfSync, String Remark) {
+    public SessionEnddayDetail(String SessionDate, int ShopID, Integer IsEndDay, Integer EndDayStaffID, String EndDayDateTime, Integer TotalReceipt, Double TotalPayPrice, Integer EndDayComputerID, Integer NoOfSync, String Remark) {
         this.SessionDate = SessionDate;
         this.ShopID = ShopID;
         this.IsEndDay = IsEndDay;
@@ -39,12 +39,12 @@ public class SessionEnddayDetail {
     }
 
     /** Not-null value. */
-    public java.util.Date getSessionDate() {
+    public String getSessionDate() {
         return SessionDate;
     }
 
     /** Not-null value; ensure this value is available before it is saved to the database. */
-    public void setSessionDate(java.util.Date SessionDate) {
+    public void setSessionDate(String SessionDate) {
         this.SessionDate = SessionDate;
     }
 
@@ -72,11 +72,11 @@ public class SessionEnddayDetail {
         this.EndDayStaffID = EndDayStaffID;
     }
 
-    public java.util.Date getEndDayDateTime() {
+    public String getEndDayDateTime() {
         return EndDayDateTime;
     }
 
-    public void setEndDayDateTime(java.util.Date EndDayDateTime) {
+    public void setEndDayDateTime(String EndDayDateTime) {
         this.EndDayDateTime = EndDayDateTime;
     }
 

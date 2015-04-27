@@ -11,7 +11,7 @@ public class FcTranPayment {
     private Integer ComputerID;
     private Integer PayTypeID;
     private Integer ShopID;
-    private java.util.Date SaleDate;
+    private String SaleDate;
     private Double PayAmount;
     private String CCNumber;
     private Integer CCExpMonth;
@@ -22,7 +22,7 @@ public class FcTranPayment {
     private String CCApproveCode;
     private String CCResponse;
     private String Remark;
-    private java.util.Date InsertDate;
+    private String InsertDate;
 
     public FcTranPayment() {
     }
@@ -33,7 +33,7 @@ public class FcTranPayment {
         this.ComputerID = ComputerID;
     }
 
-    public FcTranPayment(Integer PayDetailID, Integer TransactionID, Integer ComputerID, Integer PayTypeID, Integer ShopID, java.util.Date SaleDate, Double PayAmount, String CCNumber, Integer CCExpMonth, Integer CCExpYear, Integer CCType, Integer CCBank, String CCName, String CCApproveCode, String CCResponse, String Remark, java.util.Date InsertDate) {
+    public FcTranPayment(Integer PayDetailID, Integer TransactionID, Integer ComputerID, Integer PayTypeID, Integer ShopID, String SaleDate, Double PayAmount, String CCNumber, Integer CCExpMonth, Integer CCExpYear, Integer CCType, Integer CCBank, String CCName, String CCApproveCode, String CCResponse, String Remark, String InsertDate) {
         this.PayDetailID = PayDetailID;
         this.TransactionID = TransactionID;
         this.ComputerID = ComputerID;
@@ -93,11 +93,11 @@ public class FcTranPayment {
         this.ShopID = ShopID;
     }
 
-    public java.util.Date getSaleDate() {
+    public String getSaleDate() {
         return SaleDate;
     }
 
-    public void setSaleDate(java.util.Date SaleDate) {
+    public void setSaleDate(String SaleDate) {
         this.SaleDate = SaleDate;
     }
 
@@ -181,11 +181,11 @@ public class FcTranPayment {
         this.Remark = Remark;
     }
 
-    public java.util.Date getInsertDate() {
+    public String getInsertDate() {
         return InsertDate;
     }
 
-    public void setInsertDate(java.util.Date InsertDate) {
+    public void setInsertDate(String InsertDate) {
         this.InsertDate = InsertDate;
     }
 

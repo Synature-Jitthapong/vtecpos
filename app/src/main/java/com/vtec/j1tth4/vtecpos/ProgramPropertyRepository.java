@@ -2,6 +2,9 @@ package com.vtec.j1tth4.vtecpos;
 
 import android.content.Context;
 
+import com.vtec.j1tth4.vtecpos.dao.ProgramProperty;
+import com.vtec.j1tth4.vtecpos.dao.ProgramPropertyDao;
+
 import java.util.List;
 
 import de.greenrobot.dao.query.Query;

@@ -26,8 +26,8 @@ public class ProductComponentGroupDao extends AbstractDao<ProductComponentGroup,
         public final static Property PGroupID = new Property(0, Integer.class, "PGroupID", true, "PGroupID");
         public final static Property ProductID = new Property(1, Integer.class, "ProductID", false, "ProductID");
         public final static Property SaleMode = new Property(2, Integer.class, "SaleMode", false, "SaleMode");
-        public final static Property StartDate = new Property(3, java.util.Date.class, "StartDate", false, "StartDate");
-        public final static Property EndDate = new Property(4, java.util.Date.class, "EndDate", false, "EndDate");
+        public final static Property StartDate = new Property(3, String.class, "StartDate", false, "StartDate");
+        public final static Property EndDate = new Property(4, String.class, "EndDate", false, "EndDate");
         public final static Property SetGroupNo = new Property(5, Integer.class, "SetGroupNo", false, "SetGroupNo");
         public final static Property SetGroupName = new Property(6, String.class, "SetGroupName", false, "SetGroupName");
         public final static Property RequireAddAmountForProduct = new Property(7, Integer.class, "RequireAddAmountForProduct", false, "RequireAddAmountForProduct");
@@ -63,14 +63,14 @@ public class ProductComponentGroupDao extends AbstractDao<ProductComponentGroup,
             stmt.bindLong(3, SaleMode);
         }
  
-        java.util.Date StartDate = entity.getStartDate();
+        String StartDate = entity.getStartDate();
         if (StartDate != null) {
-            stmt.bindLong(4, StartDate.getTime());
+            stmt.bindString(4, StartDate);
         }
  
-        java.util.Date EndDate = entity.getEndDate();
+        String EndDate = entity.getEndDate();
         if (EndDate != null) {
-            stmt.bindLong(5, EndDate.getTime());
+            stmt.bindString(5, EndDate);
         }
  
         Integer SetGroupNo = entity.getSetGroupNo();
@@ -107,8 +107,8 @@ public class ProductComponentGroupDao extends AbstractDao<ProductComponentGroup,
             cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0), // PGroupID
             cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // ProductID
             cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2), // SaleMode
-            cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)), // StartDate
-            cursor.isNull(offset + 4) ? null : new java.util.Date(cursor.getLong(offset + 4)), // EndDate
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // StartDate
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // EndDate
             cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // SetGroupNo
             cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // SetGroupName
             cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7), // RequireAddAmountForProduct
@@ -123,8 +123,8 @@ public class ProductComponentGroupDao extends AbstractDao<ProductComponentGroup,
         entity.setPGroupID(cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0));
         entity.setProductID(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
         entity.setSaleMode(cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2));
-        entity.setStartDate(cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)));
-        entity.setEndDate(cursor.isNull(offset + 4) ? null : new java.util.Date(cursor.getLong(offset + 4)));
+        entity.setStartDate(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setEndDate(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setSetGroupNo(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
         entity.setSetGroupName(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setRequireAddAmountForProduct(cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7));

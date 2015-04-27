@@ -30,8 +30,8 @@ public class ShopData {
     private Integer ShopCatID8;
     private Integer ShopCatID9;
     private Integer ShopCatID10;
-    private java.util.Date OpenHour;
-    private java.util.Date CloseHour;
+    private String OpenHour;
+    private String CloseHour;
     private String CompanyName;
     private String CompanyAddress1;
     private String CompanyAddress2;
@@ -65,7 +65,7 @@ public class ShopData {
         this.ShopID = ShopID;
     }
 
-    public ShopData(Integer ShopID, String ShopCode, String ShopName, Integer IsShop, Integer IsInv, Integer HasSC, Integer IsSCBeforeDisc, Double SCPercent, String VATCode, Integer VATType, Integer MasterShop, Integer MasterShopLink, Integer ShowInReport, Integer ShopTypeID, Integer ShopCatID1, Integer ShopCatID2, Integer ShopCatID3, Integer ShopCatID4, Integer ShopCatID5, Integer ShopCatID6, Integer ShopCatID7, Integer ShopCatID8, Integer ShopCatID9, Integer ShopCatID10, java.util.Date OpenHour, java.util.Date CloseHour, String CompanyName, String CompanyAddress1, String CompanyAddress2, String CompanyCity, Integer CompanyProvince, Integer DisplayCompanyProvinceLangID, String CompanyZipCode, String CompanyTelephone, String CompanyFax, String CompanyCountry, String CompanyTaxID, String CompanyRegisterID, String AccountingCode, String DeliveryName, String DeliveryAddress1, String DeliveryAddress2, String DeliveryCity, Integer DeliveryProvince, String DeliveryZipCode, String DeliveryTelephone, String DeliveryFax, String IPAddress, String Addtional, Integer ProductLevelOrder, Integer Deleted) {
+    public ShopData(Integer ShopID, String ShopCode, String ShopName, Integer IsShop, Integer IsInv, Integer HasSC, Integer IsSCBeforeDisc, Double SCPercent, String VATCode, Integer VATType, Integer MasterShop, Integer MasterShopLink, Integer ShowInReport, Integer ShopTypeID, Integer ShopCatID1, Integer ShopCatID2, Integer ShopCatID3, Integer ShopCatID4, Integer ShopCatID5, Integer ShopCatID6, Integer ShopCatID7, Integer ShopCatID8, Integer ShopCatID9, Integer ShopCatID10, String OpenHour, String CloseHour, String CompanyName, String CompanyAddress1, String CompanyAddress2, String CompanyCity, Integer CompanyProvince, Integer DisplayCompanyProvinceLangID, String CompanyZipCode, String CompanyTelephone, String CompanyFax, String CompanyCountry, String CompanyTaxID, String CompanyRegisterID, String AccountingCode, String DeliveryName, String DeliveryAddress1, String DeliveryAddress2, String DeliveryCity, Integer DeliveryProvince, String DeliveryZipCode, String DeliveryTelephone, String DeliveryFax, String IPAddress, String Addtional, Integer ProductLevelOrder, Integer Deleted) {
         this.ShopID = ShopID;
         this.ShopCode = ShopCode;
         this.ShopName = ShopName;
@@ -311,19 +311,19 @@ public class ShopData {
         this.ShopCatID10 = ShopCatID10;
     }
 
-    public java.util.Date getOpenHour() {
+    public String getOpenHour() {
         return OpenHour;
     }
 
-    public void setOpenHour(java.util.Date OpenHour) {
+    public void setOpenHour(String OpenHour) {
         this.OpenHour = OpenHour;
     }
 
-    public java.util.Date getCloseHour() {
+    public String getCloseHour() {
         return CloseHour;
     }
 
-    public void setCloseHour(java.util.Date CloseHour) {
+    public void setCloseHour(String CloseHour) {
         this.CloseHour = CloseHour;
     }
 

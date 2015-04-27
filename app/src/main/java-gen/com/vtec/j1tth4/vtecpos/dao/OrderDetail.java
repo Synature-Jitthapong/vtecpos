@@ -14,7 +14,7 @@ public class OrderDetail {
     private Integer InsertOrderNo;
     private Integer IndentLevel;
     private Integer DisplayOrdering;
-    private java.util.Date SaleDate;
+    private String SaleDate;
     private Integer ShopID;
     private Integer ProductID;
     private Integer ProductSetType;
@@ -69,16 +69,16 @@ public class OrderDetail {
     private Integer OrderTableID;
     private Integer VoidTypeID;
     private Integer VoidStaffID;
-    private java.util.Date VoidDateTime;
+    private String VoidDateTime;
     private Integer VATType;
     private Integer PrintGroup;
     private Integer NoPrintBill;
     private Integer NoRePrintOrder;
-    private java.util.Date StartTime;
-    private java.util.Date FinishTime;
+    private String StartTime;
+    private String FinishTime;
     private Integer PrintStatus;
     private Integer ProcessID;
-    private java.util.Date SubmitOrderDateTime;
+    private String SubmitOrderDateTime;
     private String Comment;
     private Integer IsComment;
     private Integer Deleted;
@@ -92,7 +92,7 @@ public class OrderDetail {
         this.ComputerID = ComputerID;
     }
 
-    public OrderDetail(Integer OrderDetailID, Integer TransactionID, Integer ComputerID, Integer ComponentLevel, Integer OrderDetailLinkID, Integer InsertOrderNo, Integer IndentLevel, Integer DisplayOrdering, java.util.Date SaleDate, Integer ShopID, Integer ProductID, Integer ProductSetType, Integer OrderStatusID, Integer SaleMode, Double TotalQty, Double PricePerUnit, Double TotalRetailPrice, Double OrgPricePerUnit, Double OrgTotalRetailPrice, Double DiscPrice, Double DiscPercent, Double DiscAmount, Double DiscOtherPercent, Double DiscOther, Double TotalItemDisc, Double SalePrice, Double DiscBill, Double TotalDiscount, Double NetSale, Double Vatable, String ProductVATCode, String VATDisplay, Double ProductVATPercent, Double ProductVAT, Double ProductBeforeVAT, Double TotalRetailVAT, Double DiscVAT, Integer IsSCBeforeDisc, Integer HasServiceCharge, Double SCPercent, Double SCAmount, Double SCVAT, Double SCBeforeVAT, Double WVatable, Double SCWAmount, Double SCWVAT, Double SCWBeforeVAT, Double WeightPrice, Double WeightPriceVAT, Double WeightBeforeVAT, String OtherFoodName, Integer OtherProductGroupID, Integer DiscountAllow, Integer ItemDiscAllow, Integer LastTransactionID, Integer LastComputerID, Integer PrinterID, Integer InventoryID, Integer OrderStaffID, Integer OrderComputerID, Integer OrderTableID, Integer VoidTypeID, Integer VoidStaffID, java.util.Date VoidDateTime, Integer VATType, Integer PrintGroup, Integer NoPrintBill, Integer NoRePrintOrder, java.util.Date StartTime, java.util.Date FinishTime, Integer PrintStatus, Integer ProcessID, java.util.Date SubmitOrderDateTime, String Comment, Integer IsComment, Integer Deleted) {
+    public OrderDetail(Integer OrderDetailID, Integer TransactionID, Integer ComputerID, Integer ComponentLevel, Integer OrderDetailLinkID, Integer InsertOrderNo, Integer IndentLevel, Integer DisplayOrdering, String SaleDate, Integer ShopID, Integer ProductID, Integer ProductSetType, Integer OrderStatusID, Integer SaleMode, Double TotalQty, Double PricePerUnit, Double TotalRetailPrice, Double OrgPricePerUnit, Double OrgTotalRetailPrice, Double DiscPrice, Double DiscPercent, Double DiscAmount, Double DiscOtherPercent, Double DiscOther, Double TotalItemDisc, Double SalePrice, Double DiscBill, Double TotalDiscount, Double NetSale, Double Vatable, String ProductVATCode, String VATDisplay, Double ProductVATPercent, Double ProductVAT, Double ProductBeforeVAT, Double TotalRetailVAT, Double DiscVAT, Integer IsSCBeforeDisc, Integer HasServiceCharge, Double SCPercent, Double SCAmount, Double SCVAT, Double SCBeforeVAT, Double WVatable, Double SCWAmount, Double SCWVAT, Double SCWBeforeVAT, Double WeightPrice, Double WeightPriceVAT, Double WeightBeforeVAT, String OtherFoodName, Integer OtherProductGroupID, Integer DiscountAllow, Integer ItemDiscAllow, Integer LastTransactionID, Integer LastComputerID, Integer PrinterID, Integer InventoryID, Integer OrderStaffID, Integer OrderComputerID, Integer OrderTableID, Integer VoidTypeID, Integer VoidStaffID, String VoidDateTime, Integer VATType, Integer PrintGroup, Integer NoPrintBill, Integer NoRePrintOrder, String StartTime, String FinishTime, Integer PrintStatus, Integer ProcessID, String SubmitOrderDateTime, String Comment, Integer IsComment, Integer Deleted) {
         this.OrderDetailID = OrderDetailID;
         this.TransactionID = TransactionID;
         this.ComputerID = ComputerID;
@@ -235,11 +235,11 @@ public class OrderDetail {
         this.DisplayOrdering = DisplayOrdering;
     }
 
-    public java.util.Date getSaleDate() {
+    public String getSaleDate() {
         return SaleDate;
     }
 
-    public void setSaleDate(java.util.Date SaleDate) {
+    public void setSaleDate(String SaleDate) {
         this.SaleDate = SaleDate;
     }
 
@@ -675,11 +675,11 @@ public class OrderDetail {
         this.VoidStaffID = VoidStaffID;
     }
 
-    public java.util.Date getVoidDateTime() {
+    public String getVoidDateTime() {
         return VoidDateTime;
     }
 
-    public void setVoidDateTime(java.util.Date VoidDateTime) {
+    public void setVoidDateTime(String VoidDateTime) {
         this.VoidDateTime = VoidDateTime;
     }
 
@@ -715,19 +715,19 @@ public class OrderDetail {
         this.NoRePrintOrder = NoRePrintOrder;
     }
 
-    public java.util.Date getStartTime() {
+    public String getStartTime() {
         return StartTime;
     }
 
-    public void setStartTime(java.util.Date StartTime) {
+    public void setStartTime(String StartTime) {
         this.StartTime = StartTime;
     }
 
-    public java.util.Date getFinishTime() {
+    public String getFinishTime() {
         return FinishTime;
     }
 
-    public void setFinishTime(java.util.Date FinishTime) {
+    public void setFinishTime(String FinishTime) {
         this.FinishTime = FinishTime;
     }
 
@@ -747,11 +747,11 @@ public class OrderDetail {
         this.ProcessID = ProcessID;
     }
 
-    public java.util.Date getSubmitOrderDateTime() {
+    public String getSubmitOrderDateTime() {
         return SubmitOrderDateTime;
     }
 
-    public void setSubmitOrderDateTime(java.util.Date SubmitOrderDateTime) {
+    public void setSubmitOrderDateTime(String SubmitOrderDateTime) {
         this.SubmitOrderDateTime = SubmitOrderDateTime;
     }
 

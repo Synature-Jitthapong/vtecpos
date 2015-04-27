@@ -2,6 +2,12 @@ package com.vtec.j1tth4.vtecpos;
 
 import android.content.Context;
 
+import com.vtec.j1tth4.vtecpos.dao.ProductComponentDao;
+import com.vtec.j1tth4.vtecpos.dao.ProductTypeDao;
+import com.vtec.j1tth4.vtecpos.dao.ProductVatDao;
+import com.vtec.j1tth4.vtecpos.dao.Products;
+import com.vtec.j1tth4.vtecpos.dao.ProductsDao;
+
 import java.util.List;
 
 import de.greenrobot.dao.query.Query;

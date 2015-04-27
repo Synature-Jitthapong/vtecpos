@@ -615,7 +615,7 @@ public class MyDaoGenerator {
         document.addIntProperty(COLUMN_DOCUMENT_YEAR).columnName(COLUMN_DOCUMENT_YEAR);
         document.addIntProperty(COLUMN_DOCUMENT_MONTH).columnName(COLUMN_DOCUMENT_MONTH);
         document.addIntProperty(COLUMN_DOCUMENT_NUMBER).columnName(COLUMN_DOCUMENT_NUMBER);
-        document.addDateProperty(COLUMN_DOCUMENT_DATE).columnName(COLUMN_DOCUMENT_DATE);
+        document.addStringProperty(COLUMN_DOCUMENT_DATE).columnName(COLUMN_DOCUMENT_DATE);
         document.addIntProperty(COLUMN_INPUT_BY).columnName(COLUMN_INPUT_BY);
         document.addIntProperty(COLUMN_UPDATE_BY).columnName(COLUMN_UPDATE_BY);
         document.addIntProperty(COLUMN_APPROVE_BY).columnName(COLUMN_APPROVE_BY);
@@ -634,13 +634,13 @@ public class MyDaoGenerator {
         document.addIntProperty(COLUMN_IS_SMALL_UNIT).columnName(COLUMN_IS_SMALL_UNIT);
         document.addStringProperty(COLUMN_REMARK).columnName(COLUMN_REMARK);
         document.addIntProperty(COLUMN_TERM_OF_PAYMENT).columnName(COLUMN_TERM_OF_PAYMENT);
-        document.addDateProperty(COLUMN_DUE_DATE).columnName(COLUMN_DUE_DATE);
+        document.addStringProperty(COLUMN_DUE_DATE).columnName(COLUMN_DUE_DATE);
         document.addStringProperty(COLUMN_DOCUMENT_HEADER).columnName(COLUMN_DOCUMENT_HEADER);
         document.addIntProperty(COLUMN_CREDIT_DAY).columnName(COLUMN_CREDIT_DAY);
-        document.addDateProperty(COLUMN_INSERT_DATE).columnName(COLUMN_INSERT_DATE);
-        document.addDateProperty(COLUMN_UPDATE_DATE).columnName(COLUMN_UPDATE_DATE);
-        document.addDateProperty(COLUMN_APPROVE_DATE).columnName(COLUMN_APPROVE_DATE);
-        document.addDateProperty(COLUMN_CANCEL_DATE).columnName(COLUMN_CANCEL_DATE);
+        document.addStringProperty(COLUMN_INSERT_DATE).columnName(COLUMN_INSERT_DATE);
+        document.addStringProperty(COLUMN_UPDATE_DATE).columnName(COLUMN_UPDATE_DATE);
+        document.addStringProperty(COLUMN_APPROVE_DATE).columnName(COLUMN_APPROVE_DATE);
+        document.addStringProperty(COLUMN_CANCEL_DATE).columnName(COLUMN_CANCEL_DATE);
         document.addIntProperty(COLUMN_NEW_SEND).columnName(COLUMN_NEW_SEND);
         document.addIntProperty(COLUMN_CURRENT_STAFF_ACCESS).columnName(COLUMN_CURRENT_STAFF_ACCESS);
         document.addDoubleProperty(COLUMN_OTHER_PERCENT_DISCOUNT).columnName(COLUMN_OTHER_PERCENT_DISCOUNT);
@@ -690,13 +690,13 @@ public class MyDaoGenerator {
         fcCardHistory.addIntProperty(COLUMN_TRANSACTION_ID).columnName(COLUMN_TRANSACTION_ID);
         fcCardHistory.addIntProperty(COLUMN_COMPUTER_ID).columnName(COLUMN_COMPUTER_ID);
         fcCardHistory.addIntProperty(COLUMN_SHOP_ID).columnName(COLUMN_SHOP_ID);
-        fcCardHistory.addDateProperty(COLUMN_SALE_DATE).columnName(COLUMN_SALE_DATE);
+        fcCardHistory.addStringProperty(COLUMN_SALE_DATE).columnName(COLUMN_SALE_DATE);
         fcCardHistory.addStringProperty(COLUMN_RECEIPT_NO).columnName(COLUMN_RECEIPT_NO);
         fcCardHistory.addDoubleProperty(COLUMN_PREVIOUS_BALANCE).columnName(COLUMN_PREVIOUS_BALANCE);
         fcCardHistory.addDoubleProperty(COLUMN_TRANS_AMOUNT).columnName(COLUMN_TRANS_AMOUNT);
         fcCardHistory.addIntProperty(COLUMN_DOC_TYPE).columnName(COLUMN_DOC_TYPE);
         fcCardHistory.addIntProperty(COLUMN_STAFF_ID).columnName(COLUMN_STAFF_ID);
-        fcCardHistory.addDateProperty(COLUMN_INSERT_DATE).columnName(COLUMN_INSERT_DATE);
+        fcCardHistory.addStringProperty(COLUMN_INSERT_DATE).columnName(COLUMN_INSERT_DATE);
         fcCardHistory.setSkipTableCreation(true);
     }
 
@@ -713,9 +713,9 @@ public class MyDaoGenerator {
         fcCardInfo.addIntProperty(COLUMN_CREATE_STAFF_ID).columnName(COLUMN_STAFF_ID);
         fcCardInfo.addIntProperty(COLUMN_UPDATE_STAFF_ID).columnName(COLUMN_UPDATE_STAFF_ID);
         fcCardInfo.addIntProperty(COLUMN_MEMBER_ID).columnName(COLUMN_MEMBER_ID);
-        fcCardInfo.addDateProperty(COLUMN_CREATE_DATE).columnName(COLUMN_CREATE_DATE);
-        fcCardInfo.addDateProperty(COLUMN_UPDATE_DATE).columnName(COLUMN_UPDATE_DATE);
-        fcCardInfo.addDateProperty(COLUMN_EXPIRE_DATE).columnName(COLUMN_EXPIRE_DATE);
+        fcCardInfo.addStringProperty(COLUMN_CREATE_DATE).columnName(COLUMN_CREATE_DATE);
+        fcCardInfo.addStringProperty(COLUMN_UPDATE_DATE).columnName(COLUMN_UPDATE_DATE);
+        fcCardInfo.addStringProperty(COLUMN_EXPIRE_DATE).columnName(COLUMN_EXPIRE_DATE);
         fcCardInfo.addIntProperty(COLUMN_DELETED).columnName(COLUMN_DELETED);
         fcCardInfo.setSkipTableCreation(true);
     }
@@ -729,10 +729,10 @@ public class MyDaoGenerator {
         fcTranDetail.addIntProperty(COLUMN_CARD_ID).columnName(COLUMN_CARD_ID);
         fcTranDetail.addStringProperty(COLUMN_CARD_NO).columnName(COLUMN_CARD_NO);
         fcTranDetail.addIntProperty(COLUMN_SHOP_ID).columnName(COLUMN_SHOP_ID);
-        fcTranDetail.addDateProperty(COLUMN_SALE_DATE).columnName(COLUMN_SALE_DATE);
+        fcTranDetail.addStringProperty(COLUMN_SALE_DATE).columnName(COLUMN_SALE_DATE);
         fcTranDetail.addDoubleProperty(COLUMN_TRANS_AMOUNT).columnName(COLUMN_TRANS_AMOUNT);
         fcTranDetail.addIntProperty(COLUMN_RECORD_STATUS).columnName(COLUMN_RECORD_STATUS);
-        fcTranDetail.addDateProperty(COLUMN_INSERT_DATE).columnName(COLUMN_INSERT_DATE);
+        fcTranDetail.addStringProperty(COLUMN_INSERT_DATE).columnName(COLUMN_INSERT_DATE);
         fcTranDetail.setSkipTableCreation(true);
     }
 
@@ -744,7 +744,7 @@ public class MyDaoGenerator {
         fcTransPayment.addIntProperty(COLUMN_COMPUTER_ID).columnName(COLUMN_COMPUTER_ID).primaryKey();
         fcTransPayment.addIntProperty(COLUMN_PAY_TYPE_ID).columnName(COLUMN_PAY_TYPE_ID);
         fcTransPayment.addIntProperty(COLUMN_SHOP_ID).columnName(COLUMN_SHOP_ID);
-        fcTransPayment.addDateProperty(COLUMN_SALE_DATE).columnName(COLUMN_SALE_DATE);
+        fcTransPayment.addStringProperty(COLUMN_SALE_DATE).columnName(COLUMN_SALE_DATE);
         fcTransPayment.addDoubleProperty(COLUMN_PAY_AMOUNT).columnName(COLUMN_PAY_AMOUNT);
         fcTransPayment.addStringProperty(COLUMN_CC_NUMBER).columnName(COLUMN_CC_NUMBER);
         fcTransPayment.addIntProperty(COLUMN_CC_EXP_MONTH).columnName(COLUMN_CC_EXP_MONTH);
@@ -755,7 +755,7 @@ public class MyDaoGenerator {
         fcTransPayment.addStringProperty(COLUMN_CC_APPROVE_CODE).columnName(COLUMN_CC_APPROVE_CODE);
         fcTransPayment.addStringProperty(COLUMN_CC_RESPONSE).columnName(COLUMN_CC_RESPONSE);
         fcTransPayment.addStringProperty(COLUMN_REMARK).columnName(COLUMN_REMARK);
-        fcTransPayment.addDateProperty(COLUMN_INSERT_DATE).columnName(COLUMN_INSERT_DATE);
+        fcTransPayment.addStringProperty(COLUMN_INSERT_DATE).columnName(COLUMN_INSERT_DATE);
         fcTransPayment.setSkipTableCreation(true);
     }
 
@@ -769,13 +769,13 @@ public class MyDaoGenerator {
         fcTrans.addIntProperty(COLUMN_RECEIPT_MONTH).columnName(COLUMN_RECEIPT_MONTH);
         fcTrans.addIntProperty(COLUMN_RECEIPT_ID).columnName(COLUMN_RECEIPT_ID);
         fcTrans.addIntProperty(COLUMN_SHOP_ID).columnName(COLUMN_RECEIPT_ID);
-        fcTrans.addDateProperty(COLUMN_SALE_DATE).columnName(COLUMN_SALE_DATE);
+        fcTrans.addStringProperty(COLUMN_SALE_DATE).columnName(COLUMN_SALE_DATE);
         fcTrans.addStringProperty(COLUMN_RECEIPT_NO).columnName(COLUMN_RECEIPT_NO);
         fcTrans.addDoubleProperty(COLUMN_TOTAL_AMOUNT).columnName(COLUMN_TOTAL_AMOUNT);
         fcTrans.addIntProperty(COLUMN_TRANS_STATUS).columnName(COLUMN_TRANS_STATUS);
         fcTrans.addIntProperty(COLUMN_DOC_TYPE).columnName(COLUMN_DOC_TYPE);
         fcTrans.addIntProperty(COLUMN_STAFF_ID).columnName(COLUMN_STAFF_ID);
-        fcTrans.addDateProperty(COLUMN_INSERT_DATE).columnName(COLUMN_INSERT_DATE);
+        fcTrans.addStringProperty(COLUMN_INSERT_DATE).columnName(COLUMN_INSERT_DATE);
         fcTrans.setSkipTableCreation(true);
     }
 
@@ -829,21 +829,21 @@ public class MyDaoGenerator {
         staff.addStringProperty("StaffTelephone");
         staff.addStringProperty("StaffMobile");
         staff.addStringProperty("StaffEmail");
-        staff.addDateProperty("StaffBirthDay");
+        staff.addStringProperty("StaffBirthDay");
         staff.addStringProperty("StaffAdditional");
         staff.addStringProperty("StaffIDNumber");
-        staff.addDateProperty("StaffIDIssueDate");
-        staff.addDateProperty("StaffIDExpiration");
+        staff.addStringProperty("StaffIDIssueDate");
+        staff.addStringProperty("StaffIDExpiration");
         staff.addStringProperty("StaffBlood");
         staff.addStringProperty("StaffPictureFileServer");
         staff.addStringProperty("StaffPictureFileClient");
         staff.addDoubleProperty("BasedSalary");
         staff.addIntProperty("LangID");
-        staff.addDateProperty("InputDate");
+        staff.addStringProperty("InputDate");
         staff.addIntProperty("InputBy");
-        staff.addDateProperty("UpdateDate");
+        staff.addStringProperty("UpdateDate");
         staff.addIntProperty("UpdateBy");
-        staff.addDateProperty("LastUseDate");
+        staff.addStringProperty("LastUseDate");
         staff.addIntProperty("Activated");
         staff.addIntProperty("Deleted");
         staff.addIntProperty("AddingFromBranch");
@@ -861,7 +861,7 @@ public class MyDaoGenerator {
         orderDetail.addIntProperty(COLUMN_INSERT_ORDER_NO).columnName(COLUMN_INSERT_ORDER_NO);
         orderDetail.addIntProperty(COLUMN_INDENT_LEVEL).columnName(COLUMN_INDENT_LEVEL);
         orderDetail.addIntProperty(COLUMN_DISPLAY_ORDERING).columnName(COLUMN_DISPLAY_ORDERING);
-        orderDetail.addDateProperty(COLUMN_SALE_DATE).columnName(COLUMN_SALE_DATE);
+        orderDetail.addStringProperty(COLUMN_SALE_DATE).columnName(COLUMN_SALE_DATE);
         orderDetail.addIntProperty(COLUMN_SHOP_ID).columnName(COLUMN_SHOP_ID);
         orderDetail.addIntProperty(COLUMN_PRODUCT_ID).columnName(COLUMN_PRODUCT_ID);
         orderDetail.addIntProperty(COLUMN_PRODUCT_SET_TYPE).columnName(COLUMN_PRODUCT_SET_TYPE);
@@ -916,16 +916,16 @@ public class MyDaoGenerator {
         orderDetail.addIntProperty(COLUMN_ORDER_TABLE_ID).columnName(COLUMN_ORDER_TABLE_ID);
         orderDetail.addIntProperty(COLUMN_VOID_TYPE_ID).columnName(COLUMN_VOID_TYPE_ID);
         orderDetail.addIntProperty(COLUMN_VOID_STAFF_ID).columnName(COLUMN_VOID_STAFF_ID);
-        orderDetail.addDateProperty(COLUMN_VOID_DATE_TIME).columnName(COLUMN_VOID_DATE_TIME);
+        orderDetail.addStringProperty(COLUMN_VOID_DATE_TIME).columnName(COLUMN_VOID_DATE_TIME);
         orderDetail.addIntProperty(COLUMN_VAT_TYPE).columnName(COLUMN_VAT_TYPE);
         orderDetail.addIntProperty(COLUMN_PRINT_GROUP).columnName(COLUMN_PRINT_GROUP);
         orderDetail.addIntProperty(COLUMN_NO_PRINT_BILL).columnName(COLUMN_NO_PRINT_BILL);
         orderDetail.addIntProperty(COLUMN_NO_PRINT_ORDER).columnName(COLUMN_NO_PRINT_ORDER);
-        orderDetail.addDateProperty(COLUMN_START_TIME).columnName(COLUMN_START_TIME);
-        orderDetail.addDateProperty(COLUMN_FINISH_TIME).columnName(COLUMN_FINISH_TIME);
+        orderDetail.addStringProperty(COLUMN_START_TIME).columnName(COLUMN_START_TIME);
+        orderDetail.addStringProperty(COLUMN_FINISH_TIME).columnName(COLUMN_FINISH_TIME);
         orderDetail.addIntProperty(COLUMN_PRINT_STATUS).columnName(COLUMN_PRINT_STATUS);
         orderDetail.addIntProperty(COLUMN_PROCESS_ID).columnName(COLUMN_PROCESS_ID);
-        orderDetail.addDateProperty(COLUMN_SUBMIT_ORDER_DATE_TIME).columnName(COLUMN_SUBMIT_ORDER_DATE_TIME);
+        orderDetail.addStringProperty(COLUMN_SUBMIT_ORDER_DATE_TIME).columnName(COLUMN_SUBMIT_ORDER_DATE_TIME);
         orderDetail.addStringProperty(COLUMN_COMMENT).columnName(COLUMN_COMMENT);
         orderDetail.addIntProperty(COLUMN_IS_COMMENT).columnName(COLUMN_IS_COMMENT);
         orderDetail.addIntProperty(COLUMN_DELETED).columnName(COLUMN_DELETED);
@@ -945,7 +945,7 @@ public class MyDaoGenerator {
         orderPayDetail.addIntProperty(COLUMN_EXPIRE_MONTH).columnName(COLUMN_EXPIRE_MONTH);
         orderPayDetail.addIntProperty(COLUMN_EXPIRE_YEAR).columnName(COLUMN_EXPIRE_YEAR);
         orderPayDetail.addStringProperty(COLUMN_CHEQUE_NUMBER).columnName(COLUMN_CHEQUE_NUMBER);
-        orderPayDetail.addDateProperty(COLUMN_CHEQUE_DATE).columnName(COLUMN_CHEQUE_DATE);
+        orderPayDetail.addStringProperty(COLUMN_CHEQUE_DATE).columnName(COLUMN_CHEQUE_DATE);
         orderPayDetail.addStringProperty(COLUMN_BANK_NAME).columnName(COLUMN_BANK_NAME);
         orderPayDetail.addIntProperty(COLUMN_CREDIT_CARD_TYPE).columnName(COLUMN_CREDIT_CARD_TYPE);
         orderPayDetail.addStringProperty(COLUMN_PAID_BY_NAME).columnName(COLUMN_PAID_BY_NAME);
@@ -972,10 +972,10 @@ public class MyDaoGenerator {
         orderPrintJob.addIntProperty(COLUMN_PRINT_NO).columnName(COLUMN_PRINT_NO).primaryKey();
         orderPrintJob.addIntProperty(COLUMN_PRINTER_ID).columnName(COLUMN_PRINTER_ID);
         orderPrintJob.addIntProperty(COLUMN_IS_PRINT_SUMMARY).columnName(COLUMN_IS_PRINT_SUMMARY);
-        orderPrintJob.addDateProperty(COLUMN_INSERT_DATE_TIME).columnName(COLUMN_INSERT_DATE_TIME);
-        orderPrintJob.addDateProperty(COLUMN_PRINT_DATE_TIME).columnName(COLUMN_PRINT_DATE_TIME);
-        orderPrintJob.addDateProperty(COLUMN_FINISH_DATE_TIME).columnName(COLUMN_PRINT_DATE_TIME);
-        orderPrintJob.addDateProperty(COLUMN_SALE_DATE).columnName(COLUMN_SALE_DATE);
+        orderPrintJob.addStringProperty(COLUMN_INSERT_DATE_TIME).columnName(COLUMN_INSERT_DATE_TIME);
+        orderPrintJob.addStringProperty(COLUMN_PRINT_DATE_TIME).columnName(COLUMN_PRINT_DATE_TIME);
+        orderPrintJob.addStringProperty(COLUMN_FINISH_DATE_TIME).columnName(COLUMN_PRINT_DATE_TIME);
+        orderPrintJob.addStringProperty(COLUMN_SALE_DATE).columnName(COLUMN_SALE_DATE);
         orderPrintJob.addIntProperty(COLUMN_SHOP_ID).columnName(COLUMN_SHOP_ID);
         orderPrintJob.addIntProperty(COLUMN_PRINT_FROM_COMPUTER_ID).columnName(COLUMN_PRINT_FROM_COMPUTER_ID);
         orderPrintJob.addIntProperty(COLUMN_PRINT_STATUS).columnName(COLUMN_PRINT_STATUS);
@@ -988,13 +988,13 @@ public class MyDaoGenerator {
         orderTransaction.addIntProperty(COLUMN_TRANSACTION_ID).columnName(COLUMN_TRANSACTION_ID).primaryKey();
         orderTransaction.addIntProperty(COLUMN_COMPUTER_ID).columnName(COLUMN_COMPUTER_ID).primaryKey();
         orderTransaction.addStringProperty(COLUMN_TRANSACTION_UUID).columnName(COLUMN_TRANSACTION_UUID);
-        orderTransaction.addDateProperty(COLUMN_RESERVE_TIME).columnName(COLUMN_RESERVE_TIME);
+        orderTransaction.addStringProperty(COLUMN_RESERVE_TIME).columnName(COLUMN_RESERVE_TIME);
         orderTransaction.addIntProperty(COLUMN_RESERVE_STAFF_ID).columnName(COLUMN_RESERVE_STAFF_ID);
-        orderTransaction.addDateProperty(COLUMN_OPEN_TIME).columnName(COLUMN_OPEN_TIME);
+        orderTransaction.addStringProperty(COLUMN_OPEN_TIME).columnName(COLUMN_OPEN_TIME);
         orderTransaction.addIntProperty(COLUMN_OPEN_STAFF_ID).columnName(COLUMN_OPEN_STAFF_ID);
-        orderTransaction.addDateProperty(COLUMN_PAID_TIME).columnName(COLUMN_PAID_TIME);
+        orderTransaction.addStringProperty(COLUMN_PAID_TIME).columnName(COLUMN_PAID_TIME);
         orderTransaction.addIntProperty(COLUMN_PAID_STAFF_ID).columnName(COLUMN_PAID_STAFF_ID);
-        orderTransaction.addDateProperty(COLUMN_CLOSE_TIME).columnName(COLUMN_CLOSE_TIME);
+        orderTransaction.addStringProperty(COLUMN_CLOSE_TIME).columnName(COLUMN_CLOSE_TIME);
         orderTransaction.addIntProperty(COLUMN_COMM_STAFF_ID).columnName(COLUMN_COMM_STAFF_ID);
         orderTransaction.addDoubleProperty(COLUMN_DISCOUNT_ITEM).columnName(COLUMN_DISCOUNT_ITEM);
         orderTransaction.addDoubleProperty(COLUMN_DISCOUNT_BILL).columnName(COLUMN_DISCOUNT_BILL);
@@ -1011,7 +1011,7 @@ public class MyDaoGenerator {
         orderTransaction.addIntProperty(COLUMN_RECEIPT_MONTH).columnName(COLUMN_RECEIPT_MONTH);
         orderTransaction.addIntProperty(COLUMN_RECEIPT_ID).columnName(COLUMN_RECEIPT_ID);
         orderTransaction.addStringProperty(COLUMN_RECEIPT_NUMBER).columnName(COLUMN_RECEIPT_NUMBER);
-        orderTransaction.addDateProperty(COLUMN_SALE_DATE).columnName(COLUMN_SALE_DATE);
+        orderTransaction.addStringProperty(COLUMN_SALE_DATE).columnName(COLUMN_SALE_DATE);
         orderTransaction.addIntProperty(COLUMN_SHOP_ID).columnName(COLUMN_SHOP_ID);
         orderTransaction.addDoubleProperty(COLUMN_TRANSACTION_VAT).columnName(COLUMN_TRANSACTION_VAT);
         orderTransaction.addDoubleProperty(COLUMN_TRANSACTION_VATABLE).columnName(COLUMN_TRANSACTION_VATABLE);
@@ -1036,7 +1036,7 @@ public class MyDaoGenerator {
         orderTransaction.addIntProperty(COLUMN_CLOSE_COMPUTER_ID).columnName(COLUMN_CLOSE_COMPUTER_ID);
         orderTransaction.addIntProperty(COLUMN_VOID_STAFF_ID).columnName(COLUMN_VOID_STAFF_ID);
         orderTransaction.addStringProperty(COLUMN_VOID_REASON).columnName(COLUMN_VOID_REASON);
-        orderTransaction.addDateProperty(COLUMN_VOID_TIME).columnName(COLUMN_VOID_TIME);
+        orderTransaction.addStringProperty(COLUMN_VOID_TIME).columnName(COLUMN_VOID_TIME);
         orderTransaction.addIntProperty(COLUMN_IS_CLONE_BILL).columnName(COLUMN_IS_CLONE_BILL);
         orderTransaction.addIntProperty(COLUMN_VOID_TRANS_ID).columnName(COLUMN_VOID_TRANS_ID);
         orderTransaction.addIntProperty(COLUMN_VOID_COM_ID).columnName(COLUMN_VOID_COM_ID);
@@ -1049,11 +1049,11 @@ public class MyDaoGenerator {
         orderTransaction.addIntProperty(COLUMN_CALL_FOR_CHECK_BILl).columnName(COLUMN_CALL_FOR_CHECK_BILl);
         orderTransaction.addStringProperty(COLUMN_TRANSACTION_NOTE).columnName(COLUMN_TRANSACTION_NOTE);
         orderTransaction.addIntProperty(COLUMN_CURRENT_ACCESS_COMPUTER).columnName(COLUMN_CURRENT_ACCESS_COMPUTER);
-        orderTransaction.addDateProperty(COLUMN_UPDATE_DATE).columnName(COLUMN_UPDATE_DATE);
-        orderTransaction.addDateProperty(COLUMN_BEGIN_TIME).columnName(COLUMN_BEGIN_TIME);
-        orderTransaction.addDateProperty(COLUMN_END_TIME).columnName(COLUMN_END_TIME);
-        orderTransaction.addDateProperty(COLUMN_PRINT_WARNING_TIME).columnName(COLUMN_PRINT_WARNING_TIME);
-        orderTransaction.addDateProperty(COLUMN_PRINT_BEGIN_TIME).columnName(COLUMN_PRINT_BEGIN_TIME);
+        orderTransaction.addStringProperty(COLUMN_UPDATE_DATE).columnName(COLUMN_UPDATE_DATE);
+        orderTransaction.addStringProperty(COLUMN_BEGIN_TIME).columnName(COLUMN_BEGIN_TIME);
+        orderTransaction.addStringProperty(COLUMN_END_TIME).columnName(COLUMN_END_TIME);
+        orderTransaction.addStringProperty(COLUMN_PRINT_WARNING_TIME).columnName(COLUMN_PRINT_WARNING_TIME);
+        orderTransaction.addStringProperty(COLUMN_PRINT_BEGIN_TIME).columnName(COLUMN_PRINT_BEGIN_TIME);
         orderTransaction.addIntProperty(COLUMN_ALREADY_CALCULATE_STOCK).columnName(COLUMN_ALREADY_CALCULATE_STOCK);
         orderTransaction.addIntProperty(COLUMN_ALREADY_EXPORT_TO_HQ).columnName(COLUMN_ALREADY_EXPORT_TO_HQ);
         orderTransaction.addIntProperty(COLUMN_TABLE_ID).columnName(COLUMN_TABLE_ID);
@@ -1084,11 +1084,11 @@ public class MyDaoGenerator {
     public static void createSessionEnddayDetailEntity(Schema schema){
         Entity sessionEndday = schema.addEntity(SESSION_ENDDAY_DETAIL_ENTITY);
         sessionEndday.setTableName(SESSION_ENDDAY_DETAIL_ENTITY);
-        sessionEndday.addDateProperty("SessionDate").notNull().primaryKey();
+        sessionEndday.addStringProperty("SessionDate").notNull().primaryKey();
         sessionEndday.addIntProperty("ShopID").notNull();
         sessionEndday.addIntProperty("IsEndDay");
         sessionEndday.addIntProperty("EndDayStaffID");
-        sessionEndday.addDateProperty("EndDayDateTime");
+        sessionEndday.addStringProperty("EndDayDateTime");
         sessionEndday.addIntProperty("TotalReceipt");
         sessionEndday.addDoubleProperty("TotalPayPrice");
         sessionEndday.addIntProperty("EndDayComputerID");
@@ -1104,16 +1104,16 @@ public class MyDaoGenerator {
         session.addIntProperty("ComputerID").notNull();
         session.addIntProperty("OpenStaffID").notNull();
         session.addIntProperty("CloseStaffID");
-        session.addDateProperty("OpenSessionDateTime");
-        session.addDateProperty("CloseSessionDateTime");
-        session.addDateProperty("SessionDate");
+        session.addStringProperty("OpenSessionDateTime");
+        session.addStringProperty("CloseSessionDateTime");
+        session.addStringProperty("SessionDate");
         session.addDoubleProperty("OpenSessionAmount").notNull();
         session.addDoubleProperty("CashAmount");
         session.addDoubleProperty("CashInAmount");
         session.addDoubleProperty("CashOutAmount");
         session.addDoubleProperty("CloseSessionAmount");
         session.addDoubleProperty("CashShortOver");
-        session.addDateProperty("SessionUpdateDate");
+        session.addStringProperty("SessionUpdateDate");
         session.addIntProperty("ShopID");
         session.addIntProperty("IsEndDaySession");
         session.setSkipTableCreation(true);
@@ -1146,8 +1146,8 @@ public class MyDaoGenerator {
         shopData.addIntProperty(COLUMN_SHOP_CAT_ID8).columnName(COLUMN_SHOP_CAT_ID8);
         shopData.addIntProperty(COLUMN_SHOP_CAT_ID9).columnName(COLUMN_SHOP_CAT_ID9);
         shopData.addIntProperty(COLUMN_SHOP_CAT_ID10).columnName(COLUMN_SHOP_CAT_ID10);
-        shopData.addDateProperty(COLUMN_OPEN_HOUR).columnName(COLUMN_OPEN_HOUR);
-        shopData.addDateProperty(COLUMN_CLOSE_HOUR).columnName(COLUMN_CLOSE_HOUR);
+        shopData.addStringProperty(COLUMN_OPEN_HOUR).columnName(COLUMN_OPEN_HOUR);
+        shopData.addStringProperty(COLUMN_CLOSE_HOUR).columnName(COLUMN_CLOSE_HOUR);
         shopData.addStringProperty(COLUMN_COMPANY_NAME).columnName(COLUMN_COMPANY_NAME);
         shopData.addStringProperty(COLUMN_COMPANY_ADDRESS1).columnName(COLUMN_COMPANY_ADDRESS1);
         shopData.addStringProperty(COLUMN_COMPANY_ADDRESS2).columnName(COLUMN_COMPANY_ADDRESS2);
@@ -1242,10 +1242,10 @@ public class MyDaoGenerator {
         programPropertyValue.addIntProperty(COLUMN_KEY_ID).columnName(COLUMN_KEY_ID).primaryKey();
         programPropertyValue.addIntProperty(COLUMN_PROPERTY_VALUE).columnName(COLUMN_PROPERTY_VALUE);
         programPropertyValue.addStringProperty(COLUMN_PROPERTY_TEXT_VALUE).columnName(COLUMN_PROPERTY_TEXT_VALUE);
-        programPropertyValue.addDateProperty(COLUMN_PROPERTY_DATE_VALUE).columnName(COLUMN_PROPERTY_DATE_VALUE);
+        programPropertyValue.addStringProperty(COLUMN_PROPERTY_DATE_VALUE).columnName(COLUMN_PROPERTY_DATE_VALUE);
         programPropertyValue.addDoubleProperty(COLUMN_PROPERTY_DECIMAL_VALUE).columnName(COLUMN_PROPERTY_DECIMAL_VALUE);
         programPropertyValue.addIntProperty(COLUMN_UPDATE_STAFF_ID).columnName(COLUMN_UPDATE_STAFF_ID);
-        programPropertyValue.addDateProperty(COLUMN_UPDATE_DATE).columnName(COLUMN_UPDATE_DATE);
+        programPropertyValue.addStringProperty(COLUMN_UPDATE_DATE).columnName(COLUMN_UPDATE_DATE);
         programPropertyValue.setSkipTableCreation(true);
     }
 
@@ -1261,8 +1261,8 @@ public class MyDaoGenerator {
         Entity productPriceGroupDate = schema.addEntity(PRODUCT_PRICE_GROUP_DATE_ENTITY);
         productPriceGroupDate.setTableName(PRODUCT_PRICE_GROUP_DATE_ENTITY);
         productPriceGroupDate.addIntProperty(COLUMN_PRICE_GROUP_DATE_ID).columnName(COLUMN_PRICE_GROUP_DATE_ID).primaryKey();
-        productPriceGroupDate.addDateProperty(COLUMN_FROM_DATE).columnName(COLUMN_FROM_DATE);
-        productPriceGroupDate.addDateProperty(COLUMN_TO_DATE).columnName(COLUMN_TO_DATE);
+        productPriceGroupDate.addStringProperty(COLUMN_FROM_DATE).columnName(COLUMN_FROM_DATE);
+        productPriceGroupDate.addStringProperty(COLUMN_TO_DATE).columnName(COLUMN_TO_DATE);
         productPriceGroupDate.addIntProperty(COLUMN_DELETED).columnName(COLUMN_DELETED);
         productPriceGroupDate.setSkipTableCreation(true);
     }
@@ -1302,8 +1302,8 @@ public class MyDaoGenerator {
         productPrice.addDoubleProperty(COLUMN_MAIN_PRICE).columnName(COLUMN_MAIN_PRICE);
         productPrice.addIntProperty(COLUMN_SALE_MODE).columnName(COLUMN_SALE_MODE);
         productPrice.addStringProperty(COLUMN_PRICE_REMARK).columnName(COLUMN_PRICE_REMARK);
-        productPrice.addDateProperty(COLUMN_FROM_DATE).columnName(COLUMN_FROM_DATE);
-        productPrice.addDateProperty(COLUMN_TO_DATE).columnName(COLUMN_TO_DATE);
+        productPrice.addStringProperty(COLUMN_FROM_DATE).columnName(COLUMN_FROM_DATE);
+        productPrice.addStringProperty(COLUMN_TO_DATE).columnName(COLUMN_TO_DATE);
         productPrice.addIntProperty(COLUMN_ADDING_FROM_BRANCH).columnName(COLUMN_ADDING_FROM_BRANCH);
         productPrice.setSkipTableCreation(true);
     }
@@ -1314,8 +1314,8 @@ public class MyDaoGenerator {
         productCompGroup.addIntProperty(COLUMN_PGROUP_ID).columnName(COLUMN_PGROUP_ID).primaryKey();
         productCompGroup.addIntProperty(COLUMN_PRODUCT_ID).columnName(COLUMN_PRODUCT_ID);
         productCompGroup.addIntProperty(COLUMN_SALE_MODE).columnName(COLUMN_SALE_MODE);
-        productCompGroup.addDateProperty(COLUMN_START_DATE).columnName(COLUMN_START_DATE);
-        productCompGroup.addDateProperty(COLUMN_END_DATE).columnName(COLUMN_END_DATE);
+        productCompGroup.addStringProperty(COLUMN_START_DATE).columnName(COLUMN_START_DATE);
+        productCompGroup.addStringProperty(COLUMN_END_DATE).columnName(COLUMN_END_DATE);
         productCompGroup.addIntProperty(COLUMN_SET_GROUP_NO).columnName(COLUMN_SET_GROUP_NO);
         productCompGroup.addStringProperty(COLUMN_SET_GROUP_NAME).columnName(COLUMN_SET_GROUP_NAME);
         productCompGroup.addIntProperty(COLUMN_REQUIRE_ADD_AMOUNT_FOR_PRODUCT).columnName(COLUMN_REQUIRE_ADD_AMOUNT_FOR_PRODUCT);
@@ -1439,7 +1439,7 @@ public class MyDaoGenerator {
         products.addIntProperty(COLUMN_PRINTER_ID).columnName(COLUMN_PRINTER_ID);
         products.addIntProperty(COLUMN_PRINT_GROUP).columnName(COLUMN_PRINT_GROUP);
         products.addStringProperty(COLUMN_PRINT_PRODUCT_NAME).columnName(COLUMN_PRINT_PRODUCT_NAME);
-        products.addDateProperty(COLUMN_DURATION_TIME).columnName(COLUMN_DURATION_TIME);
+        products.addStringProperty(COLUMN_DURATION_TIME).columnName(COLUMN_DURATION_TIME);
         products.addIntProperty(COLUMN_HAS_SERVICE_CHARGE).columnName(COLUMN_HAS_SERVICE_CHARGE);
         products.addIntProperty(COLUMN_IS_OUTOF_STOCK).columnName(COLUMN_IS_OUTOF_STOCK);
         products.addIntProperty(COLUMN_AUTO_COMMENT).columnName(COLUMN_AUTO_COMMENT);
@@ -1448,11 +1448,11 @@ public class MyDaoGenerator {
         products.addIntProperty(COLUMN_IS_PRINT_RECEIPT).columnName(COLUMN_IS_PRINT_RECEIPT);
         products.addIntProperty(COLUMN_CAN_RETURN_PRODUCT).columnName(COLUMN_CAN_RETURN_PRODUCT);
         products.addIntProperty(COLUMN_DISPLAY_AT_CHECKER_SYSTEM).columnName(COLUMN_DISPLAY_AT_CHECKER_SYSTEM);
-        products.addDateProperty(COLUMN_PRODUCT_ENABLE_DATE_TIME).columnName(COLUMN_PRODUCT_ENABLE_DATE_TIME);
-        products.addDateProperty(COLUMN_PRODUCT_EXPIRE_DATE_TIME).columnName(COLUMN_PRODUCT_EXPIRE_DATE_TIME);
-        products.addDateProperty(COLUMN_PRODUCT_ENABLE_DAY_STRING).columnName(COLUMN_PRODUCT_ENABLE_DAY_STRING);
-        products.addDateProperty(COLUMN_WARNING_TIME).columnName(COLUMN_WARNING_TIME);
-        products.addDateProperty(COLUMN_CRITICAL_TIME).columnName(COLUMN_CRITICAL_TIME);
+        products.addStringProperty(COLUMN_PRODUCT_ENABLE_DATE_TIME).columnName(COLUMN_PRODUCT_ENABLE_DATE_TIME);
+        products.addStringProperty(COLUMN_PRODUCT_EXPIRE_DATE_TIME).columnName(COLUMN_PRODUCT_EXPIRE_DATE_TIME);
+        products.addStringProperty(COLUMN_PRODUCT_ENABLE_DAY_STRING).columnName(COLUMN_PRODUCT_ENABLE_DAY_STRING);
+        products.addStringProperty(COLUMN_WARNING_TIME).columnName(COLUMN_WARNING_TIME);
+        products.addStringProperty(COLUMN_CRITICAL_TIME).columnName(COLUMN_CRITICAL_TIME);
         products.addIntProperty(COLUMN_SALE_MODE1).columnName(COLUMN_SALE_MODE1);
         products.addIntProperty(COLUMN_SALE_MODE2).columnName(COLUMN_SALE_MODE2);
         products.addIntProperty(COLUMN_SALE_MODE3).columnName(COLUMN_SALE_MODE3);
@@ -1478,8 +1478,8 @@ public class MyDaoGenerator {
         products.addIntProperty(COLUMN_PRINT_ORDERING).columnName(COLUMN_PRINT_ORDERING);
         products.addIntProperty(COLUMN_ADDING_FROM_BRANCH).columnName(COLUMN_ADDING_FROM_BRANCH);
         products.addIntProperty(COLUMN_DELETED).columnName(COLUMN_DELETED);
-        products.addDateProperty(COLUMN_INSERT_DATE).columnName(COLUMN_INSERT_DATE);
-        products.addDateProperty(COLUMN_UPDATE_DATE).columnName(COLUMN_UPDATE_DATE);
+        products.addStringProperty(COLUMN_INSERT_DATE).columnName(COLUMN_INSERT_DATE);
+        products.addStringProperty(COLUMN_UPDATE_DATE).columnName(COLUMN_UPDATE_DATE);
         products.setSkipTableCreation(true);
     }
 }

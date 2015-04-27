@@ -38,21 +38,21 @@ public class StaffsDao extends AbstractDao<Staffs, Integer> {
         public final static Property StaffTelephone = new Property(12, String.class, "StaffTelephone", false, "STAFF_TELEPHONE");
         public final static Property StaffMobile = new Property(13, String.class, "StaffMobile", false, "STAFF_MOBILE");
         public final static Property StaffEmail = new Property(14, String.class, "StaffEmail", false, "STAFF_EMAIL");
-        public final static Property StaffBirthDay = new Property(15, java.util.Date.class, "StaffBirthDay", false, "STAFF_BIRTH_DAY");
+        public final static Property StaffBirthDay = new Property(15, String.class, "StaffBirthDay", false, "STAFF_BIRTH_DAY");
         public final static Property StaffAdditional = new Property(16, String.class, "StaffAdditional", false, "STAFF_ADDITIONAL");
         public final static Property StaffIDNumber = new Property(17, String.class, "StaffIDNumber", false, "STAFF_IDNUMBER");
-        public final static Property StaffIDIssueDate = new Property(18, java.util.Date.class, "StaffIDIssueDate", false, "STAFF_IDISSUE_DATE");
-        public final static Property StaffIDExpiration = new Property(19, java.util.Date.class, "StaffIDExpiration", false, "STAFF_IDEXPIRATION");
+        public final static Property StaffIDIssueDate = new Property(18, String.class, "StaffIDIssueDate", false, "STAFF_IDISSUE_DATE");
+        public final static Property StaffIDExpiration = new Property(19, String.class, "StaffIDExpiration", false, "STAFF_IDEXPIRATION");
         public final static Property StaffBlood = new Property(20, String.class, "StaffBlood", false, "STAFF_BLOOD");
         public final static Property StaffPictureFileServer = new Property(21, String.class, "StaffPictureFileServer", false, "STAFF_PICTURE_FILE_SERVER");
         public final static Property StaffPictureFileClient = new Property(22, String.class, "StaffPictureFileClient", false, "STAFF_PICTURE_FILE_CLIENT");
         public final static Property BasedSalary = new Property(23, Double.class, "BasedSalary", false, "BASED_SALARY");
         public final static Property LangID = new Property(24, Integer.class, "LangID", false, "LANG_ID");
-        public final static Property InputDate = new Property(25, java.util.Date.class, "InputDate", false, "INPUT_DATE");
+        public final static Property InputDate = new Property(25, String.class, "InputDate", false, "INPUT_DATE");
         public final static Property InputBy = new Property(26, Integer.class, "InputBy", false, "INPUT_BY");
-        public final static Property UpdateDate = new Property(27, java.util.Date.class, "UpdateDate", false, "UPDATE_DATE");
+        public final static Property UpdateDate = new Property(27, String.class, "UpdateDate", false, "UPDATE_DATE");
         public final static Property UpdateBy = new Property(28, Integer.class, "UpdateBy", false, "UPDATE_BY");
-        public final static Property LastUseDate = new Property(29, java.util.Date.class, "LastUseDate", false, "LAST_USE_DATE");
+        public final static Property LastUseDate = new Property(29, String.class, "LastUseDate", false, "LAST_USE_DATE");
         public final static Property Activated = new Property(30, Integer.class, "Activated", false, "ACTIVATED");
         public final static Property Deleted = new Property(31, Integer.class, "Deleted", false, "DELETED");
         public final static Property AddingFromBranch = new Property(32, Integer.class, "AddingFromBranch", false, "ADDING_FROM_BRANCH");
@@ -123,9 +123,9 @@ public class StaffsDao extends AbstractDao<Staffs, Integer> {
             stmt.bindString(15, StaffEmail);
         }
  
-        java.util.Date StaffBirthDay = entity.getStaffBirthDay();
+        String StaffBirthDay = entity.getStaffBirthDay();
         if (StaffBirthDay != null) {
-            stmt.bindLong(16, StaffBirthDay.getTime());
+            stmt.bindString(16, StaffBirthDay);
         }
  
         String StaffAdditional = entity.getStaffAdditional();
@@ -138,14 +138,14 @@ public class StaffsDao extends AbstractDao<Staffs, Integer> {
             stmt.bindString(18, StaffIDNumber);
         }
  
-        java.util.Date StaffIDIssueDate = entity.getStaffIDIssueDate();
+        String StaffIDIssueDate = entity.getStaffIDIssueDate();
         if (StaffIDIssueDate != null) {
-            stmt.bindLong(19, StaffIDIssueDate.getTime());
+            stmt.bindString(19, StaffIDIssueDate);
         }
  
-        java.util.Date StaffIDExpiration = entity.getStaffIDExpiration();
+        String StaffIDExpiration = entity.getStaffIDExpiration();
         if (StaffIDExpiration != null) {
-            stmt.bindLong(20, StaffIDExpiration.getTime());
+            stmt.bindString(20, StaffIDExpiration);
         }
  
         String StaffBlood = entity.getStaffBlood();
@@ -173,9 +173,9 @@ public class StaffsDao extends AbstractDao<Staffs, Integer> {
             stmt.bindLong(25, LangID);
         }
  
-        java.util.Date InputDate = entity.getInputDate();
+        String InputDate = entity.getInputDate();
         if (InputDate != null) {
-            stmt.bindLong(26, InputDate.getTime());
+            stmt.bindString(26, InputDate);
         }
  
         Integer InputBy = entity.getInputBy();
@@ -183,9 +183,9 @@ public class StaffsDao extends AbstractDao<Staffs, Integer> {
             stmt.bindLong(27, InputBy);
         }
  
-        java.util.Date UpdateDate = entity.getUpdateDate();
+        String UpdateDate = entity.getUpdateDate();
         if (UpdateDate != null) {
-            stmt.bindLong(28, UpdateDate.getTime());
+            stmt.bindString(28, UpdateDate);
         }
  
         Integer UpdateBy = entity.getUpdateBy();
@@ -193,9 +193,9 @@ public class StaffsDao extends AbstractDao<Staffs, Integer> {
             stmt.bindLong(29, UpdateBy);
         }
  
-        java.util.Date LastUseDate = entity.getLastUseDate();
+        String LastUseDate = entity.getLastUseDate();
         if (LastUseDate != null) {
-            stmt.bindLong(30, LastUseDate.getTime());
+            stmt.bindString(30, LastUseDate);
         }
  
         Integer Activated = entity.getActivated();
@@ -239,21 +239,21 @@ public class StaffsDao extends AbstractDao<Staffs, Integer> {
             cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12), // StaffTelephone
             cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // StaffMobile
             cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // StaffEmail
-            cursor.isNull(offset + 15) ? null : new java.util.Date(cursor.getLong(offset + 15)), // StaffBirthDay
+            cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // StaffBirthDay
             cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // StaffAdditional
             cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // StaffIDNumber
-            cursor.isNull(offset + 18) ? null : new java.util.Date(cursor.getLong(offset + 18)), // StaffIDIssueDate
-            cursor.isNull(offset + 19) ? null : new java.util.Date(cursor.getLong(offset + 19)), // StaffIDExpiration
+            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18), // StaffIDIssueDate
+            cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19), // StaffIDExpiration
             cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20), // StaffBlood
             cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21), // StaffPictureFileServer
             cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22), // StaffPictureFileClient
             cursor.isNull(offset + 23) ? null : cursor.getDouble(offset + 23), // BasedSalary
             cursor.isNull(offset + 24) ? null : cursor.getInt(offset + 24), // LangID
-            cursor.isNull(offset + 25) ? null : new java.util.Date(cursor.getLong(offset + 25)), // InputDate
+            cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25), // InputDate
             cursor.isNull(offset + 26) ? null : cursor.getInt(offset + 26), // InputBy
-            cursor.isNull(offset + 27) ? null : new java.util.Date(cursor.getLong(offset + 27)), // UpdateDate
+            cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27), // UpdateDate
             cursor.isNull(offset + 28) ? null : cursor.getInt(offset + 28), // UpdateBy
-            cursor.isNull(offset + 29) ? null : new java.util.Date(cursor.getLong(offset + 29)), // LastUseDate
+            cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29), // LastUseDate
             cursor.isNull(offset + 30) ? null : cursor.getInt(offset + 30), // Activated
             cursor.isNull(offset + 31) ? null : cursor.getInt(offset + 31), // Deleted
             cursor.isNull(offset + 32) ? null : cursor.getInt(offset + 32) // AddingFromBranch
@@ -279,21 +279,21 @@ public class StaffsDao extends AbstractDao<Staffs, Integer> {
         entity.setStaffTelephone(cursor.isNull(offset + 12) ? null : cursor.getString(offset + 12));
         entity.setStaffMobile(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
         entity.setStaffEmail(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
-        entity.setStaffBirthDay(cursor.isNull(offset + 15) ? null : new java.util.Date(cursor.getLong(offset + 15)));
+        entity.setStaffBirthDay(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
         entity.setStaffAdditional(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
         entity.setStaffIDNumber(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
-        entity.setStaffIDIssueDate(cursor.isNull(offset + 18) ? null : new java.util.Date(cursor.getLong(offset + 18)));
-        entity.setStaffIDExpiration(cursor.isNull(offset + 19) ? null : new java.util.Date(cursor.getLong(offset + 19)));
+        entity.setStaffIDIssueDate(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
+        entity.setStaffIDExpiration(cursor.isNull(offset + 19) ? null : cursor.getString(offset + 19));
         entity.setStaffBlood(cursor.isNull(offset + 20) ? null : cursor.getString(offset + 20));
         entity.setStaffPictureFileServer(cursor.isNull(offset + 21) ? null : cursor.getString(offset + 21));
         entity.setStaffPictureFileClient(cursor.isNull(offset + 22) ? null : cursor.getString(offset + 22));
         entity.setBasedSalary(cursor.isNull(offset + 23) ? null : cursor.getDouble(offset + 23));
         entity.setLangID(cursor.isNull(offset + 24) ? null : cursor.getInt(offset + 24));
-        entity.setInputDate(cursor.isNull(offset + 25) ? null : new java.util.Date(cursor.getLong(offset + 25)));
+        entity.setInputDate(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
         entity.setInputBy(cursor.isNull(offset + 26) ? null : cursor.getInt(offset + 26));
-        entity.setUpdateDate(cursor.isNull(offset + 27) ? null : new java.util.Date(cursor.getLong(offset + 27)));
+        entity.setUpdateDate(cursor.isNull(offset + 27) ? null : cursor.getString(offset + 27));
         entity.setUpdateBy(cursor.isNull(offset + 28) ? null : cursor.getInt(offset + 28));
-        entity.setLastUseDate(cursor.isNull(offset + 29) ? null : new java.util.Date(cursor.getLong(offset + 29)));
+        entity.setLastUseDate(cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29));
         entity.setActivated(cursor.isNull(offset + 30) ? null : cursor.getInt(offset + 30));
         entity.setDeleted(cursor.isNull(offset + 31) ? null : cursor.getInt(offset + 31));
         entity.setAddingFromBranch(cursor.isNull(offset + 32) ? null : cursor.getInt(offset + 32));

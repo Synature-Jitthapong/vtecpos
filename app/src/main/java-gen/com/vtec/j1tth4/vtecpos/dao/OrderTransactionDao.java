@@ -26,13 +26,13 @@ public class OrderTransactionDao extends AbstractDao<OrderTransaction, Void> {
         public final static Property TransactionID = new Property(0, Integer.class, "TransactionID", true, "TransactionID");
         public final static Property ComputerID = new Property(1, Integer.class, "ComputerID", true, "ComputerID");
         public final static Property TransactionUUID = new Property(2, String.class, "TransactionUUID", false, "TransactionUUID");
-        public final static Property ReserveTime = new Property(3, java.util.Date.class, "ReserveTime", false, "ReserveTime");
+        public final static Property ReserveTime = new Property(3, String.class, "ReserveTime", false, "ReserveTime");
         public final static Property ReserveStaffID = new Property(4, Integer.class, "ReserveStaffID", false, "ReserveStaffID");
-        public final static Property OpenTime = new Property(5, java.util.Date.class, "OpenTime", false, "OpenTime");
+        public final static Property OpenTime = new Property(5, String.class, "OpenTime", false, "OpenTime");
         public final static Property OpenStaffID = new Property(6, Integer.class, "OpenStaffID", false, "OpenStaffID");
-        public final static Property PaidTime = new Property(7, java.util.Date.class, "PaidTime", false, "PaidTime");
+        public final static Property PaidTime = new Property(7, String.class, "PaidTime", false, "PaidTime");
         public final static Property PaidStaffID = new Property(8, Integer.class, "PaidStaffID", false, "PaidStaffID");
-        public final static Property CloseTime = new Property(9, java.util.Date.class, "CloseTime", false, "CloseTime");
+        public final static Property CloseTime = new Property(9, String.class, "CloseTime", false, "CloseTime");
         public final static Property CommStaffID = new Property(10, Integer.class, "CommStaffID", false, "CommStaffID");
         public final static Property DiscountItem = new Property(11, Double.class, "DiscountItem", false, "DiscountItem");
         public final static Property DiscountBill = new Property(12, Double.class, "DiscountBill", false, "DiscountBill");
@@ -49,7 +49,7 @@ public class OrderTransactionDao extends AbstractDao<OrderTransaction, Void> {
         public final static Property ReceiptMonth = new Property(23, Integer.class, "ReceiptMonth", false, "ReceiptMonth");
         public final static Property ReceiptID = new Property(24, Integer.class, "ReceiptID", false, "ReceiptID");
         public final static Property ReceiptNumber = new Property(25, String.class, "ReceiptNumber", false, "ReceiptNumber");
-        public final static Property SaleDate = new Property(26, java.util.Date.class, "SaleDate", false, "SaleDate");
+        public final static Property SaleDate = new Property(26, String.class, "SaleDate", false, "SaleDate");
         public final static Property ShopID = new Property(27, Integer.class, "ShopID", false, "ShopID");
         public final static Property TransactionVAT = new Property(28, Double.class, "TransactionVAT", false, "TransactionVAT");
         public final static Property TransactionVATable = new Property(29, Double.class, "TransactionVATable", false, "TransactionVATable");
@@ -74,7 +74,7 @@ public class OrderTransactionDao extends AbstractDao<OrderTransaction, Void> {
         public final static Property CloseComputerID = new Property(48, Integer.class, "CloseComputerID", false, "CloseComputerID");
         public final static Property VoidStaffID = new Property(49, Integer.class, "VoidStaffID", false, "VoidStaffID");
         public final static Property VoidReason = new Property(50, String.class, "VoidReason", false, "VoidReason");
-        public final static Property VoidTime = new Property(51, java.util.Date.class, "VoidTime", false, "VoidTime");
+        public final static Property VoidTime = new Property(51, String.class, "VoidTime", false, "VoidTime");
         public final static Property IsCloneBill = new Property(52, Integer.class, "IsCloneBill", false, "IsCloneBill");
         public final static Property VoidTranID = new Property(53, Integer.class, "VoidTranID", false, "VoidTranID");
         public final static Property VoidComID = new Property(54, Integer.class, "VoidComID", false, "VoidComID");
@@ -87,11 +87,11 @@ public class OrderTransactionDao extends AbstractDao<OrderTransaction, Void> {
         public final static Property CallForCheckBill = new Property(61, Integer.class, "CallForCheckBill", false, "CallForCheckBill");
         public final static Property TransactionNote = new Property(62, String.class, "TransactionNote", false, "TransactionNote");
         public final static Property CurrentAccessComputer = new Property(63, Integer.class, "CurrentAccessComputer", false, "CurrentAccessComputer");
-        public final static Property UpdateDate = new Property(64, java.util.Date.class, "UpdateDate", false, "UpdateDate");
-        public final static Property BeginTime = new Property(65, java.util.Date.class, "BeginTime", false, "BeginTime");
-        public final static Property EndTime = new Property(66, java.util.Date.class, "EndTime", false, "EndTime");
-        public final static Property PrintWarningTime = new Property(67, java.util.Date.class, "PrintWarningTime", false, "PrintWarningTime");
-        public final static Property PrintBeginTime = new Property(68, java.util.Date.class, "PrintBeginTime", false, "PrintBeginTime");
+        public final static Property UpdateDate = new Property(64, String.class, "UpdateDate", false, "UpdateDate");
+        public final static Property BeginTime = new Property(65, String.class, "BeginTime", false, "BeginTime");
+        public final static Property EndTime = new Property(66, String.class, "EndTime", false, "EndTime");
+        public final static Property PrintWarningTime = new Property(67, String.class, "PrintWarningTime", false, "PrintWarningTime");
+        public final static Property PrintBeginTime = new Property(68, String.class, "PrintBeginTime", false, "PrintBeginTime");
         public final static Property AlreadyCalculateStock = new Property(69, Integer.class, "AlreadyCalculateStock", false, "AlreadyCalculateStock");
         public final static Property AlreadyExportToHQ = new Property(70, Integer.class, "AlreadyExportToHQ", false, "AlreadyExportToHQ");
         public final static Property TableID = new Property(71, Integer.class, "TableID", false, "TableID");
@@ -132,9 +132,9 @@ public class OrderTransactionDao extends AbstractDao<OrderTransaction, Void> {
             stmt.bindString(3, TransactionUUID);
         }
  
-        java.util.Date ReserveTime = entity.getReserveTime();
+        String ReserveTime = entity.getReserveTime();
         if (ReserveTime != null) {
-            stmt.bindLong(4, ReserveTime.getTime());
+            stmt.bindString(4, ReserveTime);
         }
  
         Integer ReserveStaffID = entity.getReserveStaffID();
@@ -142,9 +142,9 @@ public class OrderTransactionDao extends AbstractDao<OrderTransaction, Void> {
             stmt.bindLong(5, ReserveStaffID);
         }
  
-        java.util.Date OpenTime = entity.getOpenTime();
+        String OpenTime = entity.getOpenTime();
         if (OpenTime != null) {
-            stmt.bindLong(6, OpenTime.getTime());
+            stmt.bindString(6, OpenTime);
         }
  
         Integer OpenStaffID = entity.getOpenStaffID();
@@ -152,9 +152,9 @@ public class OrderTransactionDao extends AbstractDao<OrderTransaction, Void> {
             stmt.bindLong(7, OpenStaffID);
         }
  
-        java.util.Date PaidTime = entity.getPaidTime();
+        String PaidTime = entity.getPaidTime();
         if (PaidTime != null) {
-            stmt.bindLong(8, PaidTime.getTime());
+            stmt.bindString(8, PaidTime);
         }
  
         Integer PaidStaffID = entity.getPaidStaffID();
@@ -162,9 +162,9 @@ public class OrderTransactionDao extends AbstractDao<OrderTransaction, Void> {
             stmt.bindLong(9, PaidStaffID);
         }
  
-        java.util.Date CloseTime = entity.getCloseTime();
+        String CloseTime = entity.getCloseTime();
         if (CloseTime != null) {
-            stmt.bindLong(10, CloseTime.getTime());
+            stmt.bindString(10, CloseTime);
         }
  
         Integer CommStaffID = entity.getCommStaffID();
@@ -247,9 +247,9 @@ public class OrderTransactionDao extends AbstractDao<OrderTransaction, Void> {
             stmt.bindString(26, ReceiptNumber);
         }
  
-        java.util.Date SaleDate = entity.getSaleDate();
+        String SaleDate = entity.getSaleDate();
         if (SaleDate != null) {
-            stmt.bindLong(27, SaleDate.getTime());
+            stmt.bindString(27, SaleDate);
         }
  
         Integer ShopID = entity.getShopID();
@@ -372,9 +372,9 @@ public class OrderTransactionDao extends AbstractDao<OrderTransaction, Void> {
             stmt.bindString(51, VoidReason);
         }
  
-        java.util.Date VoidTime = entity.getVoidTime();
+        String VoidTime = entity.getVoidTime();
         if (VoidTime != null) {
-            stmt.bindLong(52, VoidTime.getTime());
+            stmt.bindString(52, VoidTime);
         }
  
         Integer IsCloneBill = entity.getIsCloneBill();
@@ -437,29 +437,29 @@ public class OrderTransactionDao extends AbstractDao<OrderTransaction, Void> {
             stmt.bindLong(64, CurrentAccessComputer);
         }
  
-        java.util.Date UpdateDate = entity.getUpdateDate();
+        String UpdateDate = entity.getUpdateDate();
         if (UpdateDate != null) {
-            stmt.bindLong(65, UpdateDate.getTime());
+            stmt.bindString(65, UpdateDate);
         }
  
-        java.util.Date BeginTime = entity.getBeginTime();
+        String BeginTime = entity.getBeginTime();
         if (BeginTime != null) {
-            stmt.bindLong(66, BeginTime.getTime());
+            stmt.bindString(66, BeginTime);
         }
  
-        java.util.Date EndTime = entity.getEndTime();
+        String EndTime = entity.getEndTime();
         if (EndTime != null) {
-            stmt.bindLong(67, EndTime.getTime());
+            stmt.bindString(67, EndTime);
         }
  
-        java.util.Date PrintWarningTime = entity.getPrintWarningTime();
+        String PrintWarningTime = entity.getPrintWarningTime();
         if (PrintWarningTime != null) {
-            stmt.bindLong(68, PrintWarningTime.getTime());
+            stmt.bindString(68, PrintWarningTime);
         }
  
-        java.util.Date PrintBeginTime = entity.getPrintBeginTime();
+        String PrintBeginTime = entity.getPrintBeginTime();
         if (PrintBeginTime != null) {
-            stmt.bindLong(69, PrintBeginTime.getTime());
+            stmt.bindString(69, PrintBeginTime);
         }
  
         Integer AlreadyCalculateStock = entity.getAlreadyCalculateStock();
@@ -521,13 +521,13 @@ public class OrderTransactionDao extends AbstractDao<OrderTransaction, Void> {
             cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0), // TransactionID
             cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // ComputerID
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // TransactionUUID
-            cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)), // ReserveTime
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // ReserveTime
             cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // ReserveStaffID
-            cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)), // OpenTime
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // OpenTime
             cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6), // OpenStaffID
-            cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)), // PaidTime
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // PaidTime
             cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8), // PaidStaffID
-            cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)), // CloseTime
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // CloseTime
             cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10), // CommStaffID
             cursor.isNull(offset + 11) ? null : cursor.getDouble(offset + 11), // DiscountItem
             cursor.isNull(offset + 12) ? null : cursor.getDouble(offset + 12), // DiscountBill
@@ -544,7 +544,7 @@ public class OrderTransactionDao extends AbstractDao<OrderTransaction, Void> {
             cursor.isNull(offset + 23) ? null : cursor.getInt(offset + 23), // ReceiptMonth
             cursor.isNull(offset + 24) ? null : cursor.getInt(offset + 24), // ReceiptID
             cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25), // ReceiptNumber
-            cursor.isNull(offset + 26) ? null : new java.util.Date(cursor.getLong(offset + 26)), // SaleDate
+            cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26), // SaleDate
             cursor.isNull(offset + 27) ? null : cursor.getInt(offset + 27), // ShopID
             cursor.isNull(offset + 28) ? null : cursor.getDouble(offset + 28), // TransactionVAT
             cursor.isNull(offset + 29) ? null : cursor.getDouble(offset + 29), // TransactionVATable
@@ -569,7 +569,7 @@ public class OrderTransactionDao extends AbstractDao<OrderTransaction, Void> {
             cursor.isNull(offset + 48) ? null : cursor.getInt(offset + 48), // CloseComputerID
             cursor.isNull(offset + 49) ? null : cursor.getInt(offset + 49), // VoidStaffID
             cursor.isNull(offset + 50) ? null : cursor.getString(offset + 50), // VoidReason
-            cursor.isNull(offset + 51) ? null : new java.util.Date(cursor.getLong(offset + 51)), // VoidTime
+            cursor.isNull(offset + 51) ? null : cursor.getString(offset + 51), // VoidTime
             cursor.isNull(offset + 52) ? null : cursor.getInt(offset + 52), // IsCloneBill
             cursor.isNull(offset + 53) ? null : cursor.getInt(offset + 53), // VoidTranID
             cursor.isNull(offset + 54) ? null : cursor.getInt(offset + 54), // VoidComID
@@ -582,11 +582,11 @@ public class OrderTransactionDao extends AbstractDao<OrderTransaction, Void> {
             cursor.isNull(offset + 61) ? null : cursor.getInt(offset + 61), // CallForCheckBill
             cursor.isNull(offset + 62) ? null : cursor.getString(offset + 62), // TransactionNote
             cursor.isNull(offset + 63) ? null : cursor.getInt(offset + 63), // CurrentAccessComputer
-            cursor.isNull(offset + 64) ? null : new java.util.Date(cursor.getLong(offset + 64)), // UpdateDate
-            cursor.isNull(offset + 65) ? null : new java.util.Date(cursor.getLong(offset + 65)), // BeginTime
-            cursor.isNull(offset + 66) ? null : new java.util.Date(cursor.getLong(offset + 66)), // EndTime
-            cursor.isNull(offset + 67) ? null : new java.util.Date(cursor.getLong(offset + 67)), // PrintWarningTime
-            cursor.isNull(offset + 68) ? null : new java.util.Date(cursor.getLong(offset + 68)), // PrintBeginTime
+            cursor.isNull(offset + 64) ? null : cursor.getString(offset + 64), // UpdateDate
+            cursor.isNull(offset + 65) ? null : cursor.getString(offset + 65), // BeginTime
+            cursor.isNull(offset + 66) ? null : cursor.getString(offset + 66), // EndTime
+            cursor.isNull(offset + 67) ? null : cursor.getString(offset + 67), // PrintWarningTime
+            cursor.isNull(offset + 68) ? null : cursor.getString(offset + 68), // PrintBeginTime
             cursor.isNull(offset + 69) ? null : cursor.getInt(offset + 69), // AlreadyCalculateStock
             cursor.isNull(offset + 70) ? null : cursor.getInt(offset + 70), // AlreadyExportToHQ
             cursor.isNull(offset + 71) ? null : cursor.getInt(offset + 71), // TableID
@@ -606,13 +606,13 @@ public class OrderTransactionDao extends AbstractDao<OrderTransaction, Void> {
         entity.setTransactionID(cursor.isNull(offset + 0) ? null : cursor.getInt(offset + 0));
         entity.setComputerID(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
         entity.setTransactionUUID(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setReserveTime(cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)));
+        entity.setReserveTime(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
         entity.setReserveStaffID(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
-        entity.setOpenTime(cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)));
+        entity.setOpenTime(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
         entity.setOpenStaffID(cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6));
-        entity.setPaidTime(cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)));
+        entity.setPaidTime(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setPaidStaffID(cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8));
-        entity.setCloseTime(cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)));
+        entity.setCloseTime(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
         entity.setCommStaffID(cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10));
         entity.setDiscountItem(cursor.isNull(offset + 11) ? null : cursor.getDouble(offset + 11));
         entity.setDiscountBill(cursor.isNull(offset + 12) ? null : cursor.getDouble(offset + 12));
@@ -629,7 +629,7 @@ public class OrderTransactionDao extends AbstractDao<OrderTransaction, Void> {
         entity.setReceiptMonth(cursor.isNull(offset + 23) ? null : cursor.getInt(offset + 23));
         entity.setReceiptID(cursor.isNull(offset + 24) ? null : cursor.getInt(offset + 24));
         entity.setReceiptNumber(cursor.isNull(offset + 25) ? null : cursor.getString(offset + 25));
-        entity.setSaleDate(cursor.isNull(offset + 26) ? null : new java.util.Date(cursor.getLong(offset + 26)));
+        entity.setSaleDate(cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26));
         entity.setShopID(cursor.isNull(offset + 27) ? null : cursor.getInt(offset + 27));
         entity.setTransactionVAT(cursor.isNull(offset + 28) ? null : cursor.getDouble(offset + 28));
         entity.setTransactionVATable(cursor.isNull(offset + 29) ? null : cursor.getDouble(offset + 29));
@@ -654,7 +654,7 @@ public class OrderTransactionDao extends AbstractDao<OrderTransaction, Void> {
         entity.setCloseComputerID(cursor.isNull(offset + 48) ? null : cursor.getInt(offset + 48));
         entity.setVoidStaffID(cursor.isNull(offset + 49) ? null : cursor.getInt(offset + 49));
         entity.setVoidReason(cursor.isNull(offset + 50) ? null : cursor.getString(offset + 50));
-        entity.setVoidTime(cursor.isNull(offset + 51) ? null : new java.util.Date(cursor.getLong(offset + 51)));
+        entity.setVoidTime(cursor.isNull(offset + 51) ? null : cursor.getString(offset + 51));
         entity.setIsCloneBill(cursor.isNull(offset + 52) ? null : cursor.getInt(offset + 52));
         entity.setVoidTranID(cursor.isNull(offset + 53) ? null : cursor.getInt(offset + 53));
         entity.setVoidComID(cursor.isNull(offset + 54) ? null : cursor.getInt(offset + 54));
@@ -667,11 +667,11 @@ public class OrderTransactionDao extends AbstractDao<OrderTransaction, Void> {
         entity.setCallForCheckBill(cursor.isNull(offset + 61) ? null : cursor.getInt(offset + 61));
         entity.setTransactionNote(cursor.isNull(offset + 62) ? null : cursor.getString(offset + 62));
         entity.setCurrentAccessComputer(cursor.isNull(offset + 63) ? null : cursor.getInt(offset + 63));
-        entity.setUpdateDate(cursor.isNull(offset + 64) ? null : new java.util.Date(cursor.getLong(offset + 64)));
-        entity.setBeginTime(cursor.isNull(offset + 65) ? null : new java.util.Date(cursor.getLong(offset + 65)));
-        entity.setEndTime(cursor.isNull(offset + 66) ? null : new java.util.Date(cursor.getLong(offset + 66)));
-        entity.setPrintWarningTime(cursor.isNull(offset + 67) ? null : new java.util.Date(cursor.getLong(offset + 67)));
-        entity.setPrintBeginTime(cursor.isNull(offset + 68) ? null : new java.util.Date(cursor.getLong(offset + 68)));
+        entity.setUpdateDate(cursor.isNull(offset + 64) ? null : cursor.getString(offset + 64));
+        entity.setBeginTime(cursor.isNull(offset + 65) ? null : cursor.getString(offset + 65));
+        entity.setEndTime(cursor.isNull(offset + 66) ? null : cursor.getString(offset + 66));
+        entity.setPrintWarningTime(cursor.isNull(offset + 67) ? null : cursor.getString(offset + 67));
+        entity.setPrintBeginTime(cursor.isNull(offset + 68) ? null : cursor.getString(offset + 68));
         entity.setAlreadyCalculateStock(cursor.isNull(offset + 69) ? null : cursor.getInt(offset + 69));
         entity.setAlreadyExportToHQ(cursor.isNull(offset + 70) ? null : cursor.getInt(offset + 70));
         entity.setTableID(cursor.isNull(offset + 71) ? null : cursor.getInt(offset + 71));

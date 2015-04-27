@@ -28,7 +28,7 @@ public class FcTranPaymentDao extends AbstractDao<FcTranPayment, Void> {
         public final static Property ComputerID = new Property(2, Integer.class, "ComputerID", true, "ComputerID");
         public final static Property PayTypeID = new Property(3, Integer.class, "PayTypeID", false, "PayTypeID");
         public final static Property ShopID = new Property(4, Integer.class, "ShopID", false, "ShopID");
-        public final static Property SaleDate = new Property(5, java.util.Date.class, "SaleDate", false, "SaleDate");
+        public final static Property SaleDate = new Property(5, String.class, "SaleDate", false, "SaleDate");
         public final static Property PayAmount = new Property(6, Double.class, "PayAmount", false, "PayAmount");
         public final static Property CCNumber = new Property(7, String.class, "CCNumber", false, "CCNumber");
         public final static Property CCExpMonth = new Property(8, Integer.class, "CCExpMonth", false, "CCExpMonth");
@@ -39,7 +39,7 @@ public class FcTranPaymentDao extends AbstractDao<FcTranPayment, Void> {
         public final static Property CCApproveCode = new Property(13, String.class, "CCApproveCode", false, "CCApproveCode");
         public final static Property CCResponse = new Property(14, String.class, "CCResponse", false, "CCResponse");
         public final static Property Remark = new Property(15, String.class, "Remark", false, "Remark");
-        public final static Property InsertDate = new Property(16, java.util.Date.class, "InsertDate", false, "InsertDate");
+        public final static Property InsertDate = new Property(16, String.class, "InsertDate", false, "InsertDate");
     };
 
 
@@ -81,9 +81,9 @@ public class FcTranPaymentDao extends AbstractDao<FcTranPayment, Void> {
             stmt.bindLong(5, ShopID);
         }
  
-        java.util.Date SaleDate = entity.getSaleDate();
+        String SaleDate = entity.getSaleDate();
         if (SaleDate != null) {
-            stmt.bindLong(6, SaleDate.getTime());
+            stmt.bindString(6, SaleDate);
         }
  
         Double PayAmount = entity.getPayAmount();
@@ -136,9 +136,9 @@ public class FcTranPaymentDao extends AbstractDao<FcTranPayment, Void> {
             stmt.bindString(16, Remark);
         }
  
-        java.util.Date InsertDate = entity.getInsertDate();
+        String InsertDate = entity.getInsertDate();
         if (InsertDate != null) {
-            stmt.bindLong(17, InsertDate.getTime());
+            stmt.bindString(17, InsertDate);
         }
     }
 
@@ -157,7 +157,7 @@ public class FcTranPaymentDao extends AbstractDao<FcTranPayment, Void> {
             cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2), // ComputerID
             cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // PayTypeID
             cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // ShopID
-            cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)), // SaleDate
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // SaleDate
             cursor.isNull(offset + 6) ? null : cursor.getDouble(offset + 6), // PayAmount
             cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // CCNumber
             cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8), // CCExpMonth
@@ -168,7 +168,7 @@ public class FcTranPaymentDao extends AbstractDao<FcTranPayment, Void> {
             cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // CCApproveCode
             cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // CCResponse
             cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // Remark
-            cursor.isNull(offset + 16) ? null : new java.util.Date(cursor.getLong(offset + 16)) // InsertDate
+            cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16) // InsertDate
         );
         return entity;
     }
@@ -181,7 +181,7 @@ public class FcTranPaymentDao extends AbstractDao<FcTranPayment, Void> {
         entity.setComputerID(cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2));
         entity.setPayTypeID(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
         entity.setShopID(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
-        entity.setSaleDate(cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)));
+        entity.setSaleDate(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
         entity.setPayAmount(cursor.isNull(offset + 6) ? null : cursor.getDouble(offset + 6));
         entity.setCCNumber(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setCCExpMonth(cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8));
@@ -192,7 +192,7 @@ public class FcTranPaymentDao extends AbstractDao<FcTranPayment, Void> {
         entity.setCCApproveCode(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
         entity.setCCResponse(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
         entity.setRemark(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
-        entity.setInsertDate(cursor.isNull(offset + 16) ? null : new java.util.Date(cursor.getLong(offset + 16)));
+        entity.setInsertDate(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
      }
     
     /** @inheritdoc */

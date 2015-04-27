@@ -30,13 +30,13 @@ public class FcTransactionDao extends AbstractDao<FcTransaction, Void> {
         public final static Property ReceiptMonth = new Property(4, Integer.class, "ReceiptMonth", false, "ReceiptMonth");
         public final static Property ReceiptID = new Property(5, Integer.class, "ReceiptID", false, "ReceiptID");
         public final static Property ShopID = new Property(6, Integer.class, "ShopID", false, "ReceiptID");
-        public final static Property SaleDate = new Property(7, java.util.Date.class, "SaleDate", false, "SaleDate");
+        public final static Property SaleDate = new Property(7, String.class, "SaleDate", false, "SaleDate");
         public final static Property ReceiptNo = new Property(8, String.class, "ReceiptNo", false, "ReceiptNo");
         public final static Property TotalAmount = new Property(9, Double.class, "TotalAmount", false, "TotalAmount");
         public final static Property TranStatus = new Property(10, Integer.class, "TranStatus", false, "TranStatus");
         public final static Property DocType = new Property(11, Integer.class, "DocType", false, "DocType");
         public final static Property StaffID = new Property(12, Integer.class, "StaffID", false, "StaffID");
-        public final static Property InsertDate = new Property(13, java.util.Date.class, "InsertDate", false, "InsertDate");
+        public final static Property InsertDate = new Property(13, String.class, "InsertDate", false, "InsertDate");
     };
 
 
@@ -88,9 +88,9 @@ public class FcTransactionDao extends AbstractDao<FcTransaction, Void> {
             stmt.bindLong(7, ShopID);
         }
  
-        java.util.Date SaleDate = entity.getSaleDate();
+        String SaleDate = entity.getSaleDate();
         if (SaleDate != null) {
-            stmt.bindLong(8, SaleDate.getTime());
+            stmt.bindString(8, SaleDate);
         }
  
         String ReceiptNo = entity.getReceiptNo();
@@ -118,9 +118,9 @@ public class FcTransactionDao extends AbstractDao<FcTransaction, Void> {
             stmt.bindLong(13, StaffID);
         }
  
-        java.util.Date InsertDate = entity.getInsertDate();
+        String InsertDate = entity.getInsertDate();
         if (InsertDate != null) {
-            stmt.bindLong(14, InsertDate.getTime());
+            stmt.bindString(14, InsertDate);
         }
     }
 
@@ -141,13 +141,13 @@ public class FcTransactionDao extends AbstractDao<FcTransaction, Void> {
             cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // ReceiptMonth
             cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // ReceiptID
             cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6), // ShopID
-            cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)), // SaleDate
+            cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7), // SaleDate
             cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // ReceiptNo
             cursor.isNull(offset + 9) ? null : cursor.getDouble(offset + 9), // TotalAmount
             cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10), // TranStatus
             cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11), // DocType
             cursor.isNull(offset + 12) ? null : cursor.getInt(offset + 12), // StaffID
-            cursor.isNull(offset + 13) ? null : new java.util.Date(cursor.getLong(offset + 13)) // InsertDate
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13) // InsertDate
         );
         return entity;
     }
@@ -162,13 +162,13 @@ public class FcTransactionDao extends AbstractDao<FcTransaction, Void> {
         entity.setReceiptMonth(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
         entity.setReceiptID(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
         entity.setShopID(cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6));
-        entity.setSaleDate(cursor.isNull(offset + 7) ? null : new java.util.Date(cursor.getLong(offset + 7)));
+        entity.setSaleDate(cursor.isNull(offset + 7) ? null : cursor.getString(offset + 7));
         entity.setReceiptNo(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
         entity.setTotalAmount(cursor.isNull(offset + 9) ? null : cursor.getDouble(offset + 9));
         entity.setTranStatus(cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10));
         entity.setDocType(cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11));
         entity.setStaffID(cursor.isNull(offset + 12) ? null : cursor.getInt(offset + 12));
-        entity.setInsertDate(cursor.isNull(offset + 13) ? null : new java.util.Date(cursor.getLong(offset + 13)));
+        entity.setInsertDate(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
      }
     
     /** @inheritdoc */

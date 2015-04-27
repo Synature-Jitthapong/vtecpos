@@ -31,7 +31,7 @@ public class OrderDetailDao extends AbstractDao<OrderDetail, Void> {
         public final static Property InsertOrderNo = new Property(5, Integer.class, "InsertOrderNo", false, "InsertOrderNo");
         public final static Property IndentLevel = new Property(6, Integer.class, "IndentLevel", false, "IndentLevel");
         public final static Property DisplayOrdering = new Property(7, Integer.class, "DisplayOrdering", false, "DisplayOrdering");
-        public final static Property SaleDate = new Property(8, java.util.Date.class, "SaleDate", false, "SaleDate");
+        public final static Property SaleDate = new Property(8, String.class, "SaleDate", false, "SaleDate");
         public final static Property ShopID = new Property(9, Integer.class, "ShopID", false, "ShopID");
         public final static Property ProductID = new Property(10, Integer.class, "ProductID", false, "ProductID");
         public final static Property ProductSetType = new Property(11, Integer.class, "ProductSetType", false, "ProductSetType");
@@ -86,16 +86,16 @@ public class OrderDetailDao extends AbstractDao<OrderDetail, Void> {
         public final static Property OrderTableID = new Property(60, Integer.class, "OrderTableID", false, "OrderTableID");
         public final static Property VoidTypeID = new Property(61, Integer.class, "VoidTypeID", false, "VoidTypeID");
         public final static Property VoidStaffID = new Property(62, Integer.class, "VoidStaffID", false, "VoidStaffID");
-        public final static Property VoidDateTime = new Property(63, java.util.Date.class, "VoidDateTime", false, "VoidDateTime");
+        public final static Property VoidDateTime = new Property(63, String.class, "VoidDateTime", false, "VoidDateTime");
         public final static Property VATType = new Property(64, Integer.class, "VATType", false, "VATType");
         public final static Property PrintGroup = new Property(65, Integer.class, "PrintGroup", false, "PrintGroup");
         public final static Property NoPrintBill = new Property(66, Integer.class, "NoPrintBill", false, "NoPrintBill");
         public final static Property NoRePrintOrder = new Property(67, Integer.class, "NoRePrintOrder", false, "NoRePrintOrder");
-        public final static Property StartTime = new Property(68, java.util.Date.class, "StartTime", false, "StartTime");
-        public final static Property FinishTime = new Property(69, java.util.Date.class, "FinishTime", false, "FinishTime");
+        public final static Property StartTime = new Property(68, String.class, "StartTime", false, "StartTime");
+        public final static Property FinishTime = new Property(69, String.class, "FinishTime", false, "FinishTime");
         public final static Property PrintStatus = new Property(70, Integer.class, "PrintStatus", false, "PrintStatus");
         public final static Property ProcessID = new Property(71, Integer.class, "ProcessID", false, "ProcessID");
-        public final static Property SubmitOrderDateTime = new Property(72, java.util.Date.class, "SubmitOrderDateTime", false, "SubmitOrderDateTime");
+        public final static Property SubmitOrderDateTime = new Property(72, String.class, "SubmitOrderDateTime", false, "SubmitOrderDateTime");
         public final static Property Comment = new Property(73, String.class, "Comment", false, "Comment");
         public final static Property IsComment = new Property(74, Integer.class, "IsComment", false, "IsComment");
         public final static Property Deleted = new Property(75, Integer.class, "Deleted", false, "Deleted");
@@ -155,9 +155,9 @@ public class OrderDetailDao extends AbstractDao<OrderDetail, Void> {
             stmt.bindLong(8, DisplayOrdering);
         }
  
-        java.util.Date SaleDate = entity.getSaleDate();
+        String SaleDate = entity.getSaleDate();
         if (SaleDate != null) {
-            stmt.bindLong(9, SaleDate.getTime());
+            stmt.bindString(9, SaleDate);
         }
  
         Integer ShopID = entity.getShopID();
@@ -430,9 +430,9 @@ public class OrderDetailDao extends AbstractDao<OrderDetail, Void> {
             stmt.bindLong(63, VoidStaffID);
         }
  
-        java.util.Date VoidDateTime = entity.getVoidDateTime();
+        String VoidDateTime = entity.getVoidDateTime();
         if (VoidDateTime != null) {
-            stmt.bindLong(64, VoidDateTime.getTime());
+            stmt.bindString(64, VoidDateTime);
         }
  
         Integer VATType = entity.getVATType();
@@ -455,14 +455,14 @@ public class OrderDetailDao extends AbstractDao<OrderDetail, Void> {
             stmt.bindLong(68, NoRePrintOrder);
         }
  
-        java.util.Date StartTime = entity.getStartTime();
+        String StartTime = entity.getStartTime();
         if (StartTime != null) {
-            stmt.bindLong(69, StartTime.getTime());
+            stmt.bindString(69, StartTime);
         }
  
-        java.util.Date FinishTime = entity.getFinishTime();
+        String FinishTime = entity.getFinishTime();
         if (FinishTime != null) {
-            stmt.bindLong(70, FinishTime.getTime());
+            stmt.bindString(70, FinishTime);
         }
  
         Integer PrintStatus = entity.getPrintStatus();
@@ -475,9 +475,9 @@ public class OrderDetailDao extends AbstractDao<OrderDetail, Void> {
             stmt.bindLong(72, ProcessID);
         }
  
-        java.util.Date SubmitOrderDateTime = entity.getSubmitOrderDateTime();
+        String SubmitOrderDateTime = entity.getSubmitOrderDateTime();
         if (SubmitOrderDateTime != null) {
-            stmt.bindLong(73, SubmitOrderDateTime.getTime());
+            stmt.bindString(73, SubmitOrderDateTime);
         }
  
         String Comment = entity.getComment();
@@ -514,7 +514,7 @@ public class OrderDetailDao extends AbstractDao<OrderDetail, Void> {
             cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // InsertOrderNo
             cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6), // IndentLevel
             cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7), // DisplayOrdering
-            cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)), // SaleDate
+            cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8), // SaleDate
             cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9), // ShopID
             cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10), // ProductID
             cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11), // ProductSetType
@@ -569,16 +569,16 @@ public class OrderDetailDao extends AbstractDao<OrderDetail, Void> {
             cursor.isNull(offset + 60) ? null : cursor.getInt(offset + 60), // OrderTableID
             cursor.isNull(offset + 61) ? null : cursor.getInt(offset + 61), // VoidTypeID
             cursor.isNull(offset + 62) ? null : cursor.getInt(offset + 62), // VoidStaffID
-            cursor.isNull(offset + 63) ? null : new java.util.Date(cursor.getLong(offset + 63)), // VoidDateTime
+            cursor.isNull(offset + 63) ? null : cursor.getString(offset + 63), // VoidDateTime
             cursor.isNull(offset + 64) ? null : cursor.getInt(offset + 64), // VATType
             cursor.isNull(offset + 65) ? null : cursor.getInt(offset + 65), // PrintGroup
             cursor.isNull(offset + 66) ? null : cursor.getInt(offset + 66), // NoPrintBill
             cursor.isNull(offset + 67) ? null : cursor.getInt(offset + 67), // NoRePrintOrder
-            cursor.isNull(offset + 68) ? null : new java.util.Date(cursor.getLong(offset + 68)), // StartTime
-            cursor.isNull(offset + 69) ? null : new java.util.Date(cursor.getLong(offset + 69)), // FinishTime
+            cursor.isNull(offset + 68) ? null : cursor.getString(offset + 68), // StartTime
+            cursor.isNull(offset + 69) ? null : cursor.getString(offset + 69), // FinishTime
             cursor.isNull(offset + 70) ? null : cursor.getInt(offset + 70), // PrintStatus
             cursor.isNull(offset + 71) ? null : cursor.getInt(offset + 71), // ProcessID
-            cursor.isNull(offset + 72) ? null : new java.util.Date(cursor.getLong(offset + 72)), // SubmitOrderDateTime
+            cursor.isNull(offset + 72) ? null : cursor.getString(offset + 72), // SubmitOrderDateTime
             cursor.isNull(offset + 73) ? null : cursor.getString(offset + 73), // Comment
             cursor.isNull(offset + 74) ? null : cursor.getInt(offset + 74), // IsComment
             cursor.isNull(offset + 75) ? null : cursor.getInt(offset + 75) // Deleted
@@ -597,7 +597,7 @@ public class OrderDetailDao extends AbstractDao<OrderDetail, Void> {
         entity.setInsertOrderNo(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
         entity.setIndentLevel(cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6));
         entity.setDisplayOrdering(cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7));
-        entity.setSaleDate(cursor.isNull(offset + 8) ? null : new java.util.Date(cursor.getLong(offset + 8)));
+        entity.setSaleDate(cursor.isNull(offset + 8) ? null : cursor.getString(offset + 8));
         entity.setShopID(cursor.isNull(offset + 9) ? null : cursor.getInt(offset + 9));
         entity.setProductID(cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10));
         entity.setProductSetType(cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11));
@@ -652,16 +652,16 @@ public class OrderDetailDao extends AbstractDao<OrderDetail, Void> {
         entity.setOrderTableID(cursor.isNull(offset + 60) ? null : cursor.getInt(offset + 60));
         entity.setVoidTypeID(cursor.isNull(offset + 61) ? null : cursor.getInt(offset + 61));
         entity.setVoidStaffID(cursor.isNull(offset + 62) ? null : cursor.getInt(offset + 62));
-        entity.setVoidDateTime(cursor.isNull(offset + 63) ? null : new java.util.Date(cursor.getLong(offset + 63)));
+        entity.setVoidDateTime(cursor.isNull(offset + 63) ? null : cursor.getString(offset + 63));
         entity.setVATType(cursor.isNull(offset + 64) ? null : cursor.getInt(offset + 64));
         entity.setPrintGroup(cursor.isNull(offset + 65) ? null : cursor.getInt(offset + 65));
         entity.setNoPrintBill(cursor.isNull(offset + 66) ? null : cursor.getInt(offset + 66));
         entity.setNoRePrintOrder(cursor.isNull(offset + 67) ? null : cursor.getInt(offset + 67));
-        entity.setStartTime(cursor.isNull(offset + 68) ? null : new java.util.Date(cursor.getLong(offset + 68)));
-        entity.setFinishTime(cursor.isNull(offset + 69) ? null : new java.util.Date(cursor.getLong(offset + 69)));
+        entity.setStartTime(cursor.isNull(offset + 68) ? null : cursor.getString(offset + 68));
+        entity.setFinishTime(cursor.isNull(offset + 69) ? null : cursor.getString(offset + 69));
         entity.setPrintStatus(cursor.isNull(offset + 70) ? null : cursor.getInt(offset + 70));
         entity.setProcessID(cursor.isNull(offset + 71) ? null : cursor.getInt(offset + 71));
-        entity.setSubmitOrderDateTime(cursor.isNull(offset + 72) ? null : new java.util.Date(cursor.getLong(offset + 72)));
+        entity.setSubmitOrderDateTime(cursor.isNull(offset + 72) ? null : cursor.getString(offset + 72));
         entity.setComment(cursor.isNull(offset + 73) ? null : cursor.getString(offset + 73));
         entity.setIsComment(cursor.isNull(offset + 74) ? null : cursor.getInt(offset + 74));
         entity.setDeleted(cursor.isNull(offset + 75) ? null : cursor.getInt(offset + 75));

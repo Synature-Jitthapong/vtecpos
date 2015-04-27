@@ -33,7 +33,7 @@ public class OrderpayDetailDao extends AbstractDao<OrderpayDetail, Void> {
         public final static Property ExpireMonth = new Property(7, Integer.class, "ExpireMonth", false, "ExpireMonth");
         public final static Property ExpireYear = new Property(8, Integer.class, "ExpireYear", false, "ExpireYear");
         public final static Property ChequeNumber = new Property(9, String.class, "ChequeNumber", false, "ChequeNumber");
-        public final static Property ChequeDate = new Property(10, java.util.Date.class, "ChequeDate", false, "ChequeDate");
+        public final static Property ChequeDate = new Property(10, String.class, "ChequeDate", false, "ChequeDate");
         public final static Property BankName = new Property(11, String.class, "BankName", false, "BankName");
         public final static Property CreditCardType = new Property(12, Integer.class, "CreditCardType", false, "CreditCardType");
         public final static Property PaidByName = new Property(13, String.class, "PaidByName", false, "PaidByName");
@@ -114,9 +114,9 @@ public class OrderpayDetailDao extends AbstractDao<OrderpayDetail, Void> {
             stmt.bindString(10, ChequeNumber);
         }
  
-        java.util.Date ChequeDate = entity.getChequeDate();
+        String ChequeDate = entity.getChequeDate();
         if (ChequeDate != null) {
-            stmt.bindLong(11, ChequeDate.getTime());
+            stmt.bindString(11, ChequeDate);
         }
  
         String BankName = entity.getBankName();
@@ -210,7 +210,7 @@ public class OrderpayDetailDao extends AbstractDao<OrderpayDetail, Void> {
             cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7), // ExpireMonth
             cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8), // ExpireYear
             cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // ChequeNumber
-            cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)), // ChequeDate
+            cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10), // ChequeDate
             cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11), // BankName
             cursor.isNull(offset + 12) ? null : cursor.getInt(offset + 12), // CreditCardType
             cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // PaidByName
@@ -242,7 +242,7 @@ public class OrderpayDetailDao extends AbstractDao<OrderpayDetail, Void> {
         entity.setExpireMonth(cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7));
         entity.setExpireYear(cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8));
         entity.setChequeNumber(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
-        entity.setChequeDate(cursor.isNull(offset + 10) ? null : new java.util.Date(cursor.getLong(offset + 10)));
+        entity.setChequeDate(cursor.isNull(offset + 10) ? null : cursor.getString(offset + 10));
         entity.setBankName(cursor.isNull(offset + 11) ? null : cursor.getString(offset + 11));
         entity.setCreditCardType(cursor.isNull(offset + 12) ? null : cursor.getInt(offset + 12));
         entity.setPaidByName(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));

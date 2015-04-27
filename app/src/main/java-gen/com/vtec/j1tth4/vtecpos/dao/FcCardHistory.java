@@ -13,13 +13,13 @@ public class FcCardHistory {
     private Integer TransactionID;
     private Integer ComputerID;
     private Integer ShopID;
-    private java.util.Date SaleDate;
+    private String SaleDate;
     private String ReceiptNo;
     private Double PreviousBalance;
     private Double TranAmount;
     private Integer DocType;
     private Integer StaffID;
-    private java.util.Date InsertDate;
+    private String InsertDate;
 
     public FcCardHistory() {
     }
@@ -28,7 +28,7 @@ public class FcCardHistory {
         this.HistoryID = HistoryID;
     }
 
-    public FcCardHistory(Integer HistoryID, Integer TranUUID, Integer CardID, String CardNo, Integer TransactionID, Integer ComputerID, Integer ShopID, java.util.Date SaleDate, String ReceiptNo, Double PreviousBalance, Double TranAmount, Integer DocType, Integer StaffID, java.util.Date InsertDate) {
+    public FcCardHistory(Integer HistoryID, Integer TranUUID, Integer CardID, String CardNo, Integer TransactionID, Integer ComputerID, Integer ShopID, String SaleDate, String ReceiptNo, Double PreviousBalance, Double TranAmount, Integer DocType, Integer StaffID, String InsertDate) {
         this.HistoryID = HistoryID;
         this.TranUUID = TranUUID;
         this.CardID = CardID;
@@ -101,11 +101,11 @@ public class FcCardHistory {
         this.ShopID = ShopID;
     }
 
-    public java.util.Date getSaleDate() {
+    public String getSaleDate() {
         return SaleDate;
     }
 
-    public void setSaleDate(java.util.Date SaleDate) {
+    public void setSaleDate(String SaleDate) {
         this.SaleDate = SaleDate;
     }
 
@@ -149,11 +149,11 @@ public class FcCardHistory {
         this.StaffID = StaffID;
     }
 
-    public java.util.Date getInsertDate() {
+    public String getInsertDate() {
         return InsertDate;
     }
 
-    public void setInsertDate(java.util.Date InsertDate) {
+    public void setInsertDate(String InsertDate) {
         this.InsertDate = InsertDate;
     }
 

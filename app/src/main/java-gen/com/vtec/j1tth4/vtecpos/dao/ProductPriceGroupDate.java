@@ -7,8 +7,8 @@ package com.vtec.j1tth4.vtecpos.dao;
 public class ProductPriceGroupDate {
 
     private Integer PriceGroupDateID;
-    private java.util.Date FromDate;
-    private java.util.Date ToDate;
+    private String FromDate;
+    private String ToDate;
     private Integer Deleted;
 
     public ProductPriceGroupDate() {
@@ -18,7 +18,7 @@ public class ProductPriceGroupDate {
         this.PriceGroupDateID = PriceGroupDateID;
     }
 
-    public ProductPriceGroupDate(Integer PriceGroupDateID, java.util.Date FromDate, java.util.Date ToDate, Integer Deleted) {
+    public ProductPriceGroupDate(Integer PriceGroupDateID, String FromDate, String ToDate, Integer Deleted) {
         this.PriceGroupDateID = PriceGroupDateID;
         this.FromDate = FromDate;
         this.ToDate = ToDate;
@@ -33,19 +33,19 @@ public class ProductPriceGroupDate {
         this.PriceGroupDateID = PriceGroupDateID;
     }
 
-    public java.util.Date getFromDate() {
+    public String getFromDate() {
         return FromDate;
     }
 
-    public void setFromDate(java.util.Date FromDate) {
+    public void setFromDate(String FromDate) {
         this.FromDate = FromDate;
     }
 
-    public java.util.Date getToDate() {
+    public String getToDate() {
         return ToDate;
     }
 
-    public void setToDate(java.util.Date ToDate) {
+    public void setToDate(String ToDate) {
         this.ToDate = ToDate;
     }
 

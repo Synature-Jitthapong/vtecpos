@@ -14,7 +14,7 @@ import com.vtec.j1tth4.vtecpos.dao.SessionEnddayDetail;
 /** 
  * DAO for table SessionEnddayDetail.
 */
-public class SessionEnddayDetailDao extends AbstractDao<SessionEnddayDetail, java.util.Date> {
+public class SessionEnddayDetailDao extends AbstractDao<SessionEnddayDetail, String> {
 
     public static final String TABLENAME = "SessionEnddayDetail";
 
@@ -23,11 +23,11 @@ public class SessionEnddayDetailDao extends AbstractDao<SessionEnddayDetail, jav
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property SessionDate = new Property(0, java.util.Date.class, "SessionDate", true, "SESSION_DATE");
+        public final static Property SessionDate = new Property(0, String.class, "SessionDate", true, "SESSION_DATE");
         public final static Property ShopID = new Property(1, int.class, "ShopID", false, "SHOP_ID");
         public final static Property IsEndDay = new Property(2, Integer.class, "IsEndDay", false, "IS_END_DAY");
         public final static Property EndDayStaffID = new Property(3, Integer.class, "EndDayStaffID", false, "END_DAY_STAFF_ID");
-        public final static Property EndDayDateTime = new Property(4, java.util.Date.class, "EndDayDateTime", false, "END_DAY_DATE_TIME");
+        public final static Property EndDayDateTime = new Property(4, String.class, "EndDayDateTime", false, "END_DAY_DATE_TIME");
         public final static Property TotalReceipt = new Property(5, Integer.class, "TotalReceipt", false, "TOTAL_RECEIPT");
         public final static Property TotalPayPrice = new Property(6, Double.class, "TotalPayPrice", false, "TOTAL_PAY_PRICE");
         public final static Property EndDayComputerID = new Property(7, Integer.class, "EndDayComputerID", false, "END_DAY_COMPUTER_ID");
@@ -48,7 +48,7 @@ public class SessionEnddayDetailDao extends AbstractDao<SessionEnddayDetail, jav
     @Override
     protected void bindValues(SQLiteStatement stmt, SessionEnddayDetail entity) {
         stmt.clearBindings();
-        stmt.bindLong(1, entity.getSessionDate().getTime());
+        stmt.bindString(1, entity.getSessionDate());
         stmt.bindLong(2, entity.getShopID());
  
         Integer IsEndDay = entity.getIsEndDay();
@@ -61,9 +61,9 @@ public class SessionEnddayDetailDao extends AbstractDao<SessionEnddayDetail, jav
             stmt.bindLong(4, EndDayStaffID);
         }
  
-        java.util.Date EndDayDateTime = entity.getEndDayDateTime();
+        String EndDayDateTime = entity.getEndDayDateTime();
         if (EndDayDateTime != null) {
-            stmt.bindLong(5, EndDayDateTime.getTime());
+            stmt.bindString(5, EndDayDateTime);
         }
  
         Integer TotalReceipt = entity.getTotalReceipt();
@@ -94,19 +94,19 @@ public class SessionEnddayDetailDao extends AbstractDao<SessionEnddayDetail, jav
 
     /** @inheritdoc */
     @Override
-    public java.util.Date readKey(Cursor cursor, int offset) {
-        return new java.util.Date(cursor.getLong(offset + 0));
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.getString(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public SessionEnddayDetail readEntity(Cursor cursor, int offset) {
         SessionEnddayDetail entity = new SessionEnddayDetail( //
-            new java.util.Date(cursor.getLong(offset + 0)), // SessionDate
+            cursor.getString(offset + 0), // SessionDate
             cursor.getInt(offset + 1), // ShopID
             cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2), // IsEndDay
             cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // EndDayStaffID
-            cursor.isNull(offset + 4) ? null : new java.util.Date(cursor.getLong(offset + 4)), // EndDayDateTime
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // EndDayDateTime
             cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // TotalReceipt
             cursor.isNull(offset + 6) ? null : cursor.getDouble(offset + 6), // TotalPayPrice
             cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7), // EndDayComputerID
@@ -119,11 +119,11 @@ public class SessionEnddayDetailDao extends AbstractDao<SessionEnddayDetail, jav
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, SessionEnddayDetail entity, int offset) {
-        entity.setSessionDate(new java.util.Date(cursor.getLong(offset + 0)));
+        entity.setSessionDate(cursor.getString(offset + 0));
         entity.setShopID(cursor.getInt(offset + 1));
         entity.setIsEndDay(cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2));
         entity.setEndDayStaffID(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
-        entity.setEndDayDateTime(cursor.isNull(offset + 4) ? null : new java.util.Date(cursor.getLong(offset + 4)));
+        entity.setEndDayDateTime(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
         entity.setTotalReceipt(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
         entity.setTotalPayPrice(cursor.isNull(offset + 6) ? null : cursor.getDouble(offset + 6));
         entity.setEndDayComputerID(cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7));
@@ -133,13 +133,13 @@ public class SessionEnddayDetailDao extends AbstractDao<SessionEnddayDetail, jav
     
     /** @inheritdoc */
     @Override
-    protected java.util.Date updateKeyAfterInsert(SessionEnddayDetail entity, long rowId) {
+    protected String updateKeyAfterInsert(SessionEnddayDetail entity, long rowId) {
         return entity.getSessionDate();
     }
     
     /** @inheritdoc */
     @Override
-    public java.util.Date getKey(SessionEnddayDetail entity) {
+    public String getKey(SessionEnddayDetail entity) {
         if(entity != null) {
             return entity.getSessionDate();
         } else {

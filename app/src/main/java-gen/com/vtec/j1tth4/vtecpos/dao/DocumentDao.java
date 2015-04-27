@@ -32,7 +32,7 @@ public class DocumentDao extends AbstractDao<Document, Integer> {
         public final static Property DocumentYear = new Property(6, Integer.class, "DocumentYear", false, "DocumentYear");
         public final static Property DocumentMonth = new Property(7, Integer.class, "DocumentMonth", false, "DocumentMonth");
         public final static Property DocumentNumber = new Property(8, Integer.class, "DocumentNumber", false, "DocumentNumber");
-        public final static Property DocumentDate = new Property(9, java.util.Date.class, "DocumentDate", false, "DocumentDate");
+        public final static Property DocumentDate = new Property(9, String.class, "DocumentDate", false, "DocumentDate");
         public final static Property InputBy = new Property(10, Integer.class, "InputBy", false, "InputBy");
         public final static Property UpdateBy = new Property(11, Integer.class, "UpdateBy", false, "UpdateBy");
         public final static Property ApproveBy = new Property(12, Integer.class, "ApproveBy", false, "ApproveBy");
@@ -51,13 +51,13 @@ public class DocumentDao extends AbstractDao<Document, Integer> {
         public final static Property IsSmallUnit = new Property(25, Integer.class, "IsSmallUnit", false, "IsSmallUnit");
         public final static Property Remark = new Property(26, String.class, "Remark", false, "Remark");
         public final static Property TermOfPayment = new Property(27, Integer.class, "TermOfPayment", false, "TermOfPayment");
-        public final static Property DueDate = new Property(28, java.util.Date.class, "DueDate", false, "DueDate");
+        public final static Property DueDate = new Property(28, String.class, "DueDate", false, "DueDate");
         public final static Property DocumentHeader = new Property(29, String.class, "DocumentHeader", false, "DocumentHeader");
         public final static Property CreditDay = new Property(30, Integer.class, "CreditDay", false, "CreditDay");
-        public final static Property InsertDate = new Property(31, java.util.Date.class, "InsertDate", false, "InsertDate");
-        public final static Property UpdateDate = new Property(32, java.util.Date.class, "UpdateDate", false, "UpdateDate");
-        public final static Property ApproveDate = new Property(33, java.util.Date.class, "ApproveDate", false, "ApproveDate");
-        public final static Property CancelDate = new Property(34, java.util.Date.class, "CancelDate", false, "CancelDate");
+        public final static Property InsertDate = new Property(31, String.class, "InsertDate", false, "InsertDate");
+        public final static Property UpdateDate = new Property(32, String.class, "UpdateDate", false, "UpdateDate");
+        public final static Property ApproveDate = new Property(33, String.class, "ApproveDate", false, "ApproveDate");
+        public final static Property CancelDate = new Property(34, String.class, "CancelDate", false, "CancelDate");
         public final static Property NewSend = new Property(35, Integer.class, "NewSend", false, "NewSend");
         public final static Property CurrentAccessStaff = new Property(36, Integer.class, "CurrentAccessStaff", false, "CurrentAccessStaff");
         public final static Property OtherPercentDiscount = new Property(37, Double.class, "OtherPercentDiscount", false, "OtherPercentDiscount");
@@ -131,9 +131,9 @@ public class DocumentDao extends AbstractDao<Document, Integer> {
             stmt.bindLong(9, DocumentNumber);
         }
  
-        java.util.Date DocumentDate = entity.getDocumentDate();
+        String DocumentDate = entity.getDocumentDate();
         if (DocumentDate != null) {
-            stmt.bindLong(10, DocumentDate.getTime());
+            stmt.bindString(10, DocumentDate);
         }
  
         Integer InputBy = entity.getInputBy();
@@ -226,9 +226,9 @@ public class DocumentDao extends AbstractDao<Document, Integer> {
             stmt.bindLong(28, TermOfPayment);
         }
  
-        java.util.Date DueDate = entity.getDueDate();
+        String DueDate = entity.getDueDate();
         if (DueDate != null) {
-            stmt.bindLong(29, DueDate.getTime());
+            stmt.bindString(29, DueDate);
         }
  
         String DocumentHeader = entity.getDocumentHeader();
@@ -241,24 +241,24 @@ public class DocumentDao extends AbstractDao<Document, Integer> {
             stmt.bindLong(31, CreditDay);
         }
  
-        java.util.Date InsertDate = entity.getInsertDate();
+        String InsertDate = entity.getInsertDate();
         if (InsertDate != null) {
-            stmt.bindLong(32, InsertDate.getTime());
+            stmt.bindString(32, InsertDate);
         }
  
-        java.util.Date UpdateDate = entity.getUpdateDate();
+        String UpdateDate = entity.getUpdateDate();
         if (UpdateDate != null) {
-            stmt.bindLong(33, UpdateDate.getTime());
+            stmt.bindString(33, UpdateDate);
         }
  
-        java.util.Date ApproveDate = entity.getApproveDate();
+        String ApproveDate = entity.getApproveDate();
         if (ApproveDate != null) {
-            stmt.bindLong(34, ApproveDate.getTime());
+            stmt.bindString(34, ApproveDate);
         }
  
-        java.util.Date CancelDate = entity.getCancelDate();
+        String CancelDate = entity.getCancelDate();
         if (CancelDate != null) {
-            stmt.bindLong(35, CancelDate.getTime());
+            stmt.bindString(35, CancelDate);
         }
  
         Integer NewSend = entity.getNewSend();
@@ -341,7 +341,7 @@ public class DocumentDao extends AbstractDao<Document, Integer> {
             cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6), // DocumentYear
             cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7), // DocumentMonth
             cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8), // DocumentNumber
-            cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)), // DocumentDate
+            cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9), // DocumentDate
             cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10), // InputBy
             cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11), // UpdateBy
             cursor.isNull(offset + 12) ? null : cursor.getInt(offset + 12), // ApproveBy
@@ -360,13 +360,13 @@ public class DocumentDao extends AbstractDao<Document, Integer> {
             cursor.isNull(offset + 25) ? null : cursor.getInt(offset + 25), // IsSmallUnit
             cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26), // Remark
             cursor.isNull(offset + 27) ? null : cursor.getInt(offset + 27), // TermOfPayment
-            cursor.isNull(offset + 28) ? null : new java.util.Date(cursor.getLong(offset + 28)), // DueDate
+            cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28), // DueDate
             cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29), // DocumentHeader
             cursor.isNull(offset + 30) ? null : cursor.getInt(offset + 30), // CreditDay
-            cursor.isNull(offset + 31) ? null : new java.util.Date(cursor.getLong(offset + 31)), // InsertDate
-            cursor.isNull(offset + 32) ? null : new java.util.Date(cursor.getLong(offset + 32)), // UpdateDate
-            cursor.isNull(offset + 33) ? null : new java.util.Date(cursor.getLong(offset + 33)), // ApproveDate
-            cursor.isNull(offset + 34) ? null : new java.util.Date(cursor.getLong(offset + 34)), // CancelDate
+            cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31), // InsertDate
+            cursor.isNull(offset + 32) ? null : cursor.getString(offset + 32), // UpdateDate
+            cursor.isNull(offset + 33) ? null : cursor.getString(offset + 33), // ApproveDate
+            cursor.isNull(offset + 34) ? null : cursor.getString(offset + 34), // CancelDate
             cursor.isNull(offset + 35) ? null : cursor.getInt(offset + 35), // NewSend
             cursor.isNull(offset + 36) ? null : cursor.getInt(offset + 36), // CurrentAccessStaff
             cursor.isNull(offset + 37) ? null : cursor.getDouble(offset + 37), // OtherPercentDiscount
@@ -395,7 +395,7 @@ public class DocumentDao extends AbstractDao<Document, Integer> {
         entity.setDocumentYear(cursor.isNull(offset + 6) ? null : cursor.getInt(offset + 6));
         entity.setDocumentMonth(cursor.isNull(offset + 7) ? null : cursor.getInt(offset + 7));
         entity.setDocumentNumber(cursor.isNull(offset + 8) ? null : cursor.getInt(offset + 8));
-        entity.setDocumentDate(cursor.isNull(offset + 9) ? null : new java.util.Date(cursor.getLong(offset + 9)));
+        entity.setDocumentDate(cursor.isNull(offset + 9) ? null : cursor.getString(offset + 9));
         entity.setInputBy(cursor.isNull(offset + 10) ? null : cursor.getInt(offset + 10));
         entity.setUpdateBy(cursor.isNull(offset + 11) ? null : cursor.getInt(offset + 11));
         entity.setApproveBy(cursor.isNull(offset + 12) ? null : cursor.getInt(offset + 12));
@@ -414,13 +414,13 @@ public class DocumentDao extends AbstractDao<Document, Integer> {
         entity.setIsSmallUnit(cursor.isNull(offset + 25) ? null : cursor.getInt(offset + 25));
         entity.setRemark(cursor.isNull(offset + 26) ? null : cursor.getString(offset + 26));
         entity.setTermOfPayment(cursor.isNull(offset + 27) ? null : cursor.getInt(offset + 27));
-        entity.setDueDate(cursor.isNull(offset + 28) ? null : new java.util.Date(cursor.getLong(offset + 28)));
+        entity.setDueDate(cursor.isNull(offset + 28) ? null : cursor.getString(offset + 28));
         entity.setDocumentHeader(cursor.isNull(offset + 29) ? null : cursor.getString(offset + 29));
         entity.setCreditDay(cursor.isNull(offset + 30) ? null : cursor.getInt(offset + 30));
-        entity.setInsertDate(cursor.isNull(offset + 31) ? null : new java.util.Date(cursor.getLong(offset + 31)));
-        entity.setUpdateDate(cursor.isNull(offset + 32) ? null : new java.util.Date(cursor.getLong(offset + 32)));
-        entity.setApproveDate(cursor.isNull(offset + 33) ? null : new java.util.Date(cursor.getLong(offset + 33)));
-        entity.setCancelDate(cursor.isNull(offset + 34) ? null : new java.util.Date(cursor.getLong(offset + 34)));
+        entity.setInsertDate(cursor.isNull(offset + 31) ? null : cursor.getString(offset + 31));
+        entity.setUpdateDate(cursor.isNull(offset + 32) ? null : cursor.getString(offset + 32));
+        entity.setApproveDate(cursor.isNull(offset + 33) ? null : cursor.getString(offset + 33));
+        entity.setCancelDate(cursor.isNull(offset + 34) ? null : cursor.getString(offset + 34));
         entity.setNewSend(cursor.isNull(offset + 35) ? null : cursor.getInt(offset + 35));
         entity.setCurrentAccessStaff(cursor.isNull(offset + 36) ? null : cursor.getInt(offset + 36));
         entity.setOtherPercentDiscount(cursor.isNull(offset + 37) ? null : cursor.getDouble(offset + 37));

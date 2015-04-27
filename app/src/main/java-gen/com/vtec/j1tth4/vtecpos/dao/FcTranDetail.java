@@ -12,10 +12,10 @@ public class FcTranDetail {
     private Integer CardID;
     private String CardNo;
     private Integer ShopID;
-    private java.util.Date SaleDate;
+    private String SaleDate;
     private Double TranAmount;
     private Integer RecordStatus;
-    private java.util.Date InsertDate;
+    private String InsertDate;
 
     public FcTranDetail() {
     }
@@ -26,7 +26,7 @@ public class FcTranDetail {
         this.ComputerID = ComputerID;
     }
 
-    public FcTranDetail(Integer OrderDetailID, Integer TransactionID, Integer ComputerID, Integer CardID, String CardNo, Integer ShopID, java.util.Date SaleDate, Double TranAmount, Integer RecordStatus, java.util.Date InsertDate) {
+    public FcTranDetail(Integer OrderDetailID, Integer TransactionID, Integer ComputerID, Integer CardID, String CardNo, Integer ShopID, String SaleDate, Double TranAmount, Integer RecordStatus, String InsertDate) {
         this.OrderDetailID = OrderDetailID;
         this.TransactionID = TransactionID;
         this.ComputerID = ComputerID;
@@ -87,11 +87,11 @@ public class FcTranDetail {
         this.ShopID = ShopID;
     }
 
-    public java.util.Date getSaleDate() {
+    public String getSaleDate() {
         return SaleDate;
     }
 
-    public void setSaleDate(java.util.Date SaleDate) {
+    public void setSaleDate(String SaleDate) {
         this.SaleDate = SaleDate;
     }
 
@@ -111,11 +111,11 @@ public class FcTranDetail {
         this.RecordStatus = RecordStatus;
     }
 
-    public java.util.Date getInsertDate() {
+    public String getInsertDate() {
         return InsertDate;
     }
 
-    public void setInsertDate(java.util.Date InsertDate) {
+    public void setInsertDate(String InsertDate) {
         this.InsertDate = InsertDate;
     }
 

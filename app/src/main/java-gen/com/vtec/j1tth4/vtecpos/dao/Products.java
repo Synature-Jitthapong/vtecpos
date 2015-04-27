@@ -36,7 +36,7 @@ public class Products {
     private Integer PrinterID;
     private Integer PrintGroup;
     private String PrintProductName;
-    private java.util.Date DurationTime;
+    private String DurationTime;
     private Integer HasServiceCharge;
     private Integer IsOutOfStock;
     private Integer AutoComment;
@@ -45,11 +45,11 @@ public class Products {
     private Integer IsPrintReceipt;
     private Integer CanReturnProduct;
     private Integer DisplayAtCheckerSystem;
-    private java.util.Date ProductEnableDateTime;
-    private java.util.Date ProductExpireDateTime;
-    private java.util.Date ProductEnableDayString;
-    private java.util.Date WarningTime;
-    private java.util.Date CriticalTime;
+    private String ProductEnableDateTime;
+    private String ProductExpireDateTime;
+    private String ProductEnableDayString;
+    private String WarningTime;
+    private String CriticalTime;
     private Integer SaleMode1;
     private Integer SaleMode2;
     private Integer SaleMode3;
@@ -75,8 +75,8 @@ public class Products {
     private Integer PrintOrdering;
     private Integer AddingFromBranch;
     private Integer Deleted;
-    private java.util.Date InsertDate;
-    private java.util.Date UpdateDate;
+    private String InsertDate;
+    private String UpdateDate;
 
     public Products() {
     }
@@ -85,7 +85,7 @@ public class Products {
         this.ProductID = ProductID;
     }
 
-    public Products(int ProductID, int ShopID, Integer InventoryID, Integer ProductGroupID, Integer ProductDeptID, Integer ProductCat1ID, Integer ProductCat2ID, Integer ProductCat3ID, Integer ProductCat4ID, Integer ProductCat5ID, Integer ProductTypeID, String ProductCode, String ProductBarCode, String ProductName, String ProductNameLang1, String ProductNameLang2, String ProductNameLang3, String ProductNameLang4, String ProductNameLang5, String ProductMName, String ProductMNameLang1, String ProductMNameLang2, String ProductMNameLang3, String ProductMNameLang4, String ProductMNameLang5, String ProductPictureServer, String ProductPictureClient, Integer PrinterID, Integer PrintGroup, String PrintProductName, java.util.Date DurationTime, Integer HasServiceCharge, Integer IsOutOfStock, Integer AutoComment, Integer IsDisplayBill, Integer IsPrintCheck, Integer IsPrintReceipt, Integer CanReturnProduct, Integer DisplayAtCheckerSystem, java.util.Date ProductEnableDateTime, java.util.Date ProductExpireDateTime, java.util.Date ProductEnableDayString, java.util.Date WarningTime, java.util.Date CriticalTime, Integer SaleMode1, Integer SaleMode2, Integer SaleMode3, Integer SaleMode4, Integer SaleMode5, Integer SaleMode6, Integer SaleMode7, Integer SaleMode8, Integer SaleMode9, Integer SaleMode10, Integer VATType, String VATCode, String ProductUnitName, Integer DiscountAllow, Integer ZeroPriceAllow, Integer LimitDiscountAmount, Integer LimitDiscountPercent, Integer CommRate, String ProductDesp, Integer ProductDisplay, Integer ProductActivate, Integer ProductOrdering, Integer PrintOrdering, Integer AddingFromBranch, Integer Deleted, java.util.Date InsertDate, java.util.Date UpdateDate) {
+    public Products(int ProductID, int ShopID, Integer InventoryID, Integer ProductGroupID, Integer ProductDeptID, Integer ProductCat1ID, Integer ProductCat2ID, Integer ProductCat3ID, Integer ProductCat4ID, Integer ProductCat5ID, Integer ProductTypeID, String ProductCode, String ProductBarCode, String ProductName, String ProductNameLang1, String ProductNameLang2, String ProductNameLang3, String ProductNameLang4, String ProductNameLang5, String ProductMName, String ProductMNameLang1, String ProductMNameLang2, String ProductMNameLang3, String ProductMNameLang4, String ProductMNameLang5, String ProductPictureServer, String ProductPictureClient, Integer PrinterID, Integer PrintGroup, String PrintProductName, String DurationTime, Integer HasServiceCharge, Integer IsOutOfStock, Integer AutoComment, Integer IsDisplayBill, Integer IsPrintCheck, Integer IsPrintReceipt, Integer CanReturnProduct, Integer DisplayAtCheckerSystem, String ProductEnableDateTime, String ProductExpireDateTime, String ProductEnableDayString, String WarningTime, String CriticalTime, Integer SaleMode1, Integer SaleMode2, Integer SaleMode3, Integer SaleMode4, Integer SaleMode5, Integer SaleMode6, Integer SaleMode7, Integer SaleMode8, Integer SaleMode9, Integer SaleMode10, Integer VATType, String VATCode, String ProductUnitName, Integer DiscountAllow, Integer ZeroPriceAllow, Integer LimitDiscountAmount, Integer LimitDiscountPercent, Integer CommRate, String ProductDesp, Integer ProductDisplay, Integer ProductActivate, Integer ProductOrdering, Integer PrintOrdering, Integer AddingFromBranch, Integer Deleted, String InsertDate, String UpdateDate) {
         this.ProductID = ProductID;
         this.ShopID = ShopID;
         this.InventoryID = InventoryID;
@@ -399,11 +399,11 @@ public class Products {
         this.PrintProductName = PrintProductName;
     }
 
-    public java.util.Date getDurationTime() {
+    public String getDurationTime() {
         return DurationTime;
     }
 
-    public void setDurationTime(java.util.Date DurationTime) {
+    public void setDurationTime(String DurationTime) {
         this.DurationTime = DurationTime;
     }
 
@@ -471,43 +471,43 @@ public class Products {
         this.DisplayAtCheckerSystem = DisplayAtCheckerSystem;
     }
 
-    public java.util.Date getProductEnableDateTime() {
+    public String getProductEnableDateTime() {
         return ProductEnableDateTime;
     }
 
-    public void setProductEnableDateTime(java.util.Date ProductEnableDateTime) {
+    public void setProductEnableDateTime(String ProductEnableDateTime) {
         this.ProductEnableDateTime = ProductEnableDateTime;
     }
 
-    public java.util.Date getProductExpireDateTime() {
+    public String getProductExpireDateTime() {
         return ProductExpireDateTime;
     }
 
-    public void setProductExpireDateTime(java.util.Date ProductExpireDateTime) {
+    public void setProductExpireDateTime(String ProductExpireDateTime) {
         this.ProductExpireDateTime = ProductExpireDateTime;
     }
 
-    public java.util.Date getProductEnableDayString() {
+    public String getProductEnableDayString() {
         return ProductEnableDayString;
     }
 
-    public void setProductEnableDayString(java.util.Date ProductEnableDayString) {
+    public void setProductEnableDayString(String ProductEnableDayString) {
         this.ProductEnableDayString = ProductEnableDayString;
     }
 
-    public java.util.Date getWarningTime() {
+    public String getWarningTime() {
         return WarningTime;
     }
 
-    public void setWarningTime(java.util.Date WarningTime) {
+    public void setWarningTime(String WarningTime) {
         this.WarningTime = WarningTime;
     }
 
-    public java.util.Date getCriticalTime() {
+    public String getCriticalTime() {
         return CriticalTime;
     }
 
-    public void setCriticalTime(java.util.Date CriticalTime) {
+    public void setCriticalTime(String CriticalTime) {
         this.CriticalTime = CriticalTime;
     }
 
@@ -711,19 +711,19 @@ public class Products {
         this.Deleted = Deleted;
     }
 
-    public java.util.Date getInsertDate() {
+    public String getInsertDate() {
         return InsertDate;
     }
 
-    public void setInsertDate(java.util.Date InsertDate) {
+    public void setInsertDate(String InsertDate) {
         this.InsertDate = InsertDate;
     }
 
-    public java.util.Date getUpdateDate() {
+    public String getUpdateDate() {
         return UpdateDate;
     }
 
-    public void setUpdateDate(java.util.Date UpdateDate) {
+    public void setUpdateDate(String UpdateDate) {
         this.UpdateDate = UpdateDate;
     }
 

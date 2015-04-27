@@ -9,8 +9,8 @@ public class ProductComponentGroup {
     private Integer PGroupID;
     private Integer ProductID;
     private Integer SaleMode;
-    private java.util.Date StartDate;
-    private java.util.Date EndDate;
+    private String StartDate;
+    private String EndDate;
     private Integer SetGroupNo;
     private String SetGroupName;
     private Integer RequireAddAmountForProduct;
@@ -23,7 +23,7 @@ public class ProductComponentGroup {
         this.PGroupID = PGroupID;
     }
 
-    public ProductComponentGroup(Integer PGroupID, Integer ProductID, Integer SaleMode, java.util.Date StartDate, java.util.Date EndDate, Integer SetGroupNo, String SetGroupName, Integer RequireAddAmountForProduct, Integer AddingFromBranch) {
+    public ProductComponentGroup(Integer PGroupID, Integer ProductID, Integer SaleMode, String StartDate, String EndDate, Integer SetGroupNo, String SetGroupName, Integer RequireAddAmountForProduct, Integer AddingFromBranch) {
         this.PGroupID = PGroupID;
         this.ProductID = ProductID;
         this.SaleMode = SaleMode;
@@ -59,19 +59,19 @@ public class ProductComponentGroup {
         this.SaleMode = SaleMode;
     }
 
-    public java.util.Date getStartDate() {
+    public String getStartDate() {
         return StartDate;
     }
 
-    public void setStartDate(java.util.Date StartDate) {
+    public void setStartDate(String StartDate) {
         this.StartDate = StartDate;
     }
 
-    public java.util.Date getEndDate() {
+    public String getEndDate() {
         return EndDate;
     }
 
-    public void setEndDate(java.util.Date EndDate) {
+    public void setEndDate(String EndDate) {
         this.EndDate = EndDate;
     }
 

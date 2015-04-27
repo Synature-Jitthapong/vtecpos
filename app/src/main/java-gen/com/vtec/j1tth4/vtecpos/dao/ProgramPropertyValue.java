@@ -10,10 +10,10 @@ public class ProgramPropertyValue {
     private Integer KeyID;
     private Integer PropertyValue;
     private String PropertyTextValue;
-    private java.util.Date PropertyDateValue;
+    private String PropertyDateValue;
     private Double PropertyDecimalValue;
     private Integer UpdateStaffID;
-    private java.util.Date UpdateDate;
+    private String UpdateDate;
 
     public ProgramPropertyValue() {
     }
@@ -23,7 +23,7 @@ public class ProgramPropertyValue {
         this.KeyID = KeyID;
     }
 
-    public ProgramPropertyValue(Integer PropertyID, Integer KeyID, Integer PropertyValue, String PropertyTextValue, java.util.Date PropertyDateValue, Double PropertyDecimalValue, Integer UpdateStaffID, java.util.Date UpdateDate) {
+    public ProgramPropertyValue(Integer PropertyID, Integer KeyID, Integer PropertyValue, String PropertyTextValue, String PropertyDateValue, Double PropertyDecimalValue, Integer UpdateStaffID, String UpdateDate) {
         this.PropertyID = PropertyID;
         this.KeyID = KeyID;
         this.PropertyValue = PropertyValue;
@@ -66,11 +66,11 @@ public class ProgramPropertyValue {
         this.PropertyTextValue = PropertyTextValue;
     }
 
-    public java.util.Date getPropertyDateValue() {
+    public String getPropertyDateValue() {
         return PropertyDateValue;
     }
 
-    public void setPropertyDateValue(java.util.Date PropertyDateValue) {
+    public void setPropertyDateValue(String PropertyDateValue) {
         this.PropertyDateValue = PropertyDateValue;
     }
 
@@ -90,11 +90,11 @@ public class ProgramPropertyValue {
         this.UpdateStaffID = UpdateStaffID;
     }
 
-    public java.util.Date getUpdateDate() {
+    public String getUpdateDate() {
         return UpdateDate;
     }
 
-    public void setUpdateDate(java.util.Date UpdateDate) {
+    public void setUpdateDate(String UpdateDate) {
         this.UpdateDate = UpdateDate;
     }
 

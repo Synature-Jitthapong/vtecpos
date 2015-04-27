@@ -25,21 +25,21 @@ public class Staffs {
     private String StaffTelephone;
     private String StaffMobile;
     private String StaffEmail;
-    private java.util.Date StaffBirthDay;
+    private String StaffBirthDay;
     private String StaffAdditional;
     private String StaffIDNumber;
-    private java.util.Date StaffIDIssueDate;
-    private java.util.Date StaffIDExpiration;
+    private String StaffIDIssueDate;
+    private String StaffIDExpiration;
     private String StaffBlood;
     private String StaffPictureFileServer;
     private String StaffPictureFileClient;
     private Double BasedSalary;
     private Integer LangID;
-    private java.util.Date InputDate;
+    private String InputDate;
     private Integer InputBy;
-    private java.util.Date UpdateDate;
+    private String UpdateDate;
     private Integer UpdateBy;
-    private java.util.Date LastUseDate;
+    private String LastUseDate;
     private Integer Activated;
     private Integer Deleted;
     private Integer AddingFromBranch;
@@ -51,7 +51,7 @@ public class Staffs {
         this.StaffID = StaffID;
     }
 
-    public Staffs(int StaffID, int StaffRoleID, String StaffPassword, String StaffCode, Integer StaffGender, String StaffFirstName, String StaffLastName, String StaffAddress1, String StaffAddress2, String StaffCity, Integer StaffProvince, String StaffZipCode, String StaffTelephone, String StaffMobile, String StaffEmail, java.util.Date StaffBirthDay, String StaffAdditional, String StaffIDNumber, java.util.Date StaffIDIssueDate, java.util.Date StaffIDExpiration, String StaffBlood, String StaffPictureFileServer, String StaffPictureFileClient, Double BasedSalary, Integer LangID, java.util.Date InputDate, Integer InputBy, java.util.Date UpdateDate, Integer UpdateBy, java.util.Date LastUseDate, Integer Activated, Integer Deleted, Integer AddingFromBranch) {
+    public Staffs(int StaffID, int StaffRoleID, String StaffPassword, String StaffCode, Integer StaffGender, String StaffFirstName, String StaffLastName, String StaffAddress1, String StaffAddress2, String StaffCity, Integer StaffProvince, String StaffZipCode, String StaffTelephone, String StaffMobile, String StaffEmail, String StaffBirthDay, String StaffAdditional, String StaffIDNumber, String StaffIDIssueDate, String StaffIDExpiration, String StaffBlood, String StaffPictureFileServer, String StaffPictureFileClient, Double BasedSalary, Integer LangID, String InputDate, Integer InputBy, String UpdateDate, Integer UpdateBy, String LastUseDate, Integer Activated, Integer Deleted, Integer AddingFromBranch) {
         this.StaffID = StaffID;
         this.StaffRoleID = StaffRoleID;
         this.StaffPassword = StaffPassword;
@@ -215,11 +215,11 @@ public class Staffs {
         this.StaffEmail = StaffEmail;
     }
 
-    public java.util.Date getStaffBirthDay() {
+    public String getStaffBirthDay() {
         return StaffBirthDay;
     }
 
-    public void setStaffBirthDay(java.util.Date StaffBirthDay) {
+    public void setStaffBirthDay(String StaffBirthDay) {
         this.StaffBirthDay = StaffBirthDay;
     }
 
@@ -239,19 +239,19 @@ public class Staffs {
         this.StaffIDNumber = StaffIDNumber;
     }
 
-    public java.util.Date getStaffIDIssueDate() {
+    public String getStaffIDIssueDate() {
         return StaffIDIssueDate;
     }
 
-    public void setStaffIDIssueDate(java.util.Date StaffIDIssueDate) {
+    public void setStaffIDIssueDate(String StaffIDIssueDate) {
         this.StaffIDIssueDate = StaffIDIssueDate;
     }
 
-    public java.util.Date getStaffIDExpiration() {
+    public String getStaffIDExpiration() {
         return StaffIDExpiration;
     }
 
-    public void setStaffIDExpiration(java.util.Date StaffIDExpiration) {
+    public void setStaffIDExpiration(String StaffIDExpiration) {
         this.StaffIDExpiration = StaffIDExpiration;
     }
 
@@ -295,11 +295,11 @@ public class Staffs {
         this.LangID = LangID;
     }
 
-    public java.util.Date getInputDate() {
+    public String getInputDate() {
         return InputDate;
     }
 
-    public void setInputDate(java.util.Date InputDate) {
+    public void setInputDate(String InputDate) {
         this.InputDate = InputDate;
     }
 
@@ -311,11 +311,11 @@ public class Staffs {
         this.InputBy = InputBy;
     }
 
-    public java.util.Date getUpdateDate() {
+    public String getUpdateDate() {
         return UpdateDate;
     }
 
-    public void setUpdateDate(java.util.Date UpdateDate) {
+    public void setUpdateDate(String UpdateDate) {
         this.UpdateDate = UpdateDate;
     }
 
@@ -327,11 +327,11 @@ public class Staffs {
         this.UpdateBy = UpdateBy;
     }
 
-    public java.util.Date getLastUseDate() {
+    public String getLastUseDate() {
         return LastUseDate;
     }
 
-    public void setLastUseDate(java.util.Date LastUseDate) {
+    public void setLastUseDate(String LastUseDate) {
         this.LastUseDate = LastUseDate;
     }
 

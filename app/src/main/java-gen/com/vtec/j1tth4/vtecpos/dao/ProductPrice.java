@@ -13,8 +13,8 @@ public class ProductPrice {
     private Double MainPrice;
     private Integer SaleMode;
     private String PriceRemark;
-    private java.util.Date FromDate;
-    private java.util.Date ToDate;
+    private String FromDate;
+    private String ToDate;
     private Integer AddingFromBranch;
 
     public ProductPrice() {
@@ -24,7 +24,7 @@ public class ProductPrice {
         this.ProductPriceID = ProductPriceID;
     }
 
-    public ProductPrice(Integer ProductPriceID, Integer ProductID, Double ProductPrice, Double PrepaidPrice, Double MainPrice, Integer SaleMode, String PriceRemark, java.util.Date FromDate, java.util.Date ToDate, Integer AddingFromBranch) {
+    public ProductPrice(Integer ProductPriceID, Integer ProductID, Double ProductPrice, Double PrepaidPrice, Double MainPrice, Integer SaleMode, String PriceRemark, String FromDate, String ToDate, Integer AddingFromBranch) {
         this.ProductPriceID = ProductPriceID;
         this.ProductID = ProductID;
         this.ProductPrice = ProductPrice;
@@ -93,19 +93,19 @@ public class ProductPrice {
         this.PriceRemark = PriceRemark;
     }
 
-    public java.util.Date getFromDate() {
+    public String getFromDate() {
         return FromDate;
     }
 
-    public void setFromDate(java.util.Date FromDate) {
+    public void setFromDate(String FromDate) {
         this.FromDate = FromDate;
     }
 
-    public java.util.Date getToDate() {
+    public String getToDate() {
         return ToDate;
     }
 
-    public void setToDate(java.util.Date ToDate) {
+    public void setToDate(String ToDate) {
         this.ToDate = ToDate;
     }
 

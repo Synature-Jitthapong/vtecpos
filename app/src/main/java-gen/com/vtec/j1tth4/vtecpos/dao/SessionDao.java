@@ -27,16 +27,16 @@ public class SessionDao extends AbstractDao<Session, Integer> {
         public final static Property ComputerID = new Property(1, int.class, "ComputerID", false, "COMPUTER_ID");
         public final static Property OpenStaffID = new Property(2, int.class, "OpenStaffID", false, "OPEN_STAFF_ID");
         public final static Property CloseStaffID = new Property(3, Integer.class, "CloseStaffID", false, "CLOSE_STAFF_ID");
-        public final static Property OpenSessionDateTime = new Property(4, java.util.Date.class, "OpenSessionDateTime", false, "OPEN_SESSION_DATE_TIME");
-        public final static Property CloseSessionDateTime = new Property(5, java.util.Date.class, "CloseSessionDateTime", false, "CLOSE_SESSION_DATE_TIME");
-        public final static Property SessionDate = new Property(6, java.util.Date.class, "SessionDate", false, "SESSION_DATE");
+        public final static Property OpenSessionDateTime = new Property(4, String.class, "OpenSessionDateTime", false, "OPEN_SESSION_DATE_TIME");
+        public final static Property CloseSessionDateTime = new Property(5, String.class, "CloseSessionDateTime", false, "CLOSE_SESSION_DATE_TIME");
+        public final static Property SessionDate = new Property(6, String.class, "SessionDate", false, "SESSION_DATE");
         public final static Property OpenSessionAmount = new Property(7, double.class, "OpenSessionAmount", false, "OPEN_SESSION_AMOUNT");
         public final static Property CashAmount = new Property(8, Double.class, "CashAmount", false, "CASH_AMOUNT");
         public final static Property CashInAmount = new Property(9, Double.class, "CashInAmount", false, "CASH_IN_AMOUNT");
         public final static Property CashOutAmount = new Property(10, Double.class, "CashOutAmount", false, "CASH_OUT_AMOUNT");
         public final static Property CloseSessionAmount = new Property(11, Double.class, "CloseSessionAmount", false, "CLOSE_SESSION_AMOUNT");
         public final static Property CashShortOver = new Property(12, Double.class, "CashShortOver", false, "CASH_SHORT_OVER");
-        public final static Property SessionUpdateDate = new Property(13, java.util.Date.class, "SessionUpdateDate", false, "SESSION_UPDATE_DATE");
+        public final static Property SessionUpdateDate = new Property(13, String.class, "SessionUpdateDate", false, "SESSION_UPDATE_DATE");
         public final static Property ShopID = new Property(14, Integer.class, "ShopID", false, "SHOP_ID");
         public final static Property IsEndDaySession = new Property(15, Integer.class, "IsEndDaySession", false, "IS_END_DAY_SESSION");
     };
@@ -63,19 +63,19 @@ public class SessionDao extends AbstractDao<Session, Integer> {
             stmt.bindLong(4, CloseStaffID);
         }
  
-        java.util.Date OpenSessionDateTime = entity.getOpenSessionDateTime();
+        String OpenSessionDateTime = entity.getOpenSessionDateTime();
         if (OpenSessionDateTime != null) {
-            stmt.bindLong(5, OpenSessionDateTime.getTime());
+            stmt.bindString(5, OpenSessionDateTime);
         }
  
-        java.util.Date CloseSessionDateTime = entity.getCloseSessionDateTime();
+        String CloseSessionDateTime = entity.getCloseSessionDateTime();
         if (CloseSessionDateTime != null) {
-            stmt.bindLong(6, CloseSessionDateTime.getTime());
+            stmt.bindString(6, CloseSessionDateTime);
         }
  
-        java.util.Date SessionDate = entity.getSessionDate();
+        String SessionDate = entity.getSessionDate();
         if (SessionDate != null) {
-            stmt.bindLong(7, SessionDate.getTime());
+            stmt.bindString(7, SessionDate);
         }
         stmt.bindDouble(8, entity.getOpenSessionAmount());
  
@@ -104,9 +104,9 @@ public class SessionDao extends AbstractDao<Session, Integer> {
             stmt.bindDouble(13, CashShortOver);
         }
  
-        java.util.Date SessionUpdateDate = entity.getSessionUpdateDate();
+        String SessionUpdateDate = entity.getSessionUpdateDate();
         if (SessionUpdateDate != null) {
-            stmt.bindLong(14, SessionUpdateDate.getTime());
+            stmt.bindString(14, SessionUpdateDate);
         }
  
         Integer ShopID = entity.getShopID();
@@ -134,16 +134,16 @@ public class SessionDao extends AbstractDao<Session, Integer> {
             cursor.getInt(offset + 1), // ComputerID
             cursor.getInt(offset + 2), // OpenStaffID
             cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // CloseStaffID
-            cursor.isNull(offset + 4) ? null : new java.util.Date(cursor.getLong(offset + 4)), // OpenSessionDateTime
-            cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)), // CloseSessionDateTime
-            cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)), // SessionDate
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // OpenSessionDateTime
+            cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5), // CloseSessionDateTime
+            cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6), // SessionDate
             cursor.getDouble(offset + 7), // OpenSessionAmount
             cursor.isNull(offset + 8) ? null : cursor.getDouble(offset + 8), // CashAmount
             cursor.isNull(offset + 9) ? null : cursor.getDouble(offset + 9), // CashInAmount
             cursor.isNull(offset + 10) ? null : cursor.getDouble(offset + 10), // CashOutAmount
             cursor.isNull(offset + 11) ? null : cursor.getDouble(offset + 11), // CloseSessionAmount
             cursor.isNull(offset + 12) ? null : cursor.getDouble(offset + 12), // CashShortOver
-            cursor.isNull(offset + 13) ? null : new java.util.Date(cursor.getLong(offset + 13)), // SessionUpdateDate
+            cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13), // SessionUpdateDate
             cursor.isNull(offset + 14) ? null : cursor.getInt(offset + 14), // ShopID
             cursor.isNull(offset + 15) ? null : cursor.getInt(offset + 15) // IsEndDaySession
         );
@@ -157,16 +157,16 @@ public class SessionDao extends AbstractDao<Session, Integer> {
         entity.setComputerID(cursor.getInt(offset + 1));
         entity.setOpenStaffID(cursor.getInt(offset + 2));
         entity.setCloseStaffID(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
-        entity.setOpenSessionDateTime(cursor.isNull(offset + 4) ? null : new java.util.Date(cursor.getLong(offset + 4)));
-        entity.setCloseSessionDateTime(cursor.isNull(offset + 5) ? null : new java.util.Date(cursor.getLong(offset + 5)));
-        entity.setSessionDate(cursor.isNull(offset + 6) ? null : new java.util.Date(cursor.getLong(offset + 6)));
+        entity.setOpenSessionDateTime(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setCloseSessionDateTime(cursor.isNull(offset + 5) ? null : cursor.getString(offset + 5));
+        entity.setSessionDate(cursor.isNull(offset + 6) ? null : cursor.getString(offset + 6));
         entity.setOpenSessionAmount(cursor.getDouble(offset + 7));
         entity.setCashAmount(cursor.isNull(offset + 8) ? null : cursor.getDouble(offset + 8));
         entity.setCashInAmount(cursor.isNull(offset + 9) ? null : cursor.getDouble(offset + 9));
         entity.setCashOutAmount(cursor.isNull(offset + 10) ? null : cursor.getDouble(offset + 10));
         entity.setCloseSessionAmount(cursor.isNull(offset + 11) ? null : cursor.getDouble(offset + 11));
         entity.setCashShortOver(cursor.isNull(offset + 12) ? null : cursor.getDouble(offset + 12));
-        entity.setSessionUpdateDate(cursor.isNull(offset + 13) ? null : new java.util.Date(cursor.getLong(offset + 13)));
+        entity.setSessionUpdateDate(cursor.isNull(offset + 13) ? null : cursor.getString(offset + 13));
         entity.setShopID(cursor.isNull(offset + 14) ? null : cursor.getInt(offset + 14));
         entity.setIsEndDaySession(cursor.isNull(offset + 15) ? null : cursor.getInt(offset + 15));
      }
