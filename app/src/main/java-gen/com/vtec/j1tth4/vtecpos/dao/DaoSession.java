@@ -21,10 +21,10 @@ import com.vtec.j1tth4.vtecpos.dao.FcTranPayment;
 import com.vtec.j1tth4.vtecpos.dao.FcTransaction;
 import com.vtec.j1tth4.vtecpos.dao.Language;
 import com.vtec.j1tth4.vtecpos.dao.LogAccessInfo;
-import com.vtec.j1tth4.vtecpos.dao.OrderDetail;
 import com.vtec.j1tth4.vtecpos.dao.OrderpayDetail;
 import com.vtec.j1tth4.vtecpos.dao.OrderPrintJob;
 import com.vtec.j1tth4.vtecpos.dao.OrderTransaction;
+import com.vtec.j1tth4.vtecpos.dao.OrderDetail;
 import com.vtec.j1tth4.vtecpos.dao.Products;
 import com.vtec.j1tth4.vtecpos.dao.ProductDept;
 import com.vtec.j1tth4.vtecpos.dao.ProductGroup;
@@ -42,8 +42,8 @@ import com.vtec.j1tth4.vtecpos.dao.ProgramProperty;
 import com.vtec.j1tth4.vtecpos.dao.ProgramPropertyValue;
 import com.vtec.j1tth4.vtecpos.dao.ShopCategory;
 import com.vtec.j1tth4.vtecpos.dao.ShopData;
-import com.vtec.j1tth4.vtecpos.dao.Staffs;
 import com.vtec.j1tth4.vtecpos.dao.StaffRole;
+import com.vtec.j1tth4.vtecpos.dao.Staffs;
 import com.vtec.j1tth4.vtecpos.dao.Session;
 import com.vtec.j1tth4.vtecpos.dao.SessionEnddayDetail;
 import com.vtec.j1tth4.vtecpos.dao.SaleMode;
@@ -60,10 +60,10 @@ import com.vtec.j1tth4.vtecpos.dao.FcTranPaymentDao;
 import com.vtec.j1tth4.vtecpos.dao.FcTransactionDao;
 import com.vtec.j1tth4.vtecpos.dao.LanguageDao;
 import com.vtec.j1tth4.vtecpos.dao.LogAccessInfoDao;
-import com.vtec.j1tth4.vtecpos.dao.OrderDetailDao;
 import com.vtec.j1tth4.vtecpos.dao.OrderpayDetailDao;
 import com.vtec.j1tth4.vtecpos.dao.OrderPrintJobDao;
 import com.vtec.j1tth4.vtecpos.dao.OrderTransactionDao;
+import com.vtec.j1tth4.vtecpos.dao.OrderDetailDao;
 import com.vtec.j1tth4.vtecpos.dao.ProductsDao;
 import com.vtec.j1tth4.vtecpos.dao.ProductDeptDao;
 import com.vtec.j1tth4.vtecpos.dao.ProductGroupDao;
@@ -81,8 +81,8 @@ import com.vtec.j1tth4.vtecpos.dao.ProgramPropertyDao;
 import com.vtec.j1tth4.vtecpos.dao.ProgramPropertyValueDao;
 import com.vtec.j1tth4.vtecpos.dao.ShopCategoryDao;
 import com.vtec.j1tth4.vtecpos.dao.ShopDataDao;
-import com.vtec.j1tth4.vtecpos.dao.StaffsDao;
 import com.vtec.j1tth4.vtecpos.dao.StaffRoleDao;
+import com.vtec.j1tth4.vtecpos.dao.StaffsDao;
 import com.vtec.j1tth4.vtecpos.dao.SessionDao;
 import com.vtec.j1tth4.vtecpos.dao.SessionEnddayDetailDao;
 import com.vtec.j1tth4.vtecpos.dao.SaleModeDao;
@@ -108,10 +108,10 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig fcTransactionDaoConfig;
     private final DaoConfig languageDaoConfig;
     private final DaoConfig logAccessInfoDaoConfig;
-    private final DaoConfig orderDetailDaoConfig;
     private final DaoConfig orderpayDetailDaoConfig;
     private final DaoConfig orderPrintJobDaoConfig;
     private final DaoConfig orderTransactionDaoConfig;
+    private final DaoConfig orderDetailDaoConfig;
     private final DaoConfig productsDaoConfig;
     private final DaoConfig productDeptDaoConfig;
     private final DaoConfig productGroupDaoConfig;
@@ -129,8 +129,8 @@ public class DaoSession extends AbstractDaoSession {
     private final DaoConfig programPropertyValueDaoConfig;
     private final DaoConfig shopCategoryDaoConfig;
     private final DaoConfig shopDataDaoConfig;
-    private final DaoConfig staffsDaoConfig;
     private final DaoConfig staffRoleDaoConfig;
+    private final DaoConfig staffsDaoConfig;
     private final DaoConfig sessionDaoConfig;
     private final DaoConfig sessionEnddayDetailDaoConfig;
     private final DaoConfig saleModeDaoConfig;
@@ -147,10 +147,10 @@ public class DaoSession extends AbstractDaoSession {
     private final FcTransactionDao fcTransactionDao;
     private final LanguageDao languageDao;
     private final LogAccessInfoDao logAccessInfoDao;
-    private final OrderDetailDao orderDetailDao;
     private final OrderpayDetailDao orderpayDetailDao;
     private final OrderPrintJobDao orderPrintJobDao;
     private final OrderTransactionDao orderTransactionDao;
+    private final OrderDetailDao orderDetailDao;
     private final ProductsDao productsDao;
     private final ProductDeptDao productDeptDao;
     private final ProductGroupDao productGroupDao;
@@ -168,8 +168,8 @@ public class DaoSession extends AbstractDaoSession {
     private final ProgramPropertyValueDao programPropertyValueDao;
     private final ShopCategoryDao shopCategoryDao;
     private final ShopDataDao shopDataDao;
-    private final StaffsDao staffsDao;
     private final StaffRoleDao staffRoleDao;
+    private final StaffsDao staffsDao;
     private final SessionDao sessionDao;
     private final SessionEnddayDetailDao sessionEnddayDetailDao;
     private final SaleModeDao saleModeDao;
@@ -214,9 +214,6 @@ public class DaoSession extends AbstractDaoSession {
         logAccessInfoDaoConfig = daoConfigMap.get(LogAccessInfoDao.class).clone();
         logAccessInfoDaoConfig.initIdentityScope(type);
 
-        orderDetailDaoConfig = daoConfigMap.get(OrderDetailDao.class).clone();
-        orderDetailDaoConfig.initIdentityScope(type);
-
         orderpayDetailDaoConfig = daoConfigMap.get(OrderpayDetailDao.class).clone();
         orderpayDetailDaoConfig.initIdentityScope(type);
 
@@ -225,6 +222,9 @@ public class DaoSession extends AbstractDaoSession {
 
         orderTransactionDaoConfig = daoConfigMap.get(OrderTransactionDao.class).clone();
         orderTransactionDaoConfig.initIdentityScope(type);
+
+        orderDetailDaoConfig = daoConfigMap.get(OrderDetailDao.class).clone();
+        orderDetailDaoConfig.initIdentityScope(type);
 
         productsDaoConfig = daoConfigMap.get(ProductsDao.class).clone();
         productsDaoConfig.initIdentityScope(type);
@@ -277,11 +277,11 @@ public class DaoSession extends AbstractDaoSession {
         shopDataDaoConfig = daoConfigMap.get(ShopDataDao.class).clone();
         shopDataDaoConfig.initIdentityScope(type);
 
-        staffsDaoConfig = daoConfigMap.get(StaffsDao.class).clone();
-        staffsDaoConfig.initIdentityScope(type);
-
         staffRoleDaoConfig = daoConfigMap.get(StaffRoleDao.class).clone();
         staffRoleDaoConfig.initIdentityScope(type);
+
+        staffsDaoConfig = daoConfigMap.get(StaffsDao.class).clone();
+        staffsDaoConfig.initIdentityScope(type);
 
         sessionDaoConfig = daoConfigMap.get(SessionDao.class).clone();
         sessionDaoConfig.initIdentityScope(type);
@@ -304,10 +304,10 @@ public class DaoSession extends AbstractDaoSession {
         fcTransactionDao = new FcTransactionDao(fcTransactionDaoConfig, this);
         languageDao = new LanguageDao(languageDaoConfig, this);
         logAccessInfoDao = new LogAccessInfoDao(logAccessInfoDaoConfig, this);
-        orderDetailDao = new OrderDetailDao(orderDetailDaoConfig, this);
         orderpayDetailDao = new OrderpayDetailDao(orderpayDetailDaoConfig, this);
         orderPrintJobDao = new OrderPrintJobDao(orderPrintJobDaoConfig, this);
         orderTransactionDao = new OrderTransactionDao(orderTransactionDaoConfig, this);
+        orderDetailDao = new OrderDetailDao(orderDetailDaoConfig, this);
         productsDao = new ProductsDao(productsDaoConfig, this);
         productDeptDao = new ProductDeptDao(productDeptDaoConfig, this);
         productGroupDao = new ProductGroupDao(productGroupDaoConfig, this);
@@ -325,8 +325,8 @@ public class DaoSession extends AbstractDaoSession {
         programPropertyValueDao = new ProgramPropertyValueDao(programPropertyValueDaoConfig, this);
         shopCategoryDao = new ShopCategoryDao(shopCategoryDaoConfig, this);
         shopDataDao = new ShopDataDao(shopDataDaoConfig, this);
-        staffsDao = new StaffsDao(staffsDaoConfig, this);
         staffRoleDao = new StaffRoleDao(staffRoleDaoConfig, this);
+        staffsDao = new StaffsDao(staffsDaoConfig, this);
         sessionDao = new SessionDao(sessionDaoConfig, this);
         sessionEnddayDetailDao = new SessionEnddayDetailDao(sessionEnddayDetailDaoConfig, this);
         saleModeDao = new SaleModeDao(saleModeDaoConfig, this);
@@ -343,10 +343,10 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(FcTransaction.class, fcTransactionDao);
         registerDao(Language.class, languageDao);
         registerDao(LogAccessInfo.class, logAccessInfoDao);
-        registerDao(OrderDetail.class, orderDetailDao);
         registerDao(OrderpayDetail.class, orderpayDetailDao);
         registerDao(OrderPrintJob.class, orderPrintJobDao);
         registerDao(OrderTransaction.class, orderTransactionDao);
+        registerDao(OrderDetail.class, orderDetailDao);
         registerDao(Products.class, productsDao);
         registerDao(ProductDept.class, productDeptDao);
         registerDao(ProductGroup.class, productGroupDao);
@@ -364,8 +364,8 @@ public class DaoSession extends AbstractDaoSession {
         registerDao(ProgramPropertyValue.class, programPropertyValueDao);
         registerDao(ShopCategory.class, shopCategoryDao);
         registerDao(ShopData.class, shopDataDao);
-        registerDao(Staffs.class, staffsDao);
         registerDao(StaffRole.class, staffRoleDao);
+        registerDao(Staffs.class, staffsDao);
         registerDao(Session.class, sessionDao);
         registerDao(SessionEnddayDetail.class, sessionEnddayDetailDao);
         registerDao(SaleMode.class, saleModeDao);
@@ -384,10 +384,10 @@ public class DaoSession extends AbstractDaoSession {
         fcTransactionDaoConfig.getIdentityScope().clear();
         languageDaoConfig.getIdentityScope().clear();
         logAccessInfoDaoConfig.getIdentityScope().clear();
-        orderDetailDaoConfig.getIdentityScope().clear();
         orderpayDetailDaoConfig.getIdentityScope().clear();
         orderPrintJobDaoConfig.getIdentityScope().clear();
         orderTransactionDaoConfig.getIdentityScope().clear();
+        orderDetailDaoConfig.getIdentityScope().clear();
         productsDaoConfig.getIdentityScope().clear();
         productDeptDaoConfig.getIdentityScope().clear();
         productGroupDaoConfig.getIdentityScope().clear();
@@ -405,8 +405,8 @@ public class DaoSession extends AbstractDaoSession {
         programPropertyValueDaoConfig.getIdentityScope().clear();
         shopCategoryDaoConfig.getIdentityScope().clear();
         shopDataDaoConfig.getIdentityScope().clear();
-        staffsDaoConfig.getIdentityScope().clear();
         staffRoleDaoConfig.getIdentityScope().clear();
+        staffsDaoConfig.getIdentityScope().clear();
         sessionDaoConfig.getIdentityScope().clear();
         sessionEnddayDetailDaoConfig.getIdentityScope().clear();
         saleModeDaoConfig.getIdentityScope().clear();
@@ -460,10 +460,6 @@ public class DaoSession extends AbstractDaoSession {
         return logAccessInfoDao;
     }
 
-    public OrderDetailDao getOrderDetailDao() {
-        return orderDetailDao;
-    }
-
     public OrderpayDetailDao getOrderpayDetailDao() {
         return orderpayDetailDao;
     }
@@ -474,6 +470,10 @@ public class DaoSession extends AbstractDaoSession {
 
     public OrderTransactionDao getOrderTransactionDao() {
         return orderTransactionDao;
+    }
+
+    public OrderDetailDao getOrderDetailDao() {
+        return orderDetailDao;
     }
 
     public ProductsDao getProductsDao() {
@@ -544,12 +544,12 @@ public class DaoSession extends AbstractDaoSession {
         return shopDataDao;
     }
 
-    public StaffsDao getStaffsDao() {
-        return staffsDao;
-    }
-
     public StaffRoleDao getStaffRoleDao() {
         return staffRoleDao;
+    }
+
+    public StaffsDao getStaffsDao() {
+        return staffsDao;
     }
 
     public SessionDao getSessionDao() {

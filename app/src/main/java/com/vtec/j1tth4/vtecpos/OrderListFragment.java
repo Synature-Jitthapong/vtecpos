@@ -1,5 +1,6 @@
 package com.vtec.j1tth4.vtecpos;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,6 +12,9 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.vtec.j1tth4.vtecpos.provider.Orders;
+import com.vtec.j1tth4.vtecpos.provider.Products;
 
 import org.w3c.dom.Text;
 
@@ -26,10 +30,23 @@ import java.util.List;
  */
 public class OrderListFragment extends Fragment {
 
+    public static final String[] PROJECTION = {
+            Orders.TRANSACTION_ID,
+            Orders.COMPUTER_ID,
+            Orders.TOTAL_QTY,
+            Orders.TOTAL_RETAIL_PRICE,
+            Products.PRODUCT_NAME,
+            Products.PRODUCT_NAME_LANG1,
+            Products.PRODUCT_NAME_LANG2,
+            Products.PRODUCT_NAME_LANG3,
+            Products.PRODUCT_NAME_LANG4,
+            Products.PRODUCT_NAME_LANG5,
+    };
+
+    private Cursor mCursor;
+
     private ListView mLvOrder;
     private ListView mLvOrderSummary;
-
-    List<MenuFragment.MenuItem> mMenuItem = new ArrayList<MenuFragment.MenuItem>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,10 +56,6 @@ public class OrderListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mMenuItem.add(new MenuFragment.MenuItem("Shusi", getResources().getDrawable(R.drawable.sushi)));
-        mMenuItem.add(new MenuFragment.MenuItem("Ramen", getResources().getDrawable(R.drawable.ramen)));
-        mMenuItem.add(new MenuFragment.MenuItem("Capuchino", getResources().getDrawable(R.drawable.capuchino)));
-        mMenuItem.add(new MenuFragment.MenuItem("Espress", getResources().getDrawable(R.drawable.esspresso)));
     }
 
     @Override
@@ -59,12 +72,12 @@ public class OrderListFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return mMenuItem.size();
+            return mCursor != null ? mCursor.getCount() : 0;
         }
 
         @Override
         public Object getItem(int i) {
-            return mMenuItem.get(i);
+            return mCursor.get
         }
 
         @Override
