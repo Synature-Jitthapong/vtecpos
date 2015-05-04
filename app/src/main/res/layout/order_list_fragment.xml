@@ -3,16 +3,17 @@
     android:layout_width="match_parent" android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ListView
+    <view
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        class="android.support.v7.widget.RecyclerView"
         android:id="@+id/lvOrder"
-        android:layout_weight="1"
-        android:background="@color/grey_50" />
+        android:layout_weight="1" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/lvSummary"
         android:divider="@null" />
+
 </LinearLayout>

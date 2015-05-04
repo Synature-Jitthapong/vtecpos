@@ -75,6 +75,16 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return dbFile.exists();
     }
 
+    public SQLiteDatabase openReadable(){
+        return SQLiteDatabase.openDatabase(mDatabasePath, null,
+                SQLiteDatabase.OPEN_READONLY);
+    }
+
+    public SQLiteDatabase openWritable(){
+        return SQLiteDatabase.openDatabase(mDatabasePath, null,
+                SQLiteDatabase.OPEN_READWRITE);
+    }
+
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
     }

@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.vtec.j1tth4.vtecpos.provider.Products;
+import com.vtec.j1tth4.vtecpos.provider.ProductsDataModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,22 +20,22 @@ import java.util.List;
  */
 public class FoodMenuFragment extends Fragment {
 
-    static String[] DEPTS = {
-            "Japanese",
-            "Thai",
-            "Hot",
-            "Ice"
-    };
+    private List<ProductsDataModel.ProductGroups> mProductGroupList = new ArrayList<>();
+    private List<ProductsDataModel.ProductDept> mProductDeptList = new ArrayList<>();
 
     private static class FoodMenuPageItem{
         private final CharSequence mTitle;
+        private final int mProductGroupId;
+        private final int mProductDeptId;
 
-        public FoodMenuPageItem(CharSequence title){
+        public FoodMenuPageItem(CharSequence title, int groupId, int deptId){
             mTitle = title;
+            mProductGroupId = groupId;
+            mProductDeptId = deptId;
         }
 
         public Fragment createFragment(){
-            return MenuFragment.newInstance(mTitle);
+            return MenuFragment.newInstance(mTitle, mProductGroupId, mProductDeptId);
         }
 
         public CharSequence getTitle(){
@@ -42,6 +45,7 @@ public class FoodMenuFragment extends Fragment {
 
     private List<FoodMenuPageItem> mTabs = new ArrayList<FoodMenuPageItem>();
 
+    private SlidingTabLayout mGroupTab;
     private SlidingTabLayout mDeptTab;
     private ViewPager mItemPager;
 
@@ -56,6 +60,7 @@ public class FoodMenuFragment extends Fragment {
         mItemPager = (ViewPager) view.findViewById(R.id.item_pager);
         mItemPager.setAdapter(new DepartmentPagerAdapter(getChildFragmentManager()));
 
+        mGroupTab = (SlidingTabLayout) view.findViewById(R.id.group_slide_tabs);
         mDeptTab = (SlidingTabLayout) view.findViewById(R.id.dep_slide_tabs);
         mDeptTab.setViewPager(mItemPager);
     }
@@ -63,14 +68,40 @@ public class FoodMenuFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        for(int i = 0; i < DEPTS.length; i++){
-            mTabs.add(new FoodMenuPageItem(DEPTS[i]));
+        Products product = new Products(getActivity());
+        mProductDeptList = product.getProductDepts(0);
+        for(int i = 0; i < mProductDeptList.size(); i++){
+            ProductsDataModel.ProductDept productDept = mProductDeptList.get(i);
+            mTabs.add(new FoodMenuPageItem(productDept.getProductDeptName(),
+                    productDept.getProductGroupId(), productDept.getProductDeptId()));
         }
     }
 
     private class DepartmentPagerAdapter extends android.support.v4.app.FragmentPagerAdapter{
 
         public DepartmentPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public android.support.v4.app.Fragment getItem(int position) {
+            return mTabs.get(position).createFragment();
+        }
+
+        @Override
+        public int getCount() {
+            return mTabs.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mTabs.get(position).getTitle();
+        }
+    }
+
+    private class GroupPagerAdapter extends android.support.v4.app.FragmentPagerAdapter{
+
+        public GroupPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 

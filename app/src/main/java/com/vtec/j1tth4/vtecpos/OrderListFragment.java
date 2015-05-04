@@ -3,6 +3,7 @@ package com.vtec.j1tth4.vtecpos;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +46,7 @@ public class OrderListFragment extends Fragment {
 
     private Cursor mCursor;
 
-    private ListView mLvOrder;
+    private RecyclerView mLvOrder;
     private ListView mLvOrderSummary;
 
     @Override
@@ -61,57 +62,47 @@ public class OrderListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mLvOrder = (ListView) view.findViewById(R.id.lvOrder);
+        mLvOrder = (RecyclerView) view.findViewById(R.id.lvOrder);
         mLvOrder.setAdapter(new OrderListAdapter());
 
         mLvOrderSummary = (ListView) view.findViewById(R.id.lvSummary);
         mLvOrderSummary.setAdapter(new OrderSummaryListAdapter());
     }
 
-    private class OrderListAdapter extends BaseAdapter{
+    private class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.ViewHolder>{
 
-        @Override
-        public int getCount() {
-            return mCursor != null ? mCursor.getCount() : 0;
-        }
-
-        @Override
-        public Object getItem(int i) {
-            return mCursor.get
-        }
-
-        @Override
-        public long getItemId(int i) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int i, View view, ViewGroup viewGroup) {
-            ViewHolder holder;
-            if(view == null){
-                holder = new ViewHolder();
-                view = getActivity().getLayoutInflater().inflate(R.layout.order_item, viewGroup, false);
-                holder.tvOrderQty = (TextView) view.findViewById(R.id.tvOrderQty);
-                holder.tvOrderTitle = (TextView) view.findViewById(R.id.tvOrderTitle);
-                holder.tvOrderSub = (TextView) view.findViewById(R.id.tvOrderSub);
-                holder.tvOrderPrice = (TextView) view.findViewById(R.id.tvOrderPrice);
-                holder.btnOrderDel = (Button) view.findViewById(R.id.btnOrderDel);
-                view.setTag(holder);
-            }else{
-                holder = (ViewHolder) view.getTag();
-            }
-            holder.tvOrderQty.setText(NumberFormat.getInstance().format(Math.ceil(Math.random() * 2)) + "x");
-            holder.tvOrderTitle.setText(mMenuItem.get(i).getMenuName());
-            holder.tvOrderPrice.setText("200");
-            return view;
-        }
-
-        class ViewHolder{
+        public class ViewHolder extends RecyclerView.ViewHolder {
             TextView tvOrderQty;
             TextView tvOrderTitle;
             TextView tvOrderSub;
             TextView tvOrderPrice;
             Button btnOrderDel;
+
+            public ViewHolder(View itemView) {
+                super(itemView);
+                tvOrderQty = (TextView) itemView.findViewById(R.id.tvOrderQty);
+                tvOrderTitle = (TextView) itemView.findViewById(R.id.tvOrderTitle);
+                tvOrderSub = (TextView) itemView.findViewById(R.id.tvOrderSub);
+                tvOrderPrice = (TextView) itemView.findViewById(R.id.tvOrderPrice);
+                btnOrderDel = (Button) itemView.findViewById(R.id.btnOrderDel);
+            }
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+            View view = getActivity().getLayoutInflater().inflate(R.layout.order_item, viewGroup, false);
+            ViewHolder holder = new ViewHolder(view);
+            return holder;
+        }
+
+        @Override
+        public void onBindViewHolder(ViewHolder viewHolder, int i) {
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return 0;
         }
     }
 

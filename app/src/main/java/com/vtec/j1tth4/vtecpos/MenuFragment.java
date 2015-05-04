@@ -11,6 +11,9 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.vtec.j1tth4.vtecpos.provider.Products;
+import com.vtec.j1tth4.vtecpos.provider.ProductsDataModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,14 +43,16 @@ public class MenuFragment extends Fragment {
         }
     }
 
-    List<MenuItem> mMenuItem = new ArrayList<MenuItem>();
+    private List<ProductsDataModel.Products> mProductList;
 
     private GridView mGvMenu;
 
-    public static MenuFragment newInstance(CharSequence title){
+    public static MenuFragment newInstance(CharSequence title, int groupId, int deptId){
         MenuFragment f = new MenuFragment();
         Bundle b = new Bundle();
         b.putCharSequence(SLIDING_TAB_TITLE, title);
+        b.putInt("groupId", groupId);
+        b.putInt("deptId", deptId);
         f.setArguments(b);
         return f;
     }
@@ -55,18 +60,10 @@ public class MenuFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        ProductRepository productRepo = new ProductRepository();
-        List<Products> productLst = productRepo.getProducts(getActivity(), 200001, 200002);
-
-//        mMenuItem.add(new MenuItem("Shusi", getResources().getDrawable(R.drawable.sushi)));
-//        mMenuItem.add(new MenuItem("Ramen", getResources().getDrawable(R.drawable.ramen)));
-//        mMenuItem.add(new MenuItem("Capuchino", getResources().getDrawable(R.drawable.capuchino)));
-//        mMenuItem.add(new MenuItem("Espress", getResources().getDrawable(R.drawable.esspresso)));
-
-        for(Products p : productLst){
-            mMenuItem.add(new MenuItem(p.getProductName(), getResources().getDrawable(R.drawable.sushi)));
-        }
+        int groupId = getArguments().getInt("groupId");
+        int deptId = getArguments().getInt("deptId");
+        Products product = new Products(getActivity());
+        mProductList = product.getProducts(groupId, deptId);
     }
 
     @Override
@@ -85,12 +82,12 @@ public class MenuFragment extends Fragment {
 
         @Override
         public int getCount() {
-            return mMenuItem.size();
+            return mProductList != null ? mProductList.size() : 0;
         }
 
         @Override
         public Object getItem(int i) {
-            return mMenuItem.get(i);
+            return mProductList.get(i);
         }
 
         @Override
@@ -111,12 +108,12 @@ public class MenuFragment extends Fragment {
             }else{
                 holder = (ViewHolder) view.getTag();
             }
-            holder.tvTitle.setText(mMenuItem.get(i).menuName);
-            holder.img.setImageDrawable(mMenuItem.get(i).imgDrawable);
+            holder.tvTitle.setText(mProductList.get(i).getProductName());
+            holder.img.setImageDrawable(null);
             return view;
         }
 
-        class ViewHolder{
+        private class ViewHolder{
             ImageView img;
             TextView tvTitle;
             TextView tvSub;

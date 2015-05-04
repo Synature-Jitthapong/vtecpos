@@ -1,10 +1,31 @@
 package com.vtec.j1tth4.vtecpos.provider;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.SQLException;
+
+import com.vtec.j1tth4.vtecpos.VtecPosApplication;
+
+import java.util.UUID;
+
 /**
  * Created by j1tth4 on 4/29/15.
  */
-public class Orders implements VtecPosBaseColumns {
+public class Orders extends SQLiteHelperBase{
+
+    public static final int NEW_TRANS = 1;
+    public static final int SUCCESS_TRANS = 2;
+    public static final int VOID_TRANS = 99;
+
+    public static final String TABLE_TRANSACTION = "OrderTransaction";
+    public static final String TABLE_TRANSACTION_FRONT = "OrderTransactionFront";
+    public static final String TABLE_ORDER_DETAIL = "OrderDetail";
+    public static final String TABLE_ORDER_DETAIL_FRONT = "OrderDetailFront";
+
     public static final String TRANSACTION_ID = "TransactionID";
+    public static final String COMPUTER_ID = "ComputerID";
+    public static final String SHOP_ID = "ShopID";
     public static final String TRANSACTION_UUID = "TransactionUUID";
     public static final String RESERVE_TIME = "ReserveTime";
     public static final String RESERVE_STAFF_ID = "ReserveStaffID";
@@ -72,10 +93,12 @@ public class Orders implements VtecPosBaseColumns {
     public static final String REFERENCE_NO = "ReferenceNo";
     public static final String FROM_DEPOSIT_TRANSACTION_ID = "FromDepositTransactionID";
     public static final String FROM_DEPOSIT_COMPUTER_ID = "FromDepositComputerID";
+    public static final String ORDER_DETAIL_ID = "OrderDetailID";
     public static final String ORDER_DETAIL_LINK_ID = "OrderDetailLinkID";
     public static final String INSERT_ORDER_NO = "InsertOrderNo";
     public static final String PRODUCT_SET_TYPE = "ProductSetType";
     public static final String ORDER_STATUS_ID = "OrderStatusID";
+    public static final String PRODUCT_ID = "ProductID";
     public static final String TOTAL_QTY = "TotalQty";
     public static final String PRICE_PER_UNIT = "PricePerUnit";
     public static final String TOTAL_RETAIL_PRICE = "TotalRetailPrice";
@@ -126,4 +149,264 @@ public class Orders implements VtecPosBaseColumns {
     public static final String PROCESS_ID = "ProcessID";
     public static final String SUBMIT_ORDER_DATE_TIME = "SubmitOrderDateTime";
     public static final String COMMENT = "Comment";
+    public static final String DOC_TYPE = "DocType";
+    public static final String COMPONENT_LEVEL = "ComponentLevel";
+    public static final String DISPLAY_ORDERING = "DisplayOrdering";
+    public static final String DISC_PRICE_PERCENT = "DiscPricePercent";
+    public static final String VAT_DISPLAY = "VATDisplay";
+    public static final String PRODUCT_VAT_PERCENT = "ProductVATPercent";
+    public static final String IS_SC_BEFORE_DISC = "IsSCBeforeDisc";
+    public static final String HAS_SERVICE_CHARGE = "HasServiceCharge";
+    public static final String SC_PERCENT = "SCPercent";
+    public static final String SALE_MODE = "SaleMode";
+    public static final String PRODUCT_VAT_CODE = "ProductVATCode";
+    public static final String DISCOUNT_ALLOW = "DiscountAllow";
+    public static final String PRINTER_ID = "PrinterID";
+    public static final String INVENTORY_ID = "InventoryID";
+    public static final String VAT_TYPE = "VATType";
+    public static final String PRINT_GROUP = "PrintGroup";
+    public static final String NO_REPRINT_ORDER = "NoRePrintOrder";
+    public static final String IS_COMMENT = "IsComment";
+    public static final String DELETED = "Deleted";
+
+    public Orders(Context c){
+        super(c);
+    }
+
+
+    public int insertOrderDetail(OrdersDataModel.OrderDetail model) throws SQLException{
+        int ordId = getMaxOrderId(model.getTransactionId(), model.getComputerId());
+        int insertOrdNo = getMaxInsertOrderNo(model.getTransactionId(), model.getComputerId());
+        int ordering = 0;
+        if(model.getIndentLevel() > 1 && model.getOrderDetailLinkId() > 0)
+            ordering = getDisplayOrdering(model.getOrderDetailLinkId(), model.getTransactionId(),
+                model.getComputerId());
+        ContentValues cv = new ContentValues();
+        cv.put(ORDER_DETAIL_ID, ordId);
+        cv.put(TRANSACTION_ID, model.getTransactionId());
+        cv.put(COMPUTER_ID, model.getComputerId());
+        cv.put(COMPONENT_LEVEL, model.getComponentLevel());
+        cv.put(ORDER_DETAIL_LINK_ID, model.getOrderDetailLinkId());
+        cv.put(INSERT_ORDER_NO, insertOrdNo);
+        cv.put(INDENT_LEVEL, model.getIndentLevel());
+        cv.put(DISPLAY_ORDERING, ordering);
+        cv.put(SALE_DATE, model.getSaleDate());
+        cv.put(SHOP_ID, model.getShopId());
+        cv.put(PRODUCT_ID, model.getProductId());
+        cv.put(PRODUCT_SET_TYPE, model.getProductSetType());
+        cv.put(ORDER_STATUS_ID, model.getOrderStatusId());
+        cv.put(SALE_MODE, model.getSaleMode());
+        cv.put(TOTAL_QTY, model.getTotalQty());
+        cv.put(PRICE_PER_UNIT, model.getPricePerUnit());
+        cv.put(TOTAL_RETAIL_PRICE, model.getTotalRetailPrice());
+        cv.put(ORG_PRICE_PER_UNIT, model.getOrgPricePerUnit());
+        cv.put(ORG_TOTAL_RETAIL_PRICE, model.getOrgTotalRetailPrice());
+        cv.put(DISC_PRICE_PERCENT, model.getDiscPricePercent());
+        cv.put(DISC_PRICE, model.getDiscPrice());
+        cv.put(DISC_OTHER, model.getDiscOther());
+        cv.put(TOTAL_ITEM_DISC, model.getTotalItemDisc());
+        cv.put(SALE_PRICE, model.getSalePrice());
+        cv.put(PRODUCT_VAT_CODE, model.getProductVATCode());
+        cv.put(VAT_DISPLAY, model.getVatDisplay());
+        cv.put(PRODUCT_VAT_PERCENT, model.getProductVATPercent());
+        cv.put(VATABLE, model.getVatable());
+        cv.put(IS_SC_BEFORE_DISC, model.getIsSCBeforeDisc());
+        cv.put(HAS_SERVICE_CHARGE, model.getHasServiceCharge());
+        cv.put(SC_PERCENT, model.getScPercent());
+        cv.put(OTHER_FOOD_NAME, model.getOtherFoodName());
+        cv.put(OTHER_PRODUCT_GROUP_ID, model.getOtherProductGroupID());
+        cv.put(DISCOUNT_ALLOW, model.getDiscountAllow());
+        cv.put(ITEM_DISC_ALLOW, model.getItemDiscAllow());
+        cv.put(LAST_TRANSACTION_ID, model.getLastTransactionId());
+        cv.put(LAST_COMPUTER_ID, model.getLastComputerId());
+        cv.put(PRINTER_ID, model.getPrinterId());
+        cv.put(INVENTORY_ID, model.getInventoryId());
+        cv.put(ORDER_STAFF_ID, model.getOrderStaffId());
+        cv.put(ORDER_COMPUTER_ID, model.getOrderComputerId());
+        cv.put(ORDER_TABLE_ID, model.getOrderTableId());
+        cv.put(VOID_TYPE_ID, model.getVoidTypeId());
+        cv.put(VOID_STAFF_ID, model.getVoidStaffId());
+        cv.putNull(VOID_DATE_TIME);
+        cv.put(VAT_TYPE, model.getVatType());
+        cv.put(PRINT_GROUP, model.getPrintGroup());
+        cv.put(NO_PRINT_BILL, model.getNoPrintBill());
+        cv.put(NO_REPRINT_ORDER, model.getNoRePrintOrder());
+        cv.put(START_TIME, VtecPosApplication.getISODateTime());
+        cv.putNull(FINISH_TIME);
+        cv.put(PRINT_STATUS, model.getPrintStatus());
+        cv.put(PROCESS_ID, model.getProcessId());
+        cv.put(SUBMIT_ORDER_DATE_TIME, VtecPosApplication.getISODateTime());
+        cv.put(COMMENT, model.getComment());
+        cv.put(IS_COMMENT, model.getIsComment());
+        cv.put(DELETED, model.getDeleted());
+        openWritable().insertOrThrow(TABLE_ORDER_DETAIL_FRONT, null, cv);
+        return ordId;
+    }
+
+    /**
+     * @param model
+     * @return last transactionId | 0 if fail
+     * @throws SQLException
+     */
+    public int insertTransaction(OrdersDataModel model) throws SQLException{
+        int transId = getMaxTransId();
+        String saleDate = VtecPosApplication.getISODate();
+        String[] dateSplit = saleDate.split("-");
+        String year = dateSplit[0];
+        String month = dateSplit[1];
+        String day = dateSplit[2];
+        ContentValues cv = new ContentValues();
+        cv.put(TRANSACTION_ID, transId);
+        cv.put(COMPUTER_ID, model.getComputerId());
+        cv.put(TRANSACTION_UUID, UUID.randomUUID().toString());
+        cv.put(OPEN_TIME, VtecPosApplication.getISODateTime());
+        cv.put(OPEN_STAFF_ID, model.getOpenStaffId());
+        cv.put(SALE_MODE, model.getSaleMode());
+        cv.put(NO_CUSTOMER, model.getSaleMode());
+        cv.put(DOC_TYPE, model.getDocType());
+        cv.put(RECEIPT_YEAR, year);
+        cv.put(RECEIPT_MONTH, month);
+        cv.put(SALE_DATE, saleDate);
+        cv.put(SHOP_ID, model.getShopId());
+        openWritable().insertOrThrow(TABLE_TRANSACTION_FRONT, null, cv);
+        return transId;
+    }
+
+    /**
+     * @param isoSaleDate
+     * @return max receiptId
+     */
+    private int getMaxReceiptId(String isoSaleDate){
+        int maxReceiptId = 0;
+        Cursor cursor = openReadable().rawQuery(
+                "select max(" + RECEIPT_ID + ") " +
+                        " from " + TABLE_TRANSACTION +
+                        " where " + SALE_DATE + "=?" +
+                        " and " + TRANSACTION_STATUS_ID + "=?",
+                new String[]{
+                        isoSaleDate,
+                        String.valueOf(SUCCESS_TRANS)
+                });
+        if(cursor.moveToFirst()){
+            maxReceiptId = cursor.getInt(0);
+        }
+        cursor.close();
+        return maxReceiptId + 1;
+    }
+
+    /**
+     * @param ordLinkId
+     * @param transId
+     * @param compId
+     * @return displayOrdering
+     */
+    private int getDisplayOrdering(int ordLinkId, int transId, int compId){
+        int ordering = 0;
+        Cursor cursor = openReadable().rawQuery(
+                "select " + DISPLAY_ORDERING +
+                    " from " + TABLE_ORDER_DETAIL_FRONT +
+                    " where " + ORDER_DETAIL_ID + "=?" +
+                    " and " + TRANSACTION_ID + "=?" +
+                    " and " + COMPUTER_ID + "?",
+                new String[]{
+                        String.valueOf(ordLinkId),
+                        String.valueOf(transId),
+                        String.valueOf(compId)
+                });
+        if(cursor.moveToFirst()){
+            ordering = cursor.getInt(0);
+        }
+        cursor.close();
+        return ordering;
+    }
+
+    /**
+     * @param transId
+     * @param compId
+     * @return max insertOrderNo | 0 if no record
+     */
+    private int getMaxInsertOrderNo(int transId, int compId){
+        int maxOrderNo = 0;
+        Cursor cursor = openReadable().rawQuery(
+                "select max(" + INSERT_ORDER_NO + ") " +
+                        " from " + TABLE_ORDER_DETAIL_FRONT +
+                        " where " + TRANSACTION_ID + "=? " +
+                        " and " + COMPUTER_ID + "=?",
+                new String[]{
+                        String.valueOf(transId),
+                        String.valueOf(compId)
+                });
+        if(cursor.moveToFirst()){
+            maxOrderNo = cursor.getInt(0);
+        }
+        cursor.close();
+        return maxOrderNo;
+    }
+
+    /**
+     * @param transId
+     * @param compId
+     * @return max orderDetailId
+     */
+    private int getMaxOrderId(int transId, int compId){
+        int maxOrderId = 0;
+        Cursor cursor = openReadable().rawQuery(
+                "select max(" + ORDER_DETAIL_ID + ")" +
+                        " from " + TABLE_ORDER_DETAIL_FRONT +
+                        " where " + TRANSACTION_ID + "=?" +
+                        " and " + COMPUTER_ID + "=?",
+                new String[]{
+                        String.valueOf(transId),
+                        String.valueOf(compId)
+                });
+        if(cursor.moveToFirst()){
+            maxOrderId = cursor.getInt(0);
+        }
+        cursor.close();
+        if(maxOrderId == 0){
+            cursor = openReadable().rawQuery(
+                    "select max(" + ORDER_DETAIL_ID + ")" +
+                            " from " + TABLE_ORDER_DETAIL +
+                            " where " + TRANSACTION_ID + "=?" +
+                            " and " + COMPUTER_ID + "=?",
+                    new String[]{
+                            String.valueOf(transId),
+                            String.valueOf(compId)
+                    });
+            if(cursor.moveToFirst()){
+                maxOrderId = cursor.getInt(0);
+            }
+            cursor.close();
+        }
+        return maxOrderId + 1;
+    }
+
+    /**
+     * @return max transactionId
+     */
+    private int getMaxTransId(){
+        int maxTransId = 0;
+        Cursor cursor = openReadable().rawQuery(
+                "select max(" + TRANSACTION_ID + ")" +
+                        " from " + TABLE_TRANSACTION_FRONT, null);
+        if (cursor.moveToFirst()) {
+            maxTransId = cursor.getInt(0);
+        }
+        cursor.close();
+        if(maxTransId == 0){
+            cursor = openReadable().rawQuery(
+                    "select max(" + TRANSACTION_ID + ")" +
+                            " from " + TABLE_TRANSACTION +
+                            " where " + TRANSACTION_STATUS_ID + "=?",
+                    new String[]{
+                            String.valueOf(SUCCESS_TRANS)
+                    });
+            if(cursor.moveToFirst()){
+                maxTransId = cursor.getInt(0);
+            }
+            cursor.close();
+        }
+        return maxTransId + 1;
+    }
+
 }
