@@ -60,7 +60,7 @@ public class FoodMenuFragment extends Fragment {
         mItemPager = (ViewPager) view.findViewById(R.id.item_pager);
         mItemPager.setAdapter(new DepartmentPagerAdapter(getChildFragmentManager()));
 
-        mGroupTab = (SlidingTabLayout) view.findViewById(R.id.group_slide_tabs);
+        //mGroupTab = (SlidingTabLayout) view.findViewById(R.id.group_slide_tabs);
         mDeptTab = (SlidingTabLayout) view.findViewById(R.id.dep_slide_tabs);
         mDeptTab.setViewPager(mItemPager);
     }

@@ -4,7 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 
+import com.vtec.j1tth4.vtecpos.Utils;
 import com.vtec.j1tth4.vtecpos.VtecPosApplication;
 
 import java.util.UUID;
@@ -22,6 +24,11 @@ public class Orders extends SQLiteHelperBase{
     public static final String TABLE_TRANSACTION_FRONT = "OrderTransactionFront";
     public static final String TABLE_ORDER_DETAIL = "OrderDetail";
     public static final String TABLE_ORDER_DETAIL_FRONT = "OrderDetailFront";
+    public static final String TABLE_ORDER_PROMOTION_APPLY = "OrderPromotionApply";
+    public static final String TABLE_ORDER_PROMOTION_APPLY_FRONT = "OrderPromotionApplyFront";
+    public static final String TABLE_ORDER_PROMOTION_DETAIL = "OrderPromotionDetail";
+    public static final String TABLE_ORDER_PROMOTION_DETAIL_FRONT = "OrderPromotionDetailFront";
+    public static final String TABLE_PROMOTION_PRODUCT = "PromotionProducts";
 
     public static final String TRANSACTION_ID = "TransactionID";
     public static final String COMPUTER_ID = "ComputerID";
@@ -168,12 +175,115 @@ public class Orders extends SQLiteHelperBase{
     public static final String NO_REPRINT_ORDER = "NoRePrintOrder";
     public static final String IS_COMMENT = "IsComment";
     public static final String DELETED = "Deleted";
+    public static final String BILL_DISC = "BillDisc";
+    public static final String DISC_PRIORITY = "DiscPriority";
+    public static final String INSERT_NO = "InsertNo";
+    public static final String PROMOTION_ID = "PromotionID";
+    public static final String DISCOUNT_AMOUNT = "DiscountAmount";
+    public static final String DISCOUNT_PERCENT = "DiscountPercent";
+
 
     public Orders(Context c){
         super(c);
     }
 
 
+    public void refreshPromotion(int transId, int compId){
+        Cursor cursorPromoApply = openReadable().rawQuery(
+                "select * from " + TABLE_ORDER_PROMOTION_APPLY_FRONT +
+                        " where " + BILL_DISC + "=?" +
+                        " and " + TRANSACTION_ID + "=?" +
+                        " and " + COMPUTER_ID + "=?" +
+                        " order by " + DISC_PRIORITY + "," + INSERT_NO,
+                new String[]{
+                        "0",
+                        String.valueOf(transId),
+                        String.valueOf(compId)
+                });
+        if(cursorPromoApply.moveToFirst()){
+            // refresh for new calculate
+            openWritable().delete(
+                    TABLE_ORDER_PROMOTION_DETAIL_FRONT,
+                    TRANSACTION_ID + "=?" +
+                            " and " + COMPUTER_ID + "=?",
+                    new String[]{
+                            String.valueOf(transId),
+                            String.valueOf(compId)
+                    });
+            ContentValues cv = new ContentValues();
+            cv.put(ITEM_DISC_ALLOW, DISCOUNT_ALLOW);
+            cv.put(DISC_PRICE_PERCENT, 0);
+            cv.put(DISC_PRICE, 0);
+            cv.put(DISC_PERCENT, 0);
+            cv.put(DISC_AMOUNT, 0);
+            openWritable().update(
+                    TABLE_ORDER_DETAIL_FRONT,
+                    cv,
+                    TRANSACTION_ID + "=?" +
+                            " and " + COMPUTER_ID + "=?",
+                    new String[]{
+                            String.valueOf(transId),
+                            String.valueOf(compId)
+                    }
+            );
+            while(!cursorPromoApply.isAfterLast()){
+                String promoId = cursorPromoApply.getString(cursorPromoApply.getColumnIndex(PROMOTION_ID));
+                Cursor cursorPromoProduct = openReadable().rawQuery(
+                        "select * from " +
+                                TABLE_ORDER_DETAIL_FRONT + " a " +
+                                " inner join " +
+                                TABLE_PROMOTION_PRODUCT + " b " +
+                                " on a." + PRODUCT_ID + "=b." + PRODUCT_ID +
+                                " and a." + SALE_MODE + "=b." + SALE_MODE +
+                                " where b." + PROMOTION_ID + "=?" +
+                                " and a." + ORDER_STATUS_ID + "<=?" +
+                                " and a." + ITEM_DISC_ALLOW + "=?" +
+                                " and a." + INDENT_LEVEL + "=?" +
+                                " and a." + TRANSACTION_ID + "=?" +
+                                " and a." + COMPUTER_ID + "=?",
+                        new String[]{
+                                promoId,
+                                "2",
+                                "1",
+                                "0",
+                                String.valueOf(transId),
+                                String.valueOf(compId)
+                        });
+                if(cursorPromoProduct.moveToFirst()){
+                    while(!cursorPromoProduct.isAfterLast()){
+                        double discountPercent = 0;
+                        double discountAmount = 0;
+                        double totalPrice = cursorPromoProduct.getDouble(cursorPromoProduct.getColumnIndex(TOTAL_RETAIL_PRICE))
+                                - cursorPromoProduct.getDouble(cursorPromoApply.getColumnIndex(DISC_OTHER));
+                        double productQty = cursorPromoProduct.getDouble(cursorPromoProduct.getColumnIndex(TOTAL_QTY));
+                        int promoLineNo = cursorPromoProduct.getInt(cursorPromoProduct.getColumnIndex(INSERT_NO));
+                        if(cursorPromoApply.getDouble(cursorPromoApply.getColumnIndex(DISCOUNT_PERCENT)) > 0){
+                            discountPercent = cursorPromoApply.getDouble(cursorPromoApply.getColumnIndex(DISCOUNT_PERCENT));
+                            discountAmount = Utils.round(totalPrice * discountPercent / 100, VtecPosApplication.ROUND_DIGIT);
+                        }else if(cursorPromoProduct.getDouble(cursorPromoProduct.getColumnIndex(DISCOUNT_PERCENT)) > 0){
+                            discountPercent = cursorPromoProduct.getDouble(cursorPromoProduct.getColumnIndex(DISCOUNT_PERCENT));
+                            discountAmount = Utils.round(totalPrice * discountPercent / 100, VtecPosApplication.ROUND_DIGIT);
+                        }else if(){
+
+                        }
+                        ElseIf ProductPromo.Rows(j)("DiscountAmount") > 0 Then
+                                DiscAmount = Math.ROUND(ProductQty * ProductPromo.Rows(j)("DiscountAmount"), DecimalDigit)
+                        End If
+                        cursorPromoProduct.moveToNext();
+                    }
+                }
+                cursorPromoProduct.close();
+                cursorPromoApply.moveToNext();
+            }
+        }
+        cursorPromoApply.close();
+    }
+
+    /**
+     * @param model
+     * @return
+     * @throws SQLException
+     */
     public int insertOrderDetail(OrdersDataModel.OrderDetail model) throws SQLException{
         int ordId = getMaxOrderId(model.getTransactionId(), model.getComputerId());
         int insertOrdNo = getMaxInsertOrderNo(model.getTransactionId(), model.getComputerId());

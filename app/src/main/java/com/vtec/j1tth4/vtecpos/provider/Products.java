@@ -170,7 +170,6 @@ public class Products extends SQLiteHelperBase{
             PRODUCT_ENABLE_DAY_STRING,
             WARNING_TIME,
             CRITICAL_TIME,
-            SALE_MODE,
             SALE_MODE1,
             SALE_MODE2,
             SALE_MODE3,
@@ -356,7 +355,6 @@ public class Products extends SQLiteHelperBase{
                 product.setProductEnableDayString(cursor.getString(cursor.getColumnIndex(PRODUCT_ENABLE_DAY_STRING)));
                 product.setWarningTime(cursor.getString(cursor.getColumnIndex(WARNING_TIME)));
                 product.setCriticalTime(cursor.getString(cursor.getColumnIndex(CRITICAL_TIME)));
-                product.setSaleMode(cursor.getInt(cursor.getColumnIndex(SALE_MODE)));
                 product.setSaleMode1(cursor.getInt(cursor.getColumnIndex(SALE_MODE1)));
                 product.setSaleMode2(cursor.getInt(cursor.getColumnIndex(SALE_MODE2)));
                 product.setSaleMode3(cursor.getInt(cursor.getColumnIndex(SALE_MODE3)));
@@ -376,6 +374,7 @@ public class Products extends SQLiteHelperBase{
                 product.setPrintOrdering(cursor.getInt(cursor.getColumnIndex(PRINT_ORDERING)));
                 product.setAddingFromBranch(cursor.getInt(cursor.getColumnIndex(ADDING_FROM_BRANCH)));
                 productsList.add(product);
+                cursor.moveToNext();
             }
         }
         cursor.close();
@@ -404,7 +403,7 @@ public class Products extends SQLiteHelperBase{
                         new ProductsDataModel.ProductDept();
                 productDept.setProductDeptId(cursor.getInt(cursor.getColumnIndex(PRODUCT_DEPT_ID)));
                 productDept.setProductGroupId(cursor.getInt(cursor.getColumnIndex(PRODUCT_GROUP_ID)));
-                productDept.setProductDeptId(cursor.getInt(cursor.getColumnIndex(SHOP_ID)));
+                productDept.setShopId(cursor.getInt(cursor.getColumnIndex(SHOP_ID)));
                 productDept.setProductDeptCode(cursor.getString(cursor.getColumnIndex(PRODUCT_DEPT_CODE)));
                 productDept.setProductDeptName(cursor.getString(cursor.getColumnIndex(PRODUCT_DEPT_NAME)));
                 productDept.setProductDeptNameLang1(cursor.getString(cursor.getColumnIndex(PRODUCT_DEPT_NAME_LANG1)));
@@ -420,6 +419,7 @@ public class Products extends SQLiteHelperBase{
                 productDept.setDisplayMobile(cursor.getInt(cursor.getColumnIndex(DISPLAY_MOBILE)));
                 productDept.setAddingFromBranch(cursor.getInt(cursor.getColumnIndex(ADDING_FROM_BRANCH)));
                 productDeptList.add(productDept);
+                cursor.moveToNext();
             }
         }
         cursor.close();
@@ -461,6 +461,7 @@ public class Products extends SQLiteHelperBase{
                 productGroups.setIsComment(cursor.getInt(cursor.getColumnIndex(IS_COMMENT)));
                 productGroups.setAddingFromBranch(cursor.getInt(cursor.getColumnIndex(ADDING_FROM_BRANCH)));
                 productGroupsList.add(productGroups);
+                cursor.moveToNext();
             }
         }
         cursor.close();

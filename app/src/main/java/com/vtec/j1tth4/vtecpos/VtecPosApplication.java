@@ -20,6 +20,8 @@ public class VtecPosApplication extends Application {
     public static final String TIME_FORMAT = "HH:mm:ss";
     public static final String ISO_DATE_TIME_FORMAT = ISO_DATE_FORMAT + " " + TIME_FORMAT;
 
+    public static final int ROUND_DIGIT = 2;
+
     @Override
     public void onCreate() {
         super.onCreate();

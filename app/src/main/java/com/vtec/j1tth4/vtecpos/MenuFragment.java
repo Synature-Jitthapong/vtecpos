@@ -1,5 +1,6 @@
 package com.vtec.j1tth4.vtecpos;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -43,7 +44,8 @@ public class MenuFragment extends Fragment {
         }
     }
 
-    private List<ProductsDataModel.Products> mProductList;
+    private List<ProductsDataModel.Products> mProductList
+            = new ArrayList<>();
 
     private GridView mGvMenu;
 
