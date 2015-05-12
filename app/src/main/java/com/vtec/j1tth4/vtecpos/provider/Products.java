@@ -9,12 +9,13 @@ import java.util.List;
 /**
  * Created by j1tth4 on 4/29/15.
  */
-public class Products extends SQLiteHelperBase{
+public class Products{
 
     public static final String TABLE_PRODUCT_GROUP = "ProductGroup";
     public static final String TABLE_PRODUCT_DEPT = "ProductDept";
     public static final String TABLE_PRODUCTS = "Products";
     public static final String TABLE_PRODUCT_PRICE = "ProductPrice";
+    public static final String TABLE_PRODUCT_VAT = "ProductVAT";
 
     public static final String PRODUCT_GROUP_ID = "ProductGroupID";
     public static final String PRODUCT_GROUP_CODE = "ProductGroupCode";
@@ -117,6 +118,8 @@ public class Products extends SQLiteHelperBase{
     public static final String PRICE_REMARK = "PriceRemark";
     public static final String FROM_DATE = "FromDate";
     public static final String TO_DATE = "ToDate";
+    public static final String PRODUCT_VAT_CODE = "ProductVATCode";
+    public static final String PRODUCT_VAT_PERCENT = "ProductVATPercent";
 
     public static final String[] ALL_PRODUCT_PRICE_COLUMN = {
             PRODUCT_PRICE_ID,
@@ -236,8 +239,10 @@ public class Products extends SQLiteHelperBase{
             DELETED
     };
 
+    private DatabaseHelper mDbHelper;
+
     public Products(Context c) {
-        super(c);
+        mDbHelper = new DatabaseHelper(c);
     }
 
     /**
@@ -258,7 +263,7 @@ public class Products extends SQLiteHelperBase{
                 isoCurrDate,
                 isoCurrDate
         };
-        Cursor cursor = openReadable().query(
+        Cursor cursor = mDbHelper.openReadable().query(
                 TABLE_PRODUCT_PRICE,
                 ALL_PRODUCT_PRICE_COLUMN,
                 selection,
@@ -276,7 +281,7 @@ public class Products extends SQLiteHelperBase{
                     isoCurrDate,
                     isoCurrDate
             };
-            cursor = openReadable().query(
+            cursor = mDbHelper.openReadable().query(
                     TABLE_PRODUCT_PRICE,
                     ALL_PRODUCT_PRICE_COLUMN,
                     selection,
@@ -297,7 +302,7 @@ public class Products extends SQLiteHelperBase{
      */
     public List<ProductsDataModel.Products> getProducts(int groupId, int deptId){
         List<ProductsDataModel.Products> productsList = null;
-        Cursor cursor = openReadable().query(
+        Cursor cursor = mDbHelper.openReadable().query(
                 TABLE_PRODUCTS,
                 ALL_PRODUCT_COLUMN,
                 PRODUCT_GROUP_ID + "=?" +
@@ -387,7 +392,7 @@ public class Products extends SQLiteHelperBase{
      */
     public List<ProductsDataModel.ProductDept> getProductDepts(int groupId){
         List<ProductsDataModel.ProductDept> productDeptList = null;
-        Cursor cursor = openReadable().query(
+        Cursor cursor = mDbHelper.openReadable().query(
                 TABLE_PRODUCT_DEPT,
                 ALL_PRODUCT_DEPT_COLUMN,
                 //PRODUCT_GROUP_ID + "=?" +
@@ -431,7 +436,7 @@ public class Products extends SQLiteHelperBase{
      */
     public List<ProductsDataModel.ProductGroups> getProductGroups(){
         List<ProductsDataModel.ProductGroups> productGroupsList = null;
-        Cursor cursor = openReadable().query(
+        Cursor cursor = mDbHelper.openReadable().query(
                 TABLE_PRODUCT_GROUP,
                 ALL_PRODUCT_GROUP_COLUMN,
                 DELETED + "=?",

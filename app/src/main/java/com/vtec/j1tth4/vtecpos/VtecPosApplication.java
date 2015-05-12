@@ -3,6 +3,9 @@ package com.vtec.j1tth4.vtecpos;
 import android.app.Application;
 import android.os.Environment;
 
+import com.vtec.j1tth4.vtecpos.provider.GlobalProperty;
+import com.vtec.j1tth4.vtecpos.provider.ShopData;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -22,9 +25,17 @@ public class VtecPosApplication extends Application {
 
     public static final int ROUND_DIGIT = 2;
 
+    public static ShopData sShopData;
+    public static GlobalProperty sGlobalProperty;
+
     @Override
     public void onCreate() {
         super.onCreate();
+
+        sShopData = new ShopData(getApplicationContext());
+        sShopData.loadVatShopData(0);
+        sGlobalProperty = new GlobalProperty(getApplicationContext());
+        sGlobalProperty.loadProgramProperty();
     }
 
     public static String getISODate(){
