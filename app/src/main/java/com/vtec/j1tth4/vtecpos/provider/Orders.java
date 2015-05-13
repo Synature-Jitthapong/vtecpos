@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 
 import com.vtec.j1tth4.vtecpos.Utils;
@@ -31,6 +32,9 @@ public class Orders{
     public static final String TABLE_ORDER_PROMOTION_DETAIL_FRONT = "OrderPromotionDetailFront";
     public static final String TABLE_PROMOTION_PRODUCT = "PromotionProducts";
     public static final String TABLE_ORDER_VATABLE_DETAIL_FRONT = "OrderVatableDetailFront";
+    public static final String TABLE_ORDER_VATABLE_DETAIL = "OrderVatableDetail";
+    public static final String TABLE_SALE_MODE = "SaleMode";
+    public static final String TABLE_ORDER_PAY_DETAIL = "OrderPayDetail";
 
     public static final String TRANSACTION_ID = "TransactionID";
     public static final String COMPUTER_ID = "ComputerID";
@@ -139,7 +143,7 @@ public class Orders{
     public static final String SC_BEFORE_VAT = "SCBeforeVAT";
     public static final String WEIGHT_PRICE = "WeightPrice";
     public static final String WEIGHT_PRICE_VAT = "WeightPriceVAT";
-    public static final String WEIGHT_PRICE_BEFORE_VAT = "WeightBeforeVAT";
+    public static final String WEIGHT_BEFORE_VAT = "WeightBeforeVAT";
     public static final String OTHER_FOOD_NAME = "OtherFoodName";
     public static final String OTHER_PRODUCT_GROUP_ID = "OtherProductGroupID";
     public static final String LAST_TRANSACTION_ID = "LastTransactionID";
@@ -200,11 +204,211 @@ public class Orders{
     public static final String VATABLE_BEFORE_VAT = "VATableBeforeVAT";
     public static final String VAT_AMOUNT = "VATAmount";
     public static final String TRANS_BEFORE_VAT = "TranBeforeVAT";
+    public static final String SALE_MODE_ID = "SaleModeID";
 
     private DatabaseHelper mDbHelper;
 
     public Orders(Context c){
         mDbHelper = new DatabaseHelper(c);
+    }
+
+    private void weightProductSet(int transId, int compId){
+        Cursor cursor1 = mDbHelper.getReadableDatabase().rawQuery(
+                "select * from " + TABLE_ORDER_DETAIL_FRONT +
+                        " where " + COMPONENT_LEVEL + "=?" +
+                        " and " + ORDER_STATUS_ID + "<=?" +
+                        " and " + TRANSACTION_ID + "=?" +
+                        " and " + COMPUTER_ID + "=?",
+                new String[]{
+                        "2",
+                        "2",
+                        String.valueOf(transId),
+                        String.valueOf(compId)
+                });
+        if(cursor1.moveToFirst()){
+            while(!cursor1.isAfterLast()){
+                int orderDetailId = cursor1.getInt(cursor1.getColumnIndex(ORDER_DETAIL_ID));
+                double sumWeightVatable = 0;
+                double sumWeightPrice = 0;
+                double sumProductWeightVat = 0;
+                double sumWeightBeforeVat = 0;
+                double sumScWeightAmount = 0;
+                double sumScWeightVat = 0;
+                double sumScWeightBeforeVat = 0;
+                Cursor cursor2 = mDbHelper.getReadableDatabase().rawQuery(
+                        "select * from " + TABLE_ORDER_DETAIL_FRONT +
+                                " where " + ORDER_DETAIL_ID + "=?" +
+                                " and " + TRANSACTION_ID + "=?" +
+                                " and " + COMPUTER_ID + "=?",
+                        new String[]{
+                                String.valueOf(orderDetailId),
+                                String.valueOf(transId),
+                                String.valueOf(compId)
+                        });
+                if(cursor2.moveToFirst()){
+                    double netSale = cursor2.getDouble(cursor2.getColumnIndex(NET_SALE));
+                    double scAmount = cursor2.getDouble(cursor2.getColumnIndex(SC_AMOUNT));
+                    double vatable = cursor2.getDouble((cursor2.getColumnIndex(VATABLE)));
+                    double productVat = cursor2.getDouble(cursor2.getColumnIndex(PRODUCT_VAT));
+                    double productBeforeVat = cursor2.getDouble(cursor2.getColumnIndex(PRODUCT_BEFORE_VAT));
+                    double scVat = cursor2.getDouble(cursor2.getColumnIndex(SC_VAT));
+                    double scBeforeVat = cursor2.getDouble(cursor2.getColumnIndex(SC_BEFORE_VAT));
+                    Cursor cursor3 = mDbHelper.getReadableDatabase().rawQuery(
+                            "select a.*,b." + HAS_SERVICE_CHARGE + " as SaleModeSC, " +
+                                    " c." + IS_SC_BEFORE_DISC + ",c." + SC_PERCENT +
+                                    " from " + TABLE_ORDER_DETAIL_FRONT + " a " +
+                                    " left outer join " + TABLE_SALE_MODE + " b " +
+                                    " on a." + SALE_MODE + "=b." + SALE_MODE_ID +
+                                    " left outer join " + ShopData.TABLE_SHOP_DATA + " c " +
+                                    " on a." + SHOP_ID + "=c." + SHOP_ID +
+                                    " where " + IS_COMMENT + "=?" +
+                                    " and " + ORDER_DETAIL_LINK_ID + "=?" +
+                                    " and " + TRANSACTION_ID + "=?" +
+                                    " and " + COMPUTER_ID + "=?" +
+                                    " order by a." + PRODUCT_VAT_PERCENT,
+                            new String[]{
+                                    "0",
+                                    String.valueOf(orderDetailId),
+                                    String.valueOf(transId),
+                                    String.valueOf(compId)
+                            });
+                    if(cursor3.moveToFirst()){
+                        double sumOrgPrice = 0;
+                        while(!cursor3.isAfterLast()){
+                            sumOrgPrice += cursor3.getDouble(cursor3.getColumnIndex(ORG_TOTAL_RETAIL_PRICE));
+                            cursor3.moveToNext();
+                        }
+                        cursor3.moveToFirst();
+                        while(!cursor3.isAfterLast()){
+                            double weightPrice = 0;
+                            double weightVatable = 0;
+                            double scWeightAmount = 0;
+                            double productWeightVat = 0;
+                            double weightBeforeVat = 0;
+                            double scWeightVat = 0;
+                            double scWeightBeforeVat = 0;
+                            double orgTotalRetailPrice = cursor3.getDouble(cursor3.getColumnIndex(ORG_TOTAL_RETAIL_PRICE));
+                            double productVatPercent = cursor3.getDouble(cursor3.getColumnIndex(PRODUCT_VAT_PERCENT));
+                            int vatType = cursor3.getInt(cursor3.getColumnIndex(VAT_TYPE));
+                            if(cursor3.getPosition() < cursor3.getCount() - 1){
+                                weightPrice = Utils.round((orgTotalRetailPrice * netSale) / sumOrgPrice, 0);
+                                weightVatable = weightPrice;
+                                scWeightAmount = Utils.round((orgTotalRetailPrice * scAmount) / sumOrgPrice, 0);
+                                if(vatType == 1) {
+                                    productWeightVat = Utils.round(weightPrice *
+                                            productVatPercent / (100 + productVatPercent), VtecPosApplication.ROUND_DIGIT);
+                                    weightBeforeVat = weightPrice - productWeightVat;
+
+                                    scWeightVat = Utils.round(scWeightAmount *
+                                            productVatPercent / (100 + productVatPercent), VtecPosApplication.ROUND_DIGIT);
+                                    scWeightBeforeVat = scWeightAmount - scWeightVat;
+                                }else{
+                                    productWeightVat = Utils.round(weightPrice * productVatPercent / 100, VtecPosApplication.ROUND_DIGIT);
+                                    weightBeforeVat = weightPrice;
+
+                                    scWeightVat = Utils.round(scWeightAmount * productVatPercent / 100, VtecPosApplication.ROUND_DIGIT);
+                                    scWeightBeforeVat = scWeightVat;
+                                }
+                                sumWeightVatable += weightVatable;
+                                sumWeightPrice += weightPrice;
+                                sumProductWeightVat += productWeightVat;
+                                sumWeightBeforeVat += weightBeforeVat;
+                                sumScWeightAmount += scWeightAmount;
+                                sumScWeightVat += scWeightVat;
+                                sumScWeightBeforeVat += scWeightBeforeVat;
+                            }else{
+                                weightVatable = vatable - sumWeightVatable;
+                                weightPrice = netSale - sumWeightPrice;
+                                productWeightVat = productVat - sumProductWeightVat;
+                                weightBeforeVat = productBeforeVat - sumWeightBeforeVat;
+                                scWeightAmount = scAmount - sumScWeightAmount;
+                                scWeightVat = scVat - sumScWeightVat;
+                                scWeightBeforeVat = scBeforeVat - sumScWeightBeforeVat;
+                            }
+                            ContentValues cv = new ContentValues();
+                            cv.put(W_VATABLE, weightVatable);
+                            cv.put(WEIGHT_PRICE, weightPrice);
+                            cv.put(WEIGHT_PRICE_VAT, productWeightVat);
+                            cv.put(WEIGHT_BEFORE_VAT, weightBeforeVat);
+                            cv.put(SCW_AMOUNT, scWeightAmount);
+                            cv.put(SCW_VAT, scWeightVat);
+                            cv.put(SCW_BEFORE_VAT, scWeightBeforeVat);
+                            mDbHelper.getWritableDatabase().update(
+                                    TABLE_ORDER_DETAIL_FRONT,
+                                    cv,
+                                    ORDER_DETAIL_ID + "=?" +
+                                            " and " + TRANSACTION_ID + "=?" +
+                                            " and " + COMPUTER_ID + "=?",
+                                    new String[]{
+                                            cursor3.getString(cursor3.getColumnIndex(ORDER_DETAIL_ID)),
+                                            cursor3.getString(cursor3.getColumnIndex(TRANSACTION_ID)),
+                                            cursor3.getString(cursor3.getColumnIndex(COMPUTER_ID))
+                                    });
+                            cursor3.moveToNext();
+                        }
+                    }
+                    cursor3.close();
+                }
+                cursor2.close();
+                cursor1.moveToNext();
+            }
+            mDbHelper.getWritableDatabase().execSQL(
+                    "update " + TABLE_ORDER_DETAIL_FRONT +
+                            " set " + W_VATABLE + "=" + VATABLE + "+" + W_VATABLE + ", " +
+                            WEIGHT_PRICE + "=" + WEIGHT_PRICE + "+" + NET_SALE + ", " +
+                            WEIGHT_PRICE_VAT + "=" + WEIGHT_PRICE_VAT + "+" + PRODUCT_VAT + ", " +
+                            WEIGHT_BEFORE_VAT + "=" + WEIGHT_BEFORE_VAT + "+" + PRODUCT_BEFORE_VAT + ", " +
+                            SCW_AMOUNT + "=" + SCW_AMOUNT + "+" + SC_AMOUNT + ", " +
+                            SCW_VAT + "=" + SCW_VAT + "+" + SC_VAT + ", " +
+                            SCW_BEFORE_VAT + "=" + SCW_BEFORE_VAT + "+" + SC_BEFORE_VAT +
+                            " where " + ORDER_STATUS_ID + "<=?" +
+                            " and " + COMPONENT_LEVEL + "<?" +
+                            " and " + TRANSACTION_ID + "=?" +
+                            " and " + COMPUTER_ID + "=?",
+                    new String[]{
+                            "2",
+                            "2",
+                            String.valueOf(transId),
+                            String.valueOf(compId)
+                    });
+        }
+        cursor1.close();
+
+        //Move to real table
+        String[] tables = {
+                TABLE_TRANSACTION,
+                TABLE_ORDER_DETAIL,
+                TABLE_ORDER_PAY_DETAIL,
+                TABLE_ORDER_PROMOTION_APPLY,
+                TABLE_ORDER_PROMOTION_DETAIL,
+                TABLE_ORDER_VATABLE_DETAIL
+        };
+        String[] whereArgs = {
+                String.valueOf(transId),
+                String.valueOf(compId)
+        };
+        SQLiteDatabase db = mDbHelper.openWritable();
+        db.beginTransaction();
+        try {
+            for (int i = 0; i < tables.length; i++) {
+                db.execSQL("delete from " + tables[i] +
+                        " where " + TRANSACTION_ID + "=? " +
+                        " and " + COMPUTER_ID + "=?",
+                        whereArgs);
+                db.execSQL("insert into " + tables[i] +
+                        " select * from " + tables[i] + "Front" +
+                        " where " + TRANSACTION_ID + "=?" +
+                        " and " + COMPUTER_ID + "=?",
+                        whereArgs);
+                db.execSQL("delete from " + tables[i] + "Front" +
+                        " where " + TRANSACTION_ID + "=?" +
+                        " and " + COMPUTER_ID + "=?",
+                        whereArgs);
+            }
+            db.setTransactionSuccessful();
+        }finally{
+            db.endTransaction();
+        }
     }
 
     private void finalizeBill(int transId, int compId){
