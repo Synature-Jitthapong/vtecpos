@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by j1tth4 on 4/29/15.
  */
-public class Products{
+public class ProductDataSource {
 
     public static final String TABLE_PRODUCT_GROUP = "ProductGroup";
     public static final String TABLE_PRODUCT_DEPT = "ProductDept";
@@ -241,7 +241,7 @@ public class Products{
 
     private DatabaseHelper mDbHelper;
 
-    public Products(Context c) {
+    public ProductDataSource(Context c) {
         mDbHelper = new DatabaseHelper(c);
     }
 
@@ -300,8 +300,8 @@ public class Products{
      * @param deptId
      * @return null if no record
      */
-    public List<ProductsDataModel.Products> getProducts(int groupId, int deptId){
-        List<ProductsDataModel.Products> productsList = null;
+    public List<Product.Products> getProducts(int groupId, int deptId){
+        List<Product.Products> productsList = null;
         Cursor cursor = mDbHelper.openReadable().query(
                 TABLE_PRODUCTS,
                 ALL_PRODUCT_COLUMN,
@@ -317,8 +317,8 @@ public class Products{
         if(cursor.moveToFirst()){
             productsList = new ArrayList<>();
             while(!cursor.isAfterLast()){
-                ProductsDataModel.Products product =
-                        new ProductsDataModel.Products();
+                Product.Products product =
+                        new Product.Products();
                 product.setProductId(cursor.getInt(cursor.getColumnIndex(PRODUCT_ID)));
                 product.setShopId(cursor.getInt(cursor.getColumnIndex(SHOP_ID)));
                 product.setInventoryId(cursor.getInt(cursor.getColumnIndex(INVENTORY_ID)));
@@ -390,8 +390,8 @@ public class Products{
      * @param groupId
      * @return null if no record
      */
-    public List<ProductsDataModel.ProductDept> getProductDepts(int groupId){
-        List<ProductsDataModel.ProductDept> productDeptList = null;
+    public List<Product.ProductDept> getProductDepts(int groupId){
+        List<Product.ProductDept> productDeptList = null;
         Cursor cursor = mDbHelper.openReadable().query(
                 TABLE_PRODUCT_DEPT,
                 ALL_PRODUCT_DEPT_COLUMN,
@@ -404,8 +404,8 @@ public class Products{
         if(cursor.moveToFirst()){
             productDeptList = new ArrayList<>();
             while (!cursor.isAfterLast()){
-                ProductsDataModel.ProductDept productDept =
-                        new ProductsDataModel.ProductDept();
+                Product.ProductDept productDept =
+                        new Product.ProductDept();
                 productDept.setProductDeptId(cursor.getInt(cursor.getColumnIndex(PRODUCT_DEPT_ID)));
                 productDept.setProductGroupId(cursor.getInt(cursor.getColumnIndex(PRODUCT_GROUP_ID)));
                 productDept.setShopId(cursor.getInt(cursor.getColumnIndex(SHOP_ID)));
@@ -434,8 +434,8 @@ public class Products{
     /**
      * @return null if no record
      */
-    public List<ProductsDataModel.ProductGroups> getProductGroups(){
-        List<ProductsDataModel.ProductGroups> productGroupsList = null;
+    public List<Product.ProductGroups> getProductGroups(){
+        List<Product.ProductGroups> productGroupsList = null;
         Cursor cursor = mDbHelper.openReadable().query(
                 TABLE_PRODUCT_GROUP,
                 ALL_PRODUCT_GROUP_COLUMN,
@@ -446,8 +446,8 @@ public class Products{
         if(cursor.moveToFirst()){
             productGroupsList = new ArrayList<>();
             while (!cursor.isAfterLast()){
-                ProductsDataModel.ProductGroups productGroups =
-                        new ProductsDataModel.ProductGroups();
+                Product.ProductGroups productGroups =
+                        new Product.ProductGroups();
                 productGroups.setProductGroupId(cursor.getInt(cursor.getColumnIndex(PRODUCT_GROUP_ID)));
                 productGroups.setShopId(cursor.getInt(cursor.getColumnIndex(SHOP_ID)));
                 productGroups.setProductGroupCode(cursor.getString(cursor.getColumnIndex(PRODUCT_GROUP_CODE)));

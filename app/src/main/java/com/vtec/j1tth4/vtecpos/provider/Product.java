@@ -3,7 +3,7 @@ package com.vtec.j1tth4.vtecpos.provider;
 /**
  * Created by j1tth4 on 5/1/15 AD.
  */
-public class ProductsDataModel {
+public class Product {
 
     public static class Products{
         private int productId;

@@ -3,7 +3,7 @@ package com.vtec.j1tth4.vtecpos.provider;
 /**
  * Created by j1tth4 on 11/5/2558.
  */
-public class ShopDataModel {
+public class Shop {
     private int ShopID;
     private String ShopCode;
     private String ShopName;
@@ -57,7 +57,7 @@ public class ShopDataModel {
     private int ProductLevelOrder;
     private int Deleted;
 
-    public ShopDataModel(){
+    public Shop(){
     }
 
     public int getShopID() {

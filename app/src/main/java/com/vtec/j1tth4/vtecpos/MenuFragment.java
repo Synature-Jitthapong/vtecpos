@@ -1,6 +1,5 @@
 package com.vtec.j1tth4.vtecpos;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,8 +11,8 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.vtec.j1tth4.vtecpos.provider.Products;
-import com.vtec.j1tth4.vtecpos.provider.ProductsDataModel;
+import com.vtec.j1tth4.vtecpos.provider.ProductDataSource;
+import com.vtec.j1tth4.vtecpos.provider.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +43,7 @@ public class MenuFragment extends Fragment {
         }
     }
 
-    private List<ProductsDataModel.Products> mProductList
+    private List<Product.Products> mProductList
             = new ArrayList<>();
 
     private GridView mGvMenu;
@@ -64,7 +63,7 @@ public class MenuFragment extends Fragment {
         super.onCreate(savedInstanceState);
         int groupId = getArguments().getInt("groupId");
         int deptId = getArguments().getInt("deptId");
-        Products product = new Products(getActivity());
+        ProductDataSource product = new ProductDataSource(getActivity());
         mProductList = product.getProducts(groupId, deptId);
     }
 

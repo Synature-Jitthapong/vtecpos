@@ -3,7 +3,7 @@ package com.vtec.j1tth4.vtecpos.provider;
 /**
  * Created by j1tth4 on 5/1/15 AD.
  */
-public class OrdersDataModel {
+public class Transaction {
     private int transactionId;
     private int computerId;
     private String transactionUUID;
@@ -83,10 +83,10 @@ public class OrdersDataModel {
     private int fromDepositComputerId;
     private int deleted;
 
-    public OrdersDataModel(){
+    public Transaction(){
     }
 
-    public OrdersDataModel(int transactionId, int computerId, String transactionUUID, String reserveTime, int reserveStaffId, String openTime, int openStaffId, String paidTime, int paidStaffId, String closeTime, int commStaffId, double discountItem, double discountBill, double discountOther, double totalDiscount, int transactionStatusId, int saleMode, String transactionName, String queueName, int noCustomer, int noCustomerWhenOpen, int docType, int receiptYear, int receiptMonth, int receiptId, String receiptNumber, String saleDate, int shopId, double transactionVAT, double transactionVATable, double tranBeforeVAT, String vatCode, double vatPercent, double serviceChargePercent, double serviceCharge, double serviceChargeVAT, double scBeforeVAT, double otherIncome, double otherIncomeVAT, double otherIncomeBeforeVAT, double receiptTotalQty, double receiptRetailPrice, double receiptDiscount, double receiptSalePrice, double receiptNetSale, double receiptPayPrice, double receiptRoundingBill, int sessionId, int closeComputerId, int voidStaffId, String voidReason, String voidTime, int isCloneBill, int voidTranId, int voidComId, double diffCloneBill, int memberId, int hasOrder, int noPrintBillDetail, double diffPayCheckBill, String billDetailReferenceNo, int callForCheckBill, String transactionNote, int currentAccessComputer, String updateDate, String beginTime, String endTime, String printWarningTime, String printBeginTime, int alreadyCalculateStock, int alreadyExportToHQ, int tableId, int isSplitTransaction, int isFromOtherTransaction, String referenceNo, int fromDepositTransactionId, int fromDepositComputerId, int deleted) {
+    public Transaction(int transactionId, int computerId, String transactionUUID, String reserveTime, int reserveStaffId, String openTime, int openStaffId, String paidTime, int paidStaffId, String closeTime, int commStaffId, double discountItem, double discountBill, double discountOther, double totalDiscount, int transactionStatusId, int saleMode, String transactionName, String queueName, int noCustomer, int noCustomerWhenOpen, int docType, int receiptYear, int receiptMonth, int receiptId, String receiptNumber, String saleDate, int shopId, double transactionVAT, double transactionVATable, double tranBeforeVAT, String vatCode, double vatPercent, double serviceChargePercent, double serviceCharge, double serviceChargeVAT, double scBeforeVAT, double otherIncome, double otherIncomeVAT, double otherIncomeBeforeVAT, double receiptTotalQty, double receiptRetailPrice, double receiptDiscount, double receiptSalePrice, double receiptNetSale, double receiptPayPrice, double receiptRoundingBill, int sessionId, int closeComputerId, int voidStaffId, String voidReason, String voidTime, int isCloneBill, int voidTranId, int voidComId, double diffCloneBill, int memberId, int hasOrder, int noPrintBillDetail, double diffPayCheckBill, String billDetailReferenceNo, int callForCheckBill, String transactionNote, int currentAccessComputer, String updateDate, String beginTime, String endTime, String printWarningTime, String printBeginTime, int alreadyCalculateStock, int alreadyExportToHQ, int tableId, int isSplitTransaction, int isFromOtherTransaction, String referenceNo, int fromDepositTransactionId, int fromDepositComputerId, int deleted) {
         this.transactionId = transactionId;
         this.computerId = computerId;
         this.transactionUUID = transactionUUID;

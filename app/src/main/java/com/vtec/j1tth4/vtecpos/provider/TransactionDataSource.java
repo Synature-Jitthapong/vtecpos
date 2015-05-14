@@ -1,12 +1,10 @@
 package com.vtec.j1tth4.vtecpos.provider;
 
-import android.app.Service;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.text.TextUtils;
 
 import com.vtec.j1tth4.vtecpos.Utils;
 import com.vtec.j1tth4.vtecpos.VtecPosApplication;
@@ -16,7 +14,7 @@ import java.util.UUID;
 /**
  * Created by j1tth4 on 4/29/15.
  */
-public class Orders{
+public class TransactionDataSource {
 
     public static final int NEW_TRANS = 1;
     public static final int SUCCESS_TRANS = 2;
@@ -208,11 +206,12 @@ public class Orders{
 
     private DatabaseHelper mDbHelper;
 
-    public Orders(Context c){
-        mDbHelper = new DatabaseHelper(c);
+    public TransactionDataSource(DatabaseHelper helper){
+        mDbHelper = helper;
     }
 
     private void weightProductSet(int transId, int compId){
+        SQLiteDatabase db = mDbHelper.openWritable();
         Cursor cursor1 = mDbHelper.getReadableDatabase().rawQuery(
                 "select * from " + TABLE_ORDER_DETAIL_FRONT +
                         " where " + COMPONENT_LEVEL + "=?" +
@@ -259,7 +258,7 @@ public class Orders{
                                     " from " + TABLE_ORDER_DETAIL_FRONT + " a " +
                                     " left outer join " + TABLE_SALE_MODE + " b " +
                                     " on a." + SALE_MODE + "=b." + SALE_MODE_ID +
-                                    " left outer join " + ShopData.TABLE_SHOP_DATA + " c " +
+                                    " left outer join " + ShopDataSource.TABLE_SHOP_DATA + " c " +
                                     " on a." + SHOP_ID + "=c." + SHOP_ID +
                                     " where " + IS_COMMENT + "=?" +
                                     " and " + ORDER_DETAIL_LINK_ID + "=?" +
@@ -767,9 +766,9 @@ public class Orders{
         cursor3.close();
 
         double scBillDisc = 0;
-        if(VtecPosApplication.sShopData.isScBeforeDisc()) {
+        if(VtecPosApplication.sShopDataSource.isScBeforeDisc()) {
             if(totalBillDisc > 0) {
-                scBillDisc = totalBillDisc * VtecPosApplication.sShopData.getScPercent() / 100;
+                scBillDisc = totalBillDisc * VtecPosApplication.sShopDataSource.getScPercent() / 100;
             }
             scAmount = scAmount - scBillDisc;
         }
@@ -786,9 +785,9 @@ public class Orders{
         double transBeforeVat = 0;
         double scVat = 0;
         double scBeforeVat = 0;
-        int vatPercent = VtecPosApplication.sShopData.getVatType();
+        int vatPercent = VtecPosApplication.sShopDataSource.getVatType();
         int vatDigit = VtecPosApplication.sGlobalProperty.getVatDigit();
-        if(VtecPosApplication.sShopData.getVatType() == 1) {
+        if(VtecPosApplication.sShopDataSource.getVatType() == 1) {
             transVat = Utils.round(totalVatable * vatPercent / (100 + vatPercent), vatDigit);
             transBeforeVat = totalVatable - transVat;
             scVat = Utils.round(scAmount * vatPercent / (100 + vatPercent), VtecPosApplication.ROUND_DIGIT);
@@ -800,9 +799,9 @@ public class Orders{
             scBeforeVat = scAmount;
         }
         ContentValues cv = new ContentValues();
-        cv.put(VAT_CODE, VtecPosApplication.sShopData.getVatCode());
+        cv.put(VAT_CODE, VtecPosApplication.sShopDataSource.getVatCode());
         cv.put(VAT_PERCENT, vatPercent);
-        cv.put(SERVICE_CHARGE_PERCENT, VtecPosApplication.sShopData.getScPercent());
+        cv.put(SERVICE_CHARGE_PERCENT, VtecPosApplication.sShopDataSource.getScPercent());
         cv.put(SERVICE_CHARGE, scAmount);
         cv.put(SERVICE_CHARGE_VAT, scVat);
         cv.put(SC_BEFORE_VAT, scBeforeVat);
@@ -1074,7 +1073,7 @@ public class Orders{
      * @return
      * @throws SQLException
      */
-    public int insertOrderDetail(OrdersDataModel.OrderDetail model) throws SQLException{
+    public int insertOrderDetail(Transaction.OrderDetail model) throws SQLException{
         int ordId = getMaxOrderId(model.getTransactionId(), model.getComputerId());
         int insertOrdNo = getMaxInsertOrderNo(model.getTransactionId(), model.getComputerId());
         int ordering = 0;
@@ -1148,7 +1147,7 @@ public class Orders{
      * @return last transactionId | 0 if fail
      * @throws SQLException
      */
-    public int insertTransaction(OrdersDataModel model) throws SQLException{
+    public int insertTransaction(Transaction model) throws SQLException{
         int transId = getMaxTransId();
         String saleDate = VtecPosApplication.getISODate();
         String[] dateSplit = saleDate.split("-");

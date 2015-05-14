@@ -9,20 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.vtec.j1tth4.vtecpos.provider.Orders;
-import com.vtec.j1tth4.vtecpos.provider.Products;
+import com.vtec.j1tth4.vtecpos.provider.TransactionDataSource;
+import com.vtec.j1tth4.vtecpos.provider.ProductDataSource;
 
-import org.w3c.dom.Text;
-
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URLConnection;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,16 +24,16 @@ import java.util.List;
 public class OrderListFragment extends Fragment {
 
     public static final String[] PROJECTION = {
-            Orders.TRANSACTION_ID,
-            Orders.COMPUTER_ID,
-            Orders.TOTAL_QTY,
-            Orders.TOTAL_RETAIL_PRICE,
-            Products.PRODUCT_NAME,
-            Products.PRODUCT_NAME_LANG1,
-            Products.PRODUCT_NAME_LANG2,
-            Products.PRODUCT_NAME_LANG3,
-            Products.PRODUCT_NAME_LANG4,
-            Products.PRODUCT_NAME_LANG5,
+            TransactionDataSource.TRANSACTION_ID,
+            TransactionDataSource.COMPUTER_ID,
+            TransactionDataSource.TOTAL_QTY,
+            TransactionDataSource.TOTAL_RETAIL_PRICE,
+            ProductDataSource.PRODUCT_NAME,
+            ProductDataSource.PRODUCT_NAME_LANG1,
+            ProductDataSource.PRODUCT_NAME_LANG2,
+            ProductDataSource.PRODUCT_NAME_LANG3,
+            ProductDataSource.PRODUCT_NAME_LANG4,
+            ProductDataSource.PRODUCT_NAME_LANG5,
     };
 
     private Cursor mCursor;

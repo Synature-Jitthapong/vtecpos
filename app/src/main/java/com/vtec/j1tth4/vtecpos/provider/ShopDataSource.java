@@ -2,12 +2,11 @@ package com.vtec.j1tth4.vtecpos.provider;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.text.TextUtils;
 
 /**
  * Created by j1tth4 on 11/5/2558.
  */
-public class ShopData {
+public class ShopDataSource {
 
     public static final String TABLE_SHOP_DATA = "Shop_Data";
     public static final String SHOP_ID = "ShopID";
@@ -71,16 +70,16 @@ public class ShopData {
 
     private DatabaseHelper mDbHelper;
 
-    public ShopData(Context c) {
-        mDbHelper = new DatabaseHelper(c);
+    public ShopDataSource(Context c) {
+        mDbHelper = DatabaseHelper.getInstance(c);
     }
 
     public void loadVatShopData(int shopId){
         Cursor cursor = mDbHelper.openReadable().rawQuery(
             "select * " +
                 " from " + TABLE_SHOP_DATA + " a " +
-                " left outer join " + Products.TABLE_PRODUCT_VAT + " b " +
-                " on a." + VAT_CODE + "=b." + Products.PRODUCT_VAT_CODE +
+                " left outer join " + ProductDataSource.TABLE_PRODUCT_VAT + " b " +
+                " on a." + VAT_CODE + "=b." + ProductDataSource.PRODUCT_VAT_CODE +
                     (shopId != 0 ? " where a." + SHOP_ID + "=?" : ""),
                 new String[]{
                         String.valueOf(shopId)
@@ -90,8 +89,8 @@ public class ShopData {
                 vatCode = cursor.getString(cursor.getColumnIndex(VAT_CODE));
             if(!cursor.isNull(cursor.getColumnIndex(SC_PERCENT)))
                 scPercent = cursor.getDouble(cursor.getColumnIndex(SC_PERCENT));
-            if(!cursor.isNull(cursor.getColumnIndex(Products.PRODUCT_VAT_PERCENT)))
-                vatPercent = cursor.getDouble(cursor.getColumnIndex(Products.PRODUCT_VAT_PERCENT));
+            if(!cursor.isNull(cursor.getColumnIndex(ProductDataSource.PRODUCT_VAT_PERCENT)))
+                vatPercent = cursor.getDouble(cursor.getColumnIndex(ProductDataSource.PRODUCT_VAT_PERCENT));
             if(!cursor.isNull(cursor.getColumnIndex(HAS_SC)))
                 if(cursor.getInt(cursor.getColumnIndex(HAS_SC)) == 1) hasSc = true;
             if(!cursor.isNull(cursor.getColumnIndex(IS_SC_BEFORE_DISC)))

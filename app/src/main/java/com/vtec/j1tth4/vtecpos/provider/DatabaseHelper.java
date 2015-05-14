@@ -31,7 +31,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return sInstance;
     }
 
-    public DatabaseHelper(Context c) {
+    private DatabaseHelper(Context c) {
         super(c, DATABASE_NAME, null, DATABASE_VERSION);
 
         mDatabasePath = VtecPosApplication.getVtecAssetPath() + File.separator +

@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.vtec.j1tth4.vtecpos.provider.Products;
-import com.vtec.j1tth4.vtecpos.provider.ProductsDataModel;
+import com.vtec.j1tth4.vtecpos.provider.ProductDataSource;
+import com.vtec.j1tth4.vtecpos.provider.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +20,8 @@ import java.util.List;
  */
 public class FoodMenuFragment extends Fragment {
 
-    private List<ProductsDataModel.ProductGroups> mProductGroupList = new ArrayList<>();
-    private List<ProductsDataModel.ProductDept> mProductDeptList = new ArrayList<>();
+    private List<Product.ProductGroups> mProductGroupList = new ArrayList<>();
+    private List<Product.ProductDept> mProductDeptList = new ArrayList<>();
 
     private static class FoodMenuPageItem{
         private final CharSequence mTitle;
@@ -68,10 +68,10 @@ public class FoodMenuFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Products product = new Products(getActivity());
+        ProductDataSource product = new ProductDataSource(getActivity());
         mProductDeptList = product.getProductDepts(0);
         for(int i = 0; i < mProductDeptList.size(); i++){
-            ProductsDataModel.ProductDept productDept = mProductDeptList.get(i);
+            Product.ProductDept productDept = mProductDeptList.get(i);
             mTabs.add(new FoodMenuPageItem(productDept.getProductDeptName(),
                     productDept.getProductGroupId(), productDept.getProductDeptId()));
         }
