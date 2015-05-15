@@ -61,67 +61,40 @@ public class ShopDataSource {
     public static final String PRODUCTLEVEL_ORDER = "ProductLevelOrder";
     public static final String DELETED = "Deleted";
 
-    private String vatCode = "";
-    private double scPercent = 0;
-    private double vatPercent = 0;
-    private boolean hasSc = false;
-    private boolean isScBeforeDisc = false;
-    private int vatType = 1;
-
     private DatabaseHelper mDbHelper;
 
     public ShopDataSource(Context c) {
         mDbHelper = DatabaseHelper.getInstance(c);
     }
 
-    public void loadVatShopData(int shopId){
+    public Shop loadVatShopData(int shopId){
         Cursor cursor = mDbHelper.openReadable().rawQuery(
-            "select * " +
-                " from " + TABLE_SHOP_DATA + " a " +
-                " left outer join " + ProductDataSource.TABLE_PRODUCT_VAT + " b " +
-                " on a." + VAT_CODE + "=b." + ProductDataSource.PRODUCT_VAT_CODE +
-                    (shopId != 0 ? " where a." + SHOP_ID + "=?" : ""),
+                "select * " +
+                        " from " + TABLE_SHOP_DATA + " a " +
+                        " left outer join " + ProductDataSource.TABLE_PRODUCT_VAT + " b " +
+                        " on a." + VAT_CODE + "=b." + ProductDataSource.PRODUCT_VAT_CODE +
+                        (shopId != 0 ? " where a." + SHOP_ID + "=?" : ""),
                 new String[]{
                         String.valueOf(shopId)
                 });
+        Shop s = null;
         if(cursor.moveToFirst()){
+            s = new Shop();
             if(!cursor.isNull(cursor.getColumnIndex(VAT_CODE)))
-                vatCode = cursor.getString(cursor.getColumnIndex(VAT_CODE));
+                s.setVATCode(cursor.getString(cursor.getColumnIndex(VAT_CODE)));
             if(!cursor.isNull(cursor.getColumnIndex(SC_PERCENT)))
-                scPercent = cursor.getDouble(cursor.getColumnIndex(SC_PERCENT));
+                s.setSCPercent(cursor.getDouble(cursor.getColumnIndex(SC_PERCENT)));
             if(!cursor.isNull(cursor.getColumnIndex(ProductDataSource.PRODUCT_VAT_PERCENT)))
-                vatPercent = cursor.getDouble(cursor.getColumnIndex(ProductDataSource.PRODUCT_VAT_PERCENT));
+                s.setVatPercent(cursor.getDouble(cursor.getColumnIndex(ProductDataSource.PRODUCT_VAT_PERCENT)));
             if(!cursor.isNull(cursor.getColumnIndex(HAS_SC)))
-                if(cursor.getInt(cursor.getColumnIndex(HAS_SC)) == 1) hasSc = true;
+                s.setHasSC(cursor.getInt(cursor.getColumnIndex(HAS_SC)));
             if(!cursor.isNull(cursor.getColumnIndex(IS_SC_BEFORE_DISC)))
-                if(cursor.getInt(cursor.getColumnIndex(IS_SC_BEFORE_DISC)) == 1) isScBeforeDisc = true;
+                s.setIsSCBeforeDisc(cursor.getInt(cursor.getColumnIndex(IS_SC_BEFORE_DISC)));
             if(!cursor.isNull(cursor.getColumnIndex(VAT_TYPE)))
-                vatType = cursor.getInt(cursor.getColumnIndex(VAT_TYPE));
+                s.setVATType(cursor.getInt(cursor.getColumnIndex(VAT_TYPE)));
         }
         cursor.close();
-    }
-
-    public String getVatCode() {
-        return vatCode;
-    }
-
-    public double getScPercent() {
-        return scPercent;
-    }
-
-    public double getVatPercent() {
-        return vatPercent;
-    }
-
-    public boolean isHasSc() {
-        return hasSc;
-    }
-
-    public boolean isScBeforeDisc() {
-        return isScBeforeDisc;
-    }
-
-    public int getVatType() {
-        return vatType;
+        mDbHelper.close();
+        return s;
     }
 }

@@ -4,11 +4,14 @@ import android.app.Application;
 import android.os.Environment;
 
 import com.vtec.j1tth4.vtecpos.provider.GlobalProperty;
+import com.vtec.j1tth4.vtecpos.provider.GlobalPropertyDataSource;
+import com.vtec.j1tth4.vtecpos.provider.Shop;
 import com.vtec.j1tth4.vtecpos.provider.ShopDataSource;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * Created by j1tth4 on 25/3/2558.
@@ -23,19 +26,36 @@ public class VtecPosApplication extends Application {
     public static final String TIME_FORMAT = "HH:mm:ss";
     public static final String ISO_DATE_TIME_FORMAT = ISO_DATE_FORMAT + " " + TIME_FORMAT;
 
-    public static final int ROUND_DIGIT = 2;
-
-    public static ShopDataSource sShopDataSource;
-    public static GlobalProperty sGlobalProperty;
+    public static int sRoundingDigit = 2;
+    public static int sVatDigit = 2;
+    public static double sScPercent = 7.0d;
+    public static boolean sIsCalVatWhenZeroBill = false;
+    public static boolean sIsScBeforeDisc = false;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        setup();
+    }
 
-        sShopDataSource = new ShopDataSource(getApplicationContext());
-        sShopDataSource.loadVatShopData(0);
-        sGlobalProperty = new GlobalProperty(getApplicationContext());
-        sGlobalProperty.loadProgramProperty();
+    private void setup(){
+        ShopDataSource shopDataSource = new ShopDataSource(getApplicationContext());
+        Shop s = shopDataSource.loadVatShopData(0);
+        if(s.getIsSCBeforeDisc() == 1) sIsScBeforeDisc = true;
+        sScPercent = s.getSCPercent();
+
+        GlobalPropertyDataSource globalProperty = new GlobalPropertyDataSource(getApplicationContext());
+        List<GlobalProperty> gbl = globalProperty.listProgramProperty();
+        for(GlobalProperty gb : gbl) {
+            switch (gb.getPropertyID()) {
+                case GlobalPropertyDataSource.CAL_VAT_WHEN_ZERO_BILL_PROPERTY:
+                    if (gb.getPropertyValue() == 1) sIsCalVatWhenZeroBill = true;
+                    break;
+                case GlobalPropertyDataSource.VAT_DIGIT_PROPERTY:
+                    sVatDigit = gb.getPropertyValue();
+                    break;
+            }
+        }
     }
 
     public static String getISODate(){

@@ -242,7 +242,7 @@ public class ProductDataSource {
     private DatabaseHelper mDbHelper;
 
     public ProductDataSource(Context c) {
-        mDbHelper = new DatabaseHelper(c);
+        mDbHelper = DatabaseHelper.getInstance(c);
     }
 
     /**

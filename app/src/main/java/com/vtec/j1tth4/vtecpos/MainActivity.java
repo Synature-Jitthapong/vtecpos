@@ -16,14 +16,21 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
+import com.vtec.j1tth4.vtecpos.provider.ShopDataSource;
+import com.vtec.j1tth4.vtecpos.provider.Transaction;
+import com.vtec.j1tth4.vtecpos.provider.TransactionDataSource;
 
-public class MainActivity extends ActionBarActivity {
+
+public class MainActivity extends ActionBarActivity implements TransactionOperation{
 
     static String[] sDrawerItems = {
         "","","",""
     };
 
     private android.support.v4.app.ActionBarDrawerToggle mDrawerToggle;
+
+    private TransactionDataSource mTransDataSource;
+    private Transaction mTransData;
 
     private DrawerLayout mDrawerLayout;
     private ListView mLvDrawer;
@@ -35,6 +42,12 @@ public class MainActivity extends ActionBarActivity {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mLvDrawer = (ListView) findViewById(R.id.left_drawer);
+
+        mTransDataSource = new TransactionDataSource(this);
+        ShopDataSource shopData = ShopDataSource.getInstance(this);
+        mTransData = Transaction.getsInstance();
+        mTransData.setComputerId(1);
+        mTransData.setShopId(shopData.getShopID());
 
         final ActionBar actionBar = getSupportActionBar();
         mLvDrawer.setAdapter(new DrawerListAdapter());
@@ -123,6 +136,23 @@ public class MainActivity extends ActionBarActivity {
             Intent intent = new Intent(this, PaymentActivity.class);
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void onOpenTransaction() {
+        // use singleton pattern to initial Transaction
+        Transaction trans = Transaction.getsInstance();
+        trans.setTransactionId(mTransDataSource.insertTransaction(trans));
+    }
+
+    @Override
+    public void onHoldTransaction(Transaction trans) {
+
+    }
+
+    @Override
+    public void onSuccessTransaction(Transaction trans) {
+
     }
 
     private class DrawerListAdapter extends BaseAdapter{

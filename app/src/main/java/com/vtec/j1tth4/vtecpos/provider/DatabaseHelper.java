@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.SQLException;
 
 /**
  * Created by j1tth4 on 4/29/15.
@@ -21,12 +22,13 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String DATABASE_NAME = "vtecpos.db";
 
     private String mDatabasePath;
+    private SQLiteDatabase mSQLite;
 
     private static DatabaseHelper sInstance = null;
 
     public static synchronized DatabaseHelper getInstance(Context c){
         if(sInstance == null){
-            sInstance = new DatabaseHelper(c);
+            sInstance = new DatabaseHelper(c.getApplicationContext());
         }
         return sInstance;
     }
@@ -76,13 +78,20 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     public SQLiteDatabase openReadable(){
-        return SQLiteDatabase.openDatabase(mDatabasePath, null,
+        mSQLite = SQLiteDatabase.openDatabase(mDatabasePath, null,
                 SQLiteDatabase.OPEN_READONLY);
+        return mSQLite;
     }
 
     public SQLiteDatabase openWritable(){
-        return SQLiteDatabase.openDatabase(mDatabasePath, null,
+        mSQLite = SQLiteDatabase.openDatabase(mDatabasePath, null,
                 SQLiteDatabase.OPEN_READWRITE);
+        return mSQLite;
+    }
+
+    public void close(){
+        if(mSQLite != null && mSQLite.isOpen())
+            mSQLite.close();
     }
 
     @Override

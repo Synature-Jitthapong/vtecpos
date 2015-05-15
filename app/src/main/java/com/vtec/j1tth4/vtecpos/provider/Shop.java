@@ -1,7 +1,7 @@
 package com.vtec.j1tth4.vtecpos.provider;
 
 /**
- * Created by j1tth4 on 11/5/2558.
+ * Created by j1tth4 on 5/15/15.
  */
 public class Shop {
     private int ShopID;
@@ -56,9 +56,6 @@ public class Shop {
     private String Addtional;
     private int ProductLevelOrder;
     private int Deleted;
-
-    public Shop(){
-    }
 
     public int getShopID() {
         return ShopID;
@@ -466,5 +463,13 @@ public class Shop {
 
     public void setDeleted(int deleted) {
         Deleted = deleted;
+    }
+
+    public double getVatPercent() {
+        return VatPercent;
+    }
+
+    public void setVatPercent(double vatPercent) {
+        VatPercent = vatPercent;
     }
 }

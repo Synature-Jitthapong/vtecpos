@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
@@ -21,9 +22,14 @@ import java.util.List;
  * Created by j1tth4 on 3/27/15.
  * This fragment used for create menu grid view
  */
-public class MenuFragment extends Fragment {
+public class MenuFragment extends Fragment implements OnClickListener{
 
     public static final String SLIDING_TAB_TITLE = "sliding_tab_title";
+
+    @Override
+    public void onClick(View view) {
+
+    }
 
     public static class MenuItem{
         private String menuName;

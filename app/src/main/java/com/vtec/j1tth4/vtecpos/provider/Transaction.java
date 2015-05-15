@@ -83,88 +83,16 @@ public class Transaction {
     private int fromDepositComputerId;
     private int deleted;
 
-    public Transaction(){
+    private static Transaction sInstance;
+
+    public static Transaction getsInstance(){
+        if(sInstance == null){
+            sInstance = new Transaction();
+        }
+        return sInstance;
     }
 
-    public Transaction(int transactionId, int computerId, String transactionUUID, String reserveTime, int reserveStaffId, String openTime, int openStaffId, String paidTime, int paidStaffId, String closeTime, int commStaffId, double discountItem, double discountBill, double discountOther, double totalDiscount, int transactionStatusId, int saleMode, String transactionName, String queueName, int noCustomer, int noCustomerWhenOpen, int docType, int receiptYear, int receiptMonth, int receiptId, String receiptNumber, String saleDate, int shopId, double transactionVAT, double transactionVATable, double tranBeforeVAT, String vatCode, double vatPercent, double serviceChargePercent, double serviceCharge, double serviceChargeVAT, double scBeforeVAT, double otherIncome, double otherIncomeVAT, double otherIncomeBeforeVAT, double receiptTotalQty, double receiptRetailPrice, double receiptDiscount, double receiptSalePrice, double receiptNetSale, double receiptPayPrice, double receiptRoundingBill, int sessionId, int closeComputerId, int voidStaffId, String voidReason, String voidTime, int isCloneBill, int voidTranId, int voidComId, double diffCloneBill, int memberId, int hasOrder, int noPrintBillDetail, double diffPayCheckBill, String billDetailReferenceNo, int callForCheckBill, String transactionNote, int currentAccessComputer, String updateDate, String beginTime, String endTime, String printWarningTime, String printBeginTime, int alreadyCalculateStock, int alreadyExportToHQ, int tableId, int isSplitTransaction, int isFromOtherTransaction, String referenceNo, int fromDepositTransactionId, int fromDepositComputerId, int deleted) {
-        this.transactionId = transactionId;
-        this.computerId = computerId;
-        this.transactionUUID = transactionUUID;
-        this.reserveTime = reserveTime;
-        this.reserveStaffId = reserveStaffId;
-        this.openTime = openTime;
-        this.openStaffId = openStaffId;
-        this.paidTime = paidTime;
-        this.paidStaffId = paidStaffId;
-        this.closeTime = closeTime;
-        this.commStaffId = commStaffId;
-        this.discountItem = discountItem;
-        this.discountBill = discountBill;
-        this.discountOther = discountOther;
-        this.totalDiscount = totalDiscount;
-        this.transactionStatusId = transactionStatusId;
-        this.saleMode = saleMode;
-        this.transactionName = transactionName;
-        this.queueName = queueName;
-        this.noCustomer = noCustomer;
-        this.noCustomerWhenOpen = noCustomerWhenOpen;
-        this.docType = docType;
-        this.receiptYear = receiptYear;
-        this.receiptMonth = receiptMonth;
-        this.receiptId = receiptId;
-        this.receiptNumber = receiptNumber;
-        this.saleDate = saleDate;
-        this.shopId = shopId;
-        this.transactionVAT = transactionVAT;
-        this.transactionVATable = transactionVATable;
-        this.tranBeforeVAT = tranBeforeVAT;
-        this.vatCode = vatCode;
-        this.vatPercent = vatPercent;
-        this.serviceChargePercent = serviceChargePercent;
-        this.serviceCharge = serviceCharge;
-        this.serviceChargeVAT = serviceChargeVAT;
-        this.scBeforeVAT = scBeforeVAT;
-        this.otherIncome = otherIncome;
-        this.otherIncomeVAT = otherIncomeVAT;
-        this.otherIncomeBeforeVAT = otherIncomeBeforeVAT;
-        this.receiptTotalQty = receiptTotalQty;
-        this.receiptRetailPrice = receiptRetailPrice;
-        this.receiptDiscount = receiptDiscount;
-        this.receiptSalePrice = receiptSalePrice;
-        this.receiptNetSale = receiptNetSale;
-        this.receiptPayPrice = receiptPayPrice;
-        this.receiptRoundingBill = receiptRoundingBill;
-        this.sessionId = sessionId;
-        this.closeComputerId = closeComputerId;
-        this.voidStaffId = voidStaffId;
-        this.voidReason = voidReason;
-        this.voidTime = voidTime;
-        this.isCloneBill = isCloneBill;
-        this.voidTranId = voidTranId;
-        this.voidComId = voidComId;
-        this.diffCloneBill = diffCloneBill;
-        this.memberId = memberId;
-        this.hasOrder = hasOrder;
-        this.noPrintBillDetail = noPrintBillDetail;
-        this.diffPayCheckBill = diffPayCheckBill;
-        this.billDetailReferenceNo = billDetailReferenceNo;
-        this.callForCheckBill = callForCheckBill;
-        this.transactionNote = transactionNote;
-        this.currentAccessComputer = currentAccessComputer;
-        this.updateDate = updateDate;
-        this.beginTime = beginTime;
-        this.endTime = endTime;
-        this.printWarningTime = printWarningTime;
-        this.printBeginTime = printBeginTime;
-        this.alreadyCalculateStock = alreadyCalculateStock;
-        this.alreadyExportToHQ = alreadyExportToHQ;
-        this.tableId = tableId;
-        this.isSplitTransaction = isSplitTransaction;
-        this.isFromOtherTransaction = isFromOtherTransaction;
-        this.referenceNo = referenceNo;
-        this.fromDepositTransactionId = fromDepositTransactionId;
-        this.fromDepositComputerId = fromDepositComputerId;
-        this.deleted = deleted;
+    private Transaction(){
     }
 
     public int getTransactionId() {
