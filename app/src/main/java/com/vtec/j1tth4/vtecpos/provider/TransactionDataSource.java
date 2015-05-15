@@ -206,162 +206,18 @@ public class TransactionDataSource {
 
     private DatabaseHelper mDbHelper;
 
-    public TransactionDataSource(DatabaseHelper helper){
-        mDbHelper = helper;
+    public TransactionDataSource(Context c){
+        mDbHelper = DatabaseHelper.getInstance(c);
     }
 
     private void weightProductSet(int transId, int compId){
         SQLiteDatabase db = mDbHelper.openWritable();
-        Cursor cursor1 = mDbHelper.getReadableDatabase().rawQuery(
-                "select * from " + TABLE_ORDER_DETAIL_FRONT +
-                        " where " + COMPONENT_LEVEL + "=?" +
-                        " and " + ORDER_STATUS_ID + "<=?" +
-                        " and " + TRANSACTION_ID + "=?" +
-                        " and " + COMPUTER_ID + "=?",
-                new String[]{
-                        "2",
-                        "2",
-                        String.valueOf(transId),
-                        String.valueOf(compId)
-                });
-        if(cursor1.moveToFirst()){
-            while(!cursor1.isAfterLast()){
-                int orderDetailId = cursor1.getInt(cursor1.getColumnIndex(ORDER_DETAIL_ID));
-                double sumWeightVatable = 0;
-                double sumWeightPrice = 0;
-                double sumProductWeightVat = 0;
-                double sumWeightBeforeVat = 0;
-                double sumScWeightAmount = 0;
-                double sumScWeightVat = 0;
-                double sumScWeightBeforeVat = 0;
-                Cursor cursor2 = mDbHelper.getReadableDatabase().rawQuery(
-                        "select * from " + TABLE_ORDER_DETAIL_FRONT +
-                                " where " + ORDER_DETAIL_ID + "=?" +
-                                " and " + TRANSACTION_ID + "=?" +
-                                " and " + COMPUTER_ID + "=?",
-                        new String[]{
-                                String.valueOf(orderDetailId),
-                                String.valueOf(transId),
-                                String.valueOf(compId)
-                        });
-                if(cursor2.moveToFirst()){
-                    double netSale = cursor2.getDouble(cursor2.getColumnIndex(NET_SALE));
-                    double scAmount = cursor2.getDouble(cursor2.getColumnIndex(SC_AMOUNT));
-                    double vatable = cursor2.getDouble((cursor2.getColumnIndex(VATABLE)));
-                    double productVat = cursor2.getDouble(cursor2.getColumnIndex(PRODUCT_VAT));
-                    double productBeforeVat = cursor2.getDouble(cursor2.getColumnIndex(PRODUCT_BEFORE_VAT));
-                    double scVat = cursor2.getDouble(cursor2.getColumnIndex(SC_VAT));
-                    double scBeforeVat = cursor2.getDouble(cursor2.getColumnIndex(SC_BEFORE_VAT));
-                    Cursor cursor3 = mDbHelper.getReadableDatabase().rawQuery(
-                            "select a.*,b." + HAS_SERVICE_CHARGE + " as SaleModeSC, " +
-                                    " c." + IS_SC_BEFORE_DISC + ",c." + SC_PERCENT +
-                                    " from " + TABLE_ORDER_DETAIL_FRONT + " a " +
-                                    " left outer join " + TABLE_SALE_MODE + " b " +
-                                    " on a." + SALE_MODE + "=b." + SALE_MODE_ID +
-                                    " left outer join " + ShopDataSource.TABLE_SHOP_DATA + " c " +
-                                    " on a." + SHOP_ID + "=c." + SHOP_ID +
-                                    " where " + IS_COMMENT + "=?" +
-                                    " and " + ORDER_DETAIL_LINK_ID + "=?" +
-                                    " and " + TRANSACTION_ID + "=?" +
-                                    " and " + COMPUTER_ID + "=?" +
-                                    " order by a." + PRODUCT_VAT_PERCENT,
-                            new String[]{
-                                    "0",
-                                    String.valueOf(orderDetailId),
-                                    String.valueOf(transId),
-                                    String.valueOf(compId)
-                            });
-                    if(cursor3.moveToFirst()){
-                        double sumOrgPrice = 0;
-                        while(!cursor3.isAfterLast()){
-                            sumOrgPrice += cursor3.getDouble(cursor3.getColumnIndex(ORG_TOTAL_RETAIL_PRICE));
-                            cursor3.moveToNext();
-                        }
-                        cursor3.moveToFirst();
-                        while(!cursor3.isAfterLast()){
-                            double weightPrice = 0;
-                            double weightVatable = 0;
-                            double scWeightAmount = 0;
-                            double productWeightVat = 0;
-                            double weightBeforeVat = 0;
-                            double scWeightVat = 0;
-                            double scWeightBeforeVat = 0;
-                            double orgTotalRetailPrice = cursor3.getDouble(cursor3.getColumnIndex(ORG_TOTAL_RETAIL_PRICE));
-                            double productVatPercent = cursor3.getDouble(cursor3.getColumnIndex(PRODUCT_VAT_PERCENT));
-                            int vatType = cursor3.getInt(cursor3.getColumnIndex(VAT_TYPE));
-                            if(cursor3.getPosition() < cursor3.getCount() - 1){
-                                weightPrice = Utils.round((orgTotalRetailPrice * netSale) / sumOrgPrice, 0);
-                                weightVatable = weightPrice;
-                                scWeightAmount = Utils.round((orgTotalRetailPrice * scAmount) / sumOrgPrice, 0);
-                                if(vatType == 1) {
-                                    productWeightVat = Utils.round(weightPrice *
-                                            productVatPercent / (100 + productVatPercent), VtecPosApplication.ROUND_DIGIT);
-                                    weightBeforeVat = weightPrice - productWeightVat;
-
-                                    scWeightVat = Utils.round(scWeightAmount *
-                                            productVatPercent / (100 + productVatPercent), VtecPosApplication.ROUND_DIGIT);
-                                    scWeightBeforeVat = scWeightAmount - scWeightVat;
-                                }else{
-                                    productWeightVat = Utils.round(weightPrice * productVatPercent / 100, VtecPosApplication.ROUND_DIGIT);
-                                    weightBeforeVat = weightPrice;
-
-                                    scWeightVat = Utils.round(scWeightAmount * productVatPercent / 100, VtecPosApplication.ROUND_DIGIT);
-                                    scWeightBeforeVat = scWeightVat;
-                                }
-                                sumWeightVatable += weightVatable;
-                                sumWeightPrice += weightPrice;
-                                sumProductWeightVat += productWeightVat;
-                                sumWeightBeforeVat += weightBeforeVat;
-                                sumScWeightAmount += scWeightAmount;
-                                sumScWeightVat += scWeightVat;
-                                sumScWeightBeforeVat += scWeightBeforeVat;
-                            }else{
-                                weightVatable = vatable - sumWeightVatable;
-                                weightPrice = netSale - sumWeightPrice;
-                                productWeightVat = productVat - sumProductWeightVat;
-                                weightBeforeVat = productBeforeVat - sumWeightBeforeVat;
-                                scWeightAmount = scAmount - sumScWeightAmount;
-                                scWeightVat = scVat - sumScWeightVat;
-                                scWeightBeforeVat = scBeforeVat - sumScWeightBeforeVat;
-                            }
-                            ContentValues cv = new ContentValues();
-                            cv.put(W_VATABLE, weightVatable);
-                            cv.put(WEIGHT_PRICE, weightPrice);
-                            cv.put(WEIGHT_PRICE_VAT, productWeightVat);
-                            cv.put(WEIGHT_BEFORE_VAT, weightBeforeVat);
-                            cv.put(SCW_AMOUNT, scWeightAmount);
-                            cv.put(SCW_VAT, scWeightVat);
-                            cv.put(SCW_BEFORE_VAT, scWeightBeforeVat);
-                            mDbHelper.getWritableDatabase().update(
-                                    TABLE_ORDER_DETAIL_FRONT,
-                                    cv,
-                                    ORDER_DETAIL_ID + "=?" +
-                                            " and " + TRANSACTION_ID + "=?" +
-                                            " and " + COMPUTER_ID + "=?",
-                                    new String[]{
-                                            cursor3.getString(cursor3.getColumnIndex(ORDER_DETAIL_ID)),
-                                            cursor3.getString(cursor3.getColumnIndex(TRANSACTION_ID)),
-                                            cursor3.getString(cursor3.getColumnIndex(COMPUTER_ID))
-                                    });
-                            cursor3.moveToNext();
-                        }
-                    }
-                    cursor3.close();
-                }
-                cursor2.close();
-                cursor1.moveToNext();
-            }
-            mDbHelper.getWritableDatabase().execSQL(
-                    "update " + TABLE_ORDER_DETAIL_FRONT +
-                            " set " + W_VATABLE + "=" + VATABLE + "+" + W_VATABLE + ", " +
-                            WEIGHT_PRICE + "=" + WEIGHT_PRICE + "+" + NET_SALE + ", " +
-                            WEIGHT_PRICE_VAT + "=" + WEIGHT_PRICE_VAT + "+" + PRODUCT_VAT + ", " +
-                            WEIGHT_BEFORE_VAT + "=" + WEIGHT_BEFORE_VAT + "+" + PRODUCT_BEFORE_VAT + ", " +
-                            SCW_AMOUNT + "=" + SCW_AMOUNT + "+" + SC_AMOUNT + ", " +
-                            SCW_VAT + "=" + SCW_VAT + "+" + SC_VAT + ", " +
-                            SCW_BEFORE_VAT + "=" + SCW_BEFORE_VAT + "+" + SC_BEFORE_VAT +
-                            " where " + ORDER_STATUS_ID + "<=?" +
-                            " and " + COMPONENT_LEVEL + "<?" +
+        db.beginTransaction();
+        try {
+            Cursor cursor1 = db.rawQuery(
+                    "select * from " + TABLE_ORDER_DETAIL_FRONT +
+                            " where " + COMPONENT_LEVEL + "=?" +
+                            " and " + ORDER_STATUS_ID + "<=?" +
                             " and " + TRANSACTION_ID + "=?" +
                             " and " + COMPUTER_ID + "=?",
                     new String[]{
@@ -370,587 +226,723 @@ public class TransactionDataSource {
                             String.valueOf(transId),
                             String.valueOf(compId)
                     });
-        }
-        cursor1.close();
+            if (cursor1.moveToFirst()) {
+                while (!cursor1.isAfterLast()) {
+                    int orderDetailId = cursor1.getInt(cursor1.getColumnIndex(ORDER_DETAIL_ID));
+                    double sumWeightVatable = 0;
+                    double sumWeightPrice = 0;
+                    double sumProductWeightVat = 0;
+                    double sumWeightBeforeVat = 0;
+                    double sumScWeightAmount = 0;
+                    double sumScWeightVat = 0;
+                    double sumScWeightBeforeVat = 0;
+                    Cursor cursor2 = db.rawQuery(
+                            "select * from " + TABLE_ORDER_DETAIL_FRONT +
+                                    " where " + ORDER_DETAIL_ID + "=?" +
+                                    " and " + TRANSACTION_ID + "=?" +
+                                    " and " + COMPUTER_ID + "=?",
+                            new String[]{
+                                    String.valueOf(orderDetailId),
+                                    String.valueOf(transId),
+                                    String.valueOf(compId)
+                            });
+                    if (cursor2.moveToFirst()) {
+                        double netSale = cursor2.getDouble(cursor2.getColumnIndex(NET_SALE));
+                        double scAmount = cursor2.getDouble(cursor2.getColumnIndex(SC_AMOUNT));
+                        double vatable = cursor2.getDouble((cursor2.getColumnIndex(VATABLE)));
+                        double productVat = cursor2.getDouble(cursor2.getColumnIndex(PRODUCT_VAT));
+                        double productBeforeVat = cursor2.getDouble(cursor2.getColumnIndex(PRODUCT_BEFORE_VAT));
+                        double scVat = cursor2.getDouble(cursor2.getColumnIndex(SC_VAT));
+                        double scBeforeVat = cursor2.getDouble(cursor2.getColumnIndex(SC_BEFORE_VAT));
+                        Cursor cursor3 = db.rawQuery(
+                                "select a.*,b." + HAS_SERVICE_CHARGE + " as SaleModeSC, " +
+                                        " c." + IS_SC_BEFORE_DISC + ",c." + SC_PERCENT +
+                                        " from " + TABLE_ORDER_DETAIL_FRONT + " a " +
+                                        " left outer join " + TABLE_SALE_MODE + " b " +
+                                        " on a." + SALE_MODE + "=b." + SALE_MODE_ID +
+                                        " left outer join " + ShopDataSource.TABLE_SHOP_DATA + " c " +
+                                        " on a." + SHOP_ID + "=c." + SHOP_ID +
+                                        " where " + IS_COMMENT + "=?" +
+                                        " and " + ORDER_DETAIL_LINK_ID + "=?" +
+                                        " and " + TRANSACTION_ID + "=?" +
+                                        " and " + COMPUTER_ID + "=?" +
+                                        " order by a." + PRODUCT_VAT_PERCENT,
+                                new String[]{
+                                        "0",
+                                        String.valueOf(orderDetailId),
+                                        String.valueOf(transId),
+                                        String.valueOf(compId)
+                                });
+                        if (cursor3.moveToFirst()) {
+                            double sumOrgPrice = 0;
+                            while (!cursor3.isAfterLast()) {
+                                sumOrgPrice += cursor3.getDouble(cursor3.getColumnIndex(ORG_TOTAL_RETAIL_PRICE));
+                                cursor3.moveToNext();
+                            }
+                            cursor3.moveToFirst();
+                            while (!cursor3.isAfterLast()) {
+                                double weightPrice = 0;
+                                double weightVatable = 0;
+                                double scWeightAmount = 0;
+                                double productWeightVat = 0;
+                                double weightBeforeVat = 0;
+                                double scWeightVat = 0;
+                                double scWeightBeforeVat = 0;
+                                double orgTotalRetailPrice = cursor3.getDouble(cursor3.getColumnIndex(ORG_TOTAL_RETAIL_PRICE));
+                                double productVatPercent = cursor3.getDouble(cursor3.getColumnIndex(PRODUCT_VAT_PERCENT));
+                                int vatType = cursor3.getInt(cursor3.getColumnIndex(VAT_TYPE));
+                                if (cursor3.getPosition() < cursor3.getCount() - 1) {
+                                    weightPrice = Utils.round((orgTotalRetailPrice * netSale) / sumOrgPrice, 0);
+                                    weightVatable = weightPrice;
+                                    scWeightAmount = Utils.round((orgTotalRetailPrice * scAmount) / sumOrgPrice, 0);
+                                    if (vatType == 1) {
+                                        productWeightVat = Utils.round(weightPrice *
+                                                productVatPercent / (100 + productVatPercent), VtecPosApplication.ROUND_DIGIT);
+                                        weightBeforeVat = weightPrice - productWeightVat;
 
-        //Move to real table
-        String[] tables = {
-                TABLE_TRANSACTION,
-                TABLE_ORDER_DETAIL,
-                TABLE_ORDER_PAY_DETAIL,
-                TABLE_ORDER_PROMOTION_APPLY,
-                TABLE_ORDER_PROMOTION_DETAIL,
-                TABLE_ORDER_VATABLE_DETAIL
-        };
-        String[] whereArgs = {
-                String.valueOf(transId),
-                String.valueOf(compId)
-        };
-        SQLiteDatabase db = mDbHelper.openWritable();
-        db.beginTransaction();
-        try {
+                                        scWeightVat = Utils.round(scWeightAmount *
+                                                productVatPercent / (100 + productVatPercent), VtecPosApplication.ROUND_DIGIT);
+                                        scWeightBeforeVat = scWeightAmount - scWeightVat;
+                                    } else {
+                                        productWeightVat = Utils.round(weightPrice * productVatPercent / 100, VtecPosApplication.ROUND_DIGIT);
+                                        weightBeforeVat = weightPrice;
+
+                                        scWeightVat = Utils.round(scWeightAmount * productVatPercent / 100, VtecPosApplication.ROUND_DIGIT);
+                                        scWeightBeforeVat = scWeightVat;
+                                    }
+                                    sumWeightVatable += weightVatable;
+                                    sumWeightPrice += weightPrice;
+                                    sumProductWeightVat += productWeightVat;
+                                    sumWeightBeforeVat += weightBeforeVat;
+                                    sumScWeightAmount += scWeightAmount;
+                                    sumScWeightVat += scWeightVat;
+                                    sumScWeightBeforeVat += scWeightBeforeVat;
+                                } else {
+                                    weightVatable = vatable - sumWeightVatable;
+                                    weightPrice = netSale - sumWeightPrice;
+                                    productWeightVat = productVat - sumProductWeightVat;
+                                    weightBeforeVat = productBeforeVat - sumWeightBeforeVat;
+                                    scWeightAmount = scAmount - sumScWeightAmount;
+                                    scWeightVat = scVat - sumScWeightVat;
+                                    scWeightBeforeVat = scBeforeVat - sumScWeightBeforeVat;
+                                }
+                                ContentValues cv = new ContentValues();
+                                cv.put(W_VATABLE, weightVatable);
+                                cv.put(WEIGHT_PRICE, weightPrice);
+                                cv.put(WEIGHT_PRICE_VAT, productWeightVat);
+                                cv.put(WEIGHT_BEFORE_VAT, weightBeforeVat);
+                                cv.put(SCW_AMOUNT, scWeightAmount);
+                                cv.put(SCW_VAT, scWeightVat);
+                                cv.put(SCW_BEFORE_VAT, scWeightBeforeVat);
+                                db.update(
+                                        TABLE_ORDER_DETAIL_FRONT,
+                                        cv,
+                                        ORDER_DETAIL_ID + "=?" +
+                                                " and " + TRANSACTION_ID + "=?" +
+                                                " and " + COMPUTER_ID + "=?",
+                                        new String[]{
+                                                cursor3.getString(cursor3.getColumnIndex(ORDER_DETAIL_ID)),
+                                                cursor3.getString(cursor3.getColumnIndex(TRANSACTION_ID)),
+                                                cursor3.getString(cursor3.getColumnIndex(COMPUTER_ID))
+                                        });
+                                cursor3.moveToNext();
+                            }
+                        }
+                        cursor3.close();
+                    }
+                    cursor2.close();
+                    cursor1.moveToNext();
+                }
+                db.execSQL("update " + TABLE_ORDER_DETAIL_FRONT +
+                                " set " + W_VATABLE + "=" + VATABLE + "+" + W_VATABLE + ", " +
+                                WEIGHT_PRICE + "=" + WEIGHT_PRICE + "+" + NET_SALE + ", " +
+                                WEIGHT_PRICE_VAT + "=" + WEIGHT_PRICE_VAT + "+" + PRODUCT_VAT + ", " +
+                                WEIGHT_BEFORE_VAT + "=" + WEIGHT_BEFORE_VAT + "+" + PRODUCT_BEFORE_VAT + ", " +
+                                SCW_AMOUNT + "=" + SCW_AMOUNT + "+" + SC_AMOUNT + ", " +
+                                SCW_VAT + "=" + SCW_VAT + "+" + SC_VAT + ", " +
+                                SCW_BEFORE_VAT + "=" + SCW_BEFORE_VAT + "+" + SC_BEFORE_VAT +
+                                " where " + ORDER_STATUS_ID + "<=?" +
+                                " and " + COMPONENT_LEVEL + "<?" +
+                                " and " + TRANSACTION_ID + "=?" +
+                                " and " + COMPUTER_ID + "=?",
+                        new String[]{
+                                "2",
+                                "2",
+                                String.valueOf(transId),
+                                String.valueOf(compId)
+                        });
+            }
+            cursor1.close();
+
+            //Move to real table
+            String[] tables = {
+                    TABLE_TRANSACTION,
+                    TABLE_ORDER_DETAIL,
+                    TABLE_ORDER_PAY_DETAIL,
+                    TABLE_ORDER_PROMOTION_APPLY,
+                    TABLE_ORDER_PROMOTION_DETAIL,
+                    TABLE_ORDER_VATABLE_DETAIL
+            };
+            String[] whereArgs = {
+                    String.valueOf(transId),
+                    String.valueOf(compId)
+            };
             for (int i = 0; i < tables.length; i++) {
                 db.execSQL("delete from " + tables[i] +
-                        " where " + TRANSACTION_ID + "=? " +
-                        " and " + COMPUTER_ID + "=?",
+                                " where " + TRANSACTION_ID + "=? " +
+                                " and " + COMPUTER_ID + "=?",
                         whereArgs);
                 db.execSQL("insert into " + tables[i] +
-                        " select * from " + tables[i] + "Front" +
-                        " where " + TRANSACTION_ID + "=?" +
-                        " and " + COMPUTER_ID + "=?",
+                                " select * from " + tables[i] + "Front" +
+                                " where " + TRANSACTION_ID + "=?" +
+                                " and " + COMPUTER_ID + "=?",
                         whereArgs);
                 db.execSQL("delete from " + tables[i] + "Front" +
-                        " where " + TRANSACTION_ID + "=?" +
-                        " and " + COMPUTER_ID + "=?",
+                                " where " + TRANSACTION_ID + "=?" +
+                                " and " + COMPUTER_ID + "=?",
                         whereArgs);
             }
             db.setTransactionSuccessful();
-        }finally{
+        }finally {
             db.endTransaction();
         }
     }
 
     private void finalizeBill(int transId, int compId){
         int roundDigit = VtecPosApplication.ROUND_DIGIT;
-        Cursor cursor = mDbHelper.openReadable().query(
-                TABLE_TRANSACTION_FRONT,
-                new String[]{
-                        VAT_PERCENT,
-                        SERVICE_CHARGE_VAT,
-                        TRANSACTION_VAT
-                }, TRANSACTION_ID + "=?" +
-                        " and " + COMPUTER_ID + "=?",
-                new String[]{
-                        String.valueOf(transId),
-                        String.valueOf(compId)
-                }, null, null, null);
-        double vatPercent = 0;
-        double transScVat = 0;
-        double transVat = 0;
-        if(cursor.moveToFirst()){
-            vatPercent = cursor.getDouble(cursor.getColumnIndex(VAT_PERCENT));
-            transScVat = cursor.getDouble(cursor.getColumnIndex(SERVICE_CHARGE_VAT));
-            transVat = cursor.getDouble(cursor.getColumnIndex(TRANSACTION_VAT));
-        }
-        cursor.close();
-        cursor = mDbHelper.openReadable().rawQuery(
-                "select sum(" + DISCOUNT_PRICE + ") " +
-                        " from " + TABLE_ORDER_PROMOTION_DETAIL_FRONT +
-                        " where " + BILL_DISC + "=? " +
-                        " and " + TRANSACTION_ID + "=?" +
-                        " and " + COMPUTER_ID + "=?",
-                new String[]{
-                        "1",
-                        String.valueOf(transId),
-                        String.valueOf(compId)
-                });
-        double totalBillDisc = 0;
-        if(cursor.moveToFirst()){
-            totalBillDisc = cursor.getDouble(0);
-        }
-        cursor.close();
-        if(totalBillDisc > 0){
-            cursor = mDbHelper.openReadable().rawQuery(
-                    "select * from " + TABLE_ORDER_DETAIL_FRONT +
-                            " where " + ORDER_STATUS_ID + "<=?" +
-                            " and " + PRODUCT_VAT_PERCENT + ">? " +
-                            " and " + SALE_PRICE + ">?" +
-                            " and " + INDENT_LEVEL + "=?",
+        SQLiteDatabase db = mDbHelper.openWritable();
+        db.beginTransaction();
+        try {
+            Cursor cursor = db.query(
+                    TABLE_TRANSACTION_FRONT,
                     new String[]{
-                            "2",
-                            "0",
-                            "0",
-                            "0"
-                    });
-            if(cursor.moveToFirst()){
-                double totalSale = 0;
-                double discBill = 0;
-                double sumDiscBill = 0;
-                int rowCount = cursor.getCount();
-                while (!cursor.isAfterLast()){
-                    totalSale += cursor.getDouble(cursor.getColumnIndex(SALE_PRICE));
-                    cursor.moveToNext();
-                }
-                cursor.moveToFirst();
-                while(!cursor.isAfterLast()){
-                    if(cursor.getPosition() == rowCount){
-                        discBill = totalBillDisc - sumDiscBill;
-                    }else{
-                        discBill = Utils.round(cursor.getDouble(cursor.getColumnIndex(SALE_PRICE))
-                                * totalBillDisc / totalSale, 0);
-                    }
-                    sumDiscBill += discBill;
-                    mDbHelper.openWritable().execSQL(
-                            "update " + TABLE_ORDER_DETAIL_FRONT +
-                                    " set " + DISC_BILL + "=" + discBill + ", " +
-                                    NET_SALE + "=" + SALE_PRICE + "-" + discBill +
-                                    " where " + ORDER_DETAIL_ID + "=?" +
-                                    " and " + TRANSACTION_ID + "=?" +
-                                    " and " + COMPUTER_ID + "=?",
-                            new String[]{
-                                    cursor.getString(cursor.getColumnIndex(ORDER_DETAIL_ID)),
-                                    cursor.getString(cursor.getColumnIndex(TRANSACTION_ID)),
-                                    cursor.getString(cursor.getColumnIndex(COMPUTER_ID))
-                            });
-                    cursor.moveToNext();
-                }
+                            VAT_PERCENT,
+                            SERVICE_CHARGE_VAT,
+                            TRANSACTION_VAT
+                    }, TRANSACTION_ID + "=?" +
+                            " and " + COMPUTER_ID + "=?",
+                    new String[]{
+                            String.valueOf(transId),
+                            String.valueOf(compId)
+                    }, null, null, null);
+            double vatPercent = 0;
+            double transScVat = 0;
+            double transVat = 0;
+            if (cursor.moveToFirst()) {
+                vatPercent = cursor.getDouble(cursor.getColumnIndex(VAT_PERCENT));
+                transScVat = cursor.getDouble(cursor.getColumnIndex(SERVICE_CHARGE_VAT));
+                transVat = cursor.getDouble(cursor.getColumnIndex(TRANSACTION_VAT));
             }
             cursor.close();
-        }
-        mDbHelper.getWritableDatabase().execSQL(
-               "update " + TABLE_ORDER_DETAIL_FRONT +
-                       " set " + NET_SALE + "=" + SALE_PRICE +
-                       " where " + ORDER_STATUS_ID + "<=?" +
-                       " and (" + INDENT_LEVEL + ">0 OR (" + INDENT_LEVEL + "=0 and " + PRODUCT_VAT_PERCENT + "=0))" +
-                       " and " + TRANSACTION_ID + "=?" +
-                       " and " + COMPUTER_ID + "=?",
-                new String[]{
-                        "2",
-                        String.valueOf(transId),
-                        String.valueOf(compId)
-                });
-
-        mDbHelper.getWritableDatabase().execSQL(
-                "update " + TABLE_ORDER_DETAIL_FRONT +
-                        " set " + SC_AMOUNT + "=" +
-                        " case when " + HAS_SERVICE_CHARGE + "=0 then 0" +
-                        " when " + IS_SC_BEFORE_DISC + "=0 then round(" + NET_SALE + "*" + SC_PERCENT + "/100," + roundDigit + ") else round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100," + roundDigit + ") end, " +
-                        SC_VAT + "=" +
-                        " case when " + HAS_SERVICE_CHARGE + "=0 then 0 " +
-                        " when " + IS_SC_BEFORE_DISC + "=0 then " +
-                        " case when " + VAT_TYPE + "=1 then round(round(" + NET_SALE + "*" + SC_PERCENT + "/100," + roundDigit + ") * " + vatPercent + "/(100 + " + vatPercent + "), " + roundDigit + ") else round(round(" + NET_SALE + "*" + SC_PERCENT + "/100, " + roundDigit + ") * " + vatPercent + "/100, " + roundDigit + ") end " +
-                        " else " +
-                        " case when " + VAT_TYPE + "=1 then round(round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100," + roundDigit + ") * " + vatPercent + "/(100 + " + vatPercent + "), " + roundDigit + ") else round(round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100, " + roundDigit + ") * " + vatPercent + "/100, " + roundDigit + ") end " +
-                        " end" +
-                        PRODUCT_VAT + "=" +
-                        " case when " + VAT_TYPE + "=1 then round(" + NET_SALE + "*" + PRODUCT_VAT_PERCENT + "/(100 + " + PRODUCT_VAT_PERCENT + "), " + roundDigit + ") else round(" + NET_SALE + "*" + PRODUCT_VAT_PERCENT + "/100, " + roundDigit + ") end " +
-                        " where " + ORDER_STATUS_ID + "<=?" +
-                        " and " + TRANSACTION_ID + "=?" +
-                        " and " + COMPUTER_ID + "=?",
+            cursor = db.rawQuery(
+                    "select sum(" + DISCOUNT_PRICE + ") " +
+                            " from " + TABLE_ORDER_PROMOTION_DETAIL_FRONT +
+                            " where " + BILL_DISC + "=? " +
+                            " and " + TRANSACTION_ID + "=?" +
+                            " and " + COMPUTER_ID + "=?",
+                    new String[]{
+                            "1",
+                            String.valueOf(transId),
+                            String.valueOf(compId)
+                    });
+            double totalBillDisc = 0;
+            if (cursor.moveToFirst()) {
+                totalBillDisc = cursor.getDouble(0);
+            }
+            cursor.close();
+            if (totalBillDisc > 0) {
+                cursor = db.rawQuery(
+                        "select * from " + TABLE_ORDER_DETAIL_FRONT +
+                                " where " + ORDER_STATUS_ID + "<=?" +
+                                " and " + PRODUCT_VAT_PERCENT + ">? " +
+                                " and " + SALE_PRICE + ">?" +
+                                " and " + INDENT_LEVEL + "=?",
+                        new String[]{
+                                "2",
+                                "0",
+                                "0",
+                                "0"
+                        });
+                if (cursor.moveToFirst()) {
+                    double totalSale = 0;
+                    double discBill = 0;
+                    double sumDiscBill = 0;
+                    int rowCount = cursor.getCount();
+                    while (!cursor.isAfterLast()) {
+                        totalSale += cursor.getDouble(cursor.getColumnIndex(SALE_PRICE));
+                        cursor.moveToNext();
+                    }
+                    cursor.moveToFirst();
+                    while (!cursor.isAfterLast()) {
+                        if (cursor.getPosition() == rowCount) {
+                            discBill = totalBillDisc - sumDiscBill;
+                        } else {
+                            discBill = Utils.round(cursor.getDouble(cursor.getColumnIndex(SALE_PRICE))
+                                    * totalBillDisc / totalSale, 0);
+                        }
+                        sumDiscBill += discBill;
+                        db.execSQL("update " + TABLE_ORDER_DETAIL_FRONT +
+                                        " set " + DISC_BILL + "=" + discBill + ", " +
+                                        NET_SALE + "=" + SALE_PRICE + "-" + discBill +
+                                        " where " + ORDER_DETAIL_ID + "=?" +
+                                        " and " + TRANSACTION_ID + "=?" +
+                                        " and " + COMPUTER_ID + "=?",
+                                new String[]{
+                                        cursor.getString(cursor.getColumnIndex(ORDER_DETAIL_ID)),
+                                        cursor.getString(cursor.getColumnIndex(TRANSACTION_ID)),
+                                        cursor.getString(cursor.getColumnIndex(COMPUTER_ID))
+                                });
+                        cursor.moveToNext();
+                    }
+                }
+                cursor.close();
+            }
+            db.execSQL(
+                    "update " + TABLE_ORDER_DETAIL_FRONT +
+                            " set " + NET_SALE + "=" + SALE_PRICE +
+                            " where " + ORDER_STATUS_ID + "<=?" +
+                            " and (" + INDENT_LEVEL + ">0 OR (" + INDENT_LEVEL + "=0 and " + PRODUCT_VAT_PERCENT + "=0))" +
+                            " and " + TRANSACTION_ID + "=?" +
+                            " and " + COMPUTER_ID + "=?",
                     new String[]{
                             "2",
                             String.valueOf(transId),
                             String.valueOf(compId)
                     });
-        cursor = mDbHelper.getReadableDatabase().rawQuery(
-                "select sum(" + SC_VAT + ") as " + SC_VAT + ", " +
-                        " sum(" + PRODUCT_VAT + ") as " + PRODUCT_VAT +
-                        " from " + TABLE_ORDER_DETAIL_FRONT +
-                        " where " + ORDER_STATUS_ID + "<=?" +
-                        " and " + TRANSACTION_ID + "=?" +
-                        " and " + COMPUTER_ID + "=?",
-                new String[]{
-                        "2",
-                        String.valueOf(transId),
-                        String.valueOf(compId)
-                });
-        if(cursor.moveToFirst()){
-            if(!cursor.isNull(cursor.getColumnIndex(SC_VAT))){
-                double diffScVat = transScVat - cursor.getDouble(cursor.getColumnIndex(SC_VAT));
-                if(diffScVat != 0){
-                    Cursor cursor1 = mDbHelper.getReadableDatabase().rawQuery(
-                            "select * from " + TABLE_ORDER_DETAIL_FRONT +
-                                    " where " + SC_VAT + ">0 " +
-                                    " and " + ORDER_STATUS_ID + "<=?" +
-                                    " and " + TRANSACTION_ID + "=?" +
-                                    " and " + COMPUTER_ID + "=?" +
-                                    " order by " + ORDER_DETAIL_ID + " desc",
-                            new String[]{
-                                    "2",
-                                    String.valueOf(transId),
-                                    String.valueOf(compId)
-                            });
-                    if(cursor1.moveToFirst()){
-                        while(!cursor1.isAfterLast()) {
-                            if(cursor1.getDouble(cursor1.getColumnIndex(SC_VAT)) +
-                                    (transScVat - cursor.getDouble(cursor.getColumnIndex(SC_VAT))) > 0){
-                            mDbHelper.getWritableDatabase().execSQL(
-                                    "update " + TABLE_ORDER_DETAIL_FRONT +
-                                            " set " + SC_VAT + "=" + SC_VAT + "+" +
-                                            (transScVat - cursor.getDouble(cursor.getColumnIndex(SC_VAT)))+
+            db.execSQL("update " + TABLE_ORDER_DETAIL_FRONT +
+                            " set " + SC_AMOUNT + "=" +
+                            " case when " + HAS_SERVICE_CHARGE + "=0 then 0" +
+                            " when " + IS_SC_BEFORE_DISC + "=0 then round(" + NET_SALE + "*" + SC_PERCENT + "/100," + roundDigit + ") else round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100," + roundDigit + ") end, " +
+                            SC_VAT + "=" +
+                            " case when " + HAS_SERVICE_CHARGE + "=0 then 0 " +
+                            " when " + IS_SC_BEFORE_DISC + "=0 then " +
+                            " case when " + VAT_TYPE + "=1 then round(round(" + NET_SALE + "*" + SC_PERCENT + "/100," + roundDigit + ") * " + vatPercent + "/(100 + " + vatPercent + "), " + roundDigit + ") else round(round(" + NET_SALE + "*" + SC_PERCENT + "/100, " + roundDigit + ") * " + vatPercent + "/100, " + roundDigit + ") end " +
+                            " else " +
+                            " case when " + VAT_TYPE + "=1 then round(round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100," + roundDigit + ") * " + vatPercent + "/(100 + " + vatPercent + "), " + roundDigit + ") else round(round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100, " + roundDigit + ") * " + vatPercent + "/100, " + roundDigit + ") end " +
+                            " end" +
+                            PRODUCT_VAT + "=" +
+                            " case when " + VAT_TYPE + "=1 then round(" + NET_SALE + "*" + PRODUCT_VAT_PERCENT + "/(100 + " + PRODUCT_VAT_PERCENT + "), " + roundDigit + ") else round(" + NET_SALE + "*" + PRODUCT_VAT_PERCENT + "/100, " + roundDigit + ") end " +
+                            " where " + ORDER_STATUS_ID + "<=?" +
+                            " and " + TRANSACTION_ID + "=?" +
+                            " and " + COMPUTER_ID + "=?",
+                    new String[]{
+                            "2",
+                            String.valueOf(transId),
+                            String.valueOf(compId)
+                    });
+            cursor = db.rawQuery("select sum(" + SC_VAT + ") as " + SC_VAT + ", " +
+                            " sum(" + PRODUCT_VAT + ") as " + PRODUCT_VAT +
+                            " from " + TABLE_ORDER_DETAIL_FRONT +
+                            " where " + ORDER_STATUS_ID + "<=?" +
+                            " and " + TRANSACTION_ID + "=?" +
+                            " and " + COMPUTER_ID + "=?",
+                    new String[]{
+                            "2",
+                            String.valueOf(transId),
+                            String.valueOf(compId)
+                    });
+            if (cursor.moveToFirst()) {
+                if (!cursor.isNull(cursor.getColumnIndex(SC_VAT))) {
+                    double diffScVat = transScVat - cursor.getDouble(cursor.getColumnIndex(SC_VAT));
+                    if (diffScVat != 0) {
+                        Cursor cursor1 = db.rawQuery(
+                                "select * from " + TABLE_ORDER_DETAIL_FRONT +
+                                        " where " + SC_VAT + ">0 " +
+                                        " and " + ORDER_STATUS_ID + "<=?" +
+                                        " and " + TRANSACTION_ID + "=?" +
+                                        " and " + COMPUTER_ID + "=?" +
+                                        " order by " + ORDER_DETAIL_ID + " desc",
+                                new String[]{
+                                        "2",
+                                        String.valueOf(transId),
+                                        String.valueOf(compId)
+                                });
+                        if (cursor1.moveToFirst()) {
+                            while (!cursor1.isAfterLast()) {
+                                if (cursor1.getDouble(cursor1.getColumnIndex(SC_VAT)) +
+                                        (transScVat - cursor.getDouble(cursor.getColumnIndex(SC_VAT))) > 0) {
+                                    db.execSQL("update " + TABLE_ORDER_DETAIL_FRONT +
+                                                    " set " + SC_VAT + "=" + SC_VAT + "+" +
+                                                    (transScVat - cursor.getDouble(cursor.getColumnIndex(SC_VAT))) +
                                                     " where " + ORDER_DETAIL_ID + "=?" +
                                                     " and " + TRANSACTION_ID + "=?" +
                                                     " and " + COMPUTER_ID + "=?",
-                                    new String[]{
-                                            cursor1.getString(cursor1.getColumnIndex(ORDER_DETAIL_ID)),
-                                            String.valueOf(transId),
-                                            String.valueOf(compId)
-                                    });
-                                break;
+                                            new String[]{
+                                                    cursor1.getString(cursor1.getColumnIndex(ORDER_DETAIL_ID)),
+                                                    String.valueOf(transId),
+                                                    String.valueOf(compId)
+                                            });
+                                    break;
+                                }
+                                cursor1.moveToNext();
                             }
-                            cursor1.moveToNext();
                         }
-                    }
-                    cursor1.close();
-                }
-            }
-            if(!cursor.isNull(cursor.getColumnIndex(PRODUCT_VAT))){
-                if (transScVat + cursor.getDouble(cursor.getColumnIndex(PRODUCT_VAT)) != transVat) {
-                    Cursor cursor1 = mDbHelper.getReadableDatabase().rawQuery(
-                            "select * from " + TABLE_ORDER_DETAIL_FRONT +
-                                    " where " + PRODUCT_VAT + ">0 " +
-                                    " and " + ORDER_STATUS_ID + "<=?" +
-                                    " and " + TRANSACTION_ID + "=?" +
-                                    " and " + COMPUTER_ID + "=?" +
-                                    " order by " + ORDER_DETAIL_ID + " desc",
-                            new String[]{
-                                    "2",
-                                    String.valueOf(transId),
-                                    String.valueOf(compId)
-                            });
-                    if(cursor1.moveToFirst()) {
-                        while(!cursor1.isAfterLast()) {
-                            if(cursor1.getDouble(cursor1.getColumnIndex(PRODUCT_VAT)) +
-                                    (transVat - (transScVat + cursor.getDouble(cursor.getColumnIndex(PRODUCT_VAT)))) > 0){
-                                mDbHelper.getWritableDatabase().execSQL(
-                                        "update " + TABLE_ORDER_DETAIL_FRONT +
-                                                " set " + PRODUCT_VAT + "=" + PRODUCT_VAT + "+" +
-                                                (transVat - (transScVat + cursor.getDouble(cursor.getColumnIndex(PRODUCT_VAT)))) +
-                                                " where " + ORDER_DETAIL_ID + "=?" +
-                                                " and " + TRANSACTION_ID + "=?" +
-                                                " and " + COMPUTER_ID + "=?",
-                                        new String[]{
-                                                cursor1.getString(cursor1.getColumnIndex(ORDER_DETAIL_ID)),
-                                                String.valueOf(transId),
-                                                String.valueOf(compId)
-                                        });
-                                break;
-                            }
-                            cursor1.moveToNext();
-                        }
+                        cursor1.close();
                     }
                 }
+                if (!cursor.isNull(cursor.getColumnIndex(PRODUCT_VAT))) {
+                    if (transScVat + cursor.getDouble(cursor.getColumnIndex(PRODUCT_VAT)) != transVat) {
+                        Cursor cursor1 = db.rawQuery(
+                                "select * from " + TABLE_ORDER_DETAIL_FRONT +
+                                        " where " + PRODUCT_VAT + ">0 " +
+                                        " and " + ORDER_STATUS_ID + "<=?" +
+                                        " and " + TRANSACTION_ID + "=?" +
+                                        " and " + COMPUTER_ID + "=?" +
+                                        " order by " + ORDER_DETAIL_ID + " desc",
+                                new String[]{
+                                        "2",
+                                        String.valueOf(transId),
+                                        String.valueOf(compId)
+                                });
+                        if (cursor1.moveToFirst()) {
+                            while (!cursor1.isAfterLast()) {
+                                if (cursor1.getDouble(cursor1.getColumnIndex(PRODUCT_VAT)) +
+                                        (transVat - (transScVat + cursor.getDouble(cursor.getColumnIndex(PRODUCT_VAT)))) > 0) {
+                                    db.execSQL(
+                                            "update " + TABLE_ORDER_DETAIL_FRONT +
+                                                    " set " + PRODUCT_VAT + "=" + PRODUCT_VAT + "+" +
+                                                    (transVat - (transScVat + cursor.getDouble(cursor.getColumnIndex(PRODUCT_VAT)))) +
+                                                    " where " + ORDER_DETAIL_ID + "=?" +
+                                                    " and " + TRANSACTION_ID + "=?" +
+                                                    " and " + COMPUTER_ID + "=?",
+                                            new String[]{
+                                                    cursor1.getString(cursor1.getColumnIndex(ORDER_DETAIL_ID)),
+                                                    String.valueOf(transId),
+                                                    String.valueOf(compId)
+                                            });
+                                    break;
+                                }
+                                cursor1.moveToNext();
+                            }
+                        }
+                    }
+                }
             }
+            cursor.close();
+            db.execSQL(
+                    "update " + TABLE_ORDER_DETAIL_FRONT +
+                            " set " + PRODUCT_BEFORE_VAT + "=" +
+                            " case when " + VAT_TYPE + "=1 then " + NET_SALE + "-" + PRODUCT_VAT + " else " + NET_SALE + " end, " +
+                            SC_BEFORE_VAT + "=" +
+                            " case when " + VAT_TYPE + "=1 then " + SC_AMOUNT + "-" + SC_VAT + " else " + SC_AMOUNT + " end, " +
+                            VATABLE + "=" +
+                            " case when " + VATABLE + "=0 then 0 else " + NET_SALE + " end, " +
+                            TOTAL_RETAIL_VAT + "=" +
+                            " case when " + VAT_TYPE + "=1 then round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ (100 + " + PRODUCT_VAT_PERCENT + "), " + VtecPosApplication.ROUND_DIGIT + ") else " +
+                            " round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ 100, " + VtecPosApplication.ROUND_DIGIT + ")) end, " +
+                            DISC_VAT + "=" +
+                            " case when " + VAT_TYPE + "=1 then round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ (100 + " + PRODUCT_VAT_PERCENT + "), " + VtecPosApplication.ROUND_DIGIT + ") else " +
+                            " round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ 100, " + VtecPosApplication.ROUND_DIGIT + ")) - " + PRODUCT_VAT + " end " +
+                            " where OrderStatusID <=? " +
+                            " and " + TRANSACTION_ID + "=?" +
+                            " and " + COMPUTER_ID + "=?",
+                    new String[]{
+                            "2",
+                            String.valueOf(transId),
+                            String.valueOf(compId)
+                    });
+            db.setTransactionSuccessful();
+        }finally {
+            db.endTransaction();
         }
-        cursor.close();
-        mDbHelper.getWritableDatabase().execSQL(
-                "update " + TABLE_ORDER_DETAIL_FRONT +
-                        " set " + PRODUCT_BEFORE_VAT + "=" +
-                        " case when " + VAT_TYPE + "=1 then " + NET_SALE + "-" + PRODUCT_VAT + " else " + NET_SALE + " end, " +
-                        SC_BEFORE_VAT + "=" +
-                        " case when " + VAT_TYPE + "=1 then " + SC_AMOUNT + "-" + SC_VAT + " else " + SC_AMOUNT + " end, " +
-                        VATABLE + "=" +
-                        " case when " + VATABLE + "=0 then 0 else " + NET_SALE + " end, " +
-                        TOTAL_RETAIL_VAT + "=" +
-                        " case when " + VAT_TYPE + "=1 then round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ (100 + " + PRODUCT_VAT_PERCENT + "), " + VtecPosApplication.ROUND_DIGIT + ") else " +
-                        " round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ 100, " + VtecPosApplication.ROUND_DIGIT + ")) end, " +
-                        DISC_VAT + "=" +
-                        " case when " + VAT_TYPE + "=1 then round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ (100 + " + PRODUCT_VAT_PERCENT + "), " + VtecPosApplication.ROUND_DIGIT + ") else " +
-                        " round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ 100, " + VtecPosApplication.ROUND_DIGIT + ")) - " + PRODUCT_VAT + " end " +
-                        " where OrderStatusID <=? " +
-                        " and " + TRANSACTION_ID + "=?" +
-                        " and " + COMPUTER_ID + "=?",
-                new String[]{
-                        "2",
-                        String.valueOf(transId),
-                        String.valueOf(compId)
-                });
     }
 
     private void calculateBill(int transId, int compId) {
-        mDbHelper.openWritable().delete(TABLE_ORDER_VATABLE_DETAIL_FRONT,
-                TRANSACTION_ID + "=?" +
-                        " and " + COMPUTER_ID + "=?",
-                new String[]{
-                        String.valueOf(transId),
-                        String.valueOf(compId)
-                });
-        Cursor cursor1 = mDbHelper.openReadable().rawQuery(
-                "select " + TRANSACTION_ID + "," + COMPUTER_ID + ", " +
-                        PRODUCT_VAT_CODE + ", " + PRODUCT_VAT_PERCENT + ", " +
-                        VAT_TYPE + ", sum(" + TOTAL_RETAIL_PRICE + ") as " + TOTAL_RETAIL_PRICE + ", " +
-                        " sum(" + SALE_PRICE + ") as " + SALE_PRICE + ", " +
-                        " sum(" + VATABLE + ") as " + VATABLE + ", " +
-                        " sum(case when " + PRODUCT_VAT_PERCENT + "=0 then 0 else " + TOTAL_RETAIL_PRICE + " end) " +
-                        " as " + VATABLE_BEFORE_DISC + ", " +
-                        " sum(" + TOTAL_ITEM_DISC + ") as " + TOTAL_ITEM_DISC + ", " +
-                        " sum(case when " + INDENT_LEVEL + ">1 then 0 else " + TOTAL_QTY + " end) " +
-                        " as " + TOTAL_QTY +
-                        " from " + TABLE_ORDER_DETAIL_FRONT +
-                        " where " + ORDER_STATUS_ID + "<=? " +
-                        " and " + TRANSACTION_ID + "=?" +
-                        " and " + COMPUTER_ID + "=?" +
-                        " group by " + TRANSACTION_ID + ", " + COMPUTER_ID + ", " +
-                        PRODUCT_VAT_CODE + ", " + PRODUCT_VAT_PERCENT + ", " + VAT_TYPE,
-                new String[]{
-                        "2",
-                        String.valueOf(transId),
-                        String.valueOf(compId)
-                });
-        double totalQty = 0;
-        double totalSale = 0;
-        double totalDisc = 0;
-        double netSale = 0;
-        double totalRetailPrice = 0;
-        double vatableBeforeVat = 0;
-        double vatableBeforeDisc = 0;
-        double totalVatable = 0;
-        if(cursor1.moveToFirst()){
-            double vatAmount = 0;
-            while(!cursor1.isAfterLast()) {
-                int vatType = cursor1.getInt(cursor1.getColumnIndex(VAT_TYPE));
-                double vatable = cursor1.getDouble(cursor1.getColumnIndex(VATABLE));
-                double productVatPercent = cursor1.getDouble(cursor1.getColumnIndex(PRODUCT_VAT_PERCENT));
-                if(vatType == 1) {//Include VAT
-                    vatAmount = Utils.round(vatable * productVatPercent /
-                            (100 + productVatPercent), VtecPosApplication.ROUND_DIGIT);
-                    vatableBeforeVat = vatable - vatAmount;
-                }else {
-                    vatAmount = Utils.round(vatable * productVatPercent, VtecPosApplication.ROUND_DIGIT);
-                    vatableBeforeVat = vatable;
-                }
-                double salePrice = cursor1.getDouble(cursor1.getColumnIndex(SALE_PRICE));
-                ContentValues cv = new ContentValues();
-                cv.put(TRANSACTION_ID, transId);
-                cv.put(COMPUTER_ID, compId);
-                cv.put(SALE_PRICE, salePrice);
-                cv.put(VATABLE_BEFORE_DISC, cursor1.getDouble(cursor1.getColumnIndex(VATABLE_BEFORE_DISC)));
-                cv.put(VAT_CODE, cursor1.getString(cursor1.getColumnIndex(VAT_CODE)));
-                cv.put(VAT_RATE, cursor1.getDouble(cursor1.getColumnIndex(VAT_RATE)));
-                cv.put(VATABLE, vatable);
-                cv.put(VATABLE_BEFORE_VAT, vatableBeforeVat);
-                cv.put(VAT_AMOUNT, vatAmount);
-                cv.put(VAT_TYPE, vatType);
-                mDbHelper.openWritable().insert(TABLE_ORDER_VATABLE_DETAIL_FRONT, null, cv);
-
-                totalSale += salePrice;
-                totalDisc += cursor1.getDouble(cursor1.getColumnIndex(TOTAL_ITEM_DISC));
-                netSale += salePrice;
-                totalRetailPrice += cursor1.getDouble(cursor1.getColumnIndex(TOTAL_RETAIL_PRICE));
-                vatableBeforeDisc += cursor1.getDouble(cursor1.getColumnIndex(VATABLE_BEFORE_DISC));
-                totalVatable += cursor1.getDouble(cursor1.getColumnIndex(VATABLE));
-                totalQty += cursor1.getDouble(cursor1.getColumnIndex(TOTAL_QTY));
-                cursor1.moveToNext();
-            }
-        }
-        cursor1.close();
-
-        double scAmount = 0;
-        Cursor cursor2 = mDbHelper.openReadable().rawQuery(
-                "select sum(case when " + ORDER_STATUS_ID + " > 2 then 0 " +
-                        " when " + HAS_SERVICE_CHARGE + "=0 then 0 " +
-                        " when " + IS_SC_BEFORE_DISC + "=1 then " + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100 " +
-                        " else " + SALE_PRICE + "*" + SC_PERCENT + "/100 end) as " + SC_AMOUNT +
-                        " from " + TABLE_ORDER_DETAIL_FRONT +
-                        " where " + ORDER_STATUS_ID + "<=?" +
-                        " and " + TRANSACTION_ID + "=?" +
-                        " and " + COMPUTER_ID + "=?",
-                new String[]{
-                        "2",
-                        String.valueOf(transId),
-                        String.valueOf(compId)
-                });
-        if(cursor2.moveToFirst()){
-            scAmount = cursor2.getDouble(cursor2.getColumnIndex(SC_AMOUNT));
-        }
-        cursor2.close();
-
-        Cursor cursor3 = mDbHelper.openReadable().rawQuery(
-                "select sum(" + DISCOUNT_PRICE + ") " +
-                        " from " + TABLE_ORDER_PROMOTION_DETAIL_FRONT +
-                        " where " + BILL_DISC + "=?" +
-                        " and " + TRANSACTION_ID + "=?" +
-                        " and " + COMPUTER_ID + "=?",
-                new String[]{
-                        "1",
-                        String.valueOf(transId),
-                        String.valueOf(compId)
-                });
-        double totalBillDisc = 0;
-        if(cursor3.moveToFirst()){
-            totalBillDisc = cursor3.getDouble(0);
-            netSale = netSale - totalBillDisc;
-            totalVatable = totalVatable - totalBillDisc;
-            totalDisc += totalBillDisc;
-        }
-        cursor3.close();
-
-        double scBillDisc = 0;
-        if(VtecPosApplication.sShopDataSource.isScBeforeDisc()) {
-            if(totalBillDisc > 0) {
-                scBillDisc = totalBillDisc * VtecPosApplication.sShopDataSource.getScPercent() / 100;
-            }
-            scAmount = scAmount - scBillDisc;
-        }
-        scAmount = Utils.round(scAmount, VtecPosApplication.ROUND_DIGIT);
-        netSale +=scAmount;
-        vatableBeforeDisc += scAmount;
-        totalVatable += scAmount;
-
-        if(netSale == 0 && VtecPosApplication.sGlobalProperty.isCalVatWhenZeroBill()){
-            totalVatable = vatableBeforeDisc;
-        }
-
-        double transVat = 0;
-        double transBeforeVat = 0;
-        double scVat = 0;
-        double scBeforeVat = 0;
-        int vatPercent = VtecPosApplication.sShopDataSource.getVatType();
-        int vatDigit = VtecPosApplication.sGlobalProperty.getVatDigit();
-        if(VtecPosApplication.sShopDataSource.getVatType() == 1) {
-            transVat = Utils.round(totalVatable * vatPercent / (100 + vatPercent), vatDigit);
-            transBeforeVat = totalVatable - transVat;
-            scVat = Utils.round(scAmount * vatPercent / (100 + vatPercent), VtecPosApplication.ROUND_DIGIT);
-            scBeforeVat = scAmount - scVat;
-        }else{
-            transVat = Utils.round(totalVatable * vatPercent / 100, vatDigit);
-            transBeforeVat = totalVatable;
-            scVat = Utils.round(scAmount * vatPercent / 100, VtecPosApplication.ROUND_DIGIT);
-            scBeforeVat = scAmount;
-        }
-        ContentValues cv = new ContentValues();
-        cv.put(VAT_CODE, VtecPosApplication.sShopDataSource.getVatCode());
-        cv.put(VAT_PERCENT, vatPercent);
-        cv.put(SERVICE_CHARGE_PERCENT, VtecPosApplication.sShopDataSource.getScPercent());
-        cv.put(SERVICE_CHARGE, scAmount);
-        cv.put(SERVICE_CHARGE_VAT, scVat);
-        cv.put(SC_BEFORE_VAT, scBeforeVat);
-        cv.put(TRANSACTION_VATABLE, totalVatable);
-        cv.put(TRANSACTION_VAT, transVat);
-        cv.put(TRANS_BEFORE_VAT, transBeforeVat);
-        cv.put(RECEIPT_TOTAL_QTY, totalQty);
-        cv.put(RECEIPT_RETAIL_PRICE, totalRetailPrice);
-        cv.put(RECEIPT_DISCOUNT, totalDisc);
-        cv.put(RECEIPT_SALE_PRICE, totalSale);
-        cv.put(RECEIPT_NET_SALE, netSale);
-        mDbHelper.openWritable().update(TABLE_TRANSACTION_FRONT, cv,
-                TRANSACTION_ID + "=? " +
-                        " and " + COMPUTER_ID + "=?",
-                new String[]{
-                        String.valueOf(transId),
-                        String.valueOf(compId)
-                });
-    }
-
-    private void refreshPromotion(int transId, int compId){
-        Cursor cursor1 = mDbHelper.openReadable().rawQuery(
-                "select * from " + TABLE_ORDER_PROMOTION_APPLY_FRONT +
-                        " where " + BILL_DISC + "=?" +
-                        " and " + TRANSACTION_ID + "=?" +
-                        " and " + COMPUTER_ID + "=?" +
-                        " order by " + DISC_PRIORITY + "," + INSERT_NO,
-                new String[]{
-                        "0",
-                        String.valueOf(transId),
-                        String.valueOf(compId)
-                });
-        if(cursor1.moveToFirst()){
-            // refresh for new calculate
-            mDbHelper.openWritable().delete(
-                    TABLE_ORDER_PROMOTION_DETAIL_FRONT,
+        SQLiteDatabase db = mDbHelper.openWritable();
+        db.beginTransaction();
+        try {
+            db.delete(TABLE_ORDER_VATABLE_DETAIL_FRONT,
                     TRANSACTION_ID + "=?" +
                             " and " + COMPUTER_ID + "=?",
                     new String[]{
                             String.valueOf(transId),
                             String.valueOf(compId)
                     });
+            Cursor cursor1 = db.rawQuery(
+                    "select " + TRANSACTION_ID + "," + COMPUTER_ID + ", " +
+                            PRODUCT_VAT_CODE + ", " + PRODUCT_VAT_PERCENT + ", " +
+                            VAT_TYPE + ", sum(" + TOTAL_RETAIL_PRICE + ") as " + TOTAL_RETAIL_PRICE + ", " +
+                            " sum(" + SALE_PRICE + ") as " + SALE_PRICE + ", " +
+                            " sum(" + VATABLE + ") as " + VATABLE + ", " +
+                            " sum(case when " + PRODUCT_VAT_PERCENT + "=0 then 0 else " + TOTAL_RETAIL_PRICE + " end) " +
+                            " as " + VATABLE_BEFORE_DISC + ", " +
+                            " sum(" + TOTAL_ITEM_DISC + ") as " + TOTAL_ITEM_DISC + ", " +
+                            " sum(case when " + INDENT_LEVEL + ">1 then 0 else " + TOTAL_QTY + " end) " +
+                            " as " + TOTAL_QTY +
+                            " from " + TABLE_ORDER_DETAIL_FRONT +
+                            " where " + ORDER_STATUS_ID + "<=? " +
+                            " and " + TRANSACTION_ID + "=?" +
+                            " and " + COMPUTER_ID + "=?" +
+                            " group by " + TRANSACTION_ID + ", " + COMPUTER_ID + ", " +
+                            PRODUCT_VAT_CODE + ", " + PRODUCT_VAT_PERCENT + ", " + VAT_TYPE,
+                    new String[]{
+                            "2",
+                            String.valueOf(transId),
+                            String.valueOf(compId)
+                    });
+            double totalQty = 0;
+            double totalSale = 0;
+            double totalDisc = 0;
+            double netSale = 0;
+            double totalRetailPrice = 0;
+            double vatableBeforeVat = 0;
+            double vatableBeforeDisc = 0;
+            double totalVatable = 0;
+            if (cursor1.moveToFirst()) {
+                double vatAmount = 0;
+                while (!cursor1.isAfterLast()) {
+                    int vatType = cursor1.getInt(cursor1.getColumnIndex(VAT_TYPE));
+                    double vatable = cursor1.getDouble(cursor1.getColumnIndex(VATABLE));
+                    double productVatPercent = cursor1.getDouble(cursor1.getColumnIndex(PRODUCT_VAT_PERCENT));
+                    if (vatType == 1) {//Include VAT
+                        vatAmount = Utils.round(vatable * productVatPercent /
+                                (100 + productVatPercent), VtecPosApplication.ROUND_DIGIT);
+                        vatableBeforeVat = vatable - vatAmount;
+                    } else {
+                        vatAmount = Utils.round(vatable * productVatPercent, VtecPosApplication.ROUND_DIGIT);
+                        vatableBeforeVat = vatable;
+                    }
+                    double salePrice = cursor1.getDouble(cursor1.getColumnIndex(SALE_PRICE));
+                    ContentValues cv = new ContentValues();
+                    cv.put(TRANSACTION_ID, transId);
+                    cv.put(COMPUTER_ID, compId);
+                    cv.put(SALE_PRICE, salePrice);
+                    cv.put(VATABLE_BEFORE_DISC, cursor1.getDouble(cursor1.getColumnIndex(VATABLE_BEFORE_DISC)));
+                    cv.put(VAT_CODE, cursor1.getString(cursor1.getColumnIndex(VAT_CODE)));
+                    cv.put(VAT_RATE, cursor1.getDouble(cursor1.getColumnIndex(VAT_RATE)));
+                    cv.put(VATABLE, vatable);
+                    cv.put(VATABLE_BEFORE_VAT, vatableBeforeVat);
+                    cv.put(VAT_AMOUNT, vatAmount);
+                    cv.put(VAT_TYPE, vatType);
+                    db.insert(TABLE_ORDER_VATABLE_DETAIL_FRONT, null, cv);
+
+                    totalSale += salePrice;
+                    totalDisc += cursor1.getDouble(cursor1.getColumnIndex(TOTAL_ITEM_DISC));
+                    netSale += salePrice;
+                    totalRetailPrice += cursor1.getDouble(cursor1.getColumnIndex(TOTAL_RETAIL_PRICE));
+                    vatableBeforeDisc += cursor1.getDouble(cursor1.getColumnIndex(VATABLE_BEFORE_DISC));
+                    totalVatable += cursor1.getDouble(cursor1.getColumnIndex(VATABLE));
+                    totalQty += cursor1.getDouble(cursor1.getColumnIndex(TOTAL_QTY));
+                    cursor1.moveToNext();
+                }
+            }
+            cursor1.close();
+
+            double scAmount = 0;
+            Cursor cursor2 = db.rawQuery(
+                    "select sum(case when " + ORDER_STATUS_ID + " > 2 then 0 " +
+                            " when " + HAS_SERVICE_CHARGE + "=0 then 0 " +
+                            " when " + IS_SC_BEFORE_DISC + "=1 then " + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100 " +
+                            " else " + SALE_PRICE + "*" + SC_PERCENT + "/100 end) as " + SC_AMOUNT +
+                            " from " + TABLE_ORDER_DETAIL_FRONT +
+                            " where " + ORDER_STATUS_ID + "<=?" +
+                            " and " + TRANSACTION_ID + "=?" +
+                            " and " + COMPUTER_ID + "=?",
+                    new String[]{
+                            "2",
+                            String.valueOf(transId),
+                            String.valueOf(compId)
+                    });
+            if (cursor2.moveToFirst()) {
+                scAmount = cursor2.getDouble(cursor2.getColumnIndex(SC_AMOUNT));
+            }
+            cursor2.close();
+
+            Cursor cursor3 = db.rawQuery(
+                    "select sum(" + DISCOUNT_PRICE + ") " +
+                            " from " + TABLE_ORDER_PROMOTION_DETAIL_FRONT +
+                            " where " + BILL_DISC + "=?" +
+                            " and " + TRANSACTION_ID + "=?" +
+                            " and " + COMPUTER_ID + "=?",
+                    new String[]{
+                            "1",
+                            String.valueOf(transId),
+                            String.valueOf(compId)
+                    });
+            double totalBillDisc = 0;
+            if (cursor3.moveToFirst()) {
+                totalBillDisc = cursor3.getDouble(0);
+                netSale = netSale - totalBillDisc;
+                totalVatable = totalVatable - totalBillDisc;
+                totalDisc += totalBillDisc;
+            }
+            cursor3.close();
+
+            double scBillDisc = 0;
+            if (VtecPosApplication.sShopDataSource.isScBeforeDisc()) {
+                if (totalBillDisc > 0) {
+                    scBillDisc = totalBillDisc * VtecPosApplication.sShopDataSource.getScPercent() / 100;
+                }
+                scAmount = scAmount - scBillDisc;
+            }
+            scAmount = Utils.round(scAmount, VtecPosApplication.ROUND_DIGIT);
+            netSale += scAmount;
+            vatableBeforeDisc += scAmount;
+            totalVatable += scAmount;
+
+            if (netSale == 0 && VtecPosApplication.sGlobalProperty.isCalVatWhenZeroBill()) {
+                totalVatable = vatableBeforeDisc;
+            }
+
+            double transVat = 0;
+            double transBeforeVat = 0;
+            double scVat = 0;
+            double scBeforeVat = 0;
+            int vatPercent = VtecPosApplication.sShopDataSource.getVatType();
+            int vatDigit = VtecPosApplication.sGlobalProperty.getVatDigit();
+            if (VtecPosApplication.sShopDataSource.getVatType() == 1) {
+                transVat = Utils.round(totalVatable * vatPercent / (100 + vatPercent), vatDigit);
+                transBeforeVat = totalVatable - transVat;
+                scVat = Utils.round(scAmount * vatPercent / (100 + vatPercent), VtecPosApplication.ROUND_DIGIT);
+                scBeforeVat = scAmount - scVat;
+            } else {
+                transVat = Utils.round(totalVatable * vatPercent / 100, vatDigit);
+                transBeforeVat = totalVatable;
+                scVat = Utils.round(scAmount * vatPercent / 100, VtecPosApplication.ROUND_DIGIT);
+                scBeforeVat = scAmount;
+            }
             ContentValues cv = new ContentValues();
-            cv.put(ITEM_DISC_ALLOW, DISCOUNT_ALLOW);
-            cv.put(DISC_PRICE_PERCENT, 0);
-            cv.put(DISC_PRICE, 0);
-            cv.put(DISC_PERCENT, 0);
-            cv.put(DISC_AMOUNT, 0);
-            mDbHelper.openWritable().update(
-                    TABLE_ORDER_DETAIL_FRONT,
-                    cv,
-                    TRANSACTION_ID + "=?" +
+            cv.put(VAT_CODE, VtecPosApplication.sShopDataSource.getVatCode());
+            cv.put(VAT_PERCENT, vatPercent);
+            cv.put(SERVICE_CHARGE_PERCENT, VtecPosApplication.sShopDataSource.getScPercent());
+            cv.put(SERVICE_CHARGE, scAmount);
+            cv.put(SERVICE_CHARGE_VAT, scVat);
+            cv.put(SC_BEFORE_VAT, scBeforeVat);
+            cv.put(TRANSACTION_VATABLE, totalVatable);
+            cv.put(TRANSACTION_VAT, transVat);
+            cv.put(TRANS_BEFORE_VAT, transBeforeVat);
+            cv.put(RECEIPT_TOTAL_QTY, totalQty);
+            cv.put(RECEIPT_RETAIL_PRICE, totalRetailPrice);
+            cv.put(RECEIPT_DISCOUNT, totalDisc);
+            cv.put(RECEIPT_SALE_PRICE, totalSale);
+            cv.put(RECEIPT_NET_SALE, netSale);
+            db.update(TABLE_TRANSACTION_FRONT, cv,
+                    TRANSACTION_ID + "=? " +
                             " and " + COMPUTER_ID + "=?",
                     new String[]{
                             String.valueOf(transId),
                             String.valueOf(compId)
-                    }
-            );
-            while(!cursor1.isAfterLast()){
-                String promoId = cursor1.getString(cursor1.getColumnIndex(PROMOTION_ID));
-                Cursor cursor2 = mDbHelper.openReadable().rawQuery(
-                        "select * from " +
-                                TABLE_ORDER_DETAIL_FRONT + " a " +
-                                " inner join " +
-                                TABLE_PROMOTION_PRODUCT + " b " +
-                                " on a." + PRODUCT_ID + "=b." + PRODUCT_ID +
-                                " and a." + SALE_MODE + "=b." + SALE_MODE +
-                                " where b." + PROMOTION_ID + "=?" +
-                                " and a." + ORDER_STATUS_ID + "<=?" +
-                                " and a." + ITEM_DISC_ALLOW + "=?" +
-                                " and a." + INDENT_LEVEL + "=?" +
-                                " and a." + TRANSACTION_ID + "=?" +
-                                " and a." + COMPUTER_ID + "=?",
+                    });
+            db.setTransactionSuccessful();
+        } finally {
+           db.endTransaction();
+        }
+    }
+
+    private void refreshPromotion(int transId, int compId){
+        SQLiteDatabase db = mDbHelper.openWritable();
+        db.beginTransaction();
+        try {
+            Cursor cursor1 = db.rawQuery(
+                    "select * from " + TABLE_ORDER_PROMOTION_APPLY_FRONT +
+                            " where " + BILL_DISC + "=?" +
+                            " and " + TRANSACTION_ID + "=?" +
+                            " and " + COMPUTER_ID + "=?" +
+                            " order by " + DISC_PRIORITY + "," + INSERT_NO,
+                    new String[]{
+                            "0",
+                            String.valueOf(transId),
+                            String.valueOf(compId)
+                    });
+            if (cursor1.moveToFirst()) {
+                // refresh for new calculate
+                db.delete(
+                        TABLE_ORDER_PROMOTION_DETAIL_FRONT,
+                        TRANSACTION_ID + "=?" +
+                                " and " + COMPUTER_ID + "=?",
                         new String[]{
-                                promoId,
-                                "2",
-                                "1",
-                                "0",
                                 String.valueOf(transId),
                                 String.valueOf(compId)
                         });
-                if(cursor2.moveToFirst()){
-                    while(!cursor2.isAfterLast()){
-                        double discountPercent = 0;
-                        double discountAmount = 0;
-                        double totalPrice = cursor2.getDouble(cursor2.getColumnIndex(TOTAL_RETAIL_PRICE))
-                                - cursor2.getDouble(cursor1.getColumnIndex(DISC_OTHER));
-                        double productQty = cursor2.getDouble(cursor2.getColumnIndex(TOTAL_QTY));
-                        int promoLineNo = cursor2.getInt(cursor2.getColumnIndex(INSERT_NO));
-                        if(cursor1.getDouble(cursor1.getColumnIndex(DISCOUNT_PERCENT)) > 0){
-                            discountPercent = cursor1.getDouble(cursor1.getColumnIndex(DISCOUNT_PERCENT));
-                            discountAmount = Utils.round(totalPrice * discountPercent / 100, VtecPosApplication.ROUND_DIGIT);
-                        }else if(cursor2.getDouble(cursor2.getColumnIndex(DISCOUNT_PERCENT)) > 0){
-                            discountPercent = cursor2.getDouble(cursor2.getColumnIndex(DISCOUNT_PERCENT));
-                            discountAmount = Utils.round(totalPrice * discountPercent / 100, VtecPosApplication.ROUND_DIGIT);
-                        }else if(cursor2.getDouble(cursor2.getColumnIndex(DISCOUNT_AMOUNT)) > 0){
-                            discountAmount = Utils.round(productQty *
-                                    cursor2.getDouble(cursor2.getColumnIndex(DISCOUNT_AMOUNT)), VtecPosApplication.ROUND_DIGIT);
+                ContentValues cv = new ContentValues();
+                cv.put(ITEM_DISC_ALLOW, DISCOUNT_ALLOW);
+                cv.put(DISC_PRICE_PERCENT, 0);
+                cv.put(DISC_PRICE, 0);
+                cv.put(DISC_PERCENT, 0);
+                cv.put(DISC_AMOUNT, 0);
+                db.update(
+                        TABLE_ORDER_DETAIL_FRONT,
+                        cv,
+                        TRANSACTION_ID + "=?" +
+                                " and " + COMPUTER_ID + "=?",
+                        new String[]{
+                                String.valueOf(transId),
+                                String.valueOf(compId)
                         }
+                );
+                while (!cursor1.isAfterLast()) {
+                    String promoId = cursor1.getString(cursor1.getColumnIndex(PROMOTION_ID));
+                    Cursor cursor2 = db.rawQuery(
+                            "select * from " +
+                                    TABLE_ORDER_DETAIL_FRONT + " a " +
+                                    " inner join " +
+                                    TABLE_PROMOTION_PRODUCT + " b " +
+                                    " on a." + PRODUCT_ID + "=b." + PRODUCT_ID +
+                                    " and a." + SALE_MODE + "=b." + SALE_MODE +
+                                    " where b." + PROMOTION_ID + "=?" +
+                                    " and a." + ORDER_STATUS_ID + "<=?" +
+                                    " and a." + ITEM_DISC_ALLOW + "=?" +
+                                    " and a." + INDENT_LEVEL + "=?" +
+                                    " and a." + TRANSACTION_ID + "=?" +
+                                    " and a." + COMPUTER_ID + "=?",
+                            new String[]{
+                                    promoId,
+                                    "2",
+                                    "1",
+                                    "0",
+                                    String.valueOf(transId),
+                                    String.valueOf(compId)
+                            });
+                    if (cursor2.moveToFirst()) {
+                        while (!cursor2.isAfterLast()) {
+                            double discountPercent = 0;
+                            double discountAmount = 0;
+                            double totalPrice = cursor2.getDouble(cursor2.getColumnIndex(TOTAL_RETAIL_PRICE))
+                                    - cursor2.getDouble(cursor1.getColumnIndex(DISC_OTHER));
+                            double productQty = cursor2.getDouble(cursor2.getColumnIndex(TOTAL_QTY));
+                            int promoLineNo = cursor2.getInt(cursor2.getColumnIndex(INSERT_NO));
+                            if (cursor1.getDouble(cursor1.getColumnIndex(DISCOUNT_PERCENT)) > 0) {
+                                discountPercent = cursor1.getDouble(cursor1.getColumnIndex(DISCOUNT_PERCENT));
+                                discountAmount = Utils.round(totalPrice * discountPercent / 100, VtecPosApplication.ROUND_DIGIT);
+                            } else if (cursor2.getDouble(cursor2.getColumnIndex(DISCOUNT_PERCENT)) > 0) {
+                                discountPercent = cursor2.getDouble(cursor2.getColumnIndex(DISCOUNT_PERCENT));
+                                discountAmount = Utils.round(totalPrice * discountPercent / 100, VtecPosApplication.ROUND_DIGIT);
+                            } else if (cursor2.getDouble(cursor2.getColumnIndex(DISCOUNT_AMOUNT)) > 0) {
+                                discountAmount = Utils.round(productQty *
+                                        cursor2.getDouble(cursor2.getColumnIndex(DISCOUNT_AMOUNT)), VtecPosApplication.ROUND_DIGIT);
+                            }
 
-                        if(discountAmount > 0){
-                            cv = new ContentValues();
-                            cv.put(PROMOTION_UUID, cursor1.getString(cursor1.getColumnIndex(PROMOTION_UUID)));
-                            cv.put(TRANSACTION_ID, transId);
-                            cv.put(COMPUTER_ID, compId);
-                            cv.put(ORDER_DETAIL_ID, cursor2.getInt(cursor2.getColumnIndex(ORDER_DETAIL_ID)));
-                            cv.put(DISC_TYPE_ID, cursor1.getInt(cursor1.getColumnIndex(DISC_TYPE_ID)));
-                            cv.put(BILL_DISC, cursor1.getDouble(cursor1.getColumnIndex(BILL_DISC)));
-                            cv.put(PROMOTION_ID, cursor1.getInt(cursor1.getColumnIndex(PROMOTION_ID)));
-                            cv.put(DISC_PRIORITY, cursor1.getInt(cursor1.getColumnIndex(DISC_PRIORITY)));
-                            cv.put(DISCOUNT_PRICE, discountAmount);
-                            cv.put(MULTI_PROMO_OPTION, cursor1.getInt(cursor1.getColumnIndex(MULTI_PROMO_OPTION)));
-                            cv.put(IS_CALCULATE, 2);
-                            cv.put(PROMO_LINE_NO, promoLineNo);
-                            cv.put(VOUCHER_ID, cursor1.getInt(cursor1.getColumnIndex(VOUCHER_ID)));
-                            cv.put(VOUCHER_NUMBER, cursor1.getString(cursor1.getColumnIndex(VOUCHER_NUMBER)));
-                            mDbHelper.openWritable().insert(TABLE_ORDER_PROMOTION_DETAIL_FRONT, null, cv);
-                        }
+                            if (discountAmount > 0) {
+                                cv = new ContentValues();
+                                cv.put(PROMOTION_UUID, cursor1.getString(cursor1.getColumnIndex(PROMOTION_UUID)));
+                                cv.put(TRANSACTION_ID, transId);
+                                cv.put(COMPUTER_ID, compId);
+                                cv.put(ORDER_DETAIL_ID, cursor2.getInt(cursor2.getColumnIndex(ORDER_DETAIL_ID)));
+                                cv.put(DISC_TYPE_ID, cursor1.getInt(cursor1.getColumnIndex(DISC_TYPE_ID)));
+                                cv.put(BILL_DISC, cursor1.getDouble(cursor1.getColumnIndex(BILL_DISC)));
+                                cv.put(PROMOTION_ID, cursor1.getInt(cursor1.getColumnIndex(PROMOTION_ID)));
+                                cv.put(DISC_PRIORITY, cursor1.getInt(cursor1.getColumnIndex(DISC_PRIORITY)));
+                                cv.put(DISCOUNT_PRICE, discountAmount);
+                                cv.put(MULTI_PROMO_OPTION, cursor1.getInt(cursor1.getColumnIndex(MULTI_PROMO_OPTION)));
+                                cv.put(IS_CALCULATE, 2);
+                                cv.put(PROMO_LINE_NO, promoLineNo);
+                                cv.put(VOUCHER_ID, cursor1.getInt(cursor1.getColumnIndex(VOUCHER_ID)));
+                                cv.put(VOUCHER_NUMBER, cursor1.getString(cursor1.getColumnIndex(VOUCHER_NUMBER)));
+                                db.insert(TABLE_ORDER_PROMOTION_DETAIL_FRONT, null, cv);
+                            }
 
-                        int itemDiscountAllow = 0;
-                        if(cursor1.getInt(cursor1.getColumnIndex(MULTI_PROMO_OPTION)) > 2) {
-                            itemDiscountAllow = 0;
-                        }else {
-                            itemDiscountAllow = 1;
-                        }
+                            int itemDiscountAllow = 0;
+                            if (cursor1.getInt(cursor1.getColumnIndex(MULTI_PROMO_OPTION)) > 2) {
+                                itemDiscountAllow = 0;
+                            } else {
+                                itemDiscountAllow = 1;
+                            }
 
-                        double totalDiscount = 0;
-                        Cursor cursor3 = mDbHelper.openReadable().rawQuery(
-                                "select sum(" + DISCOUNT_PRICE + ") " +
-                                        " from " + TABLE_ORDER_PROMOTION_DETAIL_FRONT +
-                                        " where " + TRANSACTION_ID + "=?" +
-                                        " and " + COMPUTER_ID + "=?" +
-                                        " and " + ORDER_DETAIL_ID + "=?",
-                                new String[]{
-                                        String.valueOf(transId),
-                                        String.valueOf(compId),
-                                        cursor2.getString(cursor2.getColumnIndex(ORDER_DETAIL_ID))
-                                });
-                        if(cursor3.moveToFirst()){
-                            totalDiscount = cursor3.getDouble(0);
-                        }
-
-                        if(cursor1.getInt(cursor1.getColumnIndex(IS_PRICE_DISC)) == 1){
-                            cv = new ContentValues();
-                            cv.put(ITEM_DISC_ALLOW, itemDiscountAllow);
-                            cv.put(DISC_PRICE_PERCENT, discountPercent);
-                            cv.put(DISC_PRICE, totalDiscount);
-                            mDbHelper.openWritable().update(TABLE_ORDER_DETAIL_FRONT, cv,
-                                    TRANSACTION_ID + "=?" +
+                            double totalDiscount = 0;
+                            Cursor cursor3 = db.rawQuery(
+                                    "select sum(" + DISCOUNT_PRICE + ") " +
+                                            " from " + TABLE_ORDER_PROMOTION_DETAIL_FRONT +
+                                            " where " + TRANSACTION_ID + "=?" +
                                             " and " + COMPUTER_ID + "=?" +
                                             " and " + ORDER_DETAIL_ID + "=?",
                                     new String[]{
@@ -958,13 +950,47 @@ public class TransactionDataSource {
                                             String.valueOf(compId),
                                             cursor2.getString(cursor2.getColumnIndex(ORDER_DETAIL_ID))
                                     });
-                        }else {
-                            cv = new ContentValues();
-                            cv.put(ITEM_DISC_ALLOW, itemDiscountAllow);
-                            cv.put(DISC_PERCENT, discountPercent);
-                            cv.put(DISC_AMOUNT, discountAmount);
-                            mDbHelper.openWritable().update(TABLE_ORDER_DETAIL_FRONT, cv,
-                                    TRANSACTION_ID + "=?" +
+                            if (cursor3.moveToFirst()) {
+                                totalDiscount = cursor3.getDouble(0);
+                            }
+
+                            if (cursor1.getInt(cursor1.getColumnIndex(IS_PRICE_DISC)) == 1) {
+                                cv = new ContentValues();
+                                cv.put(ITEM_DISC_ALLOW, itemDiscountAllow);
+                                cv.put(DISC_PRICE_PERCENT, discountPercent);
+                                cv.put(DISC_PRICE, totalDiscount);
+                                db.update(TABLE_ORDER_DETAIL_FRONT, cv,
+                                        TRANSACTION_ID + "=?" +
+                                                " and " + COMPUTER_ID + "=?" +
+                                                " and " + ORDER_DETAIL_ID + "=?",
+                                        new String[]{
+                                                String.valueOf(transId),
+                                                String.valueOf(compId),
+                                                cursor2.getString(cursor2.getColumnIndex(ORDER_DETAIL_ID))
+                                        });
+                            } else {
+                                cv = new ContentValues();
+                                cv.put(ITEM_DISC_ALLOW, itemDiscountAllow);
+                                cv.put(DISC_PERCENT, discountPercent);
+                                cv.put(DISC_AMOUNT, discountAmount);
+                                db.update(TABLE_ORDER_DETAIL_FRONT, cv,
+                                        TRANSACTION_ID + "=?" +
+                                                " and " + COMPUTER_ID + "=?" +
+                                                " and " + ORDER_DETAIL_ID + "=?",
+                                        new String[]{
+                                                String.valueOf(transId),
+                                                String.valueOf(compId),
+                                                cursor2.getString(cursor2.getColumnIndex(ORDER_DETAIL_ID))
+                                        });
+                            }
+                            db.execSQL(
+                                    "update " + TABLE_ORDER_DETAIL_FRONT +
+                                            " set " + VATABLE + "=" +
+                                            " case when " + PRODUCT_VAT_PERCENT + "=0 then 0" +
+                                            " else " + SALE_PRICE + " end, " +
+                                            TOTAL_ITEM_DISC + "=" + DISC_PRICE + "+" + DISC_AMOUNT + "+" + DISC_OTHER + ", " +
+                                            SALE_PRICE + "=" + TOTAL_RETAIL_PRICE + "-(" + DISC_PRICE + "+" + DISC_AMOUNT + "+" + DISC_OTHER + ")" +
+                                            " where " + TRANSACTION_ID + "=?" +
                                             " and " + COMPUTER_ID + "=?" +
                                             " and " + ORDER_DETAIL_ID + "=?",
                                     new String[]{
@@ -972,100 +998,88 @@ public class TransactionDataSource {
                                             String.valueOf(compId),
                                             cursor2.getString(cursor2.getColumnIndex(ORDER_DETAIL_ID))
                                     });
+                            cursor2.moveToNext();
                         }
-                        mDbHelper.openWritable().execSQL(
-                                "update " + TABLE_ORDER_DETAIL_FRONT +
-                                        " set " + VATABLE + "=" +
-                                        " case when " + PRODUCT_VAT_PERCENT + "=0 then 0" +
-                                        " else " + SALE_PRICE + " end, " +
-                                        TOTAL_ITEM_DISC + "=" + DISC_PRICE + "+" + DISC_AMOUNT + "+" + DISC_OTHER + ", " +
-                                        SALE_PRICE + "=" + TOTAL_RETAIL_PRICE + "-(" + DISC_PRICE + "+" + DISC_AMOUNT + "+" + DISC_OTHER + ")" +
-                                        " where " + TRANSACTION_ID + "=?" +
-                                        " and " + COMPUTER_ID + "=?" +
-                                        " and " + ORDER_DETAIL_ID + "=?",
-                                new String[]{
-                                        String.valueOf(transId),
-                                        String.valueOf(compId),
-                                        cursor2.getString(cursor2.getColumnIndex(ORDER_DETAIL_ID))
-                                });
-                        cursor2.moveToNext();
                     }
+                    cursor2.close();
+                    cursor1.moveToNext();
                 }
-                cursor2.close();
-                cursor1.moveToNext();
             }
+            cursor1.close();
+
+            //Get Bill Discount for Calculate
+            Cursor cursor4 = db.rawQuery(
+                    "select * from " + TABLE_ORDER_PROMOTION_APPLY_FRONT +
+                            " where " + IS_CALCULATE + " in (0,1)" +
+                            " and " + BILL_DISC + "=?" +
+                            " and " + TRANSACTION_ID + "=?" +
+                            " and " + COMPUTER_ID + "=?" +
+                            " order by " + DISC_PRIORITY,
+                    new String[]{
+                            "1",
+                            String.valueOf(transId),
+                            String.valueOf(compId)
+                    });
+
+            if (cursor4.moveToFirst()) {
+                Cursor cursor5 = db.rawQuery(
+                        "select sum(" + SALE_PRICE + ") " +
+                                " from " + TABLE_ORDER_DETAIL_FRONT +
+                                " where " + ORDER_STATUS_ID + "<=?" +
+                                " and " + TRANSACTION_ID + "=?" +
+                                " and " + COMPUTER_ID + "=?",
+                        new String[]{
+                                "2",
+                                String.valueOf(transId),
+                                String.valueOf(compId)
+                        });
+                double totalSale = 0;
+                if (cursor5.moveToFirst()) {
+                    totalSale = cursor5.getDouble(0);
+                }
+                cursor5.close();
+
+                while (!cursor4.isAfterLast()) {
+                    double discAmount = 0;
+                    double billOrgDiscAmount = cursor4.getDouble(cursor4.getColumnIndex(BILL_ORG_DISC_AMOUNT));
+                    if (cursor4.getDouble(cursor4.getColumnIndex(DISCOUNT_PERCENT)) > 0) {
+                        discAmount = Utils.round(totalSale *
+                                cursor4.getDouble(cursor4.getColumnIndex(DISCOUNT_PERCENT)) / 100, VtecPosApplication.ROUND_DIGIT);
+                    } else if (billOrgDiscAmount > 0) {
+                        if (billOrgDiscAmount <= totalSale) {
+                            discAmount = billOrgDiscAmount;
+                        } else {
+                            discAmount = totalSale;
+                        }
+                    }
+                    ContentValues cv = new ContentValues();
+                    cv.put(PROMOTION_UUID, cursor4.getString(cursor4.getColumnIndex(PROMOTION_UUID)));
+                    cv.put(TRANSACTION_ID, transId);
+                    cv.put(COMPUTER_ID, compId);
+                    cv.put(ORDER_DETAIL_ID, 0);
+                    cv.put(DISC_TYPE_ID, cursor4.getInt(cursor4.getColumnIndex(DISC_TYPE_ID)));
+                    cv.put(BILL_DISC, cursor4.getDouble(cursor4.getColumnIndex(BILL_DISC)));
+                    cv.put(PROMOTION_ID, cursor4.getInt(cursor4.getColumnIndex(PROMOTION_ID)));
+                    cv.put(DISC_PRIORITY, cursor4.getInt(cursor4.getColumnIndex(DISC_PRIORITY)));
+                    cv.put(DISCOUNT_PERCENT, cursor4.getDouble(cursor4.getColumnIndex(DISCOUNT_PERCENT)));
+                    cv.put(DISCOUNT_PRICE, discAmount);
+                    cv.put(BILL_ORG_DISC_AMOUNT, cursor4.getDouble(cursor4.getColumnIndex(BILL_ORG_DISC_AMOUNT)));
+                    cv.put(MULTI_PROMO_OPTION, cursor4.getInt(cursor4.getColumnIndex(MULTI_PROMO_OPTION)));
+                    cv.put(IS_CALCULATE, cursor4.getInt(cursor4.getColumnIndex(IS_CALCULATE)));
+                    cv.put(PROMO_LINE_NO, cursor4.getInt(cursor4.getColumnIndex(INSERT_NO)));
+                    cv.put(VOUCHER_ID, cursor4.getInt(cursor4.getColumnIndex(VOUCHER_ID)));
+                    cv.put(VOUCHER_NUMBER, cursor4.getString(cursor4.getColumnIndex(VOUCHER_NUMBER)));
+                    db.insert(TABLE_ORDER_PROMOTION_DETAIL_FRONT, null, cv);
+
+                    totalSale = totalSale - discAmount;
+                    cursor4.moveToNext();
+                }
+            }
+            cursor4.close();
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
         }
-        cursor1.close();
-
-        //Get Bill Discount for Calculate
-        Cursor cursor4 = mDbHelper.openReadable().rawQuery(
-                "select * from " + TABLE_ORDER_PROMOTION_APPLY_FRONT +
-                        " where " + IS_CALCULATE + " in (0,1)" +
-                        " and " + BILL_DISC + "=?" +
-                        " and " + TRANSACTION_ID + "=?" +
-                        " and " + COMPUTER_ID + "=?" +
-                        " order by " + DISC_PRIORITY,
-                new String[]{
-                        "1",
-                        String.valueOf(transId),
-                        String.valueOf(compId)
-                });
-
-       if(cursor4.moveToFirst()){
-           Cursor cursor5 = mDbHelper.openReadable().rawQuery(
-                   "select sum(" + SALE_PRICE + ") " +
-                           " from " + TABLE_ORDER_DETAIL_FRONT +
-                           " where " + ORDER_STATUS_ID + "<=?" +
-                           " and " + TRANSACTION_ID + "=?" +
-                           " and " + COMPUTER_ID + "=?",
-                   new String[]{
-                           "2",
-                           String.valueOf(transId),
-                           String.valueOf(compId)
-                   });
-           double totalSale = 0;
-           if(cursor5.moveToFirst()){
-               totalSale = cursor5.getDouble(0);
-           }
-           cursor5.close();
-
-           while(!cursor4.isAfterLast()){
-               double discAmount = 0;
-               double billOrgDiscAmount = cursor4.getDouble(cursor4.getColumnIndex(BILL_ORG_DISC_AMOUNT));
-               if(cursor4.getDouble(cursor4.getColumnIndex(DISCOUNT_PERCENT)) > 0){
-                   discAmount = Utils.round(totalSale *
-                           cursor4.getDouble(cursor4.getColumnIndex(DISCOUNT_PERCENT)) /100, VtecPosApplication.ROUND_DIGIT);
-               }else if(billOrgDiscAmount > 0){
-                   if(billOrgDiscAmount <= totalSale) {
-                       discAmount = billOrgDiscAmount;
-                   }else{
-                       discAmount = totalSale;
-                   }
-               }
-               ContentValues cv = new ContentValues();
-               cv.put(PROMOTION_UUID, cursor4.getString(cursor4.getColumnIndex(PROMOTION_UUID)));
-               cv.put(TRANSACTION_ID, transId);
-               cv.put(COMPUTER_ID, compId);
-               cv.put(ORDER_DETAIL_ID, 0);
-               cv.put(DISC_TYPE_ID, cursor4.getInt(cursor4.getColumnIndex(DISC_TYPE_ID)));
-               cv.put(BILL_DISC, cursor4.getDouble(cursor4.getColumnIndex(BILL_DISC)));
-               cv.put(PROMOTION_ID, cursor4.getInt(cursor4.getColumnIndex(PROMOTION_ID)));
-               cv.put(DISC_PRIORITY, cursor4.getInt(cursor4.getColumnIndex(DISC_PRIORITY)));
-               cv.put(DISCOUNT_PERCENT, cursor4.getDouble(cursor4.getColumnIndex(DISCOUNT_PERCENT)));
-               cv.put(DISCOUNT_PRICE, discAmount);
-               cv.put(BILL_ORG_DISC_AMOUNT, cursor4.getDouble(cursor4.getColumnIndex(BILL_ORG_DISC_AMOUNT)));
-               cv.put(MULTI_PROMO_OPTION, cursor4.getInt(cursor4.getColumnIndex(MULTI_PROMO_OPTION)));
-               cv.put(IS_CALCULATE, cursor4.getInt(cursor4.getColumnIndex(IS_CALCULATE)));
-               cv.put(PROMO_LINE_NO, cursor4.getInt(cursor4.getColumnIndex(INSERT_NO)));
-               cv.put(VOUCHER_ID, cursor4.getInt(cursor4.getColumnIndex(VOUCHER_ID)));
-               cv.put(VOUCHER_NUMBER, cursor4.getString(cursor4.getColumnIndex(VOUCHER_NUMBER)));
-               mDbHelper.openWritable().insert(TABLE_ORDER_PROMOTION_DETAIL_FRONT, null, cv);
-
-               totalSale = totalSale - discAmount;
-               cursor4.moveToNext();
-           }
-       }
-        cursor4.close();
     }
 
     /**
@@ -1138,7 +1152,8 @@ public class TransactionDataSource {
         cv.put(COMMENT, model.getComment());
         cv.put(IS_COMMENT, model.getIsComment());
         cv.put(DELETED, model.getDeleted());
-        mDbHelper.openWritable().insertOrThrow(TABLE_ORDER_DETAIL_FRONT, null, cv);
+        SQLiteDatabase db = mDbHelper.openWritable();
+        db.insertOrThrow(TABLE_ORDER_DETAIL_FRONT, null, cv);
         return ordId;
     }
 
@@ -1167,7 +1182,8 @@ public class TransactionDataSource {
         cv.put(RECEIPT_MONTH, month);
         cv.put(SALE_DATE, saleDate);
         cv.put(SHOP_ID, model.getShopId());
-        mDbHelper.openWritable().insertOrThrow(TABLE_TRANSACTION_FRONT, null, cv);
+        SQLiteDatabase db = mDbHelper.openWritable();
+        db.insertOrThrow(TABLE_TRANSACTION_FRONT, null, cv);
         return transId;
     }
 
@@ -1177,7 +1193,8 @@ public class TransactionDataSource {
      */
     private int getMaxReceiptId(String isoSaleDate){
         int maxReceiptId = 0;
-        Cursor cursor = mDbHelper.openReadable().rawQuery(
+        SQLiteDatabase db = mDbHelper.openWritable();
+        Cursor cursor = db.rawQuery(
                 "select max(" + RECEIPT_ID + ") " +
                         " from " + TABLE_TRANSACTION +
                         " where " + SALE_DATE + "=?" +
@@ -1201,7 +1218,8 @@ public class TransactionDataSource {
      */
     private int getDisplayOrdering(int ordLinkId, int transId, int compId){
         int ordering = 0;
-        Cursor cursor = mDbHelper.openReadable().rawQuery(
+        SQLiteDatabase db = mDbHelper.openWritable();
+        Cursor cursor = db.rawQuery(
                 "select " + DISPLAY_ORDERING +
                         " from " + TABLE_ORDER_DETAIL_FRONT +
                         " where " + ORDER_DETAIL_ID + "=?" +
@@ -1226,7 +1244,8 @@ public class TransactionDataSource {
      */
     private int getMaxInsertOrderNo(int transId, int compId){
         int maxOrderNo = 0;
-        Cursor cursor = mDbHelper.openReadable().rawQuery(
+        SQLiteDatabase db = mDbHelper.openWritable();
+        Cursor cursor = db.rawQuery(
                 "select max(" + INSERT_ORDER_NO + ") " +
                         " from " + TABLE_ORDER_DETAIL_FRONT +
                         " where " + TRANSACTION_ID + "=? " +
@@ -1249,7 +1268,8 @@ public class TransactionDataSource {
      */
     private int getMaxOrderId(int transId, int compId){
         int maxOrderId = 0;
-        Cursor cursor = mDbHelper.openReadable().rawQuery(
+        SQLiteDatabase db = mDbHelper.openWritable();
+        Cursor cursor = db.rawQuery(
                 "select max(" + ORDER_DETAIL_ID + ")" +
                         " from " + TABLE_ORDER_DETAIL_FRONT +
                         " where " + TRANSACTION_ID + "=?" +
@@ -1263,7 +1283,7 @@ public class TransactionDataSource {
         }
         cursor.close();
         if(maxOrderId == 0){
-            cursor = mDbHelper.openReadable().rawQuery(
+            cursor = db.rawQuery(
                     "select max(" + ORDER_DETAIL_ID + ")" +
                             " from " + TABLE_ORDER_DETAIL +
                             " where " + TRANSACTION_ID + "=?" +
@@ -1285,7 +1305,8 @@ public class TransactionDataSource {
      */
     private int getMaxTransId(){
         int maxTransId = 0;
-        Cursor cursor = mDbHelper.openReadable().rawQuery(
+        SQLiteDatabase db = mDbHelper.openWritable();
+        Cursor cursor = db.rawQuery(
                 "select max(" + TRANSACTION_ID + ")" +
                         " from " + TABLE_TRANSACTION_FRONT, null);
         if (cursor.moveToFirst()) {
@@ -1293,7 +1314,7 @@ public class TransactionDataSource {
         }
         cursor.close();
         if(maxTransId == 0){
-            cursor = mDbHelper.openReadable().rawQuery(
+            cursor = db.rawQuery(
                     "select max(" + TRANSACTION_ID + ")" +
                             " from " + TABLE_TRANSACTION +
                             " where " + TRANSACTION_STATUS_ID + "=?",
@@ -1307,5 +1328,4 @@ public class TransactionDataSource {
         }
         return maxTransId + 1;
     }
-
 }
