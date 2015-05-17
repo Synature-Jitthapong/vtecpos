@@ -83,16 +83,7 @@ public class Transaction {
     private int fromDepositComputerId;
     private int deleted;
 
-    private static Transaction sInstance;
-
-    public static Transaction getsInstance(){
-        if(sInstance == null){
-            sInstance = new Transaction();
-        }
-        return sInstance;
-    }
-
-    private Transaction(){
+    public Transaction(){
     }
 
     public int getTransactionId() {

@@ -21,7 +21,7 @@ import com.vtec.j1tth4.vtecpos.provider.Transaction;
 import com.vtec.j1tth4.vtecpos.provider.TransactionDataSource;
 
 
-public class MainActivity extends ActionBarActivity implements TransactionOperation{
+public class MainActivity extends ActionBarActivity{
 
     static String[] sDrawerItems = {
         "","","",""
@@ -29,8 +29,7 @@ public class MainActivity extends ActionBarActivity implements TransactionOperat
 
     private android.support.v4.app.ActionBarDrawerToggle mDrawerToggle;
 
-    private TransactionDataSource mTransDataSource;
-    private Transaction mTransData;
+    private TransactionManager mTransManager;
 
     private DrawerLayout mDrawerLayout;
     private ListView mLvDrawer;
@@ -43,11 +42,7 @@ public class MainActivity extends ActionBarActivity implements TransactionOperat
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mLvDrawer = (ListView) findViewById(R.id.left_drawer);
 
-        mTransDataSource = new TransactionDataSource(this);
-        ShopDataSource shopData = ShopDataSource.getInstance(this);
-        mTransData = Transaction.getsInstance();
-        mTransData.setComputerId(1);
-        mTransData.setShopId(shopData.getShopID());
+        mTransManager = TransactionManager.getInstance(this);
 
         final ActionBar actionBar = getSupportActionBar();
         mLvDrawer.setAdapter(new DrawerListAdapter());
@@ -136,23 +131,6 @@ public class MainActivity extends ActionBarActivity implements TransactionOperat
             Intent intent = new Intent(this, PaymentActivity.class);
             startActivity(intent);
         }
-    }
-
-    @Override
-    public void onOpenTransaction() {
-        // use singleton pattern to initial Transaction
-        Transaction trans = Transaction.getsInstance();
-        trans.setTransactionId(mTransDataSource.insertTransaction(trans));
-    }
-
-    @Override
-    public void onHoldTransaction(Transaction trans) {
-
-    }
-
-    @Override
-    public void onSuccessTransaction(Transaction trans) {
-
     }
 
     private class DrawerListAdapter extends BaseAdapter{

@@ -383,7 +383,7 @@ public class ProductDataSource {
             }
         }
         cursor.close();
-        return  productsList;
+        return productsList;
     }
 
     /**

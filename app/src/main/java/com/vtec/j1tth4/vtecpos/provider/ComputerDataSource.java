@@ -47,7 +47,6 @@ public class ComputerDataSource {
             c.setDeviceCode(cursor.getString(cursor.getColumnIndex(DEVICE_CODE)));
         }
         cursor.close();
-        mDbHelper.close();
         return c;
     }
 }

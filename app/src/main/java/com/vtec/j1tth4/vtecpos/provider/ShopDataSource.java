@@ -94,7 +94,6 @@ public class ShopDataSource {
                 s.setVATType(cursor.getInt(cursor.getColumnIndex(VAT_TYPE)));
         }
         cursor.close();
-        mDbHelper.close();
         return s;
     }
 }

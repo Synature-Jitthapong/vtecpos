@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.vtec.j1tth4.vtecpos.GlobalPropertyManager;
 import com.vtec.j1tth4.vtecpos.Utils;
 import com.vtec.j1tth4.vtecpos.VtecPosApplication;
 
@@ -205,9 +206,11 @@ public class TransactionDataSource {
     public static final String SALE_MODE_ID = "SaleModeID";
 
     private DatabaseHelper mDbHelper;
+    private GlobalPropertyManager mGpManager;
 
     public TransactionDataSource(Context c){
         mDbHelper = DatabaseHelper.getInstance(c);
+        mGpManager = GlobalPropertyManager.getInstance(c);
     }
 
     private void weightProductSet(int transId, int compId){
@@ -297,17 +300,17 @@ public class TransactionDataSource {
                                     scWeightAmount = Utils.round((orgTotalRetailPrice * scAmount) / sumOrgPrice, 0);
                                     if (vatType == 1) {
                                         productWeightVat = Utils.round(weightPrice *
-                                                productVatPercent / (100 + productVatPercent), VtecPosApplication.sRoundingDigit);
+                                                productVatPercent / (100 + productVatPercent), mGpManager.getRoundingDigit());
                                         weightBeforeVat = weightPrice - productWeightVat;
 
                                         scWeightVat = Utils.round(scWeightAmount *
-                                                productVatPercent / (100 + productVatPercent), VtecPosApplication.sRoundingDigit);
+                                                productVatPercent / (100 + productVatPercent), mGpManager.getRoundingDigit());
                                         scWeightBeforeVat = scWeightAmount - scWeightVat;
                                     } else {
-                                        productWeightVat = Utils.round(weightPrice * productVatPercent / 100, VtecPosApplication.sRoundingDigit);
+                                        productWeightVat = Utils.round(weightPrice * productVatPercent / 100, mGpManager.getRoundingDigit());
                                         weightBeforeVat = weightPrice;
 
-                                        scWeightVat = Utils.round(scWeightAmount * productVatPercent / 100, VtecPosApplication.sRoundingDigit);
+                                        scWeightVat = Utils.round(scWeightAmount * productVatPercent / 100, mGpManager.getRoundingDigit());
                                         scWeightBeforeVat = scWeightVat;
                                     }
                                     sumWeightVatable += weightVatable;
@@ -406,11 +409,9 @@ public class TransactionDataSource {
         }finally {
             db.endTransaction();
         }
-        mDbHelper.close();
     }
 
     private void finalizeBill(int transId, int compId){
-        int roundDigit = VtecPosApplication.sRoundingDigit;
         SQLiteDatabase db = mDbHelper.openWritable();
         db.beginTransaction();
         try {
@@ -513,16 +514,16 @@ public class TransactionDataSource {
             db.execSQL("update " + TABLE_ORDER_DETAIL_FRONT +
                             " set " + SC_AMOUNT + "=" +
                             " case when " + HAS_SERVICE_CHARGE + "=0 then 0" +
-                            " when " + IS_SC_BEFORE_DISC + "=0 then round(" + NET_SALE + "*" + SC_PERCENT + "/100," + roundDigit + ") else round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100," + roundDigit + ") end, " +
+                            " when " + IS_SC_BEFORE_DISC + "=0 then round(" + NET_SALE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") else round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") end, " +
                             SC_VAT + "=" +
                             " case when " + HAS_SERVICE_CHARGE + "=0 then 0 " +
                             " when " + IS_SC_BEFORE_DISC + "=0 then " +
-                            " case when " + VAT_TYPE + "=1 then round(round(" + NET_SALE + "*" + SC_PERCENT + "/100," + roundDigit + ") * " + vatPercent + "/(100 + " + vatPercent + "), " + roundDigit + ") else round(round(" + NET_SALE + "*" + SC_PERCENT + "/100, " + roundDigit + ") * " + vatPercent + "/100, " + roundDigit + ") end " +
+                            " case when " + VAT_TYPE + "=1 then round(round(" + NET_SALE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/(100 + " + vatPercent + "), " + mGpManager.getRoundingDigit() + ") else round(round(" + NET_SALE + "*" + SC_PERCENT + "/100, " + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/100, " + mGpManager.getRoundingDigit() + ") end " +
                             " else " +
-                            " case when " + VAT_TYPE + "=1 then round(round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100," + roundDigit + ") * " + vatPercent + "/(100 + " + vatPercent + "), " + roundDigit + ") else round(round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100, " + roundDigit + ") * " + vatPercent + "/100, " + roundDigit + ") end " +
+                            " case when " + VAT_TYPE + "=1 then round(round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/(100 + " + vatPercent + "), " + mGpManager.getRoundingDigit() + ") else round(round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100, " + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/100, " + mGpManager.getRoundingDigit() + ") end " +
                             " end" +
                             PRODUCT_VAT + "=" +
-                            " case when " + VAT_TYPE + "=1 then round(" + NET_SALE + "*" + PRODUCT_VAT_PERCENT + "/(100 + " + PRODUCT_VAT_PERCENT + "), " + roundDigit + ") else round(" + NET_SALE + "*" + PRODUCT_VAT_PERCENT + "/100, " + roundDigit + ") end " +
+                            " case when " + VAT_TYPE + "=1 then round(" + NET_SALE + "*" + PRODUCT_VAT_PERCENT + "/(100 + " + PRODUCT_VAT_PERCENT + "), " + mGpManager.getRoundingDigit() + ") else round(" + NET_SALE + "*" + PRODUCT_VAT_PERCENT + "/100, " + mGpManager.getRoundingDigit() + ") end " +
                             " where " + ORDER_STATUS_ID + "<=?" +
                             " and " + TRANSACTION_ID + "=?" +
                             " and " + COMPUTER_ID + "=?",
@@ -629,11 +630,11 @@ public class TransactionDataSource {
                             VATABLE + "=" +
                             " case when " + VATABLE + "=0 then 0 else " + NET_SALE + " end, " +
                             TOTAL_RETAIL_VAT + "=" +
-                            " case when " + VAT_TYPE + "=1 then round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ (100 + " + PRODUCT_VAT_PERCENT + "), " + VtecPosApplication.sRoundingDigit + ") else " +
-                            " round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ 100, " + VtecPosApplication.sRoundingDigit + ")) end, " +
+                            " case when " + VAT_TYPE + "=1 then round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ (100 + " + PRODUCT_VAT_PERCENT + "), " + mGpManager.getRoundingDigit() + ") else " +
+                            " round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ 100, " + mGpManager.getRoundingDigit() + ")) end, " +
                             DISC_VAT + "=" +
-                            " case when " + VAT_TYPE + "=1 then round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ (100 + " + PRODUCT_VAT_PERCENT + "), " + VtecPosApplication.sRoundingDigit + ") else " +
-                            " round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ 100, " + VtecPosApplication.sRoundingDigit + ")) - " + PRODUCT_VAT + " end " +
+                            " case when " + VAT_TYPE + "=1 then round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ (100 + " + PRODUCT_VAT_PERCENT + "), " + mGpManager.getRoundingDigit() + ") else " +
+                            " round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ 100, " + mGpManager.getRoundingDigit() + ")) - " + PRODUCT_VAT + " end " +
                             " where OrderStatusID <=? " +
                             " and " + TRANSACTION_ID + "=?" +
                             " and " + COMPUTER_ID + "=?",
@@ -698,10 +699,10 @@ public class TransactionDataSource {
                     double productVatPercent = cursor1.getDouble(cursor1.getColumnIndex(PRODUCT_VAT_PERCENT));
                     if (vatType == 1) {//Include VAT
                         vatAmount = Utils.round(vatable * productVatPercent /
-                                (100 + productVatPercent), VtecPosApplication.sRoundingDigit);
+                                (100 + productVatPercent), mGpManager.getRoundingDigit());
                         vatableBeforeVat = vatable - vatAmount;
                     } else {
-                        vatAmount = Utils.round(vatable * productVatPercent, VtecPosApplication.sRoundingDigit);
+                        vatAmount = Utils.round(vatable * productVatPercent, mGpManager.getRoundingDigit());
                         vatableBeforeVat = vatable;
                     }
                     double salePrice = cursor1.getDouble(cursor1.getColumnIndex(SALE_PRICE));
@@ -771,18 +772,18 @@ public class TransactionDataSource {
             cursor3.close();
 
             double scBillDisc = 0;
-            if (VtecPosApplication.sIsScBeforeDisc) {
+            if (mGpManager.isScBeforeDisc()) {
                 if (totalBillDisc > 0) {
-                    scBillDisc = totalBillDisc * VtecPosApplication.sShopDataSource.getScPercent() / 100;
+                    scBillDisc = totalBillDisc * mGpManager.getScPercent() / 100;
                 }
                 scAmount = scAmount - scBillDisc;
             }
-            scAmount = Utils.round(scAmount, VtecPosApplication.sRoundingDigit);
+            scAmount = Utils.round(scAmount, mGpManager.getRoundingDigit());
             netSale += scAmount;
             vatableBeforeDisc += scAmount;
             totalVatable += scAmount;
 
-            if (netSale == 0 && VtecPosApplication.sGlobalProperty.isCalVatWhenZeroBill()) {
+            if (netSale == 0 && mGpManager.isCalVatWhenZeroBill()) {
                 totalVatable = vatableBeforeDisc;
             }
 
@@ -790,23 +791,23 @@ public class TransactionDataSource {
             double transBeforeVat = 0;
             double scVat = 0;
             double scBeforeVat = 0;
-            int vatPercent = VtecPosApplication.sShopDataSource.getVatType();
-            int vatDigit = VtecPosApplication.sGlobalProperty.getVatDigit();
-            if (VtecPosApplication.sShopDataSource.getVatType() == 1) {
+            int vatPercent = mGpManager.getVatType();
+            int vatDigit = mGpManager.getVatDigit();
+            if (mGpManager.getVatType() == 1) {
                 transVat = Utils.round(totalVatable * vatPercent / (100 + vatPercent), vatDigit);
                 transBeforeVat = totalVatable - transVat;
-                scVat = Utils.round(scAmount * vatPercent / (100 + vatPercent), VtecPosApplication.sRoundingDigit);
+                scVat = Utils.round(scAmount * vatPercent / (100 + vatPercent), mGpManager.getRoundingDigit());
                 scBeforeVat = scAmount - scVat;
             } else {
                 transVat = Utils.round(totalVatable * vatPercent / 100, vatDigit);
                 transBeforeVat = totalVatable;
-                scVat = Utils.round(scAmount * vatPercent / 100, VtecPosApplication.sRoundingDigit);
+                scVat = Utils.round(scAmount * vatPercent / 100, mGpManager.getRoundingDigit());
                 scBeforeVat = scAmount;
             }
             ContentValues cv = new ContentValues();
-            cv.put(VAT_CODE, VtecPosApplication.sShopDataSource.getVatCode());
+            cv.put(VAT_CODE, mGpManager.getVatCode());
             cv.put(VAT_PERCENT, vatPercent);
-            cv.put(SERVICE_CHARGE_PERCENT, VtecPosApplication.sShopDataSource.getScPercent());
+            cv.put(SERVICE_CHARGE_PERCENT, mGpManager.getScPercent());
             cv.put(SERVICE_CHARGE, scAmount);
             cv.put(SERVICE_CHARGE_VAT, scVat);
             cv.put(SC_BEFORE_VAT, scBeforeVat);
@@ -905,13 +906,13 @@ public class TransactionDataSource {
                             int promoLineNo = cursor2.getInt(cursor2.getColumnIndex(INSERT_NO));
                             if (cursor1.getDouble(cursor1.getColumnIndex(DISCOUNT_PERCENT)) > 0) {
                                 discountPercent = cursor1.getDouble(cursor1.getColumnIndex(DISCOUNT_PERCENT));
-                                discountAmount = Utils.round(totalPrice * discountPercent / 100, VtecPosApplication.sRoundingDigit);
+                                discountAmount = Utils.round(totalPrice * discountPercent / 100, mGpManager.getRoundingDigit());
                             } else if (cursor2.getDouble(cursor2.getColumnIndex(DISCOUNT_PERCENT)) > 0) {
                                 discountPercent = cursor2.getDouble(cursor2.getColumnIndex(DISCOUNT_PERCENT));
-                                discountAmount = Utils.round(totalPrice * discountPercent / 100, VtecPosApplication.sRoundingDigit);
+                                discountAmount = Utils.round(totalPrice * discountPercent / 100, mGpManager.getRoundingDigit());
                             } else if (cursor2.getDouble(cursor2.getColumnIndex(DISCOUNT_AMOUNT)) > 0) {
                                 discountAmount = Utils.round(productQty *
-                                        cursor2.getDouble(cursor2.getColumnIndex(DISCOUNT_AMOUNT)), VtecPosApplication.sRoundingDigit);
+                                        cursor2.getDouble(cursor2.getColumnIndex(DISCOUNT_AMOUNT)), mGpManager.getRoundingDigit());
                             }
 
                             if (discountAmount > 0) {
@@ -1046,7 +1047,7 @@ public class TransactionDataSource {
                     double billOrgDiscAmount = cursor4.getDouble(cursor4.getColumnIndex(BILL_ORG_DISC_AMOUNT));
                     if (cursor4.getDouble(cursor4.getColumnIndex(DISCOUNT_PERCENT)) > 0) {
                         discAmount = Utils.round(totalSale *
-                                cursor4.getDouble(cursor4.getColumnIndex(DISCOUNT_PERCENT)) / 100, VtecPosApplication.sRoundingDigit);
+                                cursor4.getDouble(cursor4.getColumnIndex(DISCOUNT_PERCENT)) / 100, mGpManager.getRoundingDigit());
                     } else if (billOrgDiscAmount > 0) {
                         if (billOrgDiscAmount <= totalSale) {
                             discAmount = billOrgDiscAmount;
@@ -1146,11 +1147,11 @@ public class TransactionDataSource {
         cv.put(PRINT_GROUP, model.getPrintGroup());
         cv.put(NO_PRINT_BILL, model.getNoPrintBill());
         cv.put(NO_REPRINT_ORDER, model.getNoRePrintOrder());
-        cv.put(START_TIME, VtecPosApplication.getISODateTime());
+        cv.put(START_TIME, model.getStartTime());
         cv.putNull(FINISH_TIME);
         cv.put(PRINT_STATUS, model.getPrintStatus());
         cv.put(PROCESS_ID, model.getProcessId());
-        cv.put(SUBMIT_ORDER_DATE_TIME, VtecPosApplication.getISODateTime());
+        cv.put(SUBMIT_ORDER_DATE_TIME, model.getSubmitOrderDateTime());
         cv.put(COMMENT, model.getComment());
         cv.put(IS_COMMENT, model.getIsComment());
         cv.put(DELETED, model.getDeleted());
@@ -1166,7 +1167,7 @@ public class TransactionDataSource {
      */
     public int insertTransaction(Transaction model) throws SQLException{
         int transId = getMaxTransId();
-        String saleDate = VtecPosApplication.getISODate();
+        String saleDate = model.getSaleDate();
         String[] dateSplit = saleDate.split("-");
         String year = dateSplit[0];
         String month = dateSplit[1];
@@ -1175,7 +1176,7 @@ public class TransactionDataSource {
         cv.put(TRANSACTION_ID, transId);
         cv.put(COMPUTER_ID, model.getComputerId());
         cv.put(TRANSACTION_UUID, UUID.randomUUID().toString());
-        cv.put(OPEN_TIME, VtecPosApplication.getISODateTime());
+        cv.put(OPEN_TIME, model.getOpenTime());
         cv.put(OPEN_STAFF_ID, model.getOpenStaffId());
         cv.put(SALE_MODE, model.getSaleMode());
         cv.put(NO_CUSTOMER, model.getSaleMode());
