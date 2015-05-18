@@ -6,10 +6,10 @@ import android.database.Cursor;
 import android.database.CursorWrapper;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.vtec.j1tth4.vtecpos.GlobalPropertyManager;
 import com.vtec.j1tth4.vtecpos.Utils;
-import com.vtec.j1tth4.vtecpos.VtecPosApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -1088,7 +1088,35 @@ public class TransactionDataSource {
         }
     }
 
-    public List<Transaction.OrderDetail> getOrderTransaction(int transId, int compId){
+    public Transaction.OrderDetail getOrderDetail(int transId, int compId, int orderId){
+        Transaction.OrderDetail orderDetail = null;
+        Cursor cursor = mDbHelper.openReadable().rawQuery(
+                "select a.*, b." + ProductDataSource.PRODUCT_NAME +
+                        " from " + TABLE_ORDER_DETAIL_FRONT + " a " +
+                        " left join " + ProductDataSource.TABLE_PRODUCTS + " b " +
+                        " on a." + PRODUCT_ID + "=b." + PRODUCT_ID +
+                        " where a." + TRANSACTION_ID + "=?" +
+                        " and a." + COMPUTER_ID + "=?" +
+                        " and a." + ORDER_DETAIL_ID + "=?",
+                new String[]{
+                        String.valueOf(transId),
+                        String.valueOf(compId),
+                        String.valueOf(orderId)
+                });
+        OrderDetailCursor orderCursor =
+                new OrderDetailCursor(cursor);
+        try {
+            if (orderCursor.moveToFirst()) {
+                orderDetail = orderCursor.getOrderDetail();
+            }
+        }finally {
+            if(orderCursor != null)
+                orderCursor.close();
+        }
+        return orderDetail;
+    }
+
+    public List<Transaction.OrderDetail> listOrderDetail(int transId, int compId){
         List<Transaction.OrderDetail> orderDetailList = null;
         Cursor cursor = mDbHelper.openReadable().rawQuery(
                 "select a.*, b." + ProductDataSource.PRODUCT_NAME +
@@ -1101,97 +1129,23 @@ public class TransactionDataSource {
                         String.valueOf(transId),
                         String.valueOf(compId)
                 });
+        OrderDetailCursor orderCursor =
+                new OrderDetailCursor(cursor);
         try {
-            if (cursor.moveToFirst()) {
+            if (orderCursor.moveToFirst()) {
                 orderDetailList = new ArrayList<Transaction.OrderDetail>();
-                while (!cursor.isAfterLast()){
+                while (!orderCursor.isAfterLast()){
                     Transaction.OrderDetail orderDetail =
-                            new Transaction.OrderDetail(
-                                    cursor.getInt(cursor.getColumnIndex(ORDER_DETAIL_ID)),
-                                    cursor.getInt(cursor.getColumnIndex(TRANSACTION_ID)),
-                                    cursor.getInt(cursor.getColumnIndex(COMPUTER_ID)),
-                                    cursor.getInt(cursor.getColumnIndex(COMPONENT_LEVEL)),
-                                    cursor.getInt(cursor.getColumnIndex(ORDER_DETAIL_LINK_ID)),
-                                    cursor.getInt(cursor.getColumnIndex(INSERT_ORDER_NO)),
-                                    cursor.getInt(cursor.getColumnIndex(INDENT_LEVEL)),
-                                    cursor.getInt(cursor.getColumnIndex(DISPLAY_ORDERING)),
-                                    cursor.getString(cursor.getColumnIndex(SALE_DATE)),
-                                    cursor.getInt(cursor.getColumnIndex(SHOP_ID)),
-                                    cursor.getInt(cursor.getColumnIndex(PRODUCT_ID)),
-                                    cursor.getInt(cursor.getColumnIndex(PRODUCT_SET_TYPE)),
-                                    cursor.getString(cursor.getColumnIndex(ProductDataSource.PRODUCT_NAME)),
-                                    cursor.getInt(cursor.getColumnIndex(ORDER_STATUS_ID)),
-                                    cursor.getInt(cursor.getColumnIndex(SALE_MODE)),
-                                    cursor.getDouble(cursor.getColumnIndex(TOTAL_QTY)),
-                                    cursor.getDouble(cursor.getColumnIndex(PRICE_PER_UNIT)),
-                                    cursor.getDouble(cursor.getColumnIndex(TOTAL_RETAIL_PRICE)),
-                                    cursor.getDouble(cursor.getColumnIndex(ORG_PRICE_PER_UNIT)),
-                                    cursor.getDouble(cursor.getColumnIndex(ORG_TOTAL_RETAIL_PRICE)),
-                                    cursor.getDouble(cursor.getColumnIndex(DISC_PRICE)),
-                                    cursor.getDouble(cursor.getColumnIndex(DISC_PERCENT)),
-                                    cursor.getDouble(cursor.getColumnIndex(DISC_PRICE_PERCENT)),
-                                    cursor.getDouble(cursor.getColumnIndex(DISC_AMOUNT)),
-                                    cursor.getDouble(cursor.getColumnIndex(DISC_OTHER_PERCENT)),
-                                    cursor.getDouble(cursor.getColumnIndex(DISC_OTHER)),
-                                    cursor.getDouble(cursor.getColumnIndex(TOTAL_ITEM_DISC)),
-                                    cursor.getDouble(cursor.getColumnIndex(SALE_PRICE)),
-                                    cursor.getDouble(cursor.getColumnIndex(DISC_BILL)),
-                                    cursor.getDouble(cursor.getColumnIndex(TOTAL_DISCOUNT)),
-                                    cursor.getDouble(cursor.getColumnIndex(NET_SALE)),
-                                    cursor.getDouble(cursor.getColumnIndex(VATABLE)),
-                                    cursor.getString(cursor.getColumnIndex(PRODUCT_VAT_CODE)),
-                                    cursor.getString(cursor.getColumnIndex(VAT_DISPLAY)),
-                                    cursor.getDouble(cursor.getColumnIndex(PRODUCT_VAT_PERCENT)),
-                                    cursor.getDouble(cursor.getColumnIndex(PRODUCT_VAT)),
-                                    cursor.getDouble(cursor.getColumnIndex(PRODUCT_BEFORE_VAT)),
-                                    cursor.getDouble(cursor.getColumnIndex(TOTAL_RETAIL_VAT)),
-                                    cursor.getDouble(cursor.getColumnIndex(DISC_VAT)),
-                                    cursor.getInt(cursor.getColumnIndex(IS_SC_BEFORE_DISC)),
-                                    cursor.getInt(cursor.getColumnIndex(HAS_SERVICE_CHARGE)),
-                                    cursor.getDouble(cursor.getColumnIndex(SC_PERCENT)),
-                                    cursor.getDouble(cursor.getColumnIndex(SC_AMOUNT)),
-                                    cursor.getDouble(cursor.getColumnIndex(SC_VAT)),
-                                    cursor.getDouble(cursor.getColumnIndex(SC_BEFORE_VAT)),
-                                    cursor.getDouble(cursor.getColumnIndex(W_VATABLE)),
-                                    cursor.getDouble(cursor.getColumnIndex(SCW_AMOUNT)),
-                                    cursor.getDouble(cursor.getColumnIndex(SCW_VAT)),
-                                    cursor.getDouble(cursor.getColumnIndex(SCW_BEFORE_VAT)),
-                                    cursor.getDouble(cursor.getColumnIndex(WEIGHT_PRICE)),
-                                    cursor.getDouble(cursor.getColumnIndex(WEIGHT_PRICE_VAT)),
-                                    cursor.getDouble(cursor.getColumnIndex(WEIGHT_BEFORE_VAT)),
-                                    cursor.getString(cursor.getColumnIndex(OTHER_FOOD_NAME)),
-                                    cursor.getInt(cursor.getColumnIndex(OTHER_PRODUCT_GROUP_ID)),
-                                    cursor.getInt(cursor.getColumnIndex(DISCOUNT_ALLOW)),
-                                    cursor.getInt(cursor.getColumnIndex(ITEM_DISC_ALLOW)),
-                                    cursor.getInt(cursor.getColumnIndex(LAST_TRANSACTION_ID)),
-                                    cursor.getInt(cursor.getColumnIndex(LAST_COMPUTER_ID)),
-                                    cursor.getInt(cursor.getColumnIndex(PRINTER_ID)),
-                                    cursor.getInt(cursor.getColumnIndex(INVENTORY_ID)),
-                                    cursor.getInt(cursor.getColumnIndex(ORDER_STAFF_ID)),
-                                    cursor.getInt(cursor.getColumnIndex(ORDER_COMPUTER_ID)),
-                                    cursor.getInt(cursor.getColumnIndex(ORDER_TABLE_ID)),
-                                    cursor.getInt(cursor.getColumnIndex(VOID_TYPE_ID)),
-                                    cursor.getInt(cursor.getColumnIndex(VOID_STAFF_ID)),
-                                    cursor.getString(cursor.getColumnIndex(VOID_DATE_TIME)),
-                                    cursor.getInt(cursor.getColumnIndex(VAT_TYPE)),
-                                    cursor.getInt(cursor.getColumnIndex(PRINT_GROUP)),
-                                    cursor.getInt(cursor.getColumnIndex(NO_PRINT_BILL)),
-                                    cursor.getInt(cursor.getColumnIndex(NO_REPRINT_ORDER)),
-                                    cursor.getString(cursor.getColumnIndex(START_TIME)),
-                                    cursor.getString(cursor.getColumnIndex(FINISH_TIME)),
-                                    cursor.getInt(cursor.getColumnIndex(PRINT_STATUS)),
-                                    cursor.getInt(cursor.getColumnIndex(PROCESS_ID)),
-                                    cursor.getString(cursor.getColumnIndex(SUBMIT_ORDER_DATE_TIME)),
-                                    cursor.getString(cursor.getColumnIndex(COMMENT)),
-                                    cursor.getInt(cursor.getColumnIndex(IS_COMMENT)),
-                                    cursor.getInt(cursor.getColumnIndex(DELETED)));
+                            orderCursor.getOrderDetail();
                     orderDetailList.add(orderDetail);
-                    cursor.moveToNext();
+                    orderCursor.moveToNext();
                 }
             }
         }finally {
-            if(cursor != null)
-                cursor.close();
+            if(orderCursor != null)
+                orderCursor.close();
+            if(cursor.isClosed())
+                Log.i("TransactionDataSource", "cursor is closed");
         }
         return orderDetailList;
     }
@@ -1441,5 +1395,101 @@ public class TransactionDataSource {
             cursor.close();
         }
         return maxTransId + 1;
+    }
+
+    public static class OrderDetailCursor extends CursorWrapper{
+
+        /**
+         * Creates a cursor wrapper.
+         *
+         * @param cursor The underlying cursor to wrap.
+         */
+        public OrderDetailCursor(Cursor cursor) {
+            super(cursor);
+        }
+
+        public Transaction.OrderDetail getOrderDetail(){
+            if(isBeforeFirst() || isAfterLast())
+                return null;
+            return new Transaction.OrderDetail(
+                            getInt(getColumnIndex(ORDER_DETAIL_ID)),
+                            getInt(getColumnIndex(TRANSACTION_ID)),
+                            getInt(getColumnIndex(COMPUTER_ID)),
+                            getInt(getColumnIndex(COMPONENT_LEVEL)),
+                            getInt(getColumnIndex(ORDER_DETAIL_LINK_ID)),
+                            getInt(getColumnIndex(INSERT_ORDER_NO)),
+                            getInt(getColumnIndex(INDENT_LEVEL)),
+                            getInt(getColumnIndex(DISPLAY_ORDERING)),
+                            getString(getColumnIndex(SALE_DATE)),
+                            getInt(getColumnIndex(SHOP_ID)),
+                            getInt(getColumnIndex(PRODUCT_ID)),
+                            getInt(getColumnIndex(PRODUCT_SET_TYPE)),
+                            getString(getColumnIndex(ProductDataSource.PRODUCT_NAME)),
+                            getInt(getColumnIndex(ORDER_STATUS_ID)),
+                            getInt(getColumnIndex(SALE_MODE)),
+                            getDouble(getColumnIndex(TOTAL_QTY)),
+                            getDouble(getColumnIndex(PRICE_PER_UNIT)),
+                            getDouble(getColumnIndex(TOTAL_RETAIL_PRICE)),
+                            getDouble(getColumnIndex(ORG_PRICE_PER_UNIT)),
+                            getDouble(getColumnIndex(ORG_TOTAL_RETAIL_PRICE)),
+                            getDouble(getColumnIndex(DISC_PRICE)),
+                            getDouble(getColumnIndex(DISC_PERCENT)),
+                            getDouble(getColumnIndex(DISC_PRICE_PERCENT)),
+                            getDouble(getColumnIndex(DISC_AMOUNT)),
+                            getDouble(getColumnIndex(DISC_OTHER_PERCENT)),
+                            getDouble(getColumnIndex(DISC_OTHER)),
+                            getDouble(getColumnIndex(TOTAL_ITEM_DISC)),
+                            getDouble(getColumnIndex(SALE_PRICE)),
+                            getDouble(getColumnIndex(DISC_BILL)),
+                            getDouble(getColumnIndex(TOTAL_DISCOUNT)),
+                            getDouble(getColumnIndex(NET_SALE)),
+                            getDouble(getColumnIndex(VATABLE)),
+                            getString(getColumnIndex(PRODUCT_VAT_CODE)),
+                            getString(getColumnIndex(VAT_DISPLAY)),
+                            getDouble(getColumnIndex(PRODUCT_VAT_PERCENT)),
+                            getDouble(getColumnIndex(PRODUCT_VAT)),
+                            getDouble(getColumnIndex(PRODUCT_BEFORE_VAT)),
+                            getDouble(getColumnIndex(TOTAL_RETAIL_VAT)),
+                            getDouble(getColumnIndex(DISC_VAT)),
+                            getInt(getColumnIndex(IS_SC_BEFORE_DISC)),
+                            getInt(getColumnIndex(HAS_SERVICE_CHARGE)),
+                            getDouble(getColumnIndex(SC_PERCENT)),
+                            getDouble(getColumnIndex(SC_AMOUNT)),
+                            getDouble(getColumnIndex(SC_VAT)),
+                            getDouble(getColumnIndex(SC_BEFORE_VAT)),
+                            getDouble(getColumnIndex(W_VATABLE)),
+                            getDouble(getColumnIndex(SCW_AMOUNT)),
+                            getDouble(getColumnIndex(SCW_VAT)),
+                            getDouble(getColumnIndex(SCW_BEFORE_VAT)),
+                            getDouble(getColumnIndex(WEIGHT_PRICE)),
+                            getDouble(getColumnIndex(WEIGHT_PRICE_VAT)),
+                            getDouble(getColumnIndex(WEIGHT_BEFORE_VAT)),
+                            getString(getColumnIndex(OTHER_FOOD_NAME)),
+                            getInt(getColumnIndex(OTHER_PRODUCT_GROUP_ID)),
+                            getInt(getColumnIndex(DISCOUNT_ALLOW)),
+                            getInt(getColumnIndex(ITEM_DISC_ALLOW)),
+                            getInt(getColumnIndex(LAST_TRANSACTION_ID)),
+                            getInt(getColumnIndex(LAST_COMPUTER_ID)),
+                            getInt(getColumnIndex(PRINTER_ID)),
+                            getInt(getColumnIndex(INVENTORY_ID)),
+                            getInt(getColumnIndex(ORDER_STAFF_ID)),
+                            getInt(getColumnIndex(ORDER_COMPUTER_ID)),
+                            getInt(getColumnIndex(ORDER_TABLE_ID)),
+                            getInt(getColumnIndex(VOID_TYPE_ID)),
+                            getInt(getColumnIndex(VOID_STAFF_ID)),
+                            getString(getColumnIndex(VOID_DATE_TIME)),
+                            getInt(getColumnIndex(VAT_TYPE)),
+                            getInt(getColumnIndex(PRINT_GROUP)),
+                            getInt(getColumnIndex(NO_PRINT_BILL)),
+                            getInt(getColumnIndex(NO_REPRINT_ORDER)),
+                            getString(getColumnIndex(START_TIME)),
+                            getString(getColumnIndex(FINISH_TIME)),
+                            getInt(getColumnIndex(PRINT_STATUS)),
+                            getInt(getColumnIndex(PROCESS_ID)),
+                            getString(getColumnIndex(SUBMIT_ORDER_DATE_TIME)),
+                            getString(getColumnIndex(COMMENT)),
+                            getInt(getColumnIndex(IS_COMMENT)),
+                            getInt(getColumnIndex(DELETED)));
+        }
     }
 }

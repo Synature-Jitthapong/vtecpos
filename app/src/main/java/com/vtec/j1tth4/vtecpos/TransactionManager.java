@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class TransactionManager {
 
-    private int currentTransId = 7;
+    private int currentTransId;
     private static TransactionManager sInstance = null;
     private Context mContext;
 
@@ -28,14 +28,21 @@ public class TransactionManager {
         mContext = c;
     }
 
-    public List<Transaction.OrderDetail> getOrder(){
+    public Transaction.OrderDetail getOrder(int orderId){
         TransactionDataSource dataSource =
                 new TransactionDataSource(mContext);
         GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
-        return dataSource.getOrderTransaction(currentTransId, gm.getComputerId());
+        return dataSource.getOrderDetail(currentTransId, gm.getComputerId(), orderId);
     }
 
-    public void insertOrder(ProductData.Products product, double qty){
+    public List<Transaction.OrderDetail> listOrder(){
+        TransactionDataSource dataSource =
+                new TransactionDataSource(mContext);
+        GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
+        return dataSource.listOrderDetail(currentTransId, gm.getComputerId());
+    }
+
+    public int insertOrder(ProductData.Products product, double qty){
         TransactionDataSource dataSource =
                 new TransactionDataSource(mContext);
         GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
@@ -103,7 +110,7 @@ public class TransactionManager {
 //        cv.put(COMMENT, model.getComment());
 //        cv.put(IS_COMMENT, model.getIsComment());
 //        cv.put(DELETED, model.getDeleted());
-        dataSource.insertOrderDetail(orderDetail);
+        return dataSource.insertOrderDetail(orderDetail);
     }
 
     public void insertTransaction(){

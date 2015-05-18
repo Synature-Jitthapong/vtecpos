@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.google.android.gms.analytics.ecommerce.Product;
 import com.vtec.j1tth4.vtecpos.provider.ProductDataSource;
 import com.vtec.j1tth4.vtecpos.provider.ProductData;
+import com.vtec.j1tth4.vtecpos.provider.Transaction;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -94,8 +95,9 @@ public class MenuFragment extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ProductData.Products product = (ProductData.Products) parent.getItemAtPosition(position);
-                TransactionManager.getInstance(getActivity()).insertOrder(product, 1);
-                bus.post(new MenuClickEvent());
+                TransactionManager manager = TransactionManager.getInstance(getActivity());
+                int orderId = manager.insertOrder(product, 1);
+                bus.post(new MenuClickEvent(orderId));
             }
         });
     }

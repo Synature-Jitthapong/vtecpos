@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -45,7 +44,7 @@ public class OrderListFragment extends Fragment{
         super.onCreate(savedInstanceState);
         mBus.register(this);
         TransactionManager manager = TransactionManager.getInstance(getActivity());
-        mOrderList = manager.getOrder();
+        mOrderList = manager.listOrder();
     }
 
     @Override
@@ -56,9 +55,8 @@ public class OrderListFragment extends Fragment{
 
     public void onEvent(MenuClickEvent event){
         TransactionManager manager = TransactionManager.getInstance(getActivity());
-        mOrderList = manager.getOrder();
+        mOrderList.add(manager.getOrder(event.getOrderId()));
         mOrderAdapter.notifyDataSetChanged();
-        mLvOrder.scrollToPosition(mOrderAdapter.getItemCount());
     }
 
     @Override
