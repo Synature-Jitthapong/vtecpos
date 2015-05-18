@@ -1,35 +1,42 @@
 package com.vtec.j1tth4.vtecpos;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.ecommerce.Product;
 import com.vtec.j1tth4.vtecpos.provider.ProductDataSource;
-import com.vtec.j1tth4.vtecpos.provider.Product;
+import com.vtec.j1tth4.vtecpos.provider.ProductData;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by j1tth4 on 3/27/15.
  * This fragment used for create menu grid view
  */
-public class MenuFragment extends Fragment implements OnClickListener{
+public class MenuFragment extends Fragment{
 
     public static final String SLIDING_TAB_TITLE = "sliding_tab_title";
 
-    @Override
-    public void onClick(View view) {
-
-    }
+    EventBus bus = EventBus.getDefault();
 
     public static class MenuItem{
         private String menuName;
@@ -49,7 +56,7 @@ public class MenuFragment extends Fragment implements OnClickListener{
         }
     }
 
-    private List<Product.Products> mProductList
+    private List<ProductData.Products> mProductList
             = new ArrayList<>();
 
     private GridView mGvMenu;
@@ -70,7 +77,7 @@ public class MenuFragment extends Fragment implements OnClickListener{
         int groupId = getArguments().getInt("groupId");
         int deptId = getArguments().getInt("deptId");
         ProductDataSource product = new ProductDataSource(getActivity());
-        mProductList = product.getProducts(groupId, deptId);
+        mProductList = product.getProducts(groupId, deptId, 1, Utils.getISODate());
     }
 
     @Override
@@ -83,6 +90,14 @@ public class MenuFragment extends Fragment implements OnClickListener{
         super.onViewCreated(view, savedInstanceState);
         mGvMenu = (GridView) view.findViewById(R.id.gvMenu);
         mGvMenu.setAdapter(new MenuItemAdapter());
+        mGvMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ProductData.Products product = (ProductData.Products) parent.getItemAtPosition(position);
+                TransactionManager.getInstance(getActivity()).insertOrder(product, 1);
+                bus.post(new MenuClickEvent());
+            }
+        });
     }
 
     private class MenuItemAdapter extends BaseAdapter{
@@ -115,7 +130,9 @@ public class MenuFragment extends Fragment implements OnClickListener{
             }else{
                 holder = (ViewHolder) view.getTag();
             }
-            holder.tvTitle.setText(mProductList.get(i).getProductName());
+            final ProductData.Products product = mProductList.get(i);
+            holder.tvTitle.setText(product.getProductName());
+            holder.tvSub.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(product.getProductPrice()));
             holder.img.setImageDrawable(null);
             return view;
         }

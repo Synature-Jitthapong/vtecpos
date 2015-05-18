@@ -6,7 +6,7 @@
     <GridView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="5"
+        android:numColumns="6"
         android:horizontalSpacing="@dimen/default_horizontal_margin"
         android:verticalSpacing="@dimen/default_vertical_margin"
         android:id="@+id/gvMenu"

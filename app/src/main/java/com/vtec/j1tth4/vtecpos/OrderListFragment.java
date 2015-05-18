@@ -1,45 +1,39 @@
 package com.vtec.j1tth4.vtecpos;
 
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.vtec.j1tth4.vtecpos.provider.TransactionDataSource;
-import com.vtec.j1tth4.vtecpos.provider.ProductDataSource;
+import com.vtec.j1tth4.vtecpos.provider.Transaction;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+
+import de.greenrobot.event.EventBus;
 
 /**
  * Created by j1tth4 on 3/27/15.
  */
-public class OrderListFragment extends Fragment {
+public class OrderListFragment extends Fragment{
 
-    public static final String[] PROJECTION = {
-            TransactionDataSource.TRANSACTION_ID,
-            TransactionDataSource.COMPUTER_ID,
-            TransactionDataSource.TOTAL_QTY,
-            TransactionDataSource.TOTAL_RETAIL_PRICE,
-            ProductDataSource.PRODUCT_NAME,
-            ProductDataSource.PRODUCT_NAME_LANG1,
-            ProductDataSource.PRODUCT_NAME_LANG2,
-            ProductDataSource.PRODUCT_NAME_LANG3,
-            ProductDataSource.PRODUCT_NAME_LANG4,
-            ProductDataSource.PRODUCT_NAME_LANG5,
-    };
+    private EventBus mBus = EventBus.getDefault();
 
-    private Cursor mCursor;
-
+    private List<Transaction.OrderDetail> mOrderList;
+    private OrderListAdapter mOrderAdapter;
     private RecyclerView mLvOrder;
     private ListView mLvOrderSummary;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,13 +43,39 @@ public class OrderListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mBus.register(this);
+        TransactionManager manager = TransactionManager.getInstance(getActivity());
+        mOrderList = manager.getOrder();
+    }
+
+    @Override
+    public void onDestroy() {
+        mBus.unregister(this);
+        super.onDestroy();
+    }
+
+    public void onEvent(MenuClickEvent event){
+        TransactionManager manager = TransactionManager.getInstance(getActivity());
+        mOrderList = manager.getOrder();
+        mOrderAdapter.notifyDataSetChanged();
+        mLvOrder.scrollToPosition(mOrderAdapter.getItemCount());
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mLvOrder = (RecyclerView) view.findViewById(R.id.lvOrder);
-        mLvOrder.setAdapter(new OrderListAdapter());
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mLvOrder.setHasFixedSize(true);
+
+        // use a linear layout manager
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mLvOrder.setLayoutManager(mLayoutManager);
+
+        mOrderAdapter = new OrderListAdapter();
+        mLvOrder.setAdapter(mOrderAdapter);
 
         mLvOrderSummary = (ListView) view.findViewById(R.id.lvSummary);
         mLvOrderSummary.setAdapter(new OrderSummaryListAdapter());
@@ -68,7 +88,7 @@ public class OrderListFragment extends Fragment {
             TextView tvOrderTitle;
             TextView tvOrderSub;
             TextView tvOrderPrice;
-            Button btnOrderDel;
+            ImageButton btnMore;
 
             public ViewHolder(View itemView) {
                 super(itemView);
@@ -76,7 +96,7 @@ public class OrderListFragment extends Fragment {
                 tvOrderTitle = (TextView) itemView.findViewById(R.id.tvOrderTitle);
                 tvOrderSub = (TextView) itemView.findViewById(R.id.tvOrderSub);
                 tvOrderPrice = (TextView) itemView.findViewById(R.id.tvOrderPrice);
-                btnOrderDel = (Button) itemView.findViewById(R.id.btnOrderDel);
+                btnMore = (ImageButton) itemView.findViewById(R.id.btnMore);
             }
         }
 
@@ -89,12 +109,15 @@ public class OrderListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ViewHolder viewHolder, int i) {
-
+            Transaction.OrderDetail orderDetail = mOrderList.get(i);
+            viewHolder.tvOrderQty.setText(NumberFormat.getInstance().format(orderDetail.getTotalQty()));
+            viewHolder.tvOrderTitle.setText(orderDetail.getProductName());
+            viewHolder.tvOrderPrice.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(orderDetail.getTotalRetailPrice()));
         }
 
         @Override
         public int getItemCount() {
-            return 0;
+            return mOrderList != null ? mOrderList.size() : 0;
         }
     }
 

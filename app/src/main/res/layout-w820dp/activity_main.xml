@@ -7,14 +7,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <FrameLayout
-            android:layout_width="320dp"
+            android:layout_width="420dp"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:id="@+id/leftcontent"
             android:paddingLeft="@dimen/default_horizontal_margin"
-            android:layout_alignBottom="@+id/btnDiscount"
-            android:layout_below="@+id/linearLayout2"></FrameLayout>
+            android:layout_below="@+id/linearLayout2"
+            android:layout_above="@+id/btnFastPay"></FrameLayout>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/leftcontent"
             android:id="@+id/rightcontent"
-            android:layout_above="@+id/btnFastPay"></FrameLayout>
+            android:layout_above="@+id/btnDiscount"></FrameLayout>
 
         <Button
             android:layout_width="wrap_content"
@@ -30,8 +30,8 @@
             android:text="@string/fast_pay"
             android:id="@+id/btnFastPay"
             android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@+id/btnDiscount"
-            android:layout_toEndOf="@+id/btnDiscount" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <Button
             android:layout_width="wrap_content"
@@ -48,7 +48,7 @@
             android:layout_height="wrap_content"
             android:text="@string/discount_short"
             android:id="@+id/btnDiscount"
-            android:layout_alignTop="@+id/btnFastPay"
+            android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/leftcontent"
             android:layout_toEndOf="@+id/leftcontent" />
 

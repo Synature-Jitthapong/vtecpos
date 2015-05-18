@@ -1,5 +1,8 @@
 package com.vtec.j1tth4.vtecpos.provider;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by j1tth4 on 5/1/15 AD.
  */
@@ -83,7 +86,13 @@ public class Transaction {
     private int fromDepositComputerId;
     private int deleted;
 
+    private List<OrderDetail> mOrderDetailLst;
+
     public Transaction(){
+        mOrderDetailLst = new ArrayList<OrderDetail>();
+        noCustomer = 1;
+        saleMode = 1;
+        docType = 8;
     }
 
     public int getTransactionId() {
@@ -788,11 +797,13 @@ public class Transaction {
         private String comment;
         private int isComment;
         private int deleted;
+        private String productName;
 
         public OrderDetail(){
         }
 
-        public OrderDetail(int orderDetailId, int transactionId, int computerId, int componentLevel, int orderDetailLinkId, int insertOrderNo, int indentLevel, int displayOrdering, String saleDate, int shopId, int productId, int productSetType, int orderStatusId, int saleMode, double totalQty, double pricePerUnit, double totalRetailPrice, double orgPricePerUnit, double orgTotalRetailPrice, double discPrice, double discPercent, double discPricePercent, double discAmount, double discOtherPercent, double discOther, double totalItemDisc, double salePrice, double discBill, double totalDiscount, double netSale, double vatable, String productVATCode, String vatDisplay, double productVATPercent, double productVAT, double productBeforeVAT, double totalRetailVAT, double discVAT, int isSCBeforeDisc, int hasServiceCharge, double scPercent, double scAmount, double scVAT, double scBeforeVAT, double wVatable, double scWAmount, double scWVAT, double scWBeforeVAT, double weightPrice, double weightPriceVAT, double weightBeforeVAT, String otherFoodName, int otherProductGroupID, int discountAllow, int itemDiscAllow, int lastTransactionId, int lastComputerId, int printerId, int inventoryId, int orderStaffId, int orderComputerId, int orderTableId, int voidTypeId, int voidStaffId, String voidDateTime, int vatType, int printGroup, int noPrintBill, int noRePrintOrder, String startTime, String finishTime, int printStatus, int processId, String submitOrderDateTime, String comment, int isComment, int deleted) {
+        public OrderDetail(int orderDetailId, int transactionId, int computerId, int componentLevel, int orderDetailLinkId, int insertOrderNo, int indentLevel, int displayOrdering, String saleDate, int shopId, int productId, int productSetType,
+                           String productName, int orderStatusId, int saleMode, double totalQty, double pricePerUnit, double totalRetailPrice, double orgPricePerUnit, double orgTotalRetailPrice, double discPrice, double discPercent, double discPricePercent, double discAmount, double discOtherPercent, double discOther, double totalItemDisc, double salePrice, double discBill, double totalDiscount, double netSale, double vatable, String productVATCode, String vatDisplay, double productVATPercent, double productVAT, double productBeforeVAT, double totalRetailVAT, double discVAT, int isSCBeforeDisc, int hasServiceCharge, double scPercent, double scAmount, double scVAT, double scBeforeVAT, double wVatable, double scWAmount, double scWVAT, double scWBeforeVAT, double weightPrice, double weightPriceVAT, double weightBeforeVAT, String otherFoodName, int otherProductGroupID, int discountAllow, int itemDiscAllow, int lastTransactionId, int lastComputerId, int printerId, int inventoryId, int orderStaffId, int orderComputerId, int orderTableId, int voidTypeId, int voidStaffId, String voidDateTime, int vatType, int printGroup, int noPrintBill, int noRePrintOrder, String startTime, String finishTime, int printStatus, int processId, String submitOrderDateTime, String comment, int isComment, int deleted) {
             this.orderDetailId = orderDetailId;
             this.transactionId = transactionId;
             this.computerId = computerId;
@@ -805,6 +816,7 @@ public class Transaction {
             this.shopId = shopId;
             this.productId = productId;
             this.productSetType = productSetType;
+            this.productName = productName;
             this.orderStatusId = orderStatusId;
             this.saleMode = saleMode;
             this.totalQty = totalQty;
@@ -910,6 +922,14 @@ public class Transaction {
 
         public void setOrderDetailLinkId(int orderDetailLinkId) {
             this.orderDetailLinkId = orderDetailLinkId;
+        }
+
+        public String getProductName() {
+            return productName;
+        }
+
+        public void setProductName(String productName) {
+            this.productName = productName;
         }
 
         public int getInsertOrderNo() {

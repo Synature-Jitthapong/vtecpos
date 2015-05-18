@@ -1,5 +1,6 @@
 package com.vtec.j1tth4.vtecpos;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.vtec.j1tth4.vtecpos.provider.ProductDataSource;
-import com.vtec.j1tth4.vtecpos.provider.Product;
+import com.vtec.j1tth4.vtecpos.provider.ProductData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +21,8 @@ import java.util.List;
  */
 public class FoodMenuFragment extends Fragment {
 
-    private List<Product.ProductGroups> mProductGroupList = new ArrayList<>();
-    private List<Product.ProductDept> mProductDeptList = new ArrayList<>();
+    private List<ProductData.ProductGroups> mProductGroupList = new ArrayList<>();
+    private List<ProductData.ProductDept> mProductDeptList = new ArrayList<>();
 
     private static class FoodMenuPageItem{
         private final CharSequence mTitle;
@@ -71,7 +72,7 @@ public class FoodMenuFragment extends Fragment {
         ProductDataSource product = new ProductDataSource(getActivity());
         mProductDeptList = product.getProductDepts(0);
         for(int i = 0; i < mProductDeptList.size(); i++){
-            Product.ProductDept productDept = mProductDeptList.get(i);
+            ProductData.ProductDept productDept = mProductDeptList.get(i);
             mTabs.add(new FoodMenuPageItem(productDept.getProductDeptName(),
                     productDept.getProductGroupId(), productDept.getProductDeptId()));
         }

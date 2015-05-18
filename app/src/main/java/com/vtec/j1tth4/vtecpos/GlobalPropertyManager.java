@@ -2,6 +2,8 @@ package com.vtec.j1tth4.vtecpos;
 
 import android.content.Context;
 
+import com.vtec.j1tth4.vtecpos.provider.Computer;
+import com.vtec.j1tth4.vtecpos.provider.ComputerDataSource;
 import com.vtec.j1tth4.vtecpos.provider.GlobalProperty;
 import com.vtec.j1tth4.vtecpos.provider.GlobalPropertyDataSource;
 import com.vtec.j1tth4.vtecpos.provider.Shop;
@@ -13,6 +15,10 @@ import java.util.List;
  * Created by j1tth4 on 5/17/15 AD.
  */
 public class GlobalPropertyManager {
+    private int shopId;
+    private int computerId;
+    private int staffId = 1;
+
     private int roundingDigit = 2;
     private int vatDigit = 2;
     private int vatType = 1;
@@ -23,15 +29,15 @@ public class GlobalPropertyManager {
 
     private static GlobalPropertyManager sInstance = null;
 
-    public static GlobalPropertyManager getInstance(Context context){
+    public static GlobalPropertyManager getInstance(Context c){
         if(sInstance == null){
-            sInstance = new GlobalPropertyManager(context);
+            sInstance = new GlobalPropertyManager(c);
         }
         return sInstance;
     }
 
-    private GlobalPropertyManager(Context context){
-        ShopDataSource sd = new ShopDataSource(context);
+    private GlobalPropertyManager(Context c){
+        ShopDataSource sd = new ShopDataSource(c);
         Shop s = sd.loadVatShopData(0);
         if(s == null)
             throw new ExceptionInInitializerError("Shop data is null");
@@ -39,8 +45,15 @@ public class GlobalPropertyManager {
         isScBeforeDisc = s.getIsSCBeforeDisc() == 1 ? true : false;
         vatType = s.getVATType();
         vatCode = s.getVATCode();
+        shopId = s.getShopID();
 
-        GlobalPropertyDataSource globalProperty = new GlobalPropertyDataSource(context);
+        ComputerDataSource cd = new ComputerDataSource(c);
+        Computer computer = cd.loadComputerData();
+        if(computer == null)
+            throw new ExceptionInInitializerError("Computer data is null");
+        computerId = computer.getComputerID();
+
+        GlobalPropertyDataSource globalProperty = new GlobalPropertyDataSource(c);
         List<GlobalProperty> gbl = globalProperty.listProgramProperty();
         if(gbl == null)
             throw new ExceptionInInitializerError("Global property variable is null");
@@ -54,6 +67,18 @@ public class GlobalPropertyManager {
                     break;
             }
         }
+    }
+
+    public int getStaffId() {
+        return staffId;
+    }
+
+    public int getShopId() {
+        return shopId;
+    }
+
+    public int getComputerId() {
+        return computerId;
     }
 
     public int getRoundingDigit() {

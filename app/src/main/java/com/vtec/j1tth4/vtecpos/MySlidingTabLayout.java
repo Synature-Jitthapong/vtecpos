@@ -50,32 +50,32 @@ public class MySlidingTabLayout extends HorizontalScrollView {
         addView(mTabStrip, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
         final OnClickListener tabClickListener = new TabClickListener();
-        for (int i = 0; i < GROUPS.length; i++) {
-            View tabView = null;
-            TextView tabTitleView = null;
-
-            if (mTabViewLayoutId != 0) {
-                // If there is a custom tab view layout id set, try and inflate it
-                tabView = LayoutInflater.from(getContext()).inflate(mTabViewLayoutId, mTabStrip,
-                        false);
-                tabTitleView = (TextView) tabView.findViewById(mTabViewTextViewId);
-            }
-
-            if (tabView == null) {
-                tabView = createDefaultTabView(getContext());
-            }
-
-            if (tabTitleView == null && TextView.class.isInstance(tabView)) {
-                tabTitleView = (TextView) tabView;
-            }
-
-            tabTitleView.setText(GROUPS[i]);
-            tabTitleView.setOnClickListener(tabClickListener);
-            if(i==0){
-                tabView.setBackgroundColor(getResources().getColor(R.color.grey_50));
-            }
-            mTabStrip.addView(tabView);
-        }
+//        for (int i = 0; i < GROUPS.length; i++) {
+//            View tabView = null;
+//            TextView tabTitleView = null;
+//
+//            if (mTabViewLayoutId != 0) {
+//                // If there is a custom tab view layout id set, try and inflate it
+//                tabView = LayoutInflater.from(getContext()).inflate(mTabViewLayoutId, mTabStrip,
+//                        false);
+//                tabTitleView = (TextView) tabView.findViewById(mTabViewTextViewId);
+//            }
+//
+//            if (tabView == null) {
+//                tabView = createDefaultTabView(getContext());
+//            }
+//
+//            if (tabTitleView == null && TextView.class.isInstance(tabView)) {
+//                tabTitleView = (TextView) tabView;
+//            }
+//
+//            tabTitleView.setText(GROUPS[i]);
+//            tabTitleView.setOnClickListener(tabClickListener);
+//            if(i==0){
+//                tabView.setBackgroundColor(getResources().getColor(R.color.grey_50));
+//            }
+//            mTabStrip.addView(tabView);
+//        }
     }
 
     protected TextView createDefaultTabView(Context context) {

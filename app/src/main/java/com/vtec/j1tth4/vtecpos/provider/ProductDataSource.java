@@ -16,6 +16,7 @@ public class ProductDataSource {
     public static final String TABLE_PRODUCTS = "Products";
     public static final String TABLE_PRODUCT_PRICE = "ProductPrice";
     public static final String TABLE_PRODUCT_VAT = "ProductVAT";
+    public static final String TABLE_PRODUCT_TYPE = "ProductType";
 
     public static final String PRODUCT_GROUP_ID = "ProductGroupID";
     public static final String PRODUCT_GROUP_CODE = "ProductGroupCode";
@@ -118,126 +119,22 @@ public class ProductDataSource {
     public static final String PRICE_REMARK = "PriceRemark";
     public static final String FROM_DATE = "FromDate";
     public static final String TO_DATE = "ToDate";
+    public static final String VAT_CODE = "VATCode";
+    public static final String PRODUCT_TYPE_ID = "ProductTypeID";
+    public static final String PRODUCT_TYPE_NAME = "ProductTypeName";
+    public static final String PRODUCT_TYPE_COMPONENT_LEVEL = "ComponentLevel";
+    public static final String PRODUCT_TYPE_SHOW_IN_FRONT = "ShowInFront";
+    public static final String PRODUCT_TYPE_SHOW_IN_RECEIPT = "ShowInReceipt";
+    public static final String PRODUCT_TYPE_AUTO_ADD_MATERIAL = "AutoAddMaterial";
+    public static final String PRODUCT_TYPE_NOT_IN_REVENUE = "NotInRevenue";
+    public static final String PRODUCT_TYPE_WEIGHT_PRICE_FOR_REVENUE = "WeightPriceForRevenue";
+    public static final String PRODUCT_TYPE_IS_COMMENT = "IsComment";
+    public static final String PRODUCT_TYPE_DISPLAY_ORDERING = "DisplayOrdering";
+    public static final String PRODUCT_VAT_ID = "ProductVATID";
     public static final String PRODUCT_VAT_CODE = "ProductVATCode";
     public static final String PRODUCT_VAT_PERCENT = "ProductVATPercent";
-
-    public static final String[] ALL_PRODUCT_PRICE_COLUMN = {
-            PRODUCT_PRICE_ID,
-            PRODUCT_PRICE,
-            PREPAID_PRICE,
-            MAIN_PRICE,
-            PRICE_REMARK,
-            FROM_DATE,
-            TO_DATE
-    };
-
-    public static final String[] ALL_PRODUCT_COLUMN = {
-            PRODUCT_ID,
-            SHOP_ID,
-            INVENTORY_ID,
-            PRODUCT_CAT_1ID,
-            PRODUCT_CAT_2ID,
-            PRODUCT_CAT_3ID,
-            PRODUCT_CAT_4ID,
-            PRODUCT_CAT_5ID,
-            PRODUCT_CODE,
-            PRODUCT_BARCODE,
-            PRODUCT_NAME,
-            PRODUCT_NAME_LANG1,
-            PRODUCT_NAME_LANG2,
-            PRODUCT_NAME_LANG3,
-            PRODUCT_NAME_LANG4,
-            PRODUCT_NAME_LANG5,
-            PRODUCT_MNAME,
-            PRODUCT_MNAME_LANG1,
-            PRODUCT_MNAME_LANG2,
-            PRODUCT_MNAME_LANG3,
-            PRODUCT_MNAME_LANG4,
-            PRODUCT_MNAME_LANG5,
-            PRODUCT_PICTURE_SERVER,
-            PRODUCT_PICTURE_CLIENT,
-            PRINTER_ID,
-            PRINT_GROUP,
-            PRINT_PRODUCT_NAME,
-            DURATION_TIME,
-            HAS_SERVICE_CHARGE,
-            IS_OUTOF_STOCK,
-            AUTO_COMMENT,
-            IS_DISPLAY_BILl,
-            IS_PRINT_CHECK,
-            IS_PRINT_RECEIPT,
-            CAN_RETURN_PRODUCT,
-            DISPLAY_AT_CHECKER_SYSTEM,
-            PRODUCT_ENABLE_DATE_TIME,
-            PRODUCT_EXPIRE_DATE_TIME,
-            PRODUCT_ENABLE_DAY_STRING,
-            WARNING_TIME,
-            CRITICAL_TIME,
-            SALE_MODE1,
-            SALE_MODE2,
-            SALE_MODE3,
-            SALE_MODE4,
-            SALE_MODE5,
-            SALE_MODE6,
-            SALE_MODE7,
-            SALE_MODE8,
-            SALE_MODE9,
-            SALE_MODE10,
-            PRODUCT_UNIT_NAME,
-            ZERO_PRICE_ALLOW,
-            LIMIT_DISCOUNT_AMOUNT,
-            LIMIT_DISCOUNT_PERCENT,
-            COMM_RATE,
-            PRODUCT_DESP,
-            PRODUCT_DISPLAY,
-            PRODUCT_ACTIVATE,
-            PRODUCT_ORDERING,
-            PRINT_ORDERING,
-            ADDING_FROM_BRANCH,
-            DELETED,
-    };
-
-    public static final String[] ALL_PRODUCT_DEPT_COLUMN = {
-            PRODUCT_DEPT_ID,
-            PRODUCT_GROUP_ID,
-            SHOP_ID,
-            PRODUCT_DEPT_CODE,
-            PRODUCT_DEPT_NAME,
-            PRODUCT_DEPT_NAME_LANG1,
-            PRODUCT_DEPT_NAME_LANG2,
-            PRODUCT_DEPT_NAME_LANG3,
-            PRODUCT_DEPT_NAME_LANG4,
-            PRODUCT_DEPT_NAME_LANG5,
-            PRODUCT_DEPT_ACTIVATE,
-            PRODUCT_DEPT_SALE_MODE,
-            PRODUCT_DEPT_ORDERING,
-            PRINT_PRODUCT_FOR_SESSION,
-            PRINT_RECEIPT_GROUP_DEPT,
-            DISPLAY_MOBILE,
-            ADDING_FROM_BRANCH,
-            DELETED
-    };
-
-    public static final String[] ALL_PRODUCT_GROUP_COLUMN = {
-            PRODUCT_GROUP_ID,
-            SHOP_ID,
-            PRODUCT_GROUP_CODE,
-            PRODUCT_GROUP_NAME,
-            PRODUCT_GROUP_NAME_LANG1,
-            PRODUCT_GROUP_NAME_LANG2,
-            PRODUCT_GROUP_NAME_LANG3,
-            PRODUCT_GROUP_NAME_LANG4,
-            PRODUCT_GROUP_NAME_LANG5,
-            PRODUCT_ACTIVATE,
-            PRODUCT_GROUP_SALE_MODE,
-            PRODUCT_GROUP_TYPE,
-            PRODUCT_GROUP_ORDERING,
-            PRINT_DEPT_FOR_SESSION,
-            DISPLAY_MOBILE,
-            IS_COMMENT,
-            ADDING_FROM_BRANCH,
-            DELETED
-    };
+    public static final String PRODUCT_VAT_DISPLAY = "VATDisplay";
+    public static final String PRODUCT_VAT_DESP = "VATDesp";
 
     private DatabaseHelper mDbHelper;
 
@@ -246,143 +143,145 @@ public class ProductDataSource {
     }
 
     /**
-     * @param productId
-     * @param saleMode
-     * @param isoCurrDate
-     * @return 0 if no record instead use open price
-     */
-    public double getProductPrice(int productId, int saleMode, String isoCurrDate){
-        double productPrice = 0;
-        String selection = PRODUCT_ID + "=?" +
-                " and " + SALE_MODE + "=?" +
-                " and " + FROM_DATE + "<=?" +
-                " and " + TO_DATE + ">=?";
-        String[] selectionArgs = new String[]{
-                String.valueOf(productId),
-                String.valueOf(saleMode),
-                isoCurrDate,
-                isoCurrDate
-        };
-        Cursor cursor = mDbHelper.openReadable().query(
-                TABLE_PRODUCT_PRICE,
-                ALL_PRODUCT_PRICE_COLUMN,
-                selection,
-                selectionArgs,
-                null, null, null);
-        boolean haveRecord = cursor.moveToFirst();
-        if(haveRecord){
-            productPrice = cursor.getDouble(cursor.getColumnIndex(PRODUCT_PRICE));
-        }
-        cursor.close();
-        if(saleMode > 1 && !haveRecord){
-            selectionArgs = new String[]{
-                    String.valueOf(productId),
-                    "1",
-                    isoCurrDate,
-                    isoCurrDate
-            };
-            cursor = mDbHelper.openReadable().query(
-                    TABLE_PRODUCT_PRICE,
-                    ALL_PRODUCT_PRICE_COLUMN,
-                    selection,
-                    selectionArgs,
-                    null, null, null);
-            if(cursor.moveToFirst()){
-                productPrice = cursor.getDouble(cursor.getColumnIndex(PRODUCT_PRICE));
-            }
-            cursor.close();
-        }
-        return productPrice;
-    }
-
-    /**
      * @param groupId
      * @param deptId
+     * @param saleMode
+     * @param saleDate
      * @return null if no record
      */
-    public List<Product.Products> getProducts(int groupId, int deptId){
-        List<Product.Products> productsList = null;
-        Cursor cursor = mDbHelper.openReadable().query(
-                TABLE_PRODUCTS,
-                ALL_PRODUCT_COLUMN,
-                PRODUCT_GROUP_ID + "=?" +
-                        " and " + PRODUCT_DEPT_ID + "=?" +
-                        " and " + DELETED + "=?",
+    public List<ProductData.Products> getProducts(int groupId, int deptId,
+                                                  int saleMode, String saleDate){
+        List<ProductData.Products> productsList = null;
+        Cursor cursor = mDbHelper.openReadable().rawQuery(
+                "select a.*, b." + PRODUCT_TYPE_COMPONENT_LEVEL + ", " +
+                        " c." + PRODUCT_VAT_PERCENT + ", " +
+                        " c." + PRODUCT_VAT_DISPLAY + ", " +
+                        " c." + PRODUCT_VAT_DESP + ", " +
+                        " case when (select " + PRODUCT_PRICE + " from " + TABLE_PRODUCT_PRICE +
+                        " where a." + PRODUCT_ID + "=" + PRODUCT_ID +
+                        " and " + SALE_MODE + "=" + saleMode +
+                        " and " + FROM_DATE + "<= '" + saleDate + "'" +
+                        " and " + TO_DATE + ">= '" + saleDate + "') isnull then -1 else " +
+                        " (select " + PRODUCT_PRICE + " from " + TABLE_PRODUCT_PRICE +
+                        " where a." + PRODUCT_ID + "=" + PRODUCT_ID +
+                        " and " + SALE_MODE + "=" + saleMode +
+                        " and " + FROM_DATE + "<= '" + saleDate + "'" +
+                        " and " + TO_DATE + ">= '" + saleDate + "') end as " + PRODUCT_PRICE +
+                        " from " + TABLE_PRODUCTS + " a " +
+                        " left outer join " + TABLE_PRODUCT_TYPE + " b " +
+                        " on a." + PRODUCT_TYPE_ID + "=b." + PRODUCT_TYPE_ID +
+                        " left outer join " + TABLE_PRODUCT_VAT + " c " +
+                        " on a." + VAT_CODE + "=c." + PRODUCT_VAT_CODE +
+                        " where a." + PRODUCT_GROUP_ID + "=?" +
+                        " and a." + PRODUCT_DEPT_ID + "=?" +
+                        " and a." + DELETED + "=?" +
+                        " order by a." + PRODUCT_ORDERING,
                 new String[]{
                         String.valueOf(groupId),
                         String.valueOf(deptId),
                         "0"
-                }, PRODUCT_ORDERING, null, null
-        );
-        if(cursor.moveToFirst()){
-            productsList = new ArrayList<>();
-            while(!cursor.isAfterLast()){
-                Product.Products product =
-                        new Product.Products();
-                product.setProductId(cursor.getInt(cursor.getColumnIndex(PRODUCT_ID)));
-                product.setShopId(cursor.getInt(cursor.getColumnIndex(SHOP_ID)));
-                product.setInventoryId(cursor.getInt(cursor.getColumnIndex(INVENTORY_ID)));
-                product.setProductCat1Id(cursor.getInt(cursor.getColumnIndex(PRODUCT_CAT_1ID)));
-                product.setProductCat2Id(cursor.getInt(cursor.getColumnIndex(PRODUCT_CAT_2ID)));
-                product.setProductCat3Id(cursor.getInt(cursor.getColumnIndex(PRODUCT_CAT_3ID)));
-                product.setProductCat4Id(cursor.getInt(cursor.getColumnIndex(PRODUCT_CAT_4ID)));
-                product.setProductCat5Id(cursor.getInt(cursor.getColumnIndex(PRODUCT_CAT_5ID)));
-                product.setProductCode(cursor.getString(cursor.getColumnIndex(PRODUCT_CODE)));
-                product.setProductBarCode(cursor.getString(cursor.getColumnIndex(PRODUCT_BARCODE)));
-                product.setProductName(cursor.getString(cursor.getColumnIndex(PRODUCT_NAME)));
-                product.setProductNameLang1(cursor.getString(cursor.getColumnIndex(PRODUCT_NAME_LANG1)));
-                product.setProductNameLang2(cursor.getString(cursor.getColumnIndex(PRODUCT_NAME_LANG2)));
-                product.setProductNameLang3(cursor.getString(cursor.getColumnIndex(PRODUCT_NAME_LANG3)));
-                product.setProductNameLang4(cursor.getString(cursor.getColumnIndex(PRODUCT_NAME_LANG4)));
-                product.setProductNameLang5(cursor.getString(cursor.getColumnIndex(PRODUCT_NAME_LANG5)));
-                product.setProductMName(cursor.getString(cursor.getColumnIndex(PRODUCT_MNAME)));
-                product.setProductMNameLang1(cursor.getString(cursor.getColumnIndex(PRODUCT_MNAME_LANG1)));
-                product.setProductMNameLang2(cursor.getString(cursor.getColumnIndex(PRODUCT_MNAME_LANG2)));
-                product.setProductMNameLang3(cursor.getString(cursor.getColumnIndex(PRODUCT_MNAME_LANG3)));
-                product.setProductMNameLang4(cursor.getString(cursor.getColumnIndex(PRODUCT_MNAME_LANG4)));
-                product.setProductMNameLang5(cursor.getString(cursor.getColumnIndex(PRODUCT_MNAME_LANG5)));
-                product.setProductPictureServer(cursor.getString(cursor.getColumnIndex(PRODUCT_PICTURE_SERVER)));
-                product.setProductPictureClient(cursor.getString(cursor.getColumnIndex(PRODUCT_PICTURE_CLIENT)));
-                product.setPrinterId(cursor.getInt(cursor.getColumnIndex(PRINTER_ID)));
-                product.setPrintGroup(cursor.getInt(cursor.getColumnIndex(PRINT_GROUP)));
-                product.setPrintProductName(cursor.getString(cursor.getColumnIndex(PRINT_PRODUCT_NAME)));
-                product.setDurationTime(cursor.getString(cursor.getColumnIndex(DURATION_TIME)));
-                product.setHasServiceCharge(cursor.getInt(cursor.getColumnIndex(HAS_SERVICE_CHARGE)));
-                product.setIsOutOfStock(cursor.getInt(cursor.getColumnIndex(IS_OUTOF_STOCK)));
-                product.setAutoComment(cursor.getInt(cursor.getColumnIndex(AUTO_COMMENT)));
-                product.setIsDisplayBill(cursor.getInt(cursor.getColumnIndex(IS_DISPLAY_BILl)));
-                product.setIsPrintCheck(cursor.getInt(cursor.getColumnIndex(IS_PRINT_CHECK)));
-                product.setIsPrintReceipt(cursor.getInt(cursor.getColumnIndex(IS_PRINT_RECEIPT)));
-                product.setCanReturnProduct(cursor.getInt(cursor.getColumnIndex(CAN_RETURN_PRODUCT)));
-                product.setDisplayAtCheckerSystem(cursor.getInt(cursor.getColumnIndex(DISPLAY_AT_CHECKER_SYSTEM)));
-                product.setProductEnableDateTime(cursor.getString(cursor.getColumnIndex(PRODUCT_ENABLE_DATE_TIME)));
-                product.setProductExpireDateTime(cursor.getString(cursor.getColumnIndex(PRODUCT_EXPIRE_DATE_TIME)));
-                product.setProductEnableDayString(cursor.getString(cursor.getColumnIndex(PRODUCT_ENABLE_DAY_STRING)));
-                product.setWarningTime(cursor.getString(cursor.getColumnIndex(WARNING_TIME)));
-                product.setCriticalTime(cursor.getString(cursor.getColumnIndex(CRITICAL_TIME)));
-                product.setSaleMode1(cursor.getInt(cursor.getColumnIndex(SALE_MODE1)));
-                product.setSaleMode2(cursor.getInt(cursor.getColumnIndex(SALE_MODE2)));
-                product.setSaleMode3(cursor.getInt(cursor.getColumnIndex(SALE_MODE3)));
-                product.setSaleMode4(cursor.getInt(cursor.getColumnIndex(SALE_MODE4)));
-                product.setSaleMode5(cursor.getInt(cursor.getColumnIndex(SALE_MODE5)));
-                product.setSaleMode6(cursor.getInt(cursor.getColumnIndex(SALE_MODE6)));
-                product.setSaleMode7(cursor.getInt(cursor.getColumnIndex(SALE_MODE7)));
-                product.setSaleMode8(cursor.getInt(cursor.getColumnIndex(SALE_MODE8)));
-                product.setSaleMode9(cursor.getInt(cursor.getColumnIndex(SALE_MODE9)));
-                product.setSaleMode10(cursor.getInt(cursor.getColumnIndex(SALE_MODE10)));
-                product.setProductUnitName(cursor.getString(cursor.getColumnIndex(PRODUCT_UNIT_NAME)));
-                product.setZeroPriceAllow(cursor.getInt(cursor.getColumnIndex(ZERO_PRICE_ALLOW)));
-                product.setLimitDiscountAmount(cursor.getDouble(cursor.getColumnIndex(LIMIT_DISCOUNT_AMOUNT)));
-                product.setLimitDiscountPercent(cursor.getDouble(cursor.getColumnIndex(LIMIT_DISCOUNT_PERCENT)));
-                product.setCommRate(cursor.getDouble(cursor.getColumnIndex(COMM_RATE)));
-                product.setProductDesp(cursor.getString(cursor.getColumnIndex(PRODUCT_DESP)));
-                product.setPrintOrdering(cursor.getInt(cursor.getColumnIndex(PRINT_ORDERING)));
-                product.setAddingFromBranch(cursor.getInt(cursor.getColumnIndex(ADDING_FROM_BRANCH)));
-                productsList.add(product);
-                cursor.moveToNext();
+                });
+        try {
+            if (cursor.moveToFirst()) {
+                productsList = new ArrayList<>();
+                while (!cursor.isAfterLast()) {
+                    ProductData.Products product =
+                            new ProductData.Products();
+                    int productId = cursor.getInt(cursor.getColumnIndex(PRODUCT_ID));
+                    product.setProductId(productId);
+                    product.setShopId(cursor.getInt(cursor.getColumnIndex(SHOP_ID)));
+                    product.setInventoryId(cursor.getInt(cursor.getColumnIndex(INVENTORY_ID)));
+                    product.setProductCat1Id(cursor.getInt(cursor.getColumnIndex(PRODUCT_CAT_1ID)));
+                    product.setProductCat2Id(cursor.getInt(cursor.getColumnIndex(PRODUCT_CAT_2ID)));
+                    product.setProductCat3Id(cursor.getInt(cursor.getColumnIndex(PRODUCT_CAT_3ID)));
+                    product.setProductCat4Id(cursor.getInt(cursor.getColumnIndex(PRODUCT_CAT_4ID)));
+                    product.setProductCat5Id(cursor.getInt(cursor.getColumnIndex(PRODUCT_CAT_5ID)));
+                    product.setProductCode(cursor.getString(cursor.getColumnIndex(PRODUCT_CODE)));
+                    product.setProductBarCode(cursor.getString(cursor.getColumnIndex(PRODUCT_BARCODE)));
+                    product.setProductName(cursor.getString(cursor.getColumnIndex(PRODUCT_NAME)));
+                    product.setProductNameLang1(cursor.getString(cursor.getColumnIndex(PRODUCT_NAME_LANG1)));
+                    product.setProductNameLang2(cursor.getString(cursor.getColumnIndex(PRODUCT_NAME_LANG2)));
+                    product.setProductNameLang3(cursor.getString(cursor.getColumnIndex(PRODUCT_NAME_LANG3)));
+                    product.setProductNameLang4(cursor.getString(cursor.getColumnIndex(PRODUCT_NAME_LANG4)));
+                    product.setProductNameLang5(cursor.getString(cursor.getColumnIndex(PRODUCT_NAME_LANG5)));
+                    product.setProductMName(cursor.getString(cursor.getColumnIndex(PRODUCT_MNAME)));
+                    product.setProductMNameLang1(cursor.getString(cursor.getColumnIndex(PRODUCT_MNAME_LANG1)));
+                    product.setProductMNameLang2(cursor.getString(cursor.getColumnIndex(PRODUCT_MNAME_LANG2)));
+                    product.setProductMNameLang3(cursor.getString(cursor.getColumnIndex(PRODUCT_MNAME_LANG3)));
+                    product.setProductMNameLang4(cursor.getString(cursor.getColumnIndex(PRODUCT_MNAME_LANG4)));
+                    product.setProductMNameLang5(cursor.getString(cursor.getColumnIndex(PRODUCT_MNAME_LANG5)));
+                    product.setProductPictureServer(cursor.getString(cursor.getColumnIndex(PRODUCT_PICTURE_SERVER)));
+                    product.setProductPictureClient(cursor.getString(cursor.getColumnIndex(PRODUCT_PICTURE_CLIENT)));
+                    product.setPrinterId(cursor.getInt(cursor.getColumnIndex(PRINTER_ID)));
+                    product.setPrintGroup(cursor.getInt(cursor.getColumnIndex(PRINT_GROUP)));
+                    product.setPrintProductName(cursor.getString(cursor.getColumnIndex(PRINT_PRODUCT_NAME)));
+                    product.setDurationTime(cursor.getString(cursor.getColumnIndex(DURATION_TIME)));
+                    product.setHasServiceCharge(cursor.getInt(cursor.getColumnIndex(HAS_SERVICE_CHARGE)));
+                    product.setIsOutOfStock(cursor.getInt(cursor.getColumnIndex(IS_OUTOF_STOCK)));
+                    product.setAutoComment(cursor.getInt(cursor.getColumnIndex(AUTO_COMMENT)));
+                    product.setIsDisplayBill(cursor.getInt(cursor.getColumnIndex(IS_DISPLAY_BILl)));
+                    product.setIsPrintCheck(cursor.getInt(cursor.getColumnIndex(IS_PRINT_CHECK)));
+                    product.setIsPrintReceipt(cursor.getInt(cursor.getColumnIndex(IS_PRINT_RECEIPT)));
+                    product.setCanReturnProduct(cursor.getInt(cursor.getColumnIndex(CAN_RETURN_PRODUCT)));
+                    product.setDisplayAtCheckerSystem(cursor.getInt(cursor.getColumnIndex(DISPLAY_AT_CHECKER_SYSTEM)));
+                    product.setProductEnableDateTime(cursor.getString(cursor.getColumnIndex(PRODUCT_ENABLE_DATE_TIME)));
+                    product.setProductExpireDateTime(cursor.getString(cursor.getColumnIndex(PRODUCT_EXPIRE_DATE_TIME)));
+                    product.setProductEnableDayString(cursor.getString(cursor.getColumnIndex(PRODUCT_ENABLE_DAY_STRING)));
+                    product.setWarningTime(cursor.getString(cursor.getColumnIndex(WARNING_TIME)));
+                    product.setCriticalTime(cursor.getString(cursor.getColumnIndex(CRITICAL_TIME)));
+                    product.setSaleMode1(cursor.getInt(cursor.getColumnIndex(SALE_MODE1)));
+                    product.setSaleMode2(cursor.getInt(cursor.getColumnIndex(SALE_MODE2)));
+                    product.setSaleMode3(cursor.getInt(cursor.getColumnIndex(SALE_MODE3)));
+                    product.setSaleMode4(cursor.getInt(cursor.getColumnIndex(SALE_MODE4)));
+                    product.setSaleMode5(cursor.getInt(cursor.getColumnIndex(SALE_MODE5)));
+                    product.setSaleMode6(cursor.getInt(cursor.getColumnIndex(SALE_MODE6)));
+                    product.setSaleMode7(cursor.getInt(cursor.getColumnIndex(SALE_MODE7)));
+                    product.setSaleMode8(cursor.getInt(cursor.getColumnIndex(SALE_MODE8)));
+                    product.setSaleMode9(cursor.getInt(cursor.getColumnIndex(SALE_MODE9)));
+                    product.setSaleMode10(cursor.getInt(cursor.getColumnIndex(SALE_MODE10)));
+                    product.setProductUnitName(cursor.getString(cursor.getColumnIndex(PRODUCT_UNIT_NAME)));
+                    product.setZeroPriceAllow(cursor.getInt(cursor.getColumnIndex(ZERO_PRICE_ALLOW)));
+                    product.setLimitDiscountAmount(cursor.getDouble(cursor.getColumnIndex(LIMIT_DISCOUNT_AMOUNT)));
+                    product.setLimitDiscountPercent(cursor.getDouble(cursor.getColumnIndex(LIMIT_DISCOUNT_PERCENT)));
+                    product.setCommRate(cursor.getDouble(cursor.getColumnIndex(COMM_RATE)));
+                    product.setProductDesp(cursor.getString(cursor.getColumnIndex(PRODUCT_DESP)));
+                    product.setPrintOrdering(cursor.getInt(cursor.getColumnIndex(PRINT_ORDERING)));
+                    product.setAddingFromBranch(cursor.getInt(cursor.getColumnIndex(ADDING_FROM_BRANCH)));
+                    product.setVatCode(cursor.getString(cursor.getColumnIndex(VAT_CODE)));
+                    product.setProductTypeId(cursor.getInt(cursor.getColumnIndex(PRODUCT_TYPE_ID)));
+                    product.setComponentLevel(cursor.getInt(cursor.getColumnIndex(PRODUCT_TYPE_COMPONENT_LEVEL)));
+                    product.setProductVatPercent(cursor.getDouble(cursor.getColumnIndex(PRODUCT_VAT_PERCENT)));
+                    product.setProductVatDisplay(cursor.getString(cursor.getColumnIndex(PRODUCT_VAT_DISPLAY)));
+                    product.setProductVatDesp(cursor.getString(cursor.getColumnIndex(PRODUCT_VAT_DESP)));
+
+                    double unitPrice = cursor.getDouble(cursor.getColumnIndexOrThrow(PRODUCT_PRICE));
+                    if (unitPrice == -1 && saleMode > 1) {
+                        Cursor cursor2 = mDbHelper.openReadable().rawQuery(
+                                "select " + PRODUCT_PRICE + " from " + TABLE_PRODUCT_PRICE +
+                                        " where " + PRODUCT_ID + "=?" +
+                                        " and " + SALE_MODE + "=?" +
+                                        " and " + FROM_DATE + "<= '?'" +
+                                        " and " + TO_DATE + ">= '?'",
+                                new String[]{
+                                        String.valueOf(productId),
+                                        "1",
+                                        saleDate,
+                                        saleDate
+                                });
+                        if (cursor2.moveToFirst()) {
+                            unitPrice = cursor2.getDouble(0);
+                        }
+                        cursor2.close();
+                    }
+                    product.setProductPrice(unitPrice);
+                    productsList.add(product);
+                    cursor.moveToNext();
+                }
             }
+        }finally {
+            if(cursor != null)
+                cursor.close();
         }
-        cursor.close();
         return productsList;
     }
 
@@ -390,22 +289,24 @@ public class ProductDataSource {
      * @param groupId
      * @return null if no record
      */
-    public List<Product.ProductDept> getProductDepts(int groupId){
-        List<Product.ProductDept> productDeptList = null;
-        Cursor cursor = mDbHelper.openReadable().query(
-                TABLE_PRODUCT_DEPT,
-                ALL_PRODUCT_DEPT_COLUMN,
-                //PRODUCT_GROUP_ID + "=?" +
-                DELETED + "=?",
+    public List<ProductData.ProductDept> getProductDepts(int groupId){
+        List<ProductData.ProductDept> productDeptList = null;
+        Cursor cursor = mDbHelper.openReadable().rawQuery(
+                "select * from " + TABLE_PRODUCT_DEPT + " a " +
+                        " left join " + TABLE_PRODUCT_GROUP + " b " +
+                        " on a." + PRODUCT_GROUP_ID + "=b." + PRODUCT_GROUP_ID +
+                        " where b." + IS_COMMENT + "=?" +
+                        " and a." + DELETED + "=?" +
+                        " order by " + PRODUCT_DEPT_ORDERING,
                 new String[]{
-                        //String.valueOf(groupId),
+                        "0",
                         "0"
-                }, null, null, null);
+                });
         if(cursor.moveToFirst()){
             productDeptList = new ArrayList<>();
             while (!cursor.isAfterLast()){
-                Product.ProductDept productDept =
-                        new Product.ProductDept();
+                ProductData.ProductDept productDept =
+                        new ProductData.ProductDept();
                 productDept.setProductDeptId(cursor.getInt(cursor.getColumnIndex(PRODUCT_DEPT_ID)));
                 productDept.setProductGroupId(cursor.getInt(cursor.getColumnIndex(PRODUCT_GROUP_ID)));
                 productDept.setShopId(cursor.getInt(cursor.getColumnIndex(SHOP_ID)));
@@ -434,20 +335,20 @@ public class ProductDataSource {
     /**
      * @return null if no record
      */
-    public List<Product.ProductGroups> getProductGroups(){
-        List<Product.ProductGroups> productGroupsList = null;
-        Cursor cursor = mDbHelper.openReadable().query(
-                TABLE_PRODUCT_GROUP,
-                ALL_PRODUCT_GROUP_COLUMN,
-                DELETED + "=?",
+    public List<ProductData.ProductGroups> getProductGroups() {
+        List<ProductData.ProductGroups> productGroupsList = null;
+        Cursor cursor = mDbHelper.openReadable().rawQuery(
+                "select * from " + TABLE_PRODUCT_GROUP +
+                        " where " + DELETED + "=?" +
+                        " order by " + PRODUCT_GROUP_ORDERING,
                 new String[]{
                         "0"
-                }, null, null, null);
+                });
         if(cursor.moveToFirst()){
             productGroupsList = new ArrayList<>();
             while (!cursor.isAfterLast()){
-                Product.ProductGroups productGroups =
-                        new Product.ProductGroups();
+                ProductData.ProductGroups productGroups =
+                        new ProductData.ProductGroups();
                 productGroups.setProductGroupId(cursor.getInt(cursor.getColumnIndex(PRODUCT_GROUP_ID)));
                 productGroups.setShopId(cursor.getInt(cursor.getColumnIndex(SHOP_ID)));
                 productGroups.setProductGroupCode(cursor.getString(cursor.getColumnIndex(PRODUCT_GROUP_CODE)));

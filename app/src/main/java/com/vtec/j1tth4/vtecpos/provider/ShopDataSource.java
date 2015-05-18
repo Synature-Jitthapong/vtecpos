@@ -68,15 +68,18 @@ public class ShopDataSource {
     }
 
     public Shop loadVatShopData(int shopId){
+        String[] whereArgs = null;
+        if(shopId > 0)
+            whereArgs = new String[]{
+                    String.valueOf(shopId)
+            };
         Cursor cursor = mDbHelper.openReadable().rawQuery(
                 "select * " +
                         " from " + TABLE_SHOP_DATA + " a " +
                         " left outer join " + ProductDataSource.TABLE_PRODUCT_VAT + " b " +
                         " on a." + VAT_CODE + "=b." + ProductDataSource.PRODUCT_VAT_CODE +
                         (shopId != 0 ? " where a." + SHOP_ID + "=?" : ""),
-                new String[]{
-                        String.valueOf(shopId)
-                });
+                whereArgs);
         Shop s = null;
         if(cursor.moveToFirst()){
             s = new Shop();

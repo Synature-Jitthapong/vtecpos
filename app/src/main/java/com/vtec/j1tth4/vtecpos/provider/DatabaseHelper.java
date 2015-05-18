@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.vtec.j1tth4.vtecpos.Utils;
 import com.vtec.j1tth4.vtecpos.VtecPosApplication;
 
 import java.io.File;
@@ -36,7 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private DatabaseHelper(Context c) {
         super(c, DATABASE_NAME, null, DATABASE_VERSION);
 
-        mDatabasePath = VtecPosApplication.getVtecAssetPath() + File.separator +
+        mDatabasePath = Utils.getVtecAssetPath() + File.separator +
                 VtecPosApplication.VTEC_DATABASE_DIR + File.separator + DATABASE_NAME;
 
         if(!isDataBaseExist()){
@@ -69,7 +70,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     private boolean isDataBaseExist() {
-        File vtecAssetPath = VtecPosApplication.getVtecAssetPath();
+        File vtecAssetPath = Utils.getVtecAssetPath();
         File dbPath = new File(vtecAssetPath + File.separator + VtecPosApplication.VTEC_DATABASE_DIR);
         if(!dbPath.exists())
             dbPath.mkdir();
