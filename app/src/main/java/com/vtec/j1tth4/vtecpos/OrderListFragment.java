@@ -1,5 +1,7 @@
 package com.vtec.j1tth4.vtecpos;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.vtec.j1tth4.vtecpos.provider.Transaction;
@@ -29,7 +33,9 @@ public class OrderListFragment extends Fragment{
     private EventBus mBus = EventBus.getDefault();
 
     private List<Transaction.OrderDetail> mOrderList;
+    private List<SummaryItem> mSummaryItemList;
     private OrderListAdapter mOrderAdapter;
+    private OrderSummaryListAdapter mOrderSummAdapter;
     private RecyclerView mLvOrder;
     private ListView mLvOrderSummary;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -43,6 +49,8 @@ public class OrderListFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mBus.register(this);
+        mOrderList = new ArrayList<Transaction.OrderDetail>();
+        mSummaryItemList = new ArrayList<SummaryItem>();
         TransactionManager manager = TransactionManager.getInstance(getActivity());
         mOrderList = manager.listOrder();
     }
@@ -55,8 +63,16 @@ public class OrderListFragment extends Fragment{
 
     public void onEvent(MenuClickEvent event){
         TransactionManager manager = TransactionManager.getInstance(getActivity());
-        mOrderList.add(manager.getOrder(event.getOrderId()));
+        Transaction.OrderDetail orderDetail = manager.getOrder(event.getOrderId());
+        mOrderList.add(orderDetail);
         mOrderAdapter.notifyDataSetChanged();
+        mLvOrder.post(new Runnable() {
+            @Override
+            public void run() {
+                mLvOrder.scrollToPosition(mOrderAdapter.getItemCount() - 1);
+            }
+        });
+        refreshSummary();
     }
 
     @Override
@@ -76,25 +92,41 @@ public class OrderListFragment extends Fragment{
         mLvOrder.setAdapter(mOrderAdapter);
 
         mLvOrderSummary = (ListView) view.findViewById(R.id.lvSummary);
-        mLvOrderSummary.setAdapter(new OrderSummaryListAdapter());
+        mOrderSummAdapter = new OrderSummaryListAdapter();
+        mLvOrderSummary.setAdapter(mOrderSummAdapter);
+        refreshSummary();
     }
 
     private class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.ViewHolder>{
 
         public class ViewHolder extends RecyclerView.ViewHolder {
+            boolean isCtrlExpand = false;
+
             TextView tvOrderQty;
+            TextView tvOrderQty2;
             TextView tvOrderTitle;
             TextView tvOrderSub;
             TextView tvOrderPrice;
             ImageButton btnMore;
+            Button btnDel;
+            Button btnMinus;
+            Button btnPlus;
+            Button btnMod;
+            RelativeLayout orderCtrlContainer;
 
             public ViewHolder(View itemView) {
                 super(itemView);
                 tvOrderQty = (TextView) itemView.findViewById(R.id.tvOrderQty);
+                tvOrderQty2 = (TextView) itemView.findViewById(R.id.tvOrderQty2);
                 tvOrderTitle = (TextView) itemView.findViewById(R.id.tvOrderTitle);
                 tvOrderSub = (TextView) itemView.findViewById(R.id.tvOrderSub);
                 tvOrderPrice = (TextView) itemView.findViewById(R.id.tvOrderPrice);
                 btnMore = (ImageButton) itemView.findViewById(R.id.btnMore);
+                btnDel = (Button) itemView.findViewById(R.id.btnOrderDel);
+                btnMinus = (Button) itemView.findViewById(R.id.btnOrderMinus);
+                btnPlus = (Button) itemView.findViewById(R.id.btnOrderPlus);
+                btnMod = (Button) itemView.findViewById(R.id.btnOrderModify);
+                orderCtrlContainer = (RelativeLayout) itemView.findViewById(R.id.orderCtrlContainer);
             }
         }
 
@@ -106,11 +138,82 @@ public class OrderListFragment extends Fragment{
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder viewHolder, int i) {
-            Transaction.OrderDetail orderDetail = mOrderList.get(i);
+        public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
+            final Transaction.OrderDetail orderDetail = mOrderList.get(i);
             viewHolder.tvOrderQty.setText(NumberFormat.getInstance().format(orderDetail.getTotalQty()));
+            viewHolder.tvOrderQty2.setText(NumberFormat.getInstance().format(orderDetail.getTotalQty()));
             viewHolder.tvOrderTitle.setText(orderDetail.getProductName());
             viewHolder.tvOrderPrice.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(orderDetail.getTotalRetailPrice()));
+
+            if(viewHolder.isCtrlExpand){
+                viewHolder.orderCtrlContainer.setVisibility(View.GONE);
+                viewHolder.btnMore.setImageResource(android.R.drawable.arrow_down_float);
+            }
+
+            viewHolder.btnMore.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(!viewHolder.isCtrlExpand){
+                        viewHolder.orderCtrlContainer.setVisibility(View.VISIBLE);
+                        viewHolder.isCtrlExpand = true;
+                        viewHolder.btnMore.setImageResource(android.R.drawable.arrow_up_float);
+                    }else{
+                        viewHolder.orderCtrlContainer.setVisibility(View.GONE);
+                        viewHolder.isCtrlExpand = false;
+                        viewHolder.btnMore.setImageResource(android.R.drawable.arrow_down_float);
+                    }
+                }
+            });
+
+            viewHolder.btnDel.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new AlertDialog.Builder(getActivity())
+                            .setMessage(R.string.delete)
+                            .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {}
+                            })
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    TransactionManager manager =
+                                            TransactionManager.getInstance(getActivity());
+                                    manager.deleteOrder(orderDetail.getOrderDetailId());
+                                    mOrderList.remove(i);
+                                    mOrderAdapter.notifyDataSetChanged();
+                                }
+                            }).show();
+                }
+            });
+
+            viewHolder.btnMinus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    double qty = orderDetail.getTotalQty();
+                    if(--qty > 0){
+                        TransactionManager manager =
+                                TransactionManager.getInstance(getActivity());
+                        manager.updateOrder(orderDetail.getOrderDetailId(), orderDetail.getPricePerUnit(), qty);
+                        Transaction.OrderDetail order = manager.getOrder(orderDetail.getOrderDetailId());
+                        mOrderList.set(i, order);
+                        mOrderAdapter.notifyDataSetChanged();
+                    }
+                }
+            });
+
+            viewHolder.btnPlus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    double qty = orderDetail.getTotalQty();
+                    TransactionManager manager =
+                            TransactionManager.getInstance(getActivity());
+                    manager.updateOrder(orderDetail.getOrderDetailId(), orderDetail.getPricePerUnit(), ++qty);
+                    Transaction.OrderDetail order = manager.getOrder(orderDetail.getOrderDetailId());
+                    mOrderList.set(i, order);
+                    mOrderAdapter.notifyDataSetChanged();
+                }
+            });
         }
 
         @Override
@@ -119,37 +222,80 @@ public class OrderListFragment extends Fragment{
         }
     }
 
-    private class OrderSummaryListAdapter extends BaseAdapter{
-
-        List<SummaryItem> summaryItemList = new ArrayList<SummaryItem>();
-
-        public OrderSummaryListAdapter(){
-            summaryItemList.add(
-                    new SummaryItem(
-                            getActivity().getString(R.string.items) + " 6",
-                            "10.00",
-                            SummaryItem.SUMM_NORMAL));
-            summaryItemList.add(
-                    new SummaryItem(
-                            getActivity().getString(R.string.discount_short),
-                            "0.00",
-                            SummaryItem.SUMM_NORMAL));
-
-            summaryItemList.add(
-                    new SummaryItem(
-                            getActivity().getString(R.string.total),
-                            "1,200.00",
-                            SummaryItem.SUMM_LARGE));
+    private void refreshSummary(){
+        double sumTotalItem = 0;
+        double sumRetailPrice = 0;
+        double sumDiscount = 0;
+        double sumSalePrice = 0;
+        double sumBillDisc = 0;
+        double sumNetSale = 0;
+        double sumPVat = 0;
+        double sumPBeforeVat = 0;
+        double sumSc = 0;
+        double sumScVat = 0;
+        double sumScBefore = 0;
+        double sumVatable = 0;
+        double sumWVatable = 0;
+        double sumW = 0;
+        double sumWVat = 0;
+        double sumWBefore = 0;
+        double sumWSc = 0;
+        double sumWScVat = 0;
+        double sumWScBeforeVat = 0;
+        for(Transaction.OrderDetail orderDetail : mOrderList){
+            sumTotalItem += orderDetail.getTotalQty();
+            sumRetailPrice +=  orderDetail.getTotalRetailPrice();
+            sumDiscount += orderDetail.getTotalItemDisc();//dtTable.Rows(i)("TotalItemDisc")
+            sumSalePrice += orderDetail.getSalePrice(); //dtTable.Rows(i)("SalePrice")
+            sumBillDisc +=  orderDetail.getDiscBill();//dtTable.Rows(i)("DiscBill")
+            sumNetSale +=  orderDetail.getNetSale();//dtTable.Rows(i)("NetSale")
+            sumPVat +=  orderDetail.getProductVAT();//dtTable.Rows(i)("ProductVAT")
+            sumPBeforeVat +=  orderDetail.getProductBeforeVAT(); //dtTable.Rows(i)("ProductBeforeVAT")
+            sumSc +=  orderDetail.getScAmount(); //dtTable.Rows(i)("SCAmount")
+            sumScVat += orderDetail.getScVAT(); //dtTable.Rows(i)("SCVAT")
+            sumScBefore +=  orderDetail.getScBeforeVAT(); //dtTable.Rows(i)("SCBeforeVAT")
+            sumVatable += orderDetail.getVatable(); //dtTable.Rows(i)("Vatable")
+            sumWVatable += orderDetail.getwVatable(); //dtTable.Rows(i)("WVatable")
+            sumW +=  orderDetail.getWeightPrice(); //dtTable.Rows(i)("WeightPrice")
+            sumWVat +=  orderDetail.getWeightPriceVAT(); //dtTable.Rows(i)("WeightPriceVAT")
+            sumWBefore +=  orderDetail.getWeightBeforeVAT(); //dtTable.Rows(i)("WeightBeforeVAT")
+            sumWSc +=  orderDetail.getScWAmount(); //dtTable.Rows(i)("SCWAmount")
+            sumWScVat +=  orderDetail.getScWVAT(); //dtTable.Rows(i)("SCWVAT")
+            sumWScBeforeVat +=  orderDetail.getScWBeforeVAT(); //dtTable.Rows(i)("SCWBeforeVAT")
         }
+
+        mSummaryItemList = new ArrayList<>();
+        mSummaryItemList.add(
+                new SummaryItem(
+                        getActivity().getString(R.string.items) + " " +
+                                NumberFormat.getInstance().format(sumTotalItem),
+                        NumberFormat.getCurrencyInstance().format(sumRetailPrice),
+                        SummaryItem.SUMM_NORMAL));
+        mSummaryItemList.add(
+                new SummaryItem(
+                        getActivity().getString(R.string.discount_short),
+                        NumberFormat.getCurrencyInstance().format(sumDiscount),
+                        SummaryItem.SUMM_NORMAL));
+
+        mSummaryItemList.add(
+                new SummaryItem(
+                        getActivity().getString(R.string.total),
+                        NumberFormat.getCurrencyInstance().format(sumSalePrice),
+                        SummaryItem.SUMM_LARGE));
+
+        mOrderSummAdapter.notifyDataSetChanged();
+    }
+
+    private class OrderSummaryListAdapter extends BaseAdapter{
 
         @Override
         public int getCount() {
-            return summaryItemList.size();
+            return mSummaryItemList.size();
         }
 
         @Override
         public Object getItem(int i) {
-            return summaryItemList.get(i);
+            return mSummaryItemList.get(i);
         }
 
         @Override
@@ -169,7 +315,7 @@ public class OrderListFragment extends Fragment{
             }else{
                 holder = (ViewHolder) view.getTag();
             }
-            SummaryItem item = summaryItemList.get(i);
+            SummaryItem item = mSummaryItemList.get(i);
             holder.tvLabel.setText(item.getLabel());
             holder.tvValue.setText(item.getValue());
             if(item.getItemType() == SummaryItem.SUMM_LARGE){

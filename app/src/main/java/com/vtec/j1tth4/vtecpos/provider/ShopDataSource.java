@@ -97,6 +97,27 @@ public class ShopDataSource {
                 s.setVATType(cursor.getInt(cursor.getColumnIndex(VAT_TYPE)));
         }
         cursor.close();
+        mDbHelper.close();
+        return s;
+    }
+
+    public Shop getShop(){
+        Cursor cursor = mDbHelper.openReadable().rawQuery(
+                "select * from " +
+                        TABLE_SHOP_DATA +
+                " where " + IS_SHOP + "=?" +
+                        " and " + DELETED + "=?",
+                new String[]{
+                        "1",
+                        "0"
+                });
+        Shop s = null;
+        if(cursor.moveToFirst()){
+            s = new Shop();
+            s.setShopID(cursor.getInt(cursor.getColumnIndex(SHOP_ID)));
+        }
+        cursor.close();
+        mDbHelper.close();
         return s;
     }
 }

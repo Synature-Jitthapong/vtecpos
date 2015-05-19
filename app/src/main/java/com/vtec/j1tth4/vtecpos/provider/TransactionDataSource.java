@@ -653,7 +653,7 @@ public class TransactionDataSource {
         mDbHelper.close();
     }
 
-    private void calculateBill(int transId, int compId) {
+    public void calculateBill(int transId, int compId) {
         SQLiteDatabase db = mDbHelper.openWritable();
         db.beginTransaction();
         try {
@@ -714,8 +714,8 @@ public class TransactionDataSource {
                     cv.put(COMPUTER_ID, compId);
                     cv.put(SALE_PRICE, salePrice);
                     cv.put(VATABLE_BEFORE_DISC, cursor1.getDouble(cursor1.getColumnIndex(VATABLE_BEFORE_DISC)));
-                    cv.put(VAT_CODE, cursor1.getString(cursor1.getColumnIndex(VAT_CODE)));
-                    cv.put(VAT_RATE, cursor1.getDouble(cursor1.getColumnIndex(VAT_RATE)));
+                    cv.put(VAT_CODE, cursor1.getString(cursor1.getColumnIndex(PRODUCT_VAT_CODE)));
+                    cv.put(VAT_RATE, cursor1.getDouble(cursor1.getColumnIndex(PRODUCT_VAT_PERCENT)));
                     cv.put(VATABLE, vatable);
                     cv.put(VATABLE_BEFORE_VAT, vatableBeforeVat);
                     cv.put(VAT_AMOUNT, vatAmount);
@@ -831,7 +831,8 @@ public class TransactionDataSource {
                     });
             db.setTransactionSuccessful();
         } finally {
-           db.endTransaction();
+            db.endTransaction();
+            mDbHelper.close();
         }
     }
 
@@ -1112,6 +1113,7 @@ public class TransactionDataSource {
         }finally {
             if(orderCursor != null)
                 orderCursor.close();
+            mDbHelper.close();
         }
         return orderDetail;
     }
@@ -1144,10 +1146,60 @@ public class TransactionDataSource {
         }finally {
             if(orderCursor != null)
                 orderCursor.close();
-            if(cursor.isClosed())
-                Log.i("TransactionDataSource", "cursor is closed");
+            mDbHelper.close();
         }
         return orderDetailList;
+    }
+
+    public int getCurrentTransactionId(String saleDate){
+        int currTransId = 0;
+        Cursor cursor = mDbHelper.openReadable().rawQuery(
+                "select " + TRANSACTION_ID +
+                        " from " + TABLE_TRANSACTION_FRONT +
+                        " where " + TRANSACTION_STATUS_ID + "=?" +
+                        " and " + SALE_DATE + "=?",
+                new String[]{
+                        "1",
+                        saleDate
+                });
+        if(cursor.moveToFirst()){
+            currTransId = cursor.getInt(0);
+        }
+        cursor.close();
+        mDbHelper.close();
+        return currTransId;
+    }
+
+    public void updateOrderDetail(int transId, int compId, int orderId, double qty,
+                                  double totalRetailPrice, double orgTotalRetailPrice, double salePrice){
+        ContentValues cv = new ContentValues();
+        cv.put(TOTAL_QTY, qty);
+        cv.put(TOTAL_RETAIL_PRICE, totalRetailPrice);
+        cv.put(ORG_TOTAL_RETAIL_PRICE, orgTotalRetailPrice);
+        cv.put(SALE_PRICE, salePrice);
+        mDbHelper.openWritable().update(TABLE_ORDER_DETAIL_FRONT, cv,
+                TRANSACTION_ID + "=?" +
+                        " and " + COMPUTER_ID + "=?" +
+                        " and " + ORDER_DETAIL_ID + "=?",
+                new String[]{
+                        String.valueOf(transId),
+                        String.valueOf(compId),
+                        String.valueOf(orderId)
+                });
+        mDbHelper.close();
+    }
+
+    public void deleteOrderDetail(int transId, int compId, int orderId){
+        mDbHelper.openWritable().delete(TABLE_ORDER_DETAIL_FRONT,
+                TRANSACTION_ID + "=?" +
+                        " and " + COMPUTER_ID + "=?" +
+                        " and " + ORDER_DETAIL_ID + "=?",
+                new String[]{
+                        String.valueOf(transId),
+                        String.valueOf(compId),
+                        String.valueOf(orderId)
+                });
+        mDbHelper.close();
     }
 
     /**
@@ -1222,6 +1274,7 @@ public class TransactionDataSource {
         cv.put(DELETED, model.getDeleted());
         SQLiteDatabase db = mDbHelper.openWritable();
         db.insertOrThrow(TABLE_ORDER_DETAIL_FRONT, null, cv);
+        mDbHelper.close();
         return ordId;
     }
 
@@ -1252,6 +1305,7 @@ public class TransactionDataSource {
         cv.put(SHOP_ID, model.getShopId());
         SQLiteDatabase db = mDbHelper.openWritable();
         db.insertOrThrow(TABLE_TRANSACTION_FRONT, null, cv);
+        mDbHelper.close();
         return transId;
     }
 
@@ -1275,6 +1329,7 @@ public class TransactionDataSource {
             maxReceiptId = cursor.getInt(0);
         }
         cursor.close();
+        mDbHelper.close();
         return maxReceiptId + 1;
     }
 
@@ -1394,6 +1449,7 @@ public class TransactionDataSource {
             }
             cursor.close();
         }
+        mDbHelper.close();
         return maxTransId + 1;
     }
 

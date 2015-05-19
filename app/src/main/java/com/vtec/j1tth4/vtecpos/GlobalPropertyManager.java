@@ -38,14 +38,15 @@ public class GlobalPropertyManager {
 
     private GlobalPropertyManager(Context c){
         ShopDataSource sd = new ShopDataSource(c);
-        Shop s = sd.loadVatShopData(0);
+        Shop s = sd.getShop();
         if(s == null)
             throw new ExceptionInInitializerError("Shop data is null");
+        shopId = s.getShopID();
+        s = sd.loadVatShopData(shopId);
         scPercent = s.getSCPercent();
         isScBeforeDisc = s.getIsSCBeforeDisc() == 1 ? true : false;
         vatType = s.getVATType();
         vatCode = s.getVATCode();
-        shopId = s.getShopID();
 
         ComputerDataSource cd = new ComputerDataSource(c);
         Computer computer = cd.loadComputerData();
