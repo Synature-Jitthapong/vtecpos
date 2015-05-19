@@ -2,6 +2,7 @@ package com.vtec.j1tth4.vtecpos.provider;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorWrapper;
 
 /**
  * Created by j1tth4 on 11/5/2558.
@@ -101,6 +102,26 @@ public class ShopDataSource {
         return s;
     }
 
+    public Shop getShop(int shopId){
+        Cursor cursor = mDbHelper.openReadable().rawQuery(
+                "select * from " +
+                        TABLE_SHOP_DATA +
+                        " where " + SHOP_ID + "=?" +
+                        " and " + DELETED + "=?",
+                new String[]{
+                        String.valueOf(shopId),
+                        "0"
+                });
+        Shop s = null;
+        ShopCursor shopCursor = new ShopCursor(cursor);
+        if(shopCursor.moveToFirst()){
+            s = shopCursor.getShop();
+        }
+        shopCursor.close();
+        mDbHelper.close();
+        return s;
+    }
+
     public Shop getShop(){
         Cursor cursor = mDbHelper.openReadable().rawQuery(
                 "select * from " +
@@ -112,12 +133,30 @@ public class ShopDataSource {
                         "0"
                 });
         Shop s = null;
-        if(cursor.moveToFirst()){
-            s = new Shop();
-            s.setShopID(cursor.getInt(cursor.getColumnIndex(SHOP_ID)));
+        ShopCursor shopCursor = new ShopCursor(cursor);
+        if(shopCursor.moveToFirst()){
+            s = shopCursor.getShop();
         }
-        cursor.close();
+        shopCursor.close();
         mDbHelper.close();
         return s;
+    }
+
+    public static class ShopCursor extends CursorWrapper{
+
+        public ShopCursor(Cursor cursor) {
+            super(cursor);
+        }
+
+        public Shop getShop(){
+            if(isBeforeFirst() || isAfterLast())
+                return null;
+            Shop s = new Shop();
+            s.setShopID(getInt(getColumnIndex(SHOP_ID)));
+            s.setHasSC(getInt(getColumnIndex(HAS_SC)));
+            s.setSCPercent(getDouble(getColumnIndex(SC_PERCENT)));
+            s.setIsSCBeforeDisc(getInt(getColumnIndex(IS_SC_BEFORE_DISC)));
+            return s;
+        }
     }
 }

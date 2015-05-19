@@ -3,6 +3,8 @@ package com.vtec.j1tth4.vtecpos;
 import android.content.Context;
 
 import com.vtec.j1tth4.vtecpos.provider.ProductData;
+import com.vtec.j1tth4.vtecpos.provider.SaleMode;
+import com.vtec.j1tth4.vtecpos.provider.SaleModeDataSource;
 import com.vtec.j1tth4.vtecpos.provider.Transaction;
 import com.vtec.j1tth4.vtecpos.provider.TransactionDataSource;
 
@@ -65,8 +67,7 @@ public class TransactionManager {
     }
 
     public int insertOrder(ProductData.Products product, double qty){
-        TransactionDataSource dataSource =
-                new TransactionDataSource(mContext);
+        TransactionDataSource dataSource = new TransactionDataSource(mContext);
         GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
         Transaction.OrderDetail orderDetail = new Transaction.OrderDetail();
         int componentLevel = product.getComponentLevel();

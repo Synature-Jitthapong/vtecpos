@@ -19,6 +19,7 @@ public class GlobalPropertyManager {
     private int computerId;
     private int staffId = 1;
 
+    private int saleMode = 1;
     private int roundingDigit = 2;
     private int vatDigit = 2;
     private int vatType = 1;
@@ -80,6 +81,10 @@ public class GlobalPropertyManager {
 
     public int getComputerId() {
         return computerId;
+    }
+
+    public int getSaleMode() {
+        return saleMode;
     }
 
     public int getRoundingDigit() {
