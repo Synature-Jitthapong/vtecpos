@@ -70,12 +70,22 @@ public class TransactionManager {
         TransactionDataSource dataSource = new TransactionDataSource(mContext);
         GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
         Transaction.OrderDetail orderDetail = new Transaction.OrderDetail();
-        int componentLevel = product.getComponentLevel();
+
         double orgPricePerUnit = product.getProductPrice();
         double totalRetailPrice = Utils.round(qty * product.getProductPrice(), gm.getRoundingDigit());
         double orgTotalRetailPrice = Utils.round(qty * orgPricePerUnit, gm.getRoundingDigit());
         double totalDisc = 0;
         double salePrice = totalRetailPrice - totalDisc;
+        int componentLevel = product.getComponentLevel();
+        int isSc = gm.getHasSc();
+        SaleModeDataSource smSource = new SaleModeDataSource(mContext);
+        SaleMode saleMode = smSource.getSaleMode(gm.getSaleMode());
+        if(saleMode != null){
+            isSc = saleMode.getHasServiceCharge();
+        }
+        if(isSc == 1){
+            isSc = product.getHasServiceCharge();
+        }
         orderDetail.setTransactionId(currentTransId);
         orderDetail.setComputerId(gm.getComputerId());
         orderDetail.setComponentLevel(componentLevel);
@@ -103,9 +113,9 @@ public class TransactionManager {
         orderDetail.setVatDisplay(product.getProductVatDisplay());
         orderDetail.setProductVATPercent(product.getProductVatPercent());
 //        cv.put(VATABLE, model.getVatable());
-//        cv.put(IS_SC_BEFORE_DISC, model.getIsSCBeforeDisc());
-//        cv.put(HAS_SERVICE_CHARGE, model.getHasServiceCharge());
-//        cv.put(SC_PERCENT, model.getScPercent());
+        orderDetail.setIsSCBeforeDisc(gm.scBeforeDisc());
+        orderDetail.setHasServiceCharge(isSc);
+        orderDetail.setScPercent(gm.getScPercent());
         orderDetail.setOtherFoodName("");
 //        cv.put(OTHER_PRODUCT_GROUP_ID, model.getOtherProductGroupID());
 //        cv.put(DISCOUNT_ALLOW, model.getDiscountAllow());

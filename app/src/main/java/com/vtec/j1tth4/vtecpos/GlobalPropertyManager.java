@@ -19,13 +19,14 @@ public class GlobalPropertyManager {
     private int computerId;
     private int staffId = 1;
 
+    private int hasSc;
     private int saleMode = 1;
     private int roundingDigit = 2;
     private int vatDigit = 2;
     private int vatType = 1;
     private double scPercent = 7.0d;
-    private boolean isCalVatWhenZeroBill = false;
-    private boolean isScBeforeDisc = false;
+    private int calVatWhenZeroBill = 0;
+    private int scBeforeDisc = 0;
     private String vatCode;
 
     private static GlobalPropertyManager sInstance = null;
@@ -43,9 +44,11 @@ public class GlobalPropertyManager {
         if(s == null)
             throw new ExceptionInInitializerError("Shop data is null");
         shopId = s.getShopID();
+        hasSc = s.getHasSC();
+
         s = sd.loadVatShopData(shopId);
         scPercent = s.getSCPercent();
-        isScBeforeDisc = s.getIsSCBeforeDisc() == 1 ? true : false;
+        scBeforeDisc = s.getIsSCBeforeDisc();
         vatType = s.getVATType();
         vatCode = s.getVATCode();
 
@@ -62,7 +65,7 @@ public class GlobalPropertyManager {
         for(GlobalProperty gb : gbl) {
             switch (gb.getPropertyID()) {
                 case GlobalPropertyDataSource.CAL_VAT_WHEN_ZERO_BILL_PROPERTY:
-                    if (gb.getPropertyValue() == 1) isCalVatWhenZeroBill = true;
+                    calVatWhenZeroBill = gb.getPropertyValue();
                     break;
                 case GlobalPropertyDataSource.VAT_DIGIT_PROPERTY:
                     vatDigit = gb.getPropertyValue();
@@ -87,6 +90,10 @@ public class GlobalPropertyManager {
         return saleMode;
     }
 
+    public int getHasSc(){
+        return hasSc;
+    }
+
     public int getRoundingDigit() {
         return roundingDigit;
     }
@@ -103,12 +110,12 @@ public class GlobalPropertyManager {
         return scPercent;
     }
 
-    public boolean isCalVatWhenZeroBill() {
-        return isCalVatWhenZeroBill;
+    public int calVatWhenZeroBill() {
+        return calVatWhenZeroBill;
     }
 
-    public boolean isScBeforeDisc() {
-        return isScBeforeDisc;
+    public int scBeforeDisc() {
+        return scBeforeDisc;
     }
 
     public String getVatCode(){
