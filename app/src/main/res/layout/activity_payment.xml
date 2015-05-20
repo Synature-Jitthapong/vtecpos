@@ -16,7 +16,7 @@
         android:layout_alignParentStart="true" />
 
     <FrameLayout
-        android:layout_width="320dp"
+        android:layout_width="420dp"
         android:layout_height="fill_parent"
         android:layout_below="@+id/paymenttype_tab"
         android:id="@+id/paydetail_content"
@@ -36,7 +36,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="1,190.00"
         android:id="@+id/tvPaymentTotalPrice"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
@@ -90,7 +89,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1,190.00"
                 android:id="@+id/tvTotalDue"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
         </LinearLayout>
@@ -103,17 +101,15 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/balance"
-                android:id="@+id/tvBalanceLabel"
+                android:text="@string/change"
+                android:id="@+id/tvChangeLabel"
                 android:layout_weight="1"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="-1,190.00"
-                android:id="@+id/tvBalance"
-                android:textColor="@android:color/holo_red_light"
+                android:id="@+id/tvChange"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
         </LinearLayout>
     </LinearLayout>

@@ -2,6 +2,9 @@ package com.vtec.j1tth4.vtecpos;
 
 import android.content.Context;
 
+import com.vtec.j1tth4.vtecpos.provider.GlobalPropertyDataSource;
+import com.vtec.j1tth4.vtecpos.provider.PayDetail;
+import com.vtec.j1tth4.vtecpos.provider.PaymentDataSource;
 import com.vtec.j1tth4.vtecpos.provider.ProductData;
 import com.vtec.j1tth4.vtecpos.provider.SaleMode;
 import com.vtec.j1tth4.vtecpos.provider.SaleModeDataSource;
@@ -28,6 +31,34 @@ public class TransactionManager {
 
     private TransactionManager(Context c){
         mContext = c;
+    }
+
+    public void finalizeBill(){
+        TransactionDataSource dataSource = new TransactionDataSource(mContext);
+        GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
+        dataSource.finalizeBill(currentTransId, gm.getComputerId());
+        dataSource.weightProductSet(currentTransId, gm.getComputerId());
+    }
+
+    public PayDetail getPayDetail(){
+        PaymentDataSource dataSource = new PaymentDataSource(mContext);
+        GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
+        return dataSource.getPayDetail(currentTransId, gm.getComputerId());
+    }
+
+    public void deletePaymentDetail(){
+        PaymentDataSource dataSource = new PaymentDataSource(mContext);
+        GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
+        dataSource.deletePaymentDetail(currentTransId, gm.getComputerId());
+    }
+
+    public void insertPayDetail(PayDetail payDetail){
+        PaymentDataSource dataSource = new PaymentDataSource(mContext);
+        GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
+
+        payDetail.setTransactionID(currentTransId);
+        payDetail.setComputerID(gm.getComputerId());
+        dataSource.insertPaymentDetail(payDetail);
     }
 
     public Transaction.OrderDetail getOrder(int orderId){
@@ -71,11 +102,21 @@ public class TransactionManager {
         GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
         Transaction.OrderDetail orderDetail = new Transaction.OrderDetail();
 
-        double orgPricePerUnit = product.getProductPrice();
-        double totalRetailPrice = Utils.round(qty * product.getProductPrice(), gm.getRoundingDigit());
+        double unitPrice = product.getProductPrice() == -1 ? 1 : product.getProductPrice();
+        double orgPricePerUnit = unitPrice;
+        double totalRetailPrice = Utils.round(qty * unitPrice, gm.getRoundingDigit());
         double orgTotalRetailPrice = Utils.round(qty * orgPricePerUnit, gm.getRoundingDigit());
         double totalDisc = 0;
         double salePrice = totalRetailPrice - totalDisc;
+        double vatable = salePrice;
+
+        if(product.getProductVatPercent() == 0){
+            vatable = 0;
+        }
+
+        int discountAllow = product.getDiscountAllow();
+        // if isComponentProduct when discountAllow = 0
+        int itemDiscountAllow = discountAllow;
         int componentLevel = product.getComponentLevel();
         int isSc = gm.getHasSc();
         SaleModeDataSource smSource = new SaleModeDataSource(mContext);
@@ -98,9 +139,9 @@ public class TransactionManager {
         orderDetail.setProductId(product.getProductId());
         orderDetail.setProductSetType(product.getProductTypeId());
         orderDetail.setOrderStatusId(2);
-        orderDetail.setSaleMode(1);
-        orderDetail.setTotalQty(1);
-        orderDetail.setPricePerUnit(product.getProductPrice());
+        orderDetail.setSaleMode(gm.getSaleMode());
+        orderDetail.setTotalQty(qty);
+        orderDetail.setPricePerUnit(unitPrice);
         orderDetail.setTotalRetailPrice(totalRetailPrice);
         orderDetail.setOrgPricePerUnit(orgPricePerUnit);
         orderDetail.setOrgTotalRetailPrice(orgTotalRetailPrice);
@@ -112,14 +153,14 @@ public class TransactionManager {
         orderDetail.setProductVATCode(product.getVatCode());
         orderDetail.setVatDisplay(product.getProductVatDisplay());
         orderDetail.setProductVATPercent(product.getProductVatPercent());
-//        cv.put(VATABLE, model.getVatable());
-        orderDetail.setIsSCBeforeDisc(gm.scBeforeDisc());
+        orderDetail.setVatable(vatable);
+        orderDetail.setIsSCBeforeDisc(gm.getScBeforeDisc());
         orderDetail.setHasServiceCharge(isSc);
         orderDetail.setScPercent(gm.getScPercent());
         orderDetail.setOtherFoodName("");
 //        cv.put(OTHER_PRODUCT_GROUP_ID, model.getOtherProductGroupID());
-//        cv.put(DISCOUNT_ALLOW, model.getDiscountAllow());
-//        cv.put(ITEM_DISC_ALLOW, model.getItemDiscAllow());
+        orderDetail.setDiscountAllow(discountAllow);
+        orderDetail.setItemDiscAllow(itemDiscountAllow);
 //        cv.put(LAST_TRANSACTION_ID, model.getLastTransactionId());
 //        cv.put(LAST_COMPUTER_ID, model.getLastComputerId());
 //        cv.put(PRINTER_ID, model.getPrinterId());
@@ -141,11 +182,15 @@ public class TransactionManager {
 //        cv.put(SUBMIT_ORDER_DATE_TIME, model.getSubmitOrderDateTime());
 //        cv.put(COMMENT, model.getComment());
 //        cv.put(IS_COMMENT, model.getIsComment());
-//        cv.put(DELETED, model.getDeleted());
-        //sqlStatement = "INSERT INTO OrderDetail" + TableExtraString + " (OrderDetailID,TransactionID,ComputerID,ComponentLevel,OrderDetailLinkID,InsertOrderNo,IndentLevel,DisplayOrdering,SaleDate,ShopID,ProductID,ProductSetType,OrderStatusID,SaleMode,TotalQty,PricePerUnit,TotalRetailPrice,OrgPricePerUnit,OrgTotalRetailPrice,DiscPricePercent,DiscPrice,DiscOther,TotalItemDisc,SalePrice,ProductVATCode,VATDisplay,ProductVATPercent,Vatable,IsSCBeforeDisc,HasServiceCharge,SCPercent,OtherFoodName,OtherProductGroupID,DiscountAllow,ItemDiscAllow,LastTransactionID,LastComputerID,PrinterID,InventoryID,OrderStaffID,OrderComputerID,OrderTableID,VoidTypeID,VoidStaffID,VoidDateTime,VATType,PrintGroup,NoPrintBill,NoRePrintOrder,StartTime,FinishTime,PrintStatus,ProcessID,SubmitOrderDateTime,Comment,IsComment,Deleted) values (" + OrderDetailID.ToString + "," + TransactionID.ToString + "," + ComputerID.ToString + "," + ComponentLevel.ToString + "," + OrderDetailLinkID.ToString + "," + InsertOrderNo.ToString + "," + IndentLevel.ToString + "," + DisplayOrdering.ToString + "," + SaleDate + "," + ShopID.ToString + "," + ProductID.ToString + "," + ProductTypeID.ToString + "," + OrderStatusID.ToString + "," + SaleMode.ToString + "," + ProductQty.ToString + "," + PricePerUnit.ToString + "," + TotalRetailPrice.ToString + "," + OrgPricePerUnit.ToString + "," + OrgTotalRetailPrice.ToString + "," + DiscPercent.ToString + "," + DiscAmount.ToString + "," + DiscOther.ToString + "," + TotalDiscount.ToString + "," + SalePrice.ToString + ",'" + Replace(ProductVATCode,"'","''") + "','" + Replace(VATDisplay,"'","''") + "'," + ProductVATPercent.ToString + "," + Vatable.ToString + "," + SCBeforeDisc.ToString + "," + IsSC.ToString + "," + SCPercent.ToString + ",'" + Replace(OtherFoodName,"'","''") + "'," + OtherProductGroupID.ToString + "," + DiscountAllow.ToString + "," + ItemDiscAllow.ToString + "," + LastTransactionID.ToString + "," + LastComputerID.ToString + ",'" + PrinterID.ToString + "'," + InventoryID.ToString + "," + OrderStaffID.ToString + "," + OrderComputerID.ToString + "," + OrderTableID.ToString + "," + VoidTypeID.ToString + "," + VoidStaffID.ToString + "," + VoidDateTime.ToString + "," + VATType.ToString + "," + PrintGroup.ToString + "," + NoPrintBill.ToString + "," + NoRePrintOrder.ToString + "," + StartTime.ToString + "," + FinishTime.ToString + "," + PrintStatus.ToString + "," + ProcessID.ToString + "," + SubmitOrderDateTime.ToString + ",'" + Replace(Comment,"'","''") + "'," + IsComment.ToString + "," + Deleted.ToString + ")"
+        orderDetail.setDeleted(0);
         int orderId = dataSource.insertOrderDetail(orderDetail);
         dataSource.calculateBill(currentTransId, gm.getComputerId());
         return orderId;
+    }
+
+    public Transaction getTransaction(){
+        TransactionDataSource dataSource = new TransactionDataSource(mContext);
+        return dataSource.getTransaction(currentTransId);
     }
 
     public void insertTransaction(){

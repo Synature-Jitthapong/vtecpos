@@ -14,7 +14,7 @@
     <string name="total">Total</string>
     <string name="enter">Enter</string>
     <string name="title_activity_payment">PaymentActivity</string>
-    <string name="balance">Balance</string>
+    <string name="change">Change</string>
     <string name="total_due">Total Due</string>
     <string name="total_paid">Total Paid</string>
     <string name="card_no">Card No</string>

@@ -1,11 +1,13 @@
 package com.vtec.j1tth4.vtecpos;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,8 +32,6 @@ import de.greenrobot.event.EventBus;
  */
 public class OrderListFragment extends Fragment{
 
-    private EventBus mBus = EventBus.getDefault();
-
     private List<Transaction.OrderDetail> mOrderList;
     private List<SummaryItem> mSummaryItemList;
     private OrderListAdapter mOrderAdapter;
@@ -48,22 +48,29 @@ public class OrderListFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mBus.register(this);
-        mOrderList = new ArrayList<Transaction.OrderDetail>();
-        mSummaryItemList = new ArrayList<SummaryItem>();
         TransactionManager manager = TransactionManager.getInstance(getActivity());
         mOrderList = manager.listOrder();
+        if(mOrderList == null) {
+            mOrderList = new ArrayList<Transaction.OrderDetail>();
+            mSummaryItemList = new ArrayList<SummaryItem>();
+        }
     }
 
     @Override
-    public void onDestroy() {
-        mBus.unregister(this);
-        super.onDestroy();
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
     public void onEvent(MenuClickEvent event){
         TransactionManager manager = TransactionManager.getInstance(getActivity());
-        Transaction.OrderDetail orderDetail = manager.getOrder(event.getOrderId());
+        Transaction.OrderDetail orderDetail = manager.getOrder(event.orderId);
         mOrderList.add(orderDetail);
         mOrderAdapter.notifyDataSetChanged();
         mLvOrder.post(new Runnable() {
@@ -242,28 +249,29 @@ public class OrderListFragment extends Fragment{
         double sumWSc = 0;
         double sumWScVat = 0;
         double sumWScBeforeVat = 0;
-        for(Transaction.OrderDetail orderDetail : mOrderList){
-            sumTotalItem += orderDetail.getTotalQty();
-            sumRetailPrice +=  orderDetail.getTotalRetailPrice();
-            sumDiscount += orderDetail.getTotalItemDisc();//dtTable.Rows(i)("TotalItemDisc")
-            sumSalePrice += orderDetail.getSalePrice(); //dtTable.Rows(i)("SalePrice")
-            sumBillDisc +=  orderDetail.getDiscBill();//dtTable.Rows(i)("DiscBill")
-            sumNetSale +=  orderDetail.getNetSale();//dtTable.Rows(i)("NetSale")
-            sumPVat +=  orderDetail.getProductVAT();//dtTable.Rows(i)("ProductVAT")
-            sumPBeforeVat +=  orderDetail.getProductBeforeVAT(); //dtTable.Rows(i)("ProductBeforeVAT")
-            sumSc +=  orderDetail.getScAmount(); //dtTable.Rows(i)("SCAmount")
-            sumScVat += orderDetail.getScVAT(); //dtTable.Rows(i)("SCVAT")
-            sumScBefore +=  orderDetail.getScBeforeVAT(); //dtTable.Rows(i)("SCBeforeVAT")
-            sumVatable += orderDetail.getVatable(); //dtTable.Rows(i)("Vatable")
-            sumWVatable += orderDetail.getwVatable(); //dtTable.Rows(i)("WVatable")
-            sumW +=  orderDetail.getWeightPrice(); //dtTable.Rows(i)("WeightPrice")
-            sumWVat +=  orderDetail.getWeightPriceVAT(); //dtTable.Rows(i)("WeightPriceVAT")
-            sumWBefore +=  orderDetail.getWeightBeforeVAT(); //dtTable.Rows(i)("WeightBeforeVAT")
-            sumWSc +=  orderDetail.getScWAmount(); //dtTable.Rows(i)("SCWAmount")
-            sumWScVat +=  orderDetail.getScWVAT(); //dtTable.Rows(i)("SCWVAT")
-            sumWScBeforeVat +=  orderDetail.getScWBeforeVAT(); //dtTable.Rows(i)("SCWBeforeVAT")
+        if(mOrderList != null) {
+            for (Transaction.OrderDetail orderDetail : mOrderList) {
+                sumTotalItem += orderDetail.getTotalQty();
+                sumRetailPrice += orderDetail.getTotalRetailPrice();
+                sumDiscount += orderDetail.getTotalItemDisc();//dtTable.Rows(i)("TotalItemDisc")
+                sumSalePrice += orderDetail.getSalePrice(); //dtTable.Rows(i)("SalePrice")
+                sumBillDisc += orderDetail.getDiscBill();//dtTable.Rows(i)("DiscBill")
+                sumNetSale += orderDetail.getNetSale();//dtTable.Rows(i)("NetSale")
+                sumPVat += orderDetail.getProductVAT();//dtTable.Rows(i)("ProductVAT")
+                sumPBeforeVat += orderDetail.getProductBeforeVAT(); //dtTable.Rows(i)("ProductBeforeVAT")
+                sumSc += orderDetail.getScAmount(); //dtTable.Rows(i)("SCAmount")
+                sumScVat += orderDetail.getScVAT(); //dtTable.Rows(i)("SCVAT")
+                sumScBefore += orderDetail.getScBeforeVAT(); //dtTable.Rows(i)("SCBeforeVAT")
+                sumVatable += orderDetail.getVatable(); //dtTable.Rows(i)("Vatable")
+                sumWVatable += orderDetail.getwVatable(); //dtTable.Rows(i)("WVatable")
+                sumW += orderDetail.getWeightPrice(); //dtTable.Rows(i)("WeightPrice")
+                sumWVat += orderDetail.getWeightPriceVAT(); //dtTable.Rows(i)("WeightPriceVAT")
+                sumWBefore += orderDetail.getWeightBeforeVAT(); //dtTable.Rows(i)("WeightBeforeVAT")
+                sumWSc += orderDetail.getScWAmount(); //dtTable.Rows(i)("SCWAmount")
+                sumWScVat += orderDetail.getScWVAT(); //dtTable.Rows(i)("SCWVAT")
+                sumWScBeforeVat += orderDetail.getScWBeforeVAT(); //dtTable.Rows(i)("SCWBeforeVAT")
+            }
         }
-
         mSummaryItemList = new ArrayList<>();
         mSummaryItemList.add(
                 new SummaryItem(
@@ -290,7 +298,7 @@ public class OrderListFragment extends Fragment{
 
         @Override
         public int getCount() {
-            return mSummaryItemList.size();
+            return mSummaryItemList != null ? mSummaryItemList.size() : 0;
         }
 
         @Override

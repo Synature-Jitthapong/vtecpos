@@ -6,11 +6,36 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import com.vtec.j1tth4.vtecpos.provider.Transaction;
+
+import java.text.NumberFormat;
+import java.util.Locale;
+
+import de.greenrobot.event.EventBus;
 
 
 public class PaymentActivity extends ActionBarActivity {
 
     private PaymentTypeSlidingTabLayout mPaymentTypeTabLayout;
+
+    private TextView mTvReceiptNetSale;
+    private TextView mTvTotalPaid;
+    private TextView mTvTotalDue;
+    private TextView mTvChange;
+
+    public static class PaymentEvent{
+        public double totalPaid;
+        public double totalDue;
+        public double change;
+
+        public PaymentEvent(double totalPaid, double totalDue, double change){
+            this.totalPaid = totalPaid;
+            this.totalDue = totalDue;
+            this.change = change;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +46,10 @@ public class PaymentActivity extends ActionBarActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         mPaymentTypeTabLayout = (PaymentTypeSlidingTabLayout) findViewById(R.id.paymenttype_tab);
+        mTvReceiptNetSale = (TextView) findViewById(R.id.tvPaymentTotalPrice);
+        mTvTotalPaid = (TextView) findViewById(R.id.tvTotalPaid);
+        mTvTotalDue = (TextView) findViewById(R.id.tvTotalDue);
+        mTvChange = (TextView) findViewById(R.id.tvChange);
         mPaymentTypeTabLayout.setTabClickListener(mPayTypeTabClickListener);
 
         if(savedInstanceState == null){
@@ -29,8 +58,42 @@ public class PaymentActivity extends ActionBarActivity {
             trans.replace(R.id.payment_content, cashFragment);
             trans.commit();
         }
+
+        display();
     }
 
+    private void display(){
+        TransactionManager manager = TransactionManager.getInstance(this);
+        Transaction trans = manager.getTransaction();
+        mTvReceiptNetSale.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(trans.getReceiptNetSale()));
+        mTvTotalDue.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(trans.getReceiptNetSale()));
+        mTvChange.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(0));
+    }
+
+    public void onEvent(PaymentEvent event){
+        mTvTotalPaid.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(event.totalPaid));
+        mTvTotalDue.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(event.totalDue));
+        mTvChange.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(event.change));
+    }
+
+    @Override
+    protected void onDestroy() {
+        TransactionManager manager = TransactionManager.getInstance(this);
+        manager.deletePaymentDetail();
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -36,7 +36,6 @@ public class TransactionDataSource {
     public static final String TABLE_ORDER_VATABLE_DETAIL_FRONT = "OrderVatableDetailFront";
     public static final String TABLE_ORDER_VATABLE_DETAIL = "OrderVatableDetail";
     public static final String TABLE_SALE_MODE = "SaleMode";
-    public static final String TABLE_ORDER_PAY_DETAIL = "OrderPayDetail";
 
     public static final String TRANSACTION_ID = "TransactionID";
     public static final String COMPUTER_ID = "ComputerID";
@@ -216,7 +215,7 @@ public class TransactionDataSource {
         mGpManager = GlobalPropertyManager.getInstance(c);
     }
 
-    private void weightProductSet(int transId, int compId){
+    public void weightProductSet(int transId, int compId){
         SQLiteDatabase db = mDbHelper.openWritable();
         db.beginTransaction();
         try {
@@ -384,7 +383,7 @@ public class TransactionDataSource {
             String[] tables = {
                     TABLE_TRANSACTION,
                     TABLE_ORDER_DETAIL,
-                    TABLE_ORDER_PAY_DETAIL,
+                    PaymentDataSource.TABLE_ORDER_PAY_DETAIL,
                     TABLE_ORDER_PROMOTION_APPLY,
                     TABLE_ORDER_PROMOTION_DETAIL,
                     TABLE_ORDER_VATABLE_DETAIL
@@ -414,7 +413,7 @@ public class TransactionDataSource {
         }
     }
 
-    private void finalizeBill(int transId, int compId){
+    public void finalizeBill(int transId, int compId){
         SQLiteDatabase db = mDbHelper.openWritable();
         db.beginTransaction();
         try {
@@ -524,8 +523,7 @@ public class TransactionDataSource {
                             " case when " + VAT_TYPE + "=1 then round(round(" + NET_SALE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/(100 + " + vatPercent + "), " + mGpManager.getRoundingDigit() + ") else round(round(" + NET_SALE + "*" + SC_PERCENT + "/100, " + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/100, " + mGpManager.getRoundingDigit() + ") end " +
                             " else " +
                             " case when " + VAT_TYPE + "=1 then round(round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/(100 + " + vatPercent + "), " + mGpManager.getRoundingDigit() + ") else round(round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100, " + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/100, " + mGpManager.getRoundingDigit() + ") end " +
-                            " end" +
-                            PRODUCT_VAT + "=" +
+                            " end, " + PRODUCT_VAT + "=" +
                             " case when " + VAT_TYPE + "=1 then round(" + NET_SALE + "*" + PRODUCT_VAT_PERCENT + "/(100 + " + PRODUCT_VAT_PERCENT + "), " + mGpManager.getRoundingDigit() + ") else round(" + NET_SALE + "*" + PRODUCT_VAT_PERCENT + "/100, " + mGpManager.getRoundingDigit() + ") end " +
                             " where " + ORDER_STATUS_ID + "<=?" +
                             " and " + TRANSACTION_ID + "=?" +
@@ -634,10 +632,10 @@ public class TransactionDataSource {
                             " case when " + VATABLE + "=0 then 0 else " + NET_SALE + " end, " +
                             TOTAL_RETAIL_VAT + "=" +
                             " case when " + VAT_TYPE + "=1 then round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ (100 + " + PRODUCT_VAT_PERCENT + "), " + mGpManager.getRoundingDigit() + ") else " +
-                            " round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ 100, " + mGpManager.getRoundingDigit() + ")) end, " +
+                            " round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ 100, " + mGpManager.getRoundingDigit() + ") end, " +
                             DISC_VAT + "=" +
                             " case when " + VAT_TYPE + "=1 then round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ (100 + " + PRODUCT_VAT_PERCENT + "), " + mGpManager.getRoundingDigit() + ") else " +
-                            " round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ 100, " + mGpManager.getRoundingDigit() + ")) - " + PRODUCT_VAT + " end " +
+                            " round(" + TOTAL_RETAIL_PRICE + "*" + PRODUCT_VAT_PERCENT + "/ 100, " + mGpManager.getRoundingDigit() + ") - " + PRODUCT_VAT + " end " +
                             " where OrderStatusID <=? " +
                             " and " + TRANSACTION_ID + "=?" +
                             " and " + COMPUTER_ID + "=?",
@@ -775,7 +773,7 @@ public class TransactionDataSource {
             cursor3.close();
 
             double scBillDisc = 0;
-            if (mGpManager.isScBeforeDisc()) {
+            if (mGpManager.getScBeforeDisc() == 1) {
                 if (totalBillDisc > 0) {
                     scBillDisc = totalBillDisc * mGpManager.getScPercent() / 100;
                 }
@@ -786,7 +784,7 @@ public class TransactionDataSource {
             vatableBeforeDisc += scAmount;
             totalVatable += scAmount;
 
-            if (netSale == 0 && mGpManager.isCalVatWhenZeroBill()) {
+            if (netSale == 0 && mGpManager.getCalVatWhenZeroBill() == 1) {
                 totalVatable = vatableBeforeDisc;
             }
 
@@ -794,7 +792,7 @@ public class TransactionDataSource {
             double transBeforeVat = 0;
             double scVat = 0;
             double scBeforeVat = 0;
-            int vatPercent = mGpManager.getVatType();
+            double vatPercent = mGpManager.getVatPercent();
             int vatDigit = mGpManager.getVatDigit();
             if (mGpManager.getVatType() == 1) {
                 transVat = Utils.round(totalVatable * vatPercent / (100 + vatPercent), vatDigit);
@@ -1151,6 +1149,27 @@ public class TransactionDataSource {
         return orderDetailList;
     }
 
+    public Transaction getTransaction(int transId){
+        Cursor cursor = mDbHelper.openReadable().rawQuery(
+                "select * from " + TABLE_TRANSACTION_FRONT +
+                        " where " + TRANSACTION_ID + "=?",
+                new String[]{
+                        String.valueOf(transId)
+                });
+        Transaction trans = null;
+        if(cursor.moveToFirst()){
+            trans = new Transaction();
+            trans.setTransactionId(cursor.getInt(cursor.getColumnIndex(TRANSACTION_ID)));
+            trans.setComputerId(cursor.getInt(cursor.getColumnIndex(COMPUTER_ID)));
+            trans.setReceiptNetSale(cursor.getDouble(cursor.getColumnIndex(RECEIPT_NET_SALE)));
+            trans.setTransactionVAT(cursor.getDouble(cursor.getColumnIndex(TRANSACTION_VAT)));
+            trans.setTransactionVATable(cursor.getDouble(cursor.getColumnIndex(TRANSACTION_VATABLE)));
+        }
+        cursor.close();
+        mDbHelper.close();
+        return trans;
+    }
+
     public int getCurrentTransactionId(String saleDate){
         int currTransId = 0;
         Cursor cursor = mDbHelper.openReadable().rawQuery(
@@ -1284,7 +1303,7 @@ public class TransactionDataSource {
      * @throws SQLException
      */
     public int insertTransaction(Transaction model) throws SQLException{
-        int transId = getMaxTransId();
+        int transId = getMaxTransId(model.getComputerId());
         String saleDate = model.getSaleDate();
         String[] dateSplit = saleDate.split("-");
         String year = dateSplit[0];
@@ -1424,14 +1443,19 @@ public class TransactionDataSource {
     }
 
     /**
+     * @param compId
      * @return max transactionId
      */
-    private int getMaxTransId(){
+    private int getMaxTransId(int compId){
         int maxTransId = 0;
         SQLiteDatabase db = mDbHelper.openWritable();
         Cursor cursor = db.rawQuery(
                 "select max(" + TRANSACTION_ID + ")" +
-                        " from " + TABLE_TRANSACTION_FRONT, null);
+                        " from " + TABLE_TRANSACTION_FRONT +
+                        " where " + COMPUTER_ID + "=?",
+                new String[]{
+                        String.valueOf(compId)
+                });
         if (cursor.moveToFirst()) {
             maxTransId = cursor.getInt(0);
         }
@@ -1440,8 +1464,10 @@ public class TransactionDataSource {
             cursor = db.rawQuery(
                     "select max(" + TRANSACTION_ID + ")" +
                             " from " + TABLE_TRANSACTION +
-                            " where " + TRANSACTION_STATUS_ID + "=?",
+                            " where " + COMPUTER_ID + "=? " +
+                            " and " + TRANSACTION_STATUS_ID + "=?",
                     new String[]{
+                            String.valueOf(compId),
                             String.valueOf(SUCCESS_TRANS)
                     });
             if(cursor.moveToFirst()){

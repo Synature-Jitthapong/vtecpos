@@ -37,8 +37,6 @@ public class MenuFragment extends Fragment{
 
     public static final String SLIDING_TAB_TITLE = "sliding_tab_title";
 
-    EventBus bus = EventBus.getDefault();
-
     public static class MenuItem{
         private String menuName;
         private Drawable imgDrawable;
@@ -97,7 +95,7 @@ public class MenuFragment extends Fragment{
                 ProductData.Products product = (ProductData.Products) parent.getItemAtPosition(position);
                 TransactionManager manager = TransactionManager.getInstance(getActivity());
                 int orderId = manager.insertOrder(product, 1);
-                bus.post(new MenuClickEvent(orderId));
+                EventBus.getDefault().post(new MenuClickEvent(orderId));
             }
         });
     }
@@ -134,7 +132,8 @@ public class MenuFragment extends Fragment{
             }
             final ProductData.Products product = mProductList.get(i);
             holder.tvTitle.setText(product.getProductName());
-            holder.tvSub.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(product.getProductPrice()));
+            double price = product.getProductPrice() == -1 ? 1 : product.getProductPrice(); // test -1 open price
+            holder.tvSub.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(price));
             holder.img.setImageDrawable(null);
             return view;
         }

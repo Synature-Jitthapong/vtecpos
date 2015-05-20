@@ -120,6 +120,7 @@ public class ProductDataSource {
     public static final String FROM_DATE = "FromDate";
     public static final String TO_DATE = "ToDate";
     public static final String VAT_CODE = "VATCode";
+    public static final String VAT_TYPE = "VATType";
     public static final String PRODUCT_TYPE_ID = "ProductTypeID";
     public static final String PRODUCT_TYPE_NAME = "ProductTypeName";
     public static final String PRODUCT_TYPE_COMPONENT_LEVEL = "ComponentLevel";
@@ -253,6 +254,7 @@ public class ProductDataSource {
                     product.setProductVatPercent(cursor.getDouble(cursor.getColumnIndex(PRODUCT_VAT_PERCENT)));
                     product.setProductVatDisplay(cursor.getString(cursor.getColumnIndex(PRODUCT_VAT_DISPLAY)));
                     product.setProductVatDesp(cursor.getString(cursor.getColumnIndex(PRODUCT_VAT_DESP)));
+                    product.setVatType(cursor.getInt(cursor.getColumnIndex(VAT_TYPE)));
 
                     double unitPrice = cursor.getDouble(cursor.getColumnIndexOrThrow(PRODUCT_PRICE));
                     if (unitPrice == -1 && saleMode > 1) {

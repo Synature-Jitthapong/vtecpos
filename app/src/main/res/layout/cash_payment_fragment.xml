@@ -1,38 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:baselineAligned="false">
 
     <RelativeLayout
-        android:layout_width="348dp"
+        android:layout_width="400dp"
         android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:gravity="center_horizontal">
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
-            android:id="@+id/editText"
+            android:id="@+id/txtCashDisplay"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textSize="48sp"
+            android:editable="false"
+            android:layout_alignRight="@+id/btnCashDel"
+            android:layout_alignEnd="@+id/btnCashDel" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="7"
             android:id="@+id/btnCash7"
-            android:layout_below="@+id/editText"
+            android:layout_below="@+id/txtCashDisplay"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:minHeight="72dp" />
+            android:minHeight="72dp"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -43,7 +44,7 @@
             android:layout_toRightOf="@+id/btnCash7"
             android:layout_toEndOf="@+id/btnCash7"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:minHeight="72dp" />
+            android:minHeight="72dp"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -54,7 +55,7 @@
             android:layout_toRightOf="@+id/btnCash8"
             android:layout_toEndOf="@+id/btnCash8"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:minHeight="72dp" />
+            android:minHeight="72dp"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -65,7 +66,7 @@
             android:layout_toRightOf="@+id/btnCash9"
             android:layout_toEndOf="@+id/btnCash9"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:minHeight="72dp" />
+            android:minHeight="72dp"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -76,7 +77,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:minHeight="72dp" />
+            android:minHeight="72dp"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -87,7 +88,7 @@
             android:layout_toRightOf="@+id/btnCash4"
             android:layout_toEndOf="@+id/btnCash4"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:minHeight="72dp" />
+            android:minHeight="72dp"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -98,7 +99,7 @@
             android:layout_toRightOf="@+id/btnCash5"
             android:layout_toEndOf="@+id/btnCash5"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:minHeight="72dp" />
+            android:minHeight="72dp"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -109,7 +110,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:minHeight="72dp" />
+            android:minHeight="72dp"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -120,7 +121,7 @@
             android:layout_toRightOf="@+id/btnCash1"
             android:layout_toEndOf="@+id/btnCash1"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:minHeight="72dp" />
+            android:minHeight="72dp"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -131,7 +132,7 @@
             android:layout_toRightOf="@+id/btnCash2"
             android:layout_toEndOf="@+id/btnCash2"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:minHeight="72dp" />
+            android:minHeight="72dp"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -144,7 +145,7 @@
             android:layout_toLeftOf="@+id/btnCash3"
             android:layout_toStartOf="@+id/btnCash3"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:minHeight="72dp" />
+            android:minHeight="72dp"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -155,7 +156,7 @@
             android:layout_alignLeft="@+id/btnCashDel"
             android:layout_alignStart="@+id/btnCashDel"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:minHeight="72dp" />
+            android:minHeight="72dp"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -166,7 +167,7 @@
             android:layout_toRightOf="@+id/btnCash3"
             android:layout_toEndOf="@+id/btnCash3"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:minHeight="72dp" />
+            android:minHeight="72dp"/>
 
         <Button
             android:layout_width="wrap_content"
@@ -178,7 +179,7 @@
             android:layout_alignRight="@+id/btnCashDot"
             android:layout_alignEnd="@+id/btnCashDot"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-            android:minHeight="72dp" />
+            android:minHeight="72dp"/>
     </RelativeLayout>
 
     <RelativeLayout

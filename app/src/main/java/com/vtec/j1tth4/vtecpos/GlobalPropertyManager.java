@@ -24,7 +24,8 @@ public class GlobalPropertyManager {
     private int roundingDigit = 2;
     private int vatDigit = 2;
     private int vatType = 1;
-    private double scPercent = 7.0d;
+    private double scPercent = 0;
+    private double vatPercent = 0;
     private int calVatWhenZeroBill = 0;
     private int scBeforeDisc = 0;
     private String vatCode;
@@ -51,6 +52,7 @@ public class GlobalPropertyManager {
         scBeforeDisc = s.getIsSCBeforeDisc();
         vatType = s.getVATType();
         vatCode = s.getVATCode();
+        vatPercent = s.getVatPercent();
 
         ComputerDataSource cd = new ComputerDataSource(c);
         Computer computer = cd.loadComputerData();
@@ -94,6 +96,10 @@ public class GlobalPropertyManager {
         return hasSc;
     }
 
+    public double getVatPercent(){
+        return vatPercent;
+    }
+
     public int getRoundingDigit() {
         return roundingDigit;
     }
@@ -110,11 +116,11 @@ public class GlobalPropertyManager {
         return scPercent;
     }
 
-    public int calVatWhenZeroBill() {
+    public int getCalVatWhenZeroBill() {
         return calVatWhenZeroBill;
     }
 
-    public int scBeforeDisc() {
+    public int getScBeforeDisc() {
         return scBeforeDisc;
     }
 
