@@ -2,7 +2,6 @@ package com.vtec.j1tth4.vtecpos;
 
 import android.content.Context;
 
-import com.vtec.j1tth4.vtecpos.provider.GlobalPropertyDataSource;
 import com.vtec.j1tth4.vtecpos.provider.PayDetail;
 import com.vtec.j1tth4.vtecpos.provider.PaymentDataSource;
 import com.vtec.j1tth4.vtecpos.provider.ProductData;
@@ -18,9 +17,12 @@ import java.util.List;
  */
 public class TransactionManager {
 
-    private int currentTransId;
+    private int mCurrentTransId;
     private static TransactionManager sInstance = null;
     private Context mContext;
+    private TransactionDataSource mTransDataSource;
+    private GlobalPropertyManager mGlobalManager;
+    private PaymentDataSource mPaymentDataSource;
 
     public static TransactionManager getInstance(Context c){
         if(sInstance == null){
@@ -31,81 +33,70 @@ public class TransactionManager {
 
     private TransactionManager(Context c){
         mContext = c;
+        mTransDataSource = new TransactionDataSource(mContext);
+        mGlobalManager = GlobalPropertyManager.getInstance(mContext);
+        mPaymentDataSource = new PaymentDataSource(mContext);
     }
 
     public void finalizeBill(){
-        TransactionDataSource dataSource = new TransactionDataSource(mContext);
-        GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
-        dataSource.finalizeBill(currentTransId, gm.getComputerId());
-        dataSource.weightProductSet(currentTransId, gm.getComputerId());
+        mTransDataSource.finalizeBill(mCurrentTransId, mGlobalManager.getComputerId());
+        mTransDataSource.weightProductSet(mCurrentTransId, mGlobalManager.getComputerId());
+        mCurrentTransId = 0;
     }
 
     public PayDetail getPayDetail(){
-        PaymentDataSource dataSource = new PaymentDataSource(mContext);
-        GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
-        return dataSource.getPayDetail(currentTransId, gm.getComputerId());
+        return mPaymentDataSource.getPayDetail(mCurrentTransId, mGlobalManager.getComputerId());
+    }
+
+    public List<PayDetail> listPayDetail(){
+        return mPaymentDataSource.listPayDetail(mCurrentTransId, mGlobalManager.getComputerId());
+    }
+
+    public void deletePaymentDetail(int payTypeId){
+        mPaymentDataSource.deletePaymentDetail(mCurrentTransId,
+                mGlobalManager.getComputerId(), payTypeId);
     }
 
     public void deletePaymentDetail(){
-        PaymentDataSource dataSource = new PaymentDataSource(mContext);
-        GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
-        dataSource.deletePaymentDetail(currentTransId, gm.getComputerId());
+        mPaymentDataSource.deletePaymentDetail(mCurrentTransId, mGlobalManager.getComputerId());
     }
 
     public void insertPayDetail(PayDetail payDetail){
-        PaymentDataSource dataSource = new PaymentDataSource(mContext);
-        GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
-
-        payDetail.setTransactionID(currentTransId);
-        payDetail.setComputerID(gm.getComputerId());
-        dataSource.insertPaymentDetail(payDetail);
+        payDetail.setTransactionID(mCurrentTransId);
+        payDetail.setComputerID(mGlobalManager.getComputerId());
+        mPaymentDataSource.insertPaymentDetail(payDetail);
     }
 
     public Transaction.OrderDetail getOrder(int orderId){
-        TransactionDataSource dataSource =
-                new TransactionDataSource(mContext);
-        GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
-        return dataSource.getOrderDetail(currentTransId, gm.getComputerId(), orderId);
+        return mTransDataSource.getOrderDetail(mCurrentTransId, mGlobalManager.getComputerId(), orderId);
     }
 
     public List<Transaction.OrderDetail> listOrder(){
-        TransactionDataSource dataSource =
-                new TransactionDataSource(mContext);
-        GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
-        return dataSource.listOrderDetail(currentTransId, gm.getComputerId());
+        return mTransDataSource.listOrderDetail(mCurrentTransId, mGlobalManager.getComputerId());
     }
 
     public void updateOrder(int orderId, double unitPrice, double qty){
-        TransactionDataSource dataSource =
-                new TransactionDataSource(mContext);
-        GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
-
         double orgPricePerUnit = unitPrice;
-        double totalRetailPrice = Utils.round(qty * unitPrice, gm.getRoundingDigit());
-        double orgTotalRetailPrice = Utils.round(qty * orgPricePerUnit, gm.getRoundingDigit());
+        double totalRetailPrice = Utils.round(qty * unitPrice, mGlobalManager.getRoundingDigit());
+        double orgTotalRetailPrice = Utils.round(qty * orgPricePerUnit, mGlobalManager.getRoundingDigit());
         double totalDisc = 0;
         double salePrice = totalRetailPrice - totalDisc;
 
-        dataSource.updateOrderDetail(currentTransId, gm.getComputerId(), orderId,
+        mTransDataSource.updateOrderDetail(mCurrentTransId, mGlobalManager.getComputerId(), orderId,
                 qty, totalRetailPrice, orgTotalRetailPrice, salePrice);
     }
 
     public void deleteOrder(int orderId){
-        TransactionDataSource dataSource =
-                new TransactionDataSource(mContext);
-        GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
-        dataSource.deleteOrderDetail(currentTransId, gm.getComputerId(), orderId);
+        mTransDataSource.deleteOrderDetail(mCurrentTransId, mGlobalManager.getComputerId(), orderId);
     }
 
     public int insertOrder(ProductData.Products product, double qty){
-        TransactionDataSource dataSource = new TransactionDataSource(mContext);
-        GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
         Transaction.OrderDetail orderDetail = new Transaction.OrderDetail();
 
         double unitPrice = product.getProductPrice() == -1 ? 1 : product.getProductPrice();
         double orgPricePerUnit = unitPrice;
-        double totalRetailPrice = Utils.round(qty * unitPrice, gm.getRoundingDigit());
-        double orgTotalRetailPrice = Utils.round(qty * orgPricePerUnit, gm.getRoundingDigit());
+        double totalRetailPrice = Utils.round(qty * unitPrice, mGlobalManager.getRoundingDigit());
+        double orgTotalRetailPrice = Utils.round(qty * orgPricePerUnit, mGlobalManager.getRoundingDigit());
         double totalDisc = 0;
         double salePrice = totalRetailPrice - totalDisc;
         double vatable = salePrice;
@@ -118,28 +109,28 @@ public class TransactionManager {
         // if isComponentProduct when discountAllow = 0
         int itemDiscountAllow = discountAllow;
         int componentLevel = product.getComponentLevel();
-        int isSc = gm.getHasSc();
+        int isSc = mGlobalManager.getHasSc();
         SaleModeDataSource smSource = new SaleModeDataSource(mContext);
-        SaleMode saleMode = smSource.getSaleMode(gm.getSaleMode());
+        SaleMode saleMode = smSource.getSaleMode(mGlobalManager.getSaleMode());
         if(saleMode != null){
             isSc = saleMode.getHasServiceCharge();
         }
         if(isSc == 1){
             isSc = product.getHasServiceCharge();
         }
-        orderDetail.setTransactionId(currentTransId);
-        orderDetail.setComputerId(gm.getComputerId());
+        orderDetail.setTransactionId(mCurrentTransId);
+        orderDetail.setComputerId(mGlobalManager.getComputerId());
         orderDetail.setComponentLevel(componentLevel);
         orderDetail.setOrderDetailLinkId(0);
         orderDetail.setInsertOrderNo(0);
         orderDetail.setIndentLevel(0);
         orderDetail.setDisplayOrdering(0);
         orderDetail.setSaleDate(Utils.getISODate());
-        orderDetail.setShopId(gm.getShopId());
+        orderDetail.setShopId(mGlobalManager.getShopId());
         orderDetail.setProductId(product.getProductId());
         orderDetail.setProductSetType(product.getProductTypeId());
         orderDetail.setOrderStatusId(2);
-        orderDetail.setSaleMode(gm.getSaleMode());
+        orderDetail.setSaleMode(mGlobalManager.getSaleMode());
         orderDetail.setTotalQty(qty);
         orderDetail.setPricePerUnit(unitPrice);
         orderDetail.setTotalRetailPrice(totalRetailPrice);
@@ -154,9 +145,9 @@ public class TransactionManager {
         orderDetail.setVatDisplay(product.getProductVatDisplay());
         orderDetail.setProductVATPercent(product.getProductVatPercent());
         orderDetail.setVatable(vatable);
-        orderDetail.setIsSCBeforeDisc(gm.getScBeforeDisc());
+        orderDetail.setIsSCBeforeDisc(mGlobalManager.getScBeforeDisc());
         orderDetail.setHasServiceCharge(isSc);
-        orderDetail.setScPercent(gm.getScPercent());
+        orderDetail.setScPercent(mGlobalManager.getScPercent());
         orderDetail.setOtherFoodName("");
 //        cv.put(OTHER_PRODUCT_GROUP_ID, model.getOtherProductGroupID());
         orderDetail.setDiscountAllow(discountAllow);
@@ -183,21 +174,19 @@ public class TransactionManager {
 //        cv.put(COMMENT, model.getComment());
 //        cv.put(IS_COMMENT, model.getIsComment());
         orderDetail.setDeleted(0);
-        int orderId = dataSource.insertOrderDetail(orderDetail);
-        dataSource.calculateBill(currentTransId, gm.getComputerId());
+        int orderId = mTransDataSource.insertOrderDetail(orderDetail);
+        mTransDataSource.calculateBill(mCurrentTransId, mGlobalManager.getComputerId());
         return orderId;
     }
 
     public Transaction getTransaction(){
         TransactionDataSource dataSource = new TransactionDataSource(mContext);
-        return dataSource.getTransaction(currentTransId);
+        return dataSource.getTransaction(mCurrentTransId);
     }
 
     public void insertTransaction(){
-        TransactionDataSource dataSource =
-                new TransactionDataSource(mContext);
-        currentTransId = dataSource.getCurrentTransactionId(Utils.getISODate());
-        if(currentTransId == 0) {
+        mCurrentTransId = mTransDataSource.getCurrentTransactionId(Utils.getISODate());
+        if(mCurrentTransId == 0) {
             GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
             Transaction trans = new Transaction();
             trans.setComputerId(gm.getComputerId());
@@ -205,7 +194,7 @@ public class TransactionManager {
             trans.setOpenStaffId(gm.getStaffId());
             trans.setSaleDate(Utils.getISODate());
             trans.setShopId(gm.getShopId());
-            currentTransId = dataSource.insertTransaction(trans);
+            mCurrentTransId = mTransDataSource.insertTransaction(trans);
         }
     }
 }

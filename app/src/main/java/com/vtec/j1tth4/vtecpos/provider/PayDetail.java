@@ -29,6 +29,24 @@ public class PayDetail {
     private double MainCurrencyRatio;
     private double CurrencyRatio;
     private double CurrencyAmount;
+    private String payTypeCode;
+    private String payTypeName;
+
+    public String getPayTypeCode() {
+        return payTypeCode;
+    }
+
+    public void setPayTypeCode(String payTypeCode) {
+        this.payTypeCode = payTypeCode;
+    }
+
+    public String getPayTypeName() {
+        return payTypeName;
+    }
+
+    public void setPayTypeName(String payTypeName) {
+        this.payTypeName = payTypeName;
+    }
 
     public int getCardID() {
         return CardID;

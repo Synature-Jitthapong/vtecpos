@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +27,9 @@ import de.greenrobot.event.EventBus;
 public class CashPaymentFragment extends Fragment{
 
     public static final int PAY_TYPE_CASH = 1;
+
+    public static class RecalculateEvent{
+    }
 
     static final String[] PAYMENT_BUTTONS = {
             "1,000",
@@ -50,6 +54,14 @@ public class CashPaymentFragment extends Fragment{
 
         mGvPaymentButton.setAdapter(new PaymentButtonAdapter());
 
+        mGvPaymentButton.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                mTotalCash = Double.parseDouble(PAYMENT_BUTTONS[i].replace(",", ""));
+                insertPayDetail();
+            }
+        });
+
         ((Button) view.findViewById(R.id.btnCash9)).setOnClickListener(mOnClickListener);
         ((Button) view.findViewById(R.id.btnCash8)).setOnClickListener(mOnClickListener);
         ((Button) view.findViewById(R.id.btnCash7)).setOnClickListener(mOnClickListener);
@@ -72,10 +84,26 @@ public class CashPaymentFragment extends Fragment{
         return inflater.inflate(R.layout.cash_payment_fragment, container, false);
     }
 
+    public void onEvent(RecalculateEvent event){
+        calculate();
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mStrCashAmount = new StringBuilder();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
     }
 
     private class PaymentButtonAdapter extends BaseAdapter{

@@ -40,6 +40,9 @@ public class OrderListFragment extends Fragment{
     private ListView mLvOrderSummary;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    public static class RefreshEvent{
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.order_list_fragment, container, false);
@@ -48,6 +51,11 @@ public class OrderListFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+        loadOrderData();
+    }
+
+    private void loadOrderData(){
         TransactionManager manager = TransactionManager.getInstance(getActivity());
         mOrderList = manager.listOrder();
         if(mOrderList == null) {
@@ -57,15 +65,15 @@ public class OrderListFragment extends Fragment{
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
     }
 
-    @Override
-    public void onStop() {
-        EventBus.getDefault().unregister(this);
-        super.onStop();
+    public void onEvent(RefreshEvent event){
+        loadOrderData();
+        mOrderAdapter.notifyDataSetChanged();
+        refreshSummary();
     }
 
     public void onEvent(MenuClickEvent event){

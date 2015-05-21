@@ -28,9 +28,11 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/payment_content"
+        android:layout_below="@+id/tvPaymentTotalPrice"
         android:layout_toRightOf="@+id/paydetail_content"
-        android:layout_toEndOf="@+id/paydetail_content"
-        android:layout_below="@+id/tvPaymentTotalPrice"></FrameLayout>
+        android:layout_above="@+id/linearLayout">
+
+    </FrameLayout>
 
     <TextView
         android:layout_width="wrap_content"
@@ -90,7 +92,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvTotalDue"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textColor="@android:color/holo_red_dark"
+                android:text="0" />
         </LinearLayout>
 
         <LinearLayout
@@ -110,8 +114,29 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvChange"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:text="0" />
         </LinearLayout>
     </LinearLayout>
+
+    <Button
+        android:layout_width="160dp"
+        android:layout_height="96dp"
+        android:text="@string/confirm"
+        android:id="@+id/btnPayConfirm"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/tvPaymentTotalPrice"
+        android:layout_alignEnd="@+id/tvPaymentTotalPrice"
+        android:onClick="onClick" />
+
+    <Button
+        android:layout_width="160dp"
+        android:layout_height="96dp"
+        android:text="@android:string/cancel"
+        android:id="@+id/btnPayCancel"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/btnPayConfirm"
+        android:layout_toStartOf="@+id/btnPayConfirm" />
 
 </RelativeLayout>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.vtec.j1tth4.vtecpos.provider.Transaction;
@@ -24,6 +25,12 @@ public class PaymentActivity extends ActionBarActivity {
     private TextView mTvTotalPaid;
     private TextView mTvTotalDue;
     private TextView mTvChange;
+
+    public static class PaymentDeletedEvent{
+    }
+
+    public static class PaymentAddedEvent{
+    }
 
     public static class PaymentEvent{
         public double totalPaid;
@@ -56,6 +63,9 @@ public class PaymentActivity extends ActionBarActivity {
             android.support.v4.app.FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
             CashPaymentFragment cashFragment = new CashPaymentFragment();
             trans.replace(R.id.payment_content, cashFragment);
+
+            PayDetailFragment payDetailFragment = new PayDetailFragment();
+            trans.replace(R.id.paydetail_content, payDetailFragment);
             trans.commit();
         }
 
@@ -70,10 +80,31 @@ public class PaymentActivity extends ActionBarActivity {
         mTvChange.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(0));
     }
 
+    public void onEvent(PaymentDeletedEvent event){
+        display();
+    }
+
     public void onEvent(PaymentEvent event){
         mTvTotalPaid.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(event.totalPaid));
         mTvTotalDue.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(event.totalDue));
         mTvChange.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(event.change));
+
+        EventBus.getDefault().post(new PaymentAddedEvent());
+    }
+
+    public void onClick(final View v){
+        int id = v.getId();
+        switch (id){
+            case R.id.btnPayCancel:
+                break;
+            case R.id.btnPayConfirm:
+                TransactionManager.getInstance(this).finalizeBill();
+                EventBus.getDefault().post(new OrderListFragment.RefreshEvent());
+                PrintUtils printUtils = new PrintUtils();
+                printUtils.print("xxxx");
+                finish();
+                break;
+        }
     }
 
     @Override

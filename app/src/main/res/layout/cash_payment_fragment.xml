@@ -20,7 +20,10 @@
             android:layout_alignParentStart="true"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:textSize="48sp"
-            android:editable="false"
+            android:enabled="false"
+            android:singleLine="true"
+            android:lines="1"
+            android:gravity="right"
             android:layout_alignRight="@+id/btnCashDel"
             android:layout_alignEnd="@+id/btnCashDel" />
 

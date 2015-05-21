@@ -23,6 +23,8 @@ import com.vtec.j1tth4.vtecpos.provider.ShopDataSource;
 import com.vtec.j1tth4.vtecpos.provider.Transaction;
 import com.vtec.j1tth4.vtecpos.provider.TransactionDataSource;
 
+import de.greenrobot.event.EventBus;
+
 
 public class MainActivity extends ActionBarActivity{
 
@@ -44,9 +46,6 @@ public class MainActivity extends ActionBarActivity{
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mLvDrawer = (ListView) findViewById(R.id.left_drawer);
-
-        mTransManager = TransactionManager.getInstance(this);
-        mTransManager.insertTransaction();
 
         final ActionBar actionBar = getSupportActionBar();
         mLvDrawer.setAdapter(new DrawerListAdapter());
@@ -82,6 +81,13 @@ public class MainActivity extends ActionBarActivity{
             trans.replace(R.id.leftcontent, orderListFragment);
             trans.commit();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mTransManager = TransactionManager.getInstance(this);
+        mTransManager.insertTransaction();
     }
 
     @Override

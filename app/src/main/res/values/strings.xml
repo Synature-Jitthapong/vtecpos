@@ -31,4 +31,6 @@
     <string name="modify">Modify</string>
     <string name="modify_short">Mod</string>
     <string name="delete_short">Del</string>
+    <string name="confirm_delete">Are you sure you want to delete?</string>
+    <string name="confirm">Confirm</string>
 </resources>

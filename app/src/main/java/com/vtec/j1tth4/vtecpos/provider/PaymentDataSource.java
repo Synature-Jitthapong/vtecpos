@@ -83,11 +83,25 @@ public class PaymentDataSource {
         mDbHelper = DatabaseHelper.getInstance(c);
     }
 
+    /**
+     *
+     * @param transId
+     * @param compId
+     * @return
+     */
     public List<PayDetail> listPayDetail(int transId, int compId){
         Cursor cursor = mDbHelper.openReadable().rawQuery(
-                "select * from " + TABLE_ORDER_PAY_DETAIL_FRONT +
-                        " where " + TransactionDataSource.TRANSACTION_ID + "=?" +
-                        " and " + TransactionDataSource.COMPUTER_ID + "=?",
+                "select a." + PAY_TYPE_ID + ", b." + PAY_TYPE_CODE + ", " +
+                        " sum(a." + PAY_AMOUNT + ") as " + PAY_AMOUNT + ", " +
+                        " sum(a." + PAID + ") as " + PAID + ", " +
+                        " b." + PAY_TYPE_CODE + ", " +
+                        " b." + PAY_TYPE_NAME +
+                        " from " + TABLE_ORDER_PAY_DETAIL_FRONT + " a " +
+                        " left join " + TABLE_PAY_TYPE + " b " +
+                        " on a." + PAY_TYPE_ID + "=b." + PAY_TYPE_ID +
+                        " where a." + TransactionDataSource.TRANSACTION_ID + "=?" +
+                        " and a." + TransactionDataSource.COMPUTER_ID + "=?" +
+                        " group by a." + PAY_TYPE_ID,
                 new String[]{
                         String.valueOf(transId),
                         String.valueOf(compId)
@@ -98,8 +112,11 @@ public class PaymentDataSource {
             while(!cursor.isAfterLast()) {
                 PayDetail payDetail = new PayDetail();
                 payDetail = new PayDetail();
+                payDetail.setPayTypeID(cursor.getInt(cursor.getColumnIndex(PAY_TYPE_ID)));
                 payDetail.setPaid(cursor.getDouble(cursor.getColumnIndex(PAID)));
                 payDetail.setPayAmount(cursor.getDouble(cursor.getColumnIndex(PAY_AMOUNT)));
+                payDetail.setPayTypeCode(cursor.getString(cursor.getColumnIndex(PAY_TYPE_CODE)));
+                payDetail.setPayTypeName(cursor.getString(cursor.getColumnIndex(PAY_TYPE_NAME)));
                 payDetailList.add(payDetail);
                 cursor.moveToNext();
             }
@@ -109,6 +126,12 @@ public class PaymentDataSource {
         return payDetailList;
     }
 
+    /**
+     *
+     * @param transId
+     * @param compId
+     * @return
+     */
     public PayDetail getPayDetail(int transId, int compId){
         Cursor cursor = mDbHelper.openReadable().rawQuery(
                 "select sum(" + PAY_AMOUNT +") as " + PAY_AMOUNT + ", " +
@@ -131,7 +154,30 @@ public class PaymentDataSource {
         return payDetail;
     }
 
-    public void deletePaymentDetail(int transId, int compId){
+    /**
+     *
+     * @param transId
+     * @param compId
+     * @param payTypeId
+     */
+    public void deletePaymentDetail(int transId, int compId, int payTypeId) {
+        mDbHelper.openWritable().delete(TABLE_ORDER_PAY_DETAIL_FRONT,
+                TransactionDataSource.TRANSACTION_ID + "=?" +
+                        " and " + TransactionDataSource.COMPUTER_ID + "=?" +
+                        " and " + PAY_TYPE_ID + "=?",
+                new String[]{
+                        String.valueOf(transId),
+                        String.valueOf(compId),
+                        String.valueOf(payTypeId)
+                });
+    }
+
+    /**
+     *
+     * @param transId
+     * @param compId
+     */
+    public void deletePaymentDetail(int transId, int compId) {
         mDbHelper.openWritable().delete(TABLE_ORDER_PAY_DETAIL_FRONT,
                 TransactionDataSource.TRANSACTION_ID + "=?" +
                         " and " + TransactionDataSource.COMPUTER_ID + "=?",
