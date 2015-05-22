@@ -7,1505 +7,1428 @@ import java.util.List;
  * Created by j1tth4 on 5/1/15 AD.
  */
 public class Transaction {
-    private int transactionId;
-    private int computerId;
-    private String transactionUUID;
-    private String reserveTime;
-    private int reserveStaffId;
-    private String openTime;
-    private int openStaffId;
-    private String paidTime;
-    private int paidStaffId;
-    private String closeTime;
-    private int commStaffId;
-    private double discountItem;
-    private double discountBill;
-    private double discountOther;
-    private double totalDiscount;
-    private int transactionStatusId;
-    private int saleMode;
-    private String transactionName;
-    private String queueName;
-    private int noCustomer;
-    private int noCustomerWhenOpen;
-    private int docType;
-    private int receiptYear;
-    private int receiptMonth;
-    private int receiptId;
-    private String receiptNumber;
-    private String saleDate;
-    private int shopId;
-    private double transactionVAT;
-    private double transactionVATable;
-    private double tranBeforeVAT;
-    private String vatCode;
-    private double vatPercent;
-    private double serviceChargePercent;
-    private double serviceCharge;
-    private double serviceChargeVAT;
-    private double scBeforeVAT;
-    private double otherIncome;
-    private double otherIncomeVAT;
-    private double otherIncomeBeforeVAT;
-    private double receiptTotalQty;
-    private double receiptRetailPrice;
-    private double receiptDiscount;
-    private double receiptSalePrice;
-    private double receiptNetSale;
-    private double receiptPayPrice;
-    private double receiptRoundingBill;
-    private int sessionId;
-    private int closeComputerId;
-    private int voidStaffId;
-    private String voidReason;
-    private String voidTime;
-    private int isCloneBill;
-    private int voidTranId;
-    private int voidComId;
-    private double diffCloneBill;
-    private int memberId;
-    private int hasOrder;
-    private int noPrintBillDetail;
-    private double diffPayCheckBill;
-    private String billDetailReferenceNo;
-    private int callForCheckBill;
-    private String transactionNote;
-    private int currentAccessComputer;
-    private String updateDate;
-    private String beginTime;
-    private String endTime;
-    private String printWarningTime;
-    private String printBeginTime;
-    private int alreadyCalculateStock;
-    private int alreadyExportToHQ;
-    private int tableId;
-    private int isSplitTransaction;
-    private int isFromOtherTransaction;
-    private String referenceNo;
-    private int fromDepositTransactionId;
-    private int fromDepositComputerId;
-    private int deleted;
+    private Integer TransactionID;
+    private Integer ComputerID;
+    private String TransactionUUID;
+    private String ReserveTime;
+    private Integer ReserveStaffID;
+    private String OpenTime;
+    private Integer OpenStaffID;
+    private String PaidTime;
+    private Integer PaidStaffID;
+    private String CloseTime;
+    private Integer CommStaffID;
+    private Double DiscountItem;
+    private Double DiscountBill;
+    private Double DiscountOther;
+    private Double TotalDiscount;
+    private Integer TransactionStatusID;
+    private Integer SaleMode;
+    private String TransactionName;
+    private String QueueName;
+    private Integer NoCustomer;
+    private Integer NoCustomerWhenOpen;
+    private Integer DocType;
+    private Integer ReceiptYear;
+    private Integer ReceiptMonth;
+    private Integer ReceiptID;
+    private String ReceiptNumber;
+    private String SaleDate;
+    private Integer ShopID;
+    private Double TransactionVAT;
+    private Double TransactionVATable;
+    private Double TranBeforeVAT;
+    private String VATCode;
+    private Double VATPercent;
+    private Double ServiceChargePercent;
+    private Double ServiceCharge;
+    private Double ServiceChargeVAT;
+    private Double SCBeforeVAT;
+    private Double OtherIncome;
+    private Double OtherIncomeVAT;
+    private Double OhterIncomeBeforeVAT;
+    private Double ReceiptTotalQty;
+    private Double ReceiptRetailPrice;
+    private Double ReceiptDiscount;
+    private Double ReceiptSalePrice;
+    private Double ReceiptNetSale;
+    private Double ReceiptPayPrice;
+    private Double ReceiptRoundingBill;
+    private Integer SessionID;
+    private Integer CloseComputerID;
+    private Integer VoidStaffID;
+    private String VoidReason;
+    private String VoidTime;
+    private Integer IsCloneBill;
+    private Integer VoidTranID;
+    private Integer VoidComID;
+    private Double DiffCloneBill;
+    private Integer MemberID;
+    private Integer HasOrder;
+    private Integer NoPrintBillDetail;
+    private Double DiffPayCheckBill;
+    private String BillDetailReferenceNo;
+    private Integer CallForCheckBill;
+    private String TransactionNote;
+    private Integer CurrentAccessComputer;
+    private String UpdateDate;
+    private String BeginTime;
+    private String EndTime;
+    private String PrintWarningTime;
+    private String PrintBeginTime;
+    private Integer AlreadyCalculateStock;
+    private Integer AlreadyExportToHQ;
+    private Integer TableID;
+    private Integer IsSplitTransaction;
+    private Integer IsFromOtherTransaction;
+    private String ReferenceNo;
+    private Integer FromDepositTransactionID;
+    private Integer FromDepositComputerID;
+    private Integer Deleted;
 
     private List<OrderDetail> mOrderDetailLst;
 
-    public Transaction(){
-        mOrderDetailLst = new ArrayList<OrderDetail>();
-        noCustomer = 1;
-        saleMode = 1;
-        docType = 8;
+    public Integer getTransactionID() {
+        return TransactionID;
     }
 
-    public int getTransactionId() {
-        return transactionId;
+    public void setTransactionID(Integer transactionID) {
+        TransactionID = transactionID;
     }
 
-    public void setTransactionId(int transactionId) {
-        this.transactionId = transactionId;
+    public Integer getComputerID() {
+        return ComputerID;
     }
 
-    public int getComputerId() {
-        return computerId;
-    }
-
-    public void setComputerId(int computerId) {
-        this.computerId = computerId;
+    public void setComputerID(Integer computerID) {
+        ComputerID = computerID;
     }
 
     public String getTransactionUUID() {
-        return transactionUUID;
+        return TransactionUUID;
     }
 
     public void setTransactionUUID(String transactionUUID) {
-        this.transactionUUID = transactionUUID;
+        TransactionUUID = transactionUUID;
     }
 
     public String getReserveTime() {
-        return reserveTime;
+        return ReserveTime;
     }
 
     public void setReserveTime(String reserveTime) {
-        this.reserveTime = reserveTime;
+        ReserveTime = reserveTime;
     }
 
-    public int getReserveStaffId() {
-        return reserveStaffId;
+    public Integer getReserveStaffID() {
+        return ReserveStaffID;
     }
 
-    public void setReserveStaffID(int reserveStaffId) {
-        this.reserveStaffId = reserveStaffId;
+    public void setReserveStaffID(Integer reserveStaffID) {
+        ReserveStaffID = reserveStaffID;
     }
 
     public String getOpenTime() {
-        return openTime;
+        return OpenTime;
     }
 
     public void setOpenTime(String openTime) {
-        this.openTime = openTime;
+        OpenTime = openTime;
     }
 
-    public int getOpenStaffId() {
-        return openStaffId;
+    public Integer getOpenStaffID() {
+        return OpenStaffID;
     }
 
-    public void setOpenStaffId(int openStaffId) {
-        this.openStaffId = openStaffId;
+    public void setOpenStaffID(Integer openStaffID) {
+        OpenStaffID = openStaffID;
     }
 
     public String getPaidTime() {
-        return paidTime;
+        return PaidTime;
     }
 
     public void setPaidTime(String paidTime) {
-        this.paidTime = paidTime;
+        PaidTime = paidTime;
     }
 
-    public int getPaidStaffId() {
-        return paidStaffId;
+    public Integer getPaidStaffID() {
+        return PaidStaffID;
     }
 
-    public void setPaidStaffId(int paidStaffId) {
-        this.paidStaffId = paidStaffId;
+    public void setPaidStaffID(Integer paidStaffID) {
+        PaidStaffID = paidStaffID;
     }
 
     public String getCloseTime() {
-        return closeTime;
+        return CloseTime;
     }
 
     public void setCloseTime(String closeTime) {
-        this.closeTime = closeTime;
+        CloseTime = closeTime;
     }
 
-    public int getCommStaffId() {
-        return commStaffId;
+    public Integer getCommStaffID() {
+        return CommStaffID;
     }
 
-    public void setCommStaffId(int commStaffId) {
-        this.commStaffId = commStaffId;
+    public void setCommStaffID(Integer commStaffID) {
+        CommStaffID = commStaffID;
     }
 
-    public double getDiscountItem() {
-        return discountItem;
+    public Double getDiscountItem() {
+        return DiscountItem;
     }
 
-    public void setDiscountItem(double discountItem) {
-        this.discountItem = discountItem;
+    public void setDiscountItem(Double discountItem) {
+        DiscountItem = discountItem;
     }
 
-    public double getDiscountBill() {
-        return discountBill;
+    public Double getDiscountBill() {
+        return DiscountBill;
     }
 
-    public void setDiscountBill(double discountBill) {
-        this.discountBill = discountBill;
+    public void setDiscountBill(Double discountBill) {
+        DiscountBill = discountBill;
     }
 
-    public double getDiscountOther() {
-        return discountOther;
+    public Double getDiscountOther() {
+        return DiscountOther;
     }
 
-    public void setDiscountOther(double discountOther) {
-        this.discountOther = discountOther;
+    public void setDiscountOther(Double discountOther) {
+        DiscountOther = discountOther;
     }
 
-    public double getTotalDiscount() {
-        return totalDiscount;
+    public Double getTotalDiscount() {
+        return TotalDiscount;
     }
 
-    public void setTotalDiscount(double totalDiscount) {
-        this.totalDiscount = totalDiscount;
+    public void setTotalDiscount(Double totalDiscount) {
+        TotalDiscount = totalDiscount;
     }
 
-    public int getTransactionStatusId() {
-        return transactionStatusId;
+    public Integer getTransactionStatusID() {
+        return TransactionStatusID;
     }
 
-    public void setTransactionStatusId(int transactionStatusId) {
-        this.transactionStatusId = transactionStatusId;
+    public void setTransactionStatusID(Integer transactionStatusID) {
+        TransactionStatusID = transactionStatusID;
     }
 
-    public int getSaleMode() {
-        return saleMode;
+    public Integer getSaleMode() {
+        return SaleMode;
     }
 
-    public void setSaleMode(int saleMode) {
-        this.saleMode = saleMode;
+    public void setSaleMode(Integer saleMode) {
+        SaleMode = saleMode;
     }
 
     public String getTransactionName() {
-        return transactionName;
+        return TransactionName;
     }
 
     public void setTransactionName(String transactionName) {
-        this.transactionName = transactionName;
+        TransactionName = transactionName;
     }
 
     public String getQueueName() {
-        return queueName;
+        return QueueName;
     }
 
     public void setQueueName(String queueName) {
-        this.queueName = queueName;
+        QueueName = queueName;
     }
 
-    public int getNoCustomer() {
-        return noCustomer;
+    public Integer getNoCustomer() {
+        return NoCustomer;
     }
 
-    public void setNoCustomer(int noCustomer) {
-        this.noCustomer = noCustomer;
+    public void setNoCustomer(Integer noCustomer) {
+        NoCustomer = noCustomer;
     }
 
-    public int getNoCustomerWhenOpen() {
-        return noCustomerWhenOpen;
+    public Integer getNoCustomerWhenOpen() {
+        return NoCustomerWhenOpen;
     }
 
-    public void setNoCustomerWhenOpen(int noCustomerWhenOpen) {
-        this.noCustomerWhenOpen = noCustomerWhenOpen;
+    public void setNoCustomerWhenOpen(Integer noCustomerWhenOpen) {
+        NoCustomerWhenOpen = noCustomerWhenOpen;
     }
 
-    public int getDocType() {
-        return docType;
+    public Integer getDocType() {
+        return DocType;
     }
 
-    public void setDocType(int docType) {
-        this.docType = docType;
+    public void setDocType(Integer docType) {
+        DocType = docType;
     }
 
-    public int getReceiptYear() {
-        return receiptYear;
+    public Integer getReceiptYear() {
+        return ReceiptYear;
     }
 
-    public void setReceiptYear(int receiptYear) {
-        this.receiptYear = receiptYear;
+    public void setReceiptYear(Integer receiptYear) {
+        ReceiptYear = receiptYear;
     }
 
-    public int getReceiptMonth() {
-        return receiptMonth;
+    public Integer getReceiptMonth() {
+        return ReceiptMonth;
     }
 
-    public void setReceiptMonth(int receiptMonth) {
-        this.receiptMonth = receiptMonth;
+    public void setReceiptMonth(Integer receiptMonth) {
+        ReceiptMonth = receiptMonth;
     }
 
-    public int getReceiptId() {
-        return receiptId;
+    public Integer getReceiptID() {
+        return ReceiptID;
     }
 
-    public void setReceiptId(int receiptId) {
-        this.receiptId = receiptId;
+    public void setReceiptID(Integer receiptID) {
+        ReceiptID = receiptID;
     }
 
     public String getReceiptNumber() {
-        return receiptNumber;
+        return ReceiptNumber;
     }
 
     public void setReceiptNumber(String receiptNumber) {
-        this.receiptNumber = receiptNumber;
+        ReceiptNumber = receiptNumber;
     }
 
     public String getSaleDate() {
-        return saleDate;
+        return SaleDate;
     }
 
     public void setSaleDate(String saleDate) {
-        this.saleDate = saleDate;
+        SaleDate = saleDate;
     }
 
-    public int getShopId() {
-        return shopId;
+    public Integer getShopID() {
+        return ShopID;
     }
 
-    public void setShopId(int shopId) {
-        this.shopId = shopId;
+    public void setShopID(Integer shopID) {
+        ShopID = shopID;
     }
 
-    public double getTransactionVAT() {
-        return transactionVAT;
+    public Double getTransactionVAT() {
+        return TransactionVAT;
     }
 
-    public void setTransactionVAT(double transactionVAT) {
-        this.transactionVAT = transactionVAT;
+    public void setTransactionVAT(Double transactionVAT) {
+        TransactionVAT = transactionVAT;
     }
 
-    public double getTransactionVATable() {
-        return transactionVATable;
+    public Double getTransactionVATable() {
+        return TransactionVATable;
     }
 
-    public void setTransactionVATable(double transactionVATable) {
-        this.transactionVATable = transactionVATable;
+    public void setTransactionVATable(Double transactionVATable) {
+        TransactionVATable = transactionVATable;
     }
 
-    public double getTranBeforeVAT() {
-        return tranBeforeVAT;
+    public Double getTranBeforeVAT() {
+        return TranBeforeVAT;
     }
 
-    public void setTranBeforeVAT(double tranBeforeVAT) {
-        this.tranBeforeVAT = tranBeforeVAT;
+    public void setTranBeforeVAT(Double tranBeforeVAT) {
+        TranBeforeVAT = tranBeforeVAT;
     }
 
-    public String getVatCode() {
-        return vatCode;
+    public String getVATCode() {
+        return VATCode;
     }
 
-    public void setVatCode(String vatCode) {
-        this.vatCode = vatCode;
+    public void setVATCode(String VATCode) {
+        this.VATCode = VATCode;
     }
 
-    public double getVatPercent() {
-        return vatPercent;
+    public Double getVATPercent() {
+        return VATPercent;
     }
 
-    public void setVatPercent(double vatPercent) {
-        this.vatPercent = vatPercent;
+    public void setVATPercent(Double VATPercent) {
+        this.VATPercent = VATPercent;
     }
 
-    public double getServiceChargePercent() {
-        return serviceChargePercent;
+    public Double getServiceChargePercent() {
+        return ServiceChargePercent;
     }
 
-    public void setServiceChargePercent(double serviceChargePercent) {
-        this.serviceChargePercent = serviceChargePercent;
+    public void setServiceChargePercent(Double serviceChargePercent) {
+        ServiceChargePercent = serviceChargePercent;
     }
 
-    public double getServiceCharge() {
-        return serviceCharge;
+    public Double getServiceCharge() {
+        return ServiceCharge;
     }
 
-    public void setServiceCharge(double serviceCharge) {
-        this.serviceCharge = serviceCharge;
+    public void setServiceCharge(Double serviceCharge) {
+        ServiceCharge = serviceCharge;
     }
 
-    public double getServiceChargeVAT() {
-        return serviceChargeVAT;
+    public Double getServiceChargeVAT() {
+        return ServiceChargeVAT;
     }
 
-    public void setServiceChargeVAT(double serviceChargeVAT) {
-        this.serviceChargeVAT = serviceChargeVAT;
+    public void setServiceChargeVAT(Double serviceChargeVAT) {
+        ServiceChargeVAT = serviceChargeVAT;
     }
 
-    public double getScBeforeVAT() {
-        return scBeforeVAT;
+    public Double getSCBeforeVAT() {
+        return SCBeforeVAT;
     }
 
-    public void setScBeforeVAT(double scBeforeVAT) {
-        this.scBeforeVAT = scBeforeVAT;
+    public void setSCBeforeVAT(Double SCBeforeVAT) {
+        this.SCBeforeVAT = SCBeforeVAT;
     }
 
-    public double getOtherIncome() {
-        return otherIncome;
+    public Double getOtherIncome() {
+        return OtherIncome;
     }
 
-    public void setOtherIncome(double otherIncome) {
-        this.otherIncome = otherIncome;
+    public void setOtherIncome(Double otherIncome) {
+        OtherIncome = otherIncome;
     }
 
-    public double getOtherIncomeVAT() {
-        return otherIncomeVAT;
+    public Double getOtherIncomeVAT() {
+        return OtherIncomeVAT;
     }
 
-    public void setOtherIncomeVAT(double otherIncomeVAT) {
-        this.otherIncomeVAT = otherIncomeVAT;
+    public void setOtherIncomeVAT(Double otherIncomeVAT) {
+        OtherIncomeVAT = otherIncomeVAT;
     }
 
-    public double getOtherIncomeBeforeVAT() {
-        return otherIncomeBeforeVAT;
+    public Double getOhterIncomeBeforeVAT() {
+        return OhterIncomeBeforeVAT;
     }
 
-    public void setOtherIncomeBeforeVAT(double otherIncomeBeforeVAT) {
-        this.otherIncomeBeforeVAT = otherIncomeBeforeVAT;
+    public void setOhterIncomeBeforeVAT(Double ohterIncomeBeforeVAT) {
+        OhterIncomeBeforeVAT = ohterIncomeBeforeVAT;
     }
 
-    public double getReceiptTotalQty() {
-        return receiptTotalQty;
+    public Double getReceiptTotalQty() {
+        return ReceiptTotalQty;
     }
 
-    public void setReceiptTotalQty(double receiptTotalQty) {
-        this.receiptTotalQty = receiptTotalQty;
+    public void setReceiptTotalQty(Double receiptTotalQty) {
+        ReceiptTotalQty = receiptTotalQty;
     }
 
-    public double getReceiptRetailPrice() {
-        return receiptRetailPrice;
+    public Double getReceiptRetailPrice() {
+        return ReceiptRetailPrice;
     }
 
-    public void setReceiptRetailPrice(double receiptRetailPrice) {
-        this.receiptRetailPrice = receiptRetailPrice;
+    public void setReceiptRetailPrice(Double receiptRetailPrice) {
+        ReceiptRetailPrice = receiptRetailPrice;
     }
 
-    public double getReceiptDiscount() {
-        return receiptDiscount;
+    public Double getReceiptDiscount() {
+        return ReceiptDiscount;
     }
 
-    public void setReceiptDiscount(double receiptDiscount) {
-        this.receiptDiscount = receiptDiscount;
+    public void setReceiptDiscount(Double receiptDiscount) {
+        ReceiptDiscount = receiptDiscount;
     }
 
-    public double getReceiptSalePrice() {
-        return receiptSalePrice;
+    public Double getReceiptSalePrice() {
+        return ReceiptSalePrice;
     }
 
-    public void setReceiptSalePrice(double receiptSalePrice) {
-        this.receiptSalePrice = receiptSalePrice;
+    public void setReceiptSalePrice(Double receiptSalePrice) {
+        ReceiptSalePrice = receiptSalePrice;
     }
 
-    public double getReceiptNetSale() {
-        return receiptNetSale;
+    public Double getReceiptNetSale() {
+        return ReceiptNetSale;
     }
 
-    public void setReceiptNetSale(double receiptNetSale) {
-        this.receiptNetSale = receiptNetSale;
+    public void setReceiptNetSale(Double receiptNetSale) {
+        ReceiptNetSale = receiptNetSale;
     }
 
-    public double getReceiptPayPrice() {
-        return receiptPayPrice;
+    public Double getReceiptPayPrice() {
+        return ReceiptPayPrice;
     }
 
-    public void setReceiptPayPrice(double receiptPayPrice) {
-        this.receiptPayPrice = receiptPayPrice;
+    public void setReceiptPayPrice(Double receiptPayPrice) {
+        ReceiptPayPrice = receiptPayPrice;
     }
 
-    public double getReceiptRoundingBill() {
-        return receiptRoundingBill;
+    public Double getReceiptRoundingBill() {
+        return ReceiptRoundingBill;
     }
 
-    public void setReceiptRoundingBill(double receiptRoundingBill) {
-        this.receiptRoundingBill = receiptRoundingBill;
+    public void setReceiptRoundingBill(Double receiptRoundingBill) {
+        ReceiptRoundingBill = receiptRoundingBill;
     }
 
-    public int getSessionId() {
-        return sessionId;
+    public Integer getSessionID() {
+        return SessionID;
     }
 
-    public void setSessionId(int sessionId) {
-        this.sessionId = sessionId;
+    public void setSessionID(Integer sessionID) {
+        SessionID = sessionID;
     }
 
-    public int getCloseComputerId() {
-        return closeComputerId;
+    public Integer getCloseComputerID() {
+        return CloseComputerID;
     }
 
-    public void setCloseComputerId(int closeComputerId) {
-        this.closeComputerId = closeComputerId;
+    public void setCloseComputerID(Integer closeComputerID) {
+        CloseComputerID = closeComputerID;
     }
 
-    public int getVoidStaffId() {
-        return voidStaffId;
+    public Integer getVoidStaffID() {
+        return VoidStaffID;
     }
 
-    public void setVoidStaffId(int voidStaffId) {
-        this.voidStaffId = voidStaffId;
+    public void setVoidStaffID(Integer voidStaffID) {
+        VoidStaffID = voidStaffID;
     }
 
     public String getVoidReason() {
-        return voidReason;
+        return VoidReason;
     }
 
     public void setVoidReason(String voidReason) {
-        this.voidReason = voidReason;
+        VoidReason = voidReason;
     }
 
     public String getVoidTime() {
-        return voidTime;
+        return VoidTime;
     }
 
     public void setVoidTime(String voidTime) {
-        this.voidTime = voidTime;
+        VoidTime = voidTime;
     }
 
-    public int getIsCloneBill() {
-        return isCloneBill;
+    public Integer getIsCloneBill() {
+        return IsCloneBill;
     }
 
-    public void setIsCloneBill(int isCloneBill) {
-        this.isCloneBill = isCloneBill;
+    public void setIsCloneBill(Integer isCloneBill) {
+        IsCloneBill = isCloneBill;
     }
 
-    public int getVoidTranId() {
-        return voidTranId;
+    public Integer getVoidTranID() {
+        return VoidTranID;
     }
 
-    public void setVoidTranId(int voidTranId) {
-        this.voidTranId = voidTranId;
+    public void setVoidTranID(Integer voidTranID) {
+        VoidTranID = voidTranID;
     }
 
-    public int getVoidComId() {
-        return voidComId;
+    public Integer getVoidComID() {
+        return VoidComID;
     }
 
-    public void setVoidComId(int voidComId) {
-        this.voidComId = voidComId;
+    public void setVoidComID(Integer voidComID) {
+        VoidComID = voidComID;
     }
 
-    public double getDiffCloneBill() {
-        return diffCloneBill;
+    public Double getDiffCloneBill() {
+        return DiffCloneBill;
     }
 
-    public void setDiffCloneBill(double diffCloneBill) {
-        this.diffCloneBill = diffCloneBill;
+    public void setDiffCloneBill(Double diffCloneBill) {
+        DiffCloneBill = diffCloneBill;
     }
 
-    public int getMemberId() {
-        return memberId;
+    public Integer getMemberID() {
+        return MemberID;
     }
 
-    public void setMemberId(int memberId) {
-        this.memberId = memberId;
+    public void setMemberID(Integer memberID) {
+        MemberID = memberID;
     }
 
-    public int getHasOrder() {
-        return hasOrder;
+    public Integer getHasOrder() {
+        return HasOrder;
     }
 
-    public void setHasOrder(int hasOrder) {
-        this.hasOrder = hasOrder;
+    public void setHasOrder(Integer hasOrder) {
+        HasOrder = hasOrder;
     }
 
-    public int getNoPrintBillDetail() {
-        return noPrintBillDetail;
+    public Integer getNoPrintBillDetail() {
+        return NoPrintBillDetail;
     }
 
-    public void setNoPrintBillDetail(int noPrintBillDetail) {
-        this.noPrintBillDetail = noPrintBillDetail;
+    public void setNoPrintBillDetail(Integer noPrintBillDetail) {
+        NoPrintBillDetail = noPrintBillDetail;
     }
 
-    public double getDiffPayCheckBill() {
-        return diffPayCheckBill;
+    public Double getDiffPayCheckBill() {
+        return DiffPayCheckBill;
     }
 
-    public void setDiffPayCheckBill(double diffPayCheckBill) {
-        this.diffPayCheckBill = diffPayCheckBill;
+    public void setDiffPayCheckBill(Double diffPayCheckBill) {
+        DiffPayCheckBill = diffPayCheckBill;
     }
 
     public String getBillDetailReferenceNo() {
-        return billDetailReferenceNo;
+        return BillDetailReferenceNo;
     }
 
     public void setBillDetailReferenceNo(String billDetailReferenceNo) {
-        this.billDetailReferenceNo = billDetailReferenceNo;
+        BillDetailReferenceNo = billDetailReferenceNo;
     }
 
-    public int getCallForCheckBill() {
-        return callForCheckBill;
+    public Integer getCallForCheckBill() {
+        return CallForCheckBill;
     }
 
-    public void setCallForCheckBill(int callForCheckBill) {
-        this.callForCheckBill = callForCheckBill;
+    public void setCallForCheckBill(Integer callForCheckBill) {
+        CallForCheckBill = callForCheckBill;
     }
 
     public String getTransactionNote() {
-        return transactionNote;
+        return TransactionNote;
     }
 
     public void setTransactionNote(String transactionNote) {
-        this.transactionNote = transactionNote;
+        TransactionNote = transactionNote;
     }
 
-    public int getCurrentAccessComputer() {
-        return currentAccessComputer;
+    public Integer getCurrentAccessComputer() {
+        return CurrentAccessComputer;
     }
 
-    public void setCurrentAccessComputer(int currentAccessComputer) {
-        this.currentAccessComputer = currentAccessComputer;
+    public void setCurrentAccessComputer(Integer currentAccessComputer) {
+        CurrentAccessComputer = currentAccessComputer;
     }
 
     public String getUpdateDate() {
-        return updateDate;
+        return UpdateDate;
     }
 
     public void setUpdateDate(String updateDate) {
-        this.updateDate = updateDate;
+        UpdateDate = updateDate;
     }
 
     public String getBeginTime() {
-        return beginTime;
+        return BeginTime;
     }
 
     public void setBeginTime(String beginTime) {
-        this.beginTime = beginTime;
+        BeginTime = beginTime;
     }
 
     public String getEndTime() {
-        return endTime;
+        return EndTime;
     }
 
     public void setEndTime(String endTime) {
-        this.endTime = endTime;
+        EndTime = endTime;
     }
 
     public String getPrintWarningTime() {
-        return printWarningTime;
+        return PrintWarningTime;
     }
 
     public void setPrintWarningTime(String printWarningTime) {
-        this.printWarningTime = printWarningTime;
+        PrintWarningTime = printWarningTime;
     }
 
     public String getPrintBeginTime() {
-        return printBeginTime;
+        return PrintBeginTime;
     }
 
     public void setPrintBeginTime(String printBeginTime) {
-        this.printBeginTime = printBeginTime;
+        PrintBeginTime = printBeginTime;
     }
 
-    public int getAlreadyCalculateStock() {
-        return alreadyCalculateStock;
+    public Integer getAlreadyCalculateStock() {
+        return AlreadyCalculateStock;
     }
 
-    public void setAlreadyCalculateStock(int alreadyCalculateStock) {
-        this.alreadyCalculateStock = alreadyCalculateStock;
+    public void setAlreadyCalculateStock(Integer alreadyCalculateStock) {
+        AlreadyCalculateStock = alreadyCalculateStock;
     }
 
-    public int getAlreadyExportToHQ() {
-        return alreadyExportToHQ;
+    public Integer getAlreadyExportToHQ() {
+        return AlreadyExportToHQ;
     }
 
-    public void setAlreadyExportToHQ(int alreadyExportToHQ) {
-        this.alreadyExportToHQ = alreadyExportToHQ;
+    public void setAlreadyExportToHQ(Integer alreadyExportToHQ) {
+        AlreadyExportToHQ = alreadyExportToHQ;
     }
 
-    public int getTableId() {
-        return tableId;
+    public Integer getTableID() {
+        return TableID;
     }
 
-    public void setTableId(int tableId) {
-        this.tableId = tableId;
+    public void setTableID(Integer tableID) {
+        TableID = tableID;
     }
 
-    public int getIsSplitTransaction() {
-        return isSplitTransaction;
+    public Integer getIsSplitTransaction() {
+        return IsSplitTransaction;
     }
 
-    public void setIsSplitTransaction(int isSplitTransaction) {
-        this.isSplitTransaction = isSplitTransaction;
+    public void setIsSplitTransaction(Integer isSplitTransaction) {
+        IsSplitTransaction = isSplitTransaction;
     }
 
-    public int getIsFromOtherTransaction() {
-        return isFromOtherTransaction;
+    public Integer getIsFromOtherTransaction() {
+        return IsFromOtherTransaction;
     }
 
-    public void setIsFromOtherTransaction(int isFromOtherTransaction) {
-        this.isFromOtherTransaction = isFromOtherTransaction;
+    public void setIsFromOtherTransaction(Integer isFromOtherTransaction) {
+        IsFromOtherTransaction = isFromOtherTransaction;
     }
 
     public String getReferenceNo() {
-        return referenceNo;
+        return ReferenceNo;
     }
 
     public void setReferenceNo(String referenceNo) {
-        this.referenceNo = referenceNo;
+        ReferenceNo = referenceNo;
     }
 
-    public int getFromDepositTransactionId() {
-        return fromDepositTransactionId;
+    public Integer getFromDepositTransactionID() {
+        return FromDepositTransactionID;
     }
 
-    public void setFromDepositTransactionId(int fromDepositTransactionId) {
-        this.fromDepositTransactionId = fromDepositTransactionId;
+    public void setFromDepositTransactionID(Integer fromDepositTransactionID) {
+        FromDepositTransactionID = fromDepositTransactionID;
     }
 
-    public int getFromDepositComputerId() {
-        return fromDepositComputerId;
+    public Integer getFromDepositComputerID() {
+        return FromDepositComputerID;
     }
 
-    public void setFromDepositComputerId(int fromDepositComputerId) {
-        this.fromDepositComputerId = fromDepositComputerId;
+    public void setFromDepositComputerID(Integer fromDepositComputerID) {
+        FromDepositComputerID = fromDepositComputerID;
     }
 
-    public int getDeleted() {
-        return deleted;
+    public Integer getDeleted() {
+        return Deleted;
     }
 
-    public void setDeleted(int deleted) {
-        this.deleted = deleted;
+    public void setDeleted(Integer deleted) {
+        Deleted = deleted;
     }
 
-    public static class OrderDetail{
-        private int orderDetailId;
-        private int transactionId;
-        private int computerId;
-        private int componentLevel;
-        private int orderDetailLinkId;
-        private int insertOrderNo;
-        private int indentLevel;
-        private int displayOrdering;
-        private String saleDate;
-        private int shopId;
-        private int productId;
-        private int productSetType;
-        private int orderStatusId;
-        private int saleMode;
-        private double totalQty;
-        private double pricePerUnit;
-        private double totalRetailPrice;
-        private double orgPricePerUnit;
-        private double orgTotalRetailPrice;
-        private double discPrice;
-        private double discPercent;
-        private double discPricePercent;
-        private double discAmount;
-        private double discOtherPercent;
-        private double discOther;
-        private double totalItemDisc;
-        private double salePrice;
-        private double discBill;
-        private double totalDiscount;
-        private double netSale;
-        private double vatable;
-        private String productVATCode;
-        private String vatDisplay;
-        private double productVATPercent;
-        private double productVAT;
-        private double productBeforeVAT;
-        private double totalRetailVAT;
-        private double discVAT;
-        private int isSCBeforeDisc;
-        private int hasServiceCharge;
-        private double scPercent;
-        private double scAmount;
-        private double scVAT;
-        private double scBeforeVAT;
-        private double wVatable;
-        private double scWAmount;
-        private double scWVAT;
-        private double scWBeforeVAT;
-        private double weightPrice;
-        private double weightPriceVAT;
-        private double weightBeforeVAT;
-        private String otherFoodName;
-        private int otherProductGroupID;
-        private int discountAllow;
-        private int itemDiscAllow;
-        private int lastTransactionId;
-        private int lastComputerId;
-        private int printerId;
-        private int inventoryId;
-        private int orderStaffId;
-        private int orderComputerId;
-        private int orderTableId;
-        private int voidTypeId;
-        private int voidStaffId;
-        private String voidDateTime;
-        private int vatType;
-        private int printGroup;
-        private int noPrintBill;
-        private int noRePrintOrder;
-        private String startTime;
-        private String finishTime;
-        private int printStatus;
-        private int processId;
-        private String submitOrderDateTime;
-        private String comment;
-        private int isComment;
-        private int deleted;
-        private String productName;
+    public List<OrderDetail> getmOrderDetailLst() {
+        return mOrderDetailLst;
+    }
 
-        public OrderDetail(){
+    public void setmOrderDetailLst(List<OrderDetail> mOrderDetailLst) {
+        this.mOrderDetailLst = mOrderDetailLst;
+    }
+
+    public Transaction(){
+        mOrderDetailLst = new ArrayList<OrderDetail>();
+        NoCustomer = 1;
+        SaleMode = 1;
+        DocType = 8;
+    }
+
+    public static class OrderDetail {
+        private Integer OrderDetailID;
+        private Integer TransactionID;
+        private Integer ComputerID;
+        private Integer ComponentLevel;
+        private Integer OrderDetailLinkID;
+        private Integer InsertOrderNo;
+        private Integer IndentLevel;
+        private Integer DisplayOrdering;
+        private String SaleDate;
+        private Integer ShopID;
+        private Integer ProductID;
+        private Integer ProductSetType;
+        private Integer OrderStatusID;
+        private Integer SaleMode;
+        private Double TotalQty;
+        private Double PricePerUnit;
+        private Double TotalRetailPrice;
+        private Double OrgPricePerUnit;
+        private Double OrgTotalRetailPrice;
+        private Double DiscPrice;
+        private Double DiscPercent;
+        private Double DiscPricePercent;
+        private Double DiscAmount;
+        private Double DiscOtherPercent;
+        private Double DiscOther;
+        private Double TotalItemDisc;
+        private Double SalePrice;
+        private Double DiscBill;
+        private Double TotalDiscount;
+        private Double NetSale;
+        private Double Vatable;
+        private String ProductVATCode;
+        private String VATDisplay;
+        private Double ProductVATPercent;
+        private Double ProductVAT;
+        private Double ProductBeforeVAT;
+        private Double TotalRetailVAT;
+        private Double DiscVAT;
+        private Integer IsSCBeforeDisc;
+        private Integer HasServiceCharge;
+        private Double SCPercent;
+        private Double SCAmount;
+        private Double SCVAT;
+        private Double SCBeforeVAT;
+        private Double WVatable;
+        private Double SCWAmount;
+        private Double SCWVAT;
+        private Double SCWBeforeVAT;
+        private Double WeightPrice;
+        private Double WeightPriceVAT;
+        private Double WeightBeforeVAT;
+        private String OtherFoodName;
+        private Integer OtherProductGroupID;
+        private Integer DiscountAllow;
+        private Integer ItemDiscAllow;
+        private Integer LastTransactionID;
+        private Integer LastComputerID;
+        private Integer PrinterID;
+        private Integer InventoryID;
+        private Integer OrderStaffID;
+        private Integer OrderComputerID;
+        private Integer OrderTableID;
+        private Integer VoidTypeID;
+        private Integer VoidStaffID;
+        private String VoidDateTime;
+        private Integer VATType;
+        private Integer PrintGroup;
+        private Integer NoPrintBill;
+        private Integer NoRePrintOrder;
+        private String StartTime;
+        private String FinishTime;
+        private Integer PrintStatus;
+        private Integer ProcessID;
+        private String SubmitOrderDateTime;
+        private String Comment;
+        private Integer IsComment;
+        private Integer Deleted;
+        private String ProductName;
+
+        public Integer getOrderDetailID() {
+            return OrderDetailID;
         }
 
-        public OrderDetail(int orderDetailId, int transactionId, int computerId, int componentLevel, int orderDetailLinkId, int insertOrderNo, int indentLevel, int displayOrdering, String saleDate, int shopId, int productId, int productSetType,
-                           String productName, int orderStatusId, int saleMode, double totalQty, double pricePerUnit, double totalRetailPrice, double orgPricePerUnit, double orgTotalRetailPrice, double discPrice, double discPercent, double discPricePercent, double discAmount, double discOtherPercent, double discOther, double totalItemDisc, double salePrice, double discBill, double totalDiscount, double netSale, double vatable, String productVATCode, String vatDisplay, double productVATPercent, double productVAT, double productBeforeVAT, double totalRetailVAT, double discVAT, int isSCBeforeDisc, int hasServiceCharge, double scPercent, double scAmount, double scVAT, double scBeforeVAT, double wVatable, double scWAmount, double scWVAT, double scWBeforeVAT, double weightPrice, double weightPriceVAT, double weightBeforeVAT, String otherFoodName, int otherProductGroupID, int discountAllow, int itemDiscAllow, int lastTransactionId, int lastComputerId, int printerId, int inventoryId, int orderStaffId, int orderComputerId, int orderTableId, int voidTypeId, int voidStaffId, String voidDateTime, int vatType, int printGroup, int noPrintBill, int noRePrintOrder, String startTime, String finishTime, int printStatus, int processId, String submitOrderDateTime, String comment, int isComment, int deleted) {
-            this.orderDetailId = orderDetailId;
-            this.transactionId = transactionId;
-            this.computerId = computerId;
-            this.componentLevel = componentLevel;
-            this.orderDetailLinkId = orderDetailLinkId;
-            this.insertOrderNo = insertOrderNo;
-            this.indentLevel = indentLevel;
-            this.displayOrdering = displayOrdering;
-            this.saleDate = saleDate;
-            this.shopId = shopId;
-            this.productId = productId;
-            this.productSetType = productSetType;
-            this.productName = productName;
-            this.orderStatusId = orderStatusId;
-            this.saleMode = saleMode;
-            this.totalQty = totalQty;
-            this.pricePerUnit = pricePerUnit;
-            this.totalRetailPrice = totalRetailPrice;
-            this.orgPricePerUnit = orgPricePerUnit;
-            this.orgTotalRetailPrice = orgTotalRetailPrice;
-            this.discPrice = discPrice;
-            this.discPercent = discPercent;
-            this.discPricePercent = discPricePercent;
-            this.discAmount = discAmount;
-            this.discOtherPercent = discOtherPercent;
-            this.discOther = discOther;
-            this.totalItemDisc = totalItemDisc;
-            this.salePrice = salePrice;
-            this.discBill = discBill;
-            this.totalDiscount = totalDiscount;
-            this.netSale = netSale;
-            this.vatable = vatable;
-            this.productVATCode = productVATCode;
-            this.vatDisplay = vatDisplay;
-            this.productVATPercent = productVATPercent;
-            this.productVAT = productVAT;
-            this.productBeforeVAT = productBeforeVAT;
-            this.totalRetailVAT = totalRetailVAT;
-            this.discVAT = discVAT;
-            this.isSCBeforeDisc = isSCBeforeDisc;
-            this.hasServiceCharge = hasServiceCharge;
-            this.scPercent = scPercent;
-            this.scAmount = scAmount;
-            this.scVAT = scVAT;
-            this.scBeforeVAT = scBeforeVAT;
-            this.wVatable = wVatable;
-            this.scWAmount = scWAmount;
-            this.scWVAT = scWVAT;
-            this.scWBeforeVAT = scWBeforeVAT;
-            this.weightPrice = weightPrice;
-            this.weightPriceVAT = weightPriceVAT;
-            this.weightBeforeVAT = weightBeforeVAT;
-            this.otherFoodName = otherFoodName;
-            this.otherProductGroupID = otherProductGroupID;
-            this.discountAllow = discountAllow;
-            this.itemDiscAllow = itemDiscAllow;
-            this.lastTransactionId = lastTransactionId;
-            this.lastComputerId = lastComputerId;
-            this.printerId = printerId;
-            this.inventoryId = inventoryId;
-            this.orderStaffId = orderStaffId;
-            this.orderComputerId = orderComputerId;
-            this.orderTableId = orderTableId;
-            this.voidTypeId = voidTypeId;
-            this.voidStaffId = voidStaffId;
-            this.voidDateTime = voidDateTime;
-            this.vatType = vatType;
-            this.printGroup = printGroup;
-            this.noPrintBill = noPrintBill;
-            this.noRePrintOrder = noRePrintOrder;
-            this.startTime = startTime;
-            this.finishTime = finishTime;
-            this.printStatus = printStatus;
-            this.processId = processId;
-            this.submitOrderDateTime = submitOrderDateTime;
-            this.comment = comment;
-            this.isComment = isComment;
-            this.deleted = deleted;
+        public void setOrderDetailID(Integer orderDetailID) {
+            OrderDetailID = orderDetailID;
         }
 
-        public int getOrderDetailId() {
-            return orderDetailId;
+        public Integer getTransactionID() {
+            return TransactionID;
         }
 
-        public void setOrderDetailId(int orderDetailId) {
-            this.orderDetailId = orderDetailId;
+        public void setTransactionID(Integer transactionID) {
+            TransactionID = transactionID;
         }
 
-        public int getTransactionId() {
-            return transactionId;
+        public Integer getComputerID() {
+            return ComputerID;
         }
 
-        public void setTransactionId(int transactionId) {
-            this.transactionId = transactionId;
+        public void setComputerID(Integer computerID) {
+            ComputerID = computerID;
         }
 
-        public int getComputerId() {
-            return computerId;
+        public Integer getComponentLevel() {
+            return ComponentLevel;
         }
 
-        public void setComputerId(int computerId) {
-            this.computerId = computerId;
+        public void setComponentLevel(Integer componentLevel) {
+            ComponentLevel = componentLevel;
         }
 
-        public int getComponentLevel() {
-            return componentLevel;
+        public Integer getOrderDetailLinkID() {
+            return OrderDetailLinkID;
         }
 
-        public void setComponentLevel(int componentLevel) {
-            this.componentLevel = componentLevel;
+        public void setOrderDetailLinkID(Integer orderDetailLinkID) {
+            OrderDetailLinkID = orderDetailLinkID;
         }
 
-        public int getOrderDetailLinkId() {
-            return orderDetailLinkId;
+        public Integer getInsertOrderNo() {
+            return InsertOrderNo;
         }
 
-        public void setOrderDetailLinkId(int orderDetailLinkId) {
-            this.orderDetailLinkId = orderDetailLinkId;
+        public void setInsertOrderNo(Integer insertOrderNo) {
+            InsertOrderNo = insertOrderNo;
         }
 
-        public String getProductName() {
-            return productName;
+        public Integer getIndentLevel() {
+            return IndentLevel;
         }
 
-        public void setProductName(String productName) {
-            this.productName = productName;
+        public void setIndentLevel(Integer indentLevel) {
+            IndentLevel = indentLevel;
         }
 
-        public int getInsertOrderNo() {
-            return insertOrderNo;
+        public Integer getDisplayOrdering() {
+            return DisplayOrdering;
         }
 
-        public void setInsertOrderNo(int insertOrderNo) {
-            this.insertOrderNo = insertOrderNo;
-        }
-
-        public int getIndentLevel() {
-            return indentLevel;
-        }
-
-        public void setIndentLevel(int indentLevel) {
-            this.indentLevel = indentLevel;
-        }
-
-        public int getDisplayOrdering() {
-            return displayOrdering;
-        }
-
-        public void setDisplayOrdering(int displayOrdering) {
-            this.displayOrdering = displayOrdering;
+        public void setDisplayOrdering(Integer displayOrdering) {
+            DisplayOrdering = displayOrdering;
         }
 
         public String getSaleDate() {
-            return saleDate;
+            return SaleDate;
         }
 
         public void setSaleDate(String saleDate) {
-            this.saleDate = saleDate;
+            SaleDate = saleDate;
         }
 
-        public int getShopId() {
-            return shopId;
+        public Integer getShopID() {
+            return ShopID;
         }
 
-        public void setShopId(int shopId) {
-            this.shopId = shopId;
+        public void setShopID(Integer shopID) {
+            ShopID = shopID;
         }
 
-        public int getProductId() {
-            return productId;
+        public Integer getProductID() {
+            return ProductID;
         }
 
-        public void setProductId(int productId) {
-            this.productId = productId;
+        public void setProductID(Integer productID) {
+            ProductID = productID;
         }
 
-        public int getProductSetType() {
-            return productSetType;
+        public Integer getProductSetType() {
+            return ProductSetType;
         }
 
-        public void setProductSetType(int productSetType) {
-            this.productSetType = productSetType;
+        public void setProductSetType(Integer productSetType) {
+            ProductSetType = productSetType;
         }
 
-        public int getOrderStatusId() {
-            return orderStatusId;
+        public Integer getOrderStatusID() {
+            return OrderStatusID;
         }
 
-        public void setOrderStatusId(int orderStatusId) {
-            this.orderStatusId = orderStatusId;
+        public void setOrderStatusID(Integer orderStatusID) {
+            OrderStatusID = orderStatusID;
         }
 
-        public int getSaleMode() {
-            return saleMode;
+        public Integer getSaleMode() {
+            return SaleMode;
         }
 
-        public void setSaleMode(int saleMode) {
-            this.saleMode = saleMode;
+        public void setSaleMode(Integer saleMode) {
+            SaleMode = saleMode;
         }
 
-        public double getTotalQty() {
-            return totalQty;
+        public Double getTotalQty() {
+            return TotalQty;
         }
 
-        public void setTotalQty(double totalQty) {
-            this.totalQty = totalQty;
+        public void setTotalQty(Double totalQty) {
+            TotalQty = totalQty;
         }
 
-        public double getPricePerUnit() {
-            return pricePerUnit;
+        public Double getPricePerUnit() {
+            return PricePerUnit;
         }
 
-        public void setPricePerUnit(double pricePerUnit) {
-            this.pricePerUnit = pricePerUnit;
+        public void setPricePerUnit(Double pricePerUnit) {
+            PricePerUnit = pricePerUnit;
         }
 
-        public double getTotalRetailPrice() {
-            return totalRetailPrice;
+        public Double getTotalRetailPrice() {
+            return TotalRetailPrice;
         }
 
-        public void setTotalRetailPrice(double totalRetailPrice) {
-            this.totalRetailPrice = totalRetailPrice;
+        public void setTotalRetailPrice(Double totalRetailPrice) {
+            TotalRetailPrice = totalRetailPrice;
         }
 
-        public double getOrgPricePerUnit() {
-            return orgPricePerUnit;
+        public Double getOrgPricePerUnit() {
+            return OrgPricePerUnit;
         }
 
-        public void setOrgPricePerUnit(double orgPricePerUnit) {
-            this.orgPricePerUnit = orgPricePerUnit;
+        public void setOrgPricePerUnit(Double orgPricePerUnit) {
+            OrgPricePerUnit = orgPricePerUnit;
         }
 
-        public double getOrgTotalRetailPrice() {
-            return orgTotalRetailPrice;
+        public Double getOrgTotalRetailPrice() {
+            return OrgTotalRetailPrice;
         }
 
-        public void setOrgTotalRetailPrice(double orgTotalRetailPrice) {
-            this.orgTotalRetailPrice = orgTotalRetailPrice;
+        public void setOrgTotalRetailPrice(Double orgTotalRetailPrice) {
+            OrgTotalRetailPrice = orgTotalRetailPrice;
         }
 
-        public double getDiscPrice() {
-            return discPrice;
+        public Double getDiscPrice() {
+            return DiscPrice;
         }
 
-        public void setDiscPrice(double discPrice) {
-            this.discPrice = discPrice;
+        public void setDiscPrice(Double discPrice) {
+            DiscPrice = discPrice;
         }
 
-        public double getDiscPercent() {
-            return discPercent;
+        public Double getDiscPercent() {
+            return DiscPercent;
         }
 
-        public void setDiscPercent(double discPercent) {
-            this.discPercent = discPercent;
+        public void setDiscPercent(Double discPercent) {
+            DiscPercent = discPercent;
         }
 
-        public double getDiscPricePercent() {
-            return discPricePercent;
+        public Double getDiscAmount() {
+            return DiscAmount;
         }
 
-        public void setDiscPricePercent(double discPricePercent) {
-            this.discPricePercent = discPricePercent;
+        public void setDiscAmount(Double discAmount) {
+            DiscAmount = discAmount;
         }
 
-        public double getDiscAmount() {
-            return discAmount;
+        public Double getDiscOtherPercent() {
+            return DiscOtherPercent;
         }
 
-        public void setDiscAmount(double discAmount) {
-            this.discAmount = discAmount;
+        public void setDiscOtherPercent(Double discOtherPercent) {
+            DiscOtherPercent = discOtherPercent;
         }
 
-        public double getDiscOtherPercent() {
-            return discOtherPercent;
+        public Double getDiscOther() {
+            return DiscOther;
         }
 
-        public void setDiscOtherPercent(double discOtherPercent) {
-            this.discOtherPercent = discOtherPercent;
+        public void setDiscOther(Double discOther) {
+            DiscOther = discOther;
         }
 
-        public double getDiscOther() {
-            return discOther;
+        public Double getTotalItemDisc() {
+            return TotalItemDisc;
         }
 
-        public void setDiscOther(double discOther) {
-            this.discOther = discOther;
+        public void setTotalItemDisc(Double totalItemDisc) {
+            TotalItemDisc = totalItemDisc;
         }
 
-        public double getTotalItemDisc() {
-            return totalItemDisc;
+        public Double getSalePrice() {
+            return SalePrice;
         }
 
-        public void setTotalItemDisc(double totalItemDisc) {
-            this.totalItemDisc = totalItemDisc;
+        public void setSalePrice(Double salePrice) {
+            SalePrice = salePrice;
         }
 
-        public double getSalePrice() {
-            return salePrice;
+        public Double getDiscBill() {
+            return DiscBill;
         }
 
-        public void setSalePrice(double salePrice) {
-            this.salePrice = salePrice;
+        public void setDiscBill(Double discBill) {
+            DiscBill = discBill;
         }
 
-        public double getDiscBill() {
-            return discBill;
+        public Double getTotalDiscount() {
+            return TotalDiscount;
         }
 
-        public void setDiscBill(double discBill) {
-            this.discBill = discBill;
+        public void setTotalDiscount(Double totalDiscount) {
+            TotalDiscount = totalDiscount;
         }
 
-        public double getTotalDiscount() {
-            return totalDiscount;
+        public Double getNetSale() {
+            return NetSale;
         }
 
-        public void setTotalDiscount(double totalDiscount) {
-            this.totalDiscount = totalDiscount;
+        public void setNetSale(Double netSale) {
+            NetSale = netSale;
         }
 
-        public double getNetSale() {
-            return netSale;
+        public Double getVatable() {
+            return Vatable;
         }
 
-        public void setNetSale(double netSale) {
-            this.netSale = netSale;
-        }
-
-        public double getVatable() {
-            return vatable;
-        }
-
-        public void setVatable(double vatable) {
-            this.vatable = vatable;
+        public void setVatable(Double vatable) {
+            Vatable = vatable;
         }
 
         public String getProductVATCode() {
-            return productVATCode;
+            return ProductVATCode;
         }
 
         public void setProductVATCode(String productVATCode) {
-            this.productVATCode = productVATCode;
+            ProductVATCode = productVATCode;
         }
 
-        public String getVatDisplay() {
-            return vatDisplay;
+        public String getVATDisplay() {
+            return VATDisplay;
         }
 
-        public void setVatDisplay(String vatDisplay) {
-            this.vatDisplay = vatDisplay;
+        public void setVATDisplay(String VATDisplay) {
+            this.VATDisplay = VATDisplay;
         }
 
-        public double getProductVATPercent() {
-            return productVATPercent;
+        public Double getProductVATPercent() {
+            return ProductVATPercent;
         }
 
-        public void setProductVATPercent(double productVATPercent) {
-            this.productVATPercent = productVATPercent;
+        public void setProductVATPercent(Double productVATPercent) {
+            ProductVATPercent = productVATPercent;
         }
 
-        public double getProductVAT() {
-            return productVAT;
+        public Double getProductVAT() {
+            return ProductVAT;
         }
 
-        public void setProductVAT(double productVAT) {
-            this.productVAT = productVAT;
+        public void setProductVAT(Double productVAT) {
+            ProductVAT = productVAT;
         }
 
-        public double getProductBeforeVAT() {
-            return productBeforeVAT;
+        public Double getProductBeforeVAT() {
+            return ProductBeforeVAT;
         }
 
-        public void setProductBeforeVAT(double productBeforeVAT) {
-            this.productBeforeVAT = productBeforeVAT;
+        public void setProductBeforeVAT(Double productBeforeVAT) {
+            ProductBeforeVAT = productBeforeVAT;
         }
 
-        public double getTotalRetailVAT() {
-            return totalRetailVAT;
+        public Double getTotalRetailVAT() {
+            return TotalRetailVAT;
         }
 
-        public void setTotalRetailVAT(double totalRetailVAT) {
-            this.totalRetailVAT = totalRetailVAT;
+        public void setTotalRetailVAT(Double totalRetailVAT) {
+            TotalRetailVAT = totalRetailVAT;
         }
 
-        public double getDiscVAT() {
-            return discVAT;
+        public Double getDiscVAT() {
+            return DiscVAT;
         }
 
-        public void setDiscVAT(double discVAT) {
-            this.discVAT = discVAT;
+        public void setDiscVAT(Double discVAT) {
+            DiscVAT = discVAT;
         }
 
-        public int getIsSCBeforeDisc() {
-            return isSCBeforeDisc;
+        public Integer getIsSCBeforeDisc() {
+            return IsSCBeforeDisc;
         }
 
-        public void setIsSCBeforeDisc(int isSCBeforeDisc) {
-            this.isSCBeforeDisc = isSCBeforeDisc;
+        public void setIsSCBeforeDisc(Integer isSCBeforeDisc) {
+            IsSCBeforeDisc = isSCBeforeDisc;
         }
 
-        public int getHasServiceCharge() {
-            return hasServiceCharge;
+        public Integer getHasServiceCharge() {
+            return HasServiceCharge;
         }
 
-        public void setHasServiceCharge(int hasServiceCharge) {
-            this.hasServiceCharge = hasServiceCharge;
+        public void setHasServiceCharge(Integer hasServiceCharge) {
+            HasServiceCharge = hasServiceCharge;
         }
 
-        public double getScPercent() {
-            return scPercent;
+        public Double getSCPercent() {
+            return SCPercent;
         }
 
-        public void setScPercent(double scPercent) {
-            this.scPercent = scPercent;
+        public void setSCPercent(Double SCPercent) {
+            this.SCPercent = SCPercent;
         }
 
-        public double getScAmount() {
-            return scAmount;
+        public Double getSCAmount() {
+            return SCAmount;
         }
 
-        public void setScAmount(double scAmount) {
-            this.scAmount = scAmount;
+        public void setSCAmount(Double SCAmount) {
+            this.SCAmount = SCAmount;
         }
 
-        public double getScVAT() {
-            return scVAT;
+        public Double getSCVAT() {
+            return SCVAT;
         }
 
-        public void setScVAT(double scVAT) {
-            this.scVAT = scVAT;
+        public void setSCVAT(Double SCVAT) {
+            this.SCVAT = SCVAT;
         }
 
-        public double getScBeforeVAT() {
-            return scBeforeVAT;
+        public Double getSCBeforeVAT() {
+            return SCBeforeVAT;
         }
 
-        public void setScBeforeVAT(double scBeforeVAT) {
-            this.scBeforeVAT = scBeforeVAT;
+        public void setSCBeforeVAT(Double SCBeforeVAT) {
+            this.SCBeforeVAT = SCBeforeVAT;
         }
 
-        public double getwVatable() {
-            return wVatable;
+        public Double getWVatable() {
+            return WVatable;
         }
 
-        public void setwVatable(double wVatable) {
-            this.wVatable = wVatable;
+        public void setWVatable(Double WVatable) {
+            this.WVatable = WVatable;
         }
 
-        public double getScWAmount() {
-            return scWAmount;
+        public Double getSCWAmount() {
+            return SCWAmount;
         }
 
-        public void setScWAmount(double scWAmount) {
-            this.scWAmount = scWAmount;
+        public void setSCWAmount(Double SCWAmount) {
+            this.SCWAmount = SCWAmount;
         }
 
-        public double getScWVAT() {
-            return scWVAT;
+        public Double getSCWVAT() {
+            return SCWVAT;
         }
 
-        public void setScWVAT(double scWVAT) {
-            this.scWVAT = scWVAT;
+        public void setSCWVAT(Double SCWVAT) {
+            this.SCWVAT = SCWVAT;
         }
 
-        public double getScWBeforeVAT() {
-            return scWBeforeVAT;
+        public Double getSCWBeforeVAT() {
+            return SCWBeforeVAT;
         }
 
-        public void setScWBeforeVAT(double scWBeforeVAT) {
-            this.scWBeforeVAT = scWBeforeVAT;
+        public void setSCWBeforeVAT(Double SCWBeforeVAT) {
+            this.SCWBeforeVAT = SCWBeforeVAT;
         }
 
-        public double getWeightPrice() {
-            return weightPrice;
+        public Double getWeightPrice() {
+            return WeightPrice;
         }
 
-        public void setWeightPrice(double weightPrice) {
-            this.weightPrice = weightPrice;
+        public void setWeightPrice(Double weightPrice) {
+            WeightPrice = weightPrice;
         }
 
-        public double getWeightPriceVAT() {
-            return weightPriceVAT;
+        public Double getWeightPriceVAT() {
+            return WeightPriceVAT;
         }
 
-        public void setWeightPriceVAT(double weightPriceVAT) {
-            this.weightPriceVAT = weightPriceVAT;
+        public void setWeightPriceVAT(Double weightPriceVAT) {
+            WeightPriceVAT = weightPriceVAT;
         }
 
-        public double getWeightBeforeVAT() {
-            return weightBeforeVAT;
+        public Double getWeightBeforeVAT() {
+            return WeightBeforeVAT;
         }
 
-        public void setWeightBeforeVAT(double weightBeforeVAT) {
-            this.weightBeforeVAT = weightBeforeVAT;
+        public void setWeightBeforeVAT(Double weightBeforeVAT) {
+            WeightBeforeVAT = weightBeforeVAT;
         }
 
         public String getOtherFoodName() {
-            return otherFoodName;
+            return OtherFoodName;
         }
 
         public void setOtherFoodName(String otherFoodName) {
-            this.otherFoodName = otherFoodName;
+            OtherFoodName = otherFoodName;
         }
 
-        public int getOtherProductGroupID() {
-            return otherProductGroupID;
+        public Integer getOtherProductGroupID() {
+            return OtherProductGroupID;
         }
 
-        public void setOtherProductGroupID(int otherProductGroupID) {
-            this.otherProductGroupID = otherProductGroupID;
+        public void setOtherProductGroupID(Integer otherProductGroupID) {
+            OtherProductGroupID = otherProductGroupID;
         }
 
-        public int getDiscountAllow() {
-            return discountAllow;
+        public Integer getDiscountAllow() {
+            return DiscountAllow;
         }
 
-        public void setDiscountAllow(int discountAllow) {
-            this.discountAllow = discountAllow;
+        public void setDiscountAllow(Integer discountAllow) {
+            DiscountAllow = discountAllow;
         }
 
-        public int getItemDiscAllow() {
-            return itemDiscAllow;
+        public Integer getItemDiscAllow() {
+            return ItemDiscAllow;
         }
 
-        public void setItemDiscAllow(int itemDiscAllow) {
-            this.itemDiscAllow = itemDiscAllow;
+        public void setItemDiscAllow(Integer itemDiscAllow) {
+            ItemDiscAllow = itemDiscAllow;
         }
 
-        public int getLastTransactionId() {
-            return lastTransactionId;
+        public Integer getLastTransactionID() {
+            return LastTransactionID;
         }
 
-        public void setLastTransactionId(int lastTransactionId) {
-            this.lastTransactionId = lastTransactionId;
+        public void setLastTransactionID(Integer lastTransactionID) {
+            LastTransactionID = lastTransactionID;
         }
 
-        public int getLastComputerId() {
-            return lastComputerId;
+        public Integer getLastComputerID() {
+            return LastComputerID;
         }
 
-        public void setLastComputerId(int lastComputerId) {
-            this.lastComputerId = lastComputerId;
+        public void setLastComputerID(Integer lastComputerID) {
+            LastComputerID = lastComputerID;
         }
 
-        public int getPrinterId() {
-            return printerId;
+        public Integer getPrinterID() {
+            return PrinterID;
         }
 
-        public void setPrinterId(int printerId) {
-            this.printerId = printerId;
+        public void setPrinterID(Integer printerID) {
+            PrinterID = printerID;
         }
 
-        public int getInventoryId() {
-            return inventoryId;
+        public Integer getInventoryID() {
+            return InventoryID;
         }
 
-        public void setInventoryId(int inventoryId) {
-            this.inventoryId = inventoryId;
+        public void setInventoryID(Integer inventoryID) {
+            InventoryID = inventoryID;
         }
 
-        public int getOrderStaffId() {
-            return orderStaffId;
+        public Integer getOrderStaffID() {
+            return OrderStaffID;
         }
 
-        public void setOrderStaffId(int orderStaffId) {
-            this.orderStaffId = orderStaffId;
+        public void setOrderStaffID(Integer orderStaffID) {
+            OrderStaffID = orderStaffID;
         }
 
-        public int getOrderComputerId() {
-            return orderComputerId;
+        public Integer getOrderComputerID() {
+            return OrderComputerID;
         }
 
-        public void setOrderComputerId(int orderComputerId) {
-            this.orderComputerId = orderComputerId;
+        public void setOrderComputerID(Integer orderComputerID) {
+            OrderComputerID = orderComputerID;
         }
 
-        public int getOrderTableId() {
-            return orderTableId;
+        public Integer getOrderTableID() {
+            return OrderTableID;
         }
 
-        public void setOrderTableId(int orderTableId) {
-            this.orderTableId = orderTableId;
+        public void setOrderTableID(Integer orderTableID) {
+            OrderTableID = orderTableID;
         }
 
-        public int getVoidTypeId() {
-            return voidTypeId;
+        public Integer getVoidTypeID() {
+            return VoidTypeID;
         }
 
-        public void setVoidTypeId(int voidTypeId) {
-            this.voidTypeId = voidTypeId;
+        public void setVoidTypeID(Integer voidTypeID) {
+            VoidTypeID = voidTypeID;
         }
 
-        public int getVoidStaffId() {
-            return voidStaffId;
+        public Integer getVoidStaffID() {
+            return VoidStaffID;
         }
 
-        public void setVoidStaffId(int voidStaffId) {
-            this.voidStaffId = voidStaffId;
+        public void setVoidStaffID(Integer voidStaffID) {
+            VoidStaffID = voidStaffID;
         }
 
         public String getVoidDateTime() {
-            return voidDateTime;
+            return VoidDateTime;
         }
 
         public void setVoidDateTime(String voidDateTime) {
-            this.voidDateTime = voidDateTime;
+            VoidDateTime = voidDateTime;
         }
 
-        public int getVatType() {
-            return vatType;
+        public Integer getVATType() {
+            return VATType;
         }
 
-        public void setVatType(int vatType) {
-            this.vatType = vatType;
+        public void setVATType(Integer VATType) {
+            this.VATType = VATType;
         }
 
-        public int getPrintGroup() {
-            return printGroup;
+        public Integer getPrintGroup() {
+            return PrintGroup;
         }
 
-        public void setPrintGroup(int printGroup) {
-            this.printGroup = printGroup;
+        public void setPrintGroup(Integer printGroup) {
+            PrintGroup = printGroup;
         }
 
-        public int getNoPrintBill() {
-            return noPrintBill;
+        public Integer getNoPrintBill() {
+            return NoPrintBill;
         }
 
-        public void setNoPrintBill(int noPrintBill) {
-            this.noPrintBill = noPrintBill;
+        public void setNoPrintBill(Integer noPrintBill) {
+            NoPrintBill = noPrintBill;
         }
 
-        public int getNoRePrintOrder() {
-            return noRePrintOrder;
+        public Integer getNoRePrintOrder() {
+            return NoRePrintOrder;
         }
 
-        public void setNoRePrintOrder(int noRePrintOrder) {
-            this.noRePrintOrder = noRePrintOrder;
+        public void setNoRePrintOrder(Integer noRePrintOrder) {
+            NoRePrintOrder = noRePrintOrder;
         }
 
         public String getStartTime() {
-            return startTime;
+            return StartTime;
         }
 
         public void setStartTime(String startTime) {
-            this.startTime = startTime;
+            StartTime = startTime;
         }
 
         public String getFinishTime() {
-            return finishTime;
+            return FinishTime;
         }
 
         public void setFinishTime(String finishTime) {
-            this.finishTime = finishTime;
+            FinishTime = finishTime;
         }
 
-        public int getPrintStatus() {
-            return printStatus;
+        public Integer getPrintStatus() {
+            return PrintStatus;
         }
 
-        public void setPrintStatus(int printStatus) {
-            this.printStatus = printStatus;
+        public void setPrintStatus(Integer printStatus) {
+            PrintStatus = printStatus;
         }
 
-        public int getProcessId() {
-            return processId;
+        public Integer getProcessID() {
+            return ProcessID;
         }
 
-        public void setProcessId(int processId) {
-            this.processId = processId;
+        public void setProcessID(Integer processID) {
+            ProcessID = processID;
         }
 
         public String getSubmitOrderDateTime() {
-            return submitOrderDateTime;
+            return SubmitOrderDateTime;
         }
 
         public void setSubmitOrderDateTime(String submitOrderDateTime) {
-            this.submitOrderDateTime = submitOrderDateTime;
+            SubmitOrderDateTime = submitOrderDateTime;
         }
 
         public String getComment() {
-            return comment;
+            return Comment;
         }
 
         public void setComment(String comment) {
-            this.comment = comment;
+            Comment = comment;
         }
 
-        public int getIsComment() {
-            return isComment;
+        public Integer getIsComment() {
+            return IsComment;
         }
 
-        public void setIsComment(int isComment) {
-            this.isComment = isComment;
+        public void setIsComment(Integer isComment) {
+            IsComment = isComment;
         }
 
-        public int getDeleted() {
-            return deleted;
+        public Integer getDeleted() {
+            return Deleted;
         }
 
-        public void setDeleted(int deleted) {
-            this.deleted = deleted;
+        public void setDeleted(Integer deleted) {
+            Deleted = deleted;
+        }
+
+        public String getProductName() {
+            return ProductName;
+        }
+
+        public void setProductName(String productName) {
+            ProductName = productName;
+        }
+
+        public Double getDiscPricePercent() {
+            return DiscPricePercent;
+        }
+
+        public void setDiscPricePercent(Double discPricePercent) {
+            DiscPricePercent = discPricePercent;
         }
     }
 }

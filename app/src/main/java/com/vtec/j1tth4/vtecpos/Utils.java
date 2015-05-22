@@ -1,10 +1,12 @@
 package com.vtec.j1tth4.vtecpos;
 
+import android.content.Context;
 import android.os.Environment;
 
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -18,6 +20,18 @@ public class Utils {
         BigDecimal bd = new BigDecimal(value);
         bd = bd.setScale(scale, RoundingMode.HALF_UP);
         return bd.doubleValue();
+    }
+
+    public static String currencyFormat(Context c, double value){
+        DecimalFormat format
+                = new DecimalFormat(GlobalPropertyManager.getInstance(c).getCurrencyFormat());
+        return format.format(value);
+    }
+
+    public static String qtyFormat(Context c, double value){
+        DecimalFormat format
+                = new DecimalFormat(GlobalPropertyManager.getInstance(c).getQtyFormat());
+        return format.format(value);
     }
 
     public static String getISODate(){

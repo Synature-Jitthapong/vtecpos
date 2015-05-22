@@ -154,8 +154,8 @@ public class CashPaymentFragment extends Fragment{
 
     private void calculate(){
         TransactionManager manager = TransactionManager.getInstance(getActivity());
-        Transaction trans = manager.getTransaction();
-        PayDetail payDetail = manager.getPayDetail();
+        Transaction trans = manager.getTransaction(true);
+        PayDetail payDetail = manager.getPayDetail(true);
         double netSale = trans.getReceiptNetSale();
         double totalPaid = payDetail.getPaid();
         double totalPayAmount = payDetail.getPayAmount();

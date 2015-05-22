@@ -25,7 +25,7 @@ public class SaleModeDataSource {
     }
 
     public SaleMode getSaleMode(int saleModeId){
-        Cursor cursor = mDbHelper.openReadable().rawQuery(
+        Cursor cursor = mDbHelper.getWritableDatabase().rawQuery(
                 "select * from " + TABLE_SALE_MODE +
                         " where " + SALE_MODE_ID + "=?" +
                         " and " + DELETED + "=?",
@@ -46,7 +46,6 @@ public class SaleModeDataSource {
             saleMode.setHasServiceCharge(cursor.getInt(cursor.getColumnIndex(HAS_SERVICE_CHARGE)));
         }
         cursor.close();
-        mDbHelper.close();
         return saleMode;
     }
 }

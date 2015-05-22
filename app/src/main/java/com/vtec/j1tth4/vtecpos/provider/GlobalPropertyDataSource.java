@@ -31,7 +31,7 @@ public class GlobalPropertyDataSource {
     }
 
     public List<GlobalProperty> listProgramProperty(){
-        Cursor cursor = mDbHelper.openReadable().rawQuery(
+        Cursor cursor = mDbHelper.getWritableDatabase().rawQuery(
                 "select * from " + TABLE_PROGRAM_PROPERTY_VALUE, null);
         List<GlobalProperty> gbl = null;
         if(cursor.moveToFirst()){
@@ -45,7 +45,6 @@ public class GlobalPropertyDataSource {
             }
         }
         cursor.close();
-        mDbHelper.close();
         return gbl;
     }
 }

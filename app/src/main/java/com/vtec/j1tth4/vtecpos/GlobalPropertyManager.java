@@ -18,6 +18,8 @@ public class GlobalPropertyManager {
     private int shopId;
     private int computerId;
     private int staffId = 1;
+    private String qtyFormat = "#,##0";
+    private String currencyFormat = "#,##0.0#";
 
     private int hasSc;
     private int saleMode = 1;
@@ -86,6 +88,14 @@ public class GlobalPropertyManager {
 
     public int getComputerId() {
         return computerId;
+    }
+
+    public String getQtyFormat() {
+        return qtyFormat;
+    }
+
+    public String getCurrencyFormat() {
+        return currencyFormat;
     }
 
     public int getSaleMode() {

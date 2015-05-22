@@ -23,7 +23,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static final String DATABASE_NAME = "vtecpos.db";
 
     private String mDatabasePath;
-    private SQLiteDatabase mSQLite;
 
     private static DatabaseHelper sInstance = null;
 
@@ -72,27 +71,16 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private boolean isDataBaseExist() {
         File vtecAssetPath = Utils.getVtecAssetPath();
         File dbPath = new File(vtecAssetPath + File.separator + VtecPosApplication.VTEC_DATABASE_DIR);
-        if(!dbPath.exists())
+        if (!dbPath.exists())
             dbPath.mkdir();
         File dbFile = new File(dbPath + File.separator + DATABASE_NAME);
         return dbFile.exists();
     }
 
-    public SQLiteDatabase openReadable(){
-        mSQLite = SQLiteDatabase.openDatabase(mDatabasePath, null,
-                SQLiteDatabase.OPEN_READONLY);
-        return mSQLite;
-    }
-
-    public SQLiteDatabase openWritable(){
-        mSQLite = SQLiteDatabase.openDatabase(mDatabasePath, null,
+    @Override
+    public SQLiteDatabase getWritableDatabase() {
+        return SQLiteDatabase.openDatabase(mDatabasePath, null,
                 SQLiteDatabase.OPEN_READWRITE);
-        return mSQLite;
-    }
-
-    public void close(){
-        if(mSQLite != null && mSQLite.isOpen())
-            mSQLite.close();
     }
 
     @Override

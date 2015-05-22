@@ -31,7 +31,7 @@ public class ComputerDataSource {
     }
 
     public Computer loadComputerData(){
-        SQLiteDatabase db = mDbHelper.openReadable();
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
         Cursor cursor = db.rawQuery(
                 "select * " +
                         " from " + TABLE_COMPUTER_NAME +
@@ -47,7 +47,6 @@ public class ComputerDataSource {
             c.setDeviceCode(cursor.getString(cursor.getColumnIndex(DEVICE_CODE)));
         }
         cursor.close();
-        mDbHelper.close();
         return c;
     }
 }

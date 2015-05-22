@@ -57,7 +57,7 @@ public class OrderListFragment extends Fragment{
 
     private void loadOrderData(){
         TransactionManager manager = TransactionManager.getInstance(getActivity());
-        mOrderList = manager.listOrder();
+        mOrderList = manager.listOrder(true);
         if(mOrderList == null) {
             mOrderList = new ArrayList<Transaction.OrderDetail>();
             mSummaryItemList = new ArrayList<SummaryItem>();
@@ -78,7 +78,7 @@ public class OrderListFragment extends Fragment{
 
     public void onEvent(MenuClickEvent event){
         TransactionManager manager = TransactionManager.getInstance(getActivity());
-        Transaction.OrderDetail orderDetail = manager.getOrder(event.orderId);
+        Transaction.OrderDetail orderDetail = manager.getOrder(event.orderId, true);
         mOrderList.add(orderDetail);
         mOrderAdapter.notifyDataSetChanged();
         mLvOrder.post(new Runnable() {
@@ -194,7 +194,7 @@ public class OrderListFragment extends Fragment{
                                 public void onClick(DialogInterface dialog, int which) {
                                     TransactionManager manager =
                                             TransactionManager.getInstance(getActivity());
-                                    manager.deleteOrder(orderDetail.getOrderDetailId());
+                                    manager.deleteOrder(orderDetail.getOrderDetailID());
                                     mOrderList.remove(i);
                                     mOrderAdapter.notifyDataSetChanged();
                                 }
@@ -209,8 +209,8 @@ public class OrderListFragment extends Fragment{
                     if(--qty > 0){
                         TransactionManager manager =
                                 TransactionManager.getInstance(getActivity());
-                        manager.updateOrder(orderDetail.getOrderDetailId(), orderDetail.getPricePerUnit(), qty);
-                        Transaction.OrderDetail order = manager.getOrder(orderDetail.getOrderDetailId());
+                        manager.updateOrder(orderDetail.getOrderDetailID(), orderDetail.getPricePerUnit(), qty);
+                        Transaction.OrderDetail order = manager.getOrder(orderDetail.getOrderDetailID(), true);
                         mOrderList.set(i, order);
                         mOrderAdapter.notifyDataSetChanged();
                     }
@@ -223,8 +223,8 @@ public class OrderListFragment extends Fragment{
                     double qty = orderDetail.getTotalQty();
                     TransactionManager manager =
                             TransactionManager.getInstance(getActivity());
-                    manager.updateOrder(orderDetail.getOrderDetailId(), orderDetail.getPricePerUnit(), ++qty);
-                    Transaction.OrderDetail order = manager.getOrder(orderDetail.getOrderDetailId());
+                    manager.updateOrder(orderDetail.getOrderDetailID(), orderDetail.getPricePerUnit(), ++qty);
+                    Transaction.OrderDetail order = manager.getOrder(orderDetail.getOrderDetailID(), true);
                     mOrderList.set(i, order);
                     mOrderAdapter.notifyDataSetChanged();
                 }
@@ -267,17 +267,17 @@ public class OrderListFragment extends Fragment{
                 sumNetSale += orderDetail.getNetSale();//dtTable.Rows(i)("NetSale")
                 sumPVat += orderDetail.getProductVAT();//dtTable.Rows(i)("ProductVAT")
                 sumPBeforeVat += orderDetail.getProductBeforeVAT(); //dtTable.Rows(i)("ProductBeforeVAT")
-                sumSc += orderDetail.getScAmount(); //dtTable.Rows(i)("SCAmount")
-                sumScVat += orderDetail.getScVAT(); //dtTable.Rows(i)("SCVAT")
-                sumScBefore += orderDetail.getScBeforeVAT(); //dtTable.Rows(i)("SCBeforeVAT")
+                sumSc += orderDetail.getSCAmount(); //dtTable.Rows(i)("SCAmount")
+                sumScVat += orderDetail.getSCVAT(); //dtTable.Rows(i)("SCVAT")
+                sumScBefore += orderDetail.getSCBeforeVAT(); //dtTable.Rows(i)("SCBeforeVAT")
                 sumVatable += orderDetail.getVatable(); //dtTable.Rows(i)("Vatable")
-                sumWVatable += orderDetail.getwVatable(); //dtTable.Rows(i)("WVatable")
+                sumWVatable += orderDetail.getWVatable(); //dtTable.Rows(i)("WVatable")
                 sumW += orderDetail.getWeightPrice(); //dtTable.Rows(i)("WeightPrice")
                 sumWVat += orderDetail.getWeightPriceVAT(); //dtTable.Rows(i)("WeightPriceVAT")
                 sumWBefore += orderDetail.getWeightBeforeVAT(); //dtTable.Rows(i)("WeightBeforeVAT")
-                sumWSc += orderDetail.getScWAmount(); //dtTable.Rows(i)("SCWAmount")
-                sumWScVat += orderDetail.getScWVAT(); //dtTable.Rows(i)("SCWVAT")
-                sumWScBeforeVat += orderDetail.getScWBeforeVAT(); //dtTable.Rows(i)("SCWBeforeVAT")
+                sumWSc += orderDetail.getSCWAmount(); //dtTable.Rows(i)("SCWAmount")
+                sumWScVat += orderDetail.getSCWVAT(); //dtTable.Rows(i)("SCWVAT")
+                sumWScBeforeVat += orderDetail.getSCWBeforeVAT(); //dtTable.Rows(i)("SCWBeforeVAT")
             }
         }
         mSummaryItemList = new ArrayList<>();

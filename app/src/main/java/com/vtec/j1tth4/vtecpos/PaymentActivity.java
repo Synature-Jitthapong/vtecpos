@@ -3,7 +3,6 @@ package com.vtec.j1tth4.vtecpos;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -74,10 +73,10 @@ public class PaymentActivity extends ActionBarActivity {
 
     private void display(){
         TransactionManager manager = TransactionManager.getInstance(this);
-        Transaction trans = manager.getTransaction();
-        mTvReceiptNetSale.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(trans.getReceiptNetSale()));
-        mTvTotalDue.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(trans.getReceiptNetSale()));
-        mTvChange.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(0));
+        Transaction trans = manager.getTransaction(true);
+        mTvReceiptNetSale.setText(Utils.currencyFormat(this, trans.getReceiptNetSale()));
+        mTvTotalDue.setText(Utils.currencyFormat(this, trans.getReceiptNetSale()));
+        mTvChange.setText(Utils.currencyFormat(this, 0));
     }
 
     public void onEvent(PaymentDeletedEvent event){
@@ -85,9 +84,9 @@ public class PaymentActivity extends ActionBarActivity {
     }
 
     public void onEvent(PaymentEvent event){
-        mTvTotalPaid.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(event.totalPaid));
-        mTvTotalDue.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(event.totalDue));
-        mTvChange.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(event.change));
+        mTvTotalPaid.setText(Utils.currencyFormat(this, event.totalPaid));
+        mTvTotalDue.setText(Utils.currencyFormat(this, event.totalDue));
+        mTvChange.setText(Utils.currencyFormat(this, event.change));
 
         EventBus.getDefault().post(new PaymentAddedEvent());
     }
@@ -100,8 +99,7 @@ public class PaymentActivity extends ActionBarActivity {
             case R.id.btnPayConfirm:
                 TransactionManager.getInstance(this).finalizeBill();
                 EventBus.getDefault().post(new OrderListFragment.RefreshEvent());
-                PrintUtils printUtils = new PrintUtils();
-                printUtils.print("xxxx");
+
                 finish();
                 break;
         }

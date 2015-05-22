@@ -133,7 +133,7 @@ public class MenuFragment extends Fragment{
             final ProductData.Products product = mProductList.get(i);
             holder.tvTitle.setText(product.getProductName());
             double price = product.getProductPrice() == -1 ? 1 : product.getProductPrice(); // test -1 open price
-            holder.tvSub.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(price));
+            holder.tvSub.setText(Utils.currencyFormat(getActivity(), price));
             holder.img.setImageDrawable(null);
             return view;
         }

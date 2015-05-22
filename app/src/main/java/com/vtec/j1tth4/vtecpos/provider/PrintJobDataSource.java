@@ -25,6 +25,47 @@ public class PrintJobDataSource {
         mDbHelper = DatabaseHelper.getInstance(c);
     }
 
+    /**
+     *
+     * @param job
+     */
+    public void updateFinishPrintJob(OrderPrintJob job){
+        ContentValues cv = new ContentValues();
+        cv.put(FINISH_DATE_TIME, Utils.getISODateTime());
+        cv.put(PRINT_STATUS, job.getPrintStatus());
+        updatePrintJob(cv, job);
+    }
+
+    /**
+     *
+     * @param job
+     */
+    public void updateStartPrintJob(OrderPrintJob job){
+        ContentValues cv = new ContentValues();
+        cv.put(PRINT_DATE_TIME, Utils.getISODateTime());
+        updatePrintJob(cv, job);
+    }
+
+    /**
+     *
+     * @param cv
+     * @param job
+     */
+    private void updatePrintJob(ContentValues cv, OrderPrintJob job){
+        mDbHelper.getWritableDatabase().update(
+                TABLE_ORDER_PRINT_JOB, cv,
+                TransactionDataSource.TRANSACTION_ID + "=?" +
+                        " and " + TransactionDataSource.COMPUTER_ID + "=?",
+                new String[]{
+                        String.valueOf(job.getTransactionID()),
+                        String.valueOf(job.getComputerID())
+                });
+    }
+
+    /**
+     *
+     * @param job
+     */
     public void insertPrintJob(OrderPrintJob job){
         ContentValues cv = new ContentValues();
         cv.put(TransactionDataSource.TRANSACTION_ID, job.getTransactionID());
@@ -35,6 +76,8 @@ public class PrintJobDataSource {
         cv.put(IS_PRINT_SUMMARY, job.getIsPrintSummary());
         cv.put(INSERT_DATE_TIME, Utils.getISODateTime());
         cv.putNull(PRINT_DATE_TIME);
-
+        cv.putNull(FINISH_DATE_TIME);
+        cv.put(PRINT_FROM_COMPUTER_ID, job.getComputerID());
+        mDbHelper.getWritableDatabase().insertOrThrow(TABLE_ORDER_PRINT_JOB, null, cv);
     }
 }

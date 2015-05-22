@@ -87,16 +87,17 @@ public class PaymentDataSource {
      *
      * @param transId
      * @param compId
+     * @param onProcess
      * @return
      */
-    public List<PayDetail> listPayDetail(int transId, int compId){
-        Cursor cursor = mDbHelper.openReadable().rawQuery(
+    public List<PayDetail> listPayDetail(int transId, int compId, boolean onProcess){
+        Cursor cursor = mDbHelper.getWritableDatabase().rawQuery(
                 "select a." + PAY_TYPE_ID + ", b." + PAY_TYPE_CODE + ", " +
                         " sum(a." + PAY_AMOUNT + ") as " + PAY_AMOUNT + ", " +
                         " sum(a." + PAID + ") as " + PAID + ", " +
                         " b." + PAY_TYPE_CODE + ", " +
                         " b." + PAY_TYPE_NAME +
-                        " from " + TABLE_ORDER_PAY_DETAIL_FRONT + " a " +
+                        " from " + (onProcess ? TABLE_ORDER_PAY_DETAIL_FRONT : TABLE_ORDER_PAY_DETAIL) + " a " +
                         " left join " + TABLE_PAY_TYPE + " b " +
                         " on a." + PAY_TYPE_ID + "=b." + PAY_TYPE_ID +
                         " where a." + TransactionDataSource.TRANSACTION_ID + "=?" +
@@ -122,7 +123,6 @@ public class PaymentDataSource {
             }
         }
         cursor.close();
-        mDbHelper.close();
         return payDetailList;
     }
 
@@ -130,13 +130,14 @@ public class PaymentDataSource {
      *
      * @param transId
      * @param compId
+     * @param onProcess
      * @return
      */
-    public PayDetail getPayDetail(int transId, int compId){
-        Cursor cursor = mDbHelper.openReadable().rawQuery(
+    public PayDetail getPayDetail(int transId, int compId, boolean onProcess){
+        Cursor cursor = mDbHelper.getWritableDatabase().rawQuery(
                 "select sum(" + PAY_AMOUNT +") as " + PAY_AMOUNT + ", " +
                         " sum(" + PAID + ") as " + PAID +
-                        " from " + TABLE_ORDER_PAY_DETAIL_FRONT +
+                        " from " + (onProcess ? TABLE_ORDER_PAY_DETAIL_FRONT : TABLE_ORDER_PAY_DETAIL) +
                         " where " + TransactionDataSource.TRANSACTION_ID + "=?" +
                         " and " + TransactionDataSource.COMPUTER_ID + "=?",
                 new String[]{
@@ -150,7 +151,6 @@ public class PaymentDataSource {
             payDetail.setPayAmount(cursor.getDouble(cursor.getColumnIndex(PAY_AMOUNT)));
         }
         cursor.close();
-        mDbHelper.close();
         return payDetail;
     }
 
@@ -161,7 +161,7 @@ public class PaymentDataSource {
      * @param payTypeId
      */
     public void deletePaymentDetail(int transId, int compId, int payTypeId) {
-        mDbHelper.openWritable().delete(TABLE_ORDER_PAY_DETAIL_FRONT,
+        mDbHelper.getWritableDatabase().delete(TABLE_ORDER_PAY_DETAIL_FRONT,
                 TransactionDataSource.TRANSACTION_ID + "=?" +
                         " and " + TransactionDataSource.COMPUTER_ID + "=?" +
                         " and " + PAY_TYPE_ID + "=?",
@@ -178,7 +178,7 @@ public class PaymentDataSource {
      * @param compId
      */
     public void deletePaymentDetail(int transId, int compId) {
-        mDbHelper.openWritable().delete(TABLE_ORDER_PAY_DETAIL_FRONT,
+        mDbHelper.getWritableDatabase().delete(TABLE_ORDER_PAY_DETAIL_FRONT,
                 TransactionDataSource.TRANSACTION_ID + "=?" +
                         " and " + TransactionDataSource.COMPUTER_ID + "=?",
                 new String[]{
@@ -220,7 +220,7 @@ public class PaymentDataSource {
         cv.put(MAIN_CURRENCY_RATIO, payDetail.getMainCurrencyRatio());
         cv.put(CURRENCY_RATIO, payDetail.getCurrencyRatio());
         cv.put(CURRENCY_AMOUNT, payDetail.getCurrencyAmount());
-        mDbHelper.openWritable().insertOrThrow(TABLE_ORDER_PAY_DETAIL_FRONT, null, cv);
+        mDbHelper.getWritableDatabase().insertOrThrow(TABLE_ORDER_PAY_DETAIL_FRONT, null, cv);
         return maxPayId;
     }
 
@@ -232,7 +232,7 @@ public class PaymentDataSource {
      */
     private int getMaxPayDetailId(int transId, int compId){
         int maxPayDetailId = 0;
-        SQLiteDatabase db = mDbHelper.openWritable();
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
         String[] whereArgs = {
                 String.valueOf(transId),
                 String.valueOf(compId)
@@ -257,7 +257,6 @@ public class PaymentDataSource {
             }
             cursor.close();
         }
-        mDbHelper.close();
         return maxPayDetailId + 1;
     }
 }

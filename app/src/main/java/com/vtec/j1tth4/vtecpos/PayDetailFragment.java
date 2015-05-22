@@ -58,7 +58,7 @@ public class PayDetailFragment extends Fragment {
 
     private void loadPaymentDetail(){
         TransactionManager manager = TransactionManager.getInstance(getActivity());
-        mPayList = manager.listPayDetail();
+        mPayList = manager.listPayDetail(true);
         mPayListAdapter.notifyDataSetChanged();
     }
 

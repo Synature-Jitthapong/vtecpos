@@ -74,7 +74,7 @@ public class ShopDataSource {
             whereArgs = new String[]{
                     String.valueOf(shopId)
             };
-        Cursor cursor = mDbHelper.openReadable().rawQuery(
+        Cursor cursor = mDbHelper.getWritableDatabase().rawQuery(
                 "select * " +
                         " from " + TABLE_SHOP_DATA + " a " +
                         " left outer join " + ProductDataSource.TABLE_PRODUCT_VAT + " b " +
@@ -98,12 +98,11 @@ public class ShopDataSource {
                 s.setVATType(cursor.getInt(cursor.getColumnIndex(VAT_TYPE)));
         }
         cursor.close();
-        mDbHelper.close();
         return s;
     }
 
     public Shop getShop(int shopId){
-        Cursor cursor = mDbHelper.openReadable().rawQuery(
+        Cursor cursor = mDbHelper.getWritableDatabase().rawQuery(
                 "select * from " +
                         TABLE_SHOP_DATA +
                         " where " + SHOP_ID + "=?" +
@@ -118,12 +117,11 @@ public class ShopDataSource {
             s = shopCursor.getShop();
         }
         shopCursor.close();
-        mDbHelper.close();
         return s;
     }
 
     public Shop getShop(){
-        Cursor cursor = mDbHelper.openReadable().rawQuery(
+        Cursor cursor = mDbHelper.getWritableDatabase().rawQuery(
                 "select * from " +
                         TABLE_SHOP_DATA +
                 " where " + IS_SHOP + "=?" +

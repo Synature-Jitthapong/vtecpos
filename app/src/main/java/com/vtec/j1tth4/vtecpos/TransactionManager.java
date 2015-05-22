@@ -2,8 +2,10 @@ package com.vtec.j1tth4.vtecpos;
 
 import android.content.Context;
 
+import com.vtec.j1tth4.vtecpos.provider.OrderPrintJob;
 import com.vtec.j1tth4.vtecpos.provider.PayDetail;
 import com.vtec.j1tth4.vtecpos.provider.PaymentDataSource;
+import com.vtec.j1tth4.vtecpos.provider.PrintJobDataSource;
 import com.vtec.j1tth4.vtecpos.provider.ProductData;
 import com.vtec.j1tth4.vtecpos.provider.SaleMode;
 import com.vtec.j1tth4.vtecpos.provider.SaleModeDataSource;
@@ -41,15 +43,23 @@ public class TransactionManager {
     public void finalizeBill(){
         mTransDataSource.finalizeBill(mCurrentTransId, mGlobalManager.getComputerId());
         mTransDataSource.weightProductSet(mCurrentTransId, mGlobalManager.getComputerId());
+        PrintJobDataSource jobDataSource = new PrintJobDataSource(mContext);
+        OrderPrintJob job = new OrderPrintJob();
+        job.setTransactionID(mCurrentTransId);
+        job.setComputerID(mGlobalManager.getComputerId());
+        job.setPrintNo(1);
+        jobDataSource.insertPrintJob(job);
         mCurrentTransId = 0;
     }
 
-    public PayDetail getPayDetail(){
-        return mPaymentDataSource.getPayDetail(mCurrentTransId, mGlobalManager.getComputerId());
+    public PayDetail getPayDetail(boolean onProcess){
+        return mPaymentDataSource.getPayDetail(mCurrentTransId,
+                mGlobalManager.getComputerId(), onProcess);
     }
 
-    public List<PayDetail> listPayDetail(){
-        return mPaymentDataSource.listPayDetail(mCurrentTransId, mGlobalManager.getComputerId());
+    public List<PayDetail> listPayDetail(boolean onProcess){
+        return mPaymentDataSource.listPayDetail(mCurrentTransId,
+                mGlobalManager.getComputerId(), onProcess);
     }
 
     public void deletePaymentDetail(int payTypeId){
@@ -67,12 +77,14 @@ public class TransactionManager {
         mPaymentDataSource.insertPaymentDetail(payDetail);
     }
 
-    public Transaction.OrderDetail getOrder(int orderId){
-        return mTransDataSource.getOrderDetail(mCurrentTransId, mGlobalManager.getComputerId(), orderId);
+    public Transaction.OrderDetail getOrder(int orderId, boolean onProcess){
+        return mTransDataSource.getOrderDetail(mCurrentTransId, mGlobalManager.getComputerId(),
+                orderId, onProcess);
     }
 
-    public List<Transaction.OrderDetail> listOrder(){
-        return mTransDataSource.listOrderDetail(mCurrentTransId, mGlobalManager.getComputerId());
+    public List<Transaction.OrderDetail> listOrder(boolean onProcess){
+        return mTransDataSource.listOrderDetail(mCurrentTransId,
+                mGlobalManager.getComputerId(), onProcess);
     }
 
     public void updateOrder(int orderId, double unitPrice, double qty){
@@ -118,36 +130,36 @@ public class TransactionManager {
         if(isSc == 1){
             isSc = product.getHasServiceCharge();
         }
-        orderDetail.setTransactionId(mCurrentTransId);
-        orderDetail.setComputerId(mGlobalManager.getComputerId());
+        orderDetail.setTransactionID(mCurrentTransId);
+        orderDetail.setComputerID(mGlobalManager.getComputerId());
         orderDetail.setComponentLevel(componentLevel);
-        orderDetail.setOrderDetailLinkId(0);
+        orderDetail.setOrderDetailLinkID(0);
         orderDetail.setInsertOrderNo(0);
         orderDetail.setIndentLevel(0);
         orderDetail.setDisplayOrdering(0);
         orderDetail.setSaleDate(Utils.getISODate());
-        orderDetail.setShopId(mGlobalManager.getShopId());
-        orderDetail.setProductId(product.getProductId());
+        orderDetail.setShopID(mGlobalManager.getShopId());
+        orderDetail.setProductID(product.getProductId());
         orderDetail.setProductSetType(product.getProductTypeId());
-        orderDetail.setOrderStatusId(2);
+        orderDetail.setOrderStatusID(2);
         orderDetail.setSaleMode(mGlobalManager.getSaleMode());
         orderDetail.setTotalQty(qty);
         orderDetail.setPricePerUnit(unitPrice);
         orderDetail.setTotalRetailPrice(totalRetailPrice);
         orderDetail.setOrgPricePerUnit(orgPricePerUnit);
         orderDetail.setOrgTotalRetailPrice(orgTotalRetailPrice);
-        orderDetail.setDiscPricePercent(0);
-        orderDetail.setDiscPrice(0);
-        orderDetail.setDiscOther(0);
-        orderDetail.setTotalItemDisc(0);
+        orderDetail.setDiscPricePercent(0.0d);
+        orderDetail.setDiscPrice(0.0d);
+        orderDetail.setDiscOther(0.0d);
+        orderDetail.setTotalItemDisc(0.0d);
         orderDetail.setSalePrice(salePrice);
         orderDetail.setProductVATCode(product.getVatCode());
-        orderDetail.setVatDisplay(product.getProductVatDisplay());
+        orderDetail.setVATDisplay(product.getProductVatDisplay());
         orderDetail.setProductVATPercent(product.getProductVatPercent());
         orderDetail.setVatable(vatable);
         orderDetail.setIsSCBeforeDisc(mGlobalManager.getScBeforeDisc());
         orderDetail.setHasServiceCharge(isSc);
-        orderDetail.setScPercent(mGlobalManager.getScPercent());
+        orderDetail.setSCPercent(mGlobalManager.getScPercent());
         orderDetail.setOtherFoodName("");
 //        cv.put(OTHER_PRODUCT_GROUP_ID, model.getOtherProductGroupID());
         orderDetail.setDiscountAllow(discountAllow);
@@ -162,7 +174,7 @@ public class TransactionManager {
 //        cv.put(VOID_TYPE_ID, model.getVoidTypeId());
 //        cv.put(VOID_STAFF_ID, model.getVoidStaffId());
 //        cv.putNull(VOID_DATE_TIME);
-          orderDetail.setVatType(product.getVatType());//cv.put(VAT_TYPE, model.getVatType());
+          orderDetail.setVATType(product.getVatType());//cv.put(VAT_TYPE, model.getVatType());
 //        cv.put(PRINT_GROUP, model.getPrintGroup());
 //        cv.put(NO_PRINT_BILL, model.getNoPrintBill());
 //        cv.put(NO_REPRINT_ORDER, model.getNoRePrintOrder());
@@ -179,9 +191,9 @@ public class TransactionManager {
         return orderId;
     }
 
-    public Transaction getTransaction(){
+    public Transaction getTransaction(boolean onProcess){
         TransactionDataSource dataSource = new TransactionDataSource(mContext);
-        return dataSource.getTransaction(mCurrentTransId);
+        return dataSource.getTransaction(mCurrentTransId, onProcess);
     }
 
     public void insertTransaction(){
@@ -189,11 +201,11 @@ public class TransactionManager {
         if(mCurrentTransId == 0) {
             GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);
             Transaction trans = new Transaction();
-            trans.setComputerId(gm.getComputerId());
+            trans.setComputerID(gm.getComputerId());
             trans.setOpenTime(Utils.getISODateTime());
-            trans.setOpenStaffId(gm.getStaffId());
+            trans.setOpenStaffID(gm.getStaffId());
             trans.setSaleDate(Utils.getISODate());
-            trans.setShopId(gm.getShopId());
+            trans.setShopID(gm.getShopId());
             mCurrentTransId = mTransDataSource.insertTransaction(trans);
         }
     }

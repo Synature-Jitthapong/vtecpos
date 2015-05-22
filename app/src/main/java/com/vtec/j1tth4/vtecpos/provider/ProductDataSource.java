@@ -153,7 +153,7 @@ public class ProductDataSource {
     public List<ProductData.Products> getProducts(int groupId, int deptId,
                                                   int saleMode, String saleDate){
         List<ProductData.Products> productsList = null;
-        Cursor cursor = mDbHelper.openReadable().rawQuery(
+        Cursor cursor = mDbHelper.getWritableDatabase().rawQuery(
                 "select a.*, b." + PRODUCT_TYPE_COMPONENT_LEVEL + ", " +
                         " c." + PRODUCT_VAT_PERCENT + ", " +
                         " c." + PRODUCT_VAT_DISPLAY + ", " +
@@ -258,7 +258,7 @@ public class ProductDataSource {
 
                     double unitPrice = cursor.getDouble(cursor.getColumnIndexOrThrow(PRODUCT_PRICE));
                     if (unitPrice == -1 && saleMode > 1) {
-                        Cursor cursor2 = mDbHelper.openReadable().rawQuery(
+                        Cursor cursor2 = mDbHelper.getWritableDatabase().rawQuery(
                                 "select " + PRODUCT_PRICE + " from " + TABLE_PRODUCT_PRICE +
                                         " where " + PRODUCT_ID + "=?" +
                                         " and " + SALE_MODE + "=?" +
@@ -293,7 +293,7 @@ public class ProductDataSource {
      */
     public List<ProductData.ProductDept> getProductDepts(int groupId){
         List<ProductData.ProductDept> productDeptList = null;
-        Cursor cursor = mDbHelper.openReadable().rawQuery(
+        Cursor cursor = mDbHelper.getWritableDatabase().rawQuery(
                 "select * from " + TABLE_PRODUCT_DEPT + " a " +
                         " left join " + TABLE_PRODUCT_GROUP + " b " +
                         " on a." + PRODUCT_GROUP_ID + "=b." + PRODUCT_GROUP_ID +
@@ -339,7 +339,7 @@ public class ProductDataSource {
      */
     public List<ProductData.ProductGroups> getProductGroups() {
         List<ProductData.ProductGroups> productGroupsList = null;
-        Cursor cursor = mDbHelper.openReadable().rawQuery(
+        Cursor cursor = mDbHelper.getWritableDatabase().rawQuery(
                 "select * from " + TABLE_PRODUCT_GROUP +
                         " where " + DELETED + "=?" +
                         " order by " + PRODUCT_GROUP_ORDERING,
