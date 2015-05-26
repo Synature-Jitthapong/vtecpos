@@ -22,7 +22,6 @@ import java.util.List;
 public class FoodMenuFragment extends Fragment {
 
     private List<ProductData.ProductGroups> mProductGroupList = new ArrayList<>();
-    private List<ProductData.ProductDept> mProductDeptList = new ArrayList<>();
 
     private static class FoodMenuPageItem{
         private final CharSequence mTitle;
@@ -44,9 +43,9 @@ public class FoodMenuFragment extends Fragment {
         }
     }
 
-    private List<FoodMenuPageItem> mTabs = new ArrayList<FoodMenuPageItem>();
-
-    private SlidingTabLayout mGroupTab;
+    private List<FoodMenuPageItem> mPagerItem = new ArrayList<>();
+    private DepartmentPagerAdapter mPagerAdapter;
+    private GroupSlidingTabLayout mGroupTab;
     private SlidingTabLayout mDeptTab;
     private ViewPager mItemPager;
 
@@ -59,23 +58,36 @@ public class FoodMenuFragment extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mItemPager = (ViewPager) view.findViewById(R.id.item_pager);
-        mItemPager.setAdapter(new DepartmentPagerAdapter(getChildFragmentManager()));
-
-        //mGroupTab = (SlidingTabLayout) view.findViewById(R.id.group_slide_tabs);
+        mGroupTab = (GroupSlidingTabLayout) view.findViewById(R.id.group_slide_tabs);
         mDeptTab = (SlidingTabLayout) view.findViewById(R.id.dep_slide_tabs);
+
+        mPagerAdapter = new DepartmentPagerAdapter(getChildFragmentManager());
+        mItemPager.setAdapter(mPagerAdapter);
         mDeptTab.setViewPager(mItemPager);
+
+        final ProductDataSource product = new ProductDataSource(getActivity());
+        mProductGroupList = product.getProductGroups();
+        mGroupTab.setProductGroupData(mProductGroupList);
+        mGroupTab.setTabClickCallback(new GroupSlidingTabLayout.OnTabClickListener() {
+            @Override
+            public void onTabClick(int groupId) {
+                List<ProductData.ProductDept> deptLst = product.getProductDepts(groupId);
+                mPagerItem = new ArrayList<>();
+                for (int i = 0; i < deptLst.size(); i++) {
+                    ProductData.ProductDept productDept = deptLst.get(i);
+                    mPagerItem.add(new FoodMenuPageItem(productDept.getProductDeptName(),
+                            productDept.getProductGroupId(), productDept.getProductDeptId()));
+                }
+                mPagerAdapter = new DepartmentPagerAdapter(getChildFragmentManager());
+                mDeptTab.testSetAdapter(mPagerAdapter);
+                mDeptTab.populateTabStrip();
+            }
+        });
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ProductDataSource product = new ProductDataSource(getActivity());
-        mProductDeptList = product.getProductDepts(0);
-        for(int i = 0; i < mProductDeptList.size(); i++){
-            ProductData.ProductDept productDept = mProductDeptList.get(i);
-            mTabs.add(new FoodMenuPageItem(productDept.getProductDeptName(),
-                    productDept.getProductGroupId(), productDept.getProductDeptId()));
-        }
     }
 
     private class DepartmentPagerAdapter extends android.support.v4.app.FragmentPagerAdapter{
@@ -86,39 +98,17 @@ public class FoodMenuFragment extends Fragment {
 
         @Override
         public android.support.v4.app.Fragment getItem(int position) {
-            return mTabs.get(position).createFragment();
+            return mPagerItem.get(position).createFragment();
         }
 
         @Override
         public int getCount() {
-            return mTabs.size();
+            return mPagerItem.size();
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return mTabs.get(position).getTitle();
-        }
-    }
-
-    private class GroupPagerAdapter extends android.support.v4.app.FragmentPagerAdapter{
-
-        public GroupPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public android.support.v4.app.Fragment getItem(int position) {
-            return mTabs.get(position).createFragment();
-        }
-
-        @Override
-        public int getCount() {
-            return mTabs.size();
-        }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            return mTabs.get(position).getTitle();
+            return mPagerItem.get(position).getTitle();
         }
     }
 }

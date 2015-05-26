@@ -168,6 +168,11 @@ public class SlidingTabLayout extends HorizontalScrollView {
         }
     }
 
+    public void testSetAdapter(android.support.v4.app.FragmentPagerAdapter adapter){
+        mViewPager.removeAllViews();
+        mViewPager.setAdapter(adapter);
+    }
+
     /**
      * Create a default view to be used for tabs. This is called if a custom tab view is not set via
      * {@link #setCustomTabView(int, int)}.
@@ -199,7 +204,8 @@ public class SlidingTabLayout extends HorizontalScrollView {
         return textView;
     }
 
-    private void populateTabStrip() {
+    public void populateTabStrip() {
+        mTabStrip.removeAllViews();
         final PagerAdapter adapter = mViewPager.getAdapter();
         final View.OnClickListener tabClickListener = new TabClickListener();
 

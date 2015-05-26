@@ -47,6 +47,7 @@ public class WintecPrinter extends CommonPrint{
 
         @Override
         protected Void doInBackground(Void... voids) {
+            WintecPrinter printer = new WintecPrinter(mContext);
             return null;
         }
     }

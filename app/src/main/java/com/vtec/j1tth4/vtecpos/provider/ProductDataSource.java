@@ -297,10 +297,12 @@ public class ProductDataSource {
                 "select * from " + TABLE_PRODUCT_DEPT + " a " +
                         " left join " + TABLE_PRODUCT_GROUP + " b " +
                         " on a." + PRODUCT_GROUP_ID + "=b." + PRODUCT_GROUP_ID +
-                        " where b." + IS_COMMENT + "=?" +
+                        " where a." + PRODUCT_GROUP_ID + "=?" +
                         " and a." + DELETED + "=?" +
+                        " and b." + IS_COMMENT + "=?" +
                         " order by " + PRODUCT_DEPT_ORDERING,
                 new String[]{
+                        String.valueOf(groupId),
                         "0",
                         "0"
                 });
@@ -341,9 +343,11 @@ public class ProductDataSource {
         List<ProductData.ProductGroups> productGroupsList = null;
         Cursor cursor = mDbHelper.getWritableDatabase().rawQuery(
                 "select * from " + TABLE_PRODUCT_GROUP +
-                        " where " + DELETED + "=?" +
+                        " where " + IS_COMMENT + "=?" +
+                        " and " + DELETED + "=?" +
                         " order by " + PRODUCT_GROUP_ORDERING,
                 new String[]{
+                        "0",
                         "0"
                 });
         if(cursor.moveToFirst()){
@@ -361,7 +365,7 @@ public class ProductDataSource {
                 productGroups.setProductGroupNameLang4(cursor.getString(cursor.getColumnIndex(PRODUCT_GROUP_NAME_LANG4)));
                 productGroups.setProductGroupNameLang5(cursor.getString(cursor.getColumnIndex(PRODUCT_GROUP_NAME_LANG5)));
                 productGroups.setProductGroupActivate(cursor.getInt(cursor.getColumnIndex(PRODUCT_GROUP_ACTIVATE)));
-                productGroups.setProductGroupSaleMode(cursor.getInt(cursor.getColumnIndex(PRODUCT_DEPT_SALE_MODE)));
+                productGroups.setProductGroupSaleMode(cursor.getInt(cursor.getColumnIndex(PRODUCT_GROUP_SALE_MODE)));
                 productGroups.setProductGroupType(cursor.getInt(cursor.getColumnIndex(PRODUCT_GROUP_TYPE)));
                 productGroups.setProductGroupOrdering(cursor.getInt(cursor.getColumnIndex(PRODUCT_GROUP_ORDERING)));
                 productGroups.setPrintDeptForSession(cursor.getInt(cursor.getColumnIndex(PRINT_DEPT_FOR_SESSION)));

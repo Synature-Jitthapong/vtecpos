@@ -8,11 +8,6 @@
         android:layout_height="wrap_content"
         android:visibility="gone">
 
-        <com.vtec.j1tth4.vtecpos.MySlidingTabLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/group_slide_tabs"/>
-
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
@@ -31,6 +26,12 @@
             android:layout_toLeftOf="@+id/btnListMode"
             android:layout_toStartOf="@+id/btnListMode" />
     </RelativeLayout>
+
+    <view
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        class="com.vtec.j1tth4.vtecpos.GroupSlidingTabLayout"
+        android:id="@+id/group_slide_tabs" />
 
     <com.vtec.j1tth4.vtecpos.SlidingTabLayout
         android:layout_width="match_parent"
