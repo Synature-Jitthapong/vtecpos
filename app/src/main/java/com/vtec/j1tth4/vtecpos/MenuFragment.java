@@ -35,6 +35,8 @@ import de.greenrobot.event.EventBus;
  */
 public class MenuFragment extends Fragment{
 
+    public static final String TAG = MenuFragment.class.getSimpleName();
+
     public static final String SLIDING_TAB_TITLE = "sliding_tab_title";
 
     public static class MenuItem{
@@ -67,6 +69,7 @@ public class MenuFragment extends Fragment{
         b.putInt("groupId", groupId);
         b.putInt("deptId", deptId);
         f.setArguments(b);
+        Log.i(TAG, groupId + ", " + deptId);
         return f;
     }
 
@@ -75,6 +78,7 @@ public class MenuFragment extends Fragment{
         super.onCreate(savedInstanceState);
         int groupId = getArguments().getInt("groupId");
         int deptId = getArguments().getInt("deptId");
+
         ProductDataSource product = new ProductDataSource(getActivity());
         mProductList = product.getProducts(groupId, deptId, 1, Utils.getISODate());
     }

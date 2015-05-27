@@ -1,6 +1,7 @@
 package com.vtec.j1tth4.vtecpos;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.analytics.ecommerce.Product;
 import com.vtec.j1tth4.vtecpos.provider.ProductDataSource;
 import com.vtec.j1tth4.vtecpos.provider.ProductData;
 
@@ -40,6 +42,10 @@ public class FoodMenuFragment extends Fragment {
 
         public CharSequence getTitle(){
             return mTitle;
+        }
+
+        public String getDeptId(){
+            return String.valueOf(mProductDeptId);
         }
     }
 
@@ -78,9 +84,8 @@ public class FoodMenuFragment extends Fragment {
                     mPagerItem.add(new FoodMenuPageItem(productDept.getProductDeptName(),
                             productDept.getProductGroupId(), productDept.getProductDeptId()));
                 }
-                mPagerAdapter = new DepartmentPagerAdapter(getChildFragmentManager());
-                mDeptTab.testSetAdapter(mPagerAdapter);
                 mDeptTab.populateTabStrip();
+                mPagerAdapter.notifyDataSetChanged();
             }
         });
     }

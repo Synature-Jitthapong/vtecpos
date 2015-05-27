@@ -13,19 +13,16 @@
       <config>
         <devices>
           <device id="Nexus 10" />
-          <device id="Nexus 7 2013" />
+          <device id="wear_square" />
+          <device id="Nexus 9" />
+          <device id="Nexus 5" />
           <device id="Nexus 7" />
+          <device id="Nexus 7 2013" />
         </devices>
         <target>android-21</target>
       </config>
     </shared>
     <layouts>
-      <layout url="file://$PROJECT_DIR$/app/src/main/res/layout-w820dp/activity_main.xml">
-        <config>
-          <state>Landscape</state>
-          <theme>@style/AppTheme</theme>
-        </config>
-      </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml">
         <config>
           <theme>@style/AppTheme</theme>
@@ -33,7 +30,6 @@
       </layout>
       <layout url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
         <config>
-          <state>Portrait</state>
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
@@ -85,14 +81,21 @@
       </layout>
     </layouts>
   </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="MenuFragment" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="161bc06c-a4fb-4a57-83b7-bf6fc040bca1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/GroupSlidingTabLayout.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/layout-w820dp/activity_main.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/FoodMenuFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/FoodMenuFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/provider/ProductDataSource.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/provider/ProductDataSource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/MenuFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/MenuFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/SlidingTabLayout.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/SlidingTabLayout.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/WintecPrinter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/WintecPrinter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/food_menu_fragment.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/food_menu_fragment.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="vtecpos.iws" />
@@ -143,123 +146,7 @@
     <favorites_list name="vtecpos" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="TransactionManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/TransactionManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="49" column="26" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="WintecPrinter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/WintecPrinter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="49" column="64" selection-start-line="49" selection-start-column="64" selection-end-line="49" selection-end-column="64" />
-              <folding>
-                <element signature="imports" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="food_menu_fragment.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/food_menu_fragment.xml">
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MySlidingTabLayout.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/MySlidingTabLayout.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="73" column="23" selection-start-line="73" selection-start-column="23" selection-end-line="74" selection-end-column="87" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SlidingTabStrip.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/SlidingTabStrip.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="121" column="25" selection-start-line="121" selection-start-column="8" selection-end-line="121" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FoodMenuFragment.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/FoodMenuFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="80" column="86" selection-start-line="80" selection-start-column="86" selection-end-line="80" selection-end-column="86" />
-              <folding>
-                <element signature="e#2500#3306#0" expanded="true" />
-                <element signature="e#3305#3306#0" expanded="true" />
-                <element signature="e#3382#3383#0" expanded="true" />
-                <element signature="e#3432#3433#0" expanded="true" />
-                <element signature="e#3588#3589#0" expanded="true" />
-                <element signature="e#3621#3622#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProductDataSource.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/provider/ProductDataSource.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="302" column="61" selection-start-line="302" selection-start-column="61" selection-end-line="302" selection-end-column="61" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GroupSlidingTabLayout.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/GroupSlidingTabLayout.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7790055">
-              <caret line="164" column="17" selection-start-line="164" selection-start-column="17" selection-end-line="164" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1236#1237#0" expanded="true" />
-                <element signature="e#1271#1272#0" expanded="true" />
-                <element signature="e#1344#1345#0" expanded="true" />
-                <element signature="e#1383#1384#0" expanded="true" />
-                <element signature="e#3475#3476#0" expanded="true" />
-                <element signature="e#3519#3520#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SlidingTabLayout.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/SlidingTabLayout.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="171" column="36" selection-start-line="171" selection-start-column="36" selection-end-line="171" selection-end-column="36" />
-              <folding>
-                <element signature="e#3043#3044#0" expanded="true" />
-                <element signature="e#3078#3079#0" expanded="true" />
-                <element signature="e#4905#4906#0" expanded="true" />
-                <element signature="e#4955#4956#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -1481,7 +1368,7 @@
     </option>
     <option name="modificationStamps">
       <map>
-        <entry key="$PROJECT_DIR$" value="5717173226316" />
+        <entry key="$PROJECT_DIR$" value="5717865704127" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1993,20 +1880,16 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/VtecPosApplication.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/MySlidingTabLayout.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout-w820dp/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/provider/Product.java" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/menu_item_card.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/order_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/provider/SaleMode.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/provider/ProductData.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/MenuClickEvent.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/menu_gridview.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/order_list_fragment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/payment_list_fragment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/provider/PayDetail.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/cash_payment_fragment.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/payment_item.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_payment.xml" />
@@ -2028,7 +1911,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/provider/GlobalPropertyDataSource.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/provider/ComputerDataSource.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/PaymentActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/MenuFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/OrderListFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/PayDetailFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/CashPaymentFragment.java" />
@@ -2036,10 +1918,15 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/TransactionManager.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/WintecPrinter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/provider/ProductDataSource.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/food_menu_fragment.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/FoodMenuFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/SlidingTabLayout.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/GroupSlidingTabLayout.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/SlidingTabLayout.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/MenuFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/FoodMenuFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/food_menu_fragment.xml" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
       </list>
     </option>
   </component>
@@ -2057,10 +1944,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="69" />
-    <option name="y" value="24" />
-    <option name="width" value="1221" />
-    <option name="height" value="719" />
+    <option name="x" value="-1" />
+    <option name="y" value="22" />
+    <option name="width" value="1368" />
+    <option name="height" value="747" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -2107,7 +1994,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -2277,6 +2163,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -2304,74 +2192,9 @@
               <option name="myItemId" value="vtecpos" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vtecpos" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vtecpos" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vtecpos" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vtecpos" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vtecpos" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2391,7 +2214,7 @@
     <property name="options.searchVisible" value="true" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="OverrideImplement.overriding.sorted" value="false" />
-    <property name="android.project.structure.last.selected" value="SlidingTabs" />
+    <property name="android.project.structure.last.selected" value="app" />
     <property name="android.project.structure.proportion" value="0.15" />
     <property name="UI_DESIGNER_EDITOR_MODE.PaletteToolWindowManager.SHOW" value="true" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="E9OKBC363204" />
@@ -2694,11 +2517,12 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="69" y="24" width="1221" height="719" extended-state="0" />
-    <editor active="true" />
+    <frame x="-1" y="22" width="1368" height="747" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294702" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294702" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3959854" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2711,17 +2535,16 @@
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5368421" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32854986" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24792702" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24723874" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32854986" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27697536" sideWeight="0.4986226" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2735769" sideWeight="0.4986226" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32456142" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32980332" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32517484" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -2748,42 +2571,17 @@
           <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/FoodMenuFragment.java</url>
-          <line>95</line>
-          <properties />
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
       </breakpoints>
       <option name="time" value="29" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/menu_item_card.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/SlidingTabLayout.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="40" selection-start-line="6" selection-start-column="7" selection-end-line="11" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/order_list_fragment.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="34" selection-start-line="5" selection-start-column="4" selection-end-line="16" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java-gen/com/vtec/j1tth4/vtecpos/dao/OrderpayDetail.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="34" selection-start-line="8" selection-start-column="4" selection-end-line="32" selection-end-column="34" />
+          <caret line="171" column="36" selection-start-line="171" selection-start-column="36" selection-end-line="171" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2798,13 +2596,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="34" column="36" selection-start-line="34" selection-start-column="36" selection-end-line="34" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.64">
-          <caret line="33" column="66" selection-start-line="33" selection-start-column="66" selection-end-line="33" selection-end-column="66" />
         </state>
       </provider>
     </entry>
@@ -2862,13 +2653,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6268657">
           <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -3009,15 +2793,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="89" column="42" selection-start-line="89" selection-start-column="42" selection-end-line="89" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#5289#5290#0" expanded="false" />
-            <element signature="e#5339#5340#0" expanded="false" />
-            <element signature="e#5397#5398#0" expanded="false" />
-            <element signature="e#5443#5444#0" expanded="false" />
-            <element signature="e#5501#5502#0" expanded="false" />
-            <element signature="e#5533#5534#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3025,28 +2800,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="8" column="38" selection-start-line="5" selection-start-column="0" selection-end-line="11" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/MenuFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="135" column="67" selection-start-line="135" selection-start-column="67" selection-end-line="135" selection-end-column="67" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1413#1414#0" expanded="false" />
-            <element signature="e#1452#1453#0" expanded="false" />
-            <element signature="e#1496#1497#0" expanded="false" />
-            <element signature="e#1538#1539#0" expanded="false" />
-            <element signature="e#2887#3401#0" expanded="false" />
-            <element signature="e#3400#3401#0" expanded="false" />
-            <element signature="e#3515#3516#0" expanded="false" />
-            <element signature="e#3592#3593#0" expanded="false" />
-            <element signature="e#3650#3651#0" expanded="false" />
-            <element signature="e#3700#3701#0" expanded="false" />
-            <element signature="e#3758#3759#0" expanded="false" />
-            <element signature="e#3790#3791#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3061,7 +2814,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="168" column="27" selection-start-line="168" selection-start-column="27" selection-end-line="168" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3069,11 +2821,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="72" column="78" selection-start-line="72" selection-start-column="78" selection-end-line="72" selection-end-column="78" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#900#901#0" expanded="false" />
-            <element signature="e#957#958#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3081,7 +2828,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="49" column="26" selection-start-line="49" selection-start-column="26" selection-end-line="49" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -3089,9 +2835,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="49" column="64" selection-start-line="49" selection-start-column="64" selection-end-line="49" selection-end-column="64" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3106,10 +2849,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="4.0250964">
           <caret line="206" column="16" selection-start-line="206" selection-start-column="16" selection-end-line="206" selection-end-column="16" />
-          <folding>
-            <element signature="e#6139#6140#0" expanded="true" />
-            <element signature="e#6190#6191#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3117,10 +2856,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.34942085">
           <caret line="1430" column="16" selection-start-line="1430" selection-start-column="16" selection-end-line="1430" selection-end-column="16" />
-          <folding>
-            <element signature="e#41966#41967#0" expanded="true" />
-            <element signature="e#42017#42018#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3128,7 +2863,89 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="276" column="20" selection-start-line="276" selection-start-column="20" selection-end-line="276" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/provider/ProductDataSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="302" column="61" selection-start-line="302" selection-start-column="61" selection-end-line="302" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/SlidingTabStrip.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="121" column="25" selection-start-line="121" selection-start-column="8" selection-end-line="121" selection-end-column="25" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.76833975">
+          <caret line="38" column="42" selection-start-line="38" selection-start-column="42" selection-end-line="38" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/menu_main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3314917">
+          <caret line="12" column="46" selection-start-line="12" selection-start-column="46" selection-end-line="12" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/MySlidingTabLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.005524862">
+          <caret line="73" column="23" selection-start-line="73" selection-start-column="23" selection-end-line="74" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/GroupSlidingTabLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="164" column="17" selection-start-line="164" selection-start-column="17" selection-end-line="164" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/MenuFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="71" column="44" selection-start-line="71" selection-start-column="44" selection-end-line="71" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/SlidingTabLayout.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="165" column="75" selection-start-line="165" selection-start-column="50" selection-end-line="165" selection-end-column="75" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/FoodMenuFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="70" column="45" selection-start-line="70" selection-start-column="45" selection-end-line="70" selection-end-column="45" />
+          <folding>
+            <element signature="e#1338#1339#0" expanded="true" />
+            <element signature="e#1375#1376#0" expanded="true" />
+            <element signature="e#1411#1412#0" expanded="true" />
+            <element signature="e#1472#1473#0" expanded="true" />
+            <element signature="e#2696#3413#0" expanded="true" />
+            <element signature="e#3412#3413#0" expanded="true" />
+            <element signature="e#3489#3490#0" expanded="true" />
+            <element signature="e#3539#3540#0" expanded="true" />
+            <element signature="e#3695#3696#0" expanded="true" />
+            <element signature="e#3728#3729#0" expanded="true" />
+            <element signature="e#3941#3942#0" expanded="true" />
+            <element signature="e#3989#3990#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -3143,71 +2960,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/provider/ProductDataSource.java">
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="302" column="61" selection-start-line="302" selection-start-column="61" selection-end-line="302" selection-end-column="61" />
+        <state vertical-scroll-proportion="0.10683012">
+          <caret line="9" column="27" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/SlidingTabStrip.java">
-      <provider selected="true" editor-type-id="text-editor">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="121" column="25" selection-start-line="121" selection-start-column="8" selection-end-line="121" selection-end-column="25" />
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/SlidingTabLayout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="171" column="36" selection-start-line="171" selection-start-column="36" selection-end-line="171" selection-end-column="36" />
-          <folding>
-            <element signature="e#3043#3044#0" expanded="true" />
-            <element signature="e#3078#3079#0" expanded="true" />
-            <element signature="e#4905#4906#0" expanded="true" />
-            <element signature="e#4955#4956#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/FoodMenuFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="80" column="86" selection-start-line="80" selection-start-column="86" selection-end-line="80" selection-end-column="86" />
-          <folding>
-            <element signature="e#2500#3306#0" expanded="true" />
-            <element signature="e#3305#3306#0" expanded="true" />
-            <element signature="e#3382#3383#0" expanded="true" />
-            <element signature="e#3432#3433#0" expanded="true" />
-            <element signature="e#3588#3589#0" expanded="true" />
-            <element signature="e#3621#3622#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/MySlidingTabLayout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="73" column="23" selection-start-line="73" selection-start-column="23" selection-end-line="74" selection-end-column="87" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/vtec/j1tth4/vtecpos/GroupSlidingTabLayout.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7790055">
-          <caret line="164" column="17" selection-start-line="164" selection-start-column="17" selection-end-line="164" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1236#1237#0" expanded="true" />
-            <element signature="e#1271#1272#0" expanded="true" />
-            <element signature="e#1344#1345#0" expanded="true" />
-            <element signature="e#1383#1384#0" expanded="true" />
-            <element signature="e#3475#3476#0" expanded="true" />
-            <element signature="e#3519#3520#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

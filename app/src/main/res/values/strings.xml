@@ -33,4 +33,8 @@
     <string name="delete_short">Del</string>
     <string name="confirm_delete">Are you sure you want to delete?</string>
     <string name="confirm">Confirm</string>
+    <string name="send_data">Send Data</string>
+    <string name="report">Reports</string>
+    <string name="utility">Utility</string>
+    <string name="switch_user">Switch User</string>
 </resources>
