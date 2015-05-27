@@ -5,8 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import de.greenrobot.dao.Property;
-
 /**
  * Created by j1tth4 on 5/15/15.
  */

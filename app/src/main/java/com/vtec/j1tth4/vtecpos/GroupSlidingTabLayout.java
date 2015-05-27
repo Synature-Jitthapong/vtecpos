@@ -13,7 +13,6 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.vtec.j1tth4.vtecpos.dao.ProductGroup;
 import com.vtec.j1tth4.vtecpos.provider.ProductData;
 
 import java.util.List;
