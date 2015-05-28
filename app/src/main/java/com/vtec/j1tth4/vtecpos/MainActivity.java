@@ -4,11 +4,11 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.media.Image;
-import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,7 +32,7 @@ public class MainActivity extends ActionBarActivity{
         "","","",""
     };
 
-    private android.support.v4.app.ActionBarDrawerToggle mDrawerToggle;
+    private android.support.v7.app.ActionBarDrawerToggle mDrawerToggle;
 
     private TransactionManager mTransManager;
 
@@ -49,24 +49,25 @@ public class MainActivity extends ActionBarActivity{
 
         final ActionBar actionBar = getSupportActionBar();
         mLvDrawer.setAdapter(new DrawerListAdapter());
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                android.support.v7.appcompat.R.drawable.abc_ic_menu_moreoverflow_mtrl_alpha,
-                R.string.app_name, R.string.app_name) {
-
-            /** Called when a drawer has settled in a completely closed state. */
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
-                actionBar.setTitle("vtecpos");
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-
-            /** Called when a drawer has settled in a completely open state. */
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                actionBar.setTitle("vtecpos");
-                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-        };
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.app_name, R.string.app_name);
+//        mDrawerToggle = new android.support.v7.app.ActionBarDrawerToggle(this, mDrawerLayout,
+//                android.support.v7.appcompat.R.drawable.abc_ic_menu_moreoverflow_mtrl_alpha,
+//                R.string.app_name, R.string.app_name) {
+//
+//            /** Called when a drawer has settled in a completely closed state. */
+//            public void onDrawerClosed(View view) {
+//                super.onDrawerClosed(view);
+//                actionBar.setTitle("vtecpos");
+//                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+//            }
+//
+//            /** Called when a drawer has settled in a completely open state. */
+//            public void onDrawerOpened(View drawerView) {
+//                super.onDrawerOpened(drawerView);
+//                actionBar.setTitle("vtecpos");
+//                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+//            }
+//        };
 
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.setDrawerListener(mDrawerToggle);

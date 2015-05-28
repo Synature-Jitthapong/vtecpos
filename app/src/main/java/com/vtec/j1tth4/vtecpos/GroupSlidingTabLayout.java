@@ -59,8 +59,8 @@ public class GroupSlidingTabLayout extends HorizontalScrollView {
         mTitleOffset = (int) (TITLE_OFFSET_DIPS * getResources().getDisplayMetrics().density);
 
         mTabStrip = new SlidingTabStrip(context);
-        mTabStrip.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-        mTabStrip.setTabIndicatorColor(getResources().getColor(android.R.color.transparent));
+        mTabStrip.setBackgroundColor(getResources().getColor(R.color.grey_50));
+        //mTabStrip.setTabIndicatorColor(getResources().getColor(android.R.color.transparent));
         mTabStrip.setTabDividerColor((byte)0x20);
         addView(mTabStrip, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
     }
@@ -126,8 +126,6 @@ public class GroupSlidingTabLayout extends HorizontalScrollView {
             ProductData.ProductGroups group = mProGroupLst.get(i);
             tabTitleView.setText(group.getProductGroupName());
             tabView.setOnClickListener(tabClickListener);
-            if(i == 0)
-                tabView.callOnClick();
             mTabStrip.addView(tabView);
         }
     }
@@ -155,8 +153,9 @@ public class GroupSlidingTabLayout extends HorizontalScrollView {
         @Override
         public void onClick(View v) {
             for (int i = 0; i < mTabStrip.getChildCount(); i++) {
+                //mTabStrip.getChildAt(i).setBackgroundColor(getResources().getColor(android.R.color.transparent));
                 if (v == mTabStrip.getChildAt(i)) {
-                    v.setBackgroundColor(getResources().getColor(R.color.grey_50));
+                    //v.setBackgroundColor(getResources().getColor(R.color.grey_50));
                     mTabStrip.onViewPagerPageChanged(i, 0f);
                     scrollToTab(i, 0);
                     mTabClickListener.onTabClick(mProGroupLst.get(i).getProductGroupId());

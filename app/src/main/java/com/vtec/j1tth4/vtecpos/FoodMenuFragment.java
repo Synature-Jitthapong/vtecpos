@@ -1,7 +1,5 @@
 package com.vtec.j1tth4.vtecpos;
 
-import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.analytics.ecommerce.Product;
 import com.vtec.j1tth4.vtecpos.provider.ProductDataSource;
 import com.vtec.j1tth4.vtecpos.provider.ProductData;
 
@@ -49,11 +46,11 @@ public class FoodMenuFragment extends Fragment {
         }
     }
 
-    private List<FoodMenuPageItem> mPagerItem = new ArrayList<>();
-    private DepartmentPagerAdapter mPagerAdapter;
+    private List<FoodMenuPageItem> mPagerItems;
+    private MenuPagerAdapter mPagerAdapter;
     private GroupSlidingTabLayout mGroupTab;
     private SlidingTabLayout mDeptTab;
-    private ViewPager mItemPager;
+    private ViewPager mPager;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -63,13 +60,13 @@ public class FoodMenuFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mItemPager = (ViewPager) view.findViewById(R.id.item_pager);
+        mPager = (ViewPager) view.findViewById(R.id.item_pager);
         mGroupTab = (GroupSlidingTabLayout) view.findViewById(R.id.group_slide_tabs);
         mDeptTab = (SlidingTabLayout) view.findViewById(R.id.dep_slide_tabs);
 
-        mPagerAdapter = new DepartmentPagerAdapter(getChildFragmentManager());
-        mItemPager.setAdapter(mPagerAdapter);
-        mDeptTab.setViewPager(mItemPager);
+        mPagerAdapter = new MenuPagerAdapter(getActivity().getSupportFragmentManager());
+        mPager.setAdapter(mPagerAdapter);
+        mDeptTab.setViewPager(mPager);
 
         final ProductDataSource product = new ProductDataSource(getActivity());
         mProductGroupList = product.getProductGroups();
@@ -77,17 +74,24 @@ public class FoodMenuFragment extends Fragment {
         mGroupTab.setTabClickCallback(new GroupSlidingTabLayout.OnTabClickListener() {
             @Override
             public void onTabClick(int groupId) {
-                List<ProductData.ProductDept> deptLst = product.getProductDepts(groupId);
-                mPagerItem = new ArrayList<>();
-                for (int i = 0; i < deptLst.size(); i++) {
-                    ProductData.ProductDept productDept = deptLst.get(i);
-                    mPagerItem.add(new FoodMenuPageItem(productDept.getProductDeptName(),
-                            productDept.getProductGroupId(), productDept.getProductDeptId()));
-                }
-                mDeptTab.populateTabStrip();
-                mPagerAdapter.notifyDataSetChanged();
+                loadMenuPager(groupId);
             }
         });
+        if(mProductGroupList != null)
+            loadMenuPager(mProductGroupList.get(0).getProductGroupId());
+    }
+
+    private void loadMenuPager(int productGroupId){
+        ProductDataSource product = new ProductDataSource(getActivity());
+        List<ProductData.ProductDept> deptLst = product.getProductDepts(productGroupId);
+        mPagerItems = new ArrayList<>();
+        for (int i = 0; i < deptLst.size(); i++) {
+            ProductData.ProductDept productDept = deptLst.get(i);
+            mPagerItems.add(new FoodMenuPageItem(productDept.getProductDeptName(),
+                    productDept.getProductGroupId(), productDept.getProductDeptId()));
+        }
+        mPagerAdapter.notifyDataSetChanged();
+        mDeptTab.populateTabStrip();
     }
 
     @Override
@@ -95,25 +99,30 @@ public class FoodMenuFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    private class DepartmentPagerAdapter extends android.support.v4.app.FragmentPagerAdapter{
+    private class MenuPagerAdapter extends android.support.v4.app.FragmentStatePagerAdapter{
 
-        public DepartmentPagerAdapter(FragmentManager fm) {
+        public MenuPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         @Override
         public android.support.v4.app.Fragment getItem(int position) {
-            return mPagerItem.get(position).createFragment();
+            return mPagerItems.get(position).createFragment();
         }
 
         @Override
         public int getCount() {
-            return mPagerItem.size();
+            return mPagerItems != null ? mPagerItems.size() : 0;
         }
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return mPagerItem.get(position).getTitle();
+            return mPagerItems.get(position).getTitle();
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return POSITION_NONE;
         }
     }
 }

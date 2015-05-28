@@ -37,4 +37,5 @@
     <string name="report">Reports</string>
     <string name="utility">Utility</string>
     <string name="switch_user">Switch User</string>
+    <string name="title_activity_test_toolbar">TestToolbar</string>
 </resources>

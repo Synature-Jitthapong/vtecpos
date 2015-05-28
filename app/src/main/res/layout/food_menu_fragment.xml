@@ -29,7 +29,7 @@
 
     <view
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         class="com.vtec.j1tth4.vtecpos.GroupSlidingTabLayout"
         android:id="@+id/group_slide_tabs" />
 

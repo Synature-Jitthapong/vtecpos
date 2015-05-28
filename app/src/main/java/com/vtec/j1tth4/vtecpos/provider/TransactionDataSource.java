@@ -1294,7 +1294,7 @@ public class TransactionDataSource {
         cv.put(PRINT_GROUP, model.getPrintGroup());
         cv.put(NO_PRINT_BILL, model.getNoPrintBill());
         cv.put(NO_REPRINT_ORDER, model.getNoRePrintOrder());
-        cv.put(START_TIME, model.getStartTime());
+        cv.putNull(START_TIME);
         cv.putNull(FINISH_TIME);
         cv.put(PRINT_STATUS, model.getPrintStatus());
         cv.put(PROCESS_ID, model.getProcessID());

@@ -293,19 +293,25 @@ public class ProductDataSource {
      */
     public List<ProductData.ProductDept> getProductDepts(int groupId){
         List<ProductData.ProductDept> productDeptList = null;
+        String[] whereArgs = {
+                "0",
+                "0"
+        };
+        if(groupId != 0)
+            whereArgs = new String[]{
+                    String.valueOf(groupId),
+                    "0",
+                    "0"
+            };
         Cursor cursor = mDbHelper.getWritableDatabase().rawQuery(
                 "select * from " + TABLE_PRODUCT_DEPT + " a " +
                         " left join " + TABLE_PRODUCT_GROUP + " b " +
                         " on a." + PRODUCT_GROUP_ID + "=b." + PRODUCT_GROUP_ID +
-                        " where a." + PRODUCT_GROUP_ID + "=?" +
+                        " where 0=0 " +
+                        (groupId != 0 ? " and a." + PRODUCT_GROUP_ID + "=?" : "") +
                         " and a." + DELETED + "=?" +
                         " and b." + IS_COMMENT + "=?" +
-                        " order by " + PRODUCT_DEPT_ORDERING,
-                new String[]{
-                        String.valueOf(groupId),
-                        "0",
-                        "0"
-                });
+                        " order by " + PRODUCT_DEPT_ORDERING, whereArgs);
         if(cursor.moveToFirst()){
             productDeptList = new ArrayList<>();
             while (!cursor.isAfterLast()){
