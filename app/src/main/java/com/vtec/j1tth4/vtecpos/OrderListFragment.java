@@ -1,21 +1,16 @@
 package com.vtec.j1tth4.vtecpos;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.vtec.j1tth4.vtecpos.provider.Transaction;
@@ -40,6 +35,8 @@ public class OrderListFragment extends Fragment{
     private ListView mLvOrderSummary;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    private QuickAction mQuickAction;
+
     public static class RefreshEvent{
     }
 
@@ -52,6 +49,32 @@ public class OrderListFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
+
+        ActionItem addItem 		= new ActionItem(1, "Add", getResources().getDrawable(R.drawable.ic_add));
+        ActionItem acceptItem 	= new ActionItem(2, "Accept", getResources().getDrawable(R.drawable.ic_accept));
+        ActionItem uploadItem 	= new ActionItem(3, "Upload", getResources().getDrawable(R.drawable.ic_up));
+
+        mQuickAction 	= new QuickAction(getActivity());
+
+        mQuickAction.addActionItem(addItem);
+        mQuickAction.addActionItem(acceptItem);
+        mQuickAction.addActionItem(uploadItem);
+
+        //setup the action item click listener
+        mQuickAction.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {
+            @Override
+            public void onItemClick(QuickAction quickAction, int pos, int actionId) {
+                ActionItem actionItem = quickAction.getActionItem(pos);
+            }
+        });
+
+        //setup on dismiss listener, set the icon back to normal
+        mQuickAction.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+            }
+        });
+
         loadOrderData();
     }
 
@@ -115,33 +138,19 @@ public class OrderListFragment extends Fragment{
     private class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.ViewHolder>{
 
         public class ViewHolder extends RecyclerView.ViewHolder {
-            boolean isCtrlExpand = false;
-
             TextView tvOrderQty;
-            TextView tvOrderQty2;
             TextView tvOrderTitle;
             TextView tvOrderSub;
             TextView tvOrderPrice;
             ImageButton btnMore;
-            Button btnDel;
-            Button btnMinus;
-            Button btnPlus;
-            Button btnMod;
-            RelativeLayout orderCtrlContainer;
 
             public ViewHolder(View itemView) {
                 super(itemView);
                 tvOrderQty = (TextView) itemView.findViewById(R.id.tvOrderQty);
-                tvOrderQty2 = (TextView) itemView.findViewById(R.id.tvOrderQty2);
                 tvOrderTitle = (TextView) itemView.findViewById(R.id.tvOrderTitle);
                 tvOrderSub = (TextView) itemView.findViewById(R.id.tvOrderSub);
                 tvOrderPrice = (TextView) itemView.findViewById(R.id.tvOrderPrice);
                 btnMore = (ImageButton) itemView.findViewById(R.id.btnMore);
-                btnDel = (Button) itemView.findViewById(R.id.btnOrderDel);
-                btnMinus = (Button) itemView.findViewById(R.id.btnOrderMinus);
-                btnPlus = (Button) itemView.findViewById(R.id.btnOrderPlus);
-                btnMod = (Button) itemView.findViewById(R.id.btnOrderModify);
-                orderCtrlContainer = (RelativeLayout) itemView.findViewById(R.id.orderCtrlContainer);
             }
         }
 
@@ -156,77 +165,13 @@ public class OrderListFragment extends Fragment{
         public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
             final Transaction.OrderDetail orderDetail = mOrderList.get(i);
             viewHolder.tvOrderQty.setText(NumberFormat.getInstance().format(orderDetail.getTotalQty()));
-            viewHolder.tvOrderQty2.setText(NumberFormat.getInstance().format(orderDetail.getTotalQty()));
             viewHolder.tvOrderTitle.setText(orderDetail.getProductName());
             viewHolder.tvOrderPrice.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(orderDetail.getTotalRetailPrice()));
 
-            if(viewHolder.isCtrlExpand){
-                viewHolder.orderCtrlContainer.setVisibility(View.GONE);
-                viewHolder.btnMore.setImageResource(android.R.drawable.arrow_down_float);
-            }
-
             viewHolder.btnMore.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
-                    if(!viewHolder.isCtrlExpand){
-                        viewHolder.orderCtrlContainer.setVisibility(View.VISIBLE);
-                        viewHolder.isCtrlExpand = true;
-                        viewHolder.btnMore.setImageResource(android.R.drawable.arrow_up_float);
-                    }else{
-                        viewHolder.orderCtrlContainer.setVisibility(View.GONE);
-                        viewHolder.isCtrlExpand = false;
-                        viewHolder.btnMore.setImageResource(android.R.drawable.arrow_down_float);
-                    }
-                }
-            });
-
-            viewHolder.btnDel.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    new AlertDialog.Builder(getActivity())
-                            .setMessage(R.string.delete)
-                            .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {}
-                            })
-                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    TransactionManager manager =
-                                            TransactionManager.getInstance(getActivity());
-                                    manager.deleteOrder(orderDetail.getOrderDetailID());
-                                    mOrderList.remove(i);
-                                    mOrderAdapter.notifyDataSetChanged();
-                                }
-                            }).show();
-                }
-            });
-
-            viewHolder.btnMinus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    double qty = orderDetail.getTotalQty();
-                    if(--qty > 0){
-                        TransactionManager manager =
-                                TransactionManager.getInstance(getActivity());
-                        manager.updateOrder(orderDetail.getOrderDetailID(), orderDetail.getPricePerUnit(), qty);
-                        Transaction.OrderDetail order = manager.getOrder(orderDetail.getOrderDetailID(), true);
-                        mOrderList.set(i, order);
-                        mOrderAdapter.notifyDataSetChanged();
-                    }
-                }
-            });
-
-            viewHolder.btnPlus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    double qty = orderDetail.getTotalQty();
-                    TransactionManager manager =
-                            TransactionManager.getInstance(getActivity());
-                    manager.updateOrder(orderDetail.getOrderDetailID(), orderDetail.getPricePerUnit(), ++qty);
-                    Transaction.OrderDetail order = manager.getOrder(orderDetail.getOrderDetailID(), true);
-                    mOrderList.set(i, order);
-                    mOrderAdapter.notifyDataSetChanged();
+                public void onClick(View view) {
+                    mQuickAction.show(view);
                 }
             });
         }

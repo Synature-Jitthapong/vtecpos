@@ -69,7 +69,7 @@ public class FoodMenuFragment extends Fragment {
         mDeptTab.setViewPager(mPager);
 
         final ProductDataSource product = new ProductDataSource(getActivity());
-        mProductGroupList = product.getProductGroups();
+        mProductGroupList = product.listProductGroup();
         mGroupTab.setProductGroupData(mProductGroupList);
         mGroupTab.setTabClickCallback(new GroupSlidingTabLayout.OnTabClickListener() {
             @Override
@@ -83,7 +83,7 @@ public class FoodMenuFragment extends Fragment {
 
     private void loadMenuPager(int productGroupId){
         ProductDataSource product = new ProductDataSource(getActivity());
-        List<ProductData.ProductDept> deptLst = product.getProductDepts(productGroupId);
+        List<ProductData.ProductDept> deptLst = product.listProductDept(productGroupId);
         mPagerItems = new ArrayList<>();
         for (int i = 0; i < deptLst.size(); i++) {
             ProductData.ProductDept productDept = deptLst.get(i);

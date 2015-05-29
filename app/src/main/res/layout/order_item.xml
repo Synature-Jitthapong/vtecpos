@@ -8,7 +8,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center_vertical">
 
         <CheckBox
             android:layout_width="wrap_content"
@@ -18,9 +19,10 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:layout_marginRight="@dimen/default_horizontal_margin" >
+            android:layout_marginRight="@dimen/default_horizontal_margin"
+            android:gravity="center_vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -32,7 +34,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvOrderSub" />
+                android:id="@+id/tvOrderSub"
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -57,66 +60,8 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:id="@+id/btnMore"
-            android:src="@android:drawable/arrow_down_float"
+            android:src="@drawable/ic_more_vert_grey600_48dp"
             style="@android:style/Widget.DeviceDefault.Button.Borderless" />
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/orderCtrlContainer"
-        android:visibility="gone">
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="-"
-            android:id="@+id/btnOrderMinus"
-            android:textSize="@dimen/abc_text_size_large_material"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/btnOrderDel"
-            android:layout_toEndOf="@+id/btnOrderDel" />
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="+"
-            android:id="@+id/btnOrderPlus"
-            android:textSize="@dimen/abc_text_size_large_material"
-            android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/tvOrderQty2"
-            android:layout_toEndOf="@+id/tvOrderQty2" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/delete_short"
-            android:id="@+id/btnOrderDel"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="1"
-            android:id="@+id/tvOrderQty2"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/btnOrderMinus"
-            android:layout_toEndOf="@+id/btnOrderMinus"
-            android:minWidth="48dp"
-            android:gravity="center" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/modify_short"
-            android:id="@+id/btnOrderModify"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-    </RelativeLayout>
 </LinearLayout>

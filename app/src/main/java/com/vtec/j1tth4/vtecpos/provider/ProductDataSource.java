@@ -150,7 +150,7 @@ public class ProductDataSource {
      * @param saleDate
      * @return null if no record
      */
-    public List<ProductData.Products> getProducts(int groupId, int deptId,
+    public List<ProductData.Products> listProduct(int groupId, int deptId,
                                                   int saleMode, String saleDate){
         List<ProductData.Products> productsList = null;
         Cursor cursor = mDbHelper.getWritableDatabase().rawQuery(
@@ -291,7 +291,7 @@ public class ProductDataSource {
      * @param groupId
      * @return null if no record
      */
-    public List<ProductData.ProductDept> getProductDepts(int groupId){
+    public List<ProductData.ProductDept> listProductDept(int groupId){
         List<ProductData.ProductDept> productDeptList = null;
         String[] whereArgs = {
                 "0",
@@ -345,7 +345,7 @@ public class ProductDataSource {
     /**
      * @return null if no record
      */
-    public List<ProductData.ProductGroups> getProductGroups() {
+    public List<ProductData.ProductGroups> listProductGroup() {
         List<ProductData.ProductGroups> productGroupsList = null;
         Cursor cursor = mDbHelper.getWritableDatabase().rawQuery(
                 "select * from " + TABLE_PRODUCT_GROUP +

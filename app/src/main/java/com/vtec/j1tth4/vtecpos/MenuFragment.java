@@ -1,15 +1,11 @@
 package com.vtec.j1tth4.vtecpos;
 
-import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -17,15 +13,11 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.analytics.ecommerce.Product;
 import com.vtec.j1tth4.vtecpos.provider.ProductDataSource;
 import com.vtec.j1tth4.vtecpos.provider.ProductData;
-import com.vtec.j1tth4.vtecpos.provider.Transaction;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import de.greenrobot.event.EventBus;
 
@@ -80,7 +72,7 @@ public class MenuFragment extends Fragment{
         int deptId = getArguments().getInt("deptId");
 
         ProductDataSource product = new ProductDataSource(getActivity());
-        mProductList = product.getProducts(groupId, deptId, 1, Utils.getISODate());
+        mProductList = product.listProduct(groupId, deptId, 1, Utils.getISODate());
     }
 
     @Override
