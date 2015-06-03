@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="1"
-        android:id="@+id/tvPayNo"
+        android:id="@+id/pay_no"
         android:minWidth="48dp"
         android:gravity="center" />
 
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="PayTypeName"
-        android:id="@+id/tvPayTypeName"
+        android:id="@+id/pay_type_name"
         android:layout_weight="1"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp" />
@@ -28,15 +28,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/tvPayAmount"
+        android:id="@+id/pay_amount"
         android:gravity="right"
         android:minWidth="48dp" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnPayDel"
-        android:src="@android:drawable/ic_menu_delete"
+        android:id="@+id/pay_del"
+        android:src="@drawable/ic_delete_grey600_36dp"
         style="@android:style/Widget.Holo.Button.Borderless" />
 
 </LinearLayout>

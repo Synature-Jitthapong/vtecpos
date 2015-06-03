@@ -119,25 +119,25 @@ public class MenuFragment extends Fragment{
             if(view == null){
                 holder = new ViewHolder();
                 view = getActivity().getLayoutInflater().inflate(R.layout.menu_item_card, viewGroup, false);
-                holder.img = (ImageView) view.findViewById(R.id.imgMenu);
-                holder.tvTitle = (TextView) view.findViewById(R.id.tvMenuTitle);
-                holder.tvSub = (TextView) view.findViewById(R.id.tvMenuSub);
+                holder.menu_pic = (ImageView) view.findViewById(R.id.menu_pic);
+                holder.menu_title = (TextView) view.findViewById(R.id.menu_title);
+                holder.menu_sub_title = (TextView) view.findViewById(R.id.menu_sub_title);
                 view.setTag(holder);
             }else{
                 holder = (ViewHolder) view.getTag();
             }
             final ProductData.Products product = mProductList.get(i);
-            holder.tvTitle.setText(product.getProductName());
+            holder.menu_title.setText(product.getProductName());
             double price = product.getProductPrice() == -1 ? 1 : product.getProductPrice(); // test -1 open price
-            holder.tvSub.setText(Utils.currencyFormat(getActivity(), price));
-            holder.img.setImageDrawable(null);
+            holder.menu_sub_title.setText(Utils.currencyFormat(getActivity(), price));
+            //holder.menu_pic.setImageDrawable(null);
             return view;
         }
 
         private class ViewHolder{
-            ImageView img;
-            TextView tvTitle;
-            TextView tvSub;
+            ImageView menu_pic;
+            TextView menu_title;
+            TextView menu_sub_title;
         }
     }
 }

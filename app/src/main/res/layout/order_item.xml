@@ -1,67 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/default_horizontal_margin"
-    android:background="@drawable/abc_list_selector_holo_light">
+    android:padding="@dimen/default_horizontal_margin">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical">
+    <CheckedTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="item title"
+        android:id="@+id/order_title"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_alignTop="@+id/order_thumb_pic"
+        android:layout_toRightOf="@+id/order_thumb_pic"
+        android:layout_toEndOf="@+id/order_thumb_pic" />
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/chkOrder" />
+    <ImageButton
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/order_more_opt"
+        android:src="@drawable/ic_more_vert_grey600_36dp"
+        style="@android:style/Widget.Holo.Button.Borderless"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:layout_marginRight="@dimen/default_horizontal_margin"
-            android:gravity="center_vertical">
+    <ImageView
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:id="@+id/order_thumb_pic"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:visibility="gone" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Order Title"
-                android:id="@+id/tvOrderTitle" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sub title"
+        android:id="@+id/order_sub_title"
+        android:layout_below="@+id/order_title"
+        android:layout_alignLeft="@+id/order_title"
+        android:layout_alignStart="@+id/order_title"
+        android:textStyle="italic" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvOrderSub"
-                android:visibility="gone" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0.00"
+        android:id="@+id/order_retail_price"
+        android:minWidth="@dimen/item_price_min_width"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/order_more_opt"
+        android:layout_toStartOf="@+id/order_more_opt"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:gravity="right" />
 
-        </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:id="@+id/order_qty"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/order_plus"
+        android:layout_toStartOf="@+id/order_plus"
+        android:gravity="center" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="1"
-            android:id="@+id/tvOrderQty"
-            android:layout_marginRight="@dimen/default_horizontal_margin"
-            android:minWidth="48dp"
-            android:gravity="center" />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/order_plus"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/order_retail_price"
+        android:layout_toStartOf="@+id/order_retail_price"
+        android:src="@drawable/ic_add_circle_grey600_36dp"
+        style="@android:style/Widget.Holo.Button.Borderless" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="299,999.00"
-            android:id="@+id/tvOrderPrice" />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/order_minus"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/order_qty"
+        android:layout_toStartOf="@+id/order_qty"
+        android:src="@drawable/ic_remove_circle_grey600_36dp"
+        style="@android:style/Widget.Holo.Button.Borderless" />
 
-        <ImageButton
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:id="@+id/btnMore"
-            android:src="@drawable/ic_more_vert_grey600_48dp"
-            style="@android:style/Widget.DeviceDefault.Button.Borderless" />
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

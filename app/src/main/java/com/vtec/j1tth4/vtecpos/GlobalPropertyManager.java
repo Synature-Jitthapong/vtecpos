@@ -19,7 +19,7 @@ public class GlobalPropertyManager {
     private int computerId;
     private int staffId = 1;
     private String qtyFormat = "#,##0";
-    private String currencyFormat = "#,##0.0#";
+    private String currencyFormat = "#,##0.00";
 
     private int hasSc;
     private int saleMode = 1;

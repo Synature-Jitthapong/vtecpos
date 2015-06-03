@@ -10,9 +10,6 @@ import android.widget.TextView;
 
 import com.vtec.j1tth4.vtecpos.provider.Transaction;
 
-import java.text.NumberFormat;
-import java.util.Locale;
-
 import de.greenrobot.event.EventBus;
 
 
@@ -20,7 +17,6 @@ public class PaymentActivity extends ActionBarActivity {
 
     private PaymentTypeSlidingTabLayout mPaymentTypeTabLayout;
 
-    private TextView mTvReceiptNetSale;
     private TextView mTvTotalPaid;
     private TextView mTvTotalDue;
     private TextView mTvChange;
@@ -52,10 +48,9 @@ public class PaymentActivity extends ActionBarActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         mPaymentTypeTabLayout = (PaymentTypeSlidingTabLayout) findViewById(R.id.paymenttype_tab);
-        mTvReceiptNetSale = (TextView) findViewById(R.id.tvPaymentTotalPrice);
-        mTvTotalPaid = (TextView) findViewById(R.id.tvTotalPaid);
-        mTvTotalDue = (TextView) findViewById(R.id.tvTotalDue);
-        mTvChange = (TextView) findViewById(R.id.tvChange);
+        mTvTotalPaid = (TextView) findViewById(R.id.total_paid);
+        mTvTotalDue = (TextView) findViewById(R.id.total_due);
+        mTvChange = (TextView) findViewById(R.id.change);
         mPaymentTypeTabLayout.setTabClickListener(mPayTypeTabClickListener);
 
         if(savedInstanceState == null){
@@ -74,7 +69,6 @@ public class PaymentActivity extends ActionBarActivity {
     private void display(){
         TransactionManager manager = TransactionManager.getInstance(this);
         Transaction trans = manager.getTransaction(true);
-        mTvReceiptNetSale.setText(Utils.currencyFormat(this, trans.getReceiptNetSale()));
         mTvTotalDue.setText(Utils.currencyFormat(this, trans.getReceiptNetSale()));
         mTvChange.setText(Utils.currencyFormat(this, 0));
     }
@@ -94,9 +88,9 @@ public class PaymentActivity extends ActionBarActivity {
     public void onClick(final View v){
         int id = v.getId();
         switch (id){
-            case R.id.btnPayCancel:
+            case R.id.pay_cancel:
                 break;
-            case R.id.btnPayConfirm:
+            case R.id.pay_confirm:
                 TransactionManager.getInstance(this).finalizeBill();
                 EventBus.getDefault().post(new OrderListFragment.RefreshEvent());
 

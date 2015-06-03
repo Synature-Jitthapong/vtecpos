@@ -11,7 +11,6 @@
         android:layout_height="wrap_content"
         class="com.vtec.j1tth4.vtecpos.PaymentTypeSlidingTabLayout"
         android:id="@+id/paymenttype_tab"
-        android:layout_toLeftOf="@+id/tvPaymentTotalPrice"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -28,21 +27,10 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/payment_content"
-        android:layout_below="@+id/tvPaymentTotalPrice"
         android:layout_toRightOf="@+id/paydetail_content"
         android:layout_above="@+id/linearLayout">
 
     </FrameLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/tvPaymentTotalPrice"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:textSize="48sp" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -63,7 +51,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/total_paid"
-                android:id="@+id/tvTotalLabel"
+                android:id="@+id/total_paid_label"
                 android:layout_weight="1"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
@@ -71,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0.00"
-                android:id="@+id/tvTotalPaid"
+                android:id="@+id/total_paid"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
         </LinearLayout>
 
@@ -84,14 +72,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/total_due"
-                android:id="@+id/tvTotalDueLabel"
+                android:id="@+id/total_due_label"
                 android:layout_weight="1"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvTotalDue"
+                android:id="@+id/total_due"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 android:textColor="@android:color/holo_red_dark"
                 android:text="0" />
@@ -106,14 +94,14 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text="@string/change"
-                android:id="@+id/tvChangeLabel"
+                android:id="@+id/change_label"
                 android:layout_weight="1"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvChange"
+                android:id="@+id/change"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 android:text="0" />
         </LinearLayout>
@@ -123,20 +111,20 @@
         android:layout_width="160dp"
         android:layout_height="96dp"
         android:text="@string/confirm"
-        android:id="@+id/btnPayConfirm"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/tvPaymentTotalPrice"
-        android:layout_alignEnd="@+id/tvPaymentTotalPrice"
-        android:onClick="onClick" />
+        android:id="@+id/pay_confirm"
+        android:onClick="onClick"
+        android:layout_below="@+id/payment_content"
+        android:layout_alignRight="@+id/payment_content"
+        android:layout_alignEnd="@+id/payment_content" />
 
     <Button
         android:layout_width="160dp"
         android:layout_height="96dp"
         android:text="@android:string/cancel"
-        android:id="@+id/btnPayCancel"
+        android:id="@+id/pay_cancel"
         android:layout_gravity="center_horizontal|bottom"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/btnPayConfirm"
-        android:layout_toStartOf="@+id/btnPayConfirm" />
+        android:layout_below="@+id/payment_content"
+        android:layout_toLeftOf="@+id/pay_confirm"
+        android:layout_toStartOf="@+id/pay_confirm" />
 
 </RelativeLayout>

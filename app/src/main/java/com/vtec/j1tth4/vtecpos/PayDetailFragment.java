@@ -91,19 +91,20 @@ public class PayDetailFragment extends Fragment {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             final PayDetail payDetail = mPayList.get(position);
-            holder.tvPayNo.setText(String.valueOf(position + 1));
-            holder.tvPayTypeName.setText(payDetail.getPayTypeName());
-            holder.tvPayAmount.setText(NumberFormat.getInstance().format(payDetail.getPayAmount()));
-            holder.btnPayDel.setOnClickListener(new View.OnClickListener() {
+            holder.pay_no.setText(String.valueOf(position + 1));
+            holder.pay_type_name.setText(payDetail.getPayTypeName());
+            holder.pay_amount.setText(NumberFormat.getInstance().format(payDetail.getPayAmount()));
+            holder.pay_del.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     new AlertDialog.Builder(getActivity())
                             .setTitle(R.string.delete)
                             .setMessage(R.string.confirm_delete)
-                            .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener(){
+                            .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
 
                                 @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {}
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                }
                             })
                             .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                                 @Override
@@ -126,17 +127,17 @@ public class PayDetailFragment extends Fragment {
 
         public class ViewHolder extends RecyclerView.ViewHolder{
 
-            public TextView tvPayNo;
-            public TextView tvPayTypeName;
-            public TextView tvPayAmount;
-            public ImageButton btnPayDel;
+            public TextView pay_no;
+            public TextView pay_type_name;
+            public TextView pay_amount;
+            public ImageButton pay_del;
 
             public ViewHolder(View itemView) {
                 super(itemView);
-                tvPayNo = (TextView) itemView.findViewById(R.id.tvPayNo);
-                tvPayTypeName = (TextView) itemView.findViewById(R.id.tvPayTypeName);
-                tvPayAmount = (TextView) itemView.findViewById(R.id.tvPayAmount);
-                btnPayDel = (ImageButton) itemView.findViewById(R.id.btnPayDel);
+                pay_no = (TextView) itemView.findViewById(R.id.pay_no);
+                pay_type_name = (TextView) itemView.findViewById(R.id.pay_type_name);
+                pay_amount = (TextView) itemView.findViewById(R.id.pay_amount);
+                pay_del = (ImageButton) itemView.findViewById(R.id.pay_del);
             }
         }
     }

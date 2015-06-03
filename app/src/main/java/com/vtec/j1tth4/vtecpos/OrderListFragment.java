@@ -8,9 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckedTextView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.vtec.j1tth4.vtecpos.provider.Transaction;
@@ -35,8 +36,6 @@ public class OrderListFragment extends Fragment{
     private ListView mLvOrderSummary;
     private RecyclerView.LayoutManager mLayoutManager;
 
-    private QuickAction mQuickAction;
-
     public static class RefreshEvent{
     }
 
@@ -49,32 +48,6 @@ public class OrderListFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
-
-        ActionItem addItem 		= new ActionItem(1, "Add", getResources().getDrawable(R.drawable.ic_add));
-        ActionItem acceptItem 	= new ActionItem(2, "Accept", getResources().getDrawable(R.drawable.ic_accept));
-        ActionItem uploadItem 	= new ActionItem(3, "Upload", getResources().getDrawable(R.drawable.ic_up));
-
-        mQuickAction 	= new QuickAction(getActivity());
-
-        mQuickAction.addActionItem(addItem);
-        mQuickAction.addActionItem(acceptItem);
-        mQuickAction.addActionItem(uploadItem);
-
-        //setup the action item click listener
-        mQuickAction.setOnActionItemClickListener(new QuickAction.OnActionItemClickListener() {
-            @Override
-            public void onItemClick(QuickAction quickAction, int pos, int actionId) {
-                ActionItem actionItem = quickAction.getActionItem(pos);
-            }
-        });
-
-        //setup on dismiss listener, set the icon back to normal
-        mQuickAction.setOnDismissListener(new PopupWindow.OnDismissListener() {
-            @Override
-            public void onDismiss() {
-            }
-        });
-
         loadOrderData();
     }
 
@@ -138,19 +111,25 @@ public class OrderListFragment extends Fragment{
     private class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.ViewHolder>{
 
         public class ViewHolder extends RecyclerView.ViewHolder {
-            TextView tvOrderQty;
-            TextView tvOrderTitle;
-            TextView tvOrderSub;
-            TextView tvOrderPrice;
-            ImageButton btnMore;
+            ImageView orderThumbPic;
+            CheckedTextView orderTitle;
+            TextView orderSubTitle;
+            TextView orderQty;
+            TextView orderRetailPrice;
+            ImageButton orderMinus;
+            ImageButton orderPlus;
+            ImageButton orderMoreOpt;
 
             public ViewHolder(View itemView) {
                 super(itemView);
-                tvOrderQty = (TextView) itemView.findViewById(R.id.tvOrderQty);
-                tvOrderTitle = (TextView) itemView.findViewById(R.id.tvOrderTitle);
-                tvOrderSub = (TextView) itemView.findViewById(R.id.tvOrderSub);
-                tvOrderPrice = (TextView) itemView.findViewById(R.id.tvOrderPrice);
-                btnMore = (ImageButton) itemView.findViewById(R.id.btnMore);
+                orderThumbPic = (ImageView) itemView.findViewById(R.id.order_thumb_pic);
+                orderTitle = (CheckedTextView) itemView.findViewById(R.id.order_title);
+                orderSubTitle = (TextView) itemView.findViewById(R.id.order_sub_title);
+                orderQty = (TextView) itemView.findViewById(R.id.order_qty);
+                orderRetailPrice = (TextView) itemView.findViewById(R.id.order_retail_price);
+                orderMinus = (ImageButton) itemView.findViewById(R.id.order_minus);
+                orderPlus = (ImageButton) itemView.findViewById(R.id.order_plus);
+                orderMoreOpt = (ImageButton) itemView.findViewById(R.id.order_more_opt);
             }
         }
 
@@ -164,16 +143,40 @@ public class OrderListFragment extends Fragment{
         @Override
         public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
             final Transaction.OrderDetail orderDetail = mOrderList.get(i);
-            viewHolder.tvOrderQty.setText(NumberFormat.getInstance().format(orderDetail.getTotalQty()));
-            viewHolder.tvOrderTitle.setText(orderDetail.getProductName());
-            viewHolder.tvOrderPrice.setText(NumberFormat.getCurrencyInstance(new Locale("th", "TH")).format(orderDetail.getTotalRetailPrice()));
+            viewHolder.orderTitle.setText(orderDetail.getProductName());
+            viewHolder.orderSubTitle.setText(Utils.currencyFormat(getActivity(), orderDetail.getPricePerUnit()));
+            viewHolder.orderQty.setText(Utils.qtyFormat(getActivity(), orderDetail.getTotalQty()));
+            viewHolder.orderRetailPrice.setText(Utils.currencyFormat(getActivity(), orderDetail.getTotalRetailPrice()));
 
-            viewHolder.btnMore.setOnClickListener(new View.OnClickListener() {
+            viewHolder.orderMinus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mQuickAction.show(view);
+                    double qty = Utils.parseDouble(viewHolder.orderQty.getText());
+                    if(qty > 0){
+                        updateOrderQty(orderDetail, --qty, i);
+                    }
                 }
             });
+            viewHolder.orderPlus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    double qty = Utils.parseDouble(viewHolder.orderQty.getText());
+                    updateOrderQty(orderDetail, ++qty, i);
+                }
+            });
+            viewHolder.orderMoreOpt.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                }
+            });
+        }
+
+        private void updateOrderQty(Transaction.OrderDetail orderDetail, double qty, int position){
+            TransactionManager manager = TransactionManager.getInstance(getActivity());
+            int orderDetailId = orderDetail.getOrderDetailID();
+            manager.updateOrder(orderDetailId, orderDetail.getPricePerUnit(), qty);
+            mOrderList.set(position, manager.getOrder(orderDetailId, true));
+            mOrderAdapter.notifyDataSetChanged();
         }
 
         @Override
