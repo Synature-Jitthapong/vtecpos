@@ -20,12 +20,13 @@
             android:layout_alignParentStart="true"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
             android:textSize="30sp"
-            android:enabled="false"
             android:singleLine="true"
             android:lines="1"
             android:gravity="right"
             android:layout_alignRight="@+id/btnCashDel"
-            android:layout_alignEnd="@+id/btnCashDel" />
+            android:layout_alignEnd="@+id/btnCashDel"
+            android:enabled="false"
+            android:textColor="@color/indigo"/>
 
         <Button
             android:layout_width="wrap_content"

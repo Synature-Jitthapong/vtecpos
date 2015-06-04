@@ -7,100 +7,100 @@ import java.util.List;
  * Created by j1tth4 on 5/1/15 AD.
  */
 public class Transaction {
-    private Integer TransactionID;
-    private Integer ComputerID;
+    private int TransactionID;
+    private int ComputerID;
     private String TransactionUUID;
     private String ReserveTime;
-    private Integer ReserveStaffID;
+    private int ReserveStaffID;
     private String OpenTime;
-    private Integer OpenStaffID;
+    private int OpenStaffID;
     private String PaidTime;
-    private Integer PaidStaffID;
+    private int PaidStaffID;
     private String CloseTime;
-    private Integer CommStaffID;
-    private Double DiscountItem;
-    private Double DiscountBill;
-    private Double DiscountOther;
-    private Double TotalDiscount;
-    private Integer TransactionStatusID;
-    private Integer SaleMode;
+    private int CommStaffID;
+    private double DiscountItem;
+    private double DiscountBill;
+    private double DiscountOther;
+    private double TotalDiscount;
+    private int TransactionStatusID;
+    private int SaleMode;
     private String TransactionName;
     private String QueueName;
-    private Integer NoCustomer;
-    private Integer NoCustomerWhenOpen;
-    private Integer DocType;
-    private Integer ReceiptYear;
-    private Integer ReceiptMonth;
-    private Integer ReceiptID;
+    private int NoCustomer;
+    private int NoCustomerWhenOpen;
+    private int DocType;
+    private int ReceiptYear;
+    private int ReceiptMonth;
+    private int ReceiptID;
     private String ReceiptNumber;
     private String SaleDate;
-    private Integer ShopID;
-    private Double TransactionVAT;
-    private Double TransactionVATable;
-    private Double TranBeforeVAT;
+    private int ShopID;
+    private double TransactionVAT;
+    private double TransactionVATable;
+    private double TranBeforeVAT;
     private String VATCode;
-    private Double VATPercent;
-    private Double ServiceChargePercent;
-    private Double ServiceCharge;
-    private Double ServiceChargeVAT;
-    private Double SCBeforeVAT;
-    private Double OtherIncome;
-    private Double OtherIncomeVAT;
-    private Double OhterIncomeBeforeVAT;
-    private Double ReceiptTotalQty;
-    private Double ReceiptRetailPrice;
-    private Double ReceiptDiscount;
-    private Double ReceiptSalePrice;
-    private Double ReceiptNetSale;
-    private Double ReceiptPayPrice;
-    private Double ReceiptRoundingBill;
-    private Integer SessionID;
-    private Integer CloseComputerID;
-    private Integer VoidStaffID;
+    private double VATPercent;
+    private double ServiceChargePercent;
+    private double ServiceCharge;
+    private double ServiceChargeVAT;
+    private double SCBeforeVAT;
+    private double OtherIncome;
+    private double OtherIncomeVAT;
+    private double OhterIncomeBeforeVAT;
+    private double ReceiptTotalQty;
+    private double ReceiptRetailPrice;
+    private double ReceiptDiscount;
+    private double ReceiptSalePrice;
+    private double ReceiptNetSale;
+    private double ReceiptPayPrice;
+    private double ReceiptRoundingBill;
+    private int SessionID;
+    private int CloseComputerID;
+    private int VoidStaffID;
     private String VoidReason;
     private String VoidTime;
-    private Integer IsCloneBill;
-    private Integer VoidTranID;
-    private Integer VoidComID;
-    private Double DiffCloneBill;
-    private Integer MemberID;
-    private Integer HasOrder;
-    private Integer NoPrintBillDetail;
-    private Double DiffPayCheckBill;
+    private int IsCloneBill;
+    private int VoidTranID;
+    private int VoidComID;
+    private double DiffCloneBill;
+    private int MemberID;
+    private int HasOrder;
+    private int NoPrintBillDetail;
+    private double DiffPayCheckBill;
     private String BillDetailReferenceNo;
-    private Integer CallForCheckBill;
+    private int CallForCheckBill;
     private String TransactionNote;
-    private Integer CurrentAccessComputer;
+    private int CurrentAccessComputer;
     private String UpdateDate;
     private String BeginTime;
     private String EndTime;
     private String PrintWarningTime;
     private String PrintBeginTime;
-    private Integer AlreadyCalculateStock;
-    private Integer AlreadyExportToHQ;
-    private Integer TableID;
-    private Integer IsSplitTransaction;
-    private Integer IsFromOtherTransaction;
+    private int AlreadyCalculateStock;
+    private int AlreadyExportToHQ;
+    private int TableID;
+    private int IsSplitTransaction;
+    private int IsFromOtherTransaction;
     private String ReferenceNo;
-    private Integer FromDepositTransactionID;
-    private Integer FromDepositComputerID;
-    private Integer Deleted;
+    private int FromDepositTransactionID;
+    private int FromDepositComputerID;
+    private int Deleted;
 
     private List<OrderDetail> mOrderDetailLst;
 
-    public Integer getTransactionID() {
+    public int getTransactionID() {
         return TransactionID;
     }
 
-    public void setTransactionID(Integer transactionID) {
+    public void setTransactionID(int transactionID) {
         TransactionID = transactionID;
     }
 
-    public Integer getComputerID() {
+    public int getComputerID() {
         return ComputerID;
     }
 
-    public void setComputerID(Integer computerID) {
+    public void setComputerID(int computerID) {
         ComputerID = computerID;
     }
 
@@ -120,11 +120,11 @@ public class Transaction {
         ReserveTime = reserveTime;
     }
 
-    public Integer getReserveStaffID() {
+    public int getReserveStaffID() {
         return ReserveStaffID;
     }
 
-    public void setReserveStaffID(Integer reserveStaffID) {
+    public void setReserveStaffID(int reserveStaffID) {
         ReserveStaffID = reserveStaffID;
     }
 
@@ -136,11 +136,11 @@ public class Transaction {
         OpenTime = openTime;
     }
 
-    public Integer getOpenStaffID() {
+    public int getOpenStaffID() {
         return OpenStaffID;
     }
 
-    public void setOpenStaffID(Integer openStaffID) {
+    public void setOpenStaffID(int openStaffID) {
         OpenStaffID = openStaffID;
     }
 
@@ -152,11 +152,11 @@ public class Transaction {
         PaidTime = paidTime;
     }
 
-    public Integer getPaidStaffID() {
+    public int getPaidStaffID() {
         return PaidStaffID;
     }
 
-    public void setPaidStaffID(Integer paidStaffID) {
+    public void setPaidStaffID(int paidStaffID) {
         PaidStaffID = paidStaffID;
     }
 
@@ -168,59 +168,59 @@ public class Transaction {
         CloseTime = closeTime;
     }
 
-    public Integer getCommStaffID() {
+    public int getCommStaffID() {
         return CommStaffID;
     }
 
-    public void setCommStaffID(Integer commStaffID) {
+    public void setCommStaffID(int commStaffID) {
         CommStaffID = commStaffID;
     }
 
-    public Double getDiscountItem() {
+    public double getDiscountItem() {
         return DiscountItem;
     }
 
-    public void setDiscountItem(Double discountItem) {
+    public void setDiscountItem(double discountItem) {
         DiscountItem = discountItem;
     }
 
-    public Double getDiscountBill() {
+    public double getDiscountBill() {
         return DiscountBill;
     }
 
-    public void setDiscountBill(Double discountBill) {
+    public void setDiscountBill(double discountBill) {
         DiscountBill = discountBill;
     }
 
-    public Double getDiscountOther() {
+    public double getDiscountOther() {
         return DiscountOther;
     }
 
-    public void setDiscountOther(Double discountOther) {
+    public void setDiscountOther(double discountOther) {
         DiscountOther = discountOther;
     }
 
-    public Double getTotalDiscount() {
+    public double getTotalDiscount() {
         return TotalDiscount;
     }
 
-    public void setTotalDiscount(Double totalDiscount) {
+    public void setTotalDiscount(double totalDiscount) {
         TotalDiscount = totalDiscount;
     }
 
-    public Integer getTransactionStatusID() {
+    public int getTransactionStatusID() {
         return TransactionStatusID;
     }
 
-    public void setTransactionStatusID(Integer transactionStatusID) {
+    public void setTransactionStatusID(int transactionStatusID) {
         TransactionStatusID = transactionStatusID;
     }
 
-    public Integer getSaleMode() {
+    public int getSaleMode() {
         return SaleMode;
     }
 
-    public void setSaleMode(Integer saleMode) {
+    public void setSaleMode(int saleMode) {
         SaleMode = saleMode;
     }
 
@@ -240,51 +240,51 @@ public class Transaction {
         QueueName = queueName;
     }
 
-    public Integer getNoCustomer() {
+    public int getNoCustomer() {
         return NoCustomer;
     }
 
-    public void setNoCustomer(Integer noCustomer) {
+    public void setNoCustomer(int noCustomer) {
         NoCustomer = noCustomer;
     }
 
-    public Integer getNoCustomerWhenOpen() {
+    public int getNoCustomerWhenOpen() {
         return NoCustomerWhenOpen;
     }
 
-    public void setNoCustomerWhenOpen(Integer noCustomerWhenOpen) {
+    public void setNoCustomerWhenOpen(int noCustomerWhenOpen) {
         NoCustomerWhenOpen = noCustomerWhenOpen;
     }
 
-    public Integer getDocType() {
+    public int getDocType() {
         return DocType;
     }
 
-    public void setDocType(Integer docType) {
+    public void setDocType(int docType) {
         DocType = docType;
     }
 
-    public Integer getReceiptYear() {
+    public int getReceiptYear() {
         return ReceiptYear;
     }
 
-    public void setReceiptYear(Integer receiptYear) {
+    public void setReceiptYear(int receiptYear) {
         ReceiptYear = receiptYear;
     }
 
-    public Integer getReceiptMonth() {
+    public int getReceiptMonth() {
         return ReceiptMonth;
     }
 
-    public void setReceiptMonth(Integer receiptMonth) {
+    public void setReceiptMonth(int receiptMonth) {
         ReceiptMonth = receiptMonth;
     }
 
-    public Integer getReceiptID() {
+    public int getReceiptID() {
         return ReceiptID;
     }
 
-    public void setReceiptID(Integer receiptID) {
+    public void setReceiptID(int receiptID) {
         ReceiptID = receiptID;
     }
 
@@ -304,35 +304,35 @@ public class Transaction {
         SaleDate = saleDate;
     }
 
-    public Integer getShopID() {
+    public int getShopID() {
         return ShopID;
     }
 
-    public void setShopID(Integer shopID) {
+    public void setShopID(int shopID) {
         ShopID = shopID;
     }
 
-    public Double getTransactionVAT() {
+    public double getTransactionVAT() {
         return TransactionVAT;
     }
 
-    public void setTransactionVAT(Double transactionVAT) {
+    public void setTransactionVAT(double transactionVAT) {
         TransactionVAT = transactionVAT;
     }
 
-    public Double getTransactionVATable() {
+    public double getTransactionVATable() {
         return TransactionVATable;
     }
 
-    public void setTransactionVATable(Double transactionVATable) {
+    public void setTransactionVATable(double transactionVATable) {
         TransactionVATable = transactionVATable;
     }
 
-    public Double getTranBeforeVAT() {
+    public double getTranBeforeVAT() {
         return TranBeforeVAT;
     }
 
-    public void setTranBeforeVAT(Double tranBeforeVAT) {
+    public void setTranBeforeVAT(double tranBeforeVAT) {
         TranBeforeVAT = tranBeforeVAT;
     }
 
@@ -344,147 +344,147 @@ public class Transaction {
         this.VATCode = VATCode;
     }
 
-    public Double getVATPercent() {
+    public double getVATPercent() {
         return VATPercent;
     }
 
-    public void setVATPercent(Double VATPercent) {
+    public void setVATPercent(double VATPercent) {
         this.VATPercent = VATPercent;
     }
 
-    public Double getServiceChargePercent() {
+    public double getServiceChargePercent() {
         return ServiceChargePercent;
     }
 
-    public void setServiceChargePercent(Double serviceChargePercent) {
+    public void setServiceChargePercent(double serviceChargePercent) {
         ServiceChargePercent = serviceChargePercent;
     }
 
-    public Double getServiceCharge() {
+    public double getServiceCharge() {
         return ServiceCharge;
     }
 
-    public void setServiceCharge(Double serviceCharge) {
+    public void setServiceCharge(double serviceCharge) {
         ServiceCharge = serviceCharge;
     }
 
-    public Double getServiceChargeVAT() {
+    public double getServiceChargeVAT() {
         return ServiceChargeVAT;
     }
 
-    public void setServiceChargeVAT(Double serviceChargeVAT) {
+    public void setServiceChargeVAT(double serviceChargeVAT) {
         ServiceChargeVAT = serviceChargeVAT;
     }
 
-    public Double getSCBeforeVAT() {
+    public double getSCBeforeVAT() {
         return SCBeforeVAT;
     }
 
-    public void setSCBeforeVAT(Double SCBeforeVAT) {
+    public void setSCBeforeVAT(double SCBeforeVAT) {
         this.SCBeforeVAT = SCBeforeVAT;
     }
 
-    public Double getOtherIncome() {
+    public double getOtherIncome() {
         return OtherIncome;
     }
 
-    public void setOtherIncome(Double otherIncome) {
+    public void setOtherIncome(double otherIncome) {
         OtherIncome = otherIncome;
     }
 
-    public Double getOtherIncomeVAT() {
+    public double getOtherIncomeVAT() {
         return OtherIncomeVAT;
     }
 
-    public void setOtherIncomeVAT(Double otherIncomeVAT) {
+    public void setOtherIncomeVAT(double otherIncomeVAT) {
         OtherIncomeVAT = otherIncomeVAT;
     }
 
-    public Double getOhterIncomeBeforeVAT() {
+    public double getOhterIncomeBeforeVAT() {
         return OhterIncomeBeforeVAT;
     }
 
-    public void setOhterIncomeBeforeVAT(Double ohterIncomeBeforeVAT) {
+    public void setOhterIncomeBeforeVAT(double ohterIncomeBeforeVAT) {
         OhterIncomeBeforeVAT = ohterIncomeBeforeVAT;
     }
 
-    public Double getReceiptTotalQty() {
+    public double getReceiptTotalQty() {
         return ReceiptTotalQty;
     }
 
-    public void setReceiptTotalQty(Double receiptTotalQty) {
+    public void setReceiptTotalQty(double receiptTotalQty) {
         ReceiptTotalQty = receiptTotalQty;
     }
 
-    public Double getReceiptRetailPrice() {
+    public double getReceiptRetailPrice() {
         return ReceiptRetailPrice;
     }
 
-    public void setReceiptRetailPrice(Double receiptRetailPrice) {
+    public void setReceiptRetailPrice(double receiptRetailPrice) {
         ReceiptRetailPrice = receiptRetailPrice;
     }
 
-    public Double getReceiptDiscount() {
+    public double getReceiptDiscount() {
         return ReceiptDiscount;
     }
 
-    public void setReceiptDiscount(Double receiptDiscount) {
+    public void setReceiptDiscount(double receiptDiscount) {
         ReceiptDiscount = receiptDiscount;
     }
 
-    public Double getReceiptSalePrice() {
+    public double getReceiptSalePrice() {
         return ReceiptSalePrice;
     }
 
-    public void setReceiptSalePrice(Double receiptSalePrice) {
+    public void setReceiptSalePrice(double receiptSalePrice) {
         ReceiptSalePrice = receiptSalePrice;
     }
 
-    public Double getReceiptNetSale() {
+    public double getReceiptNetSale() {
         return ReceiptNetSale;
     }
 
-    public void setReceiptNetSale(Double receiptNetSale) {
+    public void setReceiptNetSale(double receiptNetSale) {
         ReceiptNetSale = receiptNetSale;
     }
 
-    public Double getReceiptPayPrice() {
+    public double getReceiptPayPrice() {
         return ReceiptPayPrice;
     }
 
-    public void setReceiptPayPrice(Double receiptPayPrice) {
+    public void setReceiptPayPrice(double receiptPayPrice) {
         ReceiptPayPrice = receiptPayPrice;
     }
 
-    public Double getReceiptRoundingBill() {
+    public double getReceiptRoundingBill() {
         return ReceiptRoundingBill;
     }
 
-    public void setReceiptRoundingBill(Double receiptRoundingBill) {
+    public void setReceiptRoundingBill(double receiptRoundingBill) {
         ReceiptRoundingBill = receiptRoundingBill;
     }
 
-    public Integer getSessionID() {
+    public int getSessionID() {
         return SessionID;
     }
 
-    public void setSessionID(Integer sessionID) {
+    public void setSessionID(int sessionID) {
         SessionID = sessionID;
     }
 
-    public Integer getCloseComputerID() {
+    public int getCloseComputerID() {
         return CloseComputerID;
     }
 
-    public void setCloseComputerID(Integer closeComputerID) {
+    public void setCloseComputerID(int closeComputerID) {
         CloseComputerID = closeComputerID;
     }
 
-    public Integer getVoidStaffID() {
+    public int getVoidStaffID() {
         return VoidStaffID;
     }
 
-    public void setVoidStaffID(Integer voidStaffID) {
+    public void setVoidStaffID(int voidStaffID) {
         VoidStaffID = voidStaffID;
     }
 
@@ -504,67 +504,67 @@ public class Transaction {
         VoidTime = voidTime;
     }
 
-    public Integer getIsCloneBill() {
+    public int getIsCloneBill() {
         return IsCloneBill;
     }
 
-    public void setIsCloneBill(Integer isCloneBill) {
+    public void setIsCloneBill(int isCloneBill) {
         IsCloneBill = isCloneBill;
     }
 
-    public Integer getVoidTranID() {
+    public int getVoidTranID() {
         return VoidTranID;
     }
 
-    public void setVoidTranID(Integer voidTranID) {
+    public void setVoidTranID(int voidTranID) {
         VoidTranID = voidTranID;
     }
 
-    public Integer getVoidComID() {
+    public int getVoidComID() {
         return VoidComID;
     }
 
-    public void setVoidComID(Integer voidComID) {
+    public void setVoidComID(int voidComID) {
         VoidComID = voidComID;
     }
 
-    public Double getDiffCloneBill() {
+    public double getDiffCloneBill() {
         return DiffCloneBill;
     }
 
-    public void setDiffCloneBill(Double diffCloneBill) {
+    public void setDiffCloneBill(double diffCloneBill) {
         DiffCloneBill = diffCloneBill;
     }
 
-    public Integer getMemberID() {
+    public int getMemberID() {
         return MemberID;
     }
 
-    public void setMemberID(Integer memberID) {
+    public void setMemberID(int memberID) {
         MemberID = memberID;
     }
 
-    public Integer getHasOrder() {
+    public int getHasOrder() {
         return HasOrder;
     }
 
-    public void setHasOrder(Integer hasOrder) {
+    public void setHasOrder(int hasOrder) {
         HasOrder = hasOrder;
     }
 
-    public Integer getNoPrintBillDetail() {
+    public int getNoPrintBillDetail() {
         return NoPrintBillDetail;
     }
 
-    public void setNoPrintBillDetail(Integer noPrintBillDetail) {
+    public void setNoPrintBillDetail(int noPrintBillDetail) {
         NoPrintBillDetail = noPrintBillDetail;
     }
 
-    public Double getDiffPayCheckBill() {
+    public double getDiffPayCheckBill() {
         return DiffPayCheckBill;
     }
 
-    public void setDiffPayCheckBill(Double diffPayCheckBill) {
+    public void setDiffPayCheckBill(double diffPayCheckBill) {
         DiffPayCheckBill = diffPayCheckBill;
     }
 
@@ -576,11 +576,11 @@ public class Transaction {
         BillDetailReferenceNo = billDetailReferenceNo;
     }
 
-    public Integer getCallForCheckBill() {
+    public int getCallForCheckBill() {
         return CallForCheckBill;
     }
 
-    public void setCallForCheckBill(Integer callForCheckBill) {
+    public void setCallForCheckBill(int callForCheckBill) {
         CallForCheckBill = callForCheckBill;
     }
 
@@ -592,11 +592,11 @@ public class Transaction {
         TransactionNote = transactionNote;
     }
 
-    public Integer getCurrentAccessComputer() {
+    public int getCurrentAccessComputer() {
         return CurrentAccessComputer;
     }
 
-    public void setCurrentAccessComputer(Integer currentAccessComputer) {
+    public void setCurrentAccessComputer(int currentAccessComputer) {
         CurrentAccessComputer = currentAccessComputer;
     }
 
@@ -640,43 +640,43 @@ public class Transaction {
         PrintBeginTime = printBeginTime;
     }
 
-    public Integer getAlreadyCalculateStock() {
+    public int getAlreadyCalculateStock() {
         return AlreadyCalculateStock;
     }
 
-    public void setAlreadyCalculateStock(Integer alreadyCalculateStock) {
+    public void setAlreadyCalculateStock(int alreadyCalculateStock) {
         AlreadyCalculateStock = alreadyCalculateStock;
     }
 
-    public Integer getAlreadyExportToHQ() {
+    public int getAlreadyExportToHQ() {
         return AlreadyExportToHQ;
     }
 
-    public void setAlreadyExportToHQ(Integer alreadyExportToHQ) {
+    public void setAlreadyExportToHQ(int alreadyExportToHQ) {
         AlreadyExportToHQ = alreadyExportToHQ;
     }
 
-    public Integer getTableID() {
+    public int getTableID() {
         return TableID;
     }
 
-    public void setTableID(Integer tableID) {
+    public void setTableID(int tableID) {
         TableID = tableID;
     }
 
-    public Integer getIsSplitTransaction() {
+    public int getIsSplitTransaction() {
         return IsSplitTransaction;
     }
 
-    public void setIsSplitTransaction(Integer isSplitTransaction) {
+    public void setIsSplitTransaction(int isSplitTransaction) {
         IsSplitTransaction = isSplitTransaction;
     }
 
-    public Integer getIsFromOtherTransaction() {
+    public int getIsFromOtherTransaction() {
         return IsFromOtherTransaction;
     }
 
-    public void setIsFromOtherTransaction(Integer isFromOtherTransaction) {
+    public void setIsFromOtherTransaction(int isFromOtherTransaction) {
         IsFromOtherTransaction = isFromOtherTransaction;
     }
 
@@ -688,27 +688,27 @@ public class Transaction {
         ReferenceNo = referenceNo;
     }
 
-    public Integer getFromDepositTransactionID() {
+    public int getFromDepositTransactionID() {
         return FromDepositTransactionID;
     }
 
-    public void setFromDepositTransactionID(Integer fromDepositTransactionID) {
+    public void setFromDepositTransactionID(int fromDepositTransactionID) {
         FromDepositTransactionID = fromDepositTransactionID;
     }
 
-    public Integer getFromDepositComputerID() {
+    public int getFromDepositComputerID() {
         return FromDepositComputerID;
     }
 
-    public void setFromDepositComputerID(Integer fromDepositComputerID) {
+    public void setFromDepositComputerID(int fromDepositComputerID) {
         FromDepositComputerID = fromDepositComputerID;
     }
 
-    public Integer getDeleted() {
+    public int getDeleted() {
         return Deleted;
     }
 
-    public void setDeleted(Integer deleted) {
+    public void setDeleted(int deleted) {
         Deleted = deleted;
     }
 
@@ -728,146 +728,147 @@ public class Transaction {
     }
 
     public static class OrderDetail {
-        private Integer OrderDetailID;
-        private Integer TransactionID;
-        private Integer ComputerID;
-        private Integer ComponentLevel;
-        private Integer OrderDetailLinkID;
-        private Integer InsertOrderNo;
-        private Integer IndentLevel;
-        private Integer DisplayOrdering;
+        private int OrderDetailID;
+        private int TransactionID;
+        private int ComputerID;
+        private int ComponentLevel;
+        private int OrderDetailLinkID;
+        private int InsertOrderNo;
+        private int IndentLevel;
+        private int DisplayOrdering;
         private String SaleDate;
-        private Integer ShopID;
-        private Integer ProductID;
-        private Integer ProductSetType;
-        private Integer OrderStatusID;
-        private Integer SaleMode;
-        private Double TotalQty;
-        private Double PricePerUnit;
-        private Double TotalRetailPrice;
-        private Double OrgPricePerUnit;
-        private Double OrgTotalRetailPrice;
-        private Double DiscPrice;
-        private Double DiscPercent;
-        private Double DiscPricePercent;
-        private Double DiscAmount;
-        private Double DiscOtherPercent;
-        private Double DiscOther;
-        private Double TotalItemDisc;
-        private Double SalePrice;
-        private Double DiscBill;
-        private Double TotalDiscount;
-        private Double NetSale;
-        private Double Vatable;
+        private int ShopID;
+        private int ProductID;
+        private int ProductSetType;
+        private int OrderStatusID;
+        private int SaleMode;
+        private double TotalQty;
+        private double PricePerUnit;
+        private double TotalRetailPrice;
+        private double OrgPricePerUnit;
+        private double OrgTotalRetailPrice;
+        private double DiscPrice;
+        private double DiscPercent;
+        private double DiscPricePercent;
+        private double DiscAmount;
+        private double DiscOtherPercent;
+        private double DiscOther;
+        private double TotalItemDisc;
+        private double SalePrice;
+        private double DiscBill;
+        private double TotalDiscount;
+        private double NetSale;
+        private double Vatable;
         private String ProductVATCode;
         private String VATDisplay;
-        private Double ProductVATPercent;
-        private Double ProductVAT;
-        private Double ProductBeforeVAT;
-        private Double TotalRetailVAT;
-        private Double DiscVAT;
-        private Integer IsSCBeforeDisc;
-        private Integer HasServiceCharge;
-        private Double SCPercent;
-        private Double SCAmount;
-        private Double SCVAT;
-        private Double SCBeforeVAT;
-        private Double WVatable;
-        private Double SCWAmount;
-        private Double SCWVAT;
-        private Double SCWBeforeVAT;
-        private Double WeightPrice;
-        private Double WeightPriceVAT;
-        private Double WeightBeforeVAT;
+        private double ProductVATPercent;
+        private double ProductVAT;
+        private double ProductBeforeVAT;
+        private double TotalRetailVAT;
+        private double DiscVAT;
+        private int IsSCBeforeDisc;
+        private int HasServiceCharge;
+        private double SCPercent;
+        private double SCAmount;
+        private double SCVAT;
+        private double SCBeforeVAT;
+        private double WVatable;
+        private double SCWAmount;
+        private double SCWVAT;
+        private double SCWBeforeVAT;
+        private double WeightPrice;
+        private double WeightPriceVAT;
+        private double WeightBeforeVAT;
         private String OtherFoodName;
-        private Integer OtherProductGroupID;
-        private Integer DiscountAllow;
-        private Integer ItemDiscAllow;
-        private Integer LastTransactionID;
-        private Integer LastComputerID;
-        private Integer PrinterID;
-        private Integer InventoryID;
-        private Integer OrderStaffID;
-        private Integer OrderComputerID;
-        private Integer OrderTableID;
-        private Integer VoidTypeID;
-        private Integer VoidStaffID;
+        private int OtherProductGroupID;
+        private int DiscountAllow;
+        private int ItemDiscAllow;
+        private int LastTransactionID;
+        private int LastComputerID;
+        private int PrinterID;
+        private int InventoryID;
+        private int OrderStaffID;
+        private int OrderComputerID;
+        private int OrderTableID;
+        private int VoidTypeID;
+        private int VoidStaffID;
         private String VoidDateTime;
-        private Integer VATType;
-        private Integer PrintGroup;
-        private Integer NoPrintBill;
-        private Integer NoRePrintOrder;
+        private int VATType;
+        private int PrintGroup;
+        private int NoPrintBill;
+        private int NoRePrintOrder;
         private String StartTime;
         private String FinishTime;
-        private Integer PrintStatus;
-        private Integer ProcessID;
+        private int PrintStatus;
+        private int ProcessID;
         private String SubmitOrderDateTime;
         private String Comment;
-        private Integer IsComment;
-        private Integer Deleted;
+        private int IsComment;
+        private int Deleted;
         private String ProductName;
+        private boolean isChecked = false;
 
-        public Integer getOrderDetailID() {
+        public int getOrderDetailID() {
             return OrderDetailID;
         }
 
-        public void setOrderDetailID(Integer orderDetailID) {
+        public void setOrderDetailID(int orderDetailID) {
             OrderDetailID = orderDetailID;
         }
 
-        public Integer getTransactionID() {
+        public int getTransactionID() {
             return TransactionID;
         }
 
-        public void setTransactionID(Integer transactionID) {
+        public void setTransactionID(int transactionID) {
             TransactionID = transactionID;
         }
 
-        public Integer getComputerID() {
+        public int getComputerID() {
             return ComputerID;
         }
 
-        public void setComputerID(Integer computerID) {
+        public void setComputerID(int computerID) {
             ComputerID = computerID;
         }
 
-        public Integer getComponentLevel() {
+        public int getComponentLevel() {
             return ComponentLevel;
         }
 
-        public void setComponentLevel(Integer componentLevel) {
+        public void setComponentLevel(int componentLevel) {
             ComponentLevel = componentLevel;
         }
 
-        public Integer getOrderDetailLinkID() {
+        public int getOrderDetailLinkID() {
             return OrderDetailLinkID;
         }
 
-        public void setOrderDetailLinkID(Integer orderDetailLinkID) {
+        public void setOrderDetailLinkID(int orderDetailLinkID) {
             OrderDetailLinkID = orderDetailLinkID;
         }
 
-        public Integer getInsertOrderNo() {
+        public int getInsertOrderNo() {
             return InsertOrderNo;
         }
 
-        public void setInsertOrderNo(Integer insertOrderNo) {
+        public void setInsertOrderNo(int insertOrderNo) {
             InsertOrderNo = insertOrderNo;
         }
 
-        public Integer getIndentLevel() {
+        public int getIndentLevel() {
             return IndentLevel;
         }
 
-        public void setIndentLevel(Integer indentLevel) {
+        public void setIndentLevel(int indentLevel) {
             IndentLevel = indentLevel;
         }
 
-        public Integer getDisplayOrdering() {
+        public int getDisplayOrdering() {
             return DisplayOrdering;
         }
 
-        public void setDisplayOrdering(Integer displayOrdering) {
+        public void setDisplayOrdering(int displayOrdering) {
             DisplayOrdering = displayOrdering;
         }
 
@@ -879,171 +880,171 @@ public class Transaction {
             SaleDate = saleDate;
         }
 
-        public Integer getShopID() {
+        public int getShopID() {
             return ShopID;
         }
 
-        public void setShopID(Integer shopID) {
+        public void setShopID(int shopID) {
             ShopID = shopID;
         }
 
-        public Integer getProductID() {
+        public int getProductID() {
             return ProductID;
         }
 
-        public void setProductID(Integer productID) {
+        public void setProductID(int productID) {
             ProductID = productID;
         }
 
-        public Integer getProductSetType() {
+        public int getProductSetType() {
             return ProductSetType;
         }
 
-        public void setProductSetType(Integer productSetType) {
+        public void setProductSetType(int productSetType) {
             ProductSetType = productSetType;
         }
 
-        public Integer getOrderStatusID() {
+        public int getOrderStatusID() {
             return OrderStatusID;
         }
 
-        public void setOrderStatusID(Integer orderStatusID) {
+        public void setOrderStatusID(int orderStatusID) {
             OrderStatusID = orderStatusID;
         }
 
-        public Integer getSaleMode() {
+        public int getSaleMode() {
             return SaleMode;
         }
 
-        public void setSaleMode(Integer saleMode) {
+        public void setSaleMode(int saleMode) {
             SaleMode = saleMode;
         }
 
-        public Double getTotalQty() {
+        public double getTotalQty() {
             return TotalQty;
         }
 
-        public void setTotalQty(Double totalQty) {
+        public void setTotalQty(double totalQty) {
             TotalQty = totalQty;
         }
 
-        public Double getPricePerUnit() {
+        public double getPricePerUnit() {
             return PricePerUnit;
         }
 
-        public void setPricePerUnit(Double pricePerUnit) {
+        public void setPricePerUnit(double pricePerUnit) {
             PricePerUnit = pricePerUnit;
         }
 
-        public Double getTotalRetailPrice() {
+        public double getTotalRetailPrice() {
             return TotalRetailPrice;
         }
 
-        public void setTotalRetailPrice(Double totalRetailPrice) {
+        public void setTotalRetailPrice(double totalRetailPrice) {
             TotalRetailPrice = totalRetailPrice;
         }
 
-        public Double getOrgPricePerUnit() {
+        public double getOrgPricePerUnit() {
             return OrgPricePerUnit;
         }
 
-        public void setOrgPricePerUnit(Double orgPricePerUnit) {
+        public void setOrgPricePerUnit(double orgPricePerUnit) {
             OrgPricePerUnit = orgPricePerUnit;
         }
 
-        public Double getOrgTotalRetailPrice() {
+        public double getOrgTotalRetailPrice() {
             return OrgTotalRetailPrice;
         }
 
-        public void setOrgTotalRetailPrice(Double orgTotalRetailPrice) {
+        public void setOrgTotalRetailPrice(double orgTotalRetailPrice) {
             OrgTotalRetailPrice = orgTotalRetailPrice;
         }
 
-        public Double getDiscPrice() {
+        public double getDiscPrice() {
             return DiscPrice;
         }
 
-        public void setDiscPrice(Double discPrice) {
+        public void setDiscPrice(double discPrice) {
             DiscPrice = discPrice;
         }
 
-        public Double getDiscPercent() {
+        public double getDiscPercent() {
             return DiscPercent;
         }
 
-        public void setDiscPercent(Double discPercent) {
+        public void setDiscPercent(double discPercent) {
             DiscPercent = discPercent;
         }
 
-        public Double getDiscAmount() {
+        public double getDiscAmount() {
             return DiscAmount;
         }
 
-        public void setDiscAmount(Double discAmount) {
+        public void setDiscAmount(double discAmount) {
             DiscAmount = discAmount;
         }
 
-        public Double getDiscOtherPercent() {
+        public double getDiscOtherPercent() {
             return DiscOtherPercent;
         }
 
-        public void setDiscOtherPercent(Double discOtherPercent) {
+        public void setDiscOtherPercent(double discOtherPercent) {
             DiscOtherPercent = discOtherPercent;
         }
 
-        public Double getDiscOther() {
+        public double getDiscOther() {
             return DiscOther;
         }
 
-        public void setDiscOther(Double discOther) {
+        public void setDiscOther(double discOther) {
             DiscOther = discOther;
         }
 
-        public Double getTotalItemDisc() {
+        public double getTotalItemDisc() {
             return TotalItemDisc;
         }
 
-        public void setTotalItemDisc(Double totalItemDisc) {
+        public void setTotalItemDisc(double totalItemDisc) {
             TotalItemDisc = totalItemDisc;
         }
 
-        public Double getSalePrice() {
+        public double getSalePrice() {
             return SalePrice;
         }
 
-        public void setSalePrice(Double salePrice) {
+        public void setSalePrice(double salePrice) {
             SalePrice = salePrice;
         }
 
-        public Double getDiscBill() {
+        public double getDiscBill() {
             return DiscBill;
         }
 
-        public void setDiscBill(Double discBill) {
+        public void setDiscBill(double discBill) {
             DiscBill = discBill;
         }
 
-        public Double getTotalDiscount() {
+        public double getTotalDiscount() {
             return TotalDiscount;
         }
 
-        public void setTotalDiscount(Double totalDiscount) {
+        public void setTotalDiscount(double totalDiscount) {
             TotalDiscount = totalDiscount;
         }
 
-        public Double getNetSale() {
+        public double getNetSale() {
             return NetSale;
         }
 
-        public void setNetSale(Double netSale) {
+        public void setNetSale(double netSale) {
             NetSale = netSale;
         }
 
-        public Double getVatable() {
+        public double getVatable() {
             return Vatable;
         }
 
-        public void setVatable(Double vatable) {
+        public void setVatable(double vatable) {
             Vatable = vatable;
         }
 
@@ -1063,147 +1064,147 @@ public class Transaction {
             this.VATDisplay = VATDisplay;
         }
 
-        public Double getProductVATPercent() {
+        public double getProductVATPercent() {
             return ProductVATPercent;
         }
 
-        public void setProductVATPercent(Double productVATPercent) {
+        public void setProductVATPercent(double productVATPercent) {
             ProductVATPercent = productVATPercent;
         }
 
-        public Double getProductVAT() {
+        public double getProductVAT() {
             return ProductVAT;
         }
 
-        public void setProductVAT(Double productVAT) {
+        public void setProductVAT(double productVAT) {
             ProductVAT = productVAT;
         }
 
-        public Double getProductBeforeVAT() {
+        public double getProductBeforeVAT() {
             return ProductBeforeVAT;
         }
 
-        public void setProductBeforeVAT(Double productBeforeVAT) {
+        public void setProductBeforeVAT(double productBeforeVAT) {
             ProductBeforeVAT = productBeforeVAT;
         }
 
-        public Double getTotalRetailVAT() {
+        public double getTotalRetailVAT() {
             return TotalRetailVAT;
         }
 
-        public void setTotalRetailVAT(Double totalRetailVAT) {
+        public void setTotalRetailVAT(double totalRetailVAT) {
             TotalRetailVAT = totalRetailVAT;
         }
 
-        public Double getDiscVAT() {
+        public double getDiscVAT() {
             return DiscVAT;
         }
 
-        public void setDiscVAT(Double discVAT) {
+        public void setDiscVAT(double discVAT) {
             DiscVAT = discVAT;
         }
 
-        public Integer getIsSCBeforeDisc() {
+        public int getIsSCBeforeDisc() {
             return IsSCBeforeDisc;
         }
 
-        public void setIsSCBeforeDisc(Integer isSCBeforeDisc) {
+        public void setIsSCBeforeDisc(int isSCBeforeDisc) {
             IsSCBeforeDisc = isSCBeforeDisc;
         }
 
-        public Integer getHasServiceCharge() {
+        public int getHasServiceCharge() {
             return HasServiceCharge;
         }
 
-        public void setHasServiceCharge(Integer hasServiceCharge) {
+        public void setHasServiceCharge(int hasServiceCharge) {
             HasServiceCharge = hasServiceCharge;
         }
 
-        public Double getSCPercent() {
+        public double getSCPercent() {
             return SCPercent;
         }
 
-        public void setSCPercent(Double SCPercent) {
+        public void setSCPercent(double SCPercent) {
             this.SCPercent = SCPercent;
         }
 
-        public Double getSCAmount() {
+        public double getSCAmount() {
             return SCAmount;
         }
 
-        public void setSCAmount(Double SCAmount) {
+        public void setSCAmount(double SCAmount) {
             this.SCAmount = SCAmount;
         }
 
-        public Double getSCVAT() {
+        public double getSCVAT() {
             return SCVAT;
         }
 
-        public void setSCVAT(Double SCVAT) {
+        public void setSCVAT(double SCVAT) {
             this.SCVAT = SCVAT;
         }
 
-        public Double getSCBeforeVAT() {
+        public double getSCBeforeVAT() {
             return SCBeforeVAT;
         }
 
-        public void setSCBeforeVAT(Double SCBeforeVAT) {
+        public void setSCBeforeVAT(double SCBeforeVAT) {
             this.SCBeforeVAT = SCBeforeVAT;
         }
 
-        public Double getWVatable() {
+        public double getWVatable() {
             return WVatable;
         }
 
-        public void setWVatable(Double WVatable) {
+        public void setWVatable(double WVatable) {
             this.WVatable = WVatable;
         }
 
-        public Double getSCWAmount() {
+        public double getSCWAmount() {
             return SCWAmount;
         }
 
-        public void setSCWAmount(Double SCWAmount) {
+        public void setSCWAmount(double SCWAmount) {
             this.SCWAmount = SCWAmount;
         }
 
-        public Double getSCWVAT() {
+        public double getSCWVAT() {
             return SCWVAT;
         }
 
-        public void setSCWVAT(Double SCWVAT) {
+        public void setSCWVAT(double SCWVAT) {
             this.SCWVAT = SCWVAT;
         }
 
-        public Double getSCWBeforeVAT() {
+        public double getSCWBeforeVAT() {
             return SCWBeforeVAT;
         }
 
-        public void setSCWBeforeVAT(Double SCWBeforeVAT) {
+        public void setSCWBeforeVAT(double SCWBeforeVAT) {
             this.SCWBeforeVAT = SCWBeforeVAT;
         }
 
-        public Double getWeightPrice() {
+        public double getWeightPrice() {
             return WeightPrice;
         }
 
-        public void setWeightPrice(Double weightPrice) {
+        public void setWeightPrice(double weightPrice) {
             WeightPrice = weightPrice;
         }
 
-        public Double getWeightPriceVAT() {
+        public double getWeightPriceVAT() {
             return WeightPriceVAT;
         }
 
-        public void setWeightPriceVAT(Double weightPriceVAT) {
+        public void setWeightPriceVAT(double weightPriceVAT) {
             WeightPriceVAT = weightPriceVAT;
         }
 
-        public Double getWeightBeforeVAT() {
+        public double getWeightBeforeVAT() {
             return WeightBeforeVAT;
         }
 
-        public void setWeightBeforeVAT(Double weightBeforeVAT) {
+        public void setWeightBeforeVAT(double weightBeforeVAT) {
             WeightBeforeVAT = weightBeforeVAT;
         }
 
@@ -1215,99 +1216,99 @@ public class Transaction {
             OtherFoodName = otherFoodName;
         }
 
-        public Integer getOtherProductGroupID() {
+        public int getOtherProductGroupID() {
             return OtherProductGroupID;
         }
 
-        public void setOtherProductGroupID(Integer otherProductGroupID) {
+        public void setOtherProductGroupID(int otherProductGroupID) {
             OtherProductGroupID = otherProductGroupID;
         }
 
-        public Integer getDiscountAllow() {
+        public int getDiscountAllow() {
             return DiscountAllow;
         }
 
-        public void setDiscountAllow(Integer discountAllow) {
+        public void setDiscountAllow(int discountAllow) {
             DiscountAllow = discountAllow;
         }
 
-        public Integer getItemDiscAllow() {
+        public int getItemDiscAllow() {
             return ItemDiscAllow;
         }
 
-        public void setItemDiscAllow(Integer itemDiscAllow) {
+        public void setItemDiscAllow(int itemDiscAllow) {
             ItemDiscAllow = itemDiscAllow;
         }
 
-        public Integer getLastTransactionID() {
+        public int getLastTransactionID() {
             return LastTransactionID;
         }
 
-        public void setLastTransactionID(Integer lastTransactionID) {
+        public void setLastTransactionID(int lastTransactionID) {
             LastTransactionID = lastTransactionID;
         }
 
-        public Integer getLastComputerID() {
+        public int getLastComputerID() {
             return LastComputerID;
         }
 
-        public void setLastComputerID(Integer lastComputerID) {
+        public void setLastComputerID(int lastComputerID) {
             LastComputerID = lastComputerID;
         }
 
-        public Integer getPrinterID() {
+        public int getPrinterID() {
             return PrinterID;
         }
 
-        public void setPrinterID(Integer printerID) {
+        public void setPrinterID(int printerID) {
             PrinterID = printerID;
         }
 
-        public Integer getInventoryID() {
+        public int getInventoryID() {
             return InventoryID;
         }
 
-        public void setInventoryID(Integer inventoryID) {
+        public void setInventoryID(int inventoryID) {
             InventoryID = inventoryID;
         }
 
-        public Integer getOrderStaffID() {
+        public int getOrderStaffID() {
             return OrderStaffID;
         }
 
-        public void setOrderStaffID(Integer orderStaffID) {
+        public void setOrderStaffID(int orderStaffID) {
             OrderStaffID = orderStaffID;
         }
 
-        public Integer getOrderComputerID() {
+        public int getOrderComputerID() {
             return OrderComputerID;
         }
 
-        public void setOrderComputerID(Integer orderComputerID) {
+        public void setOrderComputerID(int orderComputerID) {
             OrderComputerID = orderComputerID;
         }
 
-        public Integer getOrderTableID() {
+        public int getOrderTableID() {
             return OrderTableID;
         }
 
-        public void setOrderTableID(Integer orderTableID) {
+        public void setOrderTableID(int orderTableID) {
             OrderTableID = orderTableID;
         }
 
-        public Integer getVoidTypeID() {
+        public int getVoidTypeID() {
             return VoidTypeID;
         }
 
-        public void setVoidTypeID(Integer voidTypeID) {
+        public void setVoidTypeID(int voidTypeID) {
             VoidTypeID = voidTypeID;
         }
 
-        public Integer getVoidStaffID() {
+        public int getVoidStaffID() {
             return VoidStaffID;
         }
 
-        public void setVoidStaffID(Integer voidStaffID) {
+        public void setVoidStaffID(int voidStaffID) {
             VoidStaffID = voidStaffID;
         }
 
@@ -1319,35 +1320,35 @@ public class Transaction {
             VoidDateTime = voidDateTime;
         }
 
-        public Integer getVATType() {
+        public int getVATType() {
             return VATType;
         }
 
-        public void setVATType(Integer VATType) {
+        public void setVATType(int VATType) {
             this.VATType = VATType;
         }
 
-        public Integer getPrintGroup() {
+        public int getPrintGroup() {
             return PrintGroup;
         }
 
-        public void setPrintGroup(Integer printGroup) {
+        public void setPrintGroup(int printGroup) {
             PrintGroup = printGroup;
         }
 
-        public Integer getNoPrintBill() {
+        public int getNoPrintBill() {
             return NoPrintBill;
         }
 
-        public void setNoPrintBill(Integer noPrintBill) {
+        public void setNoPrintBill(int noPrintBill) {
             NoPrintBill = noPrintBill;
         }
 
-        public Integer getNoRePrintOrder() {
+        public int getNoRePrintOrder() {
             return NoRePrintOrder;
         }
 
-        public void setNoRePrintOrder(Integer noRePrintOrder) {
+        public void setNoRePrintOrder(int noRePrintOrder) {
             NoRePrintOrder = noRePrintOrder;
         }
 
@@ -1367,19 +1368,19 @@ public class Transaction {
             FinishTime = finishTime;
         }
 
-        public Integer getPrintStatus() {
+        public int getPrintStatus() {
             return PrintStatus;
         }
 
-        public void setPrintStatus(Integer printStatus) {
+        public void setPrintStatus(int printStatus) {
             PrintStatus = printStatus;
         }
 
-        public Integer getProcessID() {
+        public int getProcessID() {
             return ProcessID;
         }
 
-        public void setProcessID(Integer processID) {
+        public void setProcessID(int processID) {
             ProcessID = processID;
         }
 
@@ -1399,19 +1400,19 @@ public class Transaction {
             Comment = comment;
         }
 
-        public Integer getIsComment() {
+        public int getIsComment() {
             return IsComment;
         }
 
-        public void setIsComment(Integer isComment) {
+        public void setIsComment(int isComment) {
             IsComment = isComment;
         }
 
-        public Integer getDeleted() {
+        public int getDeleted() {
             return Deleted;
         }
 
-        public void setDeleted(Integer deleted) {
+        public void setDeleted(int deleted) {
             Deleted = deleted;
         }
 
@@ -1423,12 +1424,20 @@ public class Transaction {
             ProductName = productName;
         }
 
-        public Double getDiscPricePercent() {
+        public double getDiscPricePercent() {
             return DiscPricePercent;
         }
 
-        public void setDiscPricePercent(Double discPricePercent) {
+        public void setDiscPricePercent(double discPricePercent) {
             DiscPricePercent = discPricePercent;
+        }
+
+        public boolean isChecked() {
+            return isChecked;
+        }
+
+        public void setChecked(boolean isChecked) {
+            this.isChecked = isChecked;
         }
     }
 }

@@ -9,16 +9,18 @@
         android:layout_height="wrap_content"
         android:text="item title"
         android:id="@+id/order_title"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_alignTop="@+id/order_thumb_pic"
         android:layout_toRightOf="@+id/order_thumb_pic"
-        android:layout_toEndOf="@+id/order_thumb_pic" />
+        android:layout_toEndOf="@+id/order_thumb_pic"
+        android:checked="false"
+        android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
+        android:gravity="center_vertical" />
 
     <ImageButton
         android:layout_width="32dp"
         android:layout_height="wrap_content"
         android:id="@+id/order_more_opt"
-        android:src="@drawable/ic_more_vert_grey600_36dp"
+        android:src="@drawable/ic_more_vert_grey600_24dp"
         style="@android:style/Widget.Holo.Button.Borderless"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
@@ -41,7 +43,8 @@
         android:layout_below="@+id/order_title"
         android:layout_alignLeft="@+id/order_title"
         android:layout_alignStart="@+id/order_title"
-        android:textStyle="italic" />
+        android:textStyle="italic"
+        android:layout_marginLeft="32dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -60,11 +63,11 @@
         android:layout_height="wrap_content"
         android:text="1"
         android:id="@+id/order_qty"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/order_plus"
         android:layout_toStartOf="@+id/order_plus"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageButton
         android:layout_width="wrap_content"

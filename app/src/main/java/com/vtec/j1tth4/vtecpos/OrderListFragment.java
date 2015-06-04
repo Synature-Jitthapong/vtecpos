@@ -1,10 +1,13 @@
 package com.vtec.j1tth4.vtecpos;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -19,14 +22,13 @@ import com.vtec.j1tth4.vtecpos.provider.Transaction;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import de.greenrobot.event.EventBus;
 
 /**
  * Created by j1tth4 on 3/27/15.
  */
-public class OrderListFragment extends Fragment{
+public class OrderListFragment extends Fragment implements android.support.v7.widget.PopupMenu.OnMenuItemClickListener{
 
     private List<Transaction.OrderDetail> mOrderList;
     private List<SummaryItem> mSummaryItemList;
@@ -35,6 +37,7 @@ public class OrderListFragment extends Fragment{
     private RecyclerView mLvOrder;
     private ListView mLvOrderSummary;
     private RecyclerView.LayoutManager mLayoutManager;
+    private ImageButton mBtnOrderDel;
 
     public static class RefreshEvent{
     }
@@ -90,6 +93,7 @@ public class OrderListFragment extends Fragment{
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mLvOrder = (RecyclerView) view.findViewById(R.id.lvOrder);
+        mBtnOrderDel = (ImageButton) view.findViewById(R.id.btn_order_del);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -148,12 +152,29 @@ public class OrderListFragment extends Fragment{
             viewHolder.orderQty.setText(Utils.qtyFormat(getActivity(), orderDetail.getTotalQty()));
             viewHolder.orderRetailPrice.setText(Utils.currencyFormat(getActivity(), orderDetail.getTotalRetailPrice()));
 
+            final boolean isChecked = orderDetail.isChecked();
+            viewHolder.orderTitle.setChecked(isChecked);
+            viewHolder.orderTitle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    orderDetail.setChecked(!isChecked);
+                    notifyDataSetChanged();
+                    if(checkAnyOneChecked()){
+                        mBtnOrderDel.setVisibility(View.VISIBLE);
+                    }else{
+                        mBtnOrderDel.setVisibility(View.INVISIBLE);
+                    }
+                }
+            });
+
             viewHolder.orderMinus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     double qty = Utils.parseDouble(viewHolder.orderQty.getText());
-                    if(qty > 0){
+                    if (qty > 1) {
                         updateOrderQty(orderDetail, --qty, i);
+                    }else{
+                        deleteOrder(orderDetail.getOrderDetailID(), i);
                     }
                 }
             });
@@ -167,8 +188,31 @@ public class OrderListFragment extends Fragment{
             viewHolder.orderMoreOpt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    showPopup(view);
                 }
             });
+        }
+
+        private void deleteOrder(final int orderDetailId, final int position){
+            new AlertDialog.Builder(getActivity())
+                    .setTitle(R.string.delete)
+                    .setMessage(R.string.confirm_delete)
+                    .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    })
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            TransactionManager manager = TransactionManager.getInstance(getActivity());
+                            manager.deleteOrder(orderDetailId);
+                            mOrderList.remove(position);
+                            mOrderAdapter.notifyDataSetChanged();
+                            refreshSummary();
+                        }
+                    }).show();
         }
 
         private void updateOrderQty(Transaction.OrderDetail orderDetail, double qty, int position){
@@ -177,12 +221,38 @@ public class OrderListFragment extends Fragment{
             manager.updateOrder(orderDetailId, orderDetail.getPricePerUnit(), qty);
             mOrderList.set(position, manager.getOrder(orderDetailId, true));
             mOrderAdapter.notifyDataSetChanged();
+            refreshSummary();
         }
 
         @Override
         public int getItemCount() {
             return mOrderList != null ? mOrderList.size() : 0;
         }
+    }
+
+    private boolean checkAnyOneChecked(){
+        for(Transaction.OrderDetail orderDetail : mOrderList){
+            if(orderDetail.isChecked())
+                return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.action_modify:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private void showPopup(View view){
+        android.support.v7.widget.PopupMenu popup = new android.support.v7.widget.PopupMenu(getActivity(), view);
+        popup.inflate(R.menu.order_menu_option);
+        popup.setOnMenuItemClickListener(this);
+        popup.show();
     }
 
     private void refreshSummary(){
