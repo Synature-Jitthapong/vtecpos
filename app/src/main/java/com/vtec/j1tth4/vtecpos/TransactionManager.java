@@ -77,6 +77,10 @@ public class TransactionManager {
         mPaymentDataSource.insertPaymentDetail(payDetail);
     }
 
+    public int countOrder(boolean onProcess){
+        return mTransDataSource.countOrderDetail(mCurrentTransId, onProcess);
+    }
+
     public Transaction.OrderDetail getOrder(int orderId, boolean onProcess){
         return mTransDataSource.getOrderDetail(mCurrentTransId, mGlobalManager.getComputerId(),
                 orderId, onProcess);
@@ -96,6 +100,14 @@ public class TransactionManager {
 
         mTransDataSource.updateOrderDetail(mCurrentTransId, mGlobalManager.getComputerId(), orderId,
                 qty, totalRetailPrice, orgTotalRetailPrice, salePrice);
+    }
+
+    public void deleteAllOrders(){
+        mTransDataSource.deleteAllOrderDetail(mCurrentTransId, mGlobalManager.getComputerId());
+    }
+
+    public void deleteOrders(String ordersId){
+        mTransDataSource.deleteOrderDetail(mCurrentTransId, mGlobalManager.getComputerId(), ordersId);
     }
 
     public void deleteOrder(int orderId){
@@ -194,6 +206,10 @@ public class TransactionManager {
     public Transaction getTransaction(boolean onProcess){
         TransactionDataSource dataSource = new TransactionDataSource(mContext);
         return dataSource.getTransaction(mCurrentTransId, onProcess);
+    }
+
+    public int getTransactionId(){
+        return mCurrentTransId;
     }
 
     public void insertTransaction(){

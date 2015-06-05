@@ -1085,6 +1085,27 @@ public class TransactionDataSource {
     }
 
     /**
+     * @param transId
+     * @param onProcess
+     * @return
+     */
+    public int countOrderDetail(int transId, boolean onProcess){
+        Cursor cursor = mDbHelper.getWritableDatabase().rawQuery(
+                "select count(" + ORDER_DETAIL_ID + ")" +
+                        " from " + (onProcess ? TABLE_ORDER_DETAIL_FRONT : TABLE_ORDER_DETAIL) +
+                        " where " + TRANSACTION_ID + "=?",
+                new String[]{
+                        String.valueOf(transId)
+                });
+        int total = 0;
+        if(cursor.moveToFirst()){
+            total = cursor.getInt(0);
+        }
+        cursor.close();
+        return total;
+    }
+
+    /**
      *
      * @param transId
      * @param compId
@@ -1217,6 +1238,27 @@ public class TransactionDataSource {
                         String.valueOf(transId),
                         String.valueOf(compId),
                         String.valueOf(orderId)
+                });
+    }
+
+    public void deleteAllOrderDetail(int transId, int compId){
+        mDbHelper.getWritableDatabase().delete(TABLE_ORDER_DETAIL_FRONT,
+                TRANSACTION_ID + "=?" +
+                        " and " + COMPUTER_ID + "=?",
+                new String[]{
+                        String.valueOf(transId),
+                        String.valueOf(compId)
+                });
+    }
+
+    public void deleteOrderDetail(int transId, int compId, String ordersId){
+        mDbHelper.getWritableDatabase().delete(TABLE_ORDER_DETAIL_FRONT,
+                TRANSACTION_ID + "=?" +
+                        " and " + COMPUTER_ID + "=?" +
+                        " and " + ORDER_DETAIL_ID + " in(" + ordersId + ")",
+                new String[]{
+                        String.valueOf(transId),
+                        String.valueOf(compId)
                 });
     }
 

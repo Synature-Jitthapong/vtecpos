@@ -89,11 +89,29 @@ public class MenuFragment extends Fragment{
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 ProductData.Products product = (ProductData.Products) parent.getItemAtPosition(position);
-                TransactionManager manager = TransactionManager.getInstance(getActivity());
-                int orderId = manager.insertOrder(product, 1);
-                EventBus.getDefault().post(new MenuClickEvent(orderId));
+                filterProductType(product);
             }
         });
+    }
+
+    private void addOrder(ProductData.Products product, double qty){
+        TransactionManager manager = TransactionManager.getInstance(getActivity());
+        int orderId = manager.insertOrder(product, qty);
+        EventBus.getDefault().post(new MenuClickEvent(orderId));
+    }
+
+    private void filterProductType(ProductData.Products product){
+        switch (product.getProductTypeId()){
+            case ProductDataSource.NORMAL:
+                addOrder(product, 1);
+                break;
+            case ProductDataSource.SIZE:
+                break;
+            case ProductDataSource.SET:
+                break;
+            case ProductDataSource.SET_CAN_SELECT:
+                break;
+        }
     }
 
     private class MenuItemAdapter extends BaseAdapter{

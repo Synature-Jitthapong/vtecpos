@@ -26,6 +26,7 @@ public class PaymentTypeSlidingTabLayout extends HorizontalScrollView{
     };
 
     private OnTabClickListener mCallback;
+    private int mTitleOffset;
 
     private static final int TAB_VIEW_PADDING_DIPS = 16;
     private static final int TAB_VIEW_TEXT_SIZE_SP = 16;
@@ -52,6 +53,8 @@ public class PaymentTypeSlidingTabLayout extends HorizontalScrollView{
         setFillViewport(true);
 
         mTabStrip = new SlidingTabStrip(context);
+        mTabStrip.setBackgroundColor(getResources().getColor(R.color.grey_50));
+        mTabStrip.setTabDividerColor((byte)0x20);
         addView(mTabStrip, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
         final OnClickListener tabClickListener = new TabClickListener();
@@ -77,9 +80,6 @@ public class PaymentTypeSlidingTabLayout extends HorizontalScrollView{
             tabTitleView.setText(GROUPS[i]);
             tabTitleView.setId(i);
             tabTitleView.setOnClickListener(tabClickListener);
-            if(i==0){
-                tabView.setBackgroundColor(getResources().getColor(R.color.grey_50));
-            }
             mTabStrip.addView(tabView);
         }
     }
@@ -114,10 +114,36 @@ public class PaymentTypeSlidingTabLayout extends HorizontalScrollView{
         mCallback = callback;
     }
 
+    private void scrollToTab(int tabIndex, int positionOffset) {
+        final int tabStripChildCount = mTabStrip.getChildCount();
+        if (tabStripChildCount == 0 || tabIndex < 0 || tabIndex >= tabStripChildCount) {
+            return;
+        }
+
+        View selectedChild = mTabStrip.getChildAt(tabIndex);
+        if (selectedChild != null) {
+            int targetScrollX = selectedChild.getLeft() + positionOffset;
+
+            if (tabIndex > 0 || positionOffset > 0) {
+                // If we're not at the first child and are mid-scroll, make sure we obey the offset
+                targetScrollX -= mTitleOffset;
+            }
+
+            scrollTo(targetScrollX, 0);
+        }
+    }
+
     private class TabClickListener implements View.OnClickListener {
         @Override
         public void onClick(View v) {
-            mCallback.onPayTypeTabClick(v.getId());
+            for (int i = 0; i < mTabStrip.getChildCount(); i++) {
+                if (v == mTabStrip.getChildAt(i)) {
+                    mTabStrip.onViewPagerPageChanged(i, 0f);
+                    scrollToTab(i, 0);
+                    mCallback.onPayTypeTabClick(v.getId());
+                    return;
+                }
+            }
         }
     }
 }

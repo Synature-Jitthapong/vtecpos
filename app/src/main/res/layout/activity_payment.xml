@@ -1,10 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.vtec.j1tth4.vtecpos.PaymentActivity">
+    android:layout_height="match_parent"
+    tools:context="com.vtec.j1tth4.vtecpos.PaymentActivity"
+    android:padding="@dimen/default_horizontal_margin">
 
     <view
         android:layout_width="wrap_content"
@@ -12,10 +10,12 @@
         class="com.vtec.j1tth4.vtecpos.PaymentTypeSlidingTabLayout"
         android:id="@+id/paymenttype_tab"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/payment_content"
+        android:layout_alignEnd="@+id/payment_content" />
 
     <FrameLayout
-        android:layout_width="420dp"
+        android:layout_width="380dp"
         android:layout_height="fill_parent"
         android:layout_below="@+id/paymenttype_tab"
         android:id="@+id/paydetail_content"
@@ -24,11 +24,12 @@
         android:layout_above="@+id/linearLayout"></FrameLayout>
 
     <FrameLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/payment_content"
         android:layout_toRightOf="@+id/paydetail_content"
-        android:layout_above="@+id/linearLayout">
+        android:layout_above="@+id/linearLayout5"
+        android:layout_alignTop="@+id/paydetail_content">
 
     </FrameLayout>
 
@@ -37,10 +38,33 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/paydetail_content"
-        android:layout_alignEnd="@+id/paydetail_content"
         android:id="@+id/linearLayout"
-        android:padding="@dimen/default_horizontal_margin">
+        android:padding="@dimen/default_horizontal_margin"
+        android:layout_alignRight="@+id/paydetail_content"
+        android:layout_alignEnd="@+id/paydetail_content">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/total"
+                android:id="@+id/total_price_label"
+                android:layout_weight="1"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textSize="36sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0.00"
+                android:id="@+id/total_price"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textSize="36sp" />
+        </LinearLayout>
 
         <LinearLayout
             android:orientation="horizontal"
@@ -107,24 +131,36 @@
         </LinearLayout>
     </LinearLayout>
 
-    <Button
-        android:layout_width="160dp"
-        android:layout_height="96dp"
-        android:text="@string/confirm"
-        android:id="@+id/pay_confirm"
-        android:onClick="onClick"
-        android:layout_below="@+id/payment_content"
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/linearLayout"
+        android:layout_toRightOf="@+id/linearLayout"
         android:layout_alignRight="@+id/payment_content"
-        android:layout_alignEnd="@+id/payment_content" />
+        android:layout_alignEnd="@+id/payment_content"
+        android:id="@+id/linearLayout5"
+        android:gravity="center|right">
 
-    <Button
-        android:layout_width="160dp"
-        android:layout_height="96dp"
-        android:text="@android:string/cancel"
-        android:id="@+id/pay_cancel"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_below="@+id/payment_content"
-        android:layout_toLeftOf="@+id/pay_confirm"
-        android:layout_toStartOf="@+id/pay_confirm" />
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="72dp"
+            android:text="@android:string/cancel"
+            android:id="@+id/pay_cancel"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_below="@+id/payment_content"
+            android:layout_toLeftOf="@+id/pay_confirm"
+            android:layout_toStartOf="@+id/pay_confirm" />
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_height="72dp"
+            android:text="@string/confirm"
+            android:id="@+id/pay_confirm"
+            android:onClick="onClick"
+            android:layout_below="@+id/payment_content"
+            android:layout_alignRight="@+id/payment_content"
+            android:layout_alignEnd="@+id/payment_content" />
+    </LinearLayout>
 
 </RelativeLayout>

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,7 +21,6 @@ import android.widget.TextView;
 
 import com.vtec.j1tth4.vtecpos.provider.Transaction;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ import de.greenrobot.event.EventBus;
 /**
  * Created by j1tth4 on 3/27/15.
  */
-public class OrderListFragment extends Fragment implements android.support.v7.widget.PopupMenu.OnMenuItemClickListener{
+public class OrderListFragment extends Fragment implements View.OnClickListener{
 
     private List<Transaction.OrderDetail> mOrderList;
     private List<SummaryItem> mSummaryItemList;
@@ -37,7 +38,11 @@ public class OrderListFragment extends Fragment implements android.support.v7.wi
     private RecyclerView mLvOrder;
     private ListView mLvOrderSummary;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ImageButton mBtnOrderDel;
+
+    private ImageButton mBtnViewReceipt;
+    private ImageButton mBtnHoldOrder;
+    private ImageButton mBtnDeleteOrder;
+    private ImageButton mBtnClearOrder;
 
     public static class RefreshEvent{
     }
@@ -50,17 +55,16 @@ public class OrderListFragment extends Fragment implements android.support.v7.wi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mOrderList = new ArrayList<Transaction.OrderDetail>();
+        mSummaryItemList = new ArrayList<SummaryItem>();
         EventBus.getDefault().register(this);
-        loadOrderData();
     }
 
     private void loadOrderData(){
         TransactionManager manager = TransactionManager.getInstance(getActivity());
         mOrderList = manager.listOrder(true);
-        if(mOrderList == null) {
-            mOrderList = new ArrayList<Transaction.OrderDetail>();
-            mSummaryItemList = new ArrayList<SummaryItem>();
-        }
+        mOrderAdapter.notifyDataSetChanged();
+        refreshSummary();
     }
 
     @Override
@@ -71,13 +75,13 @@ public class OrderListFragment extends Fragment implements android.support.v7.wi
 
     public void onEvent(RefreshEvent event){
         loadOrderData();
-        mOrderAdapter.notifyDataSetChanged();
-        refreshSummary();
     }
 
     public void onEvent(MenuClickEvent event){
         TransactionManager manager = TransactionManager.getInstance(getActivity());
         Transaction.OrderDetail orderDetail = manager.getOrder(event.orderId, true);
+        if(mOrderList == null)
+            mOrderList = new ArrayList<>();
         mOrderList.add(orderDetail);
         mOrderAdapter.notifyDataSetChanged();
         mLvOrder.post(new Runnable() {
@@ -93,7 +97,15 @@ public class OrderListFragment extends Fragment implements android.support.v7.wi
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mLvOrder = (RecyclerView) view.findViewById(R.id.lvOrder);
-        mBtnOrderDel = (ImageButton) view.findViewById(R.id.btn_order_del);
+        mBtnViewReceipt = (ImageButton) view.findViewById(R.id.btnViewReceipt);
+        mBtnHoldOrder = (ImageButton) view.findViewById(R.id.btnHoldOrder);
+        mBtnClearOrder = (ImageButton) view.findViewById(R.id.btnClearOrder);
+        mBtnDeleteOrder = (ImageButton) view.findViewById(R.id.btnDeleteOrder);
+
+        mBtnViewReceipt.setOnClickListener(this);
+        mBtnHoldOrder.setOnClickListener(this);
+        mBtnDeleteOrder.setOnClickListener(this);
+        mBtnClearOrder.setOnClickListener(this);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -109,7 +121,25 @@ public class OrderListFragment extends Fragment implements android.support.v7.wi
         mLvOrderSummary = (ListView) view.findViewById(R.id.lvSummary);
         mOrderSummAdapter = new OrderSummaryListAdapter();
         mLvOrderSummary.setAdapter(mOrderSummAdapter);
-        refreshSummary();
+
+        loadOrderData();
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        switch (id){
+            case R.id.btnViewReceipt:
+                break;
+            case R.id.btnHoldOrder:
+                break;
+            case R.id.btnDeleteOrder:
+                deleteCheckedItems();
+                break;
+            case R.id.btnClearOrder:
+                deleteAllOrder();
+                break;
+        }
     }
 
     private class OrderListAdapter extends RecyclerView.Adapter<OrderListAdapter.ViewHolder>{
@@ -145,8 +175,8 @@ public class OrderListFragment extends Fragment implements android.support.v7.wi
         }
 
         @Override
-        public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
-            final Transaction.OrderDetail orderDetail = mOrderList.get(i);
+        public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
+            final Transaction.OrderDetail orderDetail = mOrderList.get(position);
             viewHolder.orderTitle.setText(orderDetail.getProductName());
             viewHolder.orderSubTitle.setText(Utils.currencyFormat(getActivity(), orderDetail.getPricePerUnit()));
             viewHolder.orderQty.setText(Utils.qtyFormat(getActivity(), orderDetail.getTotalQty()));
@@ -159,11 +189,11 @@ public class OrderListFragment extends Fragment implements android.support.v7.wi
                 public void onClick(View view) {
                     orderDetail.setChecked(!isChecked);
                     notifyDataSetChanged();
-                    if(checkAnyOneChecked()){
-                        mBtnOrderDel.setVisibility(View.VISIBLE);
-                    }else{
-                        mBtnOrderDel.setVisibility(View.INVISIBLE);
-                    }
+//                    if(checkAnyOneChecked()){
+//                        mBtnDeleteOrder.setVisibility(View.VISIBLE);
+//                    }else{
+//                        mBtnDeleteOrder.setVisibility(View.INVISIBLE);
+//                    }
                 }
             });
 
@@ -172,9 +202,9 @@ public class OrderListFragment extends Fragment implements android.support.v7.wi
                 public void onClick(View view) {
                     double qty = Utils.parseDouble(viewHolder.orderQty.getText());
                     if (qty > 1) {
-                        updateOrderQty(orderDetail, --qty, i);
+                        updateOrderQty(orderDetail, --qty, position);
                     }else{
-                        deleteOrder(orderDetail.getOrderDetailID(), i);
+                        deleteOrder(orderDetail.getOrderDetailID(), position);
                     }
                 }
             });
@@ -182,76 +212,147 @@ public class OrderListFragment extends Fragment implements android.support.v7.wi
                 @Override
                 public void onClick(View view) {
                     double qty = Utils.parseDouble(viewHolder.orderQty.getText());
-                    updateOrderQty(orderDetail, ++qty, i);
+                    updateOrderQty(orderDetail, ++qty, position);
                 }
             });
             viewHolder.orderMoreOpt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    showPopup(view);
+                    showPopup(view, orderDetail.getOrderDetailID(), position);
                 }
             });
         }
-
-        private void deleteOrder(final int orderDetailId, final int position){
-            new AlertDialog.Builder(getActivity())
-                    .setTitle(R.string.delete)
-                    .setMessage(R.string.confirm_delete)
-                    .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-
-                        }
-                    })
-                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            TransactionManager manager = TransactionManager.getInstance(getActivity());
-                            manager.deleteOrder(orderDetailId);
-                            mOrderList.remove(position);
-                            mOrderAdapter.notifyDataSetChanged();
-                            refreshSummary();
-                        }
-                    }).show();
-        }
-
-        private void updateOrderQty(Transaction.OrderDetail orderDetail, double qty, int position){
-            TransactionManager manager = TransactionManager.getInstance(getActivity());
-            int orderDetailId = orderDetail.getOrderDetailID();
-            manager.updateOrder(orderDetailId, orderDetail.getPricePerUnit(), qty);
-            mOrderList.set(position, manager.getOrder(orderDetailId, true));
-            mOrderAdapter.notifyDataSetChanged();
-            refreshSummary();
-        }
-
         @Override
         public int getItemCount() {
             return mOrderList != null ? mOrderList.size() : 0;
         }
     }
 
+    private void deleteAllOrder(){
+        Utils.createConfirmDialog(getActivity(), getString(R.string.confirm_clear_order),
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                }, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        TransactionManager manager = TransactionManager.getInstance(getActivity());
+                        manager.deleteAllOrders();
+                        loadOrderData();
+                    }
+                });
+    }
+
+    private void deleteOrder(final int orderDetailId, final int position){
+        Utils.createConfirmDialog(getActivity(), getString(R.string.confirm_delete),
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                    }
+                }, new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        TransactionManager manager = TransactionManager.getInstance(getActivity());
+                        manager.deleteOrder(orderDetailId);
+                        mOrderList.remove(position);
+                        mOrderAdapter.notifyDataSetChanged();
+                        refreshSummary();
+                    }
+                });
+    }
+
+    private void deleteCheckedItems(){
+        if(checkAnyOneChecked()) {
+            Utils.createConfirmDialog(getActivity(), getString(R.string.confirm_delete),
+                    new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int which) {}
+                    }, new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int which) {
+                            String ordersId = "";
+                            if(mOrderList != null) {
+                                for (int i = 0; i < mOrderList.size(); i++) {
+                                    Transaction.OrderDetail orderDetail = mOrderList.get(i);
+                                    if(orderDetail.isChecked()) {
+                                        ordersId += orderDetail.getOrderDetailID();
+                                        if (i < mOrderList.size() - 1)
+                                            ordersId += ",";
+                                    }
+                                }
+                            }
+                            if(!TextUtils.isEmpty(ordersId)) {
+                                if(ordersId.substring(ordersId.length() - 1).equals(","))
+                                    ordersId = ordersId.substring(0, ordersId.length() - 1);
+                                TransactionManager manager = TransactionManager.getInstance(getActivity());
+                                manager.deleteOrders(ordersId);
+                                loadOrderData();
+                            }
+                        }
+                    });
+        }else{
+            new AlertDialog.Builder(getActivity())
+                    .setMessage(R.string.select_item_to_delete)
+                    .setNeutralButton(R.string.close, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int which) {}
+                    }).show();
+        }
+    }
+
     private boolean checkAnyOneChecked(){
-        for(Transaction.OrderDetail orderDetail : mOrderList){
-            if(orderDetail.isChecked())
-                return true;
+        if(mOrderList != null) {
+            for (Transaction.OrderDetail orderDetail : mOrderList) {
+                if (orderDetail.isChecked())
+                    return true;
+            }
         }
         return false;
     }
 
-    @Override
-    public boolean onMenuItemClick(MenuItem menuItem) {
-        switch (menuItem.getItemId()) {
-            case R.id.action_modify:
-                return true;
-            default:
-                return false;
+    private void updateOrderQty(Transaction.OrderDetail orderDetail, double qty, int position){
+        TransactionManager manager = TransactionManager.getInstance(getActivity());
+        int orderDetailId = orderDetail.getOrderDetailID();
+        manager.updateOrder(orderDetailId, orderDetail.getPricePerUnit(), qty);
+        mOrderList.set(position, manager.getOrder(orderDetailId, true));
+        mOrderAdapter.notifyDataSetChanged();
+        refreshSummary();
+    }
+
+    private class MoreOptionClickListener implements android.support.v7.widget.PopupMenu.OnMenuItemClickListener{
+        private int orderDetailId;
+        private int position;
+
+        public MoreOptionClickListener(int orderDetailId, int position){
+            this.orderDetailId = orderDetailId;
+            this.position = position;
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.action_modify:
+                    return true;
+                case R.id.action_delete:
+                    deleteOrder(orderDetailId, position);
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 
-    private void showPopup(View view){
+    private void showPopup(View view, int orderDetailId, int position){
         android.support.v7.widget.PopupMenu popup = new android.support.v7.widget.PopupMenu(getActivity(), view);
         popup.inflate(R.menu.order_menu_option);
-        popup.setOnMenuItemClickListener(this);
+        popup.setOnMenuItemClickListener(new MoreOptionClickListener(orderDetailId, position));
         popup.show();
     }
 
@@ -302,19 +403,28 @@ public class OrderListFragment extends Fragment implements android.support.v7.wi
         mSummaryItemList.add(
                 new SummaryItem(
                         getActivity().getString(R.string.items) + " " +
-                                NumberFormat.getInstance().format(sumTotalItem),
-                        NumberFormat.getCurrencyInstance().format(sumRetailPrice),
+                                Utils.qtyFormat(getActivity(), sumTotalItem),
+                        Utils.currencyFormat(getActivity(), sumRetailPrice),
                         SummaryItem.SUMM_NORMAL));
         mSummaryItemList.add(
                 new SummaryItem(
                         getActivity().getString(R.string.discount_short),
-                        NumberFormat.getCurrencyInstance().format(sumDiscount),
+                        Utils.currencyFormat(getActivity(), sumDiscount),
                         SummaryItem.SUMM_NORMAL));
-
+//        mSummaryItemList.add(
+//                new SummaryItem(
+//                        "vat",
+//                        Utils.currencyFormat(getActivity(), sumPBeforeVat),
+//                        SummaryItem.SUMM_NORMAL));
+        mSummaryItemList.add(
+                new SummaryItem(
+                        "Sub Total",
+                        Utils.currencyFormat(getActivity(), sumSalePrice),
+                        SummaryItem.SUMM_NORMAL));
         mSummaryItemList.add(
                 new SummaryItem(
                         getActivity().getString(R.string.total),
-                        NumberFormat.getCurrencyInstance().format(sumSalePrice),
+                        Utils.currencyFormat(getActivity(), sumSalePrice),
                         SummaryItem.SUMM_LARGE));
 
         mOrderSummAdapter.notifyDataSetChanged();
@@ -353,11 +463,11 @@ public class OrderListFragment extends Fragment implements android.support.v7.wi
             holder.tvLabel.setText(item.getLabel());
             holder.tvValue.setText(item.getValue());
             if(item.getItemType() == SummaryItem.SUMM_LARGE){
-                holder.tvLabel.setTextSize(30);
-                holder.tvValue.setTextSize(22);
+                holder.tvLabel.setTextSize(32);
+                holder.tvValue.setTextSize(32);
             }else{
-                holder.tvLabel.setTextSize(22);
-                holder.tvValue.setTextSize(22);
+                holder.tvLabel.setTextSize(18);
+                holder.tvValue.setTextSize(18);
             }
             return view;
         }

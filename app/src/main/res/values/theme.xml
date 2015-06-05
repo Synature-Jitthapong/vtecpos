@@ -4,9 +4,9 @@
 
     </style>
     <style name="Theme.MyTheme" parent="CustomActionBarTheme">
-        <item name="colorPrimary">@color/blue</item>
-        <item name="colorPrimaryDark">@color/indigo</item>
-        <item name="colorAccent">@color/indigo</item>
+        <!--<item name="colorPrimary">@color/blue</item>-->
+        <!--<item name="colorPrimaryDark">@color/indigo</item>-->
+        <!--<item name="colorAccent">@color/indigo</item>-->
     </style>
 
     <!-- the theme applied to the application or activity -->

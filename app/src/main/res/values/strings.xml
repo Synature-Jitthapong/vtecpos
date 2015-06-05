@@ -32,10 +32,14 @@
     <string name="modify_short">Mod</string>
     <string name="delete_short">Del</string>
     <string name="confirm_delete">Are you sure you want to delete?</string>
+    <string name="confirm_clear_order">Are you sure you want to clear order?</string>
     <string name="confirm">Confirm</string>
     <string name="send_data">Send Data</string>
     <string name="report">Reports</string>
     <string name="utility">Utility</string>
     <string name="switch_user">Switch User</string>
     <string name="title_activity_test_toolbar">TestToolbar</string>
+    <string name="logout">Log out</string>
+    <string name="select_item_to_delete">Please select item that you want to delete.</string>
+    <string name="close">Close</string>
 </resources>

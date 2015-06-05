@@ -11,7 +11,7 @@
         android:id="@+id/tvLabel"
         android:layout_weight="1"
         android:gravity="right"
-        android:layout_marginRight="@dimen/default_horizontal_margin" />
+        android:layout_marginRight="16dp" />
 
     <TextView
         android:layout_width="wrap_content"

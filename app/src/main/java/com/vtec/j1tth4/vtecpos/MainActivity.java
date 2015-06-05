@@ -44,30 +44,15 @@ public class MainActivity extends ActionBarActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mTransManager = TransactionManager.getInstance(this);
+        mTransManager.insertTransaction();
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mLvDrawer = (ListView) findViewById(R.id.left_drawer);
 
         final ActionBar actionBar = getSupportActionBar();
         mLvDrawer.setAdapter(new DrawerListAdapter());
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.app_name, R.string.app_name);
-//        mDrawerToggle = new android.support.v7.app.ActionBarDrawerToggle(this, mDrawerLayout,
-//                android.support.v7.appcompat.R.drawable.abc_ic_menu_moreoverflow_mtrl_alpha,
-//                R.string.app_name, R.string.app_name) {
-//
-//            /** Called when a drawer has settled in a completely closed state. */
-//            public void onDrawerClosed(View view) {
-//                super.onDrawerClosed(view);
-//                actionBar.setTitle("vtecpos");
-//                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-//            }
-//
-//            /** Called when a drawer has settled in a completely open state. */
-//            public void onDrawerOpened(View drawerView) {
-//                super.onDrawerOpened(drawerView);
-//                actionBar.setTitle("vtecpos");
-//                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-//            }
-//        };
 
         // Set the drawer toggle as the DrawerListener
         mDrawerLayout.setDrawerListener(mDrawerToggle);
@@ -87,7 +72,6 @@ public class MainActivity extends ActionBarActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        mTransManager = TransactionManager.getInstance(this);
         mTransManager.insertTransaction();
     }
 
@@ -139,6 +123,12 @@ public class MainActivity extends ActionBarActivity{
     public void onClick(final View v){
         int id = v.getId();
         if(id == R.id.btnPay){
+           gotoPayment();
+        }
+    }
+
+    private void gotoPayment(){
+        if(mTransManager.countOrder(true) > 0) {
             Intent intent = new Intent(this, PaymentActivity.class);
             startActivity(intent);
         }

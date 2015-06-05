@@ -17,6 +17,7 @@ public class PaymentActivity extends ActionBarActivity {
 
     private PaymentTypeSlidingTabLayout mPaymentTypeTabLayout;
 
+    private TextView mTvTotalPrice;
     private TextView mTvTotalPaid;
     private TextView mTvTotalDue;
     private TextView mTvChange;
@@ -48,6 +49,7 @@ public class PaymentActivity extends ActionBarActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         mPaymentTypeTabLayout = (PaymentTypeSlidingTabLayout) findViewById(R.id.paymenttype_tab);
+        mTvTotalPrice = (TextView) findViewById(R.id.total_price);
         mTvTotalPaid = (TextView) findViewById(R.id.total_paid);
         mTvTotalDue = (TextView) findViewById(R.id.total_due);
         mTvChange = (TextView) findViewById(R.id.change);
@@ -69,6 +71,7 @@ public class PaymentActivity extends ActionBarActivity {
     private void display(){
         TransactionManager manager = TransactionManager.getInstance(this);
         Transaction trans = manager.getTransaction(true);
+        mTvTotalPrice.setText(Utils.currencyFormat(this, trans.getReceiptNetSale()));
         mTvTotalDue.setText(Utils.currencyFormat(this, trans.getReceiptNetSale()));
         mTvChange.setText(Utils.currencyFormat(this, 0));
     }

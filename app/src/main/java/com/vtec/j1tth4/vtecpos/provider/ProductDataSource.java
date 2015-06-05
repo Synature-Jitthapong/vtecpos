@@ -11,6 +11,12 @@ import java.util.List;
  */
 public class ProductDataSource {
 
+    public static final int NORMAL = 0;
+    public static final int SET = 1;
+    public static final int SIZE = 2;
+    public static final int SET_CAN_SELECT = 7;
+    public static final int CHILD_OF_SET = -6;
+
     public static final String TABLE_PRODUCT_GROUP = "ProductGroup";
     public static final String TABLE_PRODUCT_DEPT = "ProductDept";
     public static final String TABLE_PRODUCTS = "Products";

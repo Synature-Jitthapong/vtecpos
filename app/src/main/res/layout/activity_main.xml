@@ -29,7 +29,7 @@
                     android:layout_height="wrap_content"
                     android:text="Table 10"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:textColor="@color/indigo" />
+                    android:textColor="@color/indigo"/>
             </LinearLayout>
 
             <FrameLayout
