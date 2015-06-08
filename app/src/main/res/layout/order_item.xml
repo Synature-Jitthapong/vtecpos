@@ -76,7 +76,7 @@
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/order_retail_price"
         android:layout_toStartOf="@+id/order_retail_price"
-        android:src="@drawable/ic_add_circle_grey600_24dp"
+        android:src="@drawable/ic_add_circle_grey600_36dp"
         style="@android:style/Widget.Holo.Button.Borderless" />
 
     <ImageButton
@@ -86,7 +86,7 @@
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/order_qty"
         android:layout_toStartOf="@+id/order_qty"
-        android:src="@drawable/ic_remove_circle_grey600_24dp"
+        android:src="@drawable/ic_remove_circle_grey600_36dp"
         style="@android:style/Widget.Holo.Button.Borderless" />
 
 </RelativeLayout>

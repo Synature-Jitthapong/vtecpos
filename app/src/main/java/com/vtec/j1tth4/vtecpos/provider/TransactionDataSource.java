@@ -477,7 +477,7 @@ public class TransactionDataSource {
                     }
                     cursor.moveToFirst();
                     while (!cursor.isAfterLast()) {
-                        if (cursor.getPosition() == rowCount) {
+                        if (cursor.getPosition() == rowCount - 1) {
                             discBill = totalBillDisc - sumDiscBill;
                         } else {
                             discBill = Utils.round(cursor.getDouble(cursor.getColumnIndex(SALE_PRICE))
@@ -500,6 +500,8 @@ public class TransactionDataSource {
                 }
                 cursor.close();
             }
+
+            //Update NetSale = SalePrice for child items that have price and the item that has no VAT
             db.execSQL(
                     "update " + TABLE_ORDER_DETAIL_FRONT +
                             " set " + NET_SALE + "=" + SALE_PRICE +
@@ -515,14 +517,18 @@ public class TransactionDataSource {
             db.execSQL("update " + TABLE_ORDER_DETAIL_FRONT +
                             " set " + SC_AMOUNT + "=" +
                             " case when " + HAS_SERVICE_CHARGE + "=0 then 0" +
-                            " when " + IS_SC_BEFORE_DISC + "=0 then round(" + NET_SALE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") else round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") end, " +
-                            SC_VAT + "=" +
-                            " case when " + HAS_SERVICE_CHARGE + "=0 then 0 " +
-                            " when " + IS_SC_BEFORE_DISC + "=0 then " +
-                            " case when " + VAT_TYPE + "=1 then round(round(" + NET_SALE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/(100 + " + vatPercent + "), " + mGpManager.getRoundingDigit() + ") else round(round(" + NET_SALE + "*" + SC_PERCENT + "/100, " + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/100, " + mGpManager.getRoundingDigit() + ") end " +
                             " else " +
-                            " case when " + VAT_TYPE + "=1 then round(round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/(100 + " + vatPercent + "), " + mGpManager.getRoundingDigit() + ") else round(round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100, " + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/100, " + mGpManager.getRoundingDigit() + ") end " +
-                            " end, " + PRODUCT_VAT + "=" +
+                            " case when " + IS_SC_BEFORE_DISC + "=0 then round(" + NET_SALE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") " +
+                            " else round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") end " +
+                            " end, " +
+//                            SC_VAT + "=" + " case when " + HAS_SERVICE_CHARGE + "=0 then 0 " +
+//                            " else" +
+//                            " (case when " + IS_SC_BEFORE_DISC + "=0 then " +
+//                            " (case when " + VAT_TYPE + "=1 then round(round(" + NET_SALE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/(100 + " + vatPercent + "), " + mGpManager.getRoundingDigit() + ") else round(round(" + NET_SALE + "*" + SC_PERCENT + "/100, " + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/100, " + mGpManager.getRoundingDigit() + ") " +
+//                            " else " +
+//                            " case when " + VAT_TYPE + "=1 then round(round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/(100 + " + vatPercent + "), " + mGpManager.getRoundingDigit() + ") else round(round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100, " + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/100, " + mGpManager.getRoundingDigit() + ") ) end)" +
+//                            " end, "
+                            PRODUCT_VAT + "=" +
                             " case when " + VAT_TYPE + "=1 then round(" + NET_SALE + "*" + PRODUCT_VAT_PERCENT + "/(100 + " + PRODUCT_VAT_PERCENT + "), " + mGpManager.getRoundingDigit() + ") else round(" + NET_SALE + "*" + PRODUCT_VAT_PERCENT + "/100, " + mGpManager.getRoundingDigit() + ") end " +
                             " where " + ORDER_STATUS_ID + "<=?" +
                             " and " + TRANSACTION_ID + "=?" +
@@ -547,7 +553,7 @@ public class TransactionDataSource {
                 if (!cursor.isNull(cursor.getColumnIndex(SC_VAT))) {
                     double diffScVat = transScVat - cursor.getDouble(cursor.getColumnIndex(SC_VAT));
                     if (diffScVat != 0) {
-                        Cursor cursor1 = db.rawQuery(
+                        Cursor cursor5 = db.rawQuery(
                                 "select * from " + TABLE_ORDER_DETAIL_FRONT +
                                         " where " + SC_VAT + ">0 " +
                                         " and " + ORDER_STATUS_ID + "<=?" +
@@ -559,9 +565,9 @@ public class TransactionDataSource {
                                         String.valueOf(transId),
                                         String.valueOf(compId)
                                 });
-                        if (cursor1.moveToFirst()) {
-                            while (!cursor1.isAfterLast()) {
-                                if (cursor1.getDouble(cursor1.getColumnIndex(SC_VAT)) +
+                        if (cursor5.moveToFirst()) {
+                            while (!cursor5.isAfterLast()) {
+                                if (cursor5.getDouble(cursor5.getColumnIndex(SC_VAT)) +
                                         (transScVat - cursor.getDouble(cursor.getColumnIndex(SC_VAT))) > 0) {
                                     db.execSQL("update " + TABLE_ORDER_DETAIL_FRONT +
                                                     " set " + SC_VAT + "=" + SC_VAT + "+" +
@@ -570,16 +576,16 @@ public class TransactionDataSource {
                                                     " and " + TRANSACTION_ID + "=?" +
                                                     " and " + COMPUTER_ID + "=?",
                                             new String[]{
-                                                    cursor1.getString(cursor1.getColumnIndex(ORDER_DETAIL_ID)),
+                                                    cursor5.getString(cursor5.getColumnIndex(ORDER_DETAIL_ID)),
                                                     String.valueOf(transId),
                                                     String.valueOf(compId)
                                             });
                                     break;
                                 }
-                                cursor1.moveToNext();
+                                cursor5.moveToNext();
                             }
                         }
-                        cursor1.close();
+                        cursor5.close();
                     }
                 }
                 if (!cursor.isNull(cursor.getColumnIndex(PRODUCT_VAT))) {

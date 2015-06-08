@@ -1,6 +1,7 @@
 package com.vtec.j1tth4.vtecpos;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
 import com.vtec.j1tth4.vtecpos.provider.PayDetail;
 import com.vtec.j1tth4.vtecpos.provider.Transaction;
@@ -11,8 +12,7 @@ import java.util.List;
 /**
  * Created by j1tth4 on 5/21/15.
  */
-public abstract class CommonPrint {
-
+public class CommonPrint{
     public static final int HORIZONTAL_MAX_SPACE = 45;
     public static final int QTY_MAX_SPACE = 12;
     public static final int MAX_TEXT_LENGTH = 32;
@@ -108,7 +108,6 @@ public abstract class CommonPrint {
         for(int i = 0; i < text.length(); i++){
             int code = (int) text.charAt(i);
             if(code != 3633
-                    // thai
                     && code != 3636
                     && code != 3637
                     && code != 3638
@@ -123,23 +122,7 @@ public abstract class CommonPrint {
                     && code != 3659
                     && code != 3660
                     && code != 3661
-                    && code != 3662
-                    // lao
-                    && code != 3761
-                    && code != 3764
-                    && code != 3765
-                    && code != 3766
-                    && code != 3767
-                    && code != 3768
-                    && code != 3769
-                    && code != 3771
-                    && code != 3772
-                    && code != 3784
-                    && code != 3785
-                    && code != 3786
-                    && code != 3787
-                    && code != 3788
-                    && code != 3789){
+                    && code != 3662){
                 length ++;
             }
         }
@@ -173,21 +156,44 @@ public abstract class CommonPrint {
         //header
 
         //detail
+        double sumQty = 0;
+        double sumRetailPrice = 0;
+        double sumTotalSale = 0;
         if(model.getOrderDetails() != null){
             for (Transaction.OrderDetail orderDetail : model.getOrderDetails()){
                 String name = limitTextLength(orderDetail.getProductName());
-                String qty = Utils.qtyFormat(mContext, orderDetail.getTotalQty());
-                String retailPrice = Utils.currencyFormat(mContext, orderDetail.getPricePerUnit()) +
-                        createQtySpace(calculateLength(qty));
+                String retailPrice = Utils.currencyFormat(mContext, orderDetail.getPricePerUnit());
+                String qty = Utils.qtyFormat(mContext, orderDetail.getTotalQty()) +
+                        createQtySpace(calculateLength(retailPrice));
                 mTextToPrint.append(name);
                 mTextToPrint.append(createHorizontalSpace(
-                        calculateLength(name) +
-                                calculateLength(retailPrice)));
+                        calculateLength(name + qty + retailPrice)));
+                mTextToPrint.append(qty);
                 mTextToPrint.append(retailPrice);
                 mTextToPrint.append(CARRIAGE_RETURN);
+
+                sumQty += orderDetail.getTotalQty();
+                sumRetailPrice += orderDetail.getTotalRetailPrice();
+                sumTotalSale += orderDetail.getSalePrice();
             }
             mTextToPrint.append(createLine("-") + CARRIAGE_RETURN);
         }
+
+        String items = "Items: " + Utils.qtyFormat(mContext, sumQty);
+        String subTotal = Utils.currencyFormat(mContext, sumRetailPrice);
+        mTextToPrint.append(items);
+        mTextToPrint.append(createHorizontalSpace(
+                calculateLength(items + subTotal)));
+        mTextToPrint.append(subTotal);
+        mTextToPrint.append(CARRIAGE_RETURN);
+
+        String total = "Total.........";
+        String totalSale =  Utils.currencyFormat(mContext, sumTotalSale);
+        mTextToPrint.append(total);
+        mTextToPrint.append(createHorizontalSpace(
+                calculateLength(total + totalSale)));
+        mTextToPrint.append(totalSale);
+        mTextToPrint.append(CARRIAGE_RETURN);
 
         if(model.getPayDetails() != null){
             for(PayDetail payDetail : model.getPayDetails()){

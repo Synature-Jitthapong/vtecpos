@@ -43,12 +43,14 @@ public class TransactionManager {
     public void finalizeBill(){
         mTransDataSource.finalizeBill(mCurrentTransId, mGlobalManager.getComputerId());
         mTransDataSource.weightProductSet(mCurrentTransId, mGlobalManager.getComputerId());
-        PrintJobDataSource jobDataSource = new PrintJobDataSource(mContext);
-        OrderPrintJob job = new OrderPrintJob();
-        job.setTransactionID(mCurrentTransId);
-        job.setComputerID(mGlobalManager.getComputerId());
-        job.setPrintNo(1);
-        jobDataSource.insertPrintJob(job);
+//        PrintJobDataSource jobDataSource = new PrintJobDataSource(mContext);
+//        OrderPrintJob job = new OrderPrintJob();
+//        job.setTransactionID(mCurrentTransId);
+//        job.setComputerID(mGlobalManager.getComputerId());
+//        job.setPrintNo(1);
+//        jobDataSource.insertPrintJob(job);
+
+        new PrintTask(mContext, mCurrentTransId, mGlobalManager.getComputerId()).execute(PrintTask.PRINT_RECEIPT);
         mCurrentTransId = 0;
     }
 

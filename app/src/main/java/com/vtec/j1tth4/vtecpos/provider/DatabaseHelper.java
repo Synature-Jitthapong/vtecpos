@@ -78,6 +78,12 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     @Override
+    public SQLiteDatabase getReadableDatabase() {
+        return SQLiteDatabase.openDatabase(mDatabasePath, null,
+                SQLiteDatabase.OPEN_READONLY);
+    }
+
+    @Override
     public SQLiteDatabase getWritableDatabase() {
         return SQLiteDatabase.openDatabase(mDatabasePath, null,
                 SQLiteDatabase.OPEN_READWRITE);

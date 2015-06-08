@@ -2,6 +2,7 @@ package com.vtec.j1tth4.vtecpos.provider;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 
 import com.vtec.j1tth4.vtecpos.Utils;
 
@@ -71,7 +72,7 @@ public class PrintJobDataSource {
         cv.put(TransactionDataSource.TRANSACTION_ID, job.getTransactionID());
         cv.put(TransactionDataSource.COMPUTER_ID, job.getComputerID());
         cv.put(TransactionDataSource.ORDER_DETAIL_ID, job.getOrderDetailID());
-        cv.put(PRINT_NO, job.getPrintNo());
+        cv.put(PRINT_NO, getPrintNo(job.getTransactionID(), job.getComputerID(), job.getOrderDetailID()));
         cv.put(PRINTER_ID, job.getPrinterID());
         cv.put(IS_PRINT_SUMMARY, job.getIsPrintSummary());
         cv.put(INSERT_DATE_TIME, Utils.getISODateTime());
@@ -79,5 +80,25 @@ public class PrintJobDataSource {
         cv.putNull(FINISH_DATE_TIME);
         cv.put(PRINT_FROM_COMPUTER_ID, job.getComputerID());
         mDbHelper.getWritableDatabase().insertOrThrow(TABLE_ORDER_PRINT_JOB, null, cv);
+    }
+
+    private int getPrintNo(int transId, int compId, int detailId){
+        int printNo = 0;
+        Cursor cursor = mDbHelper.getWritableDatabase().rawQuery(
+                "select max(" + PRINT_NO + ")" +
+                        " from " + TABLE_ORDER_PRINT_JOB +
+                        " where " + TransactionDataSource.TRANSACTION_ID + "=?" +
+                        " and " + TransactionDataSource.COMPUTER_ID + "=?" +
+                        " and " + TransactionDataSource.ORDER_DETAIL_ID + "=?",
+                new String[]{
+                        String.valueOf(transId),
+                        String.valueOf(compId),
+                        String.valueOf(detailId)
+                });
+        if(cursor.moveToFirst()){
+            printNo = cursor.getInt(0);
+        }
+        cursor.close();
+        return printNo + 1;
     }
 }
