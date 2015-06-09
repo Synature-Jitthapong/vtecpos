@@ -807,6 +807,8 @@ public class Transaction {
         private int Deleted;
         private String ProductName;
         private boolean isChecked = false;
+        private int otherProductTypeId;
+        private String otherFoodName;
 
         public int getOrderDetailID() {
             return OrderDetailID;
@@ -1438,6 +1440,18 @@ public class Transaction {
 
         public void setChecked(boolean isChecked) {
             this.isChecked = isChecked;
+        }
+
+        public void setIsChecked(boolean isChecked) {
+            this.isChecked = isChecked;
+        }
+
+        public int getOtherProductTypeId() {
+            return otherProductTypeId;
+        }
+
+        public void setOtherProductTypeId(int otherProductTypeId) {
+            this.otherProductTypeId = otherProductTypeId;
         }
     }
 }

@@ -136,6 +136,7 @@ public class TransactionManager {
         int itemDiscountAllow = discountAllow;
         int componentLevel = product.getComponentLevel();
         int isSc = mGlobalManager.getHasSc();
+
         SaleModeDataSource smSource = new SaleModeDataSource(mContext);
         SaleMode saleMode = smSource.getSaleMode(mGlobalManager.getSaleMode());
         if(saleMode != null){
@@ -144,17 +145,51 @@ public class TransactionManager {
         if(isSc == 1){
             isSc = product.getHasServiceCharge();
         }
+
+        int maxOrdNo = mTransDataSource.getMaxInsertOrderNo(mCurrentTransId, mGlobalManager.getComputerId());
+        int maxDisplayOrdering = mTransDataSource.getDisplayOrdering(0, mCurrentTransId, mGlobalManager.getComputerId());
+
+        int insertOrdNo = 0;
+        int displayOrdering = maxDisplayOrdering + 1;
+
+        boolean isComment = (product.getProductTypeID() == 14 || product.getProductTypeID() == 15);
+        if(isComment){
+            insertOrdNo = maxOrdNo;
+        }else{
+            insertOrdNo = maxOrdNo + 1;
+        }
+
+        int otherProductTypeId = product.getOtherProductTypeID();
+        if(otherProductTypeId != 0){ // manual input comment
+            if(otherProductTypeId == 14){
+                insertOrdNo = maxOrdNo;
+            }else{
+                insertOrdNo = maxOrdNo + 1;
+            }
+        }
+
+        int orderLinkId = 0;
+        int indentLevel = 0;
+        if(isComment) {
+            orderLinkId = mTransDataSource.getMaxOrderId(mCurrentTransId, mGlobalManager.getComputerId());
+            indentLevel = product.getIndentLevel();
+            if (indentLevel > 1 && orderLinkId > 0) {
+                displayOrdering = mTransDataSource.getDisplayOrdering(orderLinkId,
+                        mCurrentTransId, mGlobalManager.getComputerId());
+            }
+        }
+
         orderDetail.setTransactionID(mCurrentTransId);
         orderDetail.setComputerID(mGlobalManager.getComputerId());
         orderDetail.setComponentLevel(componentLevel);
-        orderDetail.setOrderDetailLinkID(0);
-        orderDetail.setInsertOrderNo(0);
-        orderDetail.setIndentLevel(0);
-        orderDetail.setDisplayOrdering(0);
+        orderDetail.setOrderDetailLinkID(orderLinkId);
+        orderDetail.setInsertOrderNo(insertOrdNo);
+        orderDetail.setIndentLevel(indentLevel);
+        orderDetail.setDisplayOrdering(displayOrdering);
         orderDetail.setSaleDate(Utils.getISODate());
         orderDetail.setShopID(mGlobalManager.getShopId());
-        orderDetail.setProductID(product.getProductId());
-        orderDetail.setProductSetType(product.getProductTypeId());
+        orderDetail.setProductID(product.getProductID());
+        orderDetail.setProductSetType(product.getProductTypeID());
         orderDetail.setOrderStatusID(2);
         orderDetail.setSaleMode(mGlobalManager.getSaleMode());
         orderDetail.setTotalQty(qty);

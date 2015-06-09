@@ -31,6 +31,7 @@
         <activity
             android:name=".PaymentActivity"
             android:label="@string/title_activity_payment"
+            android:theme="@style/Theme.MyTheme.ActivityDialog"
             android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan|stateAlwaysHidden" >
         </activity>

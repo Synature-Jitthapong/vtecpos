@@ -158,7 +158,7 @@ public class GroupSlidingTabLayout extends HorizontalScrollView {
                     //v.setBackgroundColor(getResources().getColor(R.color.grey_50));
                     mTabStrip.onViewPagerPageChanged(i, 0f);
                     scrollToTab(i, 0);
-                    mTabClickListener.onTabClick(mProGroupLst.get(i).getProductGroupId());
+                    mTabClickListener.onTabClick(mProGroupLst.get(i).getProductGroupID());
                     return;
                 }
             }

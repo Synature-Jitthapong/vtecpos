@@ -195,14 +195,14 @@ public class ProductDataSource {
                     ProductData.Products product =
                             new ProductData.Products();
                     int productId = cursor.getInt(cursor.getColumnIndex(PRODUCT_ID));
-                    product.setProductId(productId);
-                    product.setShopId(cursor.getInt(cursor.getColumnIndex(SHOP_ID)));
-                    product.setInventoryId(cursor.getInt(cursor.getColumnIndex(INVENTORY_ID)));
-                    product.setProductCat1Id(cursor.getInt(cursor.getColumnIndex(PRODUCT_CAT_1ID)));
-                    product.setProductCat2Id(cursor.getInt(cursor.getColumnIndex(PRODUCT_CAT_2ID)));
-                    product.setProductCat3Id(cursor.getInt(cursor.getColumnIndex(PRODUCT_CAT_3ID)));
-                    product.setProductCat4Id(cursor.getInt(cursor.getColumnIndex(PRODUCT_CAT_4ID)));
-                    product.setProductCat5Id(cursor.getInt(cursor.getColumnIndex(PRODUCT_CAT_5ID)));
+                    product.setProductID(productId);
+                    product.setShopID(cursor.getInt(cursor.getColumnIndex(SHOP_ID)));
+                    product.setInventoryID(cursor.getInt(cursor.getColumnIndex(INVENTORY_ID)));
+                    product.setProductCat1ID(cursor.getInt(cursor.getColumnIndex(PRODUCT_CAT_1ID)));
+                    product.setProductCat2ID(cursor.getInt(cursor.getColumnIndex(PRODUCT_CAT_2ID)));
+                    product.setProductCat3ID(cursor.getInt(cursor.getColumnIndex(PRODUCT_CAT_3ID)));
+                    product.setProductCat4ID(cursor.getInt(cursor.getColumnIndex(PRODUCT_CAT_4ID)));
+                    product.setProductCat5ID(cursor.getInt(cursor.getColumnIndex(PRODUCT_CAT_5ID)));
                     product.setProductCode(cursor.getString(cursor.getColumnIndex(PRODUCT_CODE)));
                     product.setProductBarCode(cursor.getString(cursor.getColumnIndex(PRODUCT_BARCODE)));
                     product.setProductName(cursor.getString(cursor.getColumnIndex(PRODUCT_NAME)));
@@ -219,7 +219,7 @@ public class ProductDataSource {
                     product.setProductMNameLang5(cursor.getString(cursor.getColumnIndex(PRODUCT_MNAME_LANG5)));
                     product.setProductPictureServer(cursor.getString(cursor.getColumnIndex(PRODUCT_PICTURE_SERVER)));
                     product.setProductPictureClient(cursor.getString(cursor.getColumnIndex(PRODUCT_PICTURE_CLIENT)));
-                    product.setPrinterId(cursor.getInt(cursor.getColumnIndex(PRINTER_ID)));
+                    product.setPrinterID(cursor.getInt(cursor.getColumnIndex(PRINTER_ID)));
                     product.setPrintGroup(cursor.getInt(cursor.getColumnIndex(PRINT_GROUP)));
                     product.setPrintProductName(cursor.getString(cursor.getColumnIndex(PRINT_PRODUCT_NAME)));
                     product.setDurationTime(cursor.getString(cursor.getColumnIndex(DURATION_TIME)));
@@ -255,7 +255,7 @@ public class ProductDataSource {
                     product.setPrintOrdering(cursor.getInt(cursor.getColumnIndex(PRINT_ORDERING)));
                     product.setAddingFromBranch(cursor.getInt(cursor.getColumnIndex(ADDING_FROM_BRANCH)));
                     product.setVatCode(cursor.getString(cursor.getColumnIndex(VAT_CODE)));
-                    product.setProductTypeId(cursor.getInt(cursor.getColumnIndex(PRODUCT_TYPE_ID)));
+                    product.setProductTypeID(cursor.getInt(cursor.getColumnIndex(PRODUCT_TYPE_ID)));
                     product.setComponentLevel(cursor.getInt(cursor.getColumnIndex(PRODUCT_TYPE_COMPONENT_LEVEL)));
                     product.setProductVatPercent(cursor.getDouble(cursor.getColumnIndex(PRODUCT_VAT_PERCENT)));
                     product.setProductVatDisplay(cursor.getString(cursor.getColumnIndex(PRODUCT_VAT_DISPLAY)));
@@ -323,9 +323,9 @@ public class ProductDataSource {
             while (!cursor.isAfterLast()){
                 ProductData.ProductDept productDept =
                         new ProductData.ProductDept();
-                productDept.setProductDeptId(cursor.getInt(cursor.getColumnIndex(PRODUCT_DEPT_ID)));
-                productDept.setProductGroupId(cursor.getInt(cursor.getColumnIndex(PRODUCT_GROUP_ID)));
-                productDept.setShopId(cursor.getInt(cursor.getColumnIndex(SHOP_ID)));
+                productDept.setProductDeptID(cursor.getInt(cursor.getColumnIndex(PRODUCT_DEPT_ID)));
+                productDept.setProductGroupID(cursor.getInt(cursor.getColumnIndex(PRODUCT_GROUP_ID)));
+                productDept.setShopID(cursor.getInt(cursor.getColumnIndex(SHOP_ID)));
                 productDept.setProductDeptCode(cursor.getString(cursor.getColumnIndex(PRODUCT_DEPT_CODE)));
                 productDept.setProductDeptName(cursor.getString(cursor.getColumnIndex(PRODUCT_DEPT_NAME)));
                 productDept.setProductDeptNameLang1(cursor.getString(cursor.getColumnIndex(PRODUCT_DEPT_NAME_LANG1)));
@@ -367,8 +367,8 @@ public class ProductDataSource {
             while (!cursor.isAfterLast()){
                 ProductData.ProductGroups productGroups =
                         new ProductData.ProductGroups();
-                productGroups.setProductGroupId(cursor.getInt(cursor.getColumnIndex(PRODUCT_GROUP_ID)));
-                productGroups.setShopId(cursor.getInt(cursor.getColumnIndex(SHOP_ID)));
+                productGroups.setProductGroupID(cursor.getInt(cursor.getColumnIndex(PRODUCT_GROUP_ID)));
+                productGroups.setShopID(cursor.getInt(cursor.getColumnIndex(SHOP_ID)));
                 productGroups.setProductGroupCode(cursor.getString(cursor.getColumnIndex(PRODUCT_GROUP_CODE)));
                 productGroups.setProductGroupName(cursor.getString(cursor.getColumnIndex(PRODUCT_GROUP_NAME)));
                 productGroups.setProductGroupNameLang1(cursor.getString(cursor.getColumnIndex(PRODUCT_GROUP_NAME_LANG1)));

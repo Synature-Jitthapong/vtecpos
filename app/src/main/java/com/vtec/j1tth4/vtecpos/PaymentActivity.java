@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.vtec.j1tth4.vtecpos.provider.Transaction;
@@ -43,6 +45,13 @@ public class PaymentActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.width = 1024;
+        params.height= 600;
+        params.alpha = 1.0f;
+        params.dimAmount = 0.5f;
+        getWindow().setAttributes((WindowManager.LayoutParams) params);
+
         setContentView(R.layout.activity_payment);
 
         ActionBar actionBar = getSupportActionBar();

@@ -4,9 +4,16 @@
 
     </style>
     <style name="Theme.MyTheme" parent="CustomActionBarTheme">
-        <!--<item name="colorPrimary">@color/blue</item>-->
-        <!--<item name="colorPrimaryDark">@color/indigo</item>-->
-        <!--<item name="colorAccent">@color/indigo</item>-->
+    </style>
+    <style name="Theme.MyTheme.ActivityDialog" parent="CustomActivityDialogTheme">
+    </style>
+
+    <style name="CustomActivityDialogTheme"
+        parent="@style/Theme.AppCompat.Light.Dialog">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
+
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/MyActionBar</item>
     </style>
 
     <!-- the theme applied to the application or activity -->
@@ -22,7 +29,6 @@
     <style name="MyActionBar"
         parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="android:background">@color/indigo</item>
-
         <!-- Support library compatibility -->
         <item name="background">@color/indigo</item>
     </style>

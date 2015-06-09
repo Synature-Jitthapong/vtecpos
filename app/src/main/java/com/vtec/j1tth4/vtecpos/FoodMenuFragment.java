@@ -78,7 +78,7 @@ public class FoodMenuFragment extends Fragment {
             }
         });
         if(mProductGroupList != null)
-            loadMenuPager(mProductGroupList.get(0).getProductGroupId());
+            loadMenuPager(mProductGroupList.get(0).getProductGroupID());
     }
 
     private void loadMenuPager(int productGroupId){
@@ -88,7 +88,7 @@ public class FoodMenuFragment extends Fragment {
         for (int i = 0; i < deptLst.size(); i++) {
             ProductData.ProductDept productDept = deptLst.get(i);
             mPagerItems.add(new FoodMenuPageItem(productDept.getProductDeptName(),
-                    productDept.getProductGroupId(), productDept.getProductDeptId()));
+                    productDept.getProductGroupID(), productDept.getProductDeptID()));
         }
         mPagerAdapter.notifyDataSetChanged();
         mDeptTab.populateTabStrip();

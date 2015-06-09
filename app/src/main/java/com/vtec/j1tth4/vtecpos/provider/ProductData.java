@@ -6,1121 +6,1148 @@ package com.vtec.j1tth4.vtecpos.provider;
 public class ProductData {
 
     public static class Products{
-        private int productId;
-        private int shopId;
-        private int inventoryId;
-        private int productGroupId;
-        private int productDeptId;
-        private int productCat1Id;
-        private int productCat2Id;
-        private int productCat3Id;
-        private int productCat4Id;
-        private int productCat5Id;
-        private int productTypeId;
-        private String productCode;
-        private String productBarCode;
-        private String productName;
-        private String productNameLang1;
-        private String productNameLang2;
-        private String productNameLang3;
-        private String productNameLang4;
-        private String productNameLang5;
-        private String productMName;
-        private String productMNameLang1;
-        private String productMNameLang2;
-        private String productMNameLang3;
-        private String productMNameLang4;
-        private String productMNameLang5;
-        private String productPictureServer;
-        private String productPictureClient;
-        private int printerId;
-        private int printGroup;
-        private String printProductName;
-        private String durationTime;
-        private int hasServiceCharge;
-        private int isOutOfStock;
-        private int autoComment;
-        private int isDisplayBill;
-        private int isPrintCheck;
-        private int isPrintReceipt;
-        private int canReturnProduct;
-        private int displayAtCheckerSystem;
-        private String productEnableDateTime;
-        private String productExpireDateTime;
-        private String productEnableDayString;
-        private String warningTime;
-        private String criticalTime;
-        private int saleMode;
-        private int saleMode1;
-        private int saleMode2;
-        private int saleMode3;
-        private int saleMode4;
-        private int saleMode5;
-        private int saleMode6;
-        private int saleMode7;
-        private int saleMode8;
-        private int saleMode9;
-        private int saleMode10;
-        private int vatType;
-        private String vatCode;
-        private String productUnitName;
-        private int discountAllow;
-        private int zeroPriceAllow;
-        private double limitDiscountAmount;
-        private double limitDiscountPercent;
-        private double commRate;
-        private String productDesp;
-        private int productDisplay;
-        private int productActivate;
-        private int productOrdering;
-        private int printOrdering;
-        private int addingFromBranch;
-        private int deleted;
-        private String insertDate;
-        private String updateDate;
-        private double productPrice;
-        private double productVatPercent;
-        private String productVatDisplay;
-        private String productVatDesp;
-        private int componentLevel;
+        private int ProductID;
+        private int ShopID;
+        private int InventoryID;
+        private int ProductGroupID;
+        private int ProductDeptID;
+        private int ProductCat1ID;
+        private int ProductCat2ID;
+        private int ProductCat3ID;
+        private int ProductCat4ID;
+        private int ProductCat5ID;
+        private int ProductTypeID;
+        private String ProductCode;
+        private String ProductBarCode;
+        private String ProductName;
+        private String ProductNameLang1;
+        private String ProductNameLang2;
+        private String ProductNameLang3;
+        private String ProductNameLang4;
+        private String ProductNameLang5;
+        private String ProductMName;
+        private String ProductMNameLang1;
+        private String ProductMNameLang2;
+        private String ProductMNameLang3;
+        private String ProductMNameLang4;
+        private String ProductMNameLang5;
+        private String ProductPictureServer;
+        private String ProductPictureClient;
+        private int PrinterID;
+        private int PrintGroup;
+        private String PrintProductName;
+        private String DurationTime;
+        private int HasServiceCharge;
+        private int IsOutOfStock;
+        private int AutoComment;
+        private int IsDisplayBill;
+        private int IsPrintCheck;
+        private int IsPrintReceipt;
+        private int CanReturnProduct;
+        private int DisplayAtCheckerSystem;
+        private String ProductEnableDateTime;
+        private String ProductExpireDateTime;
+        private String ProductEnableDayString;
+        private String WarningTime;
+        private String CriticalTime;
+        private int SaleMode;
+        private int SaleMode1;
+        private int SaleMode2;
+        private int SaleMode3;
+        private int SaleMode4;
+        private int SaleMode5;
+        private int SaleMode6;
+        private int SaleMode7;
+        private int SaleMode8;
+        private int SaleMode9;
+        private int SaleMode10;
+        private int VatType;
+        private String VatCode;
+        private String ProductUnitName;
+        private int DiscountAllow;
+        private int ZeroPriceAllow;
+        private double LimitDiscountAmount;
+        private double LimitDiscountPercent;
+        private double CommRate;
+        private String ProductDesp;
+        private int ProductDisplay;
+        private int ProductActivate;
+        private int ProductOrdering;
+        private int PrintOrdering;
+        private int AddingFromBranch;
+        private int Deleted;
+        private String InsertDate;
+        private String UpdateDate;
+        private double ProductPrice;
+        private double ProductVatPercent;
+        private String ProductVatDisplay;
+        private String ProductVatDesp;
+        private int ComponentLevel;
+        private int IndentLevel;
+        private int OtherProductTypeID;
+        private String OtherProductTypeName;
 
-        public double getProductPrice() {
-            return productPrice;
+        public int getProductID() {
+            return ProductID;
         }
 
-        public void setProductPrice(double productPrice) {
-            this.productPrice = productPrice;
+        public void setProductID(int productID) {
+            ProductID = productID;
         }
 
-        public int getComponentLevel() {
-            return componentLevel;
+        public int getShopID() {
+            return ShopID;
         }
 
-        public void setComponentLevel(int componentLevel) {
-            this.componentLevel = componentLevel;
+        public void setShopID(int shopID) {
+            ShopID = shopID;
         }
 
-        public double getProductVatPercent() {
-            return productVatPercent;
+        public int getInventoryID() {
+            return InventoryID;
         }
 
-        public void setProductVatPercent(double productVatPercent) {
-            this.productVatPercent = productVatPercent;
+        public void setInventoryID(int inventoryID) {
+            InventoryID = inventoryID;
         }
 
-        public String getProductVatDisplay() {
-            return productVatDisplay;
+        public int getProductGroupID() {
+            return ProductGroupID;
         }
 
-        public void setProductVatDisplay(String productVatDisplay) {
-            this.productVatDisplay = productVatDisplay;
+        public void setProductGroupID(int productGroupID) {
+            ProductGroupID = productGroupID;
         }
 
-        public String getProductVatDesp() {
-            return productVatDesp;
+        public int getProductDeptID() {
+            return ProductDeptID;
         }
 
-        public void setProductVatDesp(String productVatDesp) {
-            this.productVatDesp = productVatDesp;
+        public void setProductDeptID(int productDeptID) {
+            ProductDeptID = productDeptID;
         }
 
-        public int getProductId() {
-            return productId;
+        public int getProductCat1ID() {
+            return ProductCat1ID;
         }
 
-        public void setProductId(int productId) {
-            this.productId = productId;
+        public void setProductCat1ID(int productCat1ID) {
+            ProductCat1ID = productCat1ID;
         }
 
-        public int getShopId() {
-            return shopId;
+        public int getProductCat2ID() {
+            return ProductCat2ID;
         }
 
-        public void setShopId(int shopId) {
-            this.shopId = shopId;
+        public void setProductCat2ID(int productCat2ID) {
+            ProductCat2ID = productCat2ID;
         }
 
-        public int getInventoryId() {
-            return inventoryId;
+        public int getProductCat3ID() {
+            return ProductCat3ID;
         }
 
-        public void setInventoryId(int inventoryId) {
-            this.inventoryId = inventoryId;
+        public void setProductCat3ID(int productCat3ID) {
+            ProductCat3ID = productCat3ID;
         }
 
-        public int getProductGroupId() {
-            return productGroupId;
+        public int getProductCat4ID() {
+            return ProductCat4ID;
         }
 
-        public void setProductGroupId(int productGroupId) {
-            this.productGroupId = productGroupId;
+        public void setProductCat4ID(int productCat4ID) {
+            ProductCat4ID = productCat4ID;
         }
 
-        public int getProductDeptId() {
-            return productDeptId;
+        public int getProductCat5ID() {
+            return ProductCat5ID;
         }
 
-        public void setProductDeptId(int productDeptId) {
-            this.productDeptId = productDeptId;
+        public void setProductCat5ID(int productCat5ID) {
+            ProductCat5ID = productCat5ID;
         }
 
-        public int getProductCat1Id() {
-            return productCat1Id;
+        public int getProductTypeID() {
+            return ProductTypeID;
         }
 
-        public void setProductCat1Id(int productCat1Id) {
-            this.productCat1Id = productCat1Id;
-        }
-
-        public int getProductCat2Id() {
-            return productCat2Id;
-        }
-
-        public void setProductCat2Id(int productCat2Id) {
-            this.productCat2Id = productCat2Id;
-        }
-
-        public int getProductCat3Id() {
-            return productCat3Id;
-        }
-
-        public void setProductCat3Id(int productCat3Id) {
-            this.productCat3Id = productCat3Id;
-        }
-
-        public int getProductCat4Id() {
-            return productCat4Id;
-        }
-
-        public void setProductCat4Id(int productCat4Id) {
-            this.productCat4Id = productCat4Id;
-        }
-
-        public int getProductCat5Id() {
-            return productCat5Id;
-        }
-
-        public void setProductCat5Id(int productCat5Id) {
-            this.productCat5Id = productCat5Id;
-        }
-
-        public int getProductTypeId() {
-            return productTypeId;
-        }
-
-        public void setProductTypeId(int productTypeId) {
-            this.productTypeId = productTypeId;
+        public void setProductTypeID(int productTypeID) {
+            ProductTypeID = productTypeID;
         }
 
         public String getProductCode() {
-            return productCode;
+            return ProductCode;
         }
 
         public void setProductCode(String productCode) {
-            this.productCode = productCode;
+            ProductCode = productCode;
         }
 
         public String getProductBarCode() {
-            return productBarCode;
+            return ProductBarCode;
         }
 
         public void setProductBarCode(String productBarCode) {
-            this.productBarCode = productBarCode;
+            ProductBarCode = productBarCode;
         }
 
         public String getProductName() {
-            return productName;
+            return ProductName;
         }
 
         public void setProductName(String productName) {
-            this.productName = productName;
+            ProductName = productName;
         }
 
         public String getProductNameLang1() {
-            return productNameLang1;
+            return ProductNameLang1;
         }
 
         public void setProductNameLang1(String productNameLang1) {
-            this.productNameLang1 = productNameLang1;
+            ProductNameLang1 = productNameLang1;
         }
 
         public String getProductNameLang2() {
-            return productNameLang2;
+            return ProductNameLang2;
         }
 
         public void setProductNameLang2(String productNameLang2) {
-            this.productNameLang2 = productNameLang2;
+            ProductNameLang2 = productNameLang2;
         }
 
         public String getProductNameLang3() {
-            return productNameLang3;
+            return ProductNameLang3;
         }
 
         public void setProductNameLang3(String productNameLang3) {
-            this.productNameLang3 = productNameLang3;
+            ProductNameLang3 = productNameLang3;
         }
 
         public String getProductNameLang4() {
-            return productNameLang4;
+            return ProductNameLang4;
         }
 
         public void setProductNameLang4(String productNameLang4) {
-            this.productNameLang4 = productNameLang4;
+            ProductNameLang4 = productNameLang4;
         }
 
         public String getProductNameLang5() {
-            return productNameLang5;
+            return ProductNameLang5;
         }
 
         public void setProductNameLang5(String productNameLang5) {
-            this.productNameLang5 = productNameLang5;
+            ProductNameLang5 = productNameLang5;
         }
 
         public String getProductMName() {
-            return productMName;
+            return ProductMName;
         }
 
         public void setProductMName(String productMName) {
-            this.productMName = productMName;
+            ProductMName = productMName;
         }
 
         public String getProductMNameLang1() {
-            return productMNameLang1;
+            return ProductMNameLang1;
         }
 
         public void setProductMNameLang1(String productMNameLang1) {
-            this.productMNameLang1 = productMNameLang1;
+            ProductMNameLang1 = productMNameLang1;
         }
 
         public String getProductMNameLang2() {
-            return productMNameLang2;
+            return ProductMNameLang2;
         }
 
         public void setProductMNameLang2(String productMNameLang2) {
-            this.productMNameLang2 = productMNameLang2;
+            ProductMNameLang2 = productMNameLang2;
         }
 
         public String getProductMNameLang3() {
-            return productMNameLang3;
+            return ProductMNameLang3;
         }
 
         public void setProductMNameLang3(String productMNameLang3) {
-            this.productMNameLang3 = productMNameLang3;
+            ProductMNameLang3 = productMNameLang3;
         }
 
         public String getProductMNameLang4() {
-            return productMNameLang4;
+            return ProductMNameLang4;
         }
 
         public void setProductMNameLang4(String productMNameLang4) {
-            this.productMNameLang4 = productMNameLang4;
+            ProductMNameLang4 = productMNameLang4;
         }
 
         public String getProductMNameLang5() {
-            return productMNameLang5;
+            return ProductMNameLang5;
         }
 
         public void setProductMNameLang5(String productMNameLang5) {
-            this.productMNameLang5 = productMNameLang5;
+            ProductMNameLang5 = productMNameLang5;
         }
 
         public String getProductPictureServer() {
-            return productPictureServer;
+            return ProductPictureServer;
         }
 
         public void setProductPictureServer(String productPictureServer) {
-            this.productPictureServer = productPictureServer;
+            ProductPictureServer = productPictureServer;
         }
 
         public String getProductPictureClient() {
-            return productPictureClient;
+            return ProductPictureClient;
         }
 
         public void setProductPictureClient(String productPictureClient) {
-            this.productPictureClient = productPictureClient;
+            ProductPictureClient = productPictureClient;
         }
 
-        public int getPrinterId() {
-            return printerId;
+        public int getPrinterID() {
+            return PrinterID;
         }
 
-        public void setPrinterId(int printerId) {
-            this.printerId = printerId;
+        public void setPrinterID(int printerID) {
+            PrinterID = printerID;
         }
 
         public int getPrintGroup() {
-            return printGroup;
+            return PrintGroup;
         }
 
         public void setPrintGroup(int printGroup) {
-            this.printGroup = printGroup;
+            PrintGroup = printGroup;
         }
 
         public String getPrintProductName() {
-            return printProductName;
+            return PrintProductName;
         }
 
         public void setPrintProductName(String printProductName) {
-            this.printProductName = printProductName;
+            PrintProductName = printProductName;
         }
 
         public String getDurationTime() {
-            return durationTime;
+            return DurationTime;
         }
 
         public void setDurationTime(String durationTime) {
-            this.durationTime = durationTime;
+            DurationTime = durationTime;
         }
 
         public int getHasServiceCharge() {
-            return hasServiceCharge;
+            return HasServiceCharge;
         }
 
         public void setHasServiceCharge(int hasServiceCharge) {
-            this.hasServiceCharge = hasServiceCharge;
+            HasServiceCharge = hasServiceCharge;
         }
 
         public int getIsOutOfStock() {
-            return isOutOfStock;
+            return IsOutOfStock;
         }
 
         public void setIsOutOfStock(int isOutOfStock) {
-            this.isOutOfStock = isOutOfStock;
+            IsOutOfStock = isOutOfStock;
         }
 
         public int getAutoComment() {
-            return autoComment;
+            return AutoComment;
         }
 
         public void setAutoComment(int autoComment) {
-            this.autoComment = autoComment;
+            AutoComment = autoComment;
         }
 
         public int getIsDisplayBill() {
-            return isDisplayBill;
+            return IsDisplayBill;
         }
 
         public void setIsDisplayBill(int isDisplayBill) {
-            this.isDisplayBill = isDisplayBill;
+            IsDisplayBill = isDisplayBill;
         }
 
         public int getIsPrintCheck() {
-            return isPrintCheck;
+            return IsPrintCheck;
         }
 
         public void setIsPrintCheck(int isPrintCheck) {
-            this.isPrintCheck = isPrintCheck;
+            IsPrintCheck = isPrintCheck;
         }
 
         public int getIsPrintReceipt() {
-            return isPrintReceipt;
+            return IsPrintReceipt;
         }
 
         public void setIsPrintReceipt(int isPrintReceipt) {
-            this.isPrintReceipt = isPrintReceipt;
+            IsPrintReceipt = isPrintReceipt;
         }
 
         public int getCanReturnProduct() {
-            return canReturnProduct;
+            return CanReturnProduct;
         }
 
         public void setCanReturnProduct(int canReturnProduct) {
-            this.canReturnProduct = canReturnProduct;
+            CanReturnProduct = canReturnProduct;
         }
 
         public int getDisplayAtCheckerSystem() {
-            return displayAtCheckerSystem;
+            return DisplayAtCheckerSystem;
         }
 
         public void setDisplayAtCheckerSystem(int displayAtCheckerSystem) {
-            this.displayAtCheckerSystem = displayAtCheckerSystem;
+            DisplayAtCheckerSystem = displayAtCheckerSystem;
         }
 
         public String getProductEnableDateTime() {
-            return productEnableDateTime;
+            return ProductEnableDateTime;
         }
 
         public void setProductEnableDateTime(String productEnableDateTime) {
-            this.productEnableDateTime = productEnableDateTime;
+            ProductEnableDateTime = productEnableDateTime;
         }
 
         public String getProductExpireDateTime() {
-            return productExpireDateTime;
+            return ProductExpireDateTime;
         }
 
         public void setProductExpireDateTime(String productExpireDateTime) {
-            this.productExpireDateTime = productExpireDateTime;
+            ProductExpireDateTime = productExpireDateTime;
         }
 
         public String getProductEnableDayString() {
-            return productEnableDayString;
+            return ProductEnableDayString;
         }
 
         public void setProductEnableDayString(String productEnableDayString) {
-            this.productEnableDayString = productEnableDayString;
+            ProductEnableDayString = productEnableDayString;
         }
 
         public String getWarningTime() {
-            return warningTime;
+            return WarningTime;
         }
 
         public void setWarningTime(String warningTime) {
-            this.warningTime = warningTime;
+            WarningTime = warningTime;
         }
 
         public String getCriticalTime() {
-            return criticalTime;
+            return CriticalTime;
         }
 
         public void setCriticalTime(String criticalTime) {
-            this.criticalTime = criticalTime;
+            CriticalTime = criticalTime;
         }
 
         public int getSaleMode() {
-            return saleMode;
+            return SaleMode;
         }
 
         public void setSaleMode(int saleMode) {
-            this.saleMode = saleMode;
+            SaleMode = saleMode;
         }
 
         public int getSaleMode1() {
-            return saleMode1;
+            return SaleMode1;
         }
 
         public void setSaleMode1(int saleMode1) {
-            this.saleMode1 = saleMode1;
+            SaleMode1 = saleMode1;
         }
 
         public int getSaleMode2() {
-            return saleMode2;
+            return SaleMode2;
         }
 
         public void setSaleMode2(int saleMode2) {
-            this.saleMode2 = saleMode2;
+            SaleMode2 = saleMode2;
         }
 
         public int getSaleMode3() {
-            return saleMode3;
+            return SaleMode3;
         }
 
         public void setSaleMode3(int saleMode3) {
-            this.saleMode3 = saleMode3;
+            SaleMode3 = saleMode3;
         }
 
         public int getSaleMode4() {
-            return saleMode4;
+            return SaleMode4;
         }
 
         public void setSaleMode4(int saleMode4) {
-            this.saleMode4 = saleMode4;
+            SaleMode4 = saleMode4;
         }
 
         public int getSaleMode5() {
-            return saleMode5;
+            return SaleMode5;
         }
 
         public void setSaleMode5(int saleMode5) {
-            this.saleMode5 = saleMode5;
+            SaleMode5 = saleMode5;
         }
 
         public int getSaleMode6() {
-            return saleMode6;
+            return SaleMode6;
         }
 
         public void setSaleMode6(int saleMode6) {
-            this.saleMode6 = saleMode6;
+            SaleMode6 = saleMode6;
         }
 
         public int getSaleMode7() {
-            return saleMode7;
+            return SaleMode7;
         }
 
         public void setSaleMode7(int saleMode7) {
-            this.saleMode7 = saleMode7;
+            SaleMode7 = saleMode7;
         }
 
         public int getSaleMode8() {
-            return saleMode8;
+            return SaleMode8;
         }
 
         public void setSaleMode8(int saleMode8) {
-            this.saleMode8 = saleMode8;
+            SaleMode8 = saleMode8;
         }
 
         public int getSaleMode9() {
-            return saleMode9;
+            return SaleMode9;
         }
 
         public void setSaleMode9(int saleMode9) {
-            this.saleMode9 = saleMode9;
+            SaleMode9 = saleMode9;
         }
 
         public int getSaleMode10() {
-            return saleMode10;
+            return SaleMode10;
         }
 
         public void setSaleMode10(int saleMode10) {
-            this.saleMode10 = saleMode10;
+            SaleMode10 = saleMode10;
         }
 
         public int getVatType() {
-            return vatType;
+            return VatType;
         }
 
         public void setVatType(int vatType) {
-            this.vatType = vatType;
+            VatType = vatType;
         }
 
         public String getVatCode() {
-            return vatCode;
+            return VatCode;
         }
 
         public void setVatCode(String vatCode) {
-            this.vatCode = vatCode;
+            VatCode = vatCode;
         }
 
         public String getProductUnitName() {
-            return productUnitName;
+            return ProductUnitName;
         }
 
         public void setProductUnitName(String productUnitName) {
-            this.productUnitName = productUnitName;
+            ProductUnitName = productUnitName;
         }
 
         public int getDiscountAllow() {
-            return discountAllow;
+            return DiscountAllow;
         }
 
         public void setDiscountAllow(int discountAllow) {
-            this.discountAllow = discountAllow;
+            DiscountAllow = discountAllow;
         }
 
         public int getZeroPriceAllow() {
-            return zeroPriceAllow;
+            return ZeroPriceAllow;
         }
 
         public void setZeroPriceAllow(int zeroPriceAllow) {
-            this.zeroPriceAllow = zeroPriceAllow;
+            ZeroPriceAllow = zeroPriceAllow;
         }
 
         public double getLimitDiscountAmount() {
-            return limitDiscountAmount;
+            return LimitDiscountAmount;
         }
 
         public void setLimitDiscountAmount(double limitDiscountAmount) {
-            this.limitDiscountAmount = limitDiscountAmount;
+            LimitDiscountAmount = limitDiscountAmount;
         }
 
         public double getLimitDiscountPercent() {
-            return limitDiscountPercent;
+            return LimitDiscountPercent;
         }
 
         public void setLimitDiscountPercent(double limitDiscountPercent) {
-            this.limitDiscountPercent = limitDiscountPercent;
+            LimitDiscountPercent = limitDiscountPercent;
         }
 
         public double getCommRate() {
-            return commRate;
+            return CommRate;
         }
 
         public void setCommRate(double commRate) {
-            this.commRate = commRate;
+            CommRate = commRate;
         }
 
         public String getProductDesp() {
-            return productDesp;
+            return ProductDesp;
         }
 
         public void setProductDesp(String productDesp) {
-            this.productDesp = productDesp;
+            ProductDesp = productDesp;
         }
 
         public int getProductDisplay() {
-            return productDisplay;
+            return ProductDisplay;
         }
 
         public void setProductDisplay(int productDisplay) {
-            this.productDisplay = productDisplay;
+            ProductDisplay = productDisplay;
         }
 
         public int getProductActivate() {
-            return productActivate;
+            return ProductActivate;
         }
 
         public void setProductActivate(int productActivate) {
-            this.productActivate = productActivate;
+            ProductActivate = productActivate;
         }
 
         public int getProductOrdering() {
-            return productOrdering;
+            return ProductOrdering;
         }
 
         public void setProductOrdering(int productOrdering) {
-            this.productOrdering = productOrdering;
+            ProductOrdering = productOrdering;
         }
 
         public int getPrintOrdering() {
-            return printOrdering;
+            return PrintOrdering;
         }
 
         public void setPrintOrdering(int printOrdering) {
-            this.printOrdering = printOrdering;
+            PrintOrdering = printOrdering;
         }
 
         public int getAddingFromBranch() {
-            return addingFromBranch;
+            return AddingFromBranch;
         }
 
         public void setAddingFromBranch(int addingFromBranch) {
-            this.addingFromBranch = addingFromBranch;
+            AddingFromBranch = addingFromBranch;
         }
 
         public int getDeleted() {
-            return deleted;
+            return Deleted;
         }
 
         public void setDeleted(int deleted) {
-            this.deleted = deleted;
+            Deleted = deleted;
         }
 
         public String getInsertDate() {
-            return insertDate;
+            return InsertDate;
         }
 
         public void setInsertDate(String insertDate) {
-            this.insertDate = insertDate;
+            InsertDate = insertDate;
         }
 
         public String getUpdateDate() {
-            return updateDate;
+            return UpdateDate;
         }
 
         public void setUpdateDate(String updateDate) {
-            this.updateDate = updateDate;
+            UpdateDate = updateDate;
+        }
+
+        public double getProductPrice() {
+            return ProductPrice;
+        }
+
+        public void setProductPrice(double productPrice) {
+            ProductPrice = productPrice;
+        }
+
+        public double getProductVatPercent() {
+            return ProductVatPercent;
+        }
+
+        public void setProductVatPercent(double productVatPercent) {
+            ProductVatPercent = productVatPercent;
+        }
+
+        public String getProductVatDisplay() {
+            return ProductVatDisplay;
+        }
+
+        public void setProductVatDisplay(String productVatDisplay) {
+            ProductVatDisplay = productVatDisplay;
+        }
+
+        public String getProductVatDesp() {
+            return ProductVatDesp;
+        }
+
+        public void setProductVatDesp(String productVatDesp) {
+            ProductVatDesp = productVatDesp;
+        }
+
+        public int getComponentLevel() {
+            return ComponentLevel;
+        }
+
+        public void setComponentLevel(int componentLevel) {
+            ComponentLevel = componentLevel;
+        }
+
+        public int getIndentLevel() {
+            return IndentLevel;
+        }
+
+        public void setIndentLevel(int indentLevel) {
+            IndentLevel = indentLevel;
+        }
+
+        public int getOtherProductTypeID() {
+            return OtherProductTypeID;
+        }
+
+        public void setOtherProductTypeID(int otherProductTypeID) {
+            OtherProductTypeID = otherProductTypeID;
+        }
+
+        public String getOtherProductTypeName() {
+            return OtherProductTypeName;
+        }
+
+        public void setOtherProductTypeName(String otherProductTypeName) {
+            OtherProductTypeName = otherProductTypeName;
         }
     }
 
     public static class ProductPrice{
-        private int productPriceId;
-        private int productId;
-        private double productPrice;
-        private double prePaidPrice;
-        private double mainPrice;
-        private int saleMode;
-        private String priceRemark;
-        private String fromDate;
-        private String toDate;
-        private int addingFromBranch;
+        private int ProductPriceID;
+        private int ProductID;
+        private double ProductPrice;
+        private double PrePaidPrice;
+        private double MainPrice;
+        private int SaleMode;
+        private String PriceRemark;
+        private String FromDate;
+        private String ToDate;
+        private int AddingFromBranch;
 
-        public int getProductPriceId() {
-            return productPriceId;
+        public int getProductPriceID() {
+            return ProductPriceID;
         }
 
-        public void setProductPriceId(int productPriceId) {
-            this.productPriceId = productPriceId;
+        public void setProductPriceID(int productPriceID) {
+            ProductPriceID = productPriceID;
         }
 
-        public int getProductId() {
-            return productId;
+        public int getProductID() {
+            return ProductID;
         }
 
-        public void setProductId(int productId) {
-            this.productId = productId;
+        public void setProductID(int productID) {
+            ProductID = productID;
         }
 
         public double getProductPrice() {
-            return productPrice;
+            return ProductPrice;
         }
 
         public void setProductPrice(double productPrice) {
-            this.productPrice = productPrice;
+            ProductPrice = productPrice;
         }
 
         public double getPrePaidPrice() {
-            return prePaidPrice;
+            return PrePaidPrice;
         }
 
         public void setPrePaidPrice(double prePaidPrice) {
-            this.prePaidPrice = prePaidPrice;
+            PrePaidPrice = prePaidPrice;
         }
 
         public double getMainPrice() {
-            return mainPrice;
+            return MainPrice;
         }
 
         public void setMainPrice(double mainPrice) {
-            this.mainPrice = mainPrice;
+            MainPrice = mainPrice;
         }
 
         public int getSaleMode() {
-            return saleMode;
+            return SaleMode;
         }
 
         public void setSaleMode(int saleMode) {
-            this.saleMode = saleMode;
+            SaleMode = saleMode;
         }
 
         public String getPriceRemark() {
-            return priceRemark;
+            return PriceRemark;
         }
 
         public void setPriceRemark(String priceRemark) {
-            this.priceRemark = priceRemark;
+            PriceRemark = priceRemark;
         }
 
         public String getFromDate() {
-            return fromDate;
+            return FromDate;
         }
 
         public void setFromDate(String fromDate) {
-            this.fromDate = fromDate;
+            FromDate = fromDate;
         }
 
         public String getToDate() {
-            return toDate;
+            return ToDate;
         }
 
         public void setToDate(String toDate) {
-            this.toDate = toDate;
+            ToDate = toDate;
         }
 
         public int getAddingFromBranch() {
-            return addingFromBranch;
+            return AddingFromBranch;
         }
 
         public void setAddingFromBranch(int addingFromBranch) {
-            this.addingFromBranch = addingFromBranch;
+            AddingFromBranch = addingFromBranch;
         }
     }
 
     public static class ProductDept{
-        private int productDeptId;
-        private int productGroupId;
-        private int shopId;
-        private String productDeptCode;
-        private String productDeptName;
-        private String productDeptNameLang1;
-        private String productDeptNameLang2;
-        private String productDeptNameLang3;
-        private String productDeptNameLang4;
-        private String productDeptNameLang5;
-        private int productDeptActivate;
-        private int productDeptSaleMode;
-        private int productDeptOrdering;
-        private int printProductForSession;
-        private int printReceiptGroupingDept;
-        private int displayMobile;
-        private int addingFromBranch;
-        private int deleted;
+        private int ProductDeptID;
+        private int ProductGroupID;
+        private int ShopID;
+        private String ProductDeptCode;
+        private String ProductDeptName;
+        private String ProductDeptNameLang1;
+        private String ProductDeptNameLang2;
+        private String ProductDeptNameLang3;
+        private String ProductDeptNameLang4;
+        private String ProductDeptNameLang5;
+        private int ProductDeptActivate;
+        private int ProductDeptSaleMode;
+        private int ProductDeptOrdering;
+        private int PrintProductForSession;
+        private int PrintReceiptGroupingDept;
+        private int DisplayMobile;
+        private int AddingFromBranch;
+        private int Deleted;
 
-        public int getProductDeptId() {
-            return productDeptId;
+        public int getShopID() {
+            return ShopID;
         }
 
-        public void setProductDeptId(int productDeptId) {
-            this.productDeptId = productDeptId;
+        public void setShopID(int shopID) {
+            ShopID = shopID;
         }
 
-        public int getProductGroupId() {
-            return productGroupId;
+        public int getProductDeptID() {
+            return ProductDeptID;
         }
 
-        public void setProductGroupId(int productGroupId) {
-            this.productGroupId = productGroupId;
+        public void setProductDeptID(int productDeptID) {
+            ProductDeptID = productDeptID;
         }
 
-        public int getShopId() {
-            return shopId;
+        public int getProductGroupID() {
+            return ProductGroupID;
         }
 
-        public void setShopId(int shopId) {
-            this.shopId = shopId;
+        public void setProductGroupID(int productGroupID) {
+            ProductGroupID = productGroupID;
         }
 
         public String getProductDeptCode() {
-            return productDeptCode;
+            return ProductDeptCode;
         }
 
         public void setProductDeptCode(String productDeptCode) {
-            this.productDeptCode = productDeptCode;
+            ProductDeptCode = productDeptCode;
         }
 
         public String getProductDeptName() {
-            return productDeptName;
+            return ProductDeptName;
         }
 
         public void setProductDeptName(String productDeptName) {
-            this.productDeptName = productDeptName;
+            ProductDeptName = productDeptName;
         }
 
         public String getProductDeptNameLang1() {
-            return productDeptNameLang1;
+            return ProductDeptNameLang1;
         }
 
         public void setProductDeptNameLang1(String productDeptNameLang1) {
-            this.productDeptNameLang1 = productDeptNameLang1;
+            ProductDeptNameLang1 = productDeptNameLang1;
         }
 
         public String getProductDeptNameLang2() {
-            return productDeptNameLang2;
+            return ProductDeptNameLang2;
         }
 
         public void setProductDeptNameLang2(String productDeptNameLang2) {
-            this.productDeptNameLang2 = productDeptNameLang2;
+            ProductDeptNameLang2 = productDeptNameLang2;
         }
 
         public String getProductDeptNameLang3() {
-            return productDeptNameLang3;
+            return ProductDeptNameLang3;
         }
 
         public void setProductDeptNameLang3(String productDeptNameLang3) {
-            this.productDeptNameLang3 = productDeptNameLang3;
+            ProductDeptNameLang3 = productDeptNameLang3;
         }
 
         public String getProductDeptNameLang4() {
-            return productDeptNameLang4;
+            return ProductDeptNameLang4;
         }
 
         public void setProductDeptNameLang4(String productDeptNameLang4) {
-            this.productDeptNameLang4 = productDeptNameLang4;
+            ProductDeptNameLang4 = productDeptNameLang4;
         }
 
         public String getProductDeptNameLang5() {
-            return productDeptNameLang5;
+            return ProductDeptNameLang5;
         }
 
         public void setProductDeptNameLang5(String productDeptNameLang5) {
-            this.productDeptNameLang5 = productDeptNameLang5;
+            ProductDeptNameLang5 = productDeptNameLang5;
         }
 
         public int getProductDeptActivate() {
-            return productDeptActivate;
+            return ProductDeptActivate;
         }
 
         public void setProductDeptActivate(int productDeptActivate) {
-            this.productDeptActivate = productDeptActivate;
+            ProductDeptActivate = productDeptActivate;
         }
 
         public int getProductDeptSaleMode() {
-            return productDeptSaleMode;
+            return ProductDeptSaleMode;
         }
 
         public void setProductDeptSaleMode(int productDeptSaleMode) {
-            this.productDeptSaleMode = productDeptSaleMode;
+            ProductDeptSaleMode = productDeptSaleMode;
         }
 
         public int getProductDeptOrdering() {
-            return productDeptOrdering;
+            return ProductDeptOrdering;
         }
 
         public void setProductDeptOrdering(int productDeptOrdering) {
-            this.productDeptOrdering = productDeptOrdering;
+            ProductDeptOrdering = productDeptOrdering;
         }
 
         public int getPrintProductForSession() {
-            return printProductForSession;
+            return PrintProductForSession;
         }
 
         public void setPrintProductForSession(int printProductForSession) {
-            this.printProductForSession = printProductForSession;
+            PrintProductForSession = printProductForSession;
         }
 
         public int getPrintReceiptGroupingDept() {
-            return printReceiptGroupingDept;
+            return PrintReceiptGroupingDept;
         }
 
         public void setPrintReceiptGroupingDept(int printReceiptGroupingDept) {
-            this.printReceiptGroupingDept = printReceiptGroupingDept;
+            PrintReceiptGroupingDept = printReceiptGroupingDept;
         }
 
         public int getDisplayMobile() {
-            return displayMobile;
+            return DisplayMobile;
         }
 
         public void setDisplayMobile(int displayMobile) {
-            this.displayMobile = displayMobile;
+            DisplayMobile = displayMobile;
         }
 
         public int getAddingFromBranch() {
-            return addingFromBranch;
+            return AddingFromBranch;
         }
 
         public void setAddingFromBranch(int addingFromBranch) {
-            this.addingFromBranch = addingFromBranch;
+            AddingFromBranch = addingFromBranch;
         }
 
         public int getDeleted() {
-            return deleted;
+            return Deleted;
         }
 
         public void setDeleted(int deleted) {
-            this.deleted = deleted;
+            Deleted = deleted;
         }
     }
 
     public static class ProductGroups{
-        private int productGroupId;
-        private int shopId;
-        private String productGroupCode;
-        private String productGroupName;
-        private String productGroupNameLang1;
-        private String productGroupNameLang2;
-        private String productGroupNameLang3;
-        private String productGroupNameLang4;
-        private String productGroupNameLang5;
-        private int productGroupActivate;
-        private int productGroupSaleMode;
-        private int productGroupType;
-        private int productGroupOrdering;
-        private int printDeptForSession;
-        private int displayMobile;
-        private int isComment;
-        private int addingFromBranch;
-        private int deleted;
+        private int ProductGroupID;
+        private int ShopID;
+        private String ProductGroupCode;
+        private String ProductGroupName;
+        private String ProductGroupNameLang1;
+        private String ProductGroupNameLang2;
+        private String ProductGroupNameLang3;
+        private String ProductGroupNameLang4;
+        private String ProductGroupNameLang5;
+        private int ProductGroupActivate;
+        private int ProductGroupSaleMode;
+        private int ProductGroupType;
+        private int ProductGroupOrdering;
+        private int PrintDeptForSession;
+        private int DisplayMobile;
+        private int IsComment;
+        private int AddingFromBranch;
+        private int Deleted;
 
-        public int getProductGroupId() {
-            return productGroupId;
+        public int getProductGroupID() {
+            return ProductGroupID;
         }
 
-        public void setProductGroupId(int productGroupId) {
-            this.productGroupId = productGroupId;
+        public void setProductGroupID(int productGroupID) {
+            ProductGroupID = productGroupID;
         }
 
-        public int getShopId() {
-            return shopId;
+        public int getShopID() {
+            return ShopID;
         }
 
-        public void setShopId(int shopId) {
-            this.shopId = shopId;
+        public void setShopID(int shopID) {
+            ShopID = shopID;
         }
 
         public String getProductGroupCode() {
-            return productGroupCode;
+            return ProductGroupCode;
         }
 
         public void setProductGroupCode(String productGroupCode) {
-            this.productGroupCode = productGroupCode;
+            ProductGroupCode = productGroupCode;
         }
 
         public String getProductGroupName() {
-            return productGroupName;
+            return ProductGroupName;
         }
 
         public void setProductGroupName(String productGroupName) {
-            this.productGroupName = productGroupName;
+            ProductGroupName = productGroupName;
         }
 
         public String getProductGroupNameLang1() {
-            return productGroupNameLang1;
+            return ProductGroupNameLang1;
         }
 
         public void setProductGroupNameLang1(String productGroupNameLang1) {
-            this.productGroupNameLang1 = productGroupNameLang1;
+            ProductGroupNameLang1 = productGroupNameLang1;
         }
 
         public String getProductGroupNameLang2() {
-            return productGroupNameLang2;
+            return ProductGroupNameLang2;
         }
 
         public void setProductGroupNameLang2(String productGroupNameLang2) {
-            this.productGroupNameLang2 = productGroupNameLang2;
+            ProductGroupNameLang2 = productGroupNameLang2;
         }
 
         public String getProductGroupNameLang3() {
-            return productGroupNameLang3;
+            return ProductGroupNameLang3;
         }
 
         public void setProductGroupNameLang3(String productGroupNameLang3) {
-            this.productGroupNameLang3 = productGroupNameLang3;
+            ProductGroupNameLang3 = productGroupNameLang3;
         }
 
         public String getProductGroupNameLang4() {
-            return productGroupNameLang4;
+            return ProductGroupNameLang4;
         }
 
         public void setProductGroupNameLang4(String productGroupNameLang4) {
-            this.productGroupNameLang4 = productGroupNameLang4;
+            ProductGroupNameLang4 = productGroupNameLang4;
         }
 
         public String getProductGroupNameLang5() {
-            return productGroupNameLang5;
+            return ProductGroupNameLang5;
         }
 
         public void setProductGroupNameLang5(String productGroupNameLang5) {
-            this.productGroupNameLang5 = productGroupNameLang5;
+            ProductGroupNameLang5 = productGroupNameLang5;
         }
 
         public int getProductGroupActivate() {
-            return productGroupActivate;
+            return ProductGroupActivate;
         }
 
         public void setProductGroupActivate(int productGroupActivate) {
-            this.productGroupActivate = productGroupActivate;
+            ProductGroupActivate = productGroupActivate;
         }
 
         public int getProductGroupSaleMode() {
-            return productGroupSaleMode;
+            return ProductGroupSaleMode;
         }
 
         public void setProductGroupSaleMode(int productGroupSaleMode) {
-            this.productGroupSaleMode = productGroupSaleMode;
+            ProductGroupSaleMode = productGroupSaleMode;
         }
 
         public int getProductGroupType() {
-            return productGroupType;
+            return ProductGroupType;
         }
 
         public void setProductGroupType(int productGroupType) {
-            this.productGroupType = productGroupType;
+            ProductGroupType = productGroupType;
         }
 
         public int getProductGroupOrdering() {
-            return productGroupOrdering;
+            return ProductGroupOrdering;
         }
 
         public void setProductGroupOrdering(int productGroupOrdering) {
-            this.productGroupOrdering = productGroupOrdering;
+            ProductGroupOrdering = productGroupOrdering;
         }
 
         public int getPrintDeptForSession() {
-            return printDeptForSession;
+            return PrintDeptForSession;
         }
 
         public void setPrintDeptForSession(int printDeptForSession) {
-            this.printDeptForSession = printDeptForSession;
+            PrintDeptForSession = printDeptForSession;
         }
 
         public int getDisplayMobile() {
-            return displayMobile;
+            return DisplayMobile;
         }
 
         public void setDisplayMobile(int displayMobile) {
-            this.displayMobile = displayMobile;
+            DisplayMobile = displayMobile;
         }
 
         public int getIsComment() {
-            return isComment;
+            return IsComment;
         }
 
         public void setIsComment(int isComment) {
-            this.isComment = isComment;
+            IsComment = isComment;
         }
 
         public int getAddingFromBranch() {
-            return addingFromBranch;
+            return AddingFromBranch;
         }
 
         public void setAddingFromBranch(int addingFromBranch) {
-            this.addingFromBranch = addingFromBranch;
+            AddingFromBranch = addingFromBranch;
         }
 
         public int getDeleted() {
-            return deleted;
+            return Deleted;
         }
 
         public void setDeleted(int deleted) {
-            this.deleted = deleted;
+            Deleted = deleted;
         }
     }
 }

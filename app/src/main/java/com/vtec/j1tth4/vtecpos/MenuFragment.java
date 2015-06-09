@@ -101,7 +101,7 @@ public class MenuFragment extends Fragment{
     }
 
     private void filterProductType(ProductData.Products product){
-        switch (product.getProductTypeId()){
+        switch (product.getProductTypeID()){
             case ProductDataSource.NORMAL:
                 addOrder(product, 1);
                 break;
