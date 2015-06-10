@@ -13,8 +13,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.vtec.j1tth4.vtecpos.provider.ProductDataSource;
-import com.vtec.j1tth4.vtecpos.provider.ProductData;
+import com.vtec.j1tth4.vtecpos.OpenPriceFragment.OpenPriceCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,8 +87,21 @@ public class MenuFragment extends Fragment{
         mGvMenu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ProductData.Products product = (ProductData.Products) parent.getItemAtPosition(position);
-                filterProductType(product);
+                final ProductData.Products product = (ProductData.Products) parent.getItemAtPosition(position);
+
+                if(product.isOpenPrice()){
+                    OpenPriceFragment opDialog = OpenPriceFragment.getInstance(product.getProductName());
+                    opDialog.show(getFragmentManager(), OpenPriceFragment.TAG);
+                    opDialog.setCallback(new OpenPriceCallback() {
+                        @Override
+                        public void onEnterPrice(double price) {
+                            product.setProductPrice(price);
+                            filterProductType(product);
+                        }
+                    });
+                }else {
+                    filterProductType(product);
+                }
             }
         });
     }
@@ -101,7 +113,7 @@ public class MenuFragment extends Fragment{
     }
 
     private void filterProductType(ProductData.Products product){
-        switch (product.getProductTypeID()){
+        switch (product.getProductTypeID()) {
             case ProductDataSource.NORMAL:
                 addOrder(product, 1);
                 break;
@@ -146,8 +158,13 @@ public class MenuFragment extends Fragment{
             }
             final ProductData.Products product = mProductList.get(i);
             holder.menu_title.setText(product.getProductName());
-            double price = product.getProductPrice() == -1 ? 1 : product.getProductPrice(); // test -1 open price
-            holder.menu_sub_title.setText(Utils.currencyFormat(getActivity(), price));
+            boolean isOpenPrice = product.getProductPrice() == -1 ? true : false;
+            product.setIsOpenPrice(isOpenPrice);
+            if(!isOpenPrice) {
+                holder.menu_sub_title.setText(Utils.currencyFormat(getActivity(), product.getProductPrice()));
+            }else{
+                holder.menu_sub_title.setText(null);
+            }
             //holder.menu_pic.setImageDrawable(null);
             return view;
         }

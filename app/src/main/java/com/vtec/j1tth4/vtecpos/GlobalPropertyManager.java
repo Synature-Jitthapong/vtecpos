@@ -2,13 +2,6 @@ package com.vtec.j1tth4.vtecpos;
 
 import android.content.Context;
 
-import com.vtec.j1tth4.vtecpos.provider.Computer;
-import com.vtec.j1tth4.vtecpos.provider.ComputerDataSource;
-import com.vtec.j1tth4.vtecpos.provider.GlobalProperty;
-import com.vtec.j1tth4.vtecpos.provider.GlobalPropertyDataSource;
-import com.vtec.j1tth4.vtecpos.provider.Shop;
-import com.vtec.j1tth4.vtecpos.provider.ShopDataSource;
-
 import java.util.List;
 
 /**
@@ -20,6 +13,12 @@ public class GlobalPropertyManager {
     private int staffId = 1;
     private String qtyFormat = "#,##0";
     private String currencyFormat = "#,##0.00";
+
+    private String fullDateFormat = "d MMMM yyyy";
+    private String fullDateTimeFormat = "d MMMM yyyy HH:mm:ss";
+
+    private String shortDateFormat = "d/MM/yyyy";
+    private String shortDateTimeFormat = "d/MM/yyyy HH:mm:ss";
 
     private int hasSc;
     private int saleMode = 1;
@@ -136,5 +135,21 @@ public class GlobalPropertyManager {
 
     public String getVatCode(){
         return vatCode;
+    }
+
+    public String getFullDateFormat() {
+        return fullDateFormat;
+    }
+
+    public String getFullDateTimeFormat() {
+        return fullDateTimeFormat;
+    }
+
+    public String getShortDateFormat() {
+        return shortDateFormat;
+    }
+
+    public String getShortDateTimeFormat() {
+        return shortDateTimeFormat;
     }
 }

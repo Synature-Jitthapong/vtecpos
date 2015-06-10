@@ -3,17 +3,13 @@ package com.vtec.j1tth4.vtecpos;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Build;
-import android.support.v4.view.PagerAdapter;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.HorizontalScrollView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.vtec.j1tth4.vtecpos.provider.ProductData;
 
 import java.util.List;
 

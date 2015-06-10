@@ -1,16 +1,15 @@
 package com.vtec.j1tth4.vtecpos;
 
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.TextView;
-
-import com.vtec.j1tth4.vtecpos.provider.Transaction;
 
 import de.greenrobot.event.EventBus;
 
@@ -19,10 +18,14 @@ public class PaymentActivity extends ActionBarActivity {
 
     private PaymentTypeSlidingTabLayout mPaymentTypeTabLayout;
 
+    private PaymentEvent mPaymentRef;
+
     private TextView mTvTotalPrice;
     private TextView mTvTotalPaid;
     private TextView mTvTotalDue;
     private TextView mTvChange;
+    private Button mBtnCancel;
+    private Button mBtnConfirm;
 
     public static class PaymentDeletedEvent{
     }
@@ -57,20 +60,22 @@ public class PaymentActivity extends ActionBarActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        mPaymentTypeTabLayout = (PaymentTypeSlidingTabLayout) findViewById(R.id.paymenttype_tab);
-        mTvTotalPrice = (TextView) findViewById(R.id.total_price);
-        mTvTotalPaid = (TextView) findViewById(R.id.total_paid);
-        mTvTotalDue = (TextView) findViewById(R.id.total_due);
+        mPaymentTypeTabLayout = (PaymentTypeSlidingTabLayout) findViewById(R.id.payTypeTab);
+        mTvTotalPrice = (TextView) findViewById(R.id.totalPrice);
+        mTvTotalPaid = (TextView) findViewById(R.id.totalPaid);
+        mTvTotalDue = (TextView) findViewById(R.id.totalDue);
         mTvChange = (TextView) findViewById(R.id.change);
+        mBtnCancel = (Button) findViewById(R.id.btnPayCancel);
+        mBtnConfirm = (Button) findViewById(R.id.btnPayConfirm);
         mPaymentTypeTabLayout.setTabClickListener(mPayTypeTabClickListener);
 
         if(savedInstanceState == null){
             android.support.v4.app.FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
             CashPaymentFragment cashFragment = new CashPaymentFragment();
-            trans.replace(R.id.payment_content, cashFragment);
+            trans.replace(R.id.paymentContentainer, cashFragment);
 
             PayDetailFragment payDetailFragment = new PayDetailFragment();
-            trans.replace(R.id.paydetail_content, payDetailFragment);
+            trans.replace(R.id.payDetailContentainer, payDetailFragment);
             trans.commit();
         }
 
@@ -90,24 +95,47 @@ public class PaymentActivity extends ActionBarActivity {
     }
 
     public void onEvent(PaymentEvent event){
+        mPaymentRef = event;
+
         mTvTotalPaid.setText(Utils.currencyFormat(this, event.totalPaid));
         mTvTotalDue.setText(Utils.currencyFormat(this, event.totalDue));
         mTvChange.setText(Utils.currencyFormat(this, event.change));
 
         EventBus.getDefault().post(new PaymentAddedEvent());
+
+        if(mPaymentRef.totalDue > 0){
+            mBtnConfirm.setEnabled(false);
+        }else{
+            mBtnConfirm.setEnabled(true);
+        }
     }
 
     public void onClick(final View v){
         int id = v.getId();
         switch (id){
-            case R.id.pay_cancel:
-                break;
-            case R.id.pay_confirm:
-                TransactionManager.getInstance(this).finalizeBill();
-                EventBus.getDefault().post(new OrderListFragment.RefreshEvent());
-
+            case R.id.btnPayCancel:
                 finish();
                 break;
+            case R.id.btnPayConfirm:
+                confirm();
+                break;
+        }
+    }
+
+    private void confirm(){
+        TransactionManager.getInstance(this).finalizeBill();
+        EventBus.getDefault().post(new OrderListFragment.RefreshEvent());
+        if(mPaymentRef.change > 0){
+            ChangeDialogFragment f = ChangeDialogFragment.getInstance(mPaymentRef.change);
+            f.show(getFragmentManager(), ChangeDialogFragment.TAG);
+            f.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialogInterface) {
+                    finish();
+                }
+            });
+        }else {
+            finish();
         }
     }
 
@@ -162,12 +190,12 @@ public class PaymentActivity extends ActionBarActivity {
                     if(tabId == 1) {
                         android.support.v4.app.FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
                         CreditPaymentFragment creditFragment = new CreditPaymentFragment();
-                        trans.replace(R.id.payment_content, creditFragment);
+                        trans.replace(R.id.paymentContentainer, creditFragment);
                         trans.commit();
                     }else{
                         android.support.v4.app.FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
                         CashPaymentFragment cashFragment = new CashPaymentFragment();
-                        trans.replace(R.id.payment_content, cashFragment);
+                        trans.replace(R.id.paymentContentainer, cashFragment);
                         trans.commit();
                     }
                 }

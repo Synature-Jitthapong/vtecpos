@@ -5,21 +5,22 @@
     android:padding="@dimen/default_horizontal_margin">
 
     <CheckedTextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="item title"
-        android:id="@+id/order_title"
-        android:layout_alignTop="@+id/order_thumb_pic"
-        android:layout_toRightOf="@+id/order_thumb_pic"
-        android:layout_toEndOf="@+id/order_thumb_pic"
+        android:id="@+id/orderTitle"
+        android:layout_alignTop="@+id/orderThumbPic"
+        android:layout_toRightOf="@+id/orderThumbPic"
         android:checked="false"
         android:drawableLeft="?android:attr/listChoiceIndicatorMultiple"
-        android:gravity="center_vertical" />
+        android:gravity="center_vertical"
+        android:layout_toStartOf="@+id/btnOrderMinus"
+        android:lines="1" />
 
     <ImageButton
         android:layout_width="32dp"
         android:layout_height="wrap_content"
-        android:id="@+id/order_more_opt"
+        android:id="@+id/btnOrderMoreOpt"
         android:src="@drawable/ic_more_vert_grey600_24dp"
         style="@android:style/Widget.Holo.Button.Borderless"
         android:layout_centerVertical="true"
@@ -29,32 +30,34 @@
     <ImageView
         android:layout_width="72dp"
         android:layout_height="72dp"
-        android:id="@+id/order_thumb_pic"
+        android:id="@+id/orderThumbPic"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:visibility="gone" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="sub title"
-        android:id="@+id/order_sub_title"
-        android:layout_below="@+id/order_title"
-        android:layout_alignLeft="@+id/order_title"
-        android:layout_alignStart="@+id/order_title"
+        android:id="@+id/orderSubTitle"
+        android:layout_below="@+id/orderTitle"
+        android:layout_alignLeft="@+id/orderTitle"
+        android:layout_alignStart="@+id/orderTitle"
         android:textStyle="italic"
-        android:layout_marginLeft="32dp" />
+        android:layout_marginLeft="32dp"
+        android:layout_toStartOf="@+id/btnOrderMinus"
+        android:lines="1" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0.00"
-        android:id="@+id/order_retail_price"
+        android:id="@+id/orderTotalRetailPrice"
         android:minWidth="@dimen/item_price_min_width"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/order_more_opt"
-        android:layout_toStartOf="@+id/order_more_opt"
+        android:layout_toLeftOf="@+id/btnOrderMoreOpt"
+        android:layout_toStartOf="@+id/btnOrderMoreOpt"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:gravity="right" />
 
@@ -62,30 +65,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="1"
-        android:id="@+id/order_qty"
+        android:id="@+id/orderQty"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/order_plus"
-        android:layout_toStartOf="@+id/order_plus"
+        android:layout_toLeftOf="@+id/btnOrderPlus"
+        android:layout_toStartOf="@+id/btnOrderPlus"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/order_plus"
+        android:id="@+id/btnOrderPlus"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/order_retail_price"
-        android:layout_toStartOf="@+id/order_retail_price"
+        android:layout_toLeftOf="@+id/orderTotalRetailPrice"
+        android:layout_toStartOf="@+id/orderTotalRetailPrice"
         android:src="@drawable/ic_add_circle_grey600_36dp"
         style="@android:style/Widget.Holo.Button.Borderless" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/order_minus"
+        android:id="@+id/btnOrderMinus"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/order_qty"
-        android:layout_toStartOf="@+id/order_qty"
+        android:layout_toLeftOf="@+id/orderQty"
+        android:layout_toStartOf="@+id/orderQty"
         android:src="@drawable/ic_remove_circle_grey600_36dp"
         style="@android:style/Widget.Holo.Button.Borderless" />
 

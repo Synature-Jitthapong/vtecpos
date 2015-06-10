@@ -1,17 +1,6 @@
 package com.vtec.j1tth4.vtecpos;
 
 import android.app.Application;
-import android.os.Environment;
-
-import com.vtec.j1tth4.vtecpos.provider.GlobalProperty;
-import com.vtec.j1tth4.vtecpos.provider.GlobalPropertyDataSource;
-import com.vtec.j1tth4.vtecpos.provider.Shop;
-import com.vtec.j1tth4.vtecpos.provider.ShopDataSource;
-
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
 
 /**
  * Created by j1tth4 on 25/3/2558.

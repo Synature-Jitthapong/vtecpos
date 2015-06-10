@@ -1,10 +1,8 @@
-package com.vtec.j1tth4.vtecpos.provider;
+package com.vtec.j1tth4.vtecpos;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-
-import com.vtec.j1tth4.vtecpos.Utils;
 
 /**
  * Created by j1tth4 on 5/21/15.

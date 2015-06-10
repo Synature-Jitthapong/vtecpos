@@ -13,11 +13,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 
-import com.vtec.j1tth4.vtecpos.provider.PayDetail;
-import com.vtec.j1tth4.vtecpos.provider.Transaction;
-
 import java.text.NumberFormat;
-import java.text.ParseException;
 
 import de.greenrobot.event.EventBus;
 
@@ -25,8 +21,6 @@ import de.greenrobot.event.EventBus;
  * Created by j1tth4 on 4/1/15.
  */
 public class CashPaymentFragment extends Fragment{
-
-    public static final int PAY_TYPE_CASH = 1;
 
     public static class RecalculateEvent{
     }
@@ -173,7 +167,7 @@ public class CashPaymentFragment extends Fragment{
             double paid = mTotalCash > mTotalDue ? mTotalDue : mTotalCash;
             TransactionManager manager = TransactionManager.getInstance(getActivity());
             PayDetail payDetail = new PayDetail();
-            payDetail.setPayTypeID(PAY_TYPE_CASH);
+            payDetail.setPayTypeID(PaymentDataSource.PAY_TYPE_CASH);
             payDetail.setPaid(paid);
             payDetail.setPayAmount(mTotalCash);
             payDetail.setBankName("");

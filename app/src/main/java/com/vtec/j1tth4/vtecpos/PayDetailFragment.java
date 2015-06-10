@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.vtec.j1tth4.vtecpos.provider.PayDetail;
-
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;

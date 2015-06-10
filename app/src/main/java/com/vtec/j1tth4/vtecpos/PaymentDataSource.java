@@ -1,4 +1,4 @@
-package com.vtec.j1tth4.vtecpos.provider;
+package com.vtec.j1tth4.vtecpos;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -12,6 +12,10 @@ import java.util.List;
  * Created by j1tth4 on 5/20/15.
  */
 public class PaymentDataSource {
+
+    public static final int PAY_TYPE_CASH = 1;
+    public static final int PAY_TYPE_CREDIT = 2;
+
     public static final String TABLE_PAY_TYPE = "PayType";
 
     public static final String TABLE_ORDER_PAY_DETAIL = "OrderPayDetail";

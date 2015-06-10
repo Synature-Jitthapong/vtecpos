@@ -1,4 +1,4 @@
-package com.vtec.j1tth4.vtecpos.provider;
+package com.vtec.j1tth4.vtecpos;
 
 /**
  * Created by j1tth4 on 5/1/15 AD.
@@ -86,6 +86,7 @@ public class ProductData {
         private int IndentLevel;
         private int OtherProductTypeID;
         private String OtherProductTypeName;
+        private boolean isOpenPrice;
 
         public int getProductID() {
             return ProductID;
@@ -725,6 +726,14 @@ public class ProductData {
 
         public void setOtherProductTypeName(String otherProductTypeName) {
             OtherProductTypeName = otherProductTypeName;
+        }
+
+        public boolean isOpenPrice() {
+            return isOpenPrice;
+        }
+
+        public void setIsOpenPrice(boolean isOpenPrice) {
+            this.isOpenPrice = isOpenPrice;
         }
     }
 

@@ -1,6 +1,5 @@
-package com.vtec.j1tth4.vtecpos.provider;
+package com.vtec.j1tth4.vtecpos;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;

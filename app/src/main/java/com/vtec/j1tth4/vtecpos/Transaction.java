@@ -1,4 +1,4 @@
-package com.vtec.j1tth4.vtecpos.provider;
+package com.vtec.j1tth4.vtecpos;
 
 import java.util.ArrayList;
 import java.util.List;

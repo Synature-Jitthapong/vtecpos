@@ -2,16 +2,6 @@ package com.vtec.j1tth4.vtecpos;
 
 import android.content.Context;
 
-import com.vtec.j1tth4.vtecpos.provider.OrderPrintJob;
-import com.vtec.j1tth4.vtecpos.provider.PayDetail;
-import com.vtec.j1tth4.vtecpos.provider.PaymentDataSource;
-import com.vtec.j1tth4.vtecpos.provider.PrintJobDataSource;
-import com.vtec.j1tth4.vtecpos.provider.ProductData;
-import com.vtec.j1tth4.vtecpos.provider.SaleMode;
-import com.vtec.j1tth4.vtecpos.provider.SaleModeDataSource;
-import com.vtec.j1tth4.vtecpos.provider.Transaction;
-import com.vtec.j1tth4.vtecpos.provider.TransactionDataSource;
-
 import java.util.List;
 
 /**

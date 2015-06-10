@@ -1,4 +1,4 @@
-package com.vtec.j1tth4.vtecpos.provider;
+package com.vtec.j1tth4.vtecpos;
 
 import android.content.Context;
 import android.database.Cursor;

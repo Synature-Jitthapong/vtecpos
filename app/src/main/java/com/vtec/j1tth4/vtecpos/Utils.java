@@ -58,6 +58,30 @@ public class Utils {
         return format.format(value);
     }
 
+    public static String shortDateTimeFormat(Context c){
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat(GlobalPropertyManager.getInstance(c).getShortDateTimeFormat());
+        return format.format(calendar.getTime());
+    }
+
+    public static String shortDateFormat(Context c){
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat(GlobalPropertyManager.getInstance(c).getShortDateFormat());
+        return format.format(calendar.getTime());
+    }
+
+    public static String fullDateFormat(Context c){
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat(GlobalPropertyManager.getInstance(c).getFullDateFormat());
+        return format.format(calendar.getTime());
+    }
+
+    public static String fullDateTimeFormat(Context c){
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat(GlobalPropertyManager.getInstance(c).getFullDateTimeFormat());
+        return format.format(calendar.getTime());
+    }
+
     public static String getISODate(){
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateTimeFormat = new SimpleDateFormat(VtecPosApplication.ISO_DATE_FORMAT);

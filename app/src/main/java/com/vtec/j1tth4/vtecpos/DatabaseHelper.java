@@ -1,18 +1,14 @@
-package com.vtec.j1tth4.vtecpos.provider;
+package com.vtec.j1tth4.vtecpos;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import com.vtec.j1tth4.vtecpos.Utils;
-import com.vtec.j1tth4.vtecpos.VtecPosApplication;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.sql.SQLException;
 
 /**
  * Created by j1tth4 on 4/29/15.
@@ -20,7 +16,7 @@ import java.sql.SQLException;
 public class DatabaseHelper extends SQLiteOpenHelper{
 
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "vtecpos.db";
+    public static final String DATABASE_NAME = "vposdb.db";//"vtecpos.db";
 
     private String mDatabasePath;
 

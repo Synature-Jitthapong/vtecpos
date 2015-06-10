@@ -3,9 +3,6 @@ package com.vtec.j1tth4.vtecpos;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.vtec.j1tth4.vtecpos.provider.Transaction;
-import com.vtec.j1tth4.vtecpos.provider.TransactionDataSource;
-
 import java.util.List;
 
 /**
@@ -29,10 +26,23 @@ public class PrintTask extends AsyncTask<Integer, Void, Void>{
     }
 
     private void createReceiptText(){
-        TransactionDataSource dataSource = new TransactionDataSource(mContext);
-        List<Transaction.OrderDetail> orderDetails = dataSource.listOrderDetail(mTransactionId, mComputerId, false);
-        CommonPrint.PrintReceiptModel model = new CommonPrint.PrintReceiptModel(orderDetails, null, null);
-        model.setOrderDetails(orderDetails);
+        ReceiptHeaderFooterDataSource headerFooter = new ReceiptHeaderFooterDataSource(mContext);
+        List<ReceiptHeaderFooter> headerLine =
+                headerFooter.listReceiptHeaderFooter(ReceiptHeaderFooterDataSource.LINE_TYPE_HEADER);
+        List<ReceiptHeaderFooter> footerLine =
+                headerFooter.listReceiptHeaderFooter(ReceiptHeaderFooterDataSource.LINE_TYPE_FOOTER);
+
+        PaymentDataSource payment = new PaymentDataSource(mContext);
+        List<PayDetail> payDetails = payment.listPayDetail(mTransactionId, mComputerId, false);
+
+        TransactionDataSource transDataSource = new TransactionDataSource(mContext);
+        Transaction trans = transDataSource.getTransaction(mTransactionId, false);
+        List<Transaction.OrderDetail> orderDetails =
+                transDataSource.listOrderDetail(mTransactionId, mComputerId, false);
+        StaffDataSource staffSource = new StaffDataSource(mContext);
+        Staff staff = staffSource.getStaff(1);
+        CommonPrint.PrintReceiptModel model =
+                new CommonPrint.PrintReceiptModel(trans, staff.getStaffFirstName(), orderDetails, payDetails, headerLine, footerLine);
         mCommonPrint.createReceiptText(model);
     }
 

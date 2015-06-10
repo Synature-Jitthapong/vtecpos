@@ -1,11 +1,9 @@
 package com.vtec.j1tth4.vtecpos;
 
 import android.content.Context;
-import android.os.AsyncTask;
+import android.text.TextUtils;
 
-import com.vtec.j1tth4.vtecpos.provider.Transaction;
-
-import java.util.List;
+import com.synature.util.LevelTextPrint;
 
 import cn.wintec.wtandroidjar2.ComIO;
 import cn.wintec.wtandroidjar2.Printer;
@@ -28,7 +26,12 @@ public class WintecPrinter{
         try {
             String[] lines = textToPrint.split("\n");
             for (String line : lines) {
-                mPrinter.PRN_Print(line, ISO_8859_11);
+                LevelTextPrint.ThreeLevelPrint supportThai = LevelTextPrint.parsingThaiLevel(line);
+                if(!TextUtils.isEmpty(supportThai.getLine1()))
+                    mPrinter.PRN_Print(supportThai.getLine1(), ISO_8859_11);
+                mPrinter.PRN_Print(supportThai.getLine2(), ISO_8859_11);
+                if(!TextUtils.isEmpty(supportThai.getLine3()))
+                    mPrinter.PRN_Print(supportThai.getLine3(), ISO_8859_11);
             }
             mPrinter.PRN_PrintAndFeedLine(5);
             mPrinter.PRN_CutPaper();

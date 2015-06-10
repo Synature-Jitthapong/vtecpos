@@ -1,4 +1,4 @@
-package com.vtec.j1tth4.vtecpos.provider;
+package com.vtec.j1tth4.vtecpos;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,11 +7,9 @@ import android.database.CursorWrapper;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.vtec.j1tth4.vtecpos.GlobalPropertyManager;
-import com.vtec.j1tth4.vtecpos.Utils;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 /**
@@ -648,6 +646,26 @@ public class TransactionDataSource {
                             String.valueOf(transId),
                             String.valueOf(compId)
                     });
+
+            // generate receipt number
+            int maxReceiptId = getMaxReceiptId(db, Utils.getISODate());
+            String[] dateSplit = Utils.getISODate().split("-");
+            int year = Integer.parseInt(dateSplit[0]);
+            int month = Integer.parseInt(dateSplit[1]);
+            int day = Integer.parseInt(dateSplit[2]);
+            String receiptNumber = generateReceiptNumber(year, month, day, maxReceiptId);
+            ContentValues cv = new ContentValues();
+            cv.put(TRANSACTION_STATUS_ID, SUCCESS_TRANS);
+            cv.put(RECEIPT_ID, maxReceiptId);
+            cv.put(RECEIPT_NUMBER, receiptNumber);
+            db.update(TABLE_TRANSACTION_FRONT, cv,
+                    TRANSACTION_ID + "=?" +
+                            " and " + COMPUTER_ID + "=?",
+                    new String[]{
+                            String.valueOf(transId),
+                            String.valueOf(compId)
+                    });
+
             db.setTransactionSuccessful();
         }finally {
             db.endTransaction();
@@ -1206,9 +1224,16 @@ public class TransactionDataSource {
             trans = new Transaction();
             trans.setTransactionID(cursor.getInt(cursor.getColumnIndex(TRANSACTION_ID)));
             trans.setComputerID(cursor.getInt(cursor.getColumnIndex(COMPUTER_ID)));
+            trans.setReceiptNumber(cursor.getString(cursor.getColumnIndex(RECEIPT_NUMBER)));
+            trans.setReceiptTotalQty(cursor.getDouble(cursor.getColumnIndex(RECEIPT_TOTAL_QTY)));
+            trans.setReceiptRetailPrice(cursor.getDouble(cursor.getColumnIndex(RECEIPT_RETAIL_PRICE)));
+            trans.setReceiptDiscount(cursor.getDouble(cursor.getColumnIndex(RECEIPT_DISCOUNT)));
+            trans.setReceiptSalePrice(cursor.getDouble(cursor.getColumnIndex(RECEIPT_SALE_PRICE)));
             trans.setReceiptNetSale(cursor.getDouble(cursor.getColumnIndex(RECEIPT_NET_SALE)));
             trans.setTransactionVAT(cursor.getDouble(cursor.getColumnIndex(TRANSACTION_VAT)));
             trans.setTransactionVATable(cursor.getDouble(cursor.getColumnIndex(TRANSACTION_VATABLE)));
+            trans.setServiceCharge(cursor.getDouble(cursor.getColumnIndex(SERVICE_CHARGE)));
+            trans.setServiceChargeVAT(cursor.getDouble(cursor.getColumnIndex(SERVICE_CHARGE_VAT)));
         }
         cursor.close();
         return trans;
@@ -1383,27 +1408,34 @@ public class TransactionDataSource {
         return transId;
     }
 
+    private String generateReceiptNumber(int year, int month, int day, int id) {
+        String receiptHeader = "xxxx";
+        String receiptYear = String.format(Locale.US, "%04d", year);
+        String receiptMonth = String.format(Locale.US, "%02d", month);
+        String receiptDay = String.format(Locale.US, "%02d", day);
+        String receiptId = String.format(Locale.US, "%04d", id);
+        return receiptHeader + receiptDay + receiptMonth + receiptYear + "/" + receiptId;
+    }
+
     /**
+     * @param db
      * @param isoSaleDate
      * @return max receiptId
      */
-    private int getMaxReceiptId(String isoSaleDate){
-        int maxReceiptId = 0;
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+    private int getMaxReceiptId(SQLiteDatabase db, String isoSaleDate){
+        int receiptId = 0;
         Cursor cursor = db.rawQuery(
                 "select max(" + RECEIPT_ID + ") " +
                         " from " + TABLE_TRANSACTION +
-                        " where " + SALE_DATE + "=?" +
-                        " and " + TRANSACTION_STATUS_ID + "=?",
+                        " where " + SALE_DATE + "=?",
                 new String[]{
-                        isoSaleDate,
-                        String.valueOf(SUCCESS_TRANS)
+                        isoSaleDate
                 });
         if(cursor.moveToFirst()){
-            maxReceiptId = cursor.getInt(0);
+            receiptId = cursor.getInt(0);
         }
         cursor.close();
-        return maxReceiptId + 1;
+        return receiptId + 1;
     }
 
     /**

@@ -1,15 +1,12 @@
 package com.vtec.j1tth4.vtecpos;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.media.Image;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,13 +14,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-
-import com.vtec.j1tth4.vtecpos.provider.ProductData;
-import com.vtec.j1tth4.vtecpos.provider.ShopDataSource;
-import com.vtec.j1tth4.vtecpos.provider.Transaction;
-import com.vtec.j1tth4.vtecpos.provider.TransactionDataSource;
-
-import de.greenrobot.event.EventBus;
 
 
 public class MainActivity extends ActionBarActivity{

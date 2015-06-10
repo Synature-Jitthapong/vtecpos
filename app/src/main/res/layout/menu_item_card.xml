@@ -31,7 +31,8 @@
                 android:layout_below="@+id/menu_pic"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="@dimen/item_margin"
-                android:layout_marginRight="@dimen/item_margin" />
+                android:layout_marginRight="@dimen/item_margin"
+                android:lines="2" />
 
             <TextView
                 android:layout_width="wrap_content"

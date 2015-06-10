@@ -42,4 +42,13 @@
     <string name="logout">Log out</string>
     <string name="select_item_to_delete">Please select item that you want to delete.</string>
     <string name="close">Close</string>
+    <string name="enter_price">Enter Price</string>
+    <string name="print_date">Print Date</string>
+    <string name="staff">Staff</string>
+    <string name="receipt_no">Receipt No.</string>
+    <string name="item">Item</string>
+    <string name="qty">Qty</string>
+    <string name="price">Price</string>
+    <string name="service_charge">SC.</string>
+    <string name="service_charge_vat">SC. VAT</string>
 </resources>

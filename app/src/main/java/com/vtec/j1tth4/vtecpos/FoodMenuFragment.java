@@ -8,9 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.vtec.j1tth4.vtecpos.provider.ProductDataSource;
-import com.vtec.j1tth4.vtecpos.provider.ProductData;
-
 import java.util.ArrayList;
 import java.util.List;
 

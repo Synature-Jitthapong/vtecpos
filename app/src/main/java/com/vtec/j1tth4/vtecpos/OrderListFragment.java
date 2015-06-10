@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,8 +17,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.vtec.j1tth4.vtecpos.provider.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -156,14 +153,14 @@ public class OrderListFragment extends Fragment implements View.OnClickListener{
 
             public ViewHolder(View itemView) {
                 super(itemView);
-                orderThumbPic = (ImageView) itemView.findViewById(R.id.order_thumb_pic);
-                orderTitle = (CheckedTextView) itemView.findViewById(R.id.order_title);
-                orderSubTitle = (TextView) itemView.findViewById(R.id.order_sub_title);
-                orderQty = (TextView) itemView.findViewById(R.id.order_qty);
-                orderRetailPrice = (TextView) itemView.findViewById(R.id.order_retail_price);
-                orderMinus = (ImageButton) itemView.findViewById(R.id.order_minus);
-                orderPlus = (ImageButton) itemView.findViewById(R.id.order_plus);
-                orderMoreOpt = (ImageButton) itemView.findViewById(R.id.order_more_opt);
+                orderThumbPic = (ImageView) itemView.findViewById(R.id.orderThumbPic);
+                orderTitle = (CheckedTextView) itemView.findViewById(R.id.orderTitle);
+                orderSubTitle = (TextView) itemView.findViewById(R.id.orderSubTitle);
+                orderQty = (TextView) itemView.findViewById(R.id.orderQty);
+                orderRetailPrice = (TextView) itemView.findViewById(R.id.orderTotalRetailPrice);
+                orderMinus = (ImageButton) itemView.findViewById(R.id.btnOrderMinus);
+                orderPlus = (ImageButton) itemView.findViewById(R.id.btnOrderPlus);
+                orderMoreOpt = (ImageButton) itemView.findViewById(R.id.btnOrderMoreOpt);
             }
         }
 
