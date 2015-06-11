@@ -94,16 +94,19 @@ public class TransactionManager {
                 qty, totalRetailPrice, orgTotalRetailPrice, salePrice);
     }
 
-    public void deleteAllOrders(){
-        mTransDataSource.deleteAllOrderDetail(mCurrentTransId, mGlobalManager.getComputerId());
-    }
-
     public void deleteOrders(String ordersId){
         mTransDataSource.deleteOrderDetail(mCurrentTransId, mGlobalManager.getComputerId(), ordersId);
     }
 
     public void deleteOrder(int orderId){
         mTransDataSource.deleteOrderDetail(mCurrentTransId, mGlobalManager.getComputerId(), orderId);
+    }
+
+    public void deleteTransaction(){
+        mTransDataSource.deleteTransaction(mCurrentTransId, mGlobalManager.getComputerId());
+        mTransDataSource.deleteAllOrderDetail(mCurrentTransId, mGlobalManager.getComputerId());
+
+        openTransaction();
     }
 
     public int insertOrder(ProductData.Products product, double qty){
@@ -239,7 +242,7 @@ public class TransactionManager {
         return mCurrentTransId;
     }
 
-    public void insertTransaction(){
+    public void openTransaction(){
         mCurrentTransId = mTransDataSource.getCurrentTransactionId(Utils.getISODate());
         if(mCurrentTransId == 0) {
             GlobalPropertyManager gm = GlobalPropertyManager.getInstance(mContext);

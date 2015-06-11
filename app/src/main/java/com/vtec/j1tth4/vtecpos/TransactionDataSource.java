@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.CursorWrapper;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,9 @@ import java.util.UUID;
  * Created by j1tth4 on 4/29/15.
  */
 public class TransactionDataSource {
+
+    public static final String TAG = "TransactionDataSource";
+    public static final boolean DEBUG = true;
 
     public static final int NEW_TRANS = 1;
     public static final int SUCCESS_TRANS = 2;
@@ -474,6 +478,12 @@ public class TransactionDataSource {
                         orderCur.moveToNext();
                     }
                     orderCur.moveToFirst();
+
+                    if(DEBUG){
+                        Log.d(TAG, "orderCur count " + rowCount);
+                        Log.d(TAG, "orderCur move to first again");
+                    }
+
                     while (!orderCur.isAfterLast()) {
                         double salePrice = orderCur.getDouble(orderCur.getColumnIndex(SALE_PRICE));
                         if (orderCur.getPosition() == rowCount - 1) {
@@ -512,28 +522,36 @@ public class TransactionDataSource {
                             String.valueOf(transId),
                             String.valueOf(compId)
                     });
-            db.execSQL("update " + TABLE_ORDER_DETAIL_FRONT +
-                            " set " + SC_AMOUNT + "=" +
-                            " case when " + HAS_SERVICE_CHARGE + "=0 then 0 " +
-                            " when " + IS_SC_BEFORE_DISC + "=0 then round(" + NET_SALE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") " +
-                            " else round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") end, " +
-                            SC_VAT + "=" +
-                            " case when " + HAS_SERVICE_CHARGE + "=0 then 0 " +
-                            " when " + IS_SC_BEFORE_DISC + "=0 then " +
-                            "   case when " + VAT_TYPE + "=1 then round(round(" + NET_SALE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/(100 + " + vatPercent + "), " + mGpManager.getRoundingDigit() + ") else round(round(" + NET_SALE + "*" + SC_PERCENT + "/100, " + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/100, " + mGpManager.getRoundingDigit() + ") end " +
-                            " else " +
-                            "   case when " + VAT_TYPE + "=1 then round(round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/(100 + " + vatPercent + "), " + mGpManager.getRoundingDigit() + ") else round(round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100, " + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/100, " + mGpManager.getRoundingDigit() + ") end" +
-                            " end, " +
-                            PRODUCT_VAT + "=" +
-                            " case when " + VAT_TYPE + "=1 then round(" + NET_SALE + "*" + PRODUCT_VAT_PERCENT + "/(100 + " + PRODUCT_VAT_PERCENT + "), " + mGpManager.getRoundingDigit() + ") else round(" + NET_SALE + "*" + PRODUCT_VAT_PERCENT + "/100, " + mGpManager.getRoundingDigit() + ") end " +
-                            " where " + ORDER_STATUS_ID + "<=?" +
-                            " and " + TRANSACTION_ID + "=?" +
-                            " and " + COMPUTER_ID + "=?",
+
+            String sqlUpdateSc = "update " + TABLE_ORDER_DETAIL_FRONT +
+                    " set " + SC_AMOUNT + "=" +
+                    " case when " + HAS_SERVICE_CHARGE + "=0 then 0 " +
+                    " when " + IS_SC_BEFORE_DISC + "=0 then round(" + NET_SALE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") " +
+                    " else round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") end, " +
+                    SC_VAT + "=" +
+                    " case when " + HAS_SERVICE_CHARGE + "=0 then 0 " +
+                    " when " + IS_SC_BEFORE_DISC + "=0 then " +
+                    "   case when " + VAT_TYPE + "=1 then round(round(" + NET_SALE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/(100 + " + vatPercent + "), " + mGpManager.getRoundingDigit() + ") else round(round(" + NET_SALE + "*" + SC_PERCENT + "/100, " + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/100, " + mGpManager.getRoundingDigit() + ") end " +
+                    " else " +
+                    "   case when " + VAT_TYPE + "=1 then round(round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100," + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/(100 + " + vatPercent + "), " + mGpManager.getRoundingDigit() + ") else round(round(" + TOTAL_RETAIL_PRICE + "*" + SC_PERCENT + "/100, " + mGpManager.getRoundingDigit() + ") * " + vatPercent + "/100, " + mGpManager.getRoundingDigit() + ") end" +
+                    " end, " +
+                    PRODUCT_VAT + "=" +
+                    " case when " + VAT_TYPE + "=1 then round(" + NET_SALE + "*" + PRODUCT_VAT_PERCENT + "/(100 + " + PRODUCT_VAT_PERCENT + "), " + mGpManager.getRoundingDigit() + ") else round(" + NET_SALE + "*" + PRODUCT_VAT_PERCENT + "/100, " + mGpManager.getRoundingDigit() + ") end " +
+                    " where " + ORDER_STATUS_ID + "<=?" +
+                    " and " + TRANSACTION_ID + "=?" +
+                    " and " + COMPUTER_ID + "=?";
+
+            db.execSQL(sqlUpdateSc,
                     new String[]{
                             "2",
                             String.valueOf(transId),
                             String.valueOf(compId)
                     });
+
+            if(DEBUG){
+                Log.d(TAG, "sql update item vat: " + sqlUpdateSc);
+            }
+
             Cursor orderVatCur = db.rawQuery("select sum(" + SC_VAT + ") as " + SC_VAT + ", " +
                             " sum(" + PRODUCT_VAT + ") as " + PRODUCT_VAT +
                             " from " + TABLE_ORDER_DETAIL_FRONT +
@@ -753,6 +771,12 @@ public class TransactionDataSource {
             }
             summaryCur.close();
 
+            if(DEBUG) {
+                Log.d(TAG, "TotalRetail: " + totalRetailPrice);
+                Log.d(TAG, "SalePrice: " + totalSale);
+                Log.d(TAG, "NetSale: " + netSale);
+            }
+
             double scAmount = 0;
             Cursor itemScCur = db.rawQuery(
                     "select sum(case when " + ORDER_STATUS_ID + " > 2 then 0 " +
@@ -772,6 +796,10 @@ public class TransactionDataSource {
                 scAmount = itemScCur.getDouble(itemScCur.getColumnIndex(SC_AMOUNT));
             }
             itemScCur.close();
+
+            if(DEBUG){
+                Log.d(TAG, "SCAmount: " + scAmount);
+            }
 
             Cursor discBillCur = db.rawQuery(
                     "select sum(" + DISCOUNT_PRICE + ") " +
@@ -1376,6 +1404,21 @@ public class TransactionDataSource {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
         db.insertOrThrow(TABLE_ORDER_DETAIL_FRONT, null, cv);
         return ordId;
+    }
+
+    /**
+     * @param transId
+     * @param compId
+     */
+    public void deleteTransaction(int transId, int compId){
+        mDbHelper.getWritableDatabase().delete(
+                TABLE_TRANSACTION_FRONT,
+                TRANSACTION_ID + "=?" +
+                        " and " + COMPUTER_ID + "=?",
+                new String[]{
+                        String.valueOf(transId),
+                        String.valueOf(compId)
+                });
     }
 
     /**

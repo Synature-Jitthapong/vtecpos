@@ -7,6 +7,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +27,7 @@ public class MainActivity extends ActionBarActivity{
 
     private TransactionManager mTransManager;
 
+    private Toolbar toolbar;
     private DrawerLayout mDrawerLayout;
     private ListView mLvDrawer;
 
@@ -34,8 +36,11 @@ public class MainActivity extends ActionBarActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        setSupportActionBar(toolbar);
+
         mTransManager = TransactionManager.getInstance(this);
-        mTransManager.insertTransaction();
+        mTransManager.openTransaction();
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mLvDrawer = (ListView) findViewById(R.id.left_drawer);
@@ -62,7 +67,7 @@ public class MainActivity extends ActionBarActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        mTransManager.insertTransaction();
+        mTransManager.openTransaction();
     }
 
     @Override

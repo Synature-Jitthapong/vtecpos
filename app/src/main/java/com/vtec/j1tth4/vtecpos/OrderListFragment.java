@@ -134,7 +134,7 @@ public class OrderListFragment extends Fragment implements View.OnClickListener{
                 deleteCheckedItems();
                 break;
             case R.id.btnClearOrder:
-                deleteAllOrder();
+                cancelOrder();
                 break;
         }
     }
@@ -225,8 +225,8 @@ public class OrderListFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    private void deleteAllOrder(){
-        Utils.createConfirmDialog(getActivity(), getString(R.string.confirm_clear_order),
+    private void cancelOrder(){
+        Utils.createConfirmDialog(getActivity(), getString(R.string.confirm_cancel_order),
                 new DialogInterface.OnClickListener() {
 
                     @Override
@@ -237,7 +237,7 @@ public class OrderListFragment extends Fragment implements View.OnClickListener{
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         TransactionManager manager = TransactionManager.getInstance(getActivity());
-                        manager.deleteAllOrders();
+                        manager.deleteTransaction();
                         loadOrderData();
                     }
                 });
@@ -354,74 +354,32 @@ public class OrderListFragment extends Fragment implements View.OnClickListener{
     }
 
     private void refreshSummary(){
-        double sumTotalItem = 0;
-        double sumRetailPrice = 0;
-        double sumDiscount = 0;
-        double sumSalePrice = 0;
-        double sumBillDisc = 0;
-        double sumNetSale = 0;
-        double sumPVat = 0;
-        double sumPBeforeVat = 0;
-        double sumSc = 0;
-        double sumScVat = 0;
-        double sumScBefore = 0;
-        double sumVatable = 0;
-        double sumWVatable = 0;
-        double sumW = 0;
-        double sumWVat = 0;
-        double sumWBefore = 0;
-        double sumWSc = 0;
-        double sumWScVat = 0;
-        double sumWScBeforeVat = 0;
-        if(mOrderList != null) {
-            for (Transaction.OrderDetail orderDetail : mOrderList) {
-                sumTotalItem += orderDetail.getTotalQty();
-                sumRetailPrice += orderDetail.getTotalRetailPrice();
-                sumDiscount += orderDetail.getTotalItemDisc();//dtTable.Rows(i)("TotalItemDisc")
-                sumSalePrice += orderDetail.getSalePrice(); //dtTable.Rows(i)("SalePrice")
-                sumBillDisc += orderDetail.getDiscBill();//dtTable.Rows(i)("DiscBill")
-                sumNetSale += orderDetail.getNetSale();//dtTable.Rows(i)("NetSale")
-                sumPVat += orderDetail.getProductVAT();//dtTable.Rows(i)("ProductVAT")
-                sumPBeforeVat += orderDetail.getProductBeforeVAT(); //dtTable.Rows(i)("ProductBeforeVAT")
-                sumSc += orderDetail.getSCAmount(); //dtTable.Rows(i)("SCAmount")
-                sumScVat += orderDetail.getSCVAT(); //dtTable.Rows(i)("SCVAT")
-                sumScBefore += orderDetail.getSCBeforeVAT(); //dtTable.Rows(i)("SCBeforeVAT")
-                sumVatable += orderDetail.getVatable(); //dtTable.Rows(i)("Vatable")
-                sumWVatable += orderDetail.getWVatable(); //dtTable.Rows(i)("WVatable")
-                sumW += orderDetail.getWeightPrice(); //dtTable.Rows(i)("WeightPrice")
-                sumWVat += orderDetail.getWeightPriceVAT(); //dtTable.Rows(i)("WeightPriceVAT")
-                sumWBefore += orderDetail.getWeightBeforeVAT(); //dtTable.Rows(i)("WeightBeforeVAT")
-                sumWSc += orderDetail.getSCWAmount(); //dtTable.Rows(i)("SCWAmount")
-                sumWScVat += orderDetail.getSCWVAT(); //dtTable.Rows(i)("SCWVAT")
-                sumWScBeforeVat += orderDetail.getSCWBeforeVAT(); //dtTable.Rows(i)("SCWBeforeVAT")
-            }
-        }
+        Transaction trans = TransactionManager.getInstance(getActivity()).getTransaction(true);
         mSummaryItemList = new ArrayList<>();
         mSummaryItemList.add(
                 new SummaryItem(
                         getActivity().getString(R.string.items) + " " +
-                                Utils.qtyFormat(getActivity(), sumTotalItem),
-                        Utils.currencyFormat(getActivity(), sumRetailPrice),
+                                Utils.qtyFormat(getActivity(), trans.getReceiptTotalQty()),
+                        Utils.currencyFormat(getActivity(), trans.getReceiptRetailPrice()),
                         SummaryItem.SUMM_NORMAL));
-        mSummaryItemList.add(
-                new SummaryItem(
-                        getActivity().getString(R.string.discount_short),
-                        Utils.currencyFormat(getActivity(), sumDiscount),
-                        SummaryItem.SUMM_NORMAL));
-//        mSummaryItemList.add(
-//                new SummaryItem(
-//                        "vat",
-//                        Utils.currencyFormat(getActivity(), sumPBeforeVat),
-//                        SummaryItem.SUMM_NORMAL));
-        mSummaryItemList.add(
-                new SummaryItem(
-                        "Sub Total",
-                        Utils.currencyFormat(getActivity(), sumSalePrice),
-                        SummaryItem.SUMM_NORMAL));
+        if(trans.getReceiptDiscount() > 0) {
+            mSummaryItemList.add(
+                    new SummaryItem(
+                            getActivity().getString(R.string.discount_short),
+                            Utils.currencyFormat(getActivity(), trans.getReceiptDiscount()),
+                            SummaryItem.SUMM_NORMAL));
+        }
+        if(trans.getServiceCharge() > 0) {
+            mSummaryItemList.add(
+                    new SummaryItem(
+                            getString(R.string.service_charge),
+                            Utils.currencyFormat(getActivity(), trans.getServiceCharge()),
+                            SummaryItem.SUMM_NORMAL));
+        }
         mSummaryItemList.add(
                 new SummaryItem(
                         getActivity().getString(R.string.total),
-                        Utils.currencyFormat(getActivity(), sumSalePrice),
+                        Utils.currencyFormat(getActivity(), trans.getReceiptNetSale()),
                         SummaryItem.SUMM_LARGE));
 
         mOrderSummAdapter.notifyDataSetChanged();

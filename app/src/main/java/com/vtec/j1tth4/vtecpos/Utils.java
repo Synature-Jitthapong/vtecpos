@@ -1,9 +1,9 @@
 package com.vtec.j1tth4.vtecpos;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Environment;
+import android.support.v7.app.AlertDialog;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -27,6 +27,7 @@ public class Utils {
                 .setMessage(msg)
                 .setNegativeButton(android.R.string.cancel, cancelCallback)
                 .setPositiveButton(android.R.string.ok, confirmCallback).show();
+
     }
 
     public static double round(double value, int scale){

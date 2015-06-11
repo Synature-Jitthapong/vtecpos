@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -49,10 +50,15 @@ public class PaymentActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         WindowManager.LayoutParams params = getWindow().getAttributes();
+//        DisplayMetrics displaymetrics = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
+//        int heightPx = displaymetrics.heightPixels;
+//        int widthPx = displaymetrics.widthPixels;
+
         params.width = 1024;
         params.height= 600;
-        params.alpha = 1.0f;
-        params.dimAmount = 0.5f;
+        //params.alpha = 1.0f;
+        //params.dimAmount = 0.5f;
         getWindow().setAttributes((WindowManager.LayoutParams) params);
 
         setContentView(R.layout.activity_payment);

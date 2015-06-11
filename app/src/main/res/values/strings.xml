@@ -10,7 +10,7 @@
     <string name="clear">Clear</string>
     <string name="hold_order">Hold</string>
     <string name="clear_short">C</string>
-    <string name="items">items</string>
+    <string name="items">Items</string>
     <string name="total">Total</string>
     <string name="enter">Enter</string>
     <string name="title_activity_payment">PaymentActivity</string>
@@ -32,7 +32,7 @@
     <string name="modify_short">Mod</string>
     <string name="delete_short">Del</string>
     <string name="confirm_delete">Are you sure you want to delete?</string>
-    <string name="confirm_clear_order">Are you sure you want to clear order?</string>
+    <string name="confirm_cancel_order">Are you sure you want to cancel this orders?</string>
     <string name="confirm">Confirm</string>
     <string name="send_data">Send Data</string>
     <string name="report">Reports</string>
@@ -49,6 +49,6 @@
     <string name="item">Item</string>
     <string name="qty">Qty</string>
     <string name="price">Price</string>
-    <string name="service_charge">SC.</string>
+    <string name="service_charge">Service Charge</string>
     <string name="service_charge_vat">SC. VAT</string>
 </resources>

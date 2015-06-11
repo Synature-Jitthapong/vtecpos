@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.MyTheme.NoActionBar" parent="@style/Theme.AppCompat.Light.NoActionBar">
-
+        <item name="colorPrimary">@color/blue</item>
+        <item name="colorPrimaryDark">@color/indigo</item>
     </style>
     <style name="Theme.MyTheme" parent="CustomActionBarTheme">
-    </style>
-    <style name="Theme.MyTheme.ActivityDialog" parent="CustomActivityDialogTheme">
-    </style>
-
-    <style name="CustomActivityDialogTheme"
-        parent="@style/Theme.AppCompat.Light.Dialog">
-        <item name="android:actionBarStyle">@style/MyActionBar</item>
-
-        <!-- Support library compatibility -->
-        <item name="actionBarStyle">@style/MyActionBar</item>
     </style>
 
     <!-- the theme applied to the application or activity -->

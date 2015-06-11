@@ -173,19 +173,19 @@ public class CommonPrint{
 
         //detail
         if(model.getOrderDetails() != null){
-            String headerItem = mContext.getString(R.string.item);
-            String headerRetailPrice = mContext.getString(R.string.price);
-            String headerQty = mContext.getString(R.string.qty) +
-                    createQtySpace(calculateLength(headerRetailPrice));
-            mTextToPrint.append(createLine("-"));
-            mTextToPrint.append(CARRIAGE_RETURN);
-            mTextToPrint.append(headerItem);
-            mTextToPrint.append(createHorizontalSpace(
-                    calculateLength(headerItem + headerQty + headerRetailPrice)));
-            mTextToPrint.append(headerQty);
-            mTextToPrint.append(headerRetailPrice);
-            mTextToPrint.append(CARRIAGE_RETURN);
-            mTextToPrint.append(createLine("-"));
+//            String headerItem = mContext.getString(R.string.item);
+//            String headerRetailPrice = mContext.getString(R.string.price);
+//            String headerQty = mContext.getString(R.string.qty) +
+//                    createQtySpace(calculateLength(headerRetailPrice));
+//            mTextToPrint.append(createLine("-"));
+//            mTextToPrint.append(CARRIAGE_RETURN);
+//            mTextToPrint.append(headerItem);
+//            mTextToPrint.append(createHorizontalSpace(
+//                    calculateLength(headerItem + headerQty + headerRetailPrice)));
+//            mTextToPrint.append(headerQty);
+//            mTextToPrint.append(headerRetailPrice);
+//            mTextToPrint.append(CARRIAGE_RETURN);
+//            mTextToPrint.append(createLine("-"));
             mTextToPrint.append(CARRIAGE_RETURN);
             for (Transaction.OrderDetail orderDetail : model.getOrderDetails()){
                 String name = limitTextWithQtyLength(orderDetail.getProductName());

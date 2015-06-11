@@ -1,10 +1,10 @@
 package com.vtec.j1tth4.vtecpos;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -48,17 +48,24 @@ public class ChangeDialogFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle(getString(R.string.change));
         builder.setView(tvChange);
-        builder.setNeutralButton(getString(R.string.close), new DialogInterface.OnClickListener(){
+        builder.setPositiveButton(getString(R.string.close), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(mOnDismissListener != null){
+                if (mOnDismissListener != null) {
                     mOnDismissListener.onDismiss(dialogInterface);
                 }
             }
         });
         final AlertDialog dialog = builder.create();
+        dialog.setCancelable(false);
         dialog.show();
         return dialog;
+    }
+
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        mOnDismissListener.onDismiss(dialog);
     }
 
     public void setOnDismissListener(DialogInterface.OnDismissListener callback){
