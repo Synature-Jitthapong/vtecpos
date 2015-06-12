@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -27,6 +28,8 @@ public class PaymentActivity extends ActionBarActivity {
     private TextView mTvChange;
     private Button mBtnCancel;
     private Button mBtnConfirm;
+
+    private Toolbar mToolbar;
 
     public static class PaymentDeletedEvent{
     }
@@ -61,10 +64,10 @@ public class PaymentActivity extends ActionBarActivity {
         //params.dimAmount = 0.5f;
         getWindow().setAttributes((WindowManager.LayoutParams) params);
 
-        setContentView(R.layout.activity_payment);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        setContentView(R.layout.activity_payment);
+        mToolbar = (Toolbar) findViewById(R.id.tool_bar);
+        setSupportActionBar(mToolbar);
 
         mPaymentTypeTabLayout = (PaymentTypeSlidingTabLayout) findViewById(R.id.payTypeTab);
         mTvTotalPrice = (TextView) findViewById(R.id.totalPrice);

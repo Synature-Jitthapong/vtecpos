@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="primary_indigo">#3F51B5</color>
+    <color name="primary_indigo_dark">#303F9F</color>
+    <color name="accent_pink">#FF4081</color>
+
     <color name="blue">#33B5E5</color>
     <color name="indigo">#3F51B5</color>
     <color name="blue_grey_900">#263238</color>

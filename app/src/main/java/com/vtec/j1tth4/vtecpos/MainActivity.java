@@ -27,7 +27,7 @@ public class MainActivity extends ActionBarActivity{
 
     private TransactionManager mTransManager;
 
-    private Toolbar toolbar;
+    private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private ListView mLvDrawer;
 
@@ -36,8 +36,8 @@ public class MainActivity extends ActionBarActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        setSupportActionBar(toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.tool_bar);
+        setSupportActionBar(mToolbar);
 
         mTransManager = TransactionManager.getInstance(this);
         mTransManager.openTransaction();
