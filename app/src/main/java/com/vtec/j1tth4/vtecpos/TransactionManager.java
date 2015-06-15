@@ -31,6 +31,9 @@ public class TransactionManager {
     }
 
     public void finalizeBill(){
+        mTransDataSource.refreshPromotion(mCurrentTransId, mGlobalManager.getComputerId());
+        mTransDataSource.calculateBill(mCurrentTransId, mGlobalManager.getComputerId());
+
         mTransDataSource.finalizeBill(mCurrentTransId, mGlobalManager.getComputerId());
         mTransDataSource.weightProductSet(mCurrentTransId, mGlobalManager.getComputerId());
 //        PrintJobDataSource jobDataSource = new PrintJobDataSource(mContext);
@@ -229,6 +232,7 @@ public class TransactionManager {
         orderDetail.setIsComment(0);
         orderDetail.setDeleted(0);
         int orderId = mTransDataSource.insertOrderDetail(orderDetail);
+        mTransDataSource.refreshPromotion(mCurrentTransId, mGlobalManager.getComputerId());
         mTransDataSource.calculateBill(mCurrentTransId, mGlobalManager.getComputerId());
         return orderId;
     }

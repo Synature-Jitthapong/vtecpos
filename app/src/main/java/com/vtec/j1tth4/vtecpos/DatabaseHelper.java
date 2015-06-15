@@ -12,11 +12,12 @@ import java.io.OutputStream;
 
 /**
  * Created by j1tth4 on 4/29/15.
+ *
  */
 public class DatabaseHelper extends SQLiteOpenHelper{
 
     public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "vposdb.db";//"vtecpos.db";
+    public static final String DATABASE_NAME = "vtecpos.db";
 
     private String mDatabasePath;
 

@@ -127,6 +127,7 @@ public class ProductDataSource {
     public static final String TO_DATE = "ToDate";
     public static final String VAT_CODE = "VATCode";
     public static final String VAT_TYPE = "VATType";
+    public static final String DISCOUNT_ALLOW = "DiscountAllow";
     public static final String PRODUCT_TYPE_ID = "ProductTypeID";
     public static final String PRODUCT_TYPE_NAME = "ProductTypeName";
     public static final String PRODUCT_TYPE_COMPONENT_LEVEL = "ComponentLevel";
@@ -246,6 +247,7 @@ public class ProductDataSource {
                     product.setSaleMode8(cursor.getInt(cursor.getColumnIndex(SALE_MODE8)));
                     product.setSaleMode9(cursor.getInt(cursor.getColumnIndex(SALE_MODE9)));
                     product.setSaleMode10(cursor.getInt(cursor.getColumnIndex(SALE_MODE10)));
+                    product.setDiscountAllow(cursor.getInt(cursor.getColumnIndex(DISCOUNT_ALLOW)));
                     product.setProductUnitName(cursor.getString(cursor.getColumnIndex(PRODUCT_UNIT_NAME)));
                     product.setZeroPriceAllow(cursor.getInt(cursor.getColumnIndex(ZERO_PRICE_ALLOW)));
                     product.setLimitDiscountAmount(cursor.getDouble(cursor.getColumnIndex(LIMIT_DISCOUNT_AMOUNT)));

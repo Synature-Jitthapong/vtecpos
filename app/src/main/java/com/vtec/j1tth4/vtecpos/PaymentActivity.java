@@ -52,6 +52,9 @@ public class PaymentActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        EventBus.getDefault().register(this);
+
         WindowManager.LayoutParams params = getWindow().getAttributes();
 //        DisplayMetrics displaymetrics = new DisplayMetrics();
 //        getWindowManager().getDefaultDisplay().getMetrics(displaymetrics);
@@ -133,7 +136,6 @@ public class PaymentActivity extends ActionBarActivity {
 
     private void confirm(){
         TransactionManager.getInstance(this).finalizeBill();
-        EventBus.getDefault().post(new OrderListFragment.RefreshEvent());
         if(mPaymentRef.change > 0){
             ChangeDialogFragment f = ChangeDialogFragment.getInstance(mPaymentRef.change);
             f.show(getFragmentManager(), ChangeDialogFragment.TAG);
@@ -152,19 +154,20 @@ public class PaymentActivity extends ActionBarActivity {
     protected void onDestroy() {
         TransactionManager manager = TransactionManager.getInstance(this);
         manager.deletePaymentDetail();
+
+        EventBus.getDefault().post(new OrderListFragment.RefreshEvent());
+        EventBus.getDefault().unregister(this);
         super.onDestroy();
     }
 
     @Override
     protected void onStop() {
-        EventBus.getDefault().unregister(this);
         super.onStop();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        EventBus.getDefault().register(this);
     }
 
     @Override

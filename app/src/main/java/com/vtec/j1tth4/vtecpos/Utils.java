@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
+import android.text.TextUtils;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -23,11 +24,20 @@ public class Utils {
     public static void createConfirmDialog(Context context, CharSequence msg,
                                            DialogInterface.OnClickListener cancelCallback,
                                            DialogInterface.OnClickListener confirmCallback){
-        new AlertDialog.Builder(context)
-                .setMessage(msg)
-                .setNegativeButton(android.R.string.cancel, cancelCallback)
-                .setPositiveButton(android.R.string.ok, confirmCallback).show();
+       createConfirmDialog(context, null, msg, cancelCallback, confirmCallback);
+    }
 
+    public static void createConfirmDialog(Context context, CharSequence title, CharSequence msg,
+                                           DialogInterface.OnClickListener cancelCallback,
+                                           DialogInterface.OnClickListener confirmCallback){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        if(!TextUtils.isEmpty(title))
+            builder.setTitle(title);
+        builder.setMessage(msg);
+        builder.setNegativeButton(android.R.string.cancel, cancelCallback);
+        builder.setPositiveButton(android.R.string.ok, confirmCallback);
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public static double round(double value, int scale){

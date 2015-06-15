@@ -201,7 +201,7 @@ public class OrderListFragment extends Fragment implements View.OnClickListener{
                     if (qty > 1) {
                         updateOrderQty(orderDetail, --qty, position);
                     }else{
-                        deleteOrder(orderDetail.getOrderDetailID(), position);
+                        deleteOrder(orderDetail.getOrderDetailID(), orderDetail.getProductName(), position);
                     }
                 }
             });
@@ -215,7 +215,7 @@ public class OrderListFragment extends Fragment implements View.OnClickListener{
             viewHolder.orderMoreOpt.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    showPopup(view, orderDetail.getOrderDetailID(), position);
+                    showPopup(view, orderDetail.getOrderDetailID(), orderDetail.getProductName(), position);
                 }
             });
         }
@@ -243,8 +243,8 @@ public class OrderListFragment extends Fragment implements View.OnClickListener{
                 });
     }
 
-    private void deleteOrder(final int orderDetailId, final int position){
-        Utils.createConfirmDialog(getActivity(), getString(R.string.confirm_delete),
+    private void deleteOrder(final int orderDetailId, CharSequence itemName, final int position){
+        Utils.createConfirmDialog(getActivity(), itemName, getString(R.string.confirm_delete),
                 new DialogInterface.OnClickListener() {
 
                     @Override
@@ -326,10 +326,12 @@ public class OrderListFragment extends Fragment implements View.OnClickListener{
     private class MoreOptionClickListener implements android.support.v7.widget.PopupMenu.OnMenuItemClickListener{
         private int orderDetailId;
         private int position;
+        private CharSequence itemName;
 
-        public MoreOptionClickListener(int orderDetailId, int position){
+        public MoreOptionClickListener(int orderDetailId, CharSequence itemName, int position){
             this.orderDetailId = orderDetailId;
             this.position = position;
+            this.itemName = itemName;
         }
 
         @Override
@@ -338,7 +340,7 @@ public class OrderListFragment extends Fragment implements View.OnClickListener{
                 case R.id.action_modify:
                     return true;
                 case R.id.action_delete:
-                    deleteOrder(orderDetailId, position);
+                    deleteOrder(orderDetailId, itemName, position);
                     return true;
                 default:
                     return false;
@@ -346,10 +348,10 @@ public class OrderListFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    private void showPopup(View view, int orderDetailId, int position){
+    private void showPopup(View view, int orderDetailId, CharSequence itemName, int position){
         android.support.v7.widget.PopupMenu popup = new android.support.v7.widget.PopupMenu(getActivity(), view);
         popup.inflate(R.menu.order_menu_option);
-        popup.setOnMenuItemClickListener(new MoreOptionClickListener(orderDetailId, position));
+        popup.setOnMenuItemClickListener(new MoreOptionClickListener(orderDetailId, itemName, position));
         popup.show();
     }
 

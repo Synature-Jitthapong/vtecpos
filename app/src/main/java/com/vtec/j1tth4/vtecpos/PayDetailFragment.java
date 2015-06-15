@@ -32,6 +32,8 @@ public class PayDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+
         mPayList = new ArrayList<>();
         mPayListAdapter = new PayListAdapter();
     }
@@ -65,15 +67,9 @@ public class PayDetailFragment extends Fragment {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    public void onStop() {
+    public void onDestroy() {
         EventBus.getDefault().unregister(this);
-        super.onStop();
+        super.onDestroy();
     }
 
     private class PayListAdapter extends RecyclerView.Adapter<PayListAdapter.ViewHolder> {
@@ -95,16 +91,14 @@ public class PayDetailFragment extends Fragment {
             holder.pay_del.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    new AlertDialog.Builder(getActivity())
-                            .setTitle(R.string.delete)
-                            .setMessage(R.string.confirm_delete)
-                            .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    Utils.createConfirmDialog(getActivity(),
+                            getString(R.string.confirm_delete),
+                            new DialogInterface.OnClickListener() {
 
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                 }
-                            })
-                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                            }, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     TransactionManager manager = TransactionManager.getInstance(getActivity());
@@ -113,7 +107,7 @@ public class PayDetailFragment extends Fragment {
                                     EventBus.getDefault().post(new PaymentActivity.PaymentDeletedEvent());
                                     EventBus.getDefault().post(new CashPaymentFragment.RecalculateEvent());
                                 }
-                            }).show();
+                            });
                 }
             });
         }

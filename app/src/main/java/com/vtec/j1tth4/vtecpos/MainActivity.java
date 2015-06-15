@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -35,6 +36,7 @@ public class MainActivity extends ActionBarActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setupNumericKeyPad();
 
         mToolbar = (Toolbar) findViewById(R.id.tool_bar);
         setSupportActionBar(mToolbar);
@@ -127,6 +129,19 @@ public class MainActivity extends ActionBarActivity{
             Intent intent = new Intent(this, PaymentActivity.class);
             startActivity(intent);
         }
+    }
+
+    private void setupNumericKeyPad(){
+        FrameLayout numericKeypadContainer = (FrameLayout) findViewById(R.id.numericKeypadContainer);
+        NumericKeyPadView view = new NumericKeyPadView(this);
+        numericKeypadContainer.addView(view);
+        view.setmCallback(new NumericKeyPadView.OnNumericButtonClickListener(){
+
+            @Override
+            public void onNumericButtonClick(int value) {
+
+            }
+        });
     }
 
     private class DrawerListAdapter extends BaseAdapter{

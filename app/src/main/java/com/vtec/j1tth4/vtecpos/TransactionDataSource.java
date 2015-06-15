@@ -8,7 +8,13 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import org.kobjects.util.Util;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -884,7 +890,7 @@ public class TransactionDataSource {
         }
     }
 
-    private void refreshPromotion(int transId, int compId){
+    public void refreshPromotion(int transId, int compId){
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
         db.beginTransaction();
         try {
@@ -1401,8 +1407,85 @@ public class TransactionDataSource {
         cv.put(COMMENT, model.getComment());
         cv.put(IS_COMMENT, model.getIsComment());
         cv.put(DELETED, model.getDeleted());
+
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
-        db.insertOrThrow(TABLE_ORDER_DETAIL_FRONT, null, cv);
+        db.beginTransaction();
+        try {
+            if (model.getDiscountAllow() == 1) {
+                Calendar calendar = Calendar.getInstance();
+                try {
+                    Date d = new SimpleDateFormat(VtecPosApplication.ISO_DATE_FORMAT).parse(model.getSaleDate());
+                    calendar.setTime(d);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                String weeklyString = "," + calendar.get(Calendar.DAY_OF_WEEK) + ", ";
+                String monthlyString = ", " + (calendar.get(Calendar.MONTH) + 1) + ",";
+                Cursor promoCur = db.rawQuery(
+                        "select * from " +
+                                PromotionDataSource.TABLE_PROMOTION +
+                                " where " + PromotionDataSource.ACTIVATED + "=? " +
+                                " and " + PromotionDataSource.ITEM_BILL_DISC + "=? " +
+                                " and " + PromotionDataSource.DELETED + "=? " +
+                                " and " + PromotionDataSource.PROMOTION_TYPE_ID + "=? " +
+                                " and " + PromotionDataSource.PROMO_FROM_DATE + "<=? " +
+                                " and " + PromotionDataSource.PROMO_TO_DATE + ">=? " +
+                                " and (" + PromotionDataSource.WEEKLY_STRING + " is null or " + PromotionDataSource.WEEKLY_STRING + " like '%" + weeklyString + "%') " +
+                                " and (" + PromotionDataSource.MONTHLY_STRING + " is null or " + PromotionDataSource.MONTHLY_STRING + " like '%" + monthlyString + "%') " +
+                                " order by " + PromotionDataSource.PROMO_PRIORITY,
+                        new String[]{
+                                "1",
+                                "0",
+                                "0",
+                                "1",
+                                model.getSaleDate(),
+                                model.getSaleDate()
+                        });
+                if (promoCur.moveToFirst()) {
+                    while (!promoCur.isAfterLast()) {
+                        Cursor chkPromoCur = db.rawQuery(
+                                "select * from " + TABLE_ORDER_PROMOTION_APPLY_FRONT +
+                                        " where " + TRANSACTION_ID + "=?" +
+                                        " and " + COMPUTER_ID + "=? " +
+                                        " and " + PROMOTION_ID + "=?",
+                                new String[]{
+                                        String.valueOf(model.getTransactionID()),
+                                        String.valueOf(model.getComputerID()),
+                                        promoCur.getString(promoCur.getColumnIndex(PROMOTION_ID))
+                                });
+                        int chkPromoRowCount = chkPromoCur != null ? chkPromoCur.getCount() : 0;
+                        if (chkPromoRowCount == 0) {
+                            int promoId = promoCur.getInt(promoCur.getColumnIndex(PROMOTION_ID));
+                            int promoTypeId = promoCur.getInt(promoCur.getColumnIndex(PromotionDataSource.PROMOTION_TYPE_ID));
+                            int promoPriority = promoCur.getInt(promoCur.getColumnIndex(PromotionDataSource.PROMO_PRIORITY));
+                            double percentDiscount = promoCur.getDouble(promoCur.getColumnIndex(PromotionDataSource.PERCENT_DISCOUNT));
+                            double priceDiscount = promoCur.getDouble(promoCur.getColumnIndex(PromotionDataSource.DISCOUNT_AMOUNT));
+                            ContentValues promoApplyCv = new ContentValues();
+                            promoApplyCv.put(PROMOTION_UUID, UUID.randomUUID().toString());
+                            promoApplyCv.put(TRANSACTION_ID, model.getTransactionID());
+                            promoApplyCv.put(COMPUTER_ID, model.getComputerID());
+                            promoApplyCv.put(DISC_TYPE_ID, promoTypeId);
+                            promoApplyCv.put(BILL_DISC, model.getDiscountAllow());
+                            promoApplyCv.put(PROMOTION_ID, promoId);
+                            promoApplyCv.put(DISC_PRIORITY, promoPriority);
+                            promoApplyCv.put(DISCOUNT_PERCENT, percentDiscount);
+                            promoApplyCv.put(DISCOUNT_PRICE, priceDiscount);
+                            promoApplyCv.put(BILL_ORG_DISC_AMOUNT, priceDiscount);
+                            promoApplyCv.put(IS_CALCULATE, 2);
+                            promoApplyCv.put(IS_PRICE_DISC, 1);
+                            db.insert(TABLE_ORDER_PROMOTION_APPLY_FRONT, null, promoApplyCv);
+                        }
+                        chkPromoCur.close();
+                        promoCur.moveToNext();
+                    }
+                }
+                promoCur.close();
+            }
+            db.insertOrThrow(TABLE_ORDER_DETAIL_FRONT, null, cv);
+            db.setTransactionSuccessful();
+        }finally {
+            db.endTransaction();
+        }
         return ordId;
     }
 
