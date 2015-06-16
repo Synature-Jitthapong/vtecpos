@@ -67,11 +67,12 @@ public class FoodMenuFragment extends Fragment {
 
         final ProductDataSource product = new ProductDataSource(getActivity());
         mProductGroupList = product.listProductGroup();
-        mGroupTab.setProductGroupData(mProductGroupList);
-        mGroupTab.setTabClickCallback(new GroupSlidingTabLayout.OnTabClickListener() {
+        mGroupTab.setTabTitle(mProductGroupList);
+        mGroupTab.setTabClickListener(new GroupSlidingTabLayout.OnTabClickListener() {
             @Override
-            public void onTabClick(int groupId) {
-                loadMenuPager(groupId);
+            public void onTabClick(int position) {
+                ProductData.ProductGroups productGroup = mProductGroupList.get(position);
+                loadMenuPager(productGroup.getProductGroupID());
             }
         });
         if(mProductGroupList != null)

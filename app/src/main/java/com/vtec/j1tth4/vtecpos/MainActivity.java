@@ -120,11 +120,18 @@ public class MainActivity extends ActionBarActivity{
     public void onClick(final View v){
         int id = v.getId();
         if(id == R.id.btnPay){
-           gotoPayment();
+           payment();
+        }else if(id == R.id.btnDiscount){
+            promotion();
         }
     }
 
-    private void gotoPayment(){
+    private void promotion(){
+        PromotionFragment f = new PromotionFragment();
+        f.show(getFragmentManager(), "");
+    }
+
+    private void payment(){
         if(mTransManager.countOrder(true) > 0) {
             Intent intent = new Intent(this, PaymentActivity.class);
             startActivity(intent);

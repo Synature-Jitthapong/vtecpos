@@ -6,12 +6,15 @@
     <string name="action_search">Search</string>
     <string name="fast_pay">Fast Pay</string>
     <string name="pay">Pay</string>
+    <string name="discount">Discount</string>
     <string name="discount_short">Disc.</string>
     <string name="clear">Clear</string>
     <string name="hold_order">Hold</string>
     <string name="clear_short">C</string>
     <string name="items">Items</string>
     <string name="total">Total</string>
+    <string name="total_price">Total Price</string>
+    <string name="sale_price">Sale Price</string>
     <string name="enter">Enter</string>
     <string name="title_activity_payment">PaymentActivity</string>
     <string name="change">Change</string>
@@ -51,4 +54,5 @@
     <string name="price">Price</string>
     <string name="service_charge">Service Charge</string>
     <string name="service_charge_vat">SC. VAT</string>
+
 </resources>

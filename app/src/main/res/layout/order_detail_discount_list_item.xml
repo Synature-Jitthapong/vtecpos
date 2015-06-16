@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:minHeight="48dp"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/items"
+        android:id="@+id/text_view1"
+        android:layout_weight="1"
+        style="@style/ColumnText" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/qty"
+        android:id="@+id/text_view2"
+        android:layout_weight="0.5"
+        style="@style/ColumnText.Numeric" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/total_price"
+        android:id="@+id/text_view3"
+        android:layout_weight="0.7"
+        style="@style/ColumnText.Numeric" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/discount"
+        android:id="@+id/text_view4"
+        android:layout_weight="0.7"
+        style="@style/ColumnText.Numeric" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/sale_price"
+        android:id="@+id/text_view5"
+        android:layout_weight="0.7"
+        style="@style/ColumnText.Numeric" />
+</LinearLayout>

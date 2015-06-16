@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ColumnText.Numeric" parent="ColumnText">
+        <item name="android:gravity">right</item>
+    </style>
+    <style name="ColumnText">
+        <item name="android:padding">@dimen/default_horizontal_margin</item>
+    </style>
+</resources>

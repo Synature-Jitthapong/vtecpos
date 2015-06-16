@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <style name="Theme.MyTheme.NoActionBar" parent="@style/Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/primary_material_light</item>
-        <item name="colorPrimaryDark">@color/primary_dark_material_light</item>
-        <item name="android:colorAccent">@color/accent_material_light</item>
+        <!--<item name="colorPrimary">@color/primary_material_light</item>-->
+        <!--<item name="colorPrimaryDark">@color/primary_dark_material_light</item>-->
+        <!--<item name="android:colorAccent">@color/accent_material_light</item>-->
     </style>
-    <!--<style name="Theme.MyTheme" parent="CustomActionBarTheme">-->
-    <!--</style>-->
+    <style name="Theme.MyTheme" parent="CustomActionBarTheme">
+    </style>
 
-    <!-- the theme applied to the application or activity -->
-    <!--<style name="CustomActionBarTheme"-->
-        <!--parent="@style/Theme.AppCompat.Light.DarkActionBar">-->
-        <!--<item name="android:actionBarStyle">@style/MyActionBar</item>-->
+    <style name="CustomActionBarTheme"
+        parent="@style/Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:actionBarStyle">@style/MyActionBar</item>
 
-        <!--&lt;!&ndash; Support library compatibility &ndash;&gt;-->
-        <!--<item name="actionBarStyle">@style/MyActionBar</item>-->
-    <!--</style>-->
+        <!-- Support library compatibility -->
+        <item name="actionBarStyle">@style/MyActionBar</item>
+    </style>
 
-    <!-- ActionBar styles -->
-    <!--<style name="MyActionBar"-->
-        <!--parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">-->
-        <!--<item name="android:background">@color/indigo</item>-->
-        <!--&lt;!&ndash; Support library compatibility &ndash;&gt;-->
-        <!--<item name="background">@color/indigo</item>-->
-    <!--</style>-->
+    <style name="MyActionBar"
+        parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <item name="android:background">@color/indigo</item>
+        <!-- Support library compatibility -->
+        <item name="background">@color/indigo</item>
+    </style>
 </resources>
